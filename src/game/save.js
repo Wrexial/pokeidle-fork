@@ -582,7 +582,22 @@ export function repairSave(saved) {
   const researchDefeated = sanitizeResearchCounters(saved.researchDefeated),
     researchFed = sanitizeResearchCounters(saved.researchFed),
     researchMoves = sanitizeResearchCounters(saved.researchMoves),
-    researchLarge = sanitizeResearchCounters(saved.researchLarge)
+    researchLarge = sanitizeResearchCounters(saved.researchLarge),
+    researchSuperEffective = sanitizeResearchCounters(saved.researchSuperEffective),
+    // Move ids a species has been seen using (for the signature-move task).
+    researchMoveIds = Object.fromEntries(
+      Object.entries(
+        saved.researchMoveIds && typeof saved.researchMoveIds === 'object'
+          ? saved.researchMoveIds
+          : {}
+      )
+        .filter(([speciesKey]) => pokemonSpecies[speciesKey])
+        .map(([speciesKey, moveIds]) => [
+          speciesKey,
+          [...new Set((Array.isArray(moveIds) ? moveIds : []).filter((moveId) => moveData[moveId]))],
+        ])
+        .filter(([, moveIds]) => moveIds.length > 0)
+    )
   const researchClaimed = /** @type {Record<string, number>} */ ({}),
     savedClaimed =
       saved.researchClaimed && typeof saved.researchClaimed === 'object' ? saved.researchClaimed : {}
@@ -885,6 +900,8 @@ export function repairSave(saved) {
     researchFed,
     researchMoves,
     researchLarge,
+    researchSuperEffective,
+    researchMoveIds,
     researchClaimed,
     researchPoints: Math.max(0, Math.floor(Number(saved.researchPoints) || 0)),
     shinySeen,
@@ -1070,6 +1087,8 @@ export const SAVED_STATE_KEYS = [
   'researchFed',
   'researchMoves',
   'researchLarge',
+  'researchSuperEffective',
+  'researchMoveIds',
   'researchClaimed',
   'researchPoints',
   'shinySeen',

@@ -13,13 +13,16 @@ const {
   creditResearchFeed,
   creditResearchLarge,
   creditResearchMove,
+  creditResearchSuperEffective,
   isLargeSpecimen,
   isWildSpecies,
   researchTasksFor,
+  signatureMoveFor,
   speciesResearch,
 } = await import('../src/game/research.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { repairSave, serializeSave } = await import('../src/game/save.js')
+const { createPokemon } = await import('../src/game/pokemon.js')
 
 test('a fresh species has no research', () => {
   const research = speciesResearch(initialGameState, 'pikachu')
@@ -86,7 +89,7 @@ test('wild species keep the defeat ladder; non-wild species get feasible tasks',
   )
   assert.deepEqual(
     researchTasksFor('venusaur').map((task) => task.id),
-    ['catch', 'fed', 'moves10', 'moves25', 'shiny', 'large']
+    ['catch', 'fed', 'moves10', 'moves25', 'shiny', 'large', 'superEffective', 'signature']
   )
   // Both task sets are worth the same, so levels and the shop stay honest.
   const wildMax = researchTasksFor('pikachu').reduce((sum, task) => sum + task.points, 0),
@@ -130,6 +133,8 @@ test('a non-wild species can reach level 10 through its own tasks', () => {
       researchFed: { venusaur: 1 },
       researchMoves: { venusaur: 25 },
       researchLarge: { venusaur: 1 },
+      researchSuperEffective: { venusaur: 1 },
+      researchMoveIds: { venusaur: [signatureMoveFor('venusaur')] },
     },
     'venusaur'
   )
@@ -146,6 +151,8 @@ test('a fully researched species reaches level 10', () => {
       shinyCaught: ['pikachu'],
       researchDefeated: { pikachu: 25 },
       researchLarge: { pikachu: 1 },
+      researchSuperEffective: { pikachu: 1 },
+      researchMoveIds: { pikachu: [signatureMoveFor('pikachu')] },
     },
     'pikachu'
   )
@@ -171,6 +178,73 @@ test('a large specimen credits the large-specimen task', () => {
   assert.equal(credited.researchPoints, 1 + 2, 'the large-specimen task pays its points')
   // Unknown species are ignored and create no counter.
   assert.equal(creditResearchLarge(base, 'nope'), base)
+})
+
+test('super-effective hits and signature moves credit their tasks', () => {
+  const signature = signatureMoveFor('pikachu')
+  assert.ok(signature, 'Pikachu has a signature move')
+  assert.equal(signatureMoveFor('notapokemon'), null)
+
+  const base = {
+    ...initialGameState,
+    pokedexCaught: ['pikachu'],
+    researchClaimed: { pikachu: 1 },
+    researchPoints: 1,
+  }
+  // A super-effective hit pays the super-effective task.
+  const se = creditResearchSuperEffective(base, 'pikachu')
+  assert.equal(se.researchSuperEffective.pikachu, 1)
+  assert.equal(se.researchPoints, 1 + 2)
+  assert.equal(creditResearchSuperEffective(base, 'nope'), base)
+
+  // Seeing the signature move completes the used-move task.
+  const seen = creditResearchMove(base, 'pikachu', signature)
+  assert.deepEqual(seen.researchMoveIds.pikachu, [signature])
+  const task = speciesResearch(seen, 'pikachu').tasks.find((entry) => entry.id === 'signature')
+  assert.ok(task.done, 'the signature-move task completes')
+  assert.match(task.label, /Pikachu|Thunder|Volt|Spark/i)
+  // Re-seeing the same move does not double-count the id.
+  assert.deepEqual(creditResearchMove(seen, 'pikachu', signature).researchMoveIds.pikachu, [
+    signature,
+  ])
+})
+
+test('the reducer credits super-effective KOs and move usage from battle events', () => {
+  const active = createPokemon('charmander', 50, 'a'),
+    base = {
+      ...initialGameState,
+      phase: 'battling',
+      party: [active],
+      playerPokemon: active,
+      activePlayerPokemonIndex: 0,
+      battleEvents: [],
+    }
+  // A super-effective KO credits the defeated species and the attacker.
+  const faint = gameReducer(
+    {
+      ...base,
+      enemyPokemon: { ...createPokemon('bulbasaur', 50, 'e'), currentHp: 0 },
+      pendingEvents: [
+        { type: 'faint', message: 'x', data: { target: 'enemy', effectiveness: 2, moveId: 'ember' } },
+      ],
+    },
+    { type: 'CONSUME_EVENT' }
+  )
+  assert.equal(faint.researchSuperEffective.bulbasaur, 1, 'the defeated species is credited')
+  assert.equal(faint.researchSuperEffective.charmander, 1, 'the attacker is credited')
+
+  // An attack event records the move id for the species that used it.
+  const moved = gameReducer(
+    {
+      ...base,
+      enemyPokemon: createPokemon('pidgey', 5, 'e'),
+      pendingEvents: [
+        { type: 'attack', message: 'x', data: { target: 'enemy', moveId: 'ember' } },
+      ],
+    },
+    { type: 'CONSUME_EVENT' }
+  )
+  assert.deepEqual(moved.researchMoveIds.charmander, ['ember'])
 })
 
 test('the Research Shop spends points and refuses when short', () => {
@@ -205,6 +279,8 @@ test('save repair sanitises research counters', () => {
       researchFed: { bulbasaur: 2, notAPokemon: 9 },
       researchMoves: { bulbasaur: 7, negative: -3 },
       researchLarge: { bulbasaur: 1, notAPokemon: 4 },
+      researchSuperEffective: { bulbasaur: 2, notAPokemon: 4 },
+      researchMoveIds: { bulbasaur: ['tackle', 'notAMove', 'tackle'], notAPokemon: ['tackle'] },
       researchClaimed: { bulbasaur: 999 },
       researchPoints: 12.7,
     },
@@ -213,6 +289,10 @@ test('save repair sanitises research counters', () => {
   assert.equal(repaired.researchFed.bulbasaur, 2)
   assert.equal(repaired.researchMoves.bulbasaur, 7)
   assert.equal(repaired.researchLarge.bulbasaur, 1)
+  assert.equal(repaired.researchSuperEffective.bulbasaur, 2)
+  assert.ok(!('notAPokemon' in repaired.researchSuperEffective))
+  assert.deepEqual(repaired.researchMoveIds.bulbasaur, ['tackle'], 'bad move ids + dups dropped')
+  assert.ok(!('notAPokemon' in repaired.researchMoveIds))
   assert.ok(!('notAPokemon' in repaired.researchLarge), 'an unknown species is dropped')
   assert.ok(!('notAPokemon' in repaired.researchFed), 'an unknown species is dropped')
   assert.ok(!('negative' in repaired.researchMoves), 'a bad count is dropped')

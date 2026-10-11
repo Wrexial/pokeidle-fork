@@ -14,7 +14,7 @@ import { fieldWeatherFor } from '../../weather.js'
 import { tickGarden } from '../../garden.js'
 import { tickPelago } from '../../pelago.js'
 import { advanceHuntEncounter } from '../../hunt.js'
-import { creditResearchDefeat, creditResearchLarge, creditResearchMove, isLargeSpecimen } from '../../research.js'
+import { creditResearchDefeat, creditResearchLarge, creditResearchMove, creditResearchSuperEffective, isLargeSpecimen } from '../../research.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { gainFriendship, isBattleReady, syncObtainedRibbons } from '../../pokemon.js'
 import { prestigeMultipliers } from '../../prestige.js'
@@ -235,6 +235,8 @@ export function consumeEvent(state, action) {
     shinyChain = state.shinyChain,
     researchDefeated = state.researchDefeated,
     researchMoves = state.researchMoves,
+    researchSuperEffective = state.researchSuperEffective,
+    researchMoveIds = state.researchMoveIds,
     researchClaimed = state.researchClaimed,
     researchPoints = state.researchPoints,
     party = state.party,
@@ -268,14 +270,21 @@ export function consumeEvent(state, action) {
       index === state.activePlayerPokemonIndex ? { ...member, moves: updatedMoves } : member
     )
   }
-  // Field research: a move used by the active player Pokemon counts toward its
-  // move-use task (only the player's attacks carry the enemy as the target).
-  if (event.type === 'attack' && event.data?.target === 'enemy') {
-    const moveResearched = creditResearchMove(
-      { ...state, researchMoves },
-      state.playerPokemon?.speciesKey
-    )
+  // Field research: a move used by either battler records the move id for its
+  // species' signature-move task, and the player's moves also climb the
+  // non-wild move-count ladder.
+  if (event.type === 'attack' && event.data?.moveId) {
+    const userSpecies =
+        event.data.target === 'enemy'
+          ? state.playerPokemon?.speciesKey
+          : state.enemyPokemon?.speciesKey,
+      moveResearched = creditResearchMove(
+        { ...state, researchMoves, researchMoveIds },
+        userSpecies,
+        event.data.moveId
+      )
     researchMoves = moveResearched.researchMoves
+    researchMoveIds = moveResearched.researchMoveIds
     researchClaimed = moveResearched.researchClaimed
     researchPoints = moveResearched.researchPoints
   }
@@ -287,11 +296,18 @@ export function consumeEvent(state, action) {
   ) {
     wildBattlesWon++
     // Field research: count the defeat and credit any newly-earned points.
-    const researched = creditResearchDefeat(
+    let researched = creditResearchDefeat(
       { ...state, researchDefeated },
       state.enemyPokemon?.speciesKey
     )
+    // A super-effective KO credits both the defeated species and the attacker
+    // that landed it (the wild and non-wild super-effective tasks).
+    if ((event.data?.effectiveness ?? 0) > 1) {
+      researched = creditResearchSuperEffective(researched, state.enemyPokemon?.speciesKey)
+      researched = creditResearchSuperEffective(researched, state.playerPokemon?.speciesKey)
+    }
     researchDefeated = researched.researchDefeated
+    researchSuperEffective = researched.researchSuperEffective
     researchClaimed = researched.researchClaimed
     researchPoints = researched.researchPoints
     // Battling together builds friendship (and can unlock friendship evolutions).
@@ -466,6 +482,8 @@ export function consumeEvent(state, action) {
     battlesWonByLocation,
     researchDefeated,
     researchMoves,
+    researchSuperEffective,
+    researchMoveIds,
     researchClaimed,
     researchPoints,
     weather,

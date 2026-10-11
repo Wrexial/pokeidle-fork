@@ -28,7 +28,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 ### Tier 3 — Small follow-ups on shipped systems
 
 See the numbered sections below: #24, #25, #56, #62, #65, #67, #69–#76,
-#79, #81–#82. They are optional extras rather than missing features.
+#79, #81. They are optional extras rather than missing features.
 
 ---
 
@@ -63,9 +63,11 @@ The effect set (healing, multi-hit, crit stages, hazards, weather, terrain,
 phazing, swaps, the status conditionals and multi-status rolls, the
 doubles-only moves and the Apricorn Balls' catch rates) is done.
 
-Still open (design calls):
+PP is stored but deliberately unused — an idle auto-battler has no PP
+management, so it stays as data only.
 
-- [ ] PP is stored but unused; decide whether to implement it or drop it.
+Still open (design call):
+
 - [ ] Z-moves / G-Max moves are otherwise dead data — decide keep/drop.
 
 ## 25. Battle engine pass
@@ -253,18 +255,6 @@ Still open (optional):
       (Lucky Egg, Amulet Coin) once PP / EVs are modelled.
 - [ ] A species-specific research reward tied to the species the points came
       from.
-
-## 82. Research tasks for non-wild species (Legends-style tasks)
-
-`researchTasksFor(speciesKey)` is species-aware, so a species with no wild route
-gets observable tasks (obtain / feed / use moves) instead of impossible defeat
-rows.
-
-Still open (optional extra Legends-style tasks):
-
-- [ ] Defeat a foe with a super-effective move of a given type (the "catch a
-      large specimen" task shipped).
-- [ ] A per-species "see it use <specific move>" flavour task for more variety.
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

@@ -110,6 +110,10 @@ export const initialGameState = {
   researchMoves: {},
   /** Field research: large specimens obtained per species. */
   researchLarge: {},
+  /** Field research: super-effective hits landed on or by a species. */
+  researchSuperEffective: {},
+  /** Field research: move ids each species has been seen using. */
+  researchMoveIds: {},
   /** Research points already credited per species (so a balance is spendable). */
   researchClaimed: {},
   /** Unspent Research Points. */

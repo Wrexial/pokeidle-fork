@@ -4,14 +4,15 @@
 // species (obtain, feed, use its moves). Progress is derived from the Pokedex
 // plus a few per-species counters.
 
-import { encounterData, pokemonSpecies } from '../data/gameData.js'
+import { encounterData, moveData, pokemonSpecies } from '../data/gameData.js'
+import { resolvePokemonMoves } from './pokemon/evolution.js'
 import { sizeRating } from './pokemon/sizes.js'
 
 /**
  * Research tasks for a species that actually spawns on a wild route (or a raid
  * pool), so the wild-defeat ladder is reachable. `kind` picks the counter the
  * task reads (`defeat` = its wild-defeat count, `catch` / `shiny` = Pokedex).
- * @type {{ id: string, kind: 'catch' | 'defeat' | 'shiny' | 'large', label: string, need: number, points: number }[]}
+ * @type {{ id: string, kind: 'catch' | 'defeat' | 'shiny' | 'large' | 'superEffective' | 'usedMove', label: string, need: number, points: number }[]}
  */
 export const RESEARCH_TASKS_WILD = [
   { id: 'catch', kind: 'catch', label: 'Catch 1', need: 1, points: 1 },
@@ -20,6 +21,14 @@ export const RESEARCH_TASKS_WILD = [
   { id: 'defeat25', kind: 'defeat', label: 'Defeat 25 in the wild', need: 25, points: 5 },
   { id: 'shiny', kind: 'shiny', label: 'Catch its shiny', need: 1, points: 5 },
   { id: 'large', kind: 'large', label: 'Catch a large specimen', need: 1, points: 2 },
+  {
+    id: 'superEffective',
+    kind: 'superEffective',
+    label: 'Defeat it with a super-effective hit',
+    need: 1,
+    points: 2,
+  },
+  { id: 'signature', kind: 'usedMove', label: 'See it use its signature move', need: 1, points: 2 },
 ]
 
 /**
@@ -28,7 +37,7 @@ export const RESEARCH_TASKS_WILD = [
  * babies, ...). The wild-defeat ladder would be impossible, so it observes the
  * species instead (feed it a berry, use its moves), Legends: Arceus style. The
  * point total matches the wild set so research levels stay comparable.
- * @type {{ id: string, kind: 'catch' | 'fed' | 'moves' | 'shiny' | 'large', label: string, need: number, points: number }[]}
+ * @type {{ id: string, kind: 'catch' | 'fed' | 'moves' | 'shiny' | 'large' | 'superEffective' | 'usedMove', label: string, need: number, points: number }[]}
  */
 export const RESEARCH_TASKS_NON_WILD = [
   { id: 'catch', kind: 'catch', label: 'Obtain 1', need: 1, points: 1 },
@@ -37,6 +46,14 @@ export const RESEARCH_TASKS_NON_WILD = [
   { id: 'moves25', kind: 'moves', label: 'Use 25 of its moves', need: 25, points: 5 },
   { id: 'shiny', kind: 'shiny', label: 'Catch its shiny', need: 1, points: 5 },
   { id: 'large', kind: 'large', label: 'Obtain a large specimen', need: 1, points: 2 },
+  {
+    id: 'superEffective',
+    kind: 'superEffective',
+    label: 'Land a super-effective hit with it',
+    need: 1,
+    points: 2,
+  },
+  { id: 'signature', kind: 'usedMove', label: 'Use its signature move', need: 1, points: 2 },
 ]
 
 /**
@@ -51,6 +68,17 @@ export function isLargeSpecimen(pokemon) {
 
 /** Total points a single species can yield (both task sets add up to this). */
 export const RESEARCH_MAX_POINTS = RESEARCH_TASKS_WILD.reduce((sum, task) => sum + task.points, 0)
+
+/**
+ * A species' signature move for the "use its signature move" task: the
+ * highest-level move in its level-up learnset. Null for a species with none.
+ * @param {string} speciesKey
+ * @returns {string | null}
+ */
+export function signatureMoveFor(speciesKey) {
+  const moves = resolvePokemonMoves(speciesKey, 100)
+  return moves.length > 0 ? moves[moves.length - 1] : null
+}
 
 /** Cached set of every species that appears in a wild route or raid pool. @type {Set<string> | null} */
 let wildSpeciesSet = null
@@ -104,29 +132,53 @@ export function speciesResearch(state, speciesKey) {
     defeated = state.researchDefeated?.[speciesKey] ?? 0,
     fed = state.researchFed?.[speciesKey] ?? 0,
     moves = state.researchMoves?.[speciesKey] ?? 0,
-    large = state.researchLarge?.[speciesKey] ?? 0
+    large = state.researchLarge?.[speciesKey] ?? 0,
+    superEffective = state.researchSuperEffective?.[speciesKey] ?? 0,
+    seenMoves = state.researchMoveIds?.[speciesKey] ?? [],
+    signature = signatureMoveFor(speciesKey),
+    wild = isWildSpecies(speciesKey)
   const tasks = researchTasksFor(speciesKey).map((task) => {
-    const raw =
-      task.kind === 'defeat'
-        ? defeated
-        : task.kind === 'fed'
-          ? fed
-          : task.kind === 'moves'
-            ? moves
-            : task.kind === 'catch'
-              ? caught
-                ? 1
-                : 0
-              : task.kind === 'shiny'
-                ? shiny
-                  ? 1
-                  : 0
-                : task.kind === 'large'
-                  ? large
-                  : 0
+    let raw = 0,
+      label = task.label
+    switch (task.kind) {
+      case 'defeat':
+        raw = defeated
+        break
+      case 'fed':
+        raw = fed
+        break
+      case 'moves':
+        raw = moves
+        break
+      case 'catch':
+        raw = caught ? 1 : 0
+        break
+      case 'shiny':
+        raw = shiny ? 1 : 0
+        break
+      case 'large':
+        raw = large
+        break
+      case 'superEffective':
+        raw = superEffective
+        break
+      case 'usedMove': {
+        // The signature-move task reads the move ids the species has used. A
+        // species with no learnset just needs to use any move.
+        const done = signature ? seenMoves.includes(signature) : seenMoves.length > 0,
+          moveName = signature ? moveData[signature]?.name ?? signature : null
+        raw = done ? 1 : 0
+        label = moveName
+          ? `${wild ? 'See it use' : 'Use'} ${moveName}`
+          : wild
+            ? 'See it use a move'
+            : 'Use one of its moves'
+        break
+      }
+    }
     return {
       id: task.id,
-      label: task.label,
+      label,
       need: task.need,
       points: task.points,
       progress: Math.min(raw, task.need),
@@ -206,17 +258,46 @@ export function creditResearchLarge(state, speciesKey) {
 }
 
 /**
- * Count a move used by `speciesKey` in battle, for species with no wild route.
+ * Count a super-effective hit landed on, or by, `speciesKey`, for the
+ * super-effective task.
  * @param {GameState} state
  * @param {string | undefined | null} speciesKey
  * @returns {GameState}
  */
-export function creditResearchMove(state, speciesKey) {
-  // Only a species with no wild route reads this counter.
-  if (!speciesKey || !pokemonSpecies[speciesKey] || isWildSpecies(speciesKey)) return state
-  const researchMoves = { ...(state.researchMoves ?? {}) }
-  researchMoves[speciesKey] = (researchMoves[speciesKey] ?? 0) + 1
-  return applyResearchEarnings({ ...state, researchMoves }, speciesKey)
+export function creditResearchSuperEffective(state, speciesKey) {
+  if (!speciesKey || !pokemonSpecies[speciesKey]) return state
+  const researchSuperEffective = { ...(state.researchSuperEffective ?? {}) }
+  researchSuperEffective[speciesKey] = (researchSuperEffective[speciesKey] ?? 0) + 1
+  return applyResearchEarnings({ ...state, researchSuperEffective }, speciesKey)
+}
+
+/**
+ * Record a move used by `speciesKey` in battle. The move id feeds the
+ * signature-move task for every species; the move-count ladder only reads for
+ * species with no wild route.
+ * @param {GameState} state
+ * @param {string | undefined | null} speciesKey
+ * @param {string | undefined | null} [moveId]
+ * @returns {GameState}
+ */
+export function creditResearchMove(state, speciesKey, moveId) {
+  if (!speciesKey || !pokemonSpecies[speciesKey]) return state
+  let next = state
+  if (moveId) {
+    const seen = state.researchMoveIds?.[speciesKey] ?? []
+    if (!seen.includes(moveId))
+      next = {
+        ...next,
+        researchMoveIds: { ...(state.researchMoveIds ?? {}), [speciesKey]: [...seen, moveId] },
+      }
+  }
+  // Only a species with no wild route reads the move-count counter.
+  if (!isWildSpecies(speciesKey)) {
+    const researchMoves = { ...(next.researchMoves ?? {}) }
+    researchMoves[speciesKey] = (researchMoves[speciesKey] ?? 0) + 1
+    next = { ...next, researchMoves }
+  }
+  return applyResearchEarnings(next, speciesKey)
 }
 
 /**

@@ -3211,6 +3211,9 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         message: `${attack.defender.name} fainted!`,
         data: {
           target: attack.isPlayer ? 'enemy' : 'player',
+          // For field research: the KO hit's effectiveness and move.
+          effectiveness: damageResult?.effectiveness ?? 1,
+          moveId: attack.moveId,
         },
       })
       // Aftermath punishes a contact KO.

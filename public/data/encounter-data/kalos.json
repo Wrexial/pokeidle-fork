@@ -3752,5 +3752,330 @@
     "maxLevel": 69
    }
   ]
+ },
+ "lumiose-wild-zone-1": {
+  "name": "Wild Zone 1",
+  "encounters": [
+   {
+    "speciesKey": "fletchling",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "bunnelby",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "scatterbug",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "litleo",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "pikachu",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "pancham",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "dedenne",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "eevee",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "skiddo",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "furfrou",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "lumiose-wild-zone-2": {
+  "name": "Wild Zone 2",
+  "encounters": [
+   {
+    "speciesKey": "budew",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "seedot",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "cottonee",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "petilil",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "foongus",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "phantump",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "swirlix",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "spritzee",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "espurr",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "pansage",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "lumiose-wild-zone-3": {
+  "name": "Wild Zone 3",
+  "encounters": [
+   {
+    "speciesKey": "magikarp",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "finneon",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "buizel",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "wooper",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "corphish",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "binacle",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "skrelp",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "clauncher",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "shellos",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "seaking",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "lumiose-wild-zone-4": {
+  "name": "Wild Zone 4",
+  "encounters": [
+   {
+    "speciesKey": "roggenrola",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "woobat",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "noibat",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "honedge",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "carbink",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "klefki",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "bronzor",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "lumiose-wild-zone-5": {
+  "name": "Wild Zone 5",
+  "encounters": [
+   {
+    "speciesKey": "magnemite",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "voltorb",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "grimer",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "koffing",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "trubbish",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "houndour",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "growlithe",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "klefki",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "pansear",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "slugma",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   }
+  ]
  }
 }

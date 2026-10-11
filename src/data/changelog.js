@@ -27,6 +27,7 @@ export const CHANGELOG = [
           'Ogerpon’s three masks, Terapagos’s Terastal and Stellar formes and Bloodmoon Ursaluna are obtainable now (the masks, a Tera Orb and a Peat Block are Reward Shop items that switch the forme from the party screen), and Wimpod, Rellor and Slither Wing have real wild routes instead of being Bug-Catching-Contest-only.',
           'The world has weather now: each area rolls rain, sun, sandstorm or snow (or stays clear) every 15 real minutes, weighted by its biome, and shows it beside the day/night chip on the Town Map. A battle starts under that weather, and the rain- and sun-favoured route activities can fire anywhere instead of only on the seven permanently weather-struck routes.',
           'Hisui opens as a Sinnoh post-game zone: beat the Sinnoh Champion and a rift at the League leads to ancient Sinnoh \u2014 the Obsidian Fieldlands, Crimson Mirelands, Cobalt Coastlands, Coronet Highlands and Alabaster Icelands, each with its own wild table (Hisuian forms included).',
+          'Lumiose City\u2019s Wild Zones open as a Kalos post-game zone once the Kalos Champion is beaten: five numbered Wild Zones (plaza, park, canal, tunnels and the power-plant quarter), each with its own wild table.',
         ],
       },
       {

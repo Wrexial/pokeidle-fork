@@ -55,8 +55,7 @@ renumbered, so the gaps below are items that shipped.
 18. **#73 Weather system on routes** — shipped.
 19. **#74 Pokemon sizes (XS–XL)** — shipped; the alpha bonus and research hook
     remain.
-20. **#75 Legends Z-A area (Kalos)** — M · ★★★ — Lumiose City's Wild Zones as a
-    post-game zone.
+20. **#75 Legends Z-A area (Kalos)** — shipped.
 21. **#76 Legends Arceus / Hisui areas (Sinnoh)** — shipped; nobles / ride
     Pokemon remain optional.
 22. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
@@ -433,18 +432,17 @@ height fetch are the extra).
 
 ## 75. Legends Z-A area (Kalos post-game zone)
 
-Legends: Z-A is set in Lumiose City, with Wild Zones carved out of the city. The
-game already ships the Z-A **Mega Evolutions** (the "Z" variants in
-`src/data/mega-evolution.js`), but not the setting itself.
+Done: **Lumiose Wild Zones** is a Kalos post-game `type: 'zone'` hub on the map,
+gated on the Kalos Champion and reached from Lumiose City. Its five numbered
+Wild Zones (plaza, park, canal, tunnels, the power-plant quarter) are hidden
+sub-areas with their own wild tables, ring-laid for the focused map view. Added
+by `tools/add-lumiose-zone.cjs` (idempotent) with the encounter index
+regenerated.
 
-- [ ] Add **Lumiose City** as a post-game `type: 'zone'` hub on Kalos (like the
-      DLC and Sevii zones), gated on the Kalos Champion, with the **Wild Zones**
-      as hidden sub-areas, each with its own wild table.
-- [ ] Reuse the zone plumbing: `ZONES` / `lib/zone-areas.cjs` in the generator, or
-      `apply-zone-areas.cjs` on the committed data, then `apply-zone-layout.cjs`
-      and `generate-encounter-index.cjs`.
-- [ ] Pick the Wild Zone species from Kalos's generation (and any Z-A-only forms)
-      that fit an inner-city setting.
+Still open (optional):
+
+- [ ] A Jubilife-style Lumiose hub scene and the Z-A Mega "Z" forms as an
+      area-specific mechanic.
 
 Effort: **medium** (map data, encounters and a generator pass; the zone model
 already exists).

@@ -217,7 +217,8 @@
    "kalos-route-16",
    "kalos-route-13",
    "kalos-route-5",
-   "kalos-power-plant"
+   "kalos-power-plant",
+   "lumiose-wild-zones"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1734,5 +1735,182 @@
   },
   "biome": "ruins",
   "background": "/backgrounds/grassland.webp"
+ },
+ "lumiose-wild-zones": {
+  "id": "lumiose-wild-zones",
+  "name": "Lumiose Wild Zones",
+  "type": "zone",
+  "region": "kalos",
+  "description": "The Wild Zones carved out of Lumiose City, open once the Kalos Champion is beaten.",
+  "routeKey": "lumiose-wild-zone-1",
+  "background": "/backgrounds/grassland.webp",
+  "biome": "grassland",
+  "connections": [
+   "kalos-lumiose-city",
+   "lumiose-wild-zone-1",
+   "lumiose-wild-zone-2",
+   "lumiose-wild-zone-3",
+   "lumiose-wild-zone-4",
+   "lumiose-wild-zone-5"
+  ],
+  "unlock": {
+   "championDefeated": "kalos"
+  },
+  "unlockOrder": 900200,
+  "position": {
+   "x": 53,
+   "y": 20
+  },
+  "subAreas": [
+   {
+    "id": "lumiose-wild-zone-1",
+    "name": "Wild Zone 1"
+   },
+   {
+    "id": "lumiose-wild-zone-2",
+    "name": "Wild Zone 2"
+   },
+   {
+    "id": "lumiose-wild-zone-3",
+    "name": "Wild Zone 3"
+   },
+   {
+    "id": "lumiose-wild-zone-4",
+    "name": "Wild Zone 4"
+   },
+   {
+    "id": "lumiose-wild-zone-5",
+    "name": "Wild Zone 5"
+   }
+  ]
+ },
+ "lumiose-wild-zone-1": {
+  "id": "lumiose-wild-zone-1",
+  "name": "Wild Zone 1",
+  "type": "route",
+  "region": "kalos",
+  "description": "A grassy plaza overrun by city Pokemon.",
+  "routeKey": "lumiose-wild-zone-1",
+  "background": "/backgrounds/grassland.webp",
+  "biome": "grassland",
+  "connections": [
+   "lumiose-wild-zones"
+  ],
+  "unlock": {
+   "requires": [
+    "lumiose-wild-zones"
+   ]
+  },
+  "unlockOrder": 900201,
+  "position": {
+   "x": 48,
+   "y": 13
+  },
+  "hidden": true,
+  "zone": "lumiose-wild-zones"
+ },
+ "lumiose-wild-zone-2": {
+  "id": "lumiose-wild-zone-2",
+  "name": "Wild Zone 2",
+  "type": "route",
+  "region": "kalos",
+  "description": "A wooded park in the heart of the city.",
+  "routeKey": "lumiose-wild-zone-2",
+  "background": "/backgrounds/grassland.webp",
+  "biome": "forest",
+  "connections": [
+   "lumiose-wild-zones"
+  ],
+  "unlock": {
+   "requires": [
+    "lumiose-wild-zones",
+    "lumiose-wild-zone-1"
+   ]
+  },
+  "unlockOrder": 900202,
+  "position": {
+   "x": 58,
+   "y": 12
+  },
+  "hidden": true,
+  "zone": "lumiose-wild-zones"
+ },
+ "lumiose-wild-zone-3": {
+  "id": "lumiose-wild-zone-3",
+  "name": "Wild Zone 3",
+  "type": "route",
+  "region": "kalos",
+  "description": "A canal-side zone where water Pokemon gather.",
+  "routeKey": "lumiose-wild-zone-3",
+  "background": "/backgrounds/beach.webp",
+  "biome": "coast",
+  "connections": [
+   "lumiose-wild-zones"
+  ],
+  "unlock": {
+   "requires": [
+    "lumiose-wild-zones",
+    "lumiose-wild-zone-2"
+   ]
+  },
+  "unlockOrder": 900203,
+  "position": {
+   "x": 62,
+   "y": 20
+  },
+  "hidden": true,
+  "zone": "lumiose-wild-zones"
+ },
+ "lumiose-wild-zone-4": {
+  "id": "lumiose-wild-zone-4",
+  "name": "Wild Zone 4",
+  "type": "route",
+  "region": "kalos",
+  "description": "Construction tunnels and old foundations below the streets.",
+  "routeKey": "lumiose-wild-zone-4",
+  "background": "/backgrounds/mountain.webp",
+  "biome": "ruins",
+  "connections": [
+   "lumiose-wild-zones"
+  ],
+  "unlock": {
+   "requires": [
+    "lumiose-wild-zones",
+    "lumiose-wild-zone-3"
+   ]
+  },
+  "unlockOrder": 900204,
+  "position": {
+   "x": 58,
+   "y": 28
+  },
+  "hidden": true,
+  "zone": "lumiose-wild-zones"
+ },
+ "lumiose-wild-zone-5": {
+  "id": "lumiose-wild-zone-5",
+  "name": "Wild Zone 5",
+  "type": "route",
+  "region": "kalos",
+  "description": "The power plant quarter, humming with heat and sparks.",
+  "routeKey": "lumiose-wild-zone-5",
+  "background": "/backgrounds/mountain.webp",
+  "biome": "volcanic",
+  "connections": [
+   "lumiose-wild-zones"
+  ],
+  "unlock": {
+   "requires": [
+    "lumiose-wild-zones",
+    "lumiose-wild-zone-4"
+   ]
+  },
+  "unlockOrder": 900205,
+  "position": {
+   "x": 48,
+   "y": 28
+  },
+  "hidden": true,
+  "zone": "lumiose-wild-zones"
  }
 }

@@ -9,6 +9,7 @@ import { areaInfoFor } from '../data/ui.js'
 import { MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_TUTORIALS, ROUTE_ACTIVITIES, ROUTE_ACTIVITY_TUTORIALS, activityConditionLabel, activityConditionMatches, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { dayPhaseAt } from '../game/day-night.js'
 import { fieldWeatherFor } from '../game/weather.js'
+import { masteryProgress } from '../game/route-mastery.js'
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations, frontierUnlocks, minigameRequirementMet, regionProgressionGoal, unlockBlockers } from '../game/progression.js'
 import { servicePoisFor, cafeFor } from '../game/services.js'
@@ -268,6 +269,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
   const fixedMinigameId = MINIGAME_LOCATIONS[location.id],
     fixedMinigame = fixedMinigameId ? MINIGAME_INFO[fixedMinigameId] : null,
     activityIds = routeActivityIds(location),
+    mastery = masteryProgress(state, location.id),
     activityConditionContext = {
       time: /** @type {'day' | 'night'} */ (dayPhaseAt().isNight ? 'night' : 'day'),
       weather: fieldWeatherFor(location)?.type ?? null,
@@ -800,6 +802,13 @@ export function LocationPanel({ onOpenCatchSettings }) {
                 children: fixedMinigame ? 'Minigame' : 'Activities',
               }),
               fixedMinigameCard,
+              activityIds.length > 0 &&
+                jsx('p', {
+                  className: `route-mastery-hint${mastery.mastered ? ' mastered' : ''}`,
+                  children: mastery.mastered
+                    ? '\u2605 Route mastered \u2014 every activity here is a perfect hit or better.'
+                    : `Mastery: ${mastery.done}/${mastery.total} activities at a perfect hit or better.`,
+                }),
               activityIds.map((activityId) => {
                 const activity = ROUTE_ACTIVITIES[activityId]
                 if (!activity) return null

@@ -44,7 +44,8 @@ renumbered, so the gaps below are items that shipped.
     shipped; box bulk-release remains.
 12. **#67 Ribbons + ribbon case** — shipped.
 13. **#68 Generation-completion rewards** — done.
-14. **#59 Activity goals & per-route mastery** — S–M · ★★.
+14. **#59 Activity goals & per-route mastery** — shipped; activity daily quests
+    remain.
 15. **#61 Focus / target hunting** — S–M · ★★½.
 16. **#66 Battle Frontier facilities** — M–L · ★★½.
 17. **#70 Recurring rival** — M · ★★½.
@@ -227,8 +228,18 @@ Effort: **small** (the remaining bits are one-offs).
 
 ## 59. Activity goals & per-route mastery
 
-Persist the best hit quality per route/activity, grant a mastery bonus once a
-route's activities are all cleared, and add activity-flavoured daily quests.
+Done: `src/game/route-mastery.js` records the best activity hit quality per
+route (miss 0, hit 1, perfect 2, ultra 3) in `state.routeMastery`, the location
+panel shows how many of a route's activities are at a perfect hit or better,
+and clearing every activity on a route pays a one-time bonus (money + a Rare
+Candy) and records it in `masteredRoutes`. The activity scene dispatches
+`RECORD_ROUTE_MASTERY` on each landed hit; a lower quality never overwrites a
+higher one.
+
+Still open:
+
+- [ ] Activity-flavoured daily quests (e.g. "land 3 perfect hits", "clear a
+      route's activities").
 
 Effort: **small–medium**.
 

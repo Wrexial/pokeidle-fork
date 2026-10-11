@@ -79,6 +79,7 @@ export const CHANGELOG = [
           'Field research: every species has five tasks that earn Research Points. It reads the Pokedex plus a per-species wild-defeat count, tracks a research level up to 10 in the Pokedex detail, and spends the points in a Research Shop on candies, ability items, Bottle Caps and a Master Ball.',
           'A species with no wild route (evolved forms, starters, fossils, gifts, statics and the rest) no longer shows impossible “defeat it in the wild” research tasks: it observes the species instead — obtain it, feed it a berry, and use its moves in battle — for the same points.',
           'Ribbons are in: a Pokemon earns a permanent award for milestones (Effort at Lv. 100, Best Friends at max friendship), Gym / Elite Four / Champion wins, Battle Tower floors and cleared Contests or the Champions’ Gauntlet. A ribbon case on the stats panel lists everything an individual has earned.',
+          'Route activities track mastery: the best hit quality you\u2019ve scored for each activity on a route is remembered, the location panel shows how many are at a perfect hit or better, and clearing every activity on a route pays a one-time bonus and marks it mastered.',
         ],
       },
       {

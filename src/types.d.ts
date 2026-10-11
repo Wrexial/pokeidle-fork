@@ -638,6 +638,10 @@ type GameState = {
   regionPrestige: Record<string, number>
   /** Best result per minigame, for `unlock.minigame` gates (see endMinigame). */
   minigameRecords: Record<string, { best: number; completed: boolean }>
+  /** Best activity hit quality per route, for route mastery (see game/route-mastery.js). */
+  routeMastery: Record<string, Record<string, number>>
+  /** Route ids whose activity mastery bonus has been paid. */
+  masteredRoutes: string[]
   /** Next Battle Tower floor to attempt (0 = not in a run). Hoenn only. */
   towerFloor: number
   /** Best Battle Tower floor cleared, keyed by region (Hoenn only). */

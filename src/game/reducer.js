@@ -16,6 +16,7 @@ import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } fro
 import { assignJob, collectJob, takeJobEncounter, unassignJob, accrueJobFinds } from './reducer/jobs.js'
 import { claimGift, startStaticEncounter } from './reducer/gifts.js'
 import { buyResearchItem } from './reducer/research.js'
+import { recordRouteMastery } from './reducer/mastery.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, recordGameCornerWin, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startChampionGauntlet, startBugContest, startContest, startCurry, startDoubles, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack, startMantineSurf, startRotomRally, startOgreOustin, startTypeFusion, startUnownPicross, startPokeshot, startTeraRaid, startPokeword, startBerryBlender } from './reducer/minigames.js'
 import { applyTeamPreset, boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, deleteTeamPreset, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, saveTeamPreset, setBoxSort, setMoves, setNickname, startEvolution, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
@@ -146,6 +147,10 @@ export const initialGameState = {
   regionPrestige: {},
   /** Best result per minigame, used by `unlock.minigame` route gates. */
   minigameRecords: {},
+  /** Best activity hit quality per route, for route mastery (see game/route-mastery.js). */
+  routeMastery: {},
+  /** Route ids whose activity mastery bonus has been paid. */
+  masteredRoutes: [],
   /** Next Battle Tower floor to attempt (0 = not in a run). Hoenn only. */
   towerFloor: 0,
   /** Best Tower floor cleared per region (only Hoenn is used). */
@@ -532,6 +537,8 @@ export function gameReducer(state, action) {
       return startRouteActivity(state, action)
     case 'END_ROUTE_ACTIVITY':
       return endRouteActivity(state, action)
+    case 'RECORD_ROUTE_MASTERY':
+      return recordRouteMastery(state, action)
     case 'PAY_MINIGAME_FEE':
       return payMinigameFee(state, action)
     case 'CLAIM_MINIGAME_REWARD':

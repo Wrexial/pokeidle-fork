@@ -16207,3 +16207,15 @@ img {
     color: #3a2818;
     min-width: 64px
 }
+
+/* Route activity mastery hint (location panel). */
+.route-mastery-hint {
+    margin: 2px 0 6px;
+    font-size: 8px;
+    color: #6a4a20
+}
+
+.route-mastery-hint.mastered {
+    color: #b8860b;
+    font-weight: 700
+}

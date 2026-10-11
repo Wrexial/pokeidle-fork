@@ -6,6 +6,7 @@ import { BATTLE_TOWER_REGION, LEGACY_SAVE_KEYS, MAX_TEAM_PRESETS, SAVE_BACKUP_KE
 import { dailyEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
+import { ROUTE_ACTIVITIES } from './minigames/route-activities.js'
 import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility, rollSize, RIBBONS } from './pokemon.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
@@ -684,6 +685,25 @@ export function repairSave(saved) {
             completed: !!record.completed,
           },
         ])
+    ),
+    // Route activity mastery: keep known locations/activities and ranks 1-3.
+    routeMastery = Object.fromEntries(
+      Object.entries(saved.routeMastery ?? {})
+        .filter(([locationId]) => mapData[locationId])
+        .map(([locationId, activities]) => [
+          locationId,
+          Object.fromEntries(
+            Object.entries(activities && typeof activities === 'object' ? activities : {})
+              .filter(
+                ([activityId, rank]) =>
+                  ROUTE_ACTIVITIES[activityId] && typeof rank === 'number' && rank > 0
+              )
+              .map(([activityId, rank]) => [activityId, Math.min(3, Math.floor(rank))])
+          ),
+        ])
+    ),
+    masteredRoutes = (Array.isArray(saved.masteredRoutes) ? saved.masteredRoutes : []).filter(
+      /** @param {string} locationId */ (locationId) => !!mapData[locationId]
     )
 
   return {
@@ -783,6 +803,8 @@ export function repairSave(saved) {
     towerFloor: repairedTowerFloor,
     towerBest: repairedTowerBest,
     minigameRecords,
+    routeMastery,
+    masteredRoutes,
     victoryTokens: saved.victoryTokens ?? 0,
     autoProceed: saved.autoProceed ?? false,
     autoHeal: !!saved.autoHeal,
@@ -946,6 +968,8 @@ export const SAVED_STATE_KEYS = [
   'claimedGifts',
   'regionPrestige',
   'minigameRecords',
+  'routeMastery',
+  'masteredRoutes',
   'towerFloor',
   'towerBest',
   'victoryTokens',

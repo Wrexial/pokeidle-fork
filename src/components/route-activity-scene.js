@@ -574,6 +574,11 @@ export function RouteActivityScene() {
       setStage(nextAttempts <= 0 ? 'done' : 'result')
       return
     }
+    // Route mastery: record the best quality for this route's activity.
+    dispatch({
+      type: 'RECORD_ROUTE_MASTERY',
+      payload: { locationId: state.currentLocation, activityId: activity.id, quality },
+    })
     if (state.sfxEnabled) playSfx(quality === 'hit' ? 'good' : 'great')
     const perfect = quality !== 'hit'
     if (activity.mode === 'encounter') {

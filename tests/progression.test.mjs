@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, regionProgressionGoal, checkShinyOdds, shinyChainMultiplier, shinyOddsForCompletedGenerations, shinyOddsForSpecies, entryRoutePath, minigameRequirementMet } =
+const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, regionProgressionGoal, checkShinyOdds, shinyChainMultiplier, shinyOddsForCompletedGenerations, shinyOddsForSpecies, entryRoutePath, minigameRequirementMet, partyNeedsHealing } =
   await import('../src/game/progression.js')
 const { initialGameState, gameReducer } = await import('../src/game/reducer.js')
 const { encounterData, gymLeaderData, mapData, pokemonSpecies, regions } = await import('../src/data/gameData.js')
@@ -23,6 +23,37 @@ function baseState(overrides = {}) {
     ...overrides,
   }
 }
+
+test('partyNeedsHealing covers the active Pokemon and the party', () => {
+  const healthy = createPokemon('bulbasaur', 5, 1),
+    hurt = { ...healthy, currentHp: healthy.maxHp - 1 }
+  assert.equal(
+    partyNeedsHealing(baseState({ playerPokemon: healthy, party: [healthy] })),
+    false
+  )
+  // A damaged active Pokemon counts even before it is synced into the party.
+  assert.equal(
+    partyNeedsHealing(baseState({ playerPokemon: hurt, party: [healthy] })),
+    true
+  )
+  // A damaged bench member counts too, even with a full-HP lead.
+  assert.equal(
+    partyNeedsHealing(baseState({ playerPokemon: healthy, party: [healthy, hurt] })),
+    true
+  )
+  // A fainted bench member is a trigger too.
+  assert.equal(
+    partyNeedsHealing(
+      baseState({ playerPokemon: healthy, party: [healthy, { ...healthy, currentHp: 0 }] })
+    ),
+    true
+  )
+  // With no party there is nothing the heal can fix, so it never triggers.
+  assert.equal(
+    partyNeedsHealing(baseState({ playerPokemon: { ...healthy, currentHp: 0 }, party: [] })),
+    false
+  )
+})
 
 test('getRegionUnlockTokens counts Champions minus opened regions', () => {
   assert.equal(

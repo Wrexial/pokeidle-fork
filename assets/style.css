@@ -8187,6 +8187,34 @@ img {
     color: #3a2818
 }
 
+.settings-default-catch {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #00000022
+}
+
+.settings-default-catch .catch-mode-option {
+    font-size: 9px;
+    color: #3a2818
+}
+
+.settings-default-catch .catch-mode-hint {
+    color: #6a4a20
+}
+
+.settings-default-catch .catch-ball-label {
+    font-size: 9px;
+    color: #5a4838
+}
+
+.settings-default-catch .catch-ball-icon-btn.active {
+    border-color: var(--gold-dark);
+    background: #8a7a6026
+}
+
 .settings-speed-btn {
     font-family: inherit;
     font-size: 9px;

@@ -15,7 +15,7 @@ import { abilityOf } from './abilities.js'
 import { companionExpMultiplier } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch, chooseTrainingSwitch } from './combat.js'
 import { isBattleReady } from './pokemon.js'
-import { awardExperience, checkShinyOdds, encountersForPhase, isHoneyActive, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
+import { awardExperience, checkShinyOdds, encountersForPhase, isHoneyActive, partyNeedsHealing, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
 
 export function useGameLoop() {
   const { state, dispatch: rawDispatch } = useGame(),
@@ -104,6 +104,22 @@ export function useGameLoop() {
       switch (currentGameState.phase) {
         case 'idle': {
           if (!currentGameState.playerPokemon) return
+          // Optional auto-heal: top the party up at the Pokemon Center before
+          // the next encounter instead of making the player press HEAL. Only
+          // the idle map heals, so a battle is never interrupted mid-turn, and
+          // a raid is skipped (healing there would return the player home).
+          // The two dispatches share one batch, so the party is healed without
+          // replaying the Pokemon Center animation on every battle.
+          if (
+            currentGameState.autoHeal &&
+            !currentGameState.inRaid &&
+            mapData[currentGameState.currentLocation]?.type !== 'raid' &&
+            partyNeedsHealing(currentGameState)
+          ) {
+            dispatch({ type: 'START_HEALING' })
+            dispatch({ type: 'COMPLETE_HEALING' })
+            return
+          }
           const currentLocationData = mapData[currentGameState.currentLocation]
           if (currentLocationData && currentLocationData.type === 'town') {
             // Cinnabar Island's famous glitch: a very rare MissingNo. encounter

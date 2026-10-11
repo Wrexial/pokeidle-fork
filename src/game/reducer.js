@@ -10,7 +10,7 @@ import { createJobs } from './jobs.js'
 import { DEFAULT_ROD } from './minigames.js'
 import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, executeTurn, fleeBattle, gmaxEvolve, megaEvolve, startBossBattle, startEncounter, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
 import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain } from './reducer/collection.js'
-import { buyCafeItem, buyItem, buyRewardItem, clearHeldItem, reviveFossil, sellItem, setAlwaysCatchShinies, setCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
+import { buyCafeItem, buyItem, buyRewardItem, clearHeldItem, reviveFossil, sellItem, setAlwaysCatchShinies, setCatchRule, setDefaultCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
 import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } from './reducer/pelago.js'
 import { assignJob, collectJob, takeJobEncounter, unassignJob, accrueJobFinds } from './reducer/jobs.js'
@@ -19,7 +19,7 @@ import { buyResearchItem } from './reducer/research.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, recordGameCornerWin, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startChampionGauntlet, startBugContest, startContest, startCurry, startDoubles, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack, startMantineSurf, startRotomRally, startOgreOustin, startTypeFusion, startUnownPicross, startPokeshot, startTeraRaid, startPokeword, startBerryBlender } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
-import { addLog, clearLevelUp, dismissNotification, markCatchRoute, markTutorialSeen, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleLargeText, toggleMartCollapsed, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx, toggleSpriteStyle } from './reducer/settings.js'
+import { addLog, clearLevelUp, dismissNotification, markCatchRoute, markTutorialSeen, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoHeal, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleDamageNumbers, toggleLargeText, toggleMartCollapsed, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx, toggleShinySparkles, toggleSpriteStyle } from './reducer/settings.js'
 import { phaseIdle, prestigeRegion, resetEliteFour, selectStarter, travel, unlockRegion } from './reducer/world.js'
 
 /** @type {GameState} */
@@ -64,6 +64,8 @@ export const initialGameState = {
   /** Newly hatched Pokemon shown in the hatch popup (null when dismissed). */
   hatchResult: null,
   autoCatch: !0,
+  /** Automatically heal the party at the Pokemon Center whenever it is damaged and the map is idle. */
+  autoHeal: !1,
   nextPokemonId: 1,
   currentLocation: 'palletTown',
   unlockedLocations: ['palletTown', 'route1'],
@@ -158,6 +160,10 @@ export const initialGameState = {
   largeText: !1,
   /** Sprite style: 'animated' gifs (default) or 'static' pngs. */
   spriteStyle: 'animated',
+  /** Float the damage dealt over the sprite during battle. */
+  showDamageNumbers: !0,
+  /** Sparkle the shiny Pokemon's sprite in battle. */
+  showShinySparkles: !0,
   /** Whether the town Poke Mart starts collapsed (persisted UI preference). */
   martCollapsed: !1,
   /** Minigame ids whose "how to play" tutorial has been shown (persisted UI preference). */
@@ -276,6 +282,8 @@ export function gameReducer(state, action) {
       return completeMasterBall(state, action)
     case 'TOGGLE_AUTO_CATCH':
       return toggleAutoCatch(state, action)
+    case 'SET_DEFAULT_CATCH_RULE':
+      return setDefaultCatchRule(state, action)
     case 'REORDER_PARTY':
       return reorderParty(state, action)
     case 'PARTY_TO_BOX':
@@ -386,6 +394,8 @@ export function gameReducer(state, action) {
       return prestigeRegion(state, action)
     case 'TOGGLE_AUTO_PROCEED':
       return toggleAutoProceed(state, action)
+    case 'TOGGLE_AUTO_HEAL':
+      return toggleAutoHeal(state)
     case 'TOGGLE_BROWSER_NOTIFICATIONS':
       return toggleBrowserNotifications(state, action)
     case 'TOGGLE_NOTIFY_SHINY':
@@ -402,6 +412,10 @@ export function gameReducer(state, action) {
       return toggleLargeText(state, action)
     case 'TOGGLE_SPRITE_STYLE':
       return toggleSpriteStyle(state, action)
+    case 'TOGGLE_DAMAGE_NUMBERS':
+      return toggleDamageNumbers(state)
+    case 'TOGGLE_SHINY_SPARKLES':
+      return toggleShinySparkles(state)
     case 'TOGGLE_MART_COLLAPSED':
       return toggleMartCollapsed(state, action)
     case 'MARK_TUTORIAL_SEEN':

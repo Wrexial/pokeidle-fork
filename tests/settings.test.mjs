@@ -129,3 +129,92 @@ test('the sprite style toggle switches between animated and static', () => {
     'animated'
   )
 })
+
+test('auto-heal is opt-in and toggles', () => {
+  assert.equal(initialGameState.autoHeal, false)
+  const on = gameReducer(initialGameState, { type: 'TOGGLE_AUTO_HEAL' })
+  assert.equal(on.autoHeal, true)
+  assert.equal(gameReducer(on, { type: 'TOGGLE_AUTO_HEAL' }).autoHeal, false)
+})
+
+test('damage numbers and shiny sparkles default on and toggle', () => {
+  assert.equal(initialGameState.showDamageNumbers, true)
+  assert.equal(initialGameState.showShinySparkles, true)
+  const noDamage = gameReducer(initialGameState, { type: 'TOGGLE_DAMAGE_NUMBERS' })
+  assert.equal(noDamage.showDamageNumbers, false)
+  assert.equal(noDamage.showShinySparkles, true)
+  const noSparkle = gameReducer(initialGameState, { type: 'TOGGLE_SHINY_SPARKLES' })
+  assert.equal(noSparkle.showShinySparkles, false)
+  assert.equal(noSparkle.showDamageNumbers, true)
+})
+
+test('SET_DEFAULT_CATCH_RULE updates only the default rule', () => {
+  const defaultRule = { ...initialGameState.globalCatchDefaults }
+  const withLevel = gameReducer(initialGameState, {
+    type: 'SET_DEFAULT_CATCH_RULE',
+    payload: { rule: { mode: 'level_threshold', levelThreshold: 20 } },
+  })
+  assert.equal(withLevel.globalCatchDefaults.mode, 'level_threshold')
+  assert.equal(withLevel.globalCatchDefaults.levelThreshold, 20)
+  // The untouched fields (and every route rule) stay put.
+  assert.deepEqual(withLevel.catchSettings, initialGameState.catchSettings)
+  assert.equal(withLevel.globalCatchDefaults.enabled, defaultRule.enabled)
+  // Invalid fields fall back to the existing value, and a non-rule payload is a no-op.
+  assert.equal(
+    gameReducer(withLevel, {
+      type: 'SET_DEFAULT_CATCH_RULE',
+      payload: { rule: { levelThreshold: -4 } },
+    }).globalCatchDefaults.levelThreshold,
+    20
+  )
+  assert.equal(
+    gameReducer(initialGameState, {
+      type: 'SET_DEFAULT_CATCH_RULE',
+      payload: {},
+    }),
+    initialGameState
+  )
+})
+
+test('SET_DEFAULT_CATCH_RULE filters unknown balls and keeps at least one', () => {
+  const filtered = gameReducer(initialGameState, {
+    type: 'SET_DEFAULT_CATCH_RULE',
+    payload: { rule: { enabledBalls: ['pokeball', 'notARealBall'] } },
+  })
+  assert.deepEqual(filtered.globalCatchDefaults.enabledBalls, ['pokeball'])
+  const empty = gameReducer(initialGameState, {
+    type: 'SET_DEFAULT_CATCH_RULE',
+    payload: { rule: { enabledBalls: [] } },
+  })
+  assert.deepEqual(empty.globalCatchDefaults.enabledBalls, initialGameState.globalCatchDefaults.enabledBalls)
+})
+
+test('repairSave defaults auto-heal off and the display toggles on', () => {
+  const save = (/** @type {Record<string, any>} */ overrides) => ({
+      version: 2,
+      playerPokemon: {
+        id: '1',
+        speciesKey: 'bulbasaur',
+        level: 5,
+        ivs: generateIVs(),
+        moves: ['tackle'],
+        currentHp: 20,
+        maxHp: 20,
+      },
+      party: [],
+      box: [],
+      nextPokemonId: 2,
+      inventory: {},
+      ...overrides,
+    }),
+    defaults = repairSave(save({}))
+  assert.equal(defaults.autoHeal, false)
+  assert.equal(defaults.showDamageNumbers, true)
+  assert.equal(defaults.showShinySparkles, true)
+  const configured = repairSave(
+    save({ autoHeal: true, showDamageNumbers: false, showShinySparkles: false })
+  )
+  assert.equal(configured.autoHeal, true)
+  assert.equal(configured.showDamageNumbers, false)
+  assert.equal(configured.showShinySparkles, false)
+})

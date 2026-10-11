@@ -70,14 +70,17 @@ renumbered, so the gaps below are items that shipped.
 and the preferences live outside the save (`pokemon-idle-settings`,
 `src/game/settings.js`) so they survive a save reset and are shared across slots.
 
+Done: a Display pair of toggles (damage numbers and shiny sparkles) beside the
+sprite style; a Default Catch Rule in Settings (mode, level threshold and
+enabled balls) for any route the player has not customised; and Auto-Heal, which
+tops the party up at the Pokemon Center whenever the map is idle (skipping the
+healing animation, and never during a raid).
+
 Still open:
 
-- [ ] **Display**: more cosmetic options beyond the sprite style
-      (animated / static) that shipped.
 - [ ] **Account**: sign in / sync controls — blocked on #19.
-- [ ] **Gameplay**: surface the default catch rule in Settings (it lives only
-      in the Catch Settings modal) and add auto-heal. Auto-switch and
-      auto-travel already exist as the Battle Style and Auto-Proceed settings.
+- [ ] **Display**: any further cosmetic options beyond the sprite style,
+      damage numbers and shiny sparkles.
 
 Effort: **medium** (mostly UI plus a small settings slice).
 

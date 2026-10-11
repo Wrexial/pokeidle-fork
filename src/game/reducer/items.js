@@ -486,6 +486,40 @@ export function setCatchRule(state, action) {
 }
 
 /**
+ * Handle the `SET_DEFAULT_CATCH_RULE` action: change the catch rule that
+ * applies on every route the player has not customised, straight from Settings.
+ * Only the fields present in the payload change, and unknown balls are dropped
+ * so a stale UI can't enable a ball the auto-catcher can't throw.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function setDefaultCatchRule(state, action) {
+  const incoming = action.payload?.rule
+  if (!incoming || typeof incoming !== 'object') return state
+  const base = state.globalCatchDefaults
+  return {
+    ...state,
+    globalCatchDefaults: {
+      ...base,
+      mode: typeof incoming.mode === 'string' ? incoming.mode : base.mode,
+      levelThreshold:
+        typeof incoming.levelThreshold === 'number' && incoming.levelThreshold > 0
+          ? Math.min(100, Math.floor(incoming.levelThreshold))
+          : base.levelThreshold,
+      enabledBalls: (() => {
+        if (!Array.isArray(incoming.enabledBalls)) return base.enabledBalls
+        const valid = incoming.enabledBalls.filter(
+          /** @param {string} ballId */ (ballId) => pokeBalls[ballId]
+        )
+        // Keep at least one ball enabled, or the auto-catcher has nothing to throw.
+        return valid.length > 0 ? valid : base.enabledBalls
+      })(),
+    },
+  }
+}
+
+/**
  * Handle the `TOGGLE_ROUTE_CATCH_ALL` action.
  * @param {GameState} state
  * @param {GameAction} action

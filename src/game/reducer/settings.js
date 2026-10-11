@@ -129,6 +129,19 @@ export function toggleAutoProceed(state, action) {
 }
 
 /**
+ * Handle the `TOGGLE_AUTO_HEAL` action: keep the party topped up at the Pokemon
+ * Center whenever the map is idle instead of waiting for a manual heal.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function toggleAutoHeal(state) {
+  return {
+    ...state,
+    autoHeal: !state.autoHeal,
+  }
+}
+
+/**
  * Handle the `TOGGLE_BROWSER_NOTIFICATIONS` action.
  * @param {GameState} state
  * @param {GameAction} action
@@ -259,6 +272,32 @@ export function toggleSpriteStyle(state, action) {
   return {
     ...state,
     spriteStyle: state.spriteStyle === 'static' ? 'animated' : 'static',
+  }
+}
+
+/**
+ * Handle the `TOGGLE_DAMAGE_NUMBERS` action: float the damage dealt over a
+ * sprite in battle, or hide it for a cleaner scene.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function toggleDamageNumbers(state) {
+  return {
+    ...state,
+    showDamageNumbers: !state.showDamageNumbers,
+  }
+}
+
+/**
+ * Handle the `TOGGLE_SHINY_SPARKLES` action: sparkle a shiny Pokemon's sprite
+ * in battle, or hide the effect.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function toggleShinySparkles(state) {
+  return {
+    ...state,
+    showShinySparkles: !state.showShinySparkles,
   }
 }
 

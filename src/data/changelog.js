@@ -67,7 +67,8 @@ export const CHANGELOG = [
           'The Pokedex groups alternate forms under one slot (with a form switcher), registering any form registers its species and counts toward that generation’s completion, entries name their source (Game Corner prizes, fossil revives, the Ruins of Alph, "Evolves from ..."), MissingNo. has its real glitch sprite and stays hidden until first seen, the search is a collapsible fuzzy match that also covers the whole evolution family, and selecting a Pokemon auto-filters the Box.',
           'A Pokemon that can transform in battle carries a form chip in its stats panel: a pink G-MAX chip that lights up after a Max Mushroom and a purple MEGA chip while it holds a Mega Stone.',
           'The Town Map marks a fully-caught route with a teal marker and "All Pokemon caught" legend entry, and marks the Day-Care, Berry Garden, Battle Tower, every Raid Island and the Ruins of Alph and Tanoby Ruins with named service markers.',
-          'Settings gained a Display section (animated or static sprites), the game keeps the screen awake while open, and a cafe opened in each region’s main city, selling a Poffin (+30 friendship) or a Poke Bean.',
+          'Settings gained a Display section (animated or static sprites, damage numbers and shiny sparkles), the game keeps the screen awake while open, and a cafe opened in each region’s main city, selling a Poffin (+30 friendship) or a Poke Bean.',
+          'Settings gained Auto-Heal, which tops the party up at the Pokemon Center whenever the map is idle and someone is hurt, and a Default Catch Rule (mode, level threshold and enabled balls) for every route you have not customised from its Catch Settings.',
         ],
       },
       {

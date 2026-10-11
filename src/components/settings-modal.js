@@ -3,12 +3,14 @@
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { clearSave } from '../data/config.js'
-import { SPEED_OPTIONS } from '../data/ui.js'
+import { autoCatchBallOrder, pokeBalls } from '../data/items.js'
+import { CATCH_MODE_OPTIONS, SPEED_OPTIONS } from '../data/ui.js'
 import { unlockAudio } from '../game/audio.js'
 import { useGame } from '../game/context.js'
 import { decodeShareCode, encodeShareCode, repairSave, serializeSave, suspendAutosave, writeImportedSave } from '../game/save.js'
 import { MonotypeSelect } from './monotype-select.js'
 import { OfflinePanel } from './offline-panel.js'
+import { PokeballIcon } from './pokeball-icon.js'
 import { SaveSlotsPanel } from './save-slots.js'
 
 /** @type {Record<string, string>} */
@@ -246,6 +248,124 @@ export function SettingsModal({ onClose }) {
                         onClick: () => dispatch({ type: 'TOGGLE_AUTO_PROCEED' }),
                         children: state.autoProceed ? 'Auto-Proceed: ON' : 'Auto-Proceed: OFF',
                       }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.autoHeal ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_AUTO_HEAL' }),
+                        children: state.autoHeal ? 'Auto-Heal: ON' : 'Auto-Heal: OFF',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Auto-Heal sends your party to the Pokemon Center whenever the map is idle and someone is hurt, so an unattended run stays topped up.',
+                      }),
+                      jsxs('div', {
+                        className: 'settings-default-catch',
+                        children: [
+                          jsx('span', {
+                            className: 'settings-speed-label',
+                            children: 'Default Catch Rule',
+                          }),
+                          jsx('p', {
+                            className: 'settings-hint',
+                            children:
+                              'How the auto-catcher treats any route you have not customised from its Catch Settings.',
+                          }),
+                          CATCH_MODE_OPTIONS.map(({ value: mode, label, hint }) =>
+                            jsxs(
+                              'label',
+                              {
+                                className: 'catch-mode-option',
+                                children: [
+                                  jsx('input', {
+                                    type: 'radio',
+                                    name: 'settings-catch-mode',
+                                    checked: state.globalCatchDefaults.mode === mode,
+                                    onChange: () =>
+                                      dispatch({
+                                        type: 'SET_DEFAULT_CATCH_RULE',
+                                        payload: { rule: { mode } },
+                                      }),
+                                  }),
+                                  jsx('span', { children: label }),
+                                  mode === 'level_threshold' &&
+                                    state.globalCatchDefaults.mode === mode &&
+                                    jsx('input', {
+                                      type: 'number',
+                                      className: 'level-threshold-input',
+                                      value: state.globalCatchDefaults.levelThreshold,
+                                      min: 1,
+                                      max: 100,
+                                      onChange: /** @param {React.ChangeEvent<HTMLInputElement>} event */ (
+                                        event
+                                      ) =>
+                                        dispatch({
+                                          type: 'SET_DEFAULT_CATCH_RULE',
+                                          payload: {
+                                            rule: {
+                                              levelThreshold: Math.max(
+                                                1,
+                                                Math.min(100, Number(event.target.value) || 1)
+                                              ),
+                                            },
+                                          },
+                                        }),
+                                    }),
+                                  hint &&
+                                    state.globalCatchDefaults.mode === mode &&
+                                    jsx('span', {
+                                      className: 'catch-mode-hint',
+                                      children: hint,
+                                    }),
+                                ],
+                              },
+                              mode
+                            )
+                          ),
+                          jsxs('div', {
+                            className: 'catch-ball-selector',
+                            children: [
+                              jsx('span', {
+                                className: 'catch-ball-label',
+                                children: 'Ball:',
+                              }),
+                              autoCatchBallOrder.map((ballId) =>
+                                jsx(
+                                  'button',
+                                  {
+                                    className: `catch-ball-icon-btn${state.globalCatchDefaults.enabledBalls.includes(ballId) ? ' active' : ''}`,
+                                    onClick: () => {
+                                      const currentBalls =
+                                        state.globalCatchDefaults.enabledBalls
+                                      dispatch({
+                                        type: 'SET_DEFAULT_CATCH_RULE',
+                                        payload: {
+                                          rule: {
+                                            enabledBalls: currentBalls.includes(ballId)
+                                              ? currentBalls.filter(
+                                                  /** @param {string} otherBallId */ (
+                                                    otherBallId
+                                                  ) => otherBallId !== ballId
+                                                )
+                                              : [...currentBalls, ballId],
+                                          },
+                                        },
+                                      })
+                                    },
+                                    title: pokeBalls[ballId].name,
+                                    children: jsx(PokeballIcon, {
+                                      ballId,
+                                      size: 10,
+                                      disabled:
+                                        !state.globalCatchDefaults.enabledBalls.includes(ballId),
+                                    }),
+                                  },
+                                  ballId
+                                )
+                              ),
+                            ],
+                          }),
+                        ],
+                      }),
                       jsxs('div', {
                         className: 'settings-speed',
                         children: [
@@ -326,6 +446,25 @@ export function SettingsModal({ onClose }) {
                         onClick: () => dispatch({ type: 'TOGGLE_SPRITE_STYLE' }),
                         children:
                           state.spriteStyle === 'static' ? 'Sprites: Static' : 'Sprites: Animated',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.showDamageNumbers ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_DAMAGE_NUMBERS' }),
+                        children: state.showDamageNumbers
+                          ? 'Damage Numbers: ON'
+                          : 'Damage Numbers: OFF',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.showShinySparkles ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_SHINY_SPARKLES' }),
+                        children: state.showShinySparkles
+                          ? 'Shiny Sparkles: ON'
+                          : 'Shiny Sparkles: OFF',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Damage Numbers float the damage dealt over a sprite in battle, and Shiny Sparkles marks a shiny Pokemon with a twinkle.',
                       }),
                     ],
                   }),

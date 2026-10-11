@@ -513,6 +513,8 @@ type GameState = {
   battleMode: 'auto' | 'manual'
   autoCatch: boolean
   autoProceed: boolean
+  /** Automatically heal the party at the Pokemon Center whenever the map is idle and it is damaged. */
+  autoHeal: boolean
   /** Raise browser notifications for key events while the tab is hidden. */
   browserNotifications: boolean
   /** Browser-notification categories (only used when notifications are on). */
@@ -527,6 +529,10 @@ type GameState = {
   largeText: boolean
   /** Sprite style: animated gifs or static pngs. */
   spriteStyle: 'animated' | 'static'
+  /** Float the damage dealt over the sprite in battle. */
+  showDamageNumbers: boolean
+  /** Sparkle a shiny Pokemon's sprite in battle. */
+  showShinySparkles: boolean
   /** Background music (off by default). */
   musicEnabled: boolean
   /** Sound effects for notable events (off by default). */

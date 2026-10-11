@@ -143,7 +143,7 @@ export function BattleScene({ onOpenMenu }) {
     playerWasHit = lastDamageEvent?.data?.target === 'player' && isLatestDamage,
     enemyWasHit = lastDamageEvent?.data?.target === 'enemy' && isLatestDamage,
     damageFloat =
-      isLatestDamage && lastDamageEvent?.data?.damage != null
+      state.showDamageNumbers && isLatestDamage && lastDamageEvent?.data?.damage != null
         ? {
             target: lastDamageEvent.data.target,
             amount: lastDamageEvent.data.damage,
@@ -435,7 +435,7 @@ export function BattleScene({ onOpenMenu }) {
       enemyPokemon &&
         !hideEnemySprite &&
         jsxs('div', {
-          className: `sprite-container enemy-sprite ${enemyWasHit ? 'hit-flash hit-shake' : ''} ${enemyFainted ? 'faint-anim' : ''} ${isTrainerSendOut ? 'pokemon-appear' : ''}${enemyPokemon.isShiny ? ' shiny-sparkle' : ''}`,
+          className: `sprite-container enemy-sprite ${enemyWasHit ? 'hit-flash hit-shake' : ''} ${enemyFainted ? 'faint-anim' : ''} ${isTrainerSendOut ? 'pokemon-appear' : ''}${enemyPokemon.isShiny && state.showShinySparkles ? ' shiny-sparkle' : ''}`,
           children: [
             jsx('div', {
               className: 'sprite-shadow',
@@ -478,7 +478,7 @@ export function BattleScene({ onOpenMenu }) {
           ],
         }),
       jsxs('div', {
-        className: `sprite-container player-sprite ${playerWasHit ? 'hit-flash hit-shake' : ''} ${playerFainted ? 'faint-anim' : ''} ${isPlayerSwitch ? 'pokemon-appear' : ''}${state.playerPokemon?.isShiny ? ' shiny-sparkle' : ''}`,
+        className: `sprite-container player-sprite ${playerWasHit ? 'hit-flash hit-shake' : ''} ${playerFainted ? 'faint-anim' : ''} ${isPlayerSwitch ? 'pokemon-appear' : ''}${state.playerPokemon?.isShiny && state.showShinySparkles ? ' shiny-sparkle' : ''}`,
         children: [
           jsx('div', {
             className: 'sprite-shadow',

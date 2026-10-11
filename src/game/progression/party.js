@@ -13,6 +13,24 @@ export function getActivePartyIndex(state) {
 }
 
 /**
+ * Whether the active Pokemon or any party member is below full HP, so the
+ * optional auto-heal preference has something to do. The active Pokemon is
+ * checked separately because it carries the battle's HP before the party is
+ * synced back.
+ * @param {GameState} state
+ * @returns {boolean}
+ */
+export function partyNeedsHealing(state) {
+  const party = state.party ?? []
+  if (party.some((member) => member && member.currentHp < member.maxHp)) return true
+  // The active Pokemon can carry a fresher HP value before it is synced back
+  // into the party. Only trust it when there is a party to sync it into, so an
+  // empty party can never trigger a heal that heals nothing (and loops).
+  const active = state.playerPokemon
+  return party.length > 0 && !!active && active.currentHp < active.maxHp
+}
+
+/**
  * @param {GameState} state
  * @returns {GameState}
  */

@@ -736,6 +736,11 @@ export function repairSave(saved) {
     minigameRecords,
     victoryTokens: saved.victoryTokens ?? 0,
     autoProceed: saved.autoProceed ?? false,
+    autoHeal: !!saved.autoHeal,
+    // Damage numbers and shiny sparkles are on unless a save explicitly turned
+    // them off (an older save has neither field).
+    showDamageNumbers: saved.showDamageNumbers !== !1,
+    showShinySparkles: saved.showShinySparkles !== !1,
     battleStyle:
       saved.battleStyle === 'set' || saved.battleStyle === 'training'
         ? saved.battleStyle

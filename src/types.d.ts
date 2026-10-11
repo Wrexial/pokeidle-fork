@@ -268,6 +268,8 @@ type VolatileState = {
   leechSeeded?: boolean
   /** Focus Sash / berry consumed for this battle. */
   heldItemUsed?: boolean
+  /** The pinned companion has already toughed out a knockout this battle. */
+  toughOutUsed?: boolean
   /** Consecutive turns the battler has used a Protect-style move. */
   protectChain?: number
   /** Turns of Taunt left (0 when not taunted). */

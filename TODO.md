@@ -460,20 +460,19 @@ crits, bonus EXP). The game has both halves already but they don't meet:
 evolutions), and the **companion** (`src/game/companion.js`) has care stats
 (fullness / happiness / energy / cleanliness) and already grants +15% EXP when
 all four are at 50+.
-- Neither affects **survival** in battle today.
+Done: the 1 HP save ships. In the damage step (`src/game/combat/turn.js`, beside
+`abilitySurvivesAtFullHp` / Endure / `heldSurvivesAtFullHp`), when the pinned
+companion is the active battler and a hit would KO it, `companionToughOutChance`
+(`src/game/companion.js`) is rolled — starting at an average care of 60 and
+scaling to 30% at full care — leaving it at 1 HP with the log line "X toughed it
+out so you wouldn't feel sad!". It is spent once per battle via `toughOutUsed`
+in the volatile state.
 
-- [ ] In the damage step (`src/game/combat/turn.js`, beside
-      `abilitySurvivesAtFullHp` / Endure / `heldSurvivesAtFullHp`), when the
-      player's Pokémon would faint, roll a chance to leave it at **1 HP** with
-      the log line "X toughed it out so you wouldn't feel sad!".
-- [ ] Gate it on affection: the pinned companion with high care (or a high
-      friendship value) — scale the chance with the care stats so a well-kept
-      buddy is likelier to hang on.
-- [ ] Allow it **once per battle** (like the Focus Sash) so a Pokémon can't
-      chain-survive, and show it clearly in the battle log / a toast.
-- [ ] Optional extras if we want the full affection set: shake off a status
-      condition, dodge a move, or a bumped crit rate — but the 1 HP save is the
-      headline.
+Still open (optional extras if we want the full affection set):
+
+- [ ] Shake off a status condition, dodge a move, or a bumped crit rate.
+- [ ] Let a high-friendship non-companion benefit too, if the companion-only
+      gate feels too narrow.
 
 Effort: **small–medium** (one hook, one roll and a log line; the state already
 exists).

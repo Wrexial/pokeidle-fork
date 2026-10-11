@@ -151,3 +151,71 @@ test('a skip turn lets only the foe act (switch or item use)', () => {
   assert.equal(attacks.length, 1, 'only one Pokemon should attack')
   assert.match(attacks[0].message, /Foe used/, 'the foe is the one that acts')
 })
+
+test('a well-kept companion can tough out a knockout at 1 HP', () => {
+  const originalRandom = Math.random
+  Math.random = () => 0
+  try {
+    const player = battler({
+        name: 'Buddy',
+        currentHp: 50,
+        maxHp: 50,
+        defense: 1,
+        spDefense: 1,
+        speed: 1,
+        toughOutChance: 1,
+        toughOutUsed: false,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        currentHp: 9999,
+        maxHp: 9999,
+        attack: 800,
+        speed: 999,
+        moves: ['tackle'],
+      }),
+      events = resolveBattleTurn(player, enemy, false)
+    assert.equal(player.currentHp, 1, 'survives the knockout on 1 HP')
+    assert.equal(player.toughOutUsed, true, 'the save is spent')
+    assert.ok(
+      events.some((/** @type {any} */ event) => /toughed it out/.test(event.message ?? '')),
+      'the battle log explains the save'
+    )
+    // It cannot chain-survive: the next knockout lands.
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(player.currentHp, 0)
+  } finally {
+    Math.random = originalRandom
+  }
+})
+
+test('the tough-out save never protects the foe', () => {
+  const originalRandom = Math.random
+  Math.random = () => 0
+  try {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        currentHp: 9999,
+        maxHp: 9999,
+        attack: 800,
+        speed: 999,
+        moves: ['tackle'],
+      }),
+      enemy = battler({
+        name: 'Foe',
+        currentHp: 20,
+        maxHp: 20,
+        defense: 1,
+        speed: 1,
+        moves: ['splash'],
+        toughOutChance: 1,
+        toughOutUsed: false,
+      })
+    resolveBattleTurn(player, enemy, false)
+    assert.equal(enemy.currentHp, 0, 'the foe does not tough it out')
+    assert.equal(enemy.toughOutUsed, false)
+  } finally {
+    Math.random = originalRandom
+  }
+})

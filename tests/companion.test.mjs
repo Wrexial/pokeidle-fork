@@ -11,9 +11,12 @@ const {
   COMPANION_EXP_MULTIPLIER,
   COMPANION_FEED_COST,
   COMPANION_MAX_CARE,
+  COMPANION_TOUGH_OUT_MAX_CHANCE,
+  COMPANION_TOUGH_OUT_MIN_CARE,
   applyCareAction,
   companionExpMultiplier,
   companionMood,
+  companionToughOutChance,
   createCompanionCare,
   isCompanionContent,
   tickCompanion,
@@ -30,6 +33,24 @@ test('companion mood reflects the lowest care stat', () => {
   assert.ok(companionMood(happy).icon)
   assert.equal(companionMood(hungry).label, 'Hungry')
   assert.equal(companionMood(sleepy).label, 'Sleepy')
+})
+
+test('a tougher-out chance scales with companion care', () => {
+  assert.equal(companionToughOutChance(null), 0)
+  assert.equal(companionToughOutChance(createCompanionCare(null, 0)), 0)
+  const full = createCompanionCare('a', 0)
+  assert.equal(companionToughOutChance(full), COMPANION_TOUGH_OUT_MAX_CHANCE)
+  // Below the minimum average care there is no chance at all.
+  const neglect =
+    COMPANION_TOUGH_OUT_MIN_CARE - 1
+  const low = { ...full, fullness: neglect, happiness: neglect, energy: neglect, cleanliness: neglect }
+  assert.equal(companionToughOutChance(low), 0)
+  // A half-way buddy sits between zero and the cap.
+  const mid = { ...full, fullness: 80, happiness: 80, energy: 80, cleanliness: 80 }
+  const midChance = companionToughOutChance(mid)
+  assert.ok(midChance > 0 && midChance < COMPANION_TOUGH_OUT_MAX_CHANCE)
+  const better = { ...full, fullness: 95, happiness: 95, energy: 95, cleanliness: 95 }
+  assert.ok(companionToughOutChance(better) > midChance)
 })
 
 test('companion care helpers', () => {

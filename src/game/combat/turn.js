@@ -2474,6 +2474,24 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       totalDamage = sashDamage
       attack.defender.heldItemUsed = !0
     }
+    // Affection: a well-kept companion can tough out a knockout, leaving it at
+    // 1 HP. The chance is rolled on the player's Pokemon only, once per battle
+    // (set when the active battler is the pinned companion).
+    if (
+      !attack.isPlayer &&
+      !attack.defender.toughOutUsed &&
+      (attack.defender.toughOutChance ?? 0) > 0 &&
+      totalDamage >= attack.defender.currentHp &&
+      Math.random() < attack.defender.toughOutChance
+    ) {
+      totalDamage = Math.max(0, attack.defender.currentHp - 1)
+      attack.defender.toughOutUsed = !0
+      events.push({
+        type: 'status',
+        message: `${attack.defender.name} toughed it out so you wouldn't feel sad!`,
+        data: { target: 'player' },
+      })
+    }
     // A substitute soaks the damage before its owner.
     if ((attack.defender.substituteHp ?? 0) > 0) {
       const absorbed = Math.min(attack.defender.substituteHp, totalDamage)

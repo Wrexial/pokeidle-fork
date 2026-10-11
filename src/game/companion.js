@@ -15,6 +15,12 @@ export const COMPANION_CONTENT_THRESHOLD = 40
 /** EXP multiplier while the companion is content. */
 export const COMPANION_EXP_MULTIPLIER = 1.15
 
+/** Average care a companion needs before it can tough out a knockout. */
+export const COMPANION_TOUGH_OUT_MIN_CARE = 60
+
+/** Best-case chance to tough out a knockout, at full care. */
+export const COMPANION_TOUGH_OUT_MAX_CHANCE = 0.3
+
 /** Money each feed costs. */
 export const COMPANION_FEED_COST = 500
 
@@ -133,6 +139,23 @@ export function companionMood(companion) {
 /** EXP multiplier from the companion's care (1x when there is no content companion). @param {Companion} companion */
 export function companionExpMultiplier(companion) {
   return isCompanionContent(companion) ? COMPANION_EXP_MULTIPLIER : 1
+}
+
+/**
+ * The chance the pinned companion toughs out a would-be knockout, so a
+ * well-kept buddy hangs on more often. Zero when nothing is pinned or its care
+ * has fallen too far.
+ * @param {Companion} companion
+ * @returns {number}
+ */
+export function companionToughOutChance(companion) {
+  if (!companion?.id) return 0
+  const average =
+    (companion.fullness + companion.happiness + companion.energy + companion.cleanliness) / 4
+  if (average < COMPANION_TOUGH_OUT_MIN_CARE) return 0
+  const progress =
+    (average - COMPANION_TOUGH_OUT_MIN_CARE) / (COMPANION_MAX_CARE - COMPANION_TOUGH_OUT_MIN_CARE)
+  return Math.min(1, Math.max(0, progress)) * COMPANION_TOUGH_OUT_MAX_CHANCE
 }
 
 /**

@@ -8,6 +8,7 @@ import { activeItems, autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
 import { ROUTE_ACTIVITIES } from './minigames/route-activities.js'
 import { BREEDING_GOALS, MAX_BREEDING_PROJECTS } from './breeding-projects.js'
+import { RIVAL_MILESTONES } from './rival.js'
 import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility, rollSize, RIBBONS } from './pokemon.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
@@ -655,6 +656,18 @@ export function repairSave(saved) {
     defeatedChampions = [
       ...new Set(savedChampions.filter(/** @param {string} id */ (id) => regionIds.has(id))),
     ],
+    // Rival wins per region, clamped to the number of milestones.
+    rivals = Object.fromEntries(
+      Object.entries(saved.rivals && typeof saved.rivals === 'object' ? saved.rivals : {})
+        .filter(
+          ([regionId, stage]) =>
+            regionIds.has(regionId) && typeof stage === 'number' && stage > 0
+        )
+        .map(([regionId, stage]) => [
+          regionId,
+          Math.min(RIVAL_MILESTONES.length, Math.floor(/** @type {number} */ (stage))),
+        ])
+    ),
     activeEffects = (Array.isArray(saved.activeEffects) ? saved.activeEffects : []).filter(
       /** @param {any} effect */ (effect) => effect && typeof effect === 'object' && effect.type in activeItems
     ),
@@ -817,6 +830,7 @@ export function repairSave(saved) {
     defeatedGyms,
     defeatedEliteFour,
     defeatedChampions,
+    rivals,
     rewardedGenerations,
     rewardedAchievements,
     claimedGifts: (Array.isArray(saved.claimedGifts) ? saved.claimedGifts : []).filter(
@@ -993,6 +1007,7 @@ export const SAVED_STATE_KEYS = [
   'defeatedGyms',
   'defeatedEliteFour',
   'defeatedChampions',
+  'rivals',
   'rewardedGenerations',
   'rewardedAchievements',
   'claimedGifts',

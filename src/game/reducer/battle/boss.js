@@ -160,6 +160,9 @@ export function bossBattleEnd(state, action) {
     defeatedEliteFour = state.defeatedEliteFour,
     defeatedChampions = state.defeatedChampions,
     victoryTokens = state.victoryTokens,
+    // A rival win pays extra money on top of the base payout.
+    rivalBonus = 0,
+    rivals = state.rivals,
     inventory = state.inventory,
     championJustDefeated = false
   const notifications = [],
@@ -202,6 +205,21 @@ export function bossBattleEnd(state, action) {
               }))
             ;((victoryTokens += 1), notifications.push('Earned a Victory Token!'))
           })()
+    // A beaten rival advances its stage and pays a scaling cash bonus.
+    if (bossType === 'rival') {
+      const rivalRegion = state.bossBattle.region ?? 'kanto',
+        stage = rivals?.[rivalRegion] ?? 0,
+        reward = 2000 + stage * 1000
+      rivals = { ...(rivals ?? {}), [rivalRegion]: stage + 1 }
+      rivalBonus = reward
+      inventory = { ...inventory, rareCandy: (inventory.rareCandy ?? 0) + 1 }
+      toastNotifications.push({
+        message: `${state.bossBattle.trainerName} was beaten! +$${reward.toLocaleString()} and a Rare Candy.`,
+        tone: 'shiny',
+        icon: '\u2694',
+        dedupeKey: `rival:${rivalRegion}:${stage + 1}`,
+      })
+    }
     // A first badge comes with a couple of TMs of the gym's theme type, so a
     // gym win is a real way to build up the TM case.
     if (bossType === 'gym' && !state.defeatedGyms.includes(bossId)) {
@@ -230,7 +248,8 @@ export function bossBattleEnd(state, action) {
       firstPokemon = nextBoss.trainerTeam[0],
       stateWithNextBoss = {
         ...syncActivePokemonIntoParty(state),
-        money: newMoney,
+        money: newMoney + rivalBonus,
+        rivals,
         inventory,
         trainerBattlesWon,
         battlesWonByLocation,
@@ -296,7 +315,8 @@ export function bossBattleEnd(state, action) {
   }
   const finalState = {
     ...prepareNextBattle(state),
-    money: newMoney,
+    money: newMoney + rivalBonus,
+    rivals,
     inventory,
     trainerBattlesWon,
     battlesWonByLocation,

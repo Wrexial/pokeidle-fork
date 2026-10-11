@@ -20,6 +20,7 @@ import { GiftPanel } from './gift-panel.js'
 import { FossilPanel } from './fossil-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
 import { GymLocationPanel } from './gym-location-panel.js'
+import { RivalPanel } from './rival-panel.js'
 import { LeagueLocationPanel } from './league-location-panel.js'
 import { DaycarePanel } from './daycare-panel.js'
 import { KurtPanel } from './kurt-panel.js'
@@ -782,6 +783,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
             ],
           }),
         jsx(GymLocationPanel, {}),
+        jsx(RivalPanel, {}),
         jsx(LeagueLocationPanel, {}),
         jsx(DaycarePanel, {}),
         jsx(KurtPanel, {}),

@@ -35,6 +35,12 @@ export const CHANGELOG = [
         ],
       },
       {
+        heading: 'Trainers',
+        items: [
+          'A recurring rival challenges you in each region: Blue, Silver, Wally, Barry, Hugh, Calem, Hau, Hop and Nemona turn up in town once you have earned 2, 4, 6 and 8 badges, each with a team that scales to your party. Beating one pays a rising cash bonus and a Rare Candy.',
+        ],
+      },
+      {
         heading: 'Battles',
         items: [
           'Another batch of damaging moves does what it says now: Tri Attack and Dire Claw roll several status conditions, Wake-Up Slap and Smelling Salts double against — and cure — a sleeping or paralyzed target, Facade, Hex, Venoshock and Brine double under their condition, Expanding Force, Rising Voltage and Misty Explosion get their terrain boost, Bolt Beak and Fishious Rend double when moving first, Payback, Avalanche and Revenge double when the foe moved first, and Assist, Me First, Retaliate, Round and Echoed Voice all work.',

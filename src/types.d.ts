@@ -656,6 +656,8 @@ type GameState = {
   defeatedGyms: string[]
   defeatedEliteFour: string[]
   defeatedChampions: string[]
+  /** Rival battles won per region (see game/rival.js). */
+  rivals: Record<string, number>
   /** Generation indices (0-based) whose dex-completion reward has been paid. */
   rewardedGenerations: number[]
   /** Achievement ids whose one-off reward has been paid. */

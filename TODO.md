@@ -50,7 +50,8 @@ renumbered, so the gaps below are items that shipped.
     remain.
 15. **#61 Focus / target hunting** — S–M · ★★½.
 16. **#66 Battle Frontier facilities** — M–L · ★★½.
-17. **#70 Recurring rival** — M · ★★½.
+17. **#70 Recurring rival** — shipped; dialogue and a dedicated sprite remain
+    optional.
 18. **#73 Weather system on routes** — shipped.
 19. **#74 Pokemon sizes (XS–XL)** — shipped; the alpha bonus and research hook
     remain.
@@ -315,8 +316,18 @@ Effort: **medium**.
 
 ## 70. Recurring rival
 
-A rival who appears at badge/Champion milestones with a scaling team and
-dialogue.
+Done: each region has a named rival (`src/game/rival.js`: Blue, Silver, Wally,
+Barry, Hugh, Calem, Hau, Hop, Nemona) who challenges you at 2 / 4 / 6 / 8 badges.
+The `RivalPanel` appears in a town when the milestone is met, builds a team that
+scales to your party level (`buildRivalTeam`, `2 + stage` species from the
+region's generation) and runs it as a `bossType: 'rival'` battle. Beating one
+advances `state.rivals[region]` and pays a rising cash bonus plus a Rare Candy.
+
+Still open (optional):
+
+- [ ] Rival dialogue before/after the battle.
+- [ ] A rival-specific sprite instead of the Ace Trainer stand-in.
+- [ ] A Rival Ribbon on the party for a full set of wins.
 
 Effort: **medium**.
 

@@ -142,6 +142,8 @@ export const initialGameState = {
   defeatedGyms: [],
   defeatedEliteFour: [],
   defeatedChampions: [],
+  /** Rival battles won per region (see game/rival.js). */
+  rivals: {},
   /** Generation indices (0-based) whose dex-completion reward has been paid. */
   rewardedGenerations: [],
   /** Achievement ids whose one-off reward has been paid. */

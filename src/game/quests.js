@@ -91,6 +91,11 @@ export function rollQuests(state, dateKey = '', random = Math.random) {
         money: goal * 60,
       })
     })
+  if (routes.length > 0)
+    builders.push(() => {
+      const goal = randInt(3, 6, random)
+      return makeQuest('activityPerfects', {}, goal, { money: goal * 120 })
+    })
   if (types.length > 0)
     builders.push(() => {
       const type = pick(types, random),
@@ -133,6 +138,8 @@ export function questLabel(quest) {
         regionName ? ` (${regionName})` : ''
       }`
     }
+    case 'activityPerfects':
+      return `Land ${quest.goal} clean hits in route activities`
     case 'catchType':
       return `Catch ${quest.goal} ${quest.params.type}-type Pokemon`
     case 'catchSpecies':
@@ -147,12 +154,18 @@ export function questLabel(quest) {
 /**
  * Whether an event counts toward a quest.
  * @param {Quest} quest
- * @param {{ kind: string, locationId?: string, speciesKey?: string, isShiny?: boolean }} event
+ * @param {{ kind: string, locationId?: string, speciesKey?: string, isShiny?: boolean, quality?: string }} event
  */
 function questMatches(quest, event) {
   switch (quest.kind) {
     case 'wildBattles':
       return event.kind === 'wild'
+    case 'activityPerfects':
+      // A "clean hit" is a perfect or ultra activity hit (not a plain hit).
+      return (
+        event.kind === 'activity' &&
+        (event.quality === 'perfect' || event.quality === 'ultra')
+      )
     case 'routeBattles':
       return event.kind === 'wild' && event.locationId === quest.params.locationId
     case 'catchType':
@@ -173,7 +186,7 @@ function questMatches(quest, event) {
  * Advance the quest list by one event. Returns the same object when nothing
  * matched so the reducer can cheaply avoid a state change.
  * @param {QuestState | null | undefined} quests
- * @param {{ kind: string, locationId?: string, speciesKey?: string, isShiny?: boolean }} event
+ * @param {{ kind: string, locationId?: string, speciesKey?: string, isShiny?: boolean, quality?: string }} event
  * @returns {QuestState | null | undefined}
  */
 export function advanceQuests(quests, event) {

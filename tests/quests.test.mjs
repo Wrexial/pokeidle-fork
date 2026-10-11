@@ -174,3 +174,39 @@ test('repairSave drops quests that reference unknown locations', () => {
   assert.equal(repaired.quests.list.length, 1)
   assert.equal(repaired.quests.list[0].id, 'wildBattles:')
 })
+
+test('activity quests advance on clean hits only', () => {
+  const activityQuest = quest({ id: 'activityPerfects:', kind: 'activityPerfects', goal: 3 })
+  assert.match(questLabel(activityQuest), /clean hits/)
+  // A plain hit does not count.
+  assert.equal(
+    advanceQuests({ date: 'x', list: [activityQuest] }, { kind: 'activity', quality: 'hit' }).list[0]
+      .progress,
+    0
+  )
+  // Perfect and ultra hits do.
+  assert.equal(
+    advanceQuests({ date: 'x', list: [activityQuest] }, { kind: 'activity', quality: 'perfect' })
+      .list[0].progress,
+    1
+  )
+  assert.equal(
+    advanceQuests({ date: 'x', list: [activityQuest] }, { kind: 'activity', quality: 'ultra' }).list[0]
+      .progress,
+    1
+  )
+})
+
+test('RECORD_ROUTE_MASTERY advances an activity quest without a mastery change', () => {
+  const base = {
+      ...initialGameState,
+      phase: 'idle',
+      routeMastery: { route23: { diving: 3 } },
+      quests: { date: 'x', list: [quest({ id: 'activityPerfects:', kind: 'activityPerfects' })] },
+    },
+    next = gameReducer(base, {
+      type: 'RECORD_ROUTE_MASTERY',
+      payload: { locationId: 'route23', activityId: 'diving', quality: 'ultra' },
+    })
+  assert.equal(next.quests.list[0].progress, 1)
+})

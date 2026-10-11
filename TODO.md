@@ -46,8 +46,7 @@ renumbered, so the gaps below are items that shipped.
     shipped; box bulk-release remains.
 12. **#67 Ribbons + ribbon case** — shipped.
 13. **#68 Generation-completion rewards** — done.
-14. **#59 Activity goals & per-route mastery** — shipped; activity daily quests
-    remain.
+14. **#59 Activity goals & per-route mastery** — shipped.
 15. **#61 Focus / target hunting** — S–M · ★★½.
 16. **#66 Battle Frontier facilities** — M–L · ★★½.
 17. **#70 Recurring rival** — shipped; dialogue and a dedicated sprite remain
@@ -238,10 +237,9 @@ Candy) and records it in `masteredRoutes`. The activity scene dispatches
 `RECORD_ROUTE_MASTERY` on each landed hit; a lower quality never overwrites a
 higher one.
 
-Still open:
-
-- [ ] Activity-flavoured daily quests (e.g. "land 3 perfect hits", "clear a
-      route's activities").
+Also done: daily quests draw from activities too — an `activityPerfects` quest
+asks for clean (perfect or ultra) hits, advanced by `RECORD_ROUTE_MASTERY`.
+**No open items.**
 
 Effort: **small–medium**.
 

@@ -1,7 +1,9 @@
-// Route-activity mastery: records the best hit quality per route/activity and
-// pays the one-time bonus once every activity on a route is mastered.
+// Route-activity mastery: records the best hit quality per route/activity,
+// advances the activity daily quests, and pays the one-time bonus once every
+// activity on a route is mastered.
 
 import { MASTERY_REWARD, masteryProgress, recordMastery } from '../route-mastery.js'
+import { advanceQuests } from '../quests.js'
 import { withNotification } from '../reducer-helpers.js'
 
 /**
@@ -11,13 +13,19 @@ import { withNotification } from '../reducer-helpers.js'
  * @returns {GameState}
  */
 export function recordRouteMastery(state, action) {
-  const { locationId, activityId, quality } = action.payload ?? {}
-  const nextMastery = recordMastery(state.routeMastery, locationId, activityId, quality)
-  if (nextMastery === state.routeMastery) return state
-  let next = {
+  const { locationId, activityId, quality } = action.payload ?? {},
+    nextMastery = recordMastery(state.routeMastery, locationId, activityId, quality),
+    // Activity daily quests advance on every landed hit, even one that doesn't
+    // improve this route's best.
+    quests = advanceQuests(state.quests, { kind: 'activity', locationId, quality })
+  if (nextMastery === state.routeMastery && quests === state.quests) return state
+  let next = /** @type {GameState} */ ({
     ...state,
-    routeMastery: /** @type {Record<string, Record<string, number>>} */ (nextMastery),
-  }
+    quests,
+    ...(nextMastery === state.routeMastery
+      ? {}
+      : { routeMastery: /** @type {Record<string, Record<string, number>>} */ (nextMastery) }),
+  })
   // Grant the one-time mastery bonus when the last activity is cleared.
   const { mastered } = masteryProgress(next, locationId)
   if (mastered && !(state.masteredRoutes ?? []).includes(locationId)) {

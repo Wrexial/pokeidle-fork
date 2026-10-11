@@ -464,12 +464,8 @@ Effort: **medium**.
 In the games, a Pokémon with high affection (Amie / Refresh / Camp) can **tough
 out** a would-be KO at 1 HP — "X toughed it out so you wouldn't feel sad!" —
 on top of the other affection effects (shaking off status, dodging a move, extra
-crits, bonus EXP). The game has both halves already but they don't meet:
+crits, bonus EXP).
 
-- **Friendship** is a per-Pokémon value (`gainFriendship`, friendship
-evolutions), and the **companion** (`src/game/companion.js`) has care stats
-(fullness / happiness / energy / cleanliness) and already grants +15% EXP when
-all four are at 50+.
 Done: the 1 HP save ships. In the damage step (`src/game/combat/turn.js`, beside
 `abilitySurvivesAtFullHp` / Endure / `heldSurvivesAtFullHp`), when the pinned
 companion is the active battler and a hit would KO it, `companionToughOutChance`
@@ -486,6 +482,45 @@ Still open (optional extras if we want the full affection set):
 
 Effort: **small–medium** (one hook, one roll and a log line; the state already
 exists).
+
+## 81. Research Shop diversification (overlaps Kecleon Wares)
+
+The Research Shop (`RESEARCH_SHOP` in `src/game/research.js`) spends Research
+Points on `expCandyL` / `rareCandy`, ten evolution stones (fire, water, thunder,
+leaf, moon, sun, shiny, dusk, dawn, ice), `bottleCap`, `goldBottleCap` and
+`masterball`. But the Kecleon Shop (`tokenShopItems` in `src/data/items.js`)
+already sells those same evolution stones for Victory Tokens, so most of the
+Research shelf reads as a duplicate of the Kecleon Wares tab and the only
+genuinely research-specific stock is the candy ladder and the Master Ball. Two
+different currencies selling the same goods makes the shops feel
+interchangeable.
+
+Goal: give the Research Shop its own identity, themed around field research and
+the species you have actually studied. A coherent subset of:
+
+- [ ] Drop the ten evolution stones (Kecleon already stocks them) and replace
+      them with research-flavoured goods.
+- [ ] **Species rewards**: a Let's-Go-style species candy, a Friendship boost,
+      or a one-off nature / ability re-roll tied to the species the points came
+      from.
+- [ ] **Ability & nature items** (new items where needed): an Ability Capsule /
+      Patch or a hidden-ability unlock. Kecleon already sells `natureMint`, so
+      decide which shop owns natures rather than selling it in both.
+- [ ] **Training items** (new items): PP Up / PP Max, vitamins (HP Up, Protein,
+      …), or a bigger EXP-candy ladder beside the existing candies and caps.
+- [ ] **Research-only held items** (Lucky Egg, Amulet Coin) or breeding
+      conveniences (Destiny Knot, Everstone, the Power items), none of which
+      are modelled yet.
+- [ ] Tune the costs so a species' five tasks buy something meaningful, keeping
+      the Bottle Caps and Master Ball as the long-term sinks.
+
+Relevant code: `RESEARCH_SHOP` (`src/game/research.js`),
+`src/components/research-panel.js`, `buyResearchItem`
+(`src/game/reducer/research.js`), and the item / icon tables in
+`src/data/items.js` + `tools/download-item-sprites.cjs` for any new items.
+
+Effort: **small–medium** (mostly a data-table reshuffle; the shop UI is already
+generic, but brand-new items also need sprites).
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

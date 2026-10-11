@@ -46,6 +46,8 @@ renumbered, so the gaps below are items that shipped.
 15. **#61 Focus / target hunting** — S–M · ★★½.
 16. **#66 Battle Frontier facilities** — M–L · ★★½.
 17. **#70 Recurring rival** — M · ★★½.
+18. **#73 Weather system on routes** — S–M · ★★ — there is no world weather
+    system, so the weather-favoured activities can almost never trigger.
 
 ---
 
@@ -268,6 +270,40 @@ Team presets, box bulk-release/sort by IV, damage/effectiveness preview on the
 battle move buttons, and JSON save export/import.
 
 Effort: **small–medium**.
+
+## 73. Weather system on routes (gap)
+
+Route activities and the battle field weather both read a **weather** value, but
+behind them there is no weather *system*:
+
+- `fieldWeatherFor(location)` (`src/game/weather.js`) only returns weather when
+the location data carries a permanent `weather` field, which exactly **7
+locations** do: Galar Route 10 (snow), Hoenn Routes 111 (sandstorm) and 119
+(rain), Kalos Route 17 (snow), Sinnoh Routes 216/217 (snow) and Unova Route 4
+(sandstorm). Moves and abilities can set weather too, but only **inside a
+battle**.
+- Nothing changes the weather over time — there is no weather cycle like the
+fixed 60-minute day/night cycle — so apart from those 7 routes it is
+effectively always clear.
+
+Consequence: the activities that favour **rain** (Fishing, Overcharge) can only
+hit their favoured bonus on Hoenn Route 119; everywhere else the weather half of
+`activityConditionMatches` is unreachable, so that condition is near-dead. The
+player guide calls these out ("fishing and overcharging love the rain"), which
+reads as though weather were a world feature.
+
+Options when we pick this up:
+
+- [ ] Add a lightweight world weather cycle (per region or per route, changing
+      over time like the day/night cycle), show it in the Town Map header beside
+      the phase, and feed it to `fieldWeatherFor` and the activity conditions.
+- [ ] Or let the activity condition read the current *battle* weather as well,
+      so a Rain Dance-buffed fight counts, instead of a world value.
+- [ ] Or drop the weather condition from activities and keep the day/night one
+      only.
+
+Effort: **small–medium** (the weather mechanics and battle side already exist;
+the work is a world weather value plus wiring it into `fieldWeatherFor`).
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

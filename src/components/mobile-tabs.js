@@ -12,6 +12,7 @@ import { BoxPanel } from './box-panel.js'
 import { PartyPanel } from './party-panel.js'
 import { StatsPanel } from './stats-panel.js'
 import { CatchSettingsModal } from './catch-settings-modal.js'
+import { HuntModal } from './hunt-panel.js'
 import { BackpackPanel } from './backpack-panel.js'
 import { BattleLog } from './battle-log.js'
 
@@ -23,6 +24,7 @@ export function MobileTabs() {
     [boxInspected, setBoxInspected] = React.useState(/** @type {{ source: string, id: string } | null} */ (null)),
     [boxReleaseConfirm, setBoxReleaseConfirm] = React.useState(/** @type {string | null} */ (null)),
     [showCatchSettings, setShowCatchSettings] = React.useState(!1),
+    [showHunt, setShowHunt] = React.useState(!1),
     location = mapData[state.currentLocation],
     isRaid = location?.type === 'raid',
     routeKey = isRaid ? location?.id : location?.routeKey,
@@ -206,6 +208,7 @@ export function MobileTabs() {
                 className: 'panel-content',
                 children: jsx(LocationPanel, {
                   onOpenCatchSettings: () => setShowCatchSettings(!0),
+                  onOpenHunt: () => setShowHunt(!0),
                 }),
               }),
             }),
@@ -229,6 +232,7 @@ export function MobileTabs() {
           encounters,
           onClose: () => setShowCatchSettings(!1),
         }),
+      showHunt && jsx(HuntModal, { onClose: () => setShowHunt(!1) }),
     ],
   })
 }

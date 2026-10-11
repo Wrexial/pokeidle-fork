@@ -11,6 +11,7 @@ import { BREEDING_GOALS, MAX_BREEDING_PROJECTS } from './breeding-projects.js'
 import { RIVAL_MILESTONES } from './rival.js'
 import { PRESTIGE_PERKS } from './prestige.js'
 import { FRONTIER_FACILITIES } from './battle-frontier.js'
+import { isValidHuntTarget } from './hunt.js'
 import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility, rollSize, RIBBONS } from './pokemon.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
@@ -686,6 +687,23 @@ export function repairSave(saved) {
         })
     ),
     prestigePoints = Math.max(0, Math.floor(Number(saved.prestigePoints) || 0)),
+    // Focus hunt: keep only a valid target and sane counters.
+    hunt = (() => {
+      const raw = saved.hunt && typeof saved.hunt === 'object' ? saved.hunt : null,
+        mode = /** @type {'species' | 'type'} */ (raw?.mode === 'type' ? 'type' : 'species')
+      if (!raw || !isValidHuntTarget(mode, raw.target)) return null
+      const bestQuality = ['hit', 'perfect', 'ultra'].includes(raw.bestQuality)
+        ? raw.bestQuality
+        : null
+      return {
+        mode,
+        target: raw.target,
+        startedAt: Number.isFinite(raw.startedAt) ? raw.startedAt : Date.now(),
+        encounters: Math.max(0, Math.floor(Number(raw.encounters) || 0)),
+        catches: Math.max(0, Math.floor(Number(raw.catches) || 0)),
+        bestQuality,
+      }
+    })(),
     // Rival wins per region, clamped to the number of milestones.
     rivals = Object.fromEntries(
       Object.entries(saved.rivals && typeof saved.rivals === 'object' ? saved.rivals : {})
@@ -888,6 +906,7 @@ export function repairSave(saved) {
     ),
     prestigePoints,
     prestigePerks,
+    hunt,
     towerFloor: repairedTowerFloor,
     towerBest: repairedTowerBest,
     frontierFloor: repairedFrontierFloor,
@@ -1064,6 +1083,7 @@ export const SAVED_STATE_KEYS = [
   'regionPrestige',
   'prestigePoints',
   'prestigePerks',
+  'hunt',
   'minigameRecords',
   'routeMastery',
   'masteredRoutes',

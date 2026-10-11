@@ -13,6 +13,7 @@ import { createVolatileState } from '../../combat.js'
 import { fieldWeatherFor } from '../../weather.js'
 import { tickGarden } from '../../garden.js'
 import { tickPelago } from '../../pelago.js'
+import { advanceHuntEncounter } from '../../hunt.js'
 import { creditResearchDefeat, creditResearchLarge, creditResearchMove, isLargeSpecimen } from '../../research.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { gainFriendship, isBattleReady, syncObtainedRibbons } from '../../pokemon.js'
@@ -41,10 +42,14 @@ export function startEncounter(state, action) {
         ? [...(state.party ?? [])].reverse().find((member) => member && !member.isEgg)
         : null
   if (disguise) enemy.disguisedAs = { speciesKey: disguise.speciesKey, name: disguise.name }
-  const shownName = disguise?.name ?? enemy?.name
+  const shownName = disguise?.name ?? enemy?.name,
+    // A focus hunt counts this sighting (and the activity hit quality that
+    // produced it, when a route activity did).
+    huntedHunt = advanceHuntEncounter(state.hunt, enemy?.speciesKey, action.payload?.activityQuality)
   return recordSeenPokemon(
     {
       ...state,
+      ...(huntedHunt === state.hunt ? {} : { hunt: huntedHunt }),
       phase: 'battling',
       enemyPokemon: enemy,
       playerPokemon: activePokemon,

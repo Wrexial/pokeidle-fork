@@ -8,6 +8,7 @@ import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 import { doubleSpawnChance } from '../../data/config.js'
 import { consumableItems, evolutionItems, fossilItems, heldItems, valuableDropTable } from '../../data/items.js'
 import { isCaveLocation, isWaterLocation } from '../catching.js'
+import { HUNT_ENCOUNTER_MULTIPLIER, huntMatchesSpecies } from '../hunt.js'
 import { rollWildHeldItem } from '../held-items.js'
 import { monotypeSpeciesPool, speciesHasType } from '../pokemon.js'
 import { DEFAULT_ROD, rodForId } from './rods.js'
@@ -705,9 +706,10 @@ export function rollActivityHeldItem(quality, types) {
  * @param {boolean} perfect
  * @param {string} [rodId]
  * @param {string | null} [monotype] Monotype challenge: only this type may appear.
+ * @param {Hunt | null} [focus] Focus hunt: its target is much more likely.
  * @returns {{ speciesKey: string, level: number, isWater: boolean, multi: boolean } | null}
  */
-export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEFAULT_ROD, monotype = null) {
+export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEFAULT_ROD, monotype = null, focus = null) {
   const activity = ROUTE_ACTIVITIES[activityId],
     rod = rodForId(rodId),
     table = encounterData[routeKey]?.encounters ?? []
@@ -762,9 +764,10 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
     // common half but leaves it reachable, so the roll keeps its variety.
     candidates = activity.deepWater ? sorted.slice(0, rareHalf) : reachable,
     candidateWeight = (/** @type {EncounterEntry} */ entry) =>
-      perfect && !activity.deepWater && sorted.indexOf(entry) >= rareHalf
+      (perfect && !activity.deepWater && sorted.indexOf(entry) >= rareHalf
         ? entry.weight * ACTIVITY_PERFECT_COMMON_WEIGHT
-        : entry.weight,
+        : entry.weight) *
+      (focus && huntMatchesSpecies(focus, entry.speciesKey) ? HUNT_ENCOUNTER_MULTIPLIER : 1),
     levelBonus = rodGated ? rod.levelBonus : 0,
     totalWeight = candidates.reduce((sum, entry) => sum + candidateWeight(entry), 0)
   let roll = Math.random() * totalWeight
@@ -800,16 +803,17 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
  * @param {boolean} perfect
  * @param {string} [rodId]
  * @param {string | null} [monotype] Monotype challenge: only this type may appear.
+ * @param {Hunt | null} [focus] Focus hunt: its target is much more likely.
  * @returns {{ speciesKey: string, level: number, isWater: boolean, multi: boolean }[]}
  */
-export function rollActivityEncounters(activityId, routeKey, perfect, rodId = DEFAULT_ROD, monotype = null) {
-  const first = rollActivityEncounter(activityId, routeKey, perfect, rodId, monotype)
+export function rollActivityEncounters(activityId, routeKey, perfect, rodId = DEFAULT_ROD, monotype = null, focus = null) {
+  const first = rollActivityEncounter(activityId, routeKey, perfect, rodId, monotype, focus)
   if (!first) return []
   if (activityId !== 'headbutt' || Math.random() >= doubleSpawnChance) return [first]
-  let second = rollActivityEncounter(activityId, routeKey, perfect, rodId, monotype)
+  let second = rollActivityEncounter(activityId, routeKey, perfect, rodId, monotype, focus)
   // Prefer a different species so the choice actually matters.
   for (let attempt = 0; attempt < 3 && second && second.speciesKey === first.speciesKey; attempt++)
-    second = rollActivityEncounter(activityId, routeKey, perfect, rodId)
+    second = rollActivityEncounter(activityId, routeKey, perfect, rodId, monotype, focus)
   return second ? [first, second] : [first]
 }
 

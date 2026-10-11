@@ -17,8 +17,7 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 1 — Worth the effort
 
-1. **#61 Focus / target hunting** — S–M · ★★½.
-2. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
+1. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
 
 ### Tier 2 — Big, defer
 
@@ -118,13 +117,6 @@ Relevant code: `src/data/move-effects.js`, `src/game/combat/turn.js`,
 `node tools/generate-reference.cjs`).
 
 Effort: **small** (the remaining bits are one-offs).
-
-## 61. Focus / target hunting
-
-Pick a species or type to focus; boost its wild and activity encounter rate and
-track hunt progress (encounters, best quality, time to catch).
-
-Effort: **small–medium**.
 
 ## 62. Offline depth
 

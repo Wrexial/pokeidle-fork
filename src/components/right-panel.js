@@ -7,12 +7,16 @@ import { useGame } from '../game/context.js'
 import { LocationPanel } from './location-panel.js'
 import { BackpackPanel } from './backpack-panel.js'
 import { CatchSettingsModal } from './catch-settings-modal.js'
+import { HuntModal } from './hunt-panel.js'
 
 export function RightPanel() {
   const { state } = useGame(),
     [showCatchSettings, setShowCatchSettings] = React.useState(!1),
+    [showHunt, setShowHunt] = React.useState(!1),
     openCatchSettings = React.useCallback(() => setShowCatchSettings(!0), []),
     closeCatchSettings = React.useCallback(() => setShowCatchSettings(!1), []),
+    openHunt = React.useCallback(() => setShowHunt(!0), []),
+    closeHunt = React.useCallback(() => setShowHunt(!1), []),
     location = mapData[state.currentLocation],
     isRaid = location?.type === 'raid',
     routeKey = isRaid ? location?.id : location?.routeKey,
@@ -33,9 +37,11 @@ export function RightPanel() {
         className: 'panel-content',
         children: jsx(LocationPanel, {
           onOpenCatchSettings: openCatchSettings,
+          onOpenHunt: openHunt,
         }),
       }),
       jsx(BackpackPanel, {}),
+      showHunt && jsx(HuntModal, { onClose: closeHunt }),
       showCatchSettings &&
         encounters &&
         routeKey &&

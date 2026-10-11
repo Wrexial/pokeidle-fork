@@ -62,6 +62,7 @@ export const CHANGELOG = [
       {
         heading: 'Features',
         items: [
+          'Focus hunts are in: pick a species or a type from the Focus Hunt bar in the location panel (search a name or choose a type) and its wild and route-activity encounter rate is tripled. The hunt tracks how many you have seen, how many you have caught, the best activity hit you landed and how long you have been at it, and lists the routes it turns up on.',
           'A species with no wild route no longer shows impossible “defeat it in the wild” research tasks: it observes the species instead — obtain it, feed it a berry, and use its moves in battle — for the same points. Every species also has a “catch a large specimen” task now, credited when you obtain an XL individual.',
           'Ribbons are in: a Pokemon earns a permanent award for milestones (Effort at Lv. 100, Best Friends at max friendship, a Shiny Ribbon for any shiny, and a Discovery Ribbon for the first of its species), Gym / Elite Four / Champion wins, Battle Tower floors and cleared Contests or the Champions’ Gauntlet. A ribbon case on the stats panel lists everything an individual has earned.',
           'Route activities track mastery: the best hit quality for each activity on a route is remembered, the location panel shows how many are at a perfect hit or better, and clearing every activity on a route pays a one-time bonus and marks it mastered.',

@@ -20,6 +20,7 @@ import { GiftPanel } from './gift-panel.js'
 import { FossilPanel } from './fossil-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
 import { BattleFrontierPanel } from './battle-frontier-panel.js'
+import { HuntBar } from './hunt-panel.js'
 import { GymLocationPanel } from './gym-location-panel.js'
 import { RivalPanel } from './rival-panel.js'
 import { LegendaryQuestPanel } from './legendary-quest-panel.js'
@@ -30,8 +31,8 @@ import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 import { CafePanel } from './cafe-panel.js'
 
-/** @param {{ onOpenCatchSettings: () => void }} props */
-export function LocationPanel({ onOpenCatchSettings }) {
+/** @param {{ onOpenCatchSettings: () => void, onOpenHunt?: () => void }} props */
+export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
   const { state, dispatch } = useGame(),
     // Which zone sub-area's wild table is expanded on the hub panel (only one
     // at a time, so a 10+ area zone stays readable).
@@ -735,6 +736,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
           className: 'location-description',
           children: location.description,
         }),
+        onOpenHunt && jsx(HuntBar, { onOpen: onOpenHunt }),
         jobCount > 0 &&
           jsx('button', {
             className: 'location-jobs-btn',

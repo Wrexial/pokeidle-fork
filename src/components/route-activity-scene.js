@@ -530,7 +530,11 @@ export function RouteActivityScene() {
         },
       })
     dispatch({ type: 'MARK_SEEN', payload: { speciesKey: pending.speciesKey } })
-    dispatch({ type: 'START_ENCOUNTER', payload: { enemy: pending.enemy } })
+    dispatch({
+      type: 'START_ENCOUNTER',
+      // The hit quality feeds the focus-hunt best-quality tracker.
+      payload: { enemy: pending.enemy, activityQuality: pending.quality },
+    })
     setPendings([])
   }
 
@@ -600,7 +604,8 @@ export function RouteActivityScene() {
         routeKey,
         perfect,
         rod.id,
-        state.challengeMonotype
+        state.challengeMonotype,
+        state.hunt
       )
       if (encounters.length === 0) {
         setMessage('Nothing is biting here.')
@@ -650,7 +655,8 @@ export function RouteActivityScene() {
           routeKey,
           perfect,
           undefined,
-          state.challengeMonotype
+          state.challengeMonotype,
+          state.hunt
         )
         if (hidden) {
           setCombo(perfect ? combo + 1 : 0)

@@ -320,7 +320,9 @@ export function useGameLoop() {
                   : 0,
                 currentGameState.challengeMonotype,
                 // Static / Magnet Pull / Lightning Rod / Storm Drain bias the roll.
-                ENCOUNTER_TYPE_ABILITY[currentGameState.playerPokemon?.ability ?? ''] ?? null
+                ENCOUNTER_TYPE_ABILITY[currentGameState.playerPokemon?.ability ?? ''] ?? null,
+                // The focus hunt makes its target much more likely.
+                currentGameState.hunt ?? null
               ),
             catchRouteKey = currentGameState.currentRoute ?? '',
             routeCatchUsed =

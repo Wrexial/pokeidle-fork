@@ -3,6 +3,7 @@
 import { roamerEncounterChance, shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance } from '../../data/config.js'
 import { GENERATION_DEX_RANGES, evolutionData, gymLeaderData, isSpeciesCharmed, pokemonSpecies, regions } from '../../data/gameData.js'
 import { challengeEligibleSpecies, speciesHasType } from '../pokemon.js'
+import { HUNT_ENCOUNTER_MULTIPLIER, huntMatchesSpecies } from '../hunt.js'
 
 /** Cached fixpoint of the minimum level each species can exist at. @type {Map<string, number> | null} */
 let speciesLevelFloors = null
@@ -457,9 +458,10 @@ export const ENCOUNTER_TYPE_ABILITY = {
  * @param {string | null} [monotype] Monotype challenge: only this type may appear.
  * @param {string | null} [biasType] A lead ability's type: those species are
  *   twice as likely (Static / Magnet Pull / ...).
+ * @param {Hunt | null} [focus] Focus hunt: its target is much more likely.
  * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean, isRoamer?: boolean }}
  */
-export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain, shinyBonus = 1, randomize = !1, levelOverride = 0, monotype = null, biasType = null) {
+export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain, shinyBonus = 1, randomize = !1, levelOverride = 0, monotype = null, biasType = null, focus = null) {
   if (randomize)
     return resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride, monotype)
   const weightedEncounters = applyEncounterModifiers(
@@ -484,14 +486,22 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
       !0
     )
   const basePool = monotypePool.length > 0 ? monotypePool : weightedEncounters,
+    // A focus hunt makes its target much more common on the route.
+    focusedPool = focus
+      ? basePool.map((encounter) =>
+          huntMatchesSpecies(focus, encounter.speciesKey)
+            ? { ...encounter, weight: encounter.weight * HUNT_ENCOUNTER_MULTIPLIER }
+            : encounter
+        )
+      : basePool,
     // A lead ability can make one type twice as common on the route.
     pool = biasType
-      ? basePool.map((encounter) =>
+      ? focusedPool.map((encounter) =>
           speciesHasType(encounter.speciesKey, biasType)
             ? { ...encounter, weight: encounter.weight * 2 }
             : encounter
         )
-      : basePool,
+      : focusedPool,
     totalWeight = pool.reduce((accumulator, encounter) => accumulator + encounter.weight, 0)
   let roll = Math.random() * totalWeight
   for (const encounter of pool)

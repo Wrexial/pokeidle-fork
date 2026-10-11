@@ -133,6 +133,18 @@ type Companion = {
   careBattle: number
 }
 
+/** A focus hunt: a species or type whose encounter rate is boosted (see game/hunt.js). */
+type Hunt = {
+  mode: 'species' | 'type'
+  /** Species key, or a type name. */
+  target: string
+  startedAt: number
+  encounters: number
+  catches: number
+  /** Best route-activity hit quality seen while hunting. */
+  bestQuality: 'hit' | 'perfect' | 'ultra' | null
+}
+
 /** One Berry Garden plot: a growing berry, or null when empty. */
 type GardenPlot = { berryId: string; battlesRemaining: number } | null
 
@@ -681,6 +693,8 @@ type GameState = {
   prestigePoints: number
   /** Owned prestige perk ranks (see game/prestige.js). */
   prestigePerks: Record<string, number>
+  /** The active focus hunt, or null (see game/hunt.js). */
+  hunt: Hunt | null
   /** Best result per minigame, for `unlock.minigame` gates (see endMinigame). */
   minigameRecords: Record<string, { best: number; completed: boolean }>
   /** Best activity hit quality per route, for route mastery (see game/route-mastery.js). */

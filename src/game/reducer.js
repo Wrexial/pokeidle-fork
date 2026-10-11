@@ -17,6 +17,7 @@ import { assignJob, collectJob, takeJobEncounter, unassignJob, accrueJobFinds } 
 import { claimGift, startStaticEncounter } from './reducer/gifts.js'
 import { buyResearchItem } from './reducer/research.js'
 import { recordRouteMastery } from './reducer/mastery.js'
+import { clearHunt, setHunt } from './reducer/hunt.js'
 import { addBreedingProject, removeBreedingProject } from './reducer/breeding.js'
 import { createBreedingTracker } from './breeding-projects.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, recordGameCornerWin, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startChampionGauntlet, startBugContest, startContest, startCurry, startDoubles, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack, startMantineSurf, startRotomRally, startOgreOustin, startTypeFusion, startUnownPicross, startPokeshot, startTeraRaid, startPokeword, startBerryBlender, startUltraWarp } from './reducer/minigames.js'
@@ -99,6 +100,8 @@ export const initialGameState = {
   pelago: createPelago(),
   /** Field Jobs: Pokemon posted to auto-run route activities (see game/jobs.js). */
   jobs: createJobs(),
+  /** Focus hunt: a species or type whose encounter rate is boosted (see game/hunt.js). */
+  hunt: null,
   /** Field research: wild defeats per species (see game/research.js). */
   researchDefeated: {},
   /** Field research: berries fed to a species, for non-wild species. */
@@ -566,6 +569,10 @@ export function gameReducer(state, action) {
       return startRouteActivity(state, action)
     case 'END_ROUTE_ACTIVITY':
       return endRouteActivity(state, action)
+    case 'SET_HUNT':
+      return setHunt(state, action)
+    case 'CLEAR_HUNT':
+      return clearHunt(state)
     case 'RECORD_ROUTE_MASTERY':
       return recordRouteMastery(state, action)
     case 'ADD_BREEDING_PROJECT':

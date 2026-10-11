@@ -1142,6 +1142,25 @@ async function main() {
     await cdp.screenshot(path.join(OUT, '35-battle-frontier.png'))
     console.log('Battle Frontier panel ok')
 
+    // Focus hunt (#61): the bar in the location panel and the picker modal.
+    await cdp.eval(
+      `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+        JSON.stringify(
+          minigameSave('kanto', 'route1', 'route1', ['palletTown', 'route1'])
+        )
+      )}); 'ok'`
+    )
+    await cdp.send('Page.navigate', { url: APP_URL })
+    await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'hunt data')
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+    )
+    await cdp.waitFor(`!!document.querySelector('.hunt-bar')`, 8000, 'hunt bar')
+    await cdp.click('.hunt-bar')
+    await cdp.waitFor(`!!document.querySelector('.hunt-modal')`, 5000, 'hunt modal')
+    await cdp.screenshot(path.join(OUT, '36-focus-hunt.png'))
+    console.log('Focus hunt panel ok')
+
     // Region-map overviews: seed each region fully open and capture its map, so
     // road/layout problems are easy to eyeball.
     const regionDefs = JSON.parse(

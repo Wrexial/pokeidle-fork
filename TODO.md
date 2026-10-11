@@ -17,8 +17,8 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 1 — High impact, worth the effort
 
-1. **#24 Move data pass** — M · ★★★ — Quick/Wide Guard's side protection and
-   the PP / Z-Move keep-or-drop decisions.
+1. **#24 Move data pass** — M · ★★★ — only the PP / Z-Move keep-or-drop
+   decisions remain (Quick/Wide Guard side protection shipped).
 2. **#25 Battle engine pass** — M–L · ★★★ — Illusion, more berries / Rocky
    Helmet, and battle polish.
 3. **#18 Better settings** — M · ★★★ — more cosmetic options if wanted;
@@ -124,12 +124,13 @@ swaps, the two-turn/charging moves, the status-condition conditionals, the
 multi-status rolls (Tri Attack, Dire Claw), Retaliate, Round / Echoed Voice and
 the faint-heals all shipped.
 
+Done: Quick Guard and Wide Guard shield the user's whole side in the doubles
+minigame (from priority and spread moves), and the Maison AI raises them when
+the opposing pair threatens one. Every other doubles-only move (After You,
+Ally Switch, Follow Me, Helping Hand, Rage Powder, …) already plays too.
+
 Not done:
 
-- [ ] Quick Guard / Wide Guard only protect the user as generic `protect`
-      moves; they should shield the user's whole side in the doubles minigame
-      (#43). Every other doubles-only move (After You, Ally Switch, Follow Me,
-      Helping Hand, Rage Powder, …) already plays in the Battle Maison.
 - [ ] PP is stored but unused; decide whether to implement it or drop it.
 - [ ] Z-moves / G-Max moves are otherwise dead data — decide keep/drop.
 
@@ -193,8 +194,8 @@ Pokemon tag in from the bench, and the ally abilities (Battery, Power Spot,
 Friend Guard, Healer) work. It reuses the singles engine one action at a time.
 
 The doubles-only moves and ally abilities ship too (Follow Me, Rage Powder,
-Spotlight, Helping Hand, After You, Quash, Ally Switch, Instruct, Dancer, plus
-the ally ability set in #25).
+Spotlight, Helping Hand, After You, Quash, Ally Switch, Instruct, Dancer, Quick
+Guard / Wide Guard side protection, plus the ally ability set in #25).
 
 Still open:
 
@@ -202,8 +203,6 @@ Still open:
 - [ ] A 3-way / 4-way free-for-all variant (the Battle Royal is the closest
       thing today).
 - [ ] A doubles home in more regions (currently only Kalos's Battle Maison).
-- [ ] Quick Guard / Wide Guard should protect the whole side, not just the user
-      (they are generic `protect` moves today).
 
 Relevant code: `src/game/minigames/doubles.js`,
 `src/components/doubles-scene.js`, `src/game/reducer/minigames.js`, and

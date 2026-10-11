@@ -408,3 +408,134 @@ test('Ally Switch resolves and redirects the round', () => {
   // The foes' targets were swapped, so the damage landed on the partner.
   assert.ok(switcher.currentHp >= partner.currentHp, 'the switch moved the attack off the switcher')
 })
+
+test('Wide Guard shields the whole side from a spread move', () => {
+  const run = (/** @type {boolean} */ useGuard) => {
+    const ally = battler({
+        name: 'Ally',
+        isPlayer: true,
+        moves: useGuard ? ['wideGuard'] : ['splash'],
+        types: ['Electric'],
+        speed: 200,
+      }),
+      partner = battler({
+        name: 'Partner',
+        isPlayer: true,
+        moves: ['splash'],
+        types: ['Electric'],
+        speed: 10,
+      }),
+      foeX = battler({
+        name: 'FoeX',
+        types: ['Ground'],
+        moves: ['earthquake'],
+        attack: 400,
+        speed: 300,
+      }),
+      foeY = battler({
+        name: 'FoeY',
+        types: ['Ground'],
+        moves: ['earthquake'],
+        attack: 400,
+        speed: 300,
+      }),
+      result = runDoublesRound([ally, partner], [foeX, foeY], { deterministic: true })
+    return { allyHp: ally.currentHp, partnerHp: partner.currentHp, log: result.log }
+  }
+  const guarded = run(true)
+  assert.ok(
+    guarded.log.some((line) => /protected the team with Wide Guard/.test(line)),
+    'the guard goes up'
+  )
+  assert.ok(
+    guarded.log.some((line) => /protected by Wide Guard/.test(line)),
+    'the spread move is blocked'
+  )
+  assert.equal(guarded.allyHp, 400, 'the guarded side takes no spread damage')
+  assert.equal(guarded.partnerHp, 400, 'the partner is shielded too')
+  // Without the guard the spread move lands.
+  const unguarded = run(false)
+  assert.ok(unguarded.allyHp < 400 && unguarded.partnerHp < 400)
+})
+
+test('Quick Guard shields the whole side from a priority move', () => {
+  const run = (/** @type {boolean} */ useGuard) => {
+    const ally = battler({
+        name: 'Ally',
+        isPlayer: true,
+        moves: useGuard ? ['quickGuard'] : ['splash'],
+        types: ['Electric'],
+        speed: 1,
+      }),
+      partner = battler({
+        name: 'Partner',
+        isPlayer: true,
+        moves: ['splash'],
+        types: ['Electric'],
+        speed: 1,
+      }),
+      foeX = battler({
+        name: 'FoeX',
+        types: ['Water'],
+        moves: ['aquaJet'],
+        attack: 400,
+        speed: 300,
+      }),
+      foeY = battler({
+        name: 'FoeY',
+        types: ['Water'],
+        moves: ['aquaJet'],
+        attack: 400,
+        speed: 300,
+      }),
+      result = runDoublesRound([ally, partner], [foeX, foeY], { deterministic: true })
+    return { allyHp: ally.currentHp, partnerHp: partner.currentHp, log: result.log }
+  }
+  const guarded = run(true)
+  assert.ok(guarded.log.some((line) => /protected the team with Quick Guard/.test(line)))
+  assert.ok(guarded.log.some((line) => /protected by Quick Guard/.test(line)))
+  assert.equal(guarded.allyHp, 400, 'the guarded side takes no priority damage')
+  assert.equal(guarded.partnerHp, 400)
+  // Aqua Jet is single-target, so only the chosen ally is hit without the guard.
+  const unguarded = run(false)
+  assert.ok(Math.min(unguarded.allyHp, unguarded.partnerHp) < 400)
+})
+
+test('Quick Guard does not block a non-priority spread move', () => {
+  // The foe knows a priority move (so the guard goes up) but leads with a
+  // stronger non-priority spread move, which Quick Guard must not stop.
+  const ally = battler({
+      name: 'Ally',
+      isPlayer: true,
+      moves: ['quickGuard'],
+      types: ['Electric'],
+      speed: 1,
+    }),
+    partner = battler({
+      name: 'Partner',
+      isPlayer: true,
+      moves: ['splash'],
+      types: ['Electric'],
+      speed: 1,
+    }),
+    foeX = battler({
+      name: 'FoeX',
+      types: ['Ground'],
+      moves: ['earthquake', 'quickAttack'],
+      attack: 400,
+      speed: 300,
+    }),
+    foeY = battler({
+      name: 'FoeY',
+      types: ['Ground'],
+      moves: ['earthquake', 'quickAttack'],
+      attack: 400,
+      speed: 300,
+    }),
+    result = runDoublesRound([ally, partner], [foeX, foeY], { deterministic: true })
+  assert.ok(
+    result.log.some((line) => /protected the team with Quick Guard/.test(line)),
+    'Quick Guard went up because the foe knows a priority move'
+  )
+  assert.ok(ally.currentHp < 400, 'the non-priority spread move still lands')
+})

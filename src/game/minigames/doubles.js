@@ -170,9 +170,10 @@ export function doublesOpponents(baseLevel, wave = 1) {
  * @param {any} attacker
  * @param {any[]} allies
  * @param {any[]} foes
- * @returns {{ attacker: any, moveId: string, target: any, priority: number, speed: number, heal?: boolean } | null}
+ * @param {{ guardChosen?: boolean }} [options]
+ * @returns {{ attacker: any, moveId: string, target: any, priority: number, speed: number, heal?: boolean, guard?: string } | null}
  */
-function chooseAction(attacker, allies, foes) {
+function chooseAction(attacker, allies, foes, options = {}) {
   // A wounded battler prefers a heal, aimed at the weakest ally (itself or its
   // partner).
   const hpRatio = attacker.maxHp > 0 ? attacker.currentHp / attacker.maxHp : 1,
@@ -192,6 +193,40 @@ function chooseAction(attacker, allies, foes) {
   }
   const availableTargets = foes.filter(alive)
   if (availableTargets.length === 0) return null
+  // Side guards: Wide Guard answers a foe that actually has a spread move, and
+  // Quick Guard a foe with a priority move. Only one guard per side per round,
+  // and each battler uses a given guard at most once per bout.
+  if (!options.guardChosen) {
+    const knows = (/** @type {string} */ id) => (attacker.moves ?? []).includes(id),
+      foeMoves = availableTargets.flatMap((foe) => foe.moves ?? []),
+      foeHasSpread = foeMoves.some(
+        (id) => SPREAD_MOVES.has(id) && (moveData[id]?.category ?? 'physical') !== 'status'
+      ),
+      // Only count priority *attacks* (Fake Out, Aqua Jet, ...); a foe's own
+      // Protect / Quick Guard should not provoke a guard.
+      foeHasPriority = foeMoves.some(
+        (id) => (moveData[id]?.priority ?? 0) > 0 && (moveData[id]?.power ?? 0) > 0
+      ),
+      guardId = /** @type {'wideGuard' | 'quickGuard' | null} */ (
+        knows('wideGuard') && foeHasSpread && !attacker.wideGuardUsed
+          ? 'wideGuard'
+          : knows('quickGuard') && foeHasPriority && !attacker.quickGuardUsed
+            ? 'quickGuard'
+            : null
+      )
+    if (guardId) {
+      if (guardId === 'wideGuard') attacker.wideGuardUsed = !0
+      else attacker.quickGuardUsed = !0
+      return {
+        attacker,
+        moveId: guardId,
+        target: attacker,
+        priority: moveData[guardId]?.priority ?? 0,
+        speed: attacker.speed,
+        guard: guardId,
+      }
+    }
+  }
   let best = null
   for (const foe of availableTargets) {
     const { moveId } = chooseMoveForBattle(attacker, foe, null, AI_SKILL.smartest),
@@ -229,13 +264,26 @@ export function runDoublesRound(allies, foes, options = {}) {
   // Round-start abilities first, so Commander removes the Tatsugiri from the
   // action list and Flower Veil is up before anything resolves.
   applyRoundStartAbilities(allies, foes, log)
+  // Side guards active this round (Quick Guard blocks priority moves, Wide
+  // Guard blocks spread moves). Reset every round.
+  const sideGuards = new Map([
+      [allies, { quick: !1, wide: !1 }],
+      [foes, { quick: !1, wide: !1 }],
+    ]),
+    // Pick each side's actions, letting at most one battler raise a guard.
+    chooseSideActions = /** @param {any[]} side @param {any[]} opponents @param {boolean} isAlly */ (side, opponents, isAlly) => {
+      let guardChosen = !1
+      return side
+        .filter((attacker) => alive(attacker) && !attacker.commanding)
+        .map((attacker) => {
+          const action = chooseAction(attacker, side, opponents, { guardChosen })
+          if (action?.guard) guardChosen = !0
+          return { attacker, allies: isAlly, action }
+        })
+    }
   const actions = [
-      ...allies
-        .filter((attacker) => alive(attacker) && !attacker.commanding)
-        .map((attacker) => ({ attacker, allies: !0, action: chooseAction(attacker, allies, foes) })),
-      ...foes
-        .filter((attacker) => alive(attacker) && !attacker.commanding)
-        .map((attacker) => ({ attacker, allies: !1, action: chooseAction(attacker, foes, allies) })),
+      ...chooseSideActions(allies, foes, !0),
+      ...chooseSideActions(foes, allies, !1),
     ]
       .filter((entry) => entry.action)
       .sort(
@@ -297,6 +345,15 @@ export function runDoublesRound(allies, foes, options = {}) {
     const moveId = action.moveId,
       move = moveData[moveId]
     if (!move) continue
+    // Raise a side guard: it protects the user's whole side for the rest of the
+    // round (Quick Guard from priority moves, Wide Guard from spread moves).
+    if (moveId === 'quickGuard' || moveId === 'wideGuard') {
+      const guards = sideGuards.get(isAlly ? allies : foes) ?? { quick: !1, wide: !1 }
+      if (moveId === 'quickGuard') guards.quick = !0
+      else guards.wide = !0
+      log.push(`${attacker.name} protected the team with ${move.name}!`)
+      continue
+    }
     // Ally Switch swaps places with the ally, so moves already aimed at either
     // of them retarget.
     if (moveId === 'allySwitch') {
@@ -386,7 +443,16 @@ export function runDoublesRound(allies, foes, options = {}) {
       // stats for the single-action resolver, then restoring them.
       const attackerSide = isAlly ? allies : foes,
         targetSide = isAlly ? foes : allies,
-        attackBoost =
+        targetGuard = sideGuards.get(targetSide),
+        wideBlocked = !!(targetGuard?.wide && SPREAD_MOVES.has(moveId)),
+        quickBlocked = !!(targetGuard?.quick && (move.priority ?? 0) > 0)
+      if (wideBlocked || quickBlocked) {
+        log.push(
+          `${target.name} was protected by ${wideBlocked ? 'Wide Guard' : 'Quick Guard'}!`
+        )
+        continue
+      }
+      const attackBoost =
           (hasAllyAbility(attacker, attackerSide, 'battery') ||
           hasAllyAbility(attacker, attackerSide, 'powerSpot')
             ? 1.3

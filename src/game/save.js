@@ -569,7 +569,8 @@ export function repairSave(saved) {
   }
   const researchDefeated = sanitizeResearchCounters(saved.researchDefeated),
     researchFed = sanitizeResearchCounters(saved.researchFed),
-    researchMoves = sanitizeResearchCounters(saved.researchMoves)
+    researchMoves = sanitizeResearchCounters(saved.researchMoves),
+    researchLarge = sanitizeResearchCounters(saved.researchLarge)
   const researchClaimed = /** @type {Record<string, number>} */ ({}),
     savedClaimed =
       saved.researchClaimed && typeof saved.researchClaimed === 'object' ? saved.researchClaimed : {}
@@ -841,6 +842,7 @@ export function repairSave(saved) {
     researchDefeated,
     researchFed,
     researchMoves,
+    researchLarge,
     researchClaimed,
     researchPoints: Math.max(0, Math.floor(Number(saved.researchPoints) || 0)),
     shinySeen,
@@ -1021,6 +1023,7 @@ export const SAVED_STATE_KEYS = [
   'researchDefeated',
   'researchFed',
   'researchMoves',
+  'researchLarge',
   'researchClaimed',
   'researchPoints',
   'shinySeen',

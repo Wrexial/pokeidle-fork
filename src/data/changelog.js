@@ -60,8 +60,8 @@ export const CHANGELOG = [
       {
         heading: 'Features',
         items: [
-          'A species with no wild route no longer shows impossible “defeat it in the wild” research tasks: it observes the species instead — obtain it, feed it a berry, and use its moves in battle — for the same points.',
-          'Ribbons are in: a Pokemon earns a permanent award for milestones (Effort at Lv. 100, Best Friends at max friendship), Gym / Elite Four / Champion wins, Battle Tower floors and cleared Contests or the Champions’ Gauntlet. A ribbon case on the stats panel lists everything an individual has earned.',
+          'A species with no wild route no longer shows impossible “defeat it in the wild” research tasks: it observes the species instead — obtain it, feed it a berry, and use its moves in battle — for the same points. Every species also has a “catch a large specimen” task now, credited when you obtain an XL individual.',
+          'Ribbons are in: a Pokemon earns a permanent award for milestones (Effort at Lv. 100, Best Friends at max friendship, a Shiny Ribbon for any shiny, and a Discovery Ribbon for the first of its species), Gym / Elite Four / Champion wins, Battle Tower floors and cleared Contests or the Champions’ Gauntlet. A ribbon case on the stats panel lists everything an individual has earned.',
           'Route activities track mastery: the best hit quality for each activity on a route is remembered, the location panel shows how many are at a perfect hit or better, and clearing every activity on a route pays a one-time bonus and marks it mastered.',
           'Daily quests can ask for clean route-activity hits (a perfect or ultra hit), and the Field Jobs’ overnight work is itemised in the “while you were away” report (the cycles each ran and what they banked).',
           'The Day-Care tracks breeding: eggs and shinies hatched, eggs since the last shiny, and a project queue (a shiny, all-31 IVs or a specific nature) that completes the moment a matching Egg hatches.',

@@ -13,9 +13,9 @@ import { createVolatileState } from '../../combat.js'
 import { fieldWeatherFor } from '../../weather.js'
 import { tickGarden } from '../../garden.js'
 import { tickPelago } from '../../pelago.js'
-import { creditResearchDefeat, creditResearchMove } from '../../research.js'
+import { creditResearchDefeat, creditResearchLarge, creditResearchMove, isLargeSpecimen } from '../../research.js'
 import { emptyBattleHazards } from '../../hazards.js'
-import { gainFriendship, isBattleReady } from '../../pokemon.js'
+import { gainFriendship, isBattleReady, syncObtainedRibbons } from '../../pokemon.js'
 import { prestigeMultipliers } from '../../prestige.js'
 import { advanceShinyTarget, computeUnlockedLocations, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from '../../progression.js'
 import { advanceQuests } from '../../quests.js'
@@ -483,12 +483,22 @@ export function consumeEvent(state, action) {
   if (hatchedEgg.length > 0) {
     for (const hatched of hatchedEgg) {
       const hatchKey = hatched.speciesKey,
+        // A brand-new species earns the Discovery Ribbon, and a shiny hatch
+        // earns the Shiny Ribbon.
+        hatchIsNew = !syncedState.pokedexCaught.includes(hatchKey),
+        ribbonedHatch = syncObtainedRibbons(hatched, {
+          isNewSpecies: hatchIsNew,
+          isShiny: hatched.isShiny,
+        }),
         // Breeding tracker + project queue: count the hatch and complete the
         // front project when it matches.
         breedingResult = advanceBreeding(syncedState.breeding, hatched)
       syncedState = withNotification(
         {
           ...syncedState,
+          party: syncedState.party.map((member) =>
+            member.id === hatched.id ? ribbonedHatch : member
+          ),
           breeding: breedingResult.breeding,
           pokedexSeen: syncedState.pokedexSeen.includes(hatchKey)
             ? syncedState.pokedexSeen
@@ -524,6 +534,9 @@ export function consumeEvent(state, action) {
           icon: '\u{1f3c6}',
           dedupeKey: `breedingproject:${breedingResult.completed.id}`,
         })
+      // An XL hatch counts toward the "large specimen" research task.
+      if (isLargeSpecimen(ribbonedHatch))
+        syncedState = creditResearchLarge(syncedState, hatchKey)
     }
     syncedState = { ...syncedState, hatchResult: hatchedEgg[hatchedEgg.length - 1] }
   }

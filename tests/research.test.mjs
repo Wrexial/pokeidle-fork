@@ -11,7 +11,9 @@ const {
   applyResearchEarnings,
   creditResearchDefeat,
   creditResearchFeed,
+  creditResearchLarge,
   creditResearchMove,
+  isLargeSpecimen,
   isWildSpecies,
   researchTasksFor,
   speciesResearch,
@@ -84,7 +86,7 @@ test('wild species keep the defeat ladder; non-wild species get feasible tasks',
   )
   assert.deepEqual(
     researchTasksFor('venusaur').map((task) => task.id),
-    ['catch', 'fed', 'moves10', 'moves25', 'shiny']
+    ['catch', 'fed', 'moves10', 'moves25', 'shiny', 'large']
   )
   // Both task sets are worth the same, so levels and the shop stay honest.
   const wildMax = researchTasksFor('pikachu').reduce((sum, task) => sum + task.points, 0),
@@ -127,6 +129,7 @@ test('a non-wild species can reach level 10 through its own tasks', () => {
       shinyCaught: ['venusaur'],
       researchFed: { venusaur: 1 },
       researchMoves: { venusaur: 25 },
+      researchLarge: { venusaur: 1 },
     },
     'venusaur'
   )
@@ -142,12 +145,32 @@ test('a fully researched species reaches level 10', () => {
       pokedexCaught: ['pikachu'],
       shinyCaught: ['pikachu'],
       researchDefeated: { pikachu: 25 },
+      researchLarge: { pikachu: 1 },
     },
     'pikachu'
   )
   assert.equal(research.earned, RESEARCH_MAX_POINTS)
   assert.equal(research.level, 10)
   assert.ok(research.complete)
+})
+
+test('a large specimen credits the large-specimen task', () => {
+  assert.equal(isLargeSpecimen({ size: 255 }), true)
+  assert.equal(isLargeSpecimen({ size: 205 }), true)
+  assert.equal(isLargeSpecimen({ size: 204 }), false)
+  assert.equal(isLargeSpecimen({}), false)
+
+  const base = {
+      ...initialGameState,
+      pokedexCaught: ['pikachu'],
+      researchClaimed: { pikachu: 1 },
+      researchPoints: 1,
+    },
+    credited = creditResearchLarge(base, 'pikachu')
+  assert.equal(credited.researchLarge.pikachu, 1)
+  assert.equal(credited.researchPoints, 1 + 2, 'the large-specimen task pays its points')
+  // Unknown species are ignored and create no counter.
+  assert.equal(creditResearchLarge(base, 'nope'), base)
 })
 
 test('the Research Shop spends points and refuses when short', () => {
@@ -181,6 +204,7 @@ test('save repair sanitises research counters', () => {
       researchDefeated: { bulbasaur: 5, notAPokemon: 99, negative: -1 },
       researchFed: { bulbasaur: 2, notAPokemon: 9 },
       researchMoves: { bulbasaur: 7, negative: -3 },
+      researchLarge: { bulbasaur: 1, notAPokemon: 4 },
       researchClaimed: { bulbasaur: 999 },
       researchPoints: 12.7,
     },
@@ -188,6 +212,8 @@ test('save repair sanitises research counters', () => {
   assert.equal(repaired.researchDefeated.bulbasaur, 5)
   assert.equal(repaired.researchFed.bulbasaur, 2)
   assert.equal(repaired.researchMoves.bulbasaur, 7)
+  assert.equal(repaired.researchLarge.bulbasaur, 1)
+  assert.ok(!('notAPokemon' in repaired.researchLarge), 'an unknown species is dropped')
   assert.ok(!('notAPokemon' in repaired.researchFed), 'an unknown species is dropped')
   assert.ok(!('negative' in repaired.researchMoves), 'a bad count is dropped')
   assert.ok(!('notAPokemon' in repaired.researchDefeated), 'an unknown species is dropped')

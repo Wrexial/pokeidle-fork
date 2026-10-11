@@ -649,6 +649,8 @@ type GameState = {
   researchFed: Record<string, number>
   /** Field research: moves used by a species, for non-wild species. */
   researchMoves: Record<string, number>
+  /** Field research: large specimens obtained per species. */
+  researchLarge: Record<string, number>
   /** Research points already credited per species. */
   researchClaimed: Record<string, number>
   /** Unspent Research Points. */

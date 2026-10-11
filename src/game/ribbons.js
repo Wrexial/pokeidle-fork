@@ -57,6 +57,34 @@ export const RIBBONS = {
     description: 'Cleared the Champions\u2019 Gauntlet.',
     icon: '\u{2694}',
   },
+  shiny: {
+    id: 'shiny',
+    name: 'Shiny Ribbon',
+    description: 'A rare shiny individual.',
+    icon: '\u2728',
+  },
+  firstCatch: {
+    id: 'firstCatch',
+    name: 'Discovery Ribbon',
+    description: 'The first of its species registered in the Pok\u00e9dex.',
+    icon: '\u{1f4d6}',
+  },
+}
+
+/**
+ * Award the ribbons a Pokemon earns the moment it is obtained: a shiny is
+ * always marked, and the first individual of a species earns the Discovery
+ * Ribbon. Idempotent.
+ * @param {Pokemon} pokemon
+ * @param {{ isNewSpecies?: boolean, isShiny?: boolean }} options
+ * @returns {Pokemon}
+ */
+export function syncObtainedRibbons(pokemon, { isNewSpecies = !1, isShiny = !1 } = {}) {
+  if (!pokemon) return pokemon
+  let next = pokemon
+  if (isShiny) next = awardRibbon(next, 'shiny')
+  if (isNewSpecies) next = awardRibbon(next, 'firstCatch')
+  return next
 }
 
 /**

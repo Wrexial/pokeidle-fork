@@ -11,6 +11,7 @@ const {
   awardRibbonToParty,
   pokemonRibbons,
   syncMilestoneRibbons,
+  syncObtainedRibbons,
 } = await import('../src/game/ribbons.js')
 const { createPokemon, generateIVs } = await import('../src/game/pokemon.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -44,6 +45,47 @@ test('syncMilestoneRibbons awards the effort and friendship ribbons', () => {
   // Both at once.
   const both = syncMilestoneRibbons({ ...base, level: 100, friendship: 255 })
   assert.deepEqual([...both.ribbons].sort(), ['bestFriends', 'effort'])
+})
+
+test('syncObtainedRibbons marks shinies and the first of a species', () => {
+  const base = createPokemon('bulbasaur', 5, 1)
+  assert.equal(syncObtainedRibbons(base), base, 'nothing to award, same reference')
+  assert.deepEqual(
+    syncObtainedRibbons(base, { isNewSpecies: true }).ribbons,
+    ['firstCatch']
+  )
+  assert.deepEqual(
+    [...syncObtainedRibbons(base, { isShiny: true }).ribbons].sort(),
+    ['shiny']
+  )
+  assert.deepEqual(
+    [...syncObtainedRibbons(base, { isNewSpecies: true, isShiny: true }).ribbons].sort(),
+    ['firstCatch', 'shiny']
+  )
+})
+
+test('a catch awards the Shiny and Discovery Ribbons', () => {
+  const caught = gameReducer(
+    { ...initialGameState, pokedexCaught: [], nextPokemonId: 1, inventory: {} },
+    {
+      type: 'CATCH_POKEMON',
+      payload: { speciesKey: 'pidgey', level: 5, pokeballUsed: 'pokeball', isShiny: true },
+    }
+  )
+  const firstCatch = caught.party[0]
+  assert.ok(firstCatch.ribbons.includes('shiny'))
+  assert.ok(firstCatch.ribbons.includes('firstCatch'))
+  // A repeat of the same species gets no Discovery Ribbon.
+  const repeat = gameReducer(
+    { ...caught, pokedexCaught: ['pidgey'], nextPokemonId: 2 },
+    {
+      type: 'CATCH_POKEMON',
+      payload: { speciesKey: 'pidgey', level: 5, pokeballUsed: 'pokeball' },
+    }
+  )
+  const second = repeat.party[repeat.party.length - 1]
+  assert.ok(!second.ribbons?.includes('firstCatch'))
+  assert.ok(!second.ribbons?.includes('shiny'))
 })
 
 test('pokemonRibbons maps ids to definitions and drops unknown ones', () => {

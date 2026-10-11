@@ -11,8 +11,9 @@ import {
   selectAutoCatchBall,
   selectBestBall,
 } from '../../catching.js'
-import { createPokemon, insertIntoBox } from '../../pokemon.js'
+import { createPokemon, insertIntoBox, syncObtainedRibbons } from '../../pokemon.js'
 import { isHoneyActive, prepareNextBattle } from '../../progression.js'
+import { creditResearchLarge, isLargeSpecimen } from '../../research.js'
 import { markCaught, markShinyCaught } from '../collection.js'
 import { catchPokemon } from '../pokemon/management.js'
 import { withNotification } from '../../reducer-helpers.js'
@@ -156,11 +157,14 @@ export function completeMasterBall(state, action) {
     speciesKey = enemy.speciesKey,
     speciesName = pokemonSpecies[speciesKey]?.name ?? speciesKey,
     isNewSpecies = !state.pokedexCaught.includes(speciesKey),
-    caughtPokemon = createPokemon(
-      speciesKey,
-      state.inRaid ? 60 : enemy.level,
-      state.nextPokemonId,
-      enemy.isShiny
+    caughtPokemon = syncObtainedRibbons(
+      createPokemon(
+        speciesKey,
+        state.inRaid ? 60 : enemy.level,
+        state.nextPokemonId,
+        enemy.isShiny
+      ),
+      { isNewSpecies, isShiny: enemy.isShiny }
     )
   let caughtState = /** @type {GameState} */ ({
     ...state,
@@ -185,6 +189,8 @@ export function completeMasterBall(state, action) {
     state.party.length < 6
       ? { ...caughtState, party: [...state.party, caughtPokemon] }
       : { ...caughtState, box: insertIntoBox(state.box, caughtPokemon, state.boxSort) }
+  // An XL catch counts toward the "large specimen" research task.
+  if (isLargeSpecimen(caughtPokemon)) caughtState = creditResearchLarge(caughtState, speciesKey)
   caughtState = prepareNextBattle(caughtState)
   if (state.inRaid)
     caughtState = {

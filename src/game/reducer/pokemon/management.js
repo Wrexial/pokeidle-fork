@@ -3,7 +3,8 @@
 import { pokemonSpecies } from '../../../data/gameData.js'
 import { tmItemId } from '../../../data/tms.js'
 import { tmTeachCost } from '../../../data/config.js'
-import { createPokemon, insertIntoBox, isTutorMove, judgeIVs } from '../../pokemon.js'
+import { createPokemon, insertIntoBox, isTutorMove, judgeIVs, syncObtainedRibbons } from '../../pokemon.js'
+import { creditResearchLarge, isLargeSpecimen } from '../../research.js'
 import { advanceShinyTarget, formatReward, loadActivePokemonFromParty, prepareNextBattle, releaseFaintedParty, releaseReward, syncActivePokemonIntoParty } from '../../progression.js'
 import { advanceQuests } from '../../quests.js'
 import { withNotification } from '../../reducer-helpers.js'
@@ -312,6 +313,12 @@ export function catchPokemon(state, action) {
   if (ability) newPokemon = { ...newPokemon, ability }
   // The Friend Ball sets a high starting friendship.
   if (pokeballUsed === 'friendball') newPokemon = { ...newPokemon, friendship: 200 }
+  // Obtained ribbons: a shiny is always marked, and its species' first catch
+  // grants the Discovery Ribbon.
+  newPokemon = syncObtainedRibbons(newPokemon, {
+    isNewSpecies: !state.pokedexCaught.includes(speciesKey),
+    isShiny,
+  })
   let inventory = state.inventory
   if (pokeballUsed) {
     const ownedCount = inventory[pokeballUsed] ?? 0
@@ -330,32 +337,37 @@ export function catchPokemon(state, action) {
         : state.claimedGifts,
     // Catching a chained shiny resets the radar chain and raises the target.
     shinyChain = advanceShinyTarget(state.shinyChain, state.enemyPokemon)
-  return state.party.length < 6
-    ? {
-        ...state,
-        party: [...state.party, newPokemon],
-        claimedGifts,
-        shinyChain,
-        nextPokemonId: state.nextPokemonId + 1,
-        inventory,
-        quests: advanceQuests(state.quests, { kind: 'catch', speciesKey, isShiny }),
-        battleLog: [
-          ...state.battleLog,
-          `Caught ${species.name}! Added to party.`,
-        ].slice(-50),
-      }
-    : {
-        ...state,
-        box: insertIntoBox(state.box, newPokemon, state.boxSort),
-        claimedGifts,
-        shinyChain,
-        nextPokemonId: state.nextPokemonId + 1,
-        inventory,
-        quests: advanceQuests(state.quests, { kind: 'catch', speciesKey, isShiny }),
-        battleLog: [...state.battleLog, `Caught ${species.name}! Sent to box.`].slice(
-          -50
-        ),
-      }
+  const caughtState =
+    state.party.length < 6
+      ? {
+          ...state,
+          party: [...state.party, newPokemon],
+          claimedGifts,
+          shinyChain,
+          nextPokemonId: state.nextPokemonId + 1,
+          inventory,
+          quests: advanceQuests(state.quests, { kind: 'catch', speciesKey, isShiny }),
+          battleLog: [
+            ...state.battleLog,
+            `Caught ${species.name}! Added to party.`,
+          ].slice(-50),
+        }
+      : {
+          ...state,
+          box: insertIntoBox(state.box, newPokemon, state.boxSort),
+          claimedGifts,
+          shinyChain,
+          nextPokemonId: state.nextPokemonId + 1,
+          inventory,
+          quests: advanceQuests(state.quests, { kind: 'catch', speciesKey, isShiny }),
+          battleLog: [...state.battleLog, `Caught ${species.name}! Sent to box.`].slice(
+            -50
+          ),
+        }
+  // An XL catch counts toward the "large specimen" research task.
+  return isLargeSpecimen(newPokemon)
+    ? creditResearchLarge(caughtState, speciesKey)
+    : caughtState
 }
 
 /**

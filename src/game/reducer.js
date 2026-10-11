@@ -104,6 +104,8 @@ export const initialGameState = {
   researchFed: {},
   /** Field research: moves used by a species, for non-wild species. */
   researchMoves: {},
+  /** Field research: large specimens obtained per species. */
+  researchLarge: {},
   /** Research points already credited per species (so a balance is spendable). */
   researchClaimed: {},
   /** Unspent Research Points. */

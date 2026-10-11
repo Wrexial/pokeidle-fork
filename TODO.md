@@ -168,8 +168,8 @@ Eight ribbons and the per-Pokemon ribbon case shipped (`src/game/ribbons.js`).
 
 Still open (optional):
 
-- [ ] More ribbons: a shiny ribbon, a first-catch ribbon, per-region League
-      ribbons, or a ribbon for a full Field-research species.
+- [ ] Per-region League ribbons, or a ribbon for a full Field-research species
+      (the shiny and first-catch ribbons shipped).
 
 Effort: **small–medium**.
 
@@ -225,9 +225,6 @@ for the very largest) on the stats panel (`src/game/pokemon/sizes.js`).
 
 Still open:
 
-- [ ] Tie size into **Field research**: "catch a large specimen" / "catch an XL
-      specimen" tasks. Size is per-individual, so the research counter has to
-      watch caught individuals, not just species.
 - [ ] Add `height` to the species data (a PokeAPI pass like `fetch-weights.cjs`)
       and scale the roll by the species' baseline, so a Wailord and a Diglett
       aren't judged on the same scale.
@@ -335,8 +332,8 @@ rows.
 
 Still open (optional extra Legends-style tasks):
 
-- [ ] Catch a large / alpha specimen (ties into #74), or defeat a foe with a
-      super-effective move of a given type.
+- [ ] Defeat a foe with a super-effective move of a given type (the "catch a
+      large specimen" task shipped).
 - [ ] A per-species "see it use <specific move>" flavour task for more variety.
 
 ## Map cleanup reference maps

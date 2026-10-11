@@ -5,12 +5,13 @@
 // plus a few per-species counters.
 
 import { encounterData, pokemonSpecies } from '../data/gameData.js'
+import { sizeRating } from './pokemon/sizes.js'
 
 /**
  * Research tasks for a species that actually spawns on a wild route (or a raid
  * pool), so the wild-defeat ladder is reachable. `kind` picks the counter the
  * task reads (`defeat` = its wild-defeat count, `catch` / `shiny` = Pokedex).
- * @type {{ id: string, kind: 'catch' | 'defeat' | 'shiny', label: string, need: number, points: number }[]}
+ * @type {{ id: string, kind: 'catch' | 'defeat' | 'shiny' | 'large', label: string, need: number, points: number }[]}
  */
 export const RESEARCH_TASKS_WILD = [
   { id: 'catch', kind: 'catch', label: 'Catch 1', need: 1, points: 1 },
@@ -18,6 +19,7 @@ export const RESEARCH_TASKS_WILD = [
   { id: 'defeat10', kind: 'defeat', label: 'Defeat 10 in the wild', need: 10, points: 3 },
   { id: 'defeat25', kind: 'defeat', label: 'Defeat 25 in the wild', need: 25, points: 5 },
   { id: 'shiny', kind: 'shiny', label: 'Catch its shiny', need: 1, points: 5 },
+  { id: 'large', kind: 'large', label: 'Catch a large specimen', need: 1, points: 2 },
 ]
 
 /**
@@ -26,7 +28,7 @@ export const RESEARCH_TASKS_WILD = [
  * babies, ...). The wild-defeat ladder would be impossible, so it observes the
  * species instead (feed it a berry, use its moves), Legends: Arceus style. The
  * point total matches the wild set so research levels stay comparable.
- * @type {{ id: string, kind: 'catch' | 'fed' | 'moves' | 'shiny', label: string, need: number, points: number }[]}
+ * @type {{ id: string, kind: 'catch' | 'fed' | 'moves' | 'shiny' | 'large', label: string, need: number, points: number }[]}
  */
 export const RESEARCH_TASKS_NON_WILD = [
   { id: 'catch', kind: 'catch', label: 'Obtain 1', need: 1, points: 1 },
@@ -34,7 +36,18 @@ export const RESEARCH_TASKS_NON_WILD = [
   { id: 'moves10', kind: 'moves', label: 'Use 10 of its moves', need: 10, points: 3 },
   { id: 'moves25', kind: 'moves', label: 'Use 25 of its moves', need: 25, points: 5 },
   { id: 'shiny', kind: 'shiny', label: 'Catch its shiny', need: 1, points: 5 },
+  { id: 'large', kind: 'large', label: 'Obtain a large specimen', need: 1, points: 2 },
 ]
+
+/**
+ * Whether a Pokemon counts as a "large specimen" for the research task: an XL
+ * individual (top of the size bell, see pokemon/sizes.js).
+ * @param {{ size?: number } | null | undefined} pokemon
+ * @returns {boolean}
+ */
+export function isLargeSpecimen(pokemon) {
+  return sizeRating(pokemon?.size) === 'XL'
+}
 
 /** Total points a single species can yield (both task sets add up to this). */
 export const RESEARCH_MAX_POINTS = RESEARCH_TASKS_WILD.reduce((sum, task) => sum + task.points, 0)
@@ -90,7 +103,8 @@ export function speciesResearch(state, speciesKey) {
     shiny = (state.shinyCaught ?? []).includes(speciesKey),
     defeated = state.researchDefeated?.[speciesKey] ?? 0,
     fed = state.researchFed?.[speciesKey] ?? 0,
-    moves = state.researchMoves?.[speciesKey] ?? 0
+    moves = state.researchMoves?.[speciesKey] ?? 0,
+    large = state.researchLarge?.[speciesKey] ?? 0
   const tasks = researchTasksFor(speciesKey).map((task) => {
     const raw =
       task.kind === 'defeat'
@@ -107,7 +121,9 @@ export function speciesResearch(state, speciesKey) {
                 ? shiny
                   ? 1
                   : 0
-                : 0
+                : task.kind === 'large'
+                  ? large
+                  : 0
     return {
       id: task.id,
       label: task.label,
@@ -172,6 +188,21 @@ export function creditResearchFeed(state, speciesKey) {
   const researchFed = { ...(state.researchFed ?? {}) }
   researchFed[speciesKey] = (researchFed[speciesKey] ?? 0) + 1
   return applyResearchEarnings({ ...state, researchFed }, speciesKey)
+}
+
+/**
+ * Count a large specimen of `speciesKey` obtained, for the "large specimen"
+ * task. Applies to any species (wild or not), since a big catch/gift/hatch is
+ * equally notable.
+ * @param {GameState} state
+ * @param {string | undefined | null} speciesKey
+ * @returns {GameState}
+ */
+export function creditResearchLarge(state, speciesKey) {
+  if (!speciesKey || !pokemonSpecies[speciesKey]) return state
+  const researchLarge = { ...(state.researchLarge ?? {}) }
+  researchLarge[speciesKey] = (researchLarge[speciesKey] ?? 0) + 1
+  return applyResearchEarnings({ ...state, researchLarge }, speciesKey)
 }
 
 /**

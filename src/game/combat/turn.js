@@ -1059,6 +1059,23 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       })
       continue
     }
+    // Affection: a well-kept companion can read an incoming attack and dodge
+    // it outright. Only the player's Pokemon carries the chance, and a move
+    // that always hits is never dodged.
+    if (
+      !attack.isPlayer &&
+      !isSelfTargetedMove(moveDef) &&
+      moveDef.accuracy <= 100 &&
+      (attack.defender.dodgeChance ?? 0) > 0 &&
+      Math.random() < attack.defender.dodgeChance
+    ) {
+      events.push({
+        type: 'miss',
+        message: `${attack.defender.name} read the attack and dodged!`,
+        data: { target: attack.isPlayer ? 'enemy' : 'player' },
+      })
+      continue
+    }
     // Protect blocks anything aimed at the protected Pokemon this turn, but
     // Unseen Fist lets a contact move through it.
     if (
@@ -2317,7 +2334,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         Math.max(
           (moveDef.critStage ?? 0) +
             (abilityOf(attack.attacker) === 'superLuck' ? 1 : 0) +
-            (attack.attacker.focusEnergy ? 2 : 0),
+            (attack.attacker.focusEnergy ? 2 : 0) +
+            (attack.attacker.critBonus ?? 0),
           guaranteedCrit ? 3 : 0
         ),
         neverMiss,
@@ -2388,7 +2406,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           Math.max(
             (moveDef.critStage ?? 0) +
               (abilityOf(attack.attacker) === 'superLuck' ? 1 : 0) +
-              (attack.attacker.focusEnergy ? 2 : 0),
+              (attack.attacker.focusEnergy ? 2 : 0) +
+              (attack.attacker.critBonus ?? 0),
             guaranteedCrit ? 3 : 0
           ),
           !0,
@@ -3279,6 +3298,22 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       break
     }
     if (attack.attacker.currentHp <= 0) break
+  }
+  // Affection: a well-kept companion can shake off a status condition.
+  if (
+    !deterministic &&
+    (player.statusCureChance ?? 0) > 0 &&
+    player.status &&
+    player.currentHp > 0 &&
+    Math.random() < player.statusCureChance
+  ) {
+    player.status = null
+    player.statusTurns = 0
+    events.push({
+      type: 'status',
+      message: `${player.name} shook off its status condition!`,
+      data: { target: 'player' },
+    })
   }
   if (!skipEndOfTurn)
     applyEndOfTurn(player, enemy, events, effectiveWeather, activeTerrain, deterministic)

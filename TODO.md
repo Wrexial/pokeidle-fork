@@ -28,7 +28,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 ### Tier 3 — Small follow-ups on shipped systems
 
 See the numbered sections below: #24, #25, #56, #62, #65, #67, #69–#76,
-#79–#82. They are optional extras rather than missing features.
+#79, #81–#82. They are optional extras rather than missing features.
 
 ---
 
@@ -240,16 +240,6 @@ Still open (optional):
 - [ ] The canonical delayed turnaround (hand Kurt Apricorns, collect after a few
       wild wins) instead of the instant carve.
 - [ ] Grow Apricorns in the Berry Garden as well as finding them on routes.
-
-## 80. Companion affection perks (tough it out)
-
-The 1 HP "tough it out" save shipped (`src/game/companion.js`,
-`combat/turn.js`).
-
-Still open (optional extras if we want the full affection set):
-
-- [ ] Shake off a status condition, dodge a move, or a bumped crit rate (a
-      high-friendship non-companion already gets a smaller tough-it-out save).
 
 ## 81. Research Shop diversification
 

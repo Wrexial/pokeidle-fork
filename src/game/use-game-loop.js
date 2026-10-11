@@ -12,7 +12,7 @@ import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from '
 import { useGame } from './context.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './catching.js'
 import { abilityOf } from './abilities.js'
-import { companionExpMultiplier, companionToughOutChance, friendshipToughOutChance } from './companion.js'
+import { companionCritBonus, companionDodgeChance, companionExpMultiplier, companionStatusCureChance, companionToughOutChance, friendshipToughOutChance } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch, chooseTrainingSwitch } from './combat.js'
 import { isBattleReady } from './pokemon.js'
 import { genderForPokemon } from './breeding.js'
@@ -401,6 +401,10 @@ export function useGameLoop() {
             return
           }
           const playerVolatile = currentGameState.playerVolatile ?? createVolatileState(),
+            // The affection perks below apply only to the pinned companion.
+            companionPinned =
+              !!currentGameState.companion?.id &&
+              currentGameState.companion.id === currentGameState.playerPokemon?.id,
             playerBattlePokemon = {
               speciesKey: currentGameState.playerPokemon.speciesKey,
               name: currentGameState.playerPokemon.name,
@@ -450,12 +454,19 @@ export function useGameLoop() {
               heldItemUsed: playerVolatile.heldItemUsed ?? !1,
               // The affection save: the pinned companion uses its care, and
               // any other active Pokemon falls back to its own friendship.
-              toughOutChance:
-                currentGameState.companion?.id &&
-                currentGameState.companion.id === currentGameState.playerPokemon.id
-                  ? companionToughOutChance(currentGameState.companion)
-                  : friendshipToughOutChance(currentGameState.playerPokemon),
+              toughOutChance: companionPinned
+                ? companionToughOutChance(currentGameState.companion)
+                : friendshipToughOutChance(currentGameState.playerPokemon),
               toughOutUsed: playerVolatile.toughOutUsed ?? !1,
+              // The rest of the affection set: dodge a move, shake off a status,
+              // and a raised crit rate.
+              dodgeChance: companionPinned
+                ? companionDodgeChance(currentGameState.companion)
+                : 0,
+              statusCureChance: companionPinned
+                ? companionStatusCureChance(currentGameState.companion)
+                : 0,
+              critBonus: companionPinned ? companionCritBonus(currentGameState.companion) : 0,
               protectChain: playerVolatile.protectChain ?? 0,
               tauntTurns: playerVolatile.tauntTurns ?? 0,
               substituteHp: playerVolatile.substituteHp ?? 0,

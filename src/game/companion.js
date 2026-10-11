@@ -29,6 +29,28 @@ export const FRIENDSHIP_TOUGH_OUT_MIN = 220
 /** Best-case chance a high-friendship non-companion toughs out a knockout. */
 export const FRIENDSHIP_TOUGH_OUT_MAX_CHANCE = 0.15
 
+/** Best-case chance a well-kept companion dodges an incoming move, at full care. */
+export const COMPANION_DODGE_MAX_CHANCE = 0.15
+
+/** Best-case chance a well-kept companion shakes off a status condition. */
+export const COMPANION_STATUS_CURE_MAX_CHANCE = 0.3
+
+/**
+ * How well kept the companion is, from 0 (below the minimum care, or not
+ * pinned) to 1 (fully cared for). Drives every affection perk.
+ * @param {Companion} companion
+ * @returns {number}
+ */
+export function companionCareProgress(companion) {
+  if (!companion?.id) return 0
+  const average =
+    (companion.fullness + companion.happiness + companion.energy + companion.cleanliness) / 4
+  if (average < COMPANION_TOUGH_OUT_MIN_CARE) return 0
+  const progress =
+    (average - COMPANION_TOUGH_OUT_MIN_CARE) / (COMPANION_MAX_CARE - COMPANION_TOUGH_OUT_MIN_CARE)
+  return Math.min(1, Math.max(0, progress))
+}
+
 /** Money each feed costs. */
 export const COMPANION_FEED_COST = 500
 
@@ -157,13 +179,35 @@ export function companionExpMultiplier(companion) {
  * @returns {number}
  */
 export function companionToughOutChance(companion) {
-  if (!companion?.id) return 0
-  const average =
-    (companion.fullness + companion.happiness + companion.energy + companion.cleanliness) / 4
-  if (average < COMPANION_TOUGH_OUT_MIN_CARE) return 0
-  const progress =
-    (average - COMPANION_TOUGH_OUT_MIN_CARE) / (COMPANION_MAX_CARE - COMPANION_TOUGH_OUT_MIN_CARE)
-  return Math.min(1, Math.max(0, progress)) * COMPANION_TOUGH_OUT_MAX_CHANCE
+  return companionCareProgress(companion) * COMPANION_TOUGH_OUT_MAX_CHANCE
+}
+
+/**
+ * The chance the pinned companion reads an incoming move and dodges it.
+ * @param {Companion} companion
+ * @returns {number}
+ */
+export function companionDodgeChance(companion) {
+  return companionCareProgress(companion) * COMPANION_DODGE_MAX_CHANCE
+}
+
+/**
+ * The chance the pinned companion shakes off a status condition at the end of a
+ * turn.
+ * @param {Companion} companion
+ * @returns {number}
+ */
+export function companionStatusCureChance(companion) {
+  return companionCareProgress(companion) * COMPANION_STATUS_CURE_MAX_CHANCE
+}
+
+/**
+ * The extra critical-hit stage a content companion's attacks get.
+ * @param {Companion} companion
+ * @returns {number}
+ */
+export function companionCritBonus(companion) {
+  return isCompanionContent(companion) ? 1 : 0
 }
 
 /**

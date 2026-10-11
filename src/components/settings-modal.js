@@ -9,6 +9,7 @@ import { unlockAudio } from '../game/audio.js'
 import { useGame } from '../game/context.js'
 import { decodeShareCode, encodeShareCode, repairSave, serializeSave, suspendAutosave, writeImportedSave } from '../game/save.js'
 import { MonotypeSelect } from './monotype-select.js'
+import { NumberControl, SegmentedControl } from './ui-controls.js'
 import { OfflinePanel } from './offline-panel.js'
 import { PokeballIcon } from './pokeball-icon.js'
 import { SaveSlotsPanel } from './save-slots.js'
@@ -289,25 +290,19 @@ export function SettingsModal({ onClose }) {
                                   jsx('span', { children: label }),
                                   mode === 'level_threshold' &&
                                     state.globalCatchDefaults.mode === mode &&
-                                    jsx('input', {
-                                      type: 'number',
-                                      className: 'level-threshold-input',
+                                    jsx(NumberControl, {
                                       value: state.globalCatchDefaults.levelThreshold,
                                       min: 1,
                                       max: 100,
-                                      onChange: /** @param {React.ChangeEvent<HTMLInputElement>} event */ (
-                                        event
+                                      compact: true,
+                                      className: 'level-threshold-control',
+                                      'aria-label': 'Level threshold',
+                                      onChange: /** @param {number} levelThreshold */ (
+                                        levelThreshold
                                       ) =>
                                         dispatch({
                                           type: 'SET_DEFAULT_CATCH_RULE',
-                                          payload: {
-                                            rule: {
-                                              levelThreshold: Math.max(
-                                                1,
-                                                Math.min(100, Number(event.target.value) || 1)
-                                              ),
-                                            },
-                                          },
+                                          payload: { rule: { levelThreshold } },
                                         }),
                                     }),
                                   hint &&
@@ -373,18 +368,16 @@ export function SettingsModal({ onClose }) {
                             className: 'settings-speed-label',
                             children: 'Battle Speed',
                           }),
-                          SPEED_OPTIONS.map((option) =>
-                            jsx(
-                              'button',
-                              {
-                                className: `settings-speed-btn${state.speed === option ? ' active' : ''}`,
-                                onClick: () =>
-                                  dispatch({ type: 'SET_SPEED', payload: { speed: option } }),
-                                children: `${option}x`,
-                              },
-                              option
-                            )
-                          ),
+                          jsx(SegmentedControl, {
+                            options: SPEED_OPTIONS.map((option) => ({
+                              value: option,
+                              label: `${option}x`,
+                            })),
+                            value: state.speed,
+                            onChange: /** @param {number} speed */ (speed) =>
+                              dispatch({ type: 'SET_SPEED', payload: { speed } }),
+                            'aria-label': 'Battle speed',
+                          }),
                         ],
                       }),
                     ],

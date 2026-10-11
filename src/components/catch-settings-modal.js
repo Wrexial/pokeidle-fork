@@ -8,6 +8,7 @@ import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { getCatchRule } from '../game/progression.js'
+import { NumberControl } from './ui-controls.js'
 import { PokeballIcon } from './pokeball-icon.js'
 
 export const CatchSettingsModal = React.memo(
@@ -38,8 +39,7 @@ export const CatchSettingsModal = React.memo(
         [state, routeKey, encounters, dispatch]
       ),
       setLevelThreshold = React.useCallback(
-        /** @param {React.ChangeEvent<HTMLInputElement>} event */ (event) => {
-          const newLevelThreshold = Math.max(1, Math.min(100, Number(event.target.value) || 1))
+        /** @param {number} newLevelThreshold */ (newLevelThreshold) => {
           for (const encounter of encounters) {
             const rule = getCatchRule(state, routeKey, encounter.speciesKey)
             dispatch({
@@ -170,14 +170,14 @@ export const CatchSettingsModal = React.memo(
                       }),
                       encounter === 'level_threshold' &&
                         mode === 'level_threshold' &&
-                        jsx('input', {
-                          type: 'number',
-                          className: 'level-threshold-input',
+                        jsx(NumberControl, {
                           value: levelThreshold,
-                          onChange: setLevelThreshold,
                           min: 1,
                           max: 100,
-                          onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
+                          onChange: setLevelThreshold,
+                          compact: true,
+                          className: 'level-threshold-control',
+                          'aria-label': 'Level threshold',
                         }),
                       hint &&
                         mode === encounter &&

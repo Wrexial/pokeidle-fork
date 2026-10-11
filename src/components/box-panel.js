@@ -11,6 +11,7 @@ import { isFemalePokemon } from '../game/breeding.js'
 import { fuzzyNameMatch, normalizeSearchName, speciesMatchingSearch } from '../game/species-search.js'
 import { itemTooltip } from '../game/progression.js'
 import { ItemIcon } from './item-icon.js'
+import { SegmentedControl } from './ui-controls.js'
 
 /** @param {{ inspected: Inspected, setInspected: (value: Inspected) => void, setReleaseConfirm: (value: string | null) => void, dragSource?: 'party' | 'box' | null, boxDragOver?: boolean, boxDragFromIndex?: number | null, boxDropTargetIndex?: number | null, onBoxDragStart?: any, onBoxSlotDragOver?: any, onBoxDragOver?: any, onBoxDrop?: any, onBoxDragLeave?: any, onDrop?: any, onDragEnd?: any }} props */
 export function BoxPanel({
@@ -209,29 +210,20 @@ export function BoxPanel({
                   setPage(0)
                 },
               }),
-              jsx('button', {
-                className: `box-filter-btn${filterMode === 'all' ? ' active' : ''}`,
-                onClick: () => {
-                  setFilterMode('all')
+              jsx(SegmentedControl, {
+                options: [
+                  { value: 'all', label: 'All' },
+                  { value: 'shiny', label: 'Shiny' },
+                  { value: 'favourite', label: 'Fav' },
+                ],
+                value: filterMode,
+                onChange: /** @param {string} next */ (next) => {
+                  setFilterMode(next)
                   setPage(0)
                 },
-                children: 'All',
-              }),
-              jsx('button', {
-                className: `box-filter-btn${filterMode === 'shiny' ? ' active' : ''}`,
-                onClick: () => {
-                  setFilterMode('shiny')
-                  setPage(0)
-                },
-                children: 'Shiny',
-              }),
-              jsx('button', {
-                className: `box-filter-btn${filterMode === 'favourite' ? ' active' : ''}`,
-                onClick: () => {
-                  setFilterMode('favourite')
-                  setPage(0)
-                },
-                children: 'Fav',
+                compact: true,
+                className: 'box-filter-segmented',
+                'aria-label': 'Box filter',
               }),
               searchActive
                 ? jsx('span', {

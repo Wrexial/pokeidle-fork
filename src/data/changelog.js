@@ -75,6 +75,7 @@ export const CHANGELOG = [
       {
         heading: 'Interface',
         items: [
+          'The small input controls are consistent now: one shared segmented button (battle speed, shop Buy/Sell, Box filters) and one shared number control — a track-and-handle slider with −/+ steppers and arrow-key support — for the catch level threshold and the shop quantity (with its MAX shortcut). Active states use the same gold treatment across segments, toggles, sliders and the radio lists.',
           'Settings gained Auto-Heal (top the party up at the Pokemon Center whenever the map is idle and someone is hurt) and a Default Catch Rule (mode, level threshold and enabled balls) for routes you have not customised.',
           'The Box can bulk-release a search or filter: a “Release Found” button appears while searching and releases everything shown (favourites and shinies are always protected), alongside the existing one-tap Release Dupes.',
           'The Display section gained damage-number and shiny-sparkle toggles, the Box can sort by total IVs, the move buttons show their type effectiveness and flag an estimated KO, and a TEAM button in the Party header saves the party as a preset you can restore in one tap.',

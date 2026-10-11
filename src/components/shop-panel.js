@@ -8,6 +8,7 @@ import { useGame } from '../game/context.js'
 import { getItemInfo, getItemSellPrice, isActiveEffectItem } from '../game/progression.js'
 import { regionalStockForMart } from '../game/shop.js'
 import { BallShopRow } from './ball-shop-row.js'
+import { NumberControl, SegmentedControl } from './ui-controls.js'
 import { ItemShopRow } from './item-shop-row.js'
 import { SellShopRow } from './sell-shop-row.js'
 
@@ -74,33 +75,35 @@ export function ShopPanel({ shopDef }) {
             jsxs('div', {
               className: 'shop-controls',
               children: [
-                jsx('div', {
-                  className: 'shop-mode-toggle',
-                  children: /** @type {('buy' | 'sell')[]} */ (['buy', 'sell']).map((option) =>
-                    jsx(
-                      'button',
-                      {
-                        className: `shop-mode-btn${mode === option ? ' active' : ''}`,
-                        onClick: () => setMode(option),
-                        children: option === 'buy' ? 'BUY' : 'SELL',
-                      },
-                      option
-                    )
-                  ),
+                jsx(SegmentedControl, {
+                  options: [
+                    { value: 'buy', label: 'BUY' },
+                    { value: 'sell', label: 'SELL' },
+                  ],
+                  value: mode,
+                  onChange: /** @param {'buy' | 'sell'} next */ (next) => setMode(next),
+                  compact: true,
+                  'aria-label': 'Buy or sell',
                 }),
-                jsx('div', {
+                jsxs('div', {
                   className: 'shop-qty-selector',
-                  children: /** @type {(number | 'max')[]} */ ([1, 10, 100, 'max']).map((qtyOption) =>
-                    jsx(
-                      'button',
-                      {
-                        className: `shop-qty-btn${qtyMode === qtyOption ? ' active' : ''}`,
-                        onClick: () => setQtyMode(qtyOption),
-                        children: qtyOption === 'max' ? 'Max' : qtyOption,
-                      },
-                      String(qtyOption)
-                    )
-                  ),
+                  children: [
+                    jsx(NumberControl, {
+                      value: qtyMode === 'max' ? 1 : qtyMode,
+                      min: 1,
+                      max: 100,
+                      onChange: setQtyMode,
+                      disabled: qtyMode === 'max',
+                      compact: true,
+                      'aria-label': 'Quantity',
+                    }),
+                    jsx('button', {
+                      type: 'button',
+                      className: `ui-segmented-btn${qtyMode === 'max' ? ' active' : ''}`,
+                      onClick: () => setQtyMode('max'),
+                      children: 'MAX',
+                    }),
+                  ],
                 }),
               ],
             }),

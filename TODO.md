@@ -17,13 +17,13 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 1 — Worth the effort
 
-1. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
+_(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 2 — Big, defer
 
-5. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+1. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
    doc and real ops for modest player value today.
-6. **#43 Multi-battles (triple / rotation)** — M–L · ★★½.
+2. **#43 Multi-battles (triple / rotation)** — M–L · ★★½.
 
 ### Tier 3 — Small follow-ups on shipped systems
 
@@ -228,24 +228,6 @@ Still open (optional):
 
 - [ ] A Jubilife Village hub location and the noble / ride Pokemon as statics or
       Raid Island additions, and space-time distortions as a swarm event.
-
-## 77. UI consistency pass (sliders / steppers)
-
-A sweep over the small input controls so like looks like like.
-
-- [ ] **Slider-style controls.** There is currently **no shared slider visual** —
-      a search of `src/` and `assets/` finds no `<input type="range">` and no
-      `slider` class at all, so anything slider-ish (the catch-settings level
-      threshold number input, the shop quantity steppers, the battle speed
-      buttons, the Town Map zoom) is styled ad hoc. Consolidate them onto one
-      shared slider/stepper component (track + fill + handle) sized for the pixel
-      UI. *(If a specific control is what you meant by "sliders", name it and this
-      item starts from there.)*
-- [ ] Check the segmented selectors (battle speed, sprite style, sort fields) use
-      the same active / inactive treatment.
-- [ ] Check the settings toggles and the radio-style option lists match too.
-
-Effort: **small–medium**.
 
 ## 79. Johto Poké Ball crafting (Kurt)
 

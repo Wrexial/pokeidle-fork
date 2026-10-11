@@ -73,6 +73,7 @@ export const CHANGELOG = [
       {
         heading: 'Fixes',
         items: [
+          'AUTO field jobs no longer bank the same Pokemon over and over: a perfect activity hit now only biases toward a route’s rarer species instead of excluding the common ones, so a job (and a perfect manual hit) keeps rolling the whole type pool.',
           'A failed startup can no longer cost you your save: the self-heal copies every slot aside first and restores it on the next good load, and a transient failure just reloads instead of erasing anything.',
           'The battle menus stay open through the healing animation, the Pokedex detail panel gained a close (X) button, and clicking a still-unseen entry no longer fills the Box search with its name.',
           'The evolution button in a Pokemon’s detail panel is readable when greyed out now (dark text on a solid muted button).',

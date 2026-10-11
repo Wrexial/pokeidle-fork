@@ -32,6 +32,15 @@ export const ACTIVITY_PERFECT_ZONE = 0.14
 export const ACTIVITY_ULTRA_ZONE = 0.055
 
 /**
+ * Weight kept for the common half of a route's matching species on a perfect
+ * activity hit. A perfect hit should *bias* toward the rare half, not exclude
+ * the common one: a route with only two matching species would otherwise
+ * always give the same one, and an AUTO field job would bank that species
+ * forever.
+ */
+export const ACTIVITY_PERFECT_COMMON_WEIGHT = 0.2
+
+/**
  * Route activities. `mode` picks the outcome: `encounter` starts a normal wild
  * battle from the route's table, `loot` pays out items and money. `display`
  * picks the interaction, and every activity has its own so none of them look
@@ -748,14 +757,19 @@ export function rollActivityEncounter(activityId, routeKey, perfect, rodId = DEF
     // hook is not enough, the reel must be timed perfectly a second time.
     multiCutoff =
       sorted.length >= 3 ? sorted[Math.max(0, Math.floor((sorted.length - 1) / 3))].weight : -1,
-    candidates = (perfect || activity.deepWater)
-      ? sorted.slice(0, Math.max(1, Math.ceil(sorted.length / 2)))
-      : reachable,
+    rareHalf = Math.max(1, Math.ceil(sorted.length / 2)),
+    // Diving reaches only the deeper half; a perfect hit down-weights the
+    // common half but leaves it reachable, so the roll keeps its variety.
+    candidates = activity.deepWater ? sorted.slice(0, rareHalf) : reachable,
+    candidateWeight = (/** @type {EncounterEntry} */ entry) =>
+      perfect && !activity.deepWater && sorted.indexOf(entry) >= rareHalf
+        ? entry.weight * ACTIVITY_PERFECT_COMMON_WEIGHT
+        : entry.weight,
     levelBonus = rodGated ? rod.levelBonus : 0,
-    totalWeight = candidates.reduce((sum, entry) => sum + entry.weight, 0)
+    totalWeight = candidates.reduce((sum, entry) => sum + candidateWeight(entry), 0)
   let roll = Math.random() * totalWeight
   for (const entry of candidates) {
-    roll -= entry.weight
+    roll -= candidateWeight(entry)
     if (roll <= 0)
       return {
         speciesKey: entry.speciesKey,

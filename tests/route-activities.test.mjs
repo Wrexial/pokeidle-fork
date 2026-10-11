@@ -81,6 +81,34 @@ test('the rarest fish on a route are flagged multi-catch', () => {
   assert.ok(flags.has(false), 'common fish are hooked on the first perfect')
 })
 
+test('a perfect activity roll keeps the route common species reachable', () => {
+  const headbuttRoute = locations.find(
+      (location) =>
+        routeActivityIds(location).includes('headbutt') &&
+        (encounterData[location.routeKey]?.encounters ?? []).filter((entry) =>
+          pokemonSpecies[entry.speciesKey].types.some((type) =>
+            ['Normal', 'Flying'].includes(type)
+          )
+        ).length >= 2
+    ),
+    original = Math.random
+  assert.ok(headbuttRoute, 'a headbutt route with two matching species exists')
+  const species = new Set()
+  try {
+    for (let index = 0; index < 400; index++) {
+      Math.random = () => (index + 0.5) / 400
+      const encounter = rollActivityEncounter('headbutt', headbuttRoute.routeKey, true)
+      if (encounter) species.add(encounter.speciesKey)
+    }
+  } finally {
+    Math.random = original
+  }
+  assert.ok(
+    species.size >= 2,
+    'a perfect hit can still shake out either species instead of always the rarest'
+  )
+})
+
 test('route activities are offered by terrain', () => {
   assert.ok(waterRoute, 'some route supports fishing')
   assert.ok(forageRoute, 'some route supports foraging')

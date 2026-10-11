@@ -24,6 +24,7 @@ import { applyTeamPreset, boxToParty, catchPokemon, clearHatchResult, completeEv
 import { completeHealing, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
 import { addLog, clearLevelUp, dismissNotification, markCatchRoute, markTutorialSeen, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoHeal, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleDamageNumbers, toggleLargeText, toggleMartCollapsed, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx, toggleShinySparkles, toggleSpriteStyle } from './reducer/settings.js'
 import { buyPrestigePerk, phaseIdle, prestigeRegion, resetEliteFour, resetPrestigePerks, selectStarter, travel, unlockRegion } from './reducer/world.js'
+import { startFrontier } from './reducer/frontier.js'
 
 /** @type {GameState} */
 export const initialGameState = {
@@ -167,6 +168,12 @@ export const initialGameState = {
   towerFloor: 0,
   /** Best Tower floor cleared per region (only Hoenn is used). */
   towerBest: {},
+  /** Next Battle Frontier floor to attempt, keyed by facility id (Hoenn only). */
+  frontierFloor: {},
+  /** Best Battle Frontier floor cleared, keyed by facility id. */
+  frontierBest: {},
+  /** The real party, set aside while a Battle Factory rental is in play. */
+  frontierRental: null,
   victoryTokens: 0,
   autoProceed: !1,
   /** Whether key events raise a browser notification while the tab is hidden. */
@@ -387,6 +394,8 @@ export function gameReducer(state, action) {
       return markShinySeen(state, action)
     case 'START_HEALING':
       return startHealing(state, action)
+    case 'START_FRONTIER':
+      return startFrontier(state, action)
     case 'START_TOWER':
       return startTower(state, action)
     case 'HEALING_STEP':

@@ -7,6 +7,7 @@ import { createVolatileState } from '../../combat.js'
 import { fieldWeatherFor } from '../../weather.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { computeUnlockedLocations, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from '../../progression.js'
+import { frontierTokenReward } from '../../battle-frontier.js'
 import { awardRibbonToParty } from '../../pokemon.js'
 import { settleUnlockTokens, recordSeenPokemon, withNotification } from '../../reducer-helpers.js'
 import { gymTmType, rollUnownedTm } from '../../tms.js'
@@ -142,6 +143,45 @@ export function bossBattleEnd(state, action) {
         ].slice(-50),
       }
     return towerWon ? withPartyRibbon(towerState, 'tower') : towerState
+  }
+  // Battle Frontier facilities are the same deterministic floor puzzle with a
+  // rule variant. The end handler restores the real party after a Battle
+  // Factory rental and records the facility's floor record.
+  if (state.bossBattle?.bossType === 'frontier') {
+    const { won: frontierWon, moneyDelta: frontierMoneyDelta } = action.payload,
+      facilityId = state.bossBattle.facilityId ?? 'factory',
+      floor = state.frontierFloor?.[facilityId] ?? 1,
+      best = state.frontierBest?.[facilityId] ?? 0,
+      reward = frontierTokenReward(floor),
+      // Put the real party back after a rental battle before rebuilding the
+      // idle state (so `prepareNextBattle` sees the actual team).
+      restored = state.frontierRental ? { ...state, party: state.frontierRental.party } : state,
+      frontierState = {
+        ...prepareNextBattle(restored),
+        frontierRental: null,
+        money: Math.max(0, state.money + frontierMoneyDelta),
+        trainerBattlesWon: frontierWon
+          ? state.trainerBattlesWon + 1
+          : state.trainerBattlesWon,
+        victoryTokens: frontierWon ? state.victoryTokens + reward : state.victoryTokens,
+        frontierFloor: {
+          ...(state.frontierFloor ?? {}),
+          [facilityId]: frontierWon ? floor + 1 : Math.max(1, floor),
+        },
+        frontierBest: {
+          ...(state.frontierBest ?? {}),
+          [facilityId]: Math.max(best, frontierWon ? floor : floor - 1),
+        },
+        battleLog: [
+          ...state.battleLog,
+          frontierWon
+            ? `Battle Frontier floor ${floor} cleared!${
+                reward > 0 ? ` Earned ${reward} Victory Token${reward > 1 ? 's' : ''}.` : ''
+              }`
+            : `Battle Frontier floor ${floor} failed \u2014 your team can try again.`,
+        ].slice(-50),
+      }
+    return frontierState
   }
   const { won, moneyDelta } = action.payload,
     newMoney = Math.max(0, state.money + moneyDelta),

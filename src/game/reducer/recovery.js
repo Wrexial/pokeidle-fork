@@ -112,6 +112,10 @@ export function completeHealing(state, action) {
         trainerTeam: bossBattle.trainerTeam,
         currentTrainerPokemonIndex: 0,
         spriteKey: bossBattle.spriteKey,
+        region: bossBattle.region,
+        // Battle Frontier rule variants (see game/battle-frontier.js).
+        rule: bossBattle.rule,
+        facilityId: bossBattle.facilityId,
       },
       bossQueue: bossBattle.bossQueue ?? [],
       battleLog: [...state.battleLog, 'Your Pokemon were healed!'].slice(-50),

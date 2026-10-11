@@ -10,6 +10,7 @@ import { ROUTE_ACTIVITIES } from './minigames/route-activities.js'
 import { BREEDING_GOALS, MAX_BREEDING_PROJECTS } from './breeding-projects.js'
 import { RIVAL_MILESTONES } from './rival.js'
 import { PRESTIGE_PERKS } from './prestige.js'
+import { FRONTIER_FACILITIES } from './battle-frontier.js'
 import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility, rollSize, RIBBONS } from './pokemon.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
@@ -140,6 +141,15 @@ export function resolveBootSlot() {
  */
 export function repairSave(saved) {
   if (!saved.playerPokemon) return null
+  // A Battle Factory rental sets the real party aside while the battle runs. A
+  // save loaded mid-rental restores the real team and drops the marker (the
+  // battle can be restarted), so a rental can never overwrite the party.
+  if (
+    saved.frontierRental &&
+    Array.isArray(saved.frontierRental.party) &&
+    saved.frontierRental.party.length > 0
+  )
+    saved = { ...saved, party: saved.frontierRental.party, frontierRental: null }
   let nextId = saved.nextPokemonId || 1
   const playerPokemon = { ...saved.playerPokemon }
   if (playerPokemon.isShiny === void 0) playerPokemon.isShiny = false
@@ -729,6 +739,19 @@ export function repairSave(saved) {
       saveTowerRegion === BATTLE_TOWER_REGION
         ? saved.towerFloor
         : 0,
+    // Battle Frontier records: keep only known facilities and sane floors.
+    frontierIds = new Set(FRONTIER_FACILITIES.map((facility) => facility.id)),
+    sanitizeFrontierFloors = /** @param {any} raw */ (raw) =>
+      Object.fromEntries(
+        Object.entries(raw && typeof raw === 'object' ? raw : {})
+          .filter(
+            ([id, floor]) =>
+              frontierIds.has(id) && typeof floor === 'number' && floor > 0
+          )
+          .map(([id, floor]) => [id, Math.floor(/** @type {number} */ (floor))])
+      ),
+    repairedFrontierFloor = sanitizeFrontierFloors(saved.frontierFloor),
+    repairedFrontierBest = sanitizeFrontierFloors(saved.frontierBest),
     // Best minigame results (for `unlock.minigame` gates); keep only well-formed
     // entries so a corrupt save can't wedge the route graph.
     minigameRecords = Object.fromEntries(
@@ -867,6 +890,9 @@ export function repairSave(saved) {
     prestigePerks,
     towerFloor: repairedTowerFloor,
     towerBest: repairedTowerBest,
+    frontierFloor: repairedFrontierFloor,
+    frontierBest: repairedFrontierBest,
+    frontierRental: null,
     minigameRecords,
     routeMastery,
     masteredRoutes,
@@ -1043,6 +1069,9 @@ export const SAVED_STATE_KEYS = [
   'masteredRoutes',
   'towerFloor',
   'towerBest',
+  'frontierFloor',
+  'frontierBest',
+  'frontierRental',
   'victoryTokens',
   'challengeRandomizer',
   'challengeLevelScale',

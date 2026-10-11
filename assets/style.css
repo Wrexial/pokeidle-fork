@@ -9011,6 +9011,117 @@ img {
     opacity: .7
 }
 
+/* Battle Frontier (#66) location panel. */
+.location-frontier {
+    margin-top: 10px
+}
+
+.frontier-hint {
+    font-size: 8px;
+    color: var(--parchment);
+    opacity: .75;
+    line-height: 1.4;
+    margin-bottom: 8px
+}
+
+.frontier-facility-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.frontier-facility {
+    padding: 7px 8px;
+    background: #00000014;
+    border: 1px solid #00000033;
+    border-radius: 4px
+}
+
+.frontier-facility-head {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.frontier-facility-icon {
+    font-size: 15px;
+    line-height: 1
+}
+
+.frontier-facility-title {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0
+}
+
+.frontier-facility-name {
+    font-size: 9px;
+    font-weight: 700;
+    color: #3a2818
+}
+
+.frontier-facility-tagline {
+    font-size: 7px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: #6a4a20
+}
+
+.frontier-facility-best {
+    font-size: 8px;
+    color: #6a4a20
+}
+
+.frontier-facility-hint {
+    font-size: 8px;
+    color: #5a4838;
+    line-height: 1.4;
+    margin: 4px 0
+}
+
+.frontier-facility-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 5px
+}
+
+.frontier-preview-title {
+    font-size: 8px;
+    font-weight: 700;
+    color: #3a2818
+}
+
+.frontier-preview-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px
+}
+
+.frontier-preview-member {
+    font-size: 7px;
+    color: #3a2818;
+    background: #00000012;
+    border: 1px solid #00000033;
+    border-radius: 3px;
+    padding: 2px 4px
+}
+
+.frontier-preview-member.rental {
+    border-color: #4a8a5a;
+    color: #1f4a2a
+}
+
+.frontier-preview-level {
+    opacity: .7
+}
+
+.frontier-fight-btn {
+    width: 100%;
+    margin-top: 2px
+}
+
 .minigame-scene {
     position: relative;
     width: 560px;

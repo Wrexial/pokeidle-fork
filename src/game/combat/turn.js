@@ -590,7 +590,7 @@ function applyTrapAbility(source, target) {
  *   A doubles round resolves several single actions and runs it once itself.
  * @returns {any[]}
  */
-export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1, playerMoveChoice = null, enemySkipMove = !1, skipEndOfTurn = !1) {
+export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1, playerMoveChoice = null, enemySkipMove = !1, skipEndOfTurn = !1, inverseTypeChart = !1) {
   const events = /** @type {any[]} */ ([])
   // Switch requests are queued and appended after the end-of-turn residual, so
   // the residuals still apply to the outgoing Pokemon.
@@ -724,7 +724,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     const lockedMove = applyMoveLock(player, respectChoice(player, playerMoveChoice))
     ;((playerMoveId = resolveCalledMove(lockedMove, player, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))
   } else {
-    const bestMove = chooseMoveForBattle(player, enemy, activeHazards, playerAiSkill),
+    const bestMove = chooseMoveForBattle(player, enemy, activeHazards, playerAiSkill, inverseTypeChart),
       lockedMove = applyMoveLock(player, respectChoice(player, bestMove.moveId))
     ;((playerMoveId = resolveCalledMove(lockedMove, player, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))
   }
@@ -733,7 +733,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
   else if (enemy.chargingMove) ((enemyMoveId = enemy.chargingMove), (enemyMove = moveData[enemyMoveId]))
   else if (enemy.lockedMove) ((enemyMoveId = enemy.lockedMove), (enemyMove = moveData[enemyMoveId]))
   else {
-    const bestMove = chooseMoveForBattle(enemy, player, activeHazards, enemyAiSkill),
+    const bestMove = chooseMoveForBattle(enemy, player, activeHazards, enemyAiSkill, inverseTypeChart),
       lockedMove = applyMoveLock(enemy, respectChoice(enemy, bestMove.moveId))
     ;((enemyMoveId = resolveCalledMove(lockedMove, enemy, player, activeTerrain)), (enemyMove = moveData[enemyMoveId]))
   }
@@ -2326,7 +2326,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         deterministic,
         abilityOf(attack.attacker) === 'sniper' ? 2.25 : 2,
         ['battleArmor', 'shellArmor'].includes(abilityOf(attack.defender) ?? '') ||
-          (attack.defender.luckyChantTurns ?? 0) > 0
+          (attack.defender.luckyChantTurns ?? 0) > 0,
+        inverseTypeChart
       )
     if (damageResult.effectivenessLabel === 'miss') {
       if (
@@ -2396,7 +2397,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           deterministic,
           abilityOf(attack.attacker) === 'sniper' ? 2.25 : 2,
           ['battleArmor', 'shellArmor'].includes(abilityOf(attack.defender) ?? '') ||
-            (attack.defender.luckyChantTurns ?? 0) > 0
+            (attack.defender.luckyChantTurns ?? 0) > 0,
+          inverseTypeChart
         )
         totalDamage += hitResult.damage
         anyCrit = anyCrit || hitResult.isCrit

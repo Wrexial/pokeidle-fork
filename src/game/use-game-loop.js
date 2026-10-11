@@ -423,9 +423,13 @@ export function useGameLoop() {
               speed: currentGameState.playerPokemon.speed,
               moves: currentGameState.playerPokemon.moves,
               ability: currentGameState.playerPokemon.ability,
-              heldItem: playerVolatile.heldItemOverridden
-                ? playerVolatile.heldItemOverride
-                : currentGameState.playerPokemon.heldItem ?? null,
+              // The Battle Palace ignores held items for both sides.
+              heldItem:
+                currentGameState.bossBattle?.rule === 'noItems'
+                  ? null
+                  : playerVolatile.heldItemOverridden
+                    ? playerVolatile.heldItemOverride
+                    : currentGameState.playerPokemon.heldItem ?? null,
               isPlayer: !0,
               isShiny: currentGameState.playerPokemon.isShiny,
               statStages: {
@@ -538,14 +542,22 @@ export function useGameLoop() {
               types:
                 currentGameState.enemyPokemon.typesOverride ??
                 currentGameState.enemyPokemon.types,
-              heldItem: currentGameState.enemyPokemon.heldItemOverridden
-                ? currentGameState.enemyPokemon.heldItemOverride
-                : currentGameState.enemyPokemon.heldItem ?? null,
+              heldItem:
+                currentGameState.bossBattle?.rule === 'noItems'
+                  ? null
+                  : currentGameState.enemyPokemon.heldItemOverridden
+                    ? currentGameState.enemyPokemon.heldItemOverride
+                    : currentGameState.enemyPokemon.heldItem ?? null,
             },
+            // The Battle Arena flips the type chart for both sides.
+            inverseBattle = currentGameState.bossBattle?.rule === 'inverse',
             isTrainerBattle =
               (currentGameState.trainerBattle ??
                 currentGameState.bossBattle) !== null,
-            isTowerBattle = currentGameState.bossBattle?.bossType === 'tower',
+            // The Battle Tower and Battle Frontier are deterministic puzzles.
+            isTowerBattle = ['tower', 'frontier'].includes(
+              currentGameState.bossBattle?.bossType ?? ''
+            ),
             // AI skill scales with the fight: wilds and route trainers toss out
             // random moves, legendary wilds and gym leaders play the full
             // heuristic, and the Elite Four, Champion, Battle Tower and the
@@ -599,7 +611,8 @@ export function useGameLoop() {
                       playerBattlePokemon,
                       currentGameState.party,
                       enemyBattlePokemon,
-                      currentGameState.activePlayerPokemonIndex
+                      currentGameState.activePlayerPokemonIndex,
+                      inverseBattle
                     )
           if (playerSwitch >= 0) {
             dispatch({
@@ -673,7 +686,9 @@ export function useGameLoop() {
               playerSkill,
               playerSkipMove,
               currentGameState.pendingPlayerMove ?? null,
-              !!currentGameState.enemyTurnSpent
+              !!currentGameState.enemyTurnSpent,
+              !1,
+              inverseBattle
             )
           dispatch({
             type: 'EXECUTE_TURN',

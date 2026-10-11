@@ -17,10 +17,8 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 1 — Worth the effort
 
-1. **#66 Battle Frontier facilities** — M–L · ★★½ — rule-variant facilities on
-   the Tower / Maison scenes.
-2. **#61 Focus / target hunting** — S–M · ★★½.
-3. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
+1. **#61 Focus / target hunting** — S–M · ★★½.
+2. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
 
 ### Tier 2 — Big, defer
 
@@ -152,13 +150,6 @@ Still open (optional):
 
 - [ ] More perk ideas: egg hatch rate or a starting-level perk (the item-drop
       and shiny-odds ideas shipped as Scavenger and Radiant).
-
-## 66. Battle Frontier facilities
-
-Rule-variant facilities (inverse battles, rental teams, no-items) built on the
-Tower / Maison scenes.
-
-Effort: **medium–large**.
 
 ## 67. Ribbons + ribbon case
 

@@ -19,6 +19,7 @@ import { FieldJobsModal } from './field-jobs-modal.js'
 import { GiftPanel } from './gift-panel.js'
 import { FossilPanel } from './fossil-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
+import { BattleFrontierPanel } from './battle-frontier-panel.js'
 import { GymLocationPanel } from './gym-location-panel.js'
 import { RivalPanel } from './rival-panel.js'
 import { LegendaryQuestPanel } from './legendary-quest-panel.js'
@@ -855,6 +856,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
             ],
           }),
         location.id === BATTLE_TOWER_LOCATION && jsx(BattleTowerPanel, {}),
+        location.id === 'hoenn-battle-frontier' && jsx(BattleFrontierPanel, {}),
         location.id === 'cinnabarIsland' && jsx(FossilPanel, {}),
         jsx(GiftPanel, { locationId: location.id }),
         nextUnlocksSection,

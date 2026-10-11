@@ -14,12 +14,24 @@ export function getTypeEffectiveness(attackType, defenderTypes) {
 }
 
 /**
- * @param {string} attackType
- * @param {string[]} defenderTypes
+ * Inverse-battle effectiveness: the chart is flipped, so a resistance becomes a
+ * weakness (0.5 -> 2, 0.25 -> 4) and an immunity (0) becomes a 2x weakness.
+ * @param {number} effectiveness
  * @returns {number}
  */
-export function getTypeMultiplier(attackType, defenderTypes) {
-  return getTypeEffectiveness(attackType, defenderTypes)
+export function invertEffectiveness(effectiveness) {
+  return effectiveness === 0 ? 2 : 1 / effectiveness
+}
+
+/**
+ * @param {string} attackType
+ * @param {string[]} defenderTypes
+ * @param {boolean} [inverse] Inverse-battle type chart (the Battle Arena).
+ * @returns {number}
+ */
+export function getTypeMultiplier(attackType, defenderTypes, inverse = !1) {
+  const effectiveness = getTypeEffectiveness(attackType, defenderTypes)
+  return inverse ? invertEffectiveness(effectiveness) : effectiveness
 }
 
 /**
@@ -97,9 +109,10 @@ export function chance(probability, deterministic) {
  * @param {boolean} [deterministic] No misses, crits or damage variance.
  * @param {number} [critMultiplierBase] Damage multiplier on a crit (Sniper = 2.25).
  * @param {boolean} [critImmune] Battle Armor / Shell Armor block crits.
+ * @param {boolean} [inverse] Inverse-battle type chart (the Battle Arena).
  * @returns {{ damage: number, isCrit: boolean, effectiveness: number, effectivenessLabel: string | null }}
  */
-export function calculateDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0, critStage = 0, skipAccuracy = !1, accuracyStage = 0, evasionStage = 0, deterministic = !1, critMultiplierBase = 2, critImmune = !1) {
+export function calculateDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0, critStage = 0, skipAccuracy = !1, accuracyStage = 0, evasionStage = 0, deterministic = !1, critMultiplierBase = 2, critImmune = !1, inverse = !1) {
   if (move.power === 0)
     return {
       damage: 0,
@@ -129,7 +142,7 @@ export function calculateDamage(attackerLevel, attack, defense, move, attackerTy
     isCrit = !deterministic && !critImmune && Math.random() < critChance,
     critMultiplier = isCrit ? critMultiplierBase : 1,
     stabMultiplier = attackerTypes.includes(move.type) ? 1.5 : 1,
-    effectiveness = getTypeMultiplier(move.type, defenderTypes),
+    effectiveness = getTypeMultiplier(move.type, defenderTypes, inverse),
     randomFactor = deterministic ? 0.925 : (Math.floor(Math.random() * 16) + 85) / 100,
     damage = Math.max(1, Math.floor(baseDamage * critMultiplier * stabMultiplier * effectiveness * randomFactor))
   /** @type {string | null} */
@@ -158,14 +171,15 @@ export function calculateDamage(attackerLevel, attack, defense, move, attackerTy
  * @param {string[]} defenderTypes
  * @param {number} [attackerStage]
  * @param {number} [defenderStage]
+ * @param {boolean} [inverse] Inverse-battle type chart (the Battle Arena).
  * @returns {number}
  */
-export function estimateMoveDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0) {
+export function estimateMoveDamage(attackerLevel, attack, defense, move, attackerTypes, defenderTypes, attackerStage = 0, defenderStage = 0, inverse = !1) {
   if (move.power === 0) return 0
   const effectiveAttack = Math.floor(attack * statStageMultiplier(attackerStage)),
     effectiveDefense = Math.max(1, Math.floor(defense * statStageMultiplier(defenderStage))),
     baseDamage = Math.floor((Math.floor((2 * attackerLevel) / 5 + 2) * move.power * effectiveAttack) / effectiveDefense / 50 + 2),
     stabMultiplier = attackerTypes.includes(move.type) ? 1.5 : 1,
-    effectiveness = getTypeMultiplier(move.type, defenderTypes)
+    effectiveness = getTypeMultiplier(move.type, defenderTypes, inverse)
   return Math.floor(baseDamage * stabMultiplier * effectiveness * 0.925)
 }

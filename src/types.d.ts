@@ -691,6 +691,12 @@ type GameState = {
   towerFloor: number
   /** Best Battle Tower floor cleared, keyed by region (Hoenn only). */
   towerBest: Record<string, number>
+  /** Next Battle Frontier floor to attempt, keyed by facility id (see game/battle-frontier.js). */
+  frontierFloor: Record<string, number>
+  /** Best Battle Frontier floor cleared, keyed by facility id. */
+  frontierBest: Record<string, number>
+  /** The real party set aside during a Battle Factory rental, or null. */
+  frontierRental: { facilityId: string; party: Pokemon[] } | null
   victoryTokens: number
   battlesWonByLocation: Record<string, number>
   wildBattlesWon: number

@@ -40,6 +40,7 @@ export const CHANGELOG = [
         heading: 'Battles',
         items: [
           'A well-kept companion can tough out a would-be knockout at 1 HP (“X toughed it out so you wouldn’t feel sad!”). The chance scales with its care stats, and any other Pokemon with near-max friendship gets a smaller version of the same save while it is in battle. It can fire once per battle, like a Focus Sash.',
+          'Hoenn’s Battle Frontier opens beside the Battle Tower once the Hoenn Champion is beaten: three rule-variant facilities on the Tower’s deterministic floor-puzzle format. The Battle Factory rents you a fresh six-Pokemon team for the floor (your own party waits safely), the Battle Arena runs inverse battles where the type chart is flipped (resistances become weaknesses and immunities become 2× hits), and the Battle Palace ignores every held item for both sides. Every ten floors pay a Victory Token.',
         ],
       },
       {

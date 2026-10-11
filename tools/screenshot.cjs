@@ -1119,6 +1119,29 @@ async function main() {
     await cdp.screenshot(path.join(OUT, '29-region-goal.png'))
     console.log('Region goal card ok')
 
+    // Battle Frontier panel (#66): the three rule-variant facilities next to
+    // Hoenn's Battle Tower.
+    await cdp.eval(
+      `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+        JSON.stringify(
+          minigameSave('hoenn', 'hoenn-battle-frontier', 'hoenn-battle-frontier', [
+            'hoenn-littleroot-town',
+            'hoenn-route-101',
+            'hoenn-route-111',
+            'hoenn-battle-frontier',
+          ])
+        )
+      )}); 'ok'`
+    )
+    await cdp.send('Page.navigate', { url: APP_URL })
+    await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'frontier data')
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+    )
+    await cdp.waitFor(`!!document.querySelector('.location-frontier')`, 8000, 'battle frontier')
+    await cdp.screenshot(path.join(OUT, '35-battle-frontier.png'))
+    console.log('Battle Frontier panel ok')
+
     // Region-map overviews: seed each region fully open and capture its map, so
     // road/layout problems are easy to eyeball.
     const regionDefs = JSON.parse(

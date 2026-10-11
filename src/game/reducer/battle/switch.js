@@ -14,13 +14,14 @@ import { switchPlayerPokemon, trainerSendNextPokemon } from './trainer.js'
  * @returns {number}
  */
 function pickPlayerSwitchIndex(state) {
-  const foe = state.enemyPokemon
+  const foe = state.enemyPokemon,
+    inverse = state.bossBattle?.rule === 'inverse'
   let bestIndex = -1,
     bestScore = -Infinity
   ;(state.party ?? []).forEach((member, index) => {
     if (index === state.activePlayerPokemonIndex) return
     if (!member || member.isEgg || (member.currentHp ?? 0) <= 0) return
-    const score = matchupScore(member, foe)
+    const score = matchupScore(member, foe, inverse)
     if (score > bestScore) {
       bestScore = score
       bestIndex = index
@@ -35,7 +36,8 @@ function pickPlayerSwitchIndex(state) {
  * @returns {number}
  */
 function pickEnemySwitchIndex(state) {
-  const battle = state.bossBattle ?? state.trainerBattle
+  const battle = state.bossBattle ?? state.trainerBattle,
+    inverse = state.bossBattle?.rule === 'inverse'
   if (!battle) return -1
   const active = state.playerPokemon
   if (!active) return -1
@@ -44,7 +46,7 @@ function pickEnemySwitchIndex(state) {
   battle.trainerTeam.forEach((member, index) => {
     if (index === battle.currentTrainerPokemonIndex) return
     if (!member || (member.currentHp ?? 0) <= 0) return
-    const score = matchupScore(member, active)
+    const score = matchupScore(member, active, inverse)
     if (score > bestScore) {
       bestScore = score
       bestIndex = index

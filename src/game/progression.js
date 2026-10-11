@@ -7,6 +7,6 @@ export { awaySummary, computeOfflineReward, formatAwayDuration } from './progres
 export { tickPokerus, pokerusExpMultiplier, tickPartyEggs, getActivePartyIndex, syncActivePokemonIntoParty, loadActivePokemonFromParty, createIdleBattleState, prepareNextBattle, releaseFaintedParty, tickBattleCounters, partyNeedsHealing } from './progression/party.js'
 export { computeUnlockedLocations, getRegionUnlockTokens, regionProgressionGoal, entryRoutePath, minigameRequirementMet, frontierUnlocks, unlockBlockers } from './progression/unlocks.js'
 export { getCatchRule, checkShinyOdds, shinyOddsForCompletedGenerations, shinyOddsForSpecies, HONEY_CHAIN_THRESHOLD, SHINY_CHAIN_FIRST_TARGET, SHINY_CHAIN_TARGET_STEP, applyEncounterModifiers, advanceShinyTarget, resolveActiveModifiers, isHoneyActive, shinyChainMultiplier, pickRaidLegendary, raidProgressFor, raidLegendaryWeight, resolveRoamer, resolvePokemonEncounter, encountersForPhase, minLevelForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression/encounters.js'
-export { buildTrainerTeam, buildTowerTeam, buildTowerFloor } from './progression/teams.js'
+export { buildTrainerTeam, buildTowerTeam, buildTowerFloor, towerFloorLevel, isFinalEvolution, totalBaseStats } from './progression/teams.js'
 export { awardExperience } from './progression/exp.js'
 export { formatCooldown, createRoadPaths } from './progression/roads.js'

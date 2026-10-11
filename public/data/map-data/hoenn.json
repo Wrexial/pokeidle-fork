@@ -541,7 +541,8 @@
    "hoenn-mauville-city",
    "hoenn-route-113",
    "hoenn-route-112",
-   "hoenn-desert-underpass"
+   "hoenn-desert-underpass",
+   "hoenn-battle-frontier"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2050,5 +2051,35 @@
   },
   "biome": "volcanic",
   "background": "/backgrounds/grassland.webp"
+ },
+ "hoenn-battle-frontier": {
+  "id": "hoenn-battle-frontier",
+  "name": "Battle Frontier",
+  "type": "facility",
+  "region": "hoenn",
+  "description": "A grand complex beside the Battle Tower where trainers test themselves under strange rules.",
+  "routeKey": "hoenn-battle-frontier",
+  "connections": [
+   "hoenn-route-111"
+  ],
+  "unlock": {
+   "championDefeated": "hoenn",
+   "battlesAtLocation": [
+    {
+     "locationId": "hoenn-route-111",
+     "count": 20
+    }
+   ],
+   "requires": [
+    "hoenn-route-111"
+   ]
+  },
+  "unlockOrder": 300140,
+  "position": {
+   "x": 37,
+   "y": 31
+  },
+  "background": "/backgrounds/mountain.webp",
+  "biome": "mountain"
  }
 }

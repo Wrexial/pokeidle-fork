@@ -28,9 +28,10 @@ function observedNullifiedMoves(attacker, defender) {
  * @param {number} defenderSpDefense
  * @param {Record<string, number>} [attackerStages]
  * @param {Record<string, number>} [defenderStages]
+ * @param {boolean} [inverse] Inverse-battle type chart (the Battle Arena).
  * @returns {{ moveId: string, move: Move }}
  */
-export function chooseBestMove(moves, attackerLevel, attack, spAttack, attackerTypes, defenderTypes, defenderDefense, defenderSpDefense, attackerStages, defenderStages) {
+export function chooseBestMove(moves, attackerLevel, attack, spAttack, attackerTypes, defenderTypes, defenderDefense, defenderSpDefense, attackerStages, defenderStages, inverse = !1) {
   let bestMoveId = moves[0],
     bestDamage = -1
   for (const moveId of moves) {
@@ -42,7 +43,7 @@ export function chooseBestMove(moves, attackerLevel, attack, spAttack, attackerT
       defenseStatKey = moveDef.category === 'physical' ? 'defense' : 'spDefense',
       attackStage = attackerStages?.[attackStatKey] ?? 0,
       defenseStage = defenderStages?.[defenseStatKey] ?? 0
-    let damage = estimateMoveDamage(attackerLevel, effectiveAttack, effectiveDefense, moveDef, attackerTypes, defenderTypes, attackStage, defenseStage)
+    let damage = estimateMoveDamage(attackerLevel, effectiveAttack, effectiveDefense, moveDef, attackerTypes, defenderTypes, attackStage, defenseStage, inverse)
     if (moveDef.effect)
       switch (moveDef.effect.type) {
         case 'recoil':
@@ -88,9 +89,10 @@ export const AI_SKILL = { dumb: 'dumb', smart: 'smart', smartest: 'smartest' }
  * @param {BattlePokemon} defender
  * @param {{ player: any, enemy: any } | null} [hazards]
  * @param {string} [skill] One of {@link AI_SKILL}.
+ * @param {boolean} [inverse] Inverse-battle type chart (the Battle Arena).
  * @returns {{ moveId: string, move: Move }}
  */
-export function chooseMoveForBattle(attacker, defender, hazards, skill = AI_SKILL.smart) {
+export function chooseMoveForBattle(attacker, defender, hazards, skill = AI_SKILL.smart, inverse = !1) {
   if (skill === AI_SKILL.dumb) return chooseRandomMove(attacker.moves)
   const deterministic = skill === AI_SKILL.smartest,
     usableMoves = attacker.moves.filter((moveId) => moveData[moveId]),
@@ -160,7 +162,8 @@ export function chooseMoveForBattle(attacker, defender, hazards, skill = AI_SKIL
     defender.defense,
     defender.spDefense,
     attacker.statStages,
-    defender.statStages
+    defender.statStages,
+    inverse
   )
 }
 
@@ -178,14 +181,15 @@ const TRAINING_DANGER_HP = 1 / 3
  * matchup. Status moves count as 0.
  * @param {BattlePokemon} attacker
  * @param {BattlePokemon} defender
+ * @param {boolean} [inverse] Inverse-battle type chart (the Battle Arena).
  * @returns {number}
  */
-function bestOffence(attacker, defender) {
+function bestOffence(attacker, defender, inverse = !1) {
   let best = 0
   for (const moveId of attacker.moves ?? []) {
     const move = moveData[moveId]
     if (!move || move.power <= 0) continue
-    best = Math.max(best, move.power * getTypeMultiplier(move.type, defender.types))
+    best = Math.max(best, move.power * getTypeMultiplier(move.type, defender.types, inverse))
   }
   return best
 }
@@ -195,10 +199,11 @@ function bestOffence(attacker, defender) {
  * foe's best one into it. Negative means it is losing the type war.
  * @param {BattlePokemon} pokemon
  * @param {BattlePokemon} foe
+ * @param {boolean} [inverse] Inverse-battle type chart (the Battle Arena).
  * @returns {number}
  */
-export function matchupScore(pokemon, foe) {
-  return bestOffence(pokemon, foe) - bestOffence(foe, pokemon)
+export function matchupScore(pokemon, foe, inverse = !1) {
+  return bestOffence(pokemon, foe, inverse) - bestOffence(foe, pokemon, inverse)
 }
 
 /**
@@ -209,16 +214,17 @@ export function matchupScore(pokemon, foe) {
  * @param {BattlePokemon[]} party
  * @param {BattlePokemon} foe
  * @param {number} activeIndex
+ * @param {boolean} [inverse] Inverse-battle type chart (the Battle Arena).
  * @returns {number}
  */
-export function chooseBestSwitch(active, party, foe, activeIndex) {
-  const activeScore = matchupScore(active, foe)
+export function chooseBestSwitch(active, party, foe, activeIndex, inverse = !1) {
+  const activeScore = matchupScore(active, foe, inverse)
   if (activeScore >= 0) return -1
   let bestIndex = -1,
     bestScore = activeScore + SWITCH_MARGIN
   ;(party ?? []).forEach((member, index) => {
     if (index === activeIndex || !member || member.currentHp <= 0) return
-    const score = matchupScore(member, foe)
+    const score = matchupScore(member, foe, inverse)
     if (score > bestScore) {
       bestScore = score
       bestIndex = index

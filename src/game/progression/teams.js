@@ -49,6 +49,16 @@ const TOWER_MULTIPLIER_FLOOR = 15
 /** Floors at or past this one may field legendary Pokemon. */
 const TOWER_LEGENDARY_FLOOR = 40
 
+/**
+ * The level a Battle Tower / Battle Frontier floor's teams are built at, so a
+ * rental team lines up with the floor's opponents.
+ * @param {number} floor
+ * @returns {number}
+ */
+export function towerFloorLevel(floor) {
+  return Math.min(100, TOWER_BASE_LEVEL + floor * 3)
+}
+
 /** @param {Species} species */
 export function totalBaseStats(species) {
   return Object.values(species.baseStats).reduce((sum, value) => sum + value, 0)
@@ -107,7 +117,7 @@ export function isFinalEvolution(speciesKey) {
  * @returns {{ speciesKey: string, level: number, statMultiplier: number }[]}
  */
 export function buildTowerTeam(floor, rng = mulberry32(hashString(`tower-${floor}`))) {
-  const level = Math.min(100, TOWER_BASE_LEVEL + floor * 3),
+  const level = towerFloorLevel(floor),
     statMultiplier = 1 + Math.max(0, floor - TOWER_MULTIPLIER_FLOOR) * 0.05,
     includeLegendaries = floor >= TOWER_LEGENDARY_FLOOR
   /** @param {string} key @returns {boolean} */
@@ -145,11 +155,14 @@ export function buildTowerTeam(floor, rng = mulberry32(hashString(`tower-${floor
 
 /**
  * The built Battle Tower roster for a floor. Seeded from the floor number, so a
- * given floor is always the same puzzle for the player to plan against.
+ * given floor is always the same puzzle for the player to plan against. A
+ * `seedTag` lets the Battle Frontier facilities build their own distinct teams
+ * on the same difficulty curve.
  * @param {number} floor
+ * @param {string} [seedTag]
  * @returns {BattlePokemon[]}
  */
-export function buildTowerFloor(floor) {
-  const rng = mulberry32(hashString(`tower-${floor}`))
+export function buildTowerFloor(floor, seedTag = 'tower') {
+  const rng = mulberry32(hashString(`${seedTag}-${floor}`))
   return buildTrainerTeam(buildTowerTeam(floor, rng), rng)
 }

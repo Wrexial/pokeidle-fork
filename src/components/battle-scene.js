@@ -75,9 +75,10 @@ import { SpeedControls } from './speed-controls.js'
  * @param {any} moveDef
  * @param {any} playerPokemon
  * @param {any} enemyPokemon
+ * @param {boolean} [inverse] Inverse-battle type chart (the Battle Arena).
  * @returns {{ multiplier: number, ko: boolean } | null}
  */
-function movePreview(moveDef, playerPokemon, enemyPokemon) {
+function movePreview(moveDef, playerPokemon, enemyPokemon, inverse = !1) {
   if (!enemyPokemon || !moveDef || !(moveDef.power > 0)) return null
   const physical = moveDef.category === 'physical',
     attack = physical ? playerPokemon.attack : playerPokemon.spAttack,
@@ -92,9 +93,10 @@ function movePreview(moveDef, playerPokemon, enemyPokemon) {
       playerPokemon.types ?? [],
       enemyPokemon.types ?? [],
       attackStage,
-      defenseStage
+      defenseStage,
+      inverse
     ),
-    multiplier = getTypeMultiplier(moveDef.type, enemyPokemon.types ?? [])
+    multiplier = getTypeMultiplier(moveDef.type, enemyPokemon.types ?? [], inverse)
   return { multiplier, ko: estimate >= (enemyPokemon.currentHp ?? 0) }
 }
 
@@ -636,7 +638,14 @@ export function BattleScene({ onOpenMenu }) {
                 className: 'move-grid',
                 children: playerPokemon.moves.map((moveId) => {
                   const moveDef = moveData[moveId],
-                    preview = moveDef ? movePreview(moveDef, playerPokemon, enemyPokemon) : null
+                    preview = moveDef
+                      ? movePreview(
+                          moveDef,
+                          playerPokemon,
+                          enemyPokemon,
+                          state.bossBattle?.rule === 'inverse'
+                        )
+                      : null
                   return moveDef
                     ? jsxs(
                         'div',

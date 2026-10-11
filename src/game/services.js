@@ -62,6 +62,16 @@ if (BATTLE_TOWER_LOCATION && mapData[BATTLE_TOWER_LOCATION])
     hint: 'Climb the tower for Victory Tokens and a tower record.',
   })
 
+// The Battle Frontier hosts the rule-variant facilities (rental / inverse /
+// no-items) beside the Tower.
+if (mapData['hoenn-battle-frontier'])
+  addServicePoi('hoenn-battle-frontier', {
+    kind: 'battleFrontier',
+    icon: '\u{1f3c6}',
+    label: 'Battle Frontier',
+    hint: 'Test yourself under strange rules: rental teams, inverse battles and no held items.',
+  })
+
 // Every Raid Island is a den where a legendary can be challenged.
 for (const [locationId, location] of Object.entries(mapData))
   if (location.type === 'raid')

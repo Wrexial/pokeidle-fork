@@ -119,9 +119,10 @@ the faint-heals all shipped.
 
 Not done:
 
-- [ ] The doubles-only moves (After You, Ally Switch, Follow Me, Helping Hand,
-      Quick/Wide Guard, Rage Powder, …) — the main game is singles, and the
-      doubles minigame (#43) does not use them yet.
+- [ ] Quick Guard / Wide Guard only protect the user as generic `protect`
+      moves; they should shield the user's whole side in the doubles minigame
+      (#43). Every other doubles-only move (After You, Ally Switch, Follow Me,
+      Helping Hand, Rage Powder, …) already plays in the Battle Maison.
 - [ ] PP is stored but unused; decide whether to implement it or drop it.
 - [ ] Z-moves / G-Max moves are otherwise dead data — decide keep/drop.
 
@@ -137,11 +138,12 @@ the battle-only synthetic-species table, and most singles abilities
 (Synchronize, Magic Bounce, Rivalry, Quick Draw, Stakeout, Supreme Overlord,
 Choice locking) have shipped.
 
+Done: the ally ability set is complete in the doubles engine — Battery, Power
+Spot, Friend Guard, Healer, Telepathy, Aroma/Flower Veil, Costar, Commander,
+Hospitality, Symbiosis and Gulp Missile all act.
+
 Not done:
 
-- [ ] The remaining doubles abilities: Telepathy, Aroma/Flower Veil, Costar,
-      Commander, Hospitality, Symbiosis, Gulp Missile. (Battery, Power Spot,
-      Friend Guard and Healer work in the Battle Maison doubles engine.)
 - [ ] Illusion (deferred: its disguise is cosmetic plus an AI read, which an
       idle auto-battler barely shows).
 - [ ] Overworld-only abilities (no effect in an idle auto-battler): Illuminate,
@@ -149,7 +151,8 @@ Not done:
 - [ ] The remaining item nuances: more berries (the pinch berries beyond
       Sitrus/Lum) and Rocky Helmet (blocked on a bag sprite). Choice locking
       shipped.
-- [ ] Battle polish: move animations / damage numbers / hit feedback.
+- [ ] Battle polish: move animations / hit feedback (damage numbers already
+      float over the sprite and have a Settings toggle).
 
 *(Switching on a bad matchup is intentionally discarded: an auto-switching
 opponent is frustrating to play against.)*
@@ -182,14 +185,18 @@ face two foes, every battler picks a target, spread moves hit both, fainted
 Pokemon tag in from the bench, and the ally abilities (Battery, Power Spot,
 Friend Guard, Healer) work. It reuses the singles engine one action at a time.
 
+The doubles-only moves and ally abilities ship too (Follow Me, Rage Powder,
+Spotlight, Helping Hand, After You, Quash, Ally Switch, Instruct, Dancer, plus
+the ally ability set in #25).
+
 Still open:
 
 - [ ] Triple and rotation battles.
 - [ ] A 3-way / 4-way free-for-all variant (the Battle Royal is the closest
       thing today).
 - [ ] A doubles home in more regions (currently only Kalos's Battle Maison).
-- [ ] The doubles-only moves (Follow Me, Helping Hand, Quick/Wide Guard) and
-      the remaining ally abilities (#25) still do nothing.
+- [ ] Quick Guard / Wide Guard should protect the whole side, not just the user
+      (they are generic `protect` moves today).
 
 Relevant code: `src/game/minigames/doubles.js`,
 `src/components/doubles-scene.js`, `src/game/reducer/minigames.js`, and

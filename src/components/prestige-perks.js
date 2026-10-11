@@ -3,17 +3,37 @@
 
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
-import { PRESTIGE_PERKS, perkCost, perkRank } from '../game/prestige.js'
+import { PRESTIGE_PERKS, perkCost, perkRank, totalPrestigeInvested } from '../game/prestige.js'
 
 export function PrestigePerks() {
   const { state, dispatch } = useGame(),
-    points = state.prestigePoints ?? 0
+    points = state.prestigePoints ?? 0,
+    invested = totalPrestigeInvested(state)
   return jsxs('div', {
     className: 'prestige-perks',
     children: [
       jsxs('div', {
-        className: 'gym-section-title',
-        children: ['Prestige Perks', ` \u00b7 ${points} PP`],
+        className: 'prestige-header',
+        children: [
+          jsxs('div', {
+            className: 'gym-section-title',
+            children: ['Prestige Perks', ` \u00b7 ${points} PP`],
+          }),
+          invested > 0 &&
+            jsx('button', {
+              className: 'prestige-respec-btn',
+              title: `Refund all ${invested} spent Prestige Points and clear every perk`,
+              onClick: () => {
+                if (
+                  window.confirm(
+                    `Reset every prestige perk and refund ${invested} Prestige Point${invested === 1 ? '' : 's'}?`
+                  )
+                )
+                  dispatch({ type: 'RESET_PRESTIGE_PERKS' })
+              },
+              children: `Reset (refund ${invested} PP)`,
+            }),
+        ],
       }),
       jsx('p', {
         className: 'prestige-hint',

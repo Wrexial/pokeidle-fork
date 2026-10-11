@@ -16,6 +16,7 @@ import { tickPelago } from '../../pelago.js'
 import { creditResearchDefeat, creditResearchMove } from '../../research.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { gainFriendship, isBattleReady } from '../../pokemon.js'
+import { prestigeMultipliers } from '../../prestige.js'
 import { advanceShinyTarget, computeUnlockedLocations, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from '../../progression.js'
 import { advanceQuests } from '../../quests.js'
 import { rollSwarm, recordSeenPokemon, withNotification } from '../../reducer-helpers.js'
@@ -362,7 +363,8 @@ export function consumeEvent(state, action) {
     )
     const dropBonus =
         dailyDropMultiplier(state.dailyEvent) *
-        (partyAbilities.has('illuminate') ? 1.5 : 1),
+        (partyAbilities.has('illuminate') ? 1.5 : 1) *
+        prestigeMultipliers(state).drops,
       dropChance = /** @param {number} chance */ (chance) => Math.min(1, chance * dropBonus)
     // A very rare Master Ball find.
     if (Math.random() < dropChance(wildMasterBallChance)) {

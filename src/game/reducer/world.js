@@ -5,7 +5,7 @@ import { POKEMON_TYPES } from '../../data/moves.js'
 import { elite4Data, gymLeaderData, mapData, regions } from '../../data/gameData.js'
 import { emptyBattleHazards } from '../hazards.js'
 import { createPokemon, isBattleReady } from '../pokemon.js'
-import { PRESTIGE_PERKS, PRESTIGE_POINT_REWARD, perkCost } from '../prestige.js'
+import { PRESTIGE_PERKS, PRESTIGE_POINT_REWARD, perkCost, totalPrestigeInvested } from '../prestige.js'
 import {
   computeUnlockedLocations,
   entryRoutePath,
@@ -313,6 +313,35 @@ export function buyPrestigePerk(state, action) {
       tone: 'success',
       icon: '\u2605',
       dedupeKey: `prestigeperk:${perkId}:${rank + 1}`,
+    }
+  )
+}
+
+/**
+ * Handle the `RESET_PRESTIGE_PERKS` action: refund every spent Prestige Point
+ * and clear the perk tree, so a player can re-spec without losing progress.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function resetPrestigePerks(state, action) {
+  const refund = totalPrestigeInvested(state)
+  if (refund <= 0) return state
+  return withNotification(
+    {
+      ...state,
+      prestigePoints: (state.prestigePoints ?? 0) + refund,
+      prestigePerks: {},
+      battleLog: [
+        ...state.battleLog,
+        `Prestige perks reset \u2014 refunded ${refund} Prestige Point${refund === 1 ? '' : 's'}.`,
+      ].slice(-50),
+    },
+    {
+      message: `Prestige perks reset \u2014 refunded ${refund} PP.`,
+      tone: 'info',
+      icon: '\u21ba',
+      dedupeKey: 'prestige:respec',
     }
   )
 }

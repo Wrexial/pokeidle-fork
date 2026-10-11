@@ -6,8 +6,10 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const {
+  ALPHA_EXP_MULTIPLIER,
   ALPHA_SIZE,
   SIZE_RATINGS,
+  alphaExpMultiplier,
   isAlphaPokemon,
   rollSize,
   sizeRating,
@@ -51,6 +53,13 @@ test('the largest specimens are alphas', () => {
   assert.equal(isAlphaPokemon(null), false)
   assert.match(sizeTooltip({ size: 255 }), /alpha/i)
   assert.doesNotMatch(sizeTooltip({ size: 100 }), /alpha/i)
+})
+
+test('an alpha earns bonus EXP', () => {
+  assert.ok(ALPHA_EXP_MULTIPLIER > 1)
+  assert.equal(alphaExpMultiplier({ size: ALPHA_SIZE }), ALPHA_EXP_MULTIPLIER)
+  assert.equal(alphaExpMultiplier({ size: ALPHA_SIZE - 1 }), 1)
+  assert.equal(alphaExpMultiplier(null), 1)
 })
 
 test('a freshly created Pokemon rolls a size', () => {

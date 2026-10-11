@@ -80,6 +80,39 @@ test('releasing the last party Pokemon is refused', () => {
   )
 })
 
+test('RELEASE_FILTERED releases the listed boxed Pokemon and pays out', () => {
+  const first = createPokemon('pidgey', 20, 'a'),
+    second = createPokemon('rattata', 20, 'b'),
+    kept = createPokemon('caterpie', 20, 'c'),
+    base = { ...initialGameState, box: [first, second, kept], money: 0, inventory: {} },
+    released = gameReducer(base, {
+      type: 'RELEASE_FILTERED',
+      payload: { ids: [first.id, second.id] },
+    })
+  assert.deepEqual(
+    released.box.map((member) => member.id),
+    [kept.id],
+    'only the listed Pokemon go'
+  )
+  assert.ok(released.money > 0)
+  assert.ok(released.notifications.length >= 1)
+})
+
+test('RELEASE_FILTERED protects favourites and shinies', () => {
+  const favourite = { ...createPokemon('pidgey', 20, 'a'), favourite: true },
+    shiny = { ...createPokemon('rattata', 20, 'b'), isShiny: true },
+    plain = createPokemon('caterpie', 20, 'c'),
+    base = { ...initialGameState, box: [favourite, shiny, plain] },
+    released = gameReducer(base, {
+      type: 'RELEASE_FILTERED',
+      payload: { ids: [favourite.id, shiny.id, plain.id] },
+    })
+  assert.deepEqual(
+    released.box.map((member) => member.id),
+    [favourite.id, shiny.id]
+  )
+})
+
 test('quick-releasing a hatchling pays out', () => {
   const egg = createPokemon('pidgey', 1, 9),
     base = { ...initialGameState, box: [egg], hatchResult: egg, money: 0, inventory: {} },

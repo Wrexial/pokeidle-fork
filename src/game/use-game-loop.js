@@ -108,7 +108,8 @@ export function useGameLoop() {
         dailyPrizeBonus = dailyPrizeMultiplier(currentGameState.dailyEvent) * prestige.fortune,
         // Happy Hour doubles the prize money from this battle.
         happyHourBonus = currentGameState.playerVolatile?.happyHour ? 2 : 1,
-        dailyShinyBonus = dailyShinyMultiplier(currentGameState.dailyEvent)
+        // The Radiant perk raises wild shiny odds on top of any daily bonus.
+        dailyShinyBonus = dailyShinyMultiplier(currentGameState.dailyEvent) * prestige.shiny
       switch (currentGameState.phase) {
         case 'idle': {
           if (!currentGameState.playerPokemon) return

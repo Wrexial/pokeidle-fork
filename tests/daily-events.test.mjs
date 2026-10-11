@@ -86,7 +86,9 @@ test('CLAIM_DAILY_GIFT grants the gift once', () => {
 })
 
 test('the training event doubles awarded EXP', () => {
-  const player = createPokemon('bulbasaur', 50, 1),
+  // A fixed average size keeps the EXP maths deterministic (an alpha earns a
+  // +20% bonus, see alphaExpMultiplier).
+  const player = { ...createPokemon('bulbasaur', 50, 1), size: 100 },
     enemy = createPokemon('pidgey', 50, 2),
     base = calculateExpYield(pokemonSpecies.pidgey, 50),
     collect = /** @param {number} bonus */ (bonus) => {

@@ -7,7 +7,7 @@ export const PRESTIGE_POINT_REWARD = 2
 
 /**
  * The perks, and which global multiplier each feeds.
- * @type {{ id: string, name: string, description: string, effect: 'experience' | 'fortune' | 'capture', maxRank: number, baseCost: number, costStep: number }[]}
+ * @type {{ id: string, name: string, description: string, effect: 'experience' | 'fortune' | 'capture' | 'shiny' | 'drops', maxRank: number, baseCost: number, costStep: number }[]}
  */
 export const PRESTIGE_PERKS = [
   {
@@ -37,6 +37,24 @@ export const PRESTIGE_PERKS = [
     baseCost: 2,
     costStep: 1,
   },
+  {
+    id: 'radiant',
+    name: 'Radiant',
+    description: '+10% shiny odds per rank.',
+    effect: 'shiny',
+    maxRank: 5,
+    baseCost: 2,
+    costStep: 1,
+  },
+  {
+    id: 'scavenger',
+    name: 'Scavenger',
+    description: '+10% wild item drops per rank.',
+    effect: 'drops',
+    maxRank: 5,
+    baseCost: 1,
+    costStep: 1,
+  },
 ]
 
 /**
@@ -64,7 +82,7 @@ export function perkCost(perkId, currentRank) {
 /**
  * The global multipliers the owned perks grant. All 1 when no perks are owned.
  * @param {{ prestigePerks?: Record<string, number> }} state
- * @returns {{ experience: number, fortune: number, capture: number }}
+ * @returns {{ experience: number, fortune: number, capture: number, shiny: number, drops: number }}
  */
 export function prestigeMultipliers(state) {
   const rank = (/** @type {string} */ id) => state.prestigePerks?.[id] ?? 0
@@ -72,5 +90,35 @@ export function prestigeMultipliers(state) {
     experience: 1 + rank('experience') * 0.08,
     fortune: 1 + rank('fortune') * 0.1,
     capture: 1 + rank('capture') * 0.05,
+    shiny: 1 + rank('radiant') * 0.1,
+    drops: 1 + rank('scavenger') * 0.1,
   }
+}
+
+/**
+ * The Prestige Points sunk into a perk at a given rank (its purchase history).
+ * @param {string} perkId
+ * @param {number} rank
+ * @returns {number}
+ */
+export function perkInvested(perkId, rank) {
+  const perk = PRESTIGE_PERKS.find((entry) => entry.id === perkId)
+  if (!perk || rank <= 0) return 0
+  let total = 0
+  for (let index = 0; index < Math.min(rank, perk.maxRank); index += 1)
+    total += perk.baseCost + index * perk.costStep
+  return total
+}
+
+/**
+ * Every Prestige Point the player has spent across all perks, i.e. what a
+ * respec would refund.
+ * @param {{ prestigePerks?: Record<string, number> }} state
+ * @returns {number}
+ */
+export function totalPrestigeInvested(state) {
+  return PRESTIGE_PERKS.reduce(
+    (sum, perk) => sum + perkInvested(perk.id, perkRank(state, perk.id)),
+    0
+  )
 }

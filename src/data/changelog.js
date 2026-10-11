@@ -27,7 +27,7 @@ export const CHANGELOG = [
       {
         heading: 'Pokemon',
         items: [
-          'Every Pokemon has a size now, rolled per individual like its IVs and shown beside them as an XS–XL rating on the stats panel. The very largest specimens are alphas and are flagged ★ ALPHA; older saves get a size rolled in on load.',
+          'Every Pokemon has a size now, rolled per individual like its IVs and shown beside them as an XS–XL rating on the stats panel. The very largest specimens are alphas and are flagged ★ ALPHA; they earn 20% more EXP from every battle, are marked ★ in the Box, and older saves get a size rolled in on load.',
         ],
       },
       {
@@ -65,7 +65,7 @@ export const CHANGELOG = [
           'Route activities track mastery: the best hit quality for each activity on a route is remembered, the location panel shows how many are at a perfect hit or better, and clearing every activity on a route pays a one-time bonus and marks it mastered.',
           'Daily quests can ask for clean route-activity hits (a perfect or ultra hit), and the Field Jobs’ overnight work is itemised in the “while you were away” report (the cycles each ran and what they banked).',
           'The Day-Care tracks breeding: eggs and shinies hatched, eggs since the last shiny, and a project queue (a shiny, all-31 IVs or a specific nature) that completes the moment a matching Egg hatches.',
-          'Prestiging a region now earns Prestige Points for a permanent perk tree that survives every reset: Experience (+8% EXP per rank), Fortune (+10% prize money per rank) and Capture (+5% catch rate per rank), up to rank 5 each.',
+          'Prestiging a region now earns Prestige Points for a permanent perk tree that survives every reset: Experience (+8% EXP per rank), Fortune (+10% prize money per rank), Capture (+5% catch rate per rank), Radiant (+10% shiny odds) and Scavenger (+10% wild item drops), up to rank 5 each. A Reset button refunds every spent point so you can re-spec.',
           'Each region’s Raid Island tracks a Legendary Quest for its box legendary: earn every badge, beat the Champion and register 40% of its generation, then challenge it directly instead of leaving it to the weighted raid roll.',
         ],
       },
@@ -73,6 +73,7 @@ export const CHANGELOG = [
         heading: 'Interface',
         items: [
           'Settings gained Auto-Heal (top the party up at the Pokemon Center whenever the map is idle and someone is hurt) and a Default Catch Rule (mode, level threshold and enabled balls) for routes you have not customised.',
+          'The Box can bulk-release a search or filter: a “Release Found” button appears while searching and releases everything shown (favourites and shinies are always protected), alongside the existing one-tap Release Dupes.',
           'The Display section gained damage-number and shiny-sparkle toggles, the Box can sort by total IVs, the move buttons show their type effectiveness and flag an estimated KO, and a TEAM button in the Party header saves the party as a preset you can restore in one tap.',
         ],
       },

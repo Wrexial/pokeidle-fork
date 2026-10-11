@@ -224,8 +224,10 @@ test('Alola route 2 unlocks from an earlier route, not the locked route 3', () =
 })
 
 test('Exp. Share gives the active 50% and each other member 25%', () => {
-  const active = createPokemon('charmander', 50, 'a'),
-    ally = createPokemon('pidgey', 10, 'b'),
+  // A fixed average size keeps the EXP maths deterministic (an alpha earns a
+  // +20% bonus, see alphaExpMultiplier).
+  const active = { ...createPokemon('charmander', 50, 'a'), size: 100 },
+    ally = { ...createPokemon('pidgey', 10, 'b'), size: 100 },
     enemy = { speciesKey: 'rattata', level: 20 },
     expected = calculateExpYield(pokemonSpecies.rattata, 20)
   const withShare = []
@@ -266,6 +268,28 @@ test('Exp. Share gives the active 50% and each other member 25%', () => {
     !withoutShare.some((action) => action.type === 'APPLY_SHARED_EXP'),
     'no shared EXP without the item'
   )
+})
+
+test('an alpha earns the +20% EXP bonus from a battle', () => {
+  const enemy = { speciesKey: 'rattata', level: 20 },
+    base = calculateExpYield(pokemonSpecies.rattata, 20),
+    collect = /** @param {any} member */ (member) => {
+      const actions = []
+      awardExperience(
+        (action) => actions.push(action),
+        member,
+        enemy,
+        1,
+        false,
+        [member],
+        0
+      )
+      return actions.find((action) => action.type === 'APPLY_EXP').payload.expGained
+    },
+    normal = collect({ ...createPokemon('charmander', 50, 'a'), size: 100 }),
+    alpha = collect({ ...createPokemon('charmander', 50, 'b'), size: 255 })
+  assert.equal(normal, base)
+  assert.equal(alpha, Math.floor(base * 1.2))
 })
 
 test('a fainted participant earns no EXP and does not dilute the survivors', () => {

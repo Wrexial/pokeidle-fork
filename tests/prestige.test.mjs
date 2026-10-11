@@ -8,8 +8,10 @@ installGameData()
 const {
   PRESTIGE_POINT_REWARD,
   perkCost,
+  perkInvested,
   perkRank,
   prestigeMultipliers,
+  totalPrestigeInvested,
 } = await import('../src/game/prestige.js')
 const { calculateCatchChance } = await import('../src/game/catching.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -40,6 +42,21 @@ test('perkCost scales with rank and caps at the perk max', () => {
   assert.equal(perkCost('nonsense', 0), null)
   assert.equal(perkRank({ prestigePerks: { fortune: 3 } }, 'fortune'), 3)
   assert.equal(perkRank({}, 'fortune'), 0)
+  assert.equal(perkCost('radiant', 0), 2)
+  assert.equal(perkCost('scavenger', 0), 1)
+})
+
+test('perkInvested and totalPrestigeInvested sum the purchase history', () => {
+  assert.equal(perkInvested('experience', 0), 0)
+  // 1 + 2 + 3 = 6.
+  assert.equal(perkInvested('experience', 3), 6)
+  // Capture starts at 2: 2 + 3 = 5.
+  assert.equal(perkInvested('capture', 2), 5)
+  assert.equal(perkInvested('nonsense', 2), 0)
+  assert.equal(
+    totalPrestigeInvested({ prestigePerks: { experience: 3, capture: 2 } }),
+    11
+  )
 })
 
 test('prestigeMultipliers scale with the owned ranks', () => {
@@ -47,13 +64,17 @@ test('prestigeMultipliers scale with the owned ranks', () => {
     experience: 1,
     fortune: 1,
     capture: 1,
+    shiny: 1,
+    drops: 1,
   })
   const multipliers = prestigeMultipliers({
-    prestigePerks: { experience: 5, fortune: 2, capture: 4 },
+    prestigePerks: { experience: 5, fortune: 2, capture: 4, radiant: 3, scavenger: 5 },
   })
   assert.ok(Math.abs(multipliers.experience - 1.4) < 1e-9)
   assert.ok(Math.abs(multipliers.fortune - 1.2) < 1e-9)
   assert.ok(Math.abs(multipliers.capture - 1.2) < 1e-9)
+  assert.ok(Math.abs(multipliers.shiny - 1.3) < 1e-9)
+  assert.ok(Math.abs(multipliers.drops - 1.5) < 1e-9)
 })
 
 test('a region prestige awards Prestige Points', () => {
@@ -93,6 +114,23 @@ test('buying a perk spends points and raises its rank', () => {
     gameReducer(maxed, { type: 'BUY_PRESTIGE_PERK', payload: { perkId: 'experience' } }),
     maxed
   )
+})
+
+test('resetting prestige perks refunds exactly what was spent', () => {
+  const base = {
+      ...initialGameState,
+      phase: 'idle',
+      prestigePoints: 1,
+      prestigePerks: { experience: 3, scavenger: 2 },
+    },
+    invested = totalPrestigeInvested(base),
+    reset = gameReducer(base, { type: 'RESET_PRESTIGE_PERKS' })
+  assert.equal(invested, 9)
+  assert.deepEqual(reset.prestigePerks, {})
+  assert.equal(reset.prestigePoints, 10)
+  // Nothing invested: the action is a no-op and returns the same state.
+  const noop = { ...base, prestigePerks: {} }
+  assert.equal(gameReducer(noop, { type: 'RESET_PRESTIGE_PERKS' }), noop)
 })
 
 test('the Capture perk raises the catch chance', () => {

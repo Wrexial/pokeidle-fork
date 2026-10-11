@@ -2176,6 +2176,18 @@ img {
     height: 12px
 }
 
+.box-alpha-marker {
+    position: absolute;
+    left: -2px;
+    top: -3px;
+    font-size: 10px;
+    color: var(--gold);
+    text-shadow: 0 0 2px #000, 0 0 3px #000;
+    line-height: 1;
+    pointer-events: none;
+    z-index: 2
+}
+
 .party-info {
     flex: 1;
     min-width: 0
@@ -16334,6 +16346,29 @@ img {
     margin-top: 10px;
     padding-top: 10px;
     border-top: 1px solid #00000022
+}
+
+.prestige-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px
+}
+
+.prestige-respec-btn {
+    font-family: inherit;
+    font-size: 8px;
+    color: #6a4a20;
+    background: #00000010;
+    border: 1px solid #00000033;
+    border-radius: 3px;
+    padding: 3px 6px;
+    cursor: pointer
+}
+
+.prestige-respec-btn:hover {
+    background: #0000001e;
+    color: #3a2818
 }
 
 .prestige-perk-row {

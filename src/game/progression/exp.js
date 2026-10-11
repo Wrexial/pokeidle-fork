@@ -2,7 +2,7 @@
 
 import { pokemonSpecies } from '../../data/gameData.js'
 import { expShareActiveMultiplier, expSharePartyMultiplier } from '../../data/config.js'
-import { calculateExpYield, calculatePokemonStats, getLevelUpResults, isBattleReady } from '../pokemon.js'
+import { alphaExpMultiplier, calculateExpYield, calculatePokemonStats, getLevelUpResults, isBattleReady } from '../pokemon.js'
 
 /**
  * Build an `APPLY_SHARED_EXP` entry for a party member. The reducer logs the
@@ -13,15 +13,18 @@ import { calculateExpYield, calculatePokemonStats, getLevelUpResults, isBattleRe
  * @returns {{ partyIndex: number, pokemonId: string, expGained: number, newLevel?: number, newMoves?: string[], newStats?: { maxHp: number, attack: number, defense: number, spAttack: number, spDefense: number, speed: number } }}
  */
 function buildSharedExpEntry(partyIndex, member, expGained) {
-  const memberSpecies = pokemonSpecies[member.speciesKey],
-    memberTotalExp = member.totalExp + expGained,
+  // An alpha earns a little more EXP from the same battle.
+  const awardedExp = Math.floor(expGained * alphaExpMultiplier(member)),
+    memberSpecies = pokemonSpecies[member.speciesKey],
+    memberTotalExp = member.totalExp + awardedExp,
     memberLevelUps = getLevelUpResults(
       member.speciesKey,
       memberSpecies.growthRate,
       member.level,
       memberTotalExp
     )
-  if (memberLevelUps.length === 0) return { partyIndex, pokemonId: member.id, expGained }
+  if (memberLevelUps.length === 0)
+    return { partyIndex, pokemonId: member.id, expGained: awardedExp }
   const lastLevelUp = memberLevelUps[memberLevelUps.length - 1],
     memberStats = calculatePokemonStats(
       memberSpecies,
@@ -33,7 +36,7 @@ function buildSharedExpEntry(partyIndex, member, expGained) {
   return {
     partyIndex,
     pokemonId: member.id,
-    expGained,
+    expGained: awardedExp,
     newLevel: lastLevelUp.newLevel,
     newMoves: memberNewMoves,
     newStats: {
@@ -97,7 +100,11 @@ export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplie
     if (remainder > 0) remainder--
     participantExp.set(index, hasExpShare ? Math.floor(share * expShareActiveMultiplier) : share)
   }
-  const finalExp = activeCanEarnExp ? (participantExp.get(activeIndex) ?? gainedExp) : 0,
+  const finalExp = activeCanEarnExp
+      ? Math.floor(
+          (participantExp.get(activeIndex) ?? gainedExp) * alphaExpMultiplier(playerPokemon)
+        )
+      : 0,
     playerSpecies = pokemonSpecies[playerPokemon.speciesKey],
     newTotalExp = playerPokemon.totalExp + finalExp,
     levelUps = getLevelUpResults(playerPokemon.speciesKey, playerSpecies.growthRate, playerPokemon.level, newTotalExp)

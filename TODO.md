@@ -152,9 +152,8 @@ A persistent perk tree bought with Prestige Points (2 per region prestige) is in
 
 Still open (optional):
 
-- [ ] More perk ideas: egg hatch rate, item drop rate, a starting-level or
-      shiny-odds perk.
-- [ ] Respec / refund points.
+- [ ] More perk ideas: egg hatch rate or a starting-level perk (the item-drop
+      and shiny-odds ideas shipped as Scavenger and Radiant).
 
 ## 66. Battle Frontier facilities
 
@@ -208,16 +207,6 @@ Still open (optional):
       current shiny-parent boost.
 - [ ] A per-project hatch counter (eggs spent toward each project).
 
-## 72. QoL pass
-
-Box IV sort, the move effectiveness / KO preview, team presets and JSON save
-export/import all shipped.
-
-Still open:
-
-- [ ] Box bulk-release (multi-select or a filtered "release all"); the Box
-      already has one-tap "Release Duplicates".
-
 ## 73. Weather system on routes
 
 A 15-minute world weather cycle feeds `fieldWeatherFor` and the activity
@@ -236,8 +225,7 @@ for the very largest) on the stats panel (`src/game/pokemon/sizes.js`).
 
 Still open:
 
-- [ ] Bake the size into an **alpha** stat/EXP bonus (and a Box marker).
-- [ ] Tie it into **Field research**: "catch a large specimen" / "catch an XL
+- [ ] Tie size into **Field research**: "catch a large specimen" / "catch an XL
       specimen" tasks. Size is per-individual, so the research counter has to
       watch caught individuals, not just species.
 - [ ] Add `height` to the species data (a PokeAPI pass like `fetch-weights.cjs`)

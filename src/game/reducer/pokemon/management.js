@@ -14,6 +14,55 @@ import { withNotification } from '../../reducer-helpers.js'
  * @param {GameAction} action
  * @returns {GameState}
  */
+/**
+ * Release a batch of boxed Pokemon, paying the usual release reward and
+ * announcing the batch. Shared by `RELEASE_DUPLICATES` and `RELEASE_FILTERED`.
+ * @param {GameState} state
+ * @param {any[]} toRelease
+ * @param {string} noun What the batch is made of ("duplicate" / "selected").
+ * @returns {GameState}
+ */
+function releaseBoxBatch(state, toRelease, noun) {
+  if (toRelease.length === 0) return state
+  const releaseIds = new Set(toRelease.map((member) => member.id))
+  let money = state.money
+  const inventory = { ...state.inventory },
+    rewardItems = /** @type {Record<string, number>} */ ({})
+  for (const member of toRelease) {
+    const reward = releaseReward(member)
+    money += reward.money
+    for (const [itemId, quantity] of Object.entries(reward.items)) {
+      inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+      rewardItems[itemId] = (rewardItems[itemId] ?? 0) + quantity
+    }
+  }
+  const rewardText = formatReward({ money: money - state.money, items: rewardItems })
+  return withNotification(
+    {
+      ...state,
+      box: state.box.filter((member) => !releaseIds.has(member.id)),
+      money,
+      inventory,
+      battleLog: [
+        ...state.battleLog,
+        `Released ${toRelease.length} ${noun} Pokemon and received ${rewardText}.`,
+      ].slice(-50),
+    },
+    {
+      message: `Released ${toRelease.length} ${noun} Pokemon: +${rewardText}`,
+      tone: 'info',
+      icon: '🎁',
+      dedupeKey: `release:${noun}:${Date.now()}`,
+    }
+  )
+}
+
+/**
+ * Handle the `RELEASE_DUPLICATES` action.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
 export function releaseDuplicates(state, action) {
   /** A favourite or shiny is never auto-released. */
   const protectedMember = /** @param {any} member */ (member) =>
@@ -42,38 +91,23 @@ export function releaseDuplicates(state, action) {
       toRelease.push(...sorted.slice(1))
     }
   }
-  if (toRelease.length === 0) return state
-  const releaseIds = new Set(toRelease.map((member) => member.id))
-  let money = state.money
-  const inventory = { ...state.inventory },
-    rewardItems = /** @type {Record<string, number>} */ ({})
-  for (const member of toRelease) {
-    const reward = releaseReward(member)
-    money += reward.money
-    for (const [itemId, quantity] of Object.entries(reward.items)) {
-      inventory[itemId] = (inventory[itemId] ?? 0) + quantity
-      rewardItems[itemId] = (rewardItems[itemId] ?? 0) + quantity
-    }
-  }
-  const rewardText = formatReward({ money: money - state.money, items: rewardItems })
-  return withNotification(
-    {
-      ...state,
-      box: state.box.filter((member) => !releaseIds.has(member.id)),
-      money,
-      inventory,
-      battleLog: [
-        ...state.battleLog,
-        `Released ${toRelease.length} duplicate Pokemon and received ${rewardText}.`,
-      ].slice(-50),
-    },
-    {
-      message: `Released ${toRelease.length} duplicate${toRelease.length === 1 ? '' : 's'}: +${rewardText}`,
-      tone: 'info',
-      icon: '🎁',
-      dedupeKey: `duplicates:${Date.now()}`,
-    }
+  return releaseBoxBatch(state, toRelease, 'duplicate')
+}
+
+/**
+ * Handle the `RELEASE_FILTERED` action: release every listed boxed Pokemon
+ * except favourites and shinies. The Box's search/filter computes the ids.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function releaseFiltered(state, action) {
+  const ids = Array.isArray(action.payload?.ids) ? action.payload.ids : [],
+    idSet = new Set(ids)
+  const toRelease = state.box.filter(
+    (member) => idSet.has(member.id) && !member.favourite && !member.isShiny
   )
+  return releaseBoxBatch(state, toRelease, 'selected')
 }
 
 /**

@@ -6,7 +6,7 @@ import { BOX_PAGE_SIZE, BOX_SORT_DIRECTIONS, BOX_SORT_FIELDS } from '../data/ui.
 import { baseSpeciesKey, isSpeciesRegistered, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { useUi } from '../game/ui-context.js'
-import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, nextBoxSortField, parseBoxSort, pokemonDisplayName, toggleBoxSortDirection } from '../game/pokemon.js'
+import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, isAlphaPokemon, nextBoxSortField, parseBoxSort, pokemonDisplayName, toggleBoxSortDirection } from '../game/pokemon.js'
 import { isFemalePokemon } from '../game/breeding.js'
 import { fuzzyNameMatch, normalizeSearchName, speciesMatchingSearch } from '../game/species-search.js'
 import { itemTooltip } from '../game/progression.js'
@@ -35,6 +35,7 @@ export function BoxPanel({
     [query, setQuery] = React.useState(''),
     [filterMode, setFilterMode] = React.useState('all'),
     [confirmDupes, setConfirmDupes] = React.useState(!1),
+    [confirmFiltered, setConfirmFiltered] = React.useState(!1),
     [searchOpen, setSearchOpen] = React.useState(!1),
     dexSeenSet = React.useMemo(
       () => new Set([...state.pokedexSeen, ...state.pokedexCaught]),
@@ -121,6 +122,13 @@ export function BoxPanel({
                     onClick: () => setConfirmDupes(!0),
                     children: 'Release Dupes',
                   }),
+                  searchActive &&
+                    visibleBox.length > 0 &&
+                    jsx('button', {
+                      className: 'box-pokedex-btn box-release-filtered-btn',
+                      onClick: () => setConfirmFiltered(!0),
+                      children: `Release Found (${visibleBox.length})`,
+                    }),
                   jsx('button', {
                     className: `box-pokedex-btn${searchActive ? ' active' : ''}`,
                     onClick: () => {
@@ -261,6 +269,36 @@ export function BoxPanel({
                 }),
               ],
             }),
+          confirmFiltered &&
+            jsxs('div', {
+              className: 'release-confirm',
+              children: [
+                jsx('span', {
+                  children: `Release all ${visibleBox.length} Pokemon currently shown? Favourites and shinies are protected.`,
+                }),
+                jsxs('div', {
+                  className: 'release-confirm-buttons',
+                  children: [
+                    jsx('button', {
+                      className: 'release-confirm-yes',
+                      onClick: () => {
+                        dispatch({
+                          type: 'RELEASE_FILTERED',
+                          payload: { ids: visibleBox.map((member) => member.id) },
+                        })
+                        setConfirmFiltered(!1)
+                      },
+                      children: 'Release',
+                    }),
+                    jsx('button', {
+                      className: 'release-confirm-no',
+                      onClick: () => setConfirmFiltered(!1),
+                      children: 'Cancel',
+                    }),
+                  ],
+                }),
+              ],
+            }),
           jsx('div', {
             className: 'box-grid-wrapper',
             children: jsx('div', {
@@ -331,6 +369,13 @@ export function BoxPanel({
                                   itemId: pokemon.heldItem,
                                   size: 12,
                                 }),
+                              }),
+                            !pokemon.isEgg &&
+                              isAlphaPokemon(pokemon) &&
+                              jsx('span', {
+                                className: 'box-alpha-marker',
+                                'data-tooltip': 'Alpha \u2014 a huge specimen (boosts EXP)',
+                                children: '\u2605',
                               }),
                           ],
                         }),

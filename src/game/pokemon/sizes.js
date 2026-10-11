@@ -21,6 +21,9 @@ export const SIZE_RATING_HINTS = {
 /** A specimen at or above this raw size is an alpha. */
 export const ALPHA_SIZE = 240
 
+/** The extra EXP an alpha earns from every battle (a rare-specimen reward). */
+export const ALPHA_EXP_MULTIPLIER = 1.2
+
 /**
  * Roll a size for a Pokemon: a bell-ish value 0-255 clustering around the
  * middle, so the extremes (and alphas) are rare.
@@ -58,6 +61,16 @@ export function isAlphaPokemon(pokemon) {
 }
 
 /**
+ * The EXP multiplier an individual earns: an alpha gains more from the same
+ * battle, so the rare specimen is worth the effort.
+ * @param {{ size?: number } | null | undefined} pokemon
+ * @returns {number}
+ */
+export function alphaExpMultiplier(pokemon) {
+  return isAlphaPokemon(pokemon) ? ALPHA_EXP_MULTIPLIER : 1
+}
+
+/**
  * The tooltip for a Pokemon's size chip, e.g. "L (180/255) — larger than
  * average." Adds an alpha callout when it applies.
  * @param {{ size?: number } | null | undefined} pokemon
@@ -68,5 +81,7 @@ export function sizeTooltip(pokemon) {
     hint = SIZE_RATING_HINTS[rating] ?? '',
     size = Number(pokemon?.size)
   const base = Number.isFinite(size) ? `${rating} (${size}/255) — ${hint}` : `${rating} — ${hint}`
-  return isAlphaPokemon(pokemon) ? `${base} An alpha!` : base
+  return isAlphaPokemon(pokemon)
+    ? `${base} An alpha! (+${Math.round((ALPHA_EXP_MULTIPLIER - 1) * 100)}% EXP)`
+    : base
 }

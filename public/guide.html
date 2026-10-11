@@ -202,6 +202,7 @@
           <li><a href="#events">Swarms &amp; roamers</a></li>
           <li><a href="#records">Records &amp; achievements</a></li>
           <li><a href="#dex">Pokédex &amp; Shiny Charm</a></li>
+          <li><a href="#research">Field research</a></li>
           <li><a href="#index">Encounter index</a></li>
           <li><a href="#reference">Battle reference</a></li>
           <li><a href="#saves">Saves</a></li>
@@ -293,6 +294,8 @@
           <li>Moves are learned by levelling; open a Pokémon's stats and use the Manage Moves panel to re-learn its family's moves for free, or slot in one of its <strong>TMs</strong> once you have found that TM. If a level-up move arrives while the four slots are full, the oldest level-up move makes room — a TM you taught is never the one forgotten.</li>
           <li>Use the speed controls to fast-forward, and the catch selector to batch-apply Repel/Honey.</li>
           <li><strong>Mega Evolution</strong>: a Mega-capable Pokémon holding the <strong>Mega Stone</strong> transforms for the rest of the battle (attackers take the X forme, others the Y forme), then reverts afterwards.</li>
+          <li><strong>Z-Moves</strong>: a Pokémon holding a matching <strong>Z-Crystal</strong> can turn a move of that type into its Z-Move once per battle, and a Pokémon that has eaten a <strong>Max Mushroom</strong> Gigantamaxes — its damaging moves become Max Moves (or its own G-Max move) and its status moves become Max Guard.</li>
+          <li><strong>Switching</strong> is a real mid-battle action (it spends your turn, so the foe still attacks): U-turn, Volt Switch, Flip Turn and friends pivot out, Roar / Whirlwind / Dragon Tail drag the foe out, and trapping abilities stop a switch — a trapped Pokémon's SWITCH button greys out. A wild battle also offers a <strong>RUN</strong> button.</li>
           <li><strong>Auto-battle smarts</strong>: your team always takes its best action and may switch to a teammate when the matchup turns bad. Foes scale with the fight — wild Pokémon and route trainers attack at random, legendary wilds and gym leaders play the full move-picking game, and the Elite Four and Champion play at their best (and the Champion switches too).</li>
           <li>The <a href="/reference.html">Battle Reference</a> lists every move and ability and what the engine does with it.</li>
         </ul>
@@ -317,6 +320,14 @@
           Leaders field much stronger rematch teams once you have every badge in their
           region, and the league does the same once the Champion is beaten. The Elite Four
           and Champion are fought as one run, with your team healed before it starts.
+        </p>
+        <p>
+          At Kanto's <strong>Indigo Plateau</strong> you can also enter the
+          <strong>Champions' Gauntlet</strong>: a post-game bracket of eight named
+          trainers drawn from every region (five gym leaders, then two Elite Four, then a
+          Champion), each fielding their Lv. 80+ rematch team. You fight them one at a
+          time, your surviving team fully healed between rounds; the run ends when the
+          whole team is down, and a full clear pays a <strong>Master Ball</strong>.
         </p>
       </section>
 
@@ -401,6 +412,8 @@
           Each one takes over the main screen and pauses the idle loop while it runs.
         </p>
         <p>
+          Every minigame (and every route activity) opens a short <strong>HOW TO
+          PLAY</strong> card the first time you start it, and again from the card's button.
           Minigames cheer a good result and buzz a miss (with the Sound Effects setting
           on). Recent polish: Puzzle League tiles are Pokémon faces that slide, pop and
           drop as you play; Poké Radar's grass patches show the route's Pokémon; the Bug
@@ -409,15 +422,48 @@
           instructions before the first event.
         </p>
         <h3>Route activities</h3>
+        <p>
+          Where a route's terrain and wild table fit, its location panel offers
+          <strong>activities</strong> — short, repeatable minigames that find Pokémon (or
+          loot) alongside ordinary encounters. A route can host several, and each one
+          plays completely differently:
+        </p>
         <ul>
-          <li><strong>Fishing</strong> on water routes — time the cast bar to hook a Water Pokémon; a perfect cast boosts the shiny odds and level of what you hook. Better rods unlock as you open regions: Old → Good → Super.</li>
-          <li><strong>Foraging</strong> in forests and gardens — time the ring for berries and supplies, and a good search can flush out a Grass Pokémon.</li>
-          <li><strong>Rock Smash</strong> on cave routes, <strong>Headbutt</strong> on grassy routes and <strong>Diving</strong> on water routes find Rock/Ground, Normal/Flying and deep Water Pokémon.</li>
-          <li>Activity finds spawn a few levels above the route, have boosted shiny odds and can hold an item. You see the find before the battle with a BATTLE / LET IT GO choice, and can <strong>ATTEMPT CATCH</strong> it directly.</li>
+          <li><strong>Fishing</strong> (water routes) — stop the sweeping cast bar on the sweet spot; a bullseye boosts the level and shiny odds. Better rods (Old → Good → Super) reach rarer fish as you open regions, and the rarest need a second perfect “reel”.</li>
+          <li><strong>Foraging</strong> (forests, gardens) — stop the closing ring for berries and supplies, and maybe flush out a Grass, Poison or Fairy Pokémon.</li>
+          <li><strong>Diving</strong> (water routes) — stop the vertical depth gauge for deep Water and Ice Pokémon, and sometimes sunken treasure.</li>
+          <li><strong>Bug Catching</strong> (overgrown routes) — tap the bug before it flits away.</li>
+          <li><strong>Rock Smash</strong> (caves) — mash a boulder before the timer drains; a clean break can crack out a gem or a fossil.</li>
+          <li><strong>Headbutt</strong> (grassy routes) — hold a tree to charge and release in the sweet spot; sometimes two Pokémon fall out at once.</li>
+          <li><strong>Rock Climbing</strong> (mountains) — hold to pull the climber up and release to drop, keeping it on the ledge band.</li>
+          <li><strong>Prospecting</strong> (caves, ruins, deserts) — dig a hidden grid; fewer holes means a richer relic haul.</li>
+          <li><strong>Campfire</strong> (volcanic, desert, cave) — a push-your-luck game: add logs to raise the blaze for a better Fire Pokémon, but each log risks a flare-over, so bank the fire before it burns.</li>
+          <li><strong>Overcharge</strong> (industrial, cave) — discharge as the spark crosses the contact; three well-timed hits make a round for Electric Pokémon.</li>
+          <li><strong>Séance</strong> (ruins, haunted woods) — watch the runes light in order, then tap them back for Psychic, Ghost and Dark Pokémon.</li>
+          <li><strong>Summit Roost</strong> (mountains, dens) — flap up the cliff spending stamina and reach the Dragon roost before you stall.</li>
         </ul>
+        <p>
+          Between them every one of the 18 types has an activity. Each favours a
+          <strong>time of day or weather</strong> (fishing and overcharging love the rain,
+          the day suits foraging and bug catching, and the night suits the campfire and
+          séance) — land a good hit in season and it counts one tier higher, and the card
+          and scene show when an activity is favoured. A good hit finds a Pokémon a few
+          levels above the route with boosted shiny odds and often a held item; you see it
+          before the battle with a <strong>BATTLE / LET IT GO</strong> choice and can
+          <strong>ATTEMPT CATCH</strong> it directly.
+        </p>
+        <p>
+          <strong>Field Jobs:</strong> under each activity card you can post a Pokémon to
+          keep that activity running on its own. It banks money and items — or the wild
+          Pokémon that wander in, ready to battle from the card — on real time, while you
+          play and while the tab is closed. Up to four jobs run at once and each holds
+          eight finds before it is full; a stronger worker (or one with Pickup, Honey
+          Gather or Illuminate) banks faster. The <strong>Field Jobs</strong> button in the
+          location panel gathers them all in one place.
+        </p>
         <h3>Regional minigames</h3>
         <ul>
-          <li><strong>Kanto:</strong> Celadon City's Game Corner slots, Vermilion City's Whack-a-Diglett and the Safari Zone (four areas — Center, East, North and West — each carrying its own rare Pokémon, and Safari finds roll shiny at twice the usual odds).</li>
+          <li><strong>Kanto:</strong> Celadon City's Game Corner slots, Vermilion City's Whack-a-Diglett, the Indigo Plateau's Champions' Gauntlet and the Safari Zone (four areas — Center, East, North and West — each carrying its own rare Pokémon, and Safari finds roll shiny at twice the usual odds).</li>
           <li><strong>Johto:</strong> Route 35's Bug Catching Contest, Ecruteak City's Pokéathlon, Goldenrod City's Puzzle League and Violet City's Ruins of Alph (slide the stone tiles back into order).</li>
           <li><strong>Hoenn:</strong> Route 111's Battle Tower, Lilycove City's Pokémon Contest, Slateport City's Pokémon Memory and Mauville City's Lights Out.</li>
           <li><strong>Sinnoh:</strong> Eterna City's Underground, Sandgem Town's Poké Radar, Solaceon Ruins' Unown Picross (read the row and column clues to fill the glyph), Hearthome City's Berry Blender (tap to keep the blender in the moving sweet spot) and Snowpoint City's Snowpoint Temple (an ice-slide maze — slide until a wall stops you; the board sits beside the D-pad).</li>
@@ -509,6 +555,22 @@
         </p>
       </section>
 
+      <section id="research">
+        <h2><span class="icon">🔬</span>Field research</h2>
+        <p>
+          Every species has a small set of <strong>research tasks</strong> — catch it,
+          defeat it 3, 10 and 25 times in the wild, and catch its shiny. They advance
+          automatically as you play (there is nothing extra to track), and each species
+          shows a <strong>research level</strong> up to 10 in its Pokédex entry, beside a
+          checklist of what is done.
+        </p>
+        <p>
+          Finishing tasks earns <strong>Research Points</strong>, which spend in the
+          <strong>Research Shop</strong> (the <em>SHOP</em> button on any Pokédex entry) on
+          Exp. Candy, Rare Candy, every evolution stone, Bottle Caps and a Master Ball.
+        </p>
+      </section>
+
       <section id="index">
         <h2><span class="icon">🔎</span>Encounter index</h2>
         <p>
@@ -553,8 +615,8 @@
           A move only works if its effect is one the engine understands. Any move whose
           effect falls outside the list below behaves like a plain attack (if it has
           power) or does nothing at all (if it is a status move). Of the 934 moves in
-          the data, about 484 have a recognised effect, 301 more are plain damaging
-          attacks, and the remaining 149 status moves are still cosmetic — see the
+          the data, 635 have a recognised effect and 296 more are plain damaging
+          attacks; only three — Grudge, Imprison and Spite — are still cosmetic. See the
           <a href="/reference.html#moves">move list</a>.
         </p>
         <ul>
@@ -592,14 +654,14 @@
             waits in the Manage Moves panel instead of replacing one.</li>
         </ul>
         <div class="note">
-          <strong>Not yet implemented:</strong> the large tail of one-off utility moves.
-          The ~160 status moves not listed above do little.
+          <strong>Not yet implemented:</strong> just Grudge, Imprison and Spite — all three
+          need cross-turn bookkeeping the engine does not keep.
         </div>
 
         <h3>Abilities — the implemented set</h3>
         <p>
           Every Pokémon rolls one of its real abilities (there is a small chance of the
-          hidden one) and the stats panel shows it. <strong>256 of the 310 abilities</strong>
+          hidden one) and the stats panel shows it. <strong>312 of the 313 abilities</strong>
           now have an effect — entry and weather/terrain setters, type absorbers,
           offensive and defensive modifiers, speed abilities, status control, contact
           and on-hit reactions, on-KO rewards, stat protection, form changes and
@@ -633,11 +695,9 @@
             Shell Armor, Merciless.</li>
         </ul>
         <div class="note">
-          About 54 abilities are still inert — mostly ally abilities beyond the doubles
-          set (Telepathy, Aroma/Flower Veil, Costar, Commander, Hospitality, Symbiosis,
-          Gulp Missile), trapping (Arena Trap, Shadow Tag) and information abilities
-          (Frisk, Forewarn). A few working ones are simplified: type absorbers heal 1/4
-          max HP instead of raising a stat, and Hustle skips its accuracy penalty. See the
+          Only <strong>Pressure</strong> is still inert. A few working ones are simplified:
+          type absorbers heal 1/4 max HP instead of raising a stat, and Hustle skips its
+          accuracy penalty. See the
           <a href="/reference.html#abilities">full ability list</a>.
         </div>
 
@@ -695,7 +755,7 @@
 
         <h3>Still to come</h3>
         <ul>
-          <li>The remaining ~54 abilities and ~149 status moves.</li>
+          <li>The last three inert moves (Grudge, Imprison, Spite) and the Pressure ability.</li>
           <li>Triple / rotation battles (the doubles Battle Maison is in).</li>
           <li>Online sync / cloud saves.</li>
         </ul>

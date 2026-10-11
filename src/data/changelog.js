@@ -7,11 +7,77 @@
 // Interface / Fixes, in that order. Items are player-facing, one line each;
 // fold new work into the newest entry rather than cutting a version per change.
 
-export const GAME_VERSION = '0.24.0'
+export const GAME_VERSION = '0.25.0'
 
 export const LAST_SEEN_VERSION_KEY = 'pokemon-idle-last-seen-version'
 
 export const CHANGELOG = [
+  {
+    version: '0.25.0',
+    subtitle: 'World, Research & Prestige',
+    sections: [
+      {
+        heading: 'Regions',
+        items: [
+          'The world has weather now: each area rolls rain, sun, sandstorm or snow (or stays clear) every 15 real minutes, weighted by its biome, and shows it beside the day/night chip on the Town Map. A battle starts under that weather, and the rain- and sun-favoured route activities can fire anywhere instead of only on the seven permanently weather-struck routes.',
+          'Hisui opens as a Sinnoh post-game zone: beat the Sinnoh Champion and a rift at the League leads to ancient Sinnoh — the Obsidian Fieldlands, Crimson Mirelands, Cobalt Coastlands, Coronet Highlands and Alabaster Icelands, each with its own wild table (Hisuian forms included).',
+          'Lumiose City’s Wild Zones open as a Kalos post-game zone once the Kalos Champion is beaten: five numbered Wild Zones (plaza, park, canal, tunnels and the power-plant quarter), each with its own wild table.',
+        ],
+      },
+      {
+        heading: 'Pokemon',
+        items: [
+          'Every Pokemon has a size now, rolled per individual like its IVs and shown beside them as an XS–XL rating on the stats panel. The very largest specimens are alphas and are flagged ★ ALPHA; older saves get a size rolled in on load.',
+        ],
+      },
+      {
+        heading: 'Trainers',
+        items: [
+          'A recurring rival challenges you in each region: Blue, Silver, Wally, Barry, Hugh, Calem, Hau, Hop and Nemona turn up in town once you have earned 2, 4, 6 and 8 badges, each with a team that scales to your party. Beating one pays a rising cash bonus and a Rare Candy.',
+        ],
+      },
+      {
+        heading: 'Battles',
+        items: [
+          'A well-kept companion can tough out a would-be knockout at 1 HP (“X toughed it out so you wouldn’t feel sad!”). The chance scales with its care stats, applies only to the pinned Pokemon while it is in battle, and can save it once per battle like a Focus Sash.',
+        ],
+      },
+      {
+        heading: 'Items',
+        items: [
+          'Two ability items join the game: the Ability Capsule switches a Pokemon between its normal abilities, and the Ability Patch toggles its hidden ability (and back again).',
+          'The Research Shop has its own identity now instead of restocking the evolution stones the Kecleon Shop already sells: it offers the full Exp. Candy ladder (S / M / L / XL), Rare Candy, Poffin, the Ability Capsule and Patch, Bottle Caps and a Master Ball.',
+          'More battle held items: the Rocky Helmet hurts a foe that makes contact for a sixth of its HP, and the six pinch Berries (Liechi, Ganlon, Salac, Petaya, Apicot, Starf) boost a stat when the holder drops to a quarter of its HP (half with Gluttony).',
+          'Kurt’s Apricorn Balls are in: Apricorns turn up on Johto routes as you win wild battles, and Kurt’s workshop in Azalea Town carves each one into its ball — Level, Lure, Friend, Heavy, Love, Fast and Moon — with their real situational catch rates.',
+        ],
+      },
+      {
+        heading: 'Minigames',
+        items: [
+          'Quick Guard and Wide Guard shield the user’s whole side in the Battle Maison doubles now (from priority and spread moves), and the Maison AI raises them when the opposing pair threatens one.',
+        ],
+      },
+      {
+        heading: 'Features',
+        items: [
+          'A species with no wild route no longer shows impossible “defeat it in the wild” research tasks: it observes the species instead — obtain it, feed it a berry, and use its moves in battle — for the same points.',
+          'Ribbons are in: a Pokemon earns a permanent award for milestones (Effort at Lv. 100, Best Friends at max friendship), Gym / Elite Four / Champion wins, Battle Tower floors and cleared Contests or the Champions’ Gauntlet. A ribbon case on the stats panel lists everything an individual has earned.',
+          'Route activities track mastery: the best hit quality for each activity on a route is remembered, the location panel shows how many are at a perfect hit or better, and clearing every activity on a route pays a one-time bonus and marks it mastered.',
+          'Daily quests can ask for clean route-activity hits (a perfect or ultra hit), and the Field Jobs’ overnight work is itemised in the “while you were away” report (the cycles each ran and what they banked).',
+          'The Day-Care tracks breeding: eggs and shinies hatched, eggs since the last shiny, and a project queue (a shiny, all-31 IVs or a specific nature) that completes the moment a matching Egg hatches.',
+          'Prestiging a region now earns Prestige Points for a permanent perk tree that survives every reset: Experience (+8% EXP per rank), Fortune (+10% prize money per rank) and Capture (+5% catch rate per rank), up to rank 5 each.',
+          'Each region’s Raid Island tracks a Legendary Quest for its box legendary: earn every badge, beat the Champion and register 40% of its generation, then challenge it directly instead of leaving it to the weighted raid roll.',
+        ],
+      },
+      {
+        heading: 'Interface',
+        items: [
+          'Settings gained Auto-Heal (top the party up at the Pokemon Center whenever the map is idle and someone is hurt) and a Default Catch Rule (mode, level threshold and enabled balls) for routes you have not customised.',
+          'The Display section gained damage-number and shiny-sparkle toggles, the Box can sort by total IVs, the move buttons show their type effectiveness and flag an estimated KO, and a TEAM button in the Party header saves the party as a preset you can restore in one tap.',
+        ],
+      },
+    ],
+  },
   {
     version: '0.24.0',
     subtitle: 'Double Battles & the Sevii Islands',
@@ -25,21 +91,6 @@ export const CHANGELOG = [
           'Thirty-three more landmarks the scraper used to drop are real wild areas now — the Unova Black 2 / White 2 areas, Hoenn’s Jagged Pass and Scorched Slab, Sinnoh’s Floaroma Meadow, Ramanas Park and Trophy Garden, Kalos’s Parfum Palace and Unknown Dungeon, Alola’s Haina Desert and Resolution Cave, Paldea’s Dalizapa Passage and more — Johto’s Whirl Islands are a proper four-cave zone, and the Galar Wild Area, Poni Island and Area Zero gained more habitats.',
           'Paldea is a linear Victory Road route now: its province zones, gym towns and landmarks open in the real gym order (Katy, Brassius, Iono, Kofu, Larry, Ryme, Tulip, Grusha) behind the previous badge and a party level, so the wilds ramp smoothly from Lv. 3 to Lv. 75.',
           'Ogerpon’s three masks, Terapagos’s Terastal and Stellar formes and Bloodmoon Ursaluna are obtainable now (the masks, a Tera Orb and a Peat Block are Reward Shop items that switch the forme from the party screen), and Wimpod, Rellor and Slither Wing have real wild routes instead of being Bug-Catching-Contest-only.',
-          'The world has weather now: each area rolls rain, sun, sandstorm or snow (or stays clear) every 15 real minutes, weighted by its biome, and shows it beside the day/night chip on the Town Map. A battle starts under that weather, and the rain- and sun-favoured route activities can fire anywhere instead of only on the seven permanently weather-struck routes.',
-          'Hisui opens as a Sinnoh post-game zone: beat the Sinnoh Champion and a rift at the League leads to ancient Sinnoh \u2014 the Obsidian Fieldlands, Crimson Mirelands, Cobalt Coastlands, Coronet Highlands and Alabaster Icelands, each with its own wild table (Hisuian forms included).',
-          'Lumiose City\u2019s Wild Zones open as a Kalos post-game zone once the Kalos Champion is beaten: five numbered Wild Zones (plaza, park, canal, tunnels and the power-plant quarter), each with its own wild table.',
-        ],
-      },
-      {
-        heading: 'Pokemon',
-        items: [
-          'Every Pokemon has a size now, rolled per individual like its IVs and shown beside them as an XS–XL rating on the stats panel. The very largest specimens (size 240+) are alphas and are flagged ★ ALPHA. Sizes are cosmetic for now and older saves get one rolled in on load.',
-        ],
-      },
-      {
-        heading: 'Trainers',
-        items: [
-          'A recurring rival challenges you in each region: Blue, Silver, Wally, Barry, Hugh, Calem, Hau, Hop and Nemona turn up in town once you have earned 2, 4, 6 and 8 badges, each with a team that scales to your party. Beating one pays a rising cash bonus and a Rare Candy.',
         ],
       },
       {
@@ -53,23 +104,12 @@ export const CHANGELOG = [
           'Dozens more abilities work in battle: Synchronize, Magic Bounce, Rivalry, Quick Draw, Stakeout, Supreme Overlord and the Choice lock, plus Long Reach, Heavy and Light Metal, Wonder Skin, Leaf Guard, Supersweet Syrup, Anticipation, Forewarn, Frisk, Lingering Aroma, Spicy Spray, Electromorphosis, Wind Power, Wind Rider, Mind’s Eye, Tera Shell, Teraform Zero, As One, Gear Up and Coaching (raise the user’s and an ally’s stats), Nightmare (a 1/4 residual on a sleeping target) and Doodle (copies the user’s ability onto the target).',
           'Out-of-battle abilities got a pass: Flame Body, Magma Armor and Steam Engine halve egg hatching, Static and Lightning Rod draw Electric wilds, Magnet Pull draws Steel and Storm Drain Water, Cute Charm biases a wild’s gender, Super Luck and Compound Eyes double wild held-item odds, and Illuminate draws 50% more item drops.',
           'Fishing has real bite rolls (Suction Cups and Sticky Hold steady the line, and the rarest fish are "multi-catch", needing a second perfect reel), Honey gives a 1.5x catch-rate bonus, and a third battle style joins Set and Switch: Training keeps your lead in for the EXP but swaps it out below a third of its HP (a Lv. 100 lead shares its EXP with the party).',
-          'A well-kept companion can tough out a would-be knockout at 1 HP (\u201cX toughed it out so you wouldn\u2019t feel sad!\u201d). The chance scales with its care stats, applies only to the pinned Pokemon while it is in battle, and can save it once per battle like a Focus Sash.',
-          'The move buttons show each move\u2019s type effectiveness against the current foe (\u00d72, \u00d7\u00bd, \u00d70) and flag an estimated knockout with a KO tag.',
-        ],
-      },
-      {
-        heading: 'Items',
-        items: [
-          'Two ability items join the game: the Ability Capsule switches a Pokemon between its normal abilities, and the Ability Patch toggles its hidden ability (and back again). Both are Research Shop rewards.',
-          'The Research Shop has its own identity now instead of restocking the evolution stones the Kecleon Shop already sells: it offers the full Exp. Candy ladder (S / M / L / XL), Rare Candy, Poffin, the Ability Capsule and Patch, Bottle Caps and a Master Ball.',
-          'More battle held items: the Rocky Helmet hurts a foe that makes contact for a sixth of its HP, and the six pinch Berries (Liechi, Ganlon, Salac, Petaya, Apicot, Starf) boost a stat when the holder drops to a quarter of its HP (half with Gluttony). Both are Grand Auction lots.',
-          'Kurt\u2019s Apricorn Balls are in: Apricorns turn up on Johto routes as you win wild battles, and Kurt\u2019s workshop in Azalea Town carves each one into its ball \u2014 Level, Lure, Friend, Heavy, Love, Fast and Moon \u2014 with their real situational catch rates (and the Friend Ball\u2019s high starting friendship).',
         ],
       },
       {
         heading: 'Minigames',
         items: [
-          'The Battle Maison in Kalos runs double battles now: two of your Pokemon face two foes, every battler picks its own target, spread moves hit both, and a fainted Pokemon is replaced from the bench. Its ally play works too — Battery, Power Spot, Friend Guard, Healer, Helping Hand, Follow Me, Rage Powder, Spotlight, After You, Quash, Commander, Dancer, Flower Veil, Power of Alchemy, Receiver, Symbiosis and Telepathy. Quick Guard and Wide Guard shield the user\u2019s whole side now (from priority and spread moves), and the Maison AI raises them when the opposing pair threatens one.',
+          'The Battle Maison in Kalos runs double battles now: two of your Pokemon face two foes, every battler picks its own target, spread moves hit both, and a fainted Pokemon is replaced from the bench. Its ally play works too — Battery, Power Spot, Friend Guard, Healer, Helping Hand, Follow Me, Rage Powder, Spotlight, After You, Quash, Commander, Dancer, Flower Veil, Power of Alchemy, Receiver, Symbiosis and Telepathy.',
           'Nine new regional minigames: Mantine Surf (Alola), Rotom Rally (Galar), Ogre Oustin’ (Paldea), Type Fusion (Unova), Unown Picross (Sinnoh), Pokeshot (Kalos), Tera Raids (Paldea’s Area Zero), the Trainer School word scramble (Unova) and the Berry Blender (Sinnoh), and the hub-based ones can be started from a zone hub.',
           'Route activities are their own thing now: fishing and foraging were joined by Bug Catching, Rock Climbing and Prospecting, then Campfire, Overcharge, Séance and Summit Roost, so every one of the 18 types can be found through an activity. Each has a unique interaction (a sweeping bar, a closing ring, a rapid tap, a hold, a rune sequence, a dig grid, ...), favours a time or weather, and has a "how to play" tutorial.',
           'Every fixed minigame shows a short "how to play" the first time you start it too, and it can be reopened from its location card.',
@@ -84,15 +124,7 @@ export const CHANGELOG = [
         items: [
           'The game works offline now: a service worker caches the app, and an Offline Play section in Settings shows the download size and fetches every sprite, backdrop, item icon and data file with a progress bar. The art and data were right-sized and minified for it (the backdrops moved to WebP) and offline uses the static sprites, keeping the download well under 50 MB.',
           'The cached app also keeps itself up to date: it checks for a new service worker on boot, when the network returns and when the tab becomes visible, and reloads a backgrounded tab into the new build, so an active battle is never interrupted.',
-          'Field research: every species has five tasks that earn Research Points. It reads the Pokedex plus a per-species wild-defeat count, tracks a research level up to 10 in the Pokedex detail, and spends the points in a Research Shop on candies, ability items, Bottle Caps and a Master Ball.',
-          'A species with no wild route (evolved forms, starters, fossils, gifts, statics and the rest) no longer shows impossible “defeat it in the wild” research tasks: it observes the species instead — obtain it, feed it a berry, and use its moves in battle — for the same points.',
-          'Ribbons are in: a Pokemon earns a permanent award for milestones (Effort at Lv. 100, Best Friends at max friendship), Gym / Elite Four / Champion wins, Battle Tower floors and cleared Contests or the Champions’ Gauntlet. A ribbon case on the stats panel lists everything an individual has earned.',
-          'Route activities track mastery: the best hit quality you\u2019ve scored for each activity on a route is remembered, the location panel shows how many are at a perfect hit or better, and clearing every activity on a route pays a one-time bonus and marks it mastered.',
-          'Daily quests can now ask for clean route-activity hits (a perfect or ultra hit), so the day\u2019s three objectives can come from fishing, foraging and the rest.',
-          'The Day-Care tracks your breeding now: it counts eggs and shinies hatched and eggs since the last shiny, and you can queue breeding projects \u2014 hatch a shiny, all-31 IVs, or a specific nature \u2014 that complete the moment a matching Egg hatches.',
-          'The “while you were away” report is richer: it lists the Field Jobs that kept running, how many cycles each finished and what it banked (money, items and the Pokemon that wandered in), alongside the offline reward.',
-          'Prestiging a region now earns Prestige Points for a permanent perk tree that survives every reset: Experience (+8% EXP per rank), Fortune (+10% prize money per rank) and Capture (+5% catch rate per rank), up to rank 5 each. The League panel shows the tree.',
-          'Each region\u2019s Raid Island tracks a Legendary Quest for its box legendary: earn every badge, beat the Champion and register 40% of its generation. Completing the steps unlocks a direct challenge for that legendary instead of leaving it to the weighted raid roll.',
+          'Field research: every species has five tasks (catch it, defeat it 3 / 10 / 25 times in the wild, catch its shiny) that earn Research Points. It reads the Pokedex plus a per-species wild-defeat count, tracks a research level up to 10 in the Pokedex detail, and spends the points in a Research Shop on candy, evolution stones, Bottle Caps and a Master Ball.',
         ],
       },
       {
@@ -101,9 +133,7 @@ export const CHANGELOG = [
           'The Pokedex groups alternate forms under one slot (with a form switcher), registering any form registers its species and counts toward that generation’s completion, entries name their source (Game Corner prizes, fossil revives, the Ruins of Alph, "Evolves from ..."), MissingNo. has its real glitch sprite and stays hidden until first seen, the search is a collapsible fuzzy match that also covers the whole evolution family, and selecting a Pokemon auto-filters the Box.',
           'A Pokemon that can transform in battle carries a form chip in its stats panel: a pink G-MAX chip that lights up after a Max Mushroom and a purple MEGA chip while it holds a Mega Stone.',
           'The Town Map marks a fully-caught route with a teal marker and "All Pokemon caught" legend entry, and marks the Day-Care, Berry Garden, Battle Tower, every Raid Island and the Ruins of Alph and Tanoby Ruins with named service markers.',
-          'Settings gained a Display section (animated or static sprites, damage numbers and shiny sparkles), the game keeps the screen awake while open, and a cafe opened in each region’s main city, selling a Poffin (+30 friendship) or a Poke Bean.',
-          'Settings gained Auto-Heal, which tops the party up at the Pokemon Center whenever the map is idle and someone is hurt, and a Default Catch Rule (mode, level threshold and enabled balls) for every route you have not customised from its Catch Settings.',
-          'The Box can sort by total IVs, and a TEAM button in the Party header saves the current party as a preset and restores it in one tap (pulling any missing Pokemon back out of the Box).',
+          'Settings gained a Display section (animated or static sprites), the game keeps the screen awake while open, and a cafe opened in each region’s main city, selling a Poffin (+30 friendship) or a Poke Bean.',
         ],
       },
       {

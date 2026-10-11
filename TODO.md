@@ -1,6 +1,6 @@
 # TODO
 
-Open ideas and follow-ups. Current game version: **0.24.0**
+Open ideas and follow-ups. Current game version: **0.25.0**
 (`src/data/changelog.js`). Finished work lives in the changelog, not here — this
 file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
@@ -15,81 +15,27 @@ renumbered, so the gaps below are items that shipped.
 **Effort**: S (small) < S–M < M < M–L < L. **Gain** is the player-facing value
 (★ = nice to have, ★★★★★ = core missing feature).
 
-### Tier 1 — High impact, worth the effort
+### Tier 1 — Worth the effort
 
-1. **#24 Move data pass** — M · ★★★ — only the PP / Z-Move keep-or-drop
-   decisions remain (Quick/Wide Guard side protection shipped).
-2. **#25 Battle engine pass** — M–L · ★★★ — Illusion and battle polish (the
-   pinch berries and Rocky Helmet shipped).
-3. **#18 Better settings** — M · ★★★ — more cosmetic options if wanted;
-   account controls blocked on #19 (auto-heal, the default catch rule and two
-   Display toggles shipped).
-4. **#43 Multi-battles (triple / rotation)** — M–L · ★★½ — build on the
-   shipped doubles engine.
+1. **#78 Alola Ultra Warp Ride** — M · ★★★ — a warp minigame to reach the Ultra
+   Beasts and legends.
+2. **#66 Battle Frontier facilities** — M–L · ★★½ — rule-variant facilities on
+   the Tower / Maison scenes.
+3. **#61 Focus / target hunting** — S–M · ★★½.
+4. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
 
-### Tier 2 — Big / low-return, defer
+### Tier 2 — Big, defer
 
-5. **#56 Multi-effect move pass (residual)** — S · ★★ — moves that carry a
-   third effect, which the single `secondary` slot cannot express.
-6. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
+5. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
    doc and real ops for modest player value today.
+6. **#43 Multi-battles (triple / rotation)** — M–L · ★★½.
 
-### Tier 3 — New ideas (route activities, idle depth, endgame)
+### Tier 3 — Small follow-ups on shipped systems
 
-7. **#69 Legendary quests** — shipped (badges / Champion / dex steps).
-8. **#65 Prestige perks** — shipped; more perks and a respec remain optional.
-9. **#71 Breeding project queue** — shipped; optional Masuda odds and
-   per-project hatch counters remain.
-10. **#62 Offline depth** — shipped (richer job report); a full idle-loop
-    catch-up simulation remains.
-11. **#72 QoL pass** — S–M · ★★★ — IV sort, move preview and team presets
-    shipped; box bulk-release remains.
-12. **#67 Ribbons + ribbon case** — shipped.
-13. **#68 Generation-completion rewards** — done.
-14. **#59 Activity goals & per-route mastery** — shipped.
-15. **#61 Focus / target hunting** — S–M · ★★½.
-16. **#66 Battle Frontier facilities** — M–L · ★★½.
-17. **#70 Recurring rival** — shipped; dialogue and a dedicated sprite remain
-    optional.
-18. **#73 Weather system on routes** — shipped.
-19. **#74 Pokemon sizes (XS–XL)** — shipped; the alpha bonus and research hook
-    remain.
-20. **#75 Legends Z-A area (Kalos)** — shipped.
-21. **#76 Legends Arceus / Hisui areas (Sinnoh)** — shipped; nobles / ride
-    Pokemon remain optional.
-22. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
-23. **#78 Alola Ultra Warp Ride** — M · ★★★ — a warp minigame to reach the Ultra
-    Beasts and legends.
-24. **#79 Johto Poké Ball crafting (Kurt)** — shipped.
-25. **#80 Companion affection perks** — shipped; the optional status-shake /
-    dodge / crit extras remain.
-26. **#81 Research Shop diversification** — shipped; the shop now stocks the
-    candy ladder, Poffin, the Ability Capsule/Patch and the caps instead of the
-    Kecleon stones.
-27. **#82 Research tasks for non-wild species** — shipped; only optional extra
-    Legends-style tasks remain.
+See the numbered sections below: #24, #25, #56, #62, #65, #67, #69–#76,
+#79–#82. They are optional extras rather than missing features.
 
 ---
-
-## 18. Better settings
-
-`settings-modal.js` exposes gameplay, notification, display and audio toggles,
-and the preferences live outside the save (`pokemon-idle-settings`,
-`src/game/settings.js`) so they survive a save reset and are shared across slots.
-
-Done: a Display pair of toggles (damage numbers and shiny sparkles) beside the
-sprite style; a Default Catch Rule in Settings (mode, level threshold and
-enabled balls) for any route the player has not customised; and Auto-Heal, which
-tops the party up at the Pokemon Center whenever the map is idle (skipping the
-healing animation, and never during a raid).
-
-Still open:
-
-- [ ] **Account**: sign in / sync controls — blocked on #19.
-- [ ] **Display**: any further cosmetic options beyond the sprite style,
-      damage numbers and shiny sparkles.
-
-Effort: **medium** (mostly UI plus a small settings slice).
 
 ## 19. Online sync (cloud saves via a database)
 
@@ -114,47 +60,26 @@ client-only today with `localStorage` saves. Worth a short design doc first.
 
 Effort: **large** (auth + conflict handling + a new server to run).
 
-## 24. Move data pass (mostly done)
+## 24. Move data pass
 
 `possible-moves.json` carries `name / type / category / power / accuracy / pp /
 priority / effect`, and `src/data/move-effects.js` layers richer effects on top.
-Healing, multi-hit, crit stages, Protect, statuses, screens, entry hazards,
-Taunt/Substitute, weather setters, weather accuracy, terrain synergy, phazing,
-swaps, the two-turn/charging moves, the status-condition conditionals, the
-multi-status rolls (Tri Attack, Dire Claw), Retaliate, Round / Echoed Voice and
-the faint-heals all shipped.
+The effect set (healing, multi-hit, crit stages, hazards, weather, terrain,
+phazing, swaps, the status conditionals and multi-status rolls, the
+doubles-only moves and the Apricorn Balls' catch rates) is done.
 
-Done: Quick Guard and Wide Guard shield the user's whole side in the doubles
-minigame (from priority and spread moves), and the Maison AI raises them when
-the opposing pair threatens one. Every other doubles-only move (After You,
-Ally Switch, Follow Me, Helping Hand, Rage Powder, …) already plays too.
-
-Not done:
+Still open (design calls):
 
 - [ ] PP is stored but unused; decide whether to implement it or drop it.
 - [ ] Z-moves / G-Max moves are otherwise dead data — decide keep/drop.
 
-Effort: **medium** (the effect set is done; what is left is design calls).
+## 25. Battle engine pass
 
-## 25. Battle engine pass (mostly done)
+`resolveBattleTurn` (`src/game/combat.js`) is complete for damage, status, stat
+changes, weather/terrain, the contact abilities, the form-change subsystem and
+the ally (doubles) abilities.
 
-`resolveBattleTurn` (`src/game/combat.js`) is fairly complete for damage +
-status + stat changes. Healing, multi-hit, Protect, hazards, accuracy/evasion
-stages, the extra statuses, weather/terrain, the crit-rate pass, the
-auto-battler AI, the contact abilities, the mid-battle form-change subsystem,
-the battle-only synthetic-species table, and most singles abilities
-(Synchronize, Magic Bounce, Rivalry, Quick Draw, Stakeout, Supreme Overlord,
-Choice locking) have shipped.
-
-Done: the ally ability set is complete in the doubles engine — Battery, Power
-Spot, Friend Guard, Healer, Telepathy, Aroma/Flower Veil, Costar, Commander,
-Hospitality, Symbiosis and Gulp Missile all act.
-
-Done: the remaining item nuances ship — Rocky Helmet (contact recoil for a
-sixth of the attacker's HP) and the six pinch berries (Liechi / Ganlon / Salac /
-Petaya / Apicot / Starf), both Grand Auction lots.
-
-Not done:
+Still open:
 
 - [ ] Illusion (deferred: its disguise is cosmetic plus an AI read, which an
       idle auto-battler barely shows).
@@ -166,37 +91,10 @@ Not done:
 *(Switching on a bad matchup is intentionally discarded: an auto-switching
 opponent is frustrating to play against.)*
 
-Effort: **medium–large** (do it in slices).
-
-## 28. More region areas (DLC, caves, POIs)
-
-The Galar / Paldea DLC and Kanto's Sevii Islands are first-class `isDlc`
-regions, the Unova Black 2 / White 2 areas and ~100 landmark areas are on the
-map (`tools/lib/ordinary-areas.cjs`), Johto's Whirl Islands is a zone, and the
-service POI set (Day-Care, Berry Garden, Battle Tower, Raid Den, Legendary
-Shrine, Cafe) is in. **No open items.**
-
-## 36. Zones — route-like chunks of areas
-
-The map is a graph of single nodes joined pair-wise. The zone model shipped in
-0.13.0: `type: 'zone'` nodes group sub-areas that are hidden routes with their
-own encounter buckets, and existing routes can be grouped too (`GROUP_ZONES` —
-Alola's islands, Paldea's provinces).
-
-Shipped: the Galar Wild Area (13 habitats), the four DLC zones, Alola's
-islands, Paldea's provinces and Area Zero, and Johto's Whirl Islands all have
-their sub-areas, spaced in a ring for the focused map view. **No open items.**
-
 ## 43. Multi-battles (double / triple / rotation) as a minigame
 
-The **doubles** 2v2 minigame shipped at Kalos's Battle Maison: two of the party
-face two foes, every battler picks a target, spread moves hit both, fainted
-Pokemon tag in from the bench, and the ally abilities (Battery, Power Spot,
-Friend Guard, Healer) work. It reuses the singles engine one action at a time.
-
-The doubles-only moves and ally abilities ship too (Follow Me, Rage Powder,
-Spotlight, Helping Hand, After You, Quash, Ally Switch, Instruct, Dancer, Quick
-Guard / Wide Guard side protection, plus the ally ability set in #25).
+The **doubles** 2v2 minigame shipped at Kalos's Battle Maison, including the
+ally abilities, the doubles-only moves and Quick/Wide Guard side protection.
 
 Still open:
 
@@ -209,11 +107,9 @@ Relevant code: `src/game/minigames/doubles.js`,
 `src/components/doubles-scene.js`, `src/game/reducer/minigames.js`, and
 `src/game/minigames/registry.js`.
 
-## 56. Multi-effect move pass (mostly done)
+## 56. Multi-effect move pass
 
-Shipped: the move data supports a primary effect plus one `secondary`, the
-recharge flag is back, the missing secondaries were filled in, the elemental
-fangs carry both effects, Fake Out is first-turn-only, and
+The move data supports a primary effect plus one `secondary`, and
 `public/reference.html` is the live checklist of every implemented effect.
 
 Still open:
@@ -227,22 +123,6 @@ Relevant code: `src/data/move-effects.js`, `src/game/combat/turn.js`,
 
 Effort: **small** (the remaining bits are one-offs).
 
-## 59. Activity goals & per-route mastery
-
-Done: `src/game/route-mastery.js` records the best activity hit quality per
-route (miss 0, hit 1, perfect 2, ultra 3) in `state.routeMastery`, the location
-panel shows how many of a route's activities are at a perfect hit or better,
-and clearing every activity on a route pays a one-time bonus (money + a Rare
-Candy) and records it in `masteredRoutes`. The activity scene dispatches
-`RECORD_ROUTE_MASTERY` on each landed hit; a lower quality never overwrites a
-higher one.
-
-Also done: daily quests draw from activities too — an `activityPerfects` quest
-asks for clean (perfect or ultra) hits, advanced by `RECORD_ROUTE_MASTERY`.
-**No open items.**
-
-Effort: **small–medium**.
-
 ## 61. Focus / target hunting
 
 Pick a species or type to focus; boost its wild and activity encounter rate and
@@ -252,11 +132,8 @@ Effort: **small–medium**.
 
 ## 62. Offline depth
 
-Done: the "while you were away" report is richer. `summarizeJobAccrual`
-(`src/game/jobs.js`) diffs the Field Jobs before/after the away window and the
-save loader attaches the result to `offlineReport.jobs`; the modal lists each
-job's activity and location, the cycles it finished, what it banked (money,
-items) and the Pokemon that wandered in, on top of the money + candy reward.
+The "while you were away" report already itemises the Field Jobs that ran
+(`offlineReport.jobs`).
 
 Still open:
 
@@ -270,21 +147,14 @@ Effort: **medium**.
 
 ## 65. Prestige perks
 
-Done: `src/game/prestige.js` defines a persistent perk tree bought with
-**Prestige Points** (2 per region prestige). Three perks, up to rank 5 each:
-**Experience** (+8% EXP/rank), **Fortune** (+10% prize money/rank) and
-**Capture** (+5% catch rate/rank). `prestigeMultipliers(state)` feeds the idle
-loop's EXP bonus (game loop), prize payouts and the catch chance
-(`calculateCatchChance` context); the League panel renders the tree.
-`prestigePoints` / `prestigePerks` persist in the save and repair.
+A persistent perk tree bought with Prestige Points (2 per region prestige) is in
+(`src/game/prestige.js`): Experience, Fortune and Capture, up to rank 5 each.
 
 Still open (optional):
 
 - [ ] More perk ideas: egg hatch rate, item drop rate, a starting-level or
       shiny-odds perk.
 - [ ] Respec / refund points.
-
-Effort: **medium–large**.
 
 ## 66. Battle Frontier facilities
 
@@ -295,12 +165,7 @@ Effort: **medium–large**.
 
 ## 67. Ribbons + ribbon case
 
-Done: `src/game/ribbons.js` defines eight ribbons (Effort at Lv. 100, Best
-Friends at max friendship, Gym, Elite, League, Tower, Contest and Gauntlet) and
-`awardRibbon` / `awardRibbonToParty` / `syncMilestoneRibbons` grant them
-idempotently. They are attached to the individual in the save, dropped if
-unknown on load, and shown in a ribbon case on the stats panel
-(`ribbon-case.js`).
+Eight ribbons and the per-Pokemon ribbon case shipped (`src/game/ribbons.js`).
 
 Still open (optional):
 
@@ -309,23 +174,11 @@ Still open (optional):
 
 Effort: **small–medium**.
 
-## 68. Generation-completion rewards
-
-A generation's dex completion already pays 3 Victory Tokens and a Master Ball
-(not just the Shiny Charm), shows a certificate scene
-(`dex-complete-scene.js`), lists each generation's completion and shiny odds in
-Records, and feeds the per-generation Shiny Charm. **No open items.**
-
 ## 69. Legendary quests
 
-Done: `src/game/legendary-quests.js` gives each region a multi-step hunt for its
-box legendary (Kanto's Mewtwo, Johto's Lugia, Hoenn's Rayquaza, Sinnoh's
-Giratina, Unova's Kyurem, Kalos's Xerneas, Alola's Necrozma, Galar's Eternatus,
-Paldea's Terapagos): earn every badge, beat the Champion, and register 40% of
-that generation. The `LegendaryQuestPanel` on the Raid Island shows the steps and
-unlocks a direct `START_RAID` challenge once they are done; the quest is complete
-once the legendary is caught. It derives everything from existing state, so no
-new save fields.
+Each region's Raid Island tracks a multi-step hunt (badges / Champion / 40% of
+its generation) that unlocks a direct raid for its box legendary
+(`src/game/legendary-quests.js`).
 
 Still open (optional):
 
@@ -333,16 +186,10 @@ Still open (optional):
       Pokédex-percentage step.
 - [ ] Per-legendary boss battles with dialogue rather than a standard raid.
 
-Effort: **medium**.
-
 ## 70. Recurring rival
 
-Done: each region has a named rival (`src/game/rival.js`: Blue, Silver, Wally,
-Barry, Hugh, Calem, Hau, Hop, Nemona) who challenges you at 2 / 4 / 6 / 8 badges.
-The `RivalPanel` appears in a town when the milestone is met, builds a team that
-scales to your party level (`buildRivalTeam`, `2 + stage` species from the
-region's generation) and runs it as a `bossType: 'rival'` battle. Beating one
-advances `state.rivals[region]` and pays a rising cash bonus plus a Rare Candy.
+Each region has a named rival who challenges you at 2 / 4 / 6 / 8 badges with a
+party-scaled team (`src/game/rival.js`, `rival-panel.js`).
 
 Still open (optional):
 
@@ -350,17 +197,10 @@ Still open (optional):
 - [ ] A rival-specific sprite instead of the Ace Trainer stand-in.
 - [ ] A Rival Ribbon on the party for a full set of wins.
 
-Effort: **medium**.
-
 ## 71. Breeding project queue & shiny tracking
 
-Done: `src/game/breeding-projects.js` has a per-save breeding tracker (eggs
-hatched, shinies hatched, eggs since the last shiny) and an ordered project
-queue. A project targets the current pair's species with a goal — any hatch, a
-shiny, all-31 IVs, or a specific nature — and completes the moment a matching
-Egg hatches (`advanceBreeding` in `reducer/battle/events.js`). The Day-Care panel
-shows the counters, the queue with a remove button, and a goal picker (the
-shiny odds were already surfaced there).
+The Day-Care tracks eggs / shinies hatched and a breeding project queue
+(`src/game/breeding-projects.js`).
 
 Still open (optional):
 
@@ -368,32 +208,20 @@ Still open (optional):
       current shiny-parent boost.
 - [ ] A per-project hatch counter (eggs spent toward each project).
 
-Effort: **medium**.
-
 ## 72. QoL pass
 
-Done: box sort by total IVs; a damage/effectiveness preview on the battle move
-buttons (a type multiplier, plus a KO tag from `estimateMoveDamage`); party
-team presets (`src/components/team-presets.js`, saved in the save and restored
-by `APPLY_TEAM_PRESET`); and JSON save export/import in Settings.
+Box IV sort, the move effectiveness / KO preview, team presets and JSON save
+export/import all shipped.
 
 Still open:
 
 - [ ] Box bulk-release (multi-select or a filtered "release all"); the Box
       already has one-tap "Release Duplicates".
 
-Effort: **small–medium**.
+## 73. Weather system on routes
 
-## 73. Weather system on routes (gap)
-
-Done: the world has a weather cycle now. `worldWeatherAt(location, now)`
-(`src/game/weather.js`) picks rain / sun / sandstorm / snow (or clear) from a
-15-minute bucket hashed with the location's region and biome, so it is
-deterministic across saves and reloads; a desert leans to sandstorm, a tundra to
-snow, a coast to rain, a cave stays clear. `fieldWeatherFor` layers it under the
-seven permanent-weather routes, so wild battles start under it and the rain /
-sun-favoured route activities can fire anywhere. A `WeatherChip` shows it beside
-the day/night chip on the Town Map.
+A 15-minute world weather cycle feeds `fieldWeatherFor` and the activity
+conditions, with a chip beside the day/night one (`src/game/weather.js`).
 
 Still open (optional):
 
@@ -401,19 +229,10 @@ Still open (optional):
       Dance-buffed fight reads as rainy.
 - [ ] Add more weather types (fog, strong winds) or a per-region flavour.
 
-Effort: **small–medium** (the weather mechanics and battle side already exist;
-the work is a world weather value plus wiring it into `fieldWeatherFor`).
+## 74. Pokemon sizes (XS–XL)
 
-## 74. Pokemon sizes (XS–XL) (gap)
-
-In Legends: Arceus every Pokemon has a size, shown as a rating from XS to XL,
-with larger specimens worth more and research tasks asking for them.
-
-Done: every individual rolls a `size` (0-255, clustered around the middle like a
-bell so the extremes are rare) in `src/game/pokemon/sizes.js`, mapped to an
-XS / S / M / L / XL rating. The stats panel shows the rating beside the IVs with
-a plain-English tooltip, the very largest (size 240+) are flagged **★ ALPHA**,
-and older saves get a size rolled in on load. Sizes are cosmetic so far.
+Every individual rolls a size mapped to an XS–XL rating (with a ★ ALPHA marker
+for the very largest) on the stats panel (`src/game/pokemon/sizes.js`).
 
 Still open:
 
@@ -425,41 +244,25 @@ Still open:
       and scale the roll by the species' baseline, so a Wailord and a Diglett
       aren't judged on the same scale.
 
-Effort: **small–medium** (the roll and UI shipped; the research hook and a
-height fetch are the extra).
-
 ## 75. Legends Z-A area (Kalos post-game zone)
 
-Done: **Lumiose Wild Zones** is a Kalos post-game `type: 'zone'` hub on the map,
-gated on the Kalos Champion and reached from Lumiose City. Its five numbered
-Wild Zones (plaza, park, canal, tunnels, the power-plant quarter) are hidden
-sub-areas with their own wild tables, ring-laid for the focused map view. Added
-by `tools/add-lumiose-zone.cjs` (idempotent) with the encounter index
-regenerated.
+Lumiose City's five Wild Zones shipped as a Kalos post-game zone
+(`tools/add-lumiose-zone.cjs`).
 
 Still open (optional):
 
 - [ ] A Jubilife-style Lumiose hub scene and the Z-A Mega "Z" forms as an
       area-specific mechanic.
 
-Effort: **medium** (map data, encounters and a generator pass; the zone model
-already exists).
-
 ## 76. Legends Arceus / Hisui areas (Sinnoh post-game zone)
 
-Done: **Hisui** is a Sinnoh post-game `type: 'zone'` hub on the map, gated on the
-Sinnoh Champion and reached from the League. Its five areas — Obsidian
-Fieldlands, Crimson Mirelands, Cobalt Coastlands, Coronet Highlands and
-Alabaster Icelands — are hidden sub-areas with their own wild tables (Sinnoh
-species plus the Hisuian forms), ring-laid for the focused map view. Added by
-`tools/add-hisui-zone.cjs` (idempotent) with the encounter index regenerated.
+Hisui's five areas shipped as a Sinnoh post-game zone
+(`tools/add-hisui-zone.cjs`).
 
 Still open (optional):
 
 - [ ] A Jubilife Village hub location and the noble / ride Pokemon as statics or
       Raid Island additions, and space-time distortions as a swarm event.
-
-Effort: **medium**.
 
 ## 77. UI consistency pass (sliders / steppers)
 
@@ -502,17 +305,9 @@ Effort: **medium**.
 
 ## 79. Johto Poké Ball crafting (Kurt)
 
-Done: Kurt's Apricorn Balls are in.
-
-- The seven **Apricorns** (Red, Blue, Yellow, Green, Pink, White, Black) drop
-  from wild wins on Johto routes (`apricornDropChance`) and have sprites.
-- The seven **balls** (Level, Lure, Friend, Heavy, Love, Fast, Moon) are real
-  `pokeBalls`, auto-catchable, with their situational rates in
-  `getBallModifier` (Level vs the lead, Lure on water, Heavy by species weight,
-  Love by opposite gender, Fast by base Speed, Moon for Moon Stone evolvers);
-  the Friend Ball sets 200 friendship on catch.
-- **Kurt's workshop** in Azalea Town (a service POI + `kurt-panel.js`) carves
-  one Apricorn into its ball for free, via `CRAFT_APRICORN_BALL`.
+The seven Apricorns, the seven Apricorn Balls (with their situational catch
+rates) and Kurt's Azalea Town workshop all shipped (`src/game/reducer/items.js`,
+`kurt-panel.js`).
 
 Still open (optional):
 
@@ -520,22 +315,10 @@ Still open (optional):
       wild wins) instead of the instant carve.
 - [ ] Grow Apricorns in the Berry Garden as well as finding them on routes.
 
-Effort: **medium**.
-
 ## 80. Companion affection perks (tough it out)
 
-In the games, a Pokémon with high affection (Amie / Refresh / Camp) can **tough
-out** a would-be KO at 1 HP — "X toughed it out so you wouldn't feel sad!" —
-on top of the other affection effects (shaking off status, dodging a move, extra
-crits, bonus EXP).
-
-Done: the 1 HP save ships. In the damage step (`src/game/combat/turn.js`, beside
-`abilitySurvivesAtFullHp` / Endure / `heldSurvivesAtFullHp`), when the pinned
-companion is the active battler and a hit would KO it, `companionToughOutChance`
-(`src/game/companion.js`) is rolled — starting at an average care of 60 and
-scaling to 30% at full care — leaving it at 1 HP with the log line "X toughed it
-out so you wouldn't feel sad!". It is spent once per battle via `toughOutUsed`
-in the volatile state.
+The 1 HP "tough it out" save shipped (`src/game/companion.js`,
+`combat/turn.js`).
 
 Still open (optional extras if we want the full affection set):
 
@@ -543,24 +326,11 @@ Still open (optional extras if we want the full affection set):
 - [ ] Let a high-friendship non-companion benefit too, if the companion-only
       gate feels too narrow.
 
-Effort: **small–medium** (one hook, one roll and a log line; the state already
-exists).
+## 81. Research Shop diversification
 
-## 81. Research Shop diversification (overlaps Kecleon Wares)
-
-The Research Shop used to sell the same ten evolution stones as the Kecleon Shop
-(for Victory Tokens), so most of the shelf read as a duplicate.
-
-Done: the shop has its own “raise and observe the Pokemon you studied” identity:
-
-- Dropped the ten evolution stones (Kecleon still stocks every one).
-- Stock: the full Exp. Candy ladder (S / M / L / XL), Rare Candy, Poffin
-  (friendship), the new **Ability Capsule** and **Ability Patch**, Bottle Caps
-  and a Master Ball.
-- `abilityCapsule` / `abilityPatch` are new items (`src/data/items.js`) whose
-  ability change is handled in `useItemOnPokemon`: the Capsule cycles the
-  normal abilities, the Patch toggles the hidden one (and back). Their sprites
-  came from `tools/download-item-sprites.cjs`.
+The Research Shop now sells a research-flavoured set (the Exp. Candy ladder,
+Rare Candy, Poffin, the Ability Capsule / Patch, Bottle Caps, a Master Ball)
+instead of the Kecleon evolution stones.
 
 Still open (optional):
 
@@ -571,26 +341,9 @@ Still open (optional):
 
 ## 82. Research tasks for non-wild species (Legends-style tasks)
 
-The problem: every species shared the same five research tasks, three of which
-were "Defeat 3 / 10 / 25 in the wild". **533 of the 1292 species are in neither
-a wild route nor a raid pool** (298 base species plus 235 forms — evolved forms,
-starters, fossils, gifts and statics, Game Corner prizes, breeding-only babies,
-and so on), so those three rows were impossible and the species could never
-reach research level 10.
-
-Done (Legends: Arceus style):
-
-- `researchTasksFor(speciesKey)` (`src/game/research.js`) is species-aware:
-  a species that spawns on a wild route or a raid pool keeps the wild-defeat
-  ladder, and everything else gets an observable set instead — obtain it, feed
-  it a berry, use 10 / 25 of its moves, catch its shiny. Both sets total the
-  same 16 points, so the level curve and `RESEARCH_MAX_POINTS` are unchanged.
-- **Move tracking**: `creditResearchMove` counts a move the active species
-  actually uses (the `attack` battle event now carries its `moveId`).
-- **Berry feeding**: `creditResearchFeed` counts a garden berry used on a
-  species through the bag.
-- New `researchFed` / `researchMoves` counters persist in the save and repair
-  like `researchDefeated`; the Pokedex detail already renders the new labels.
+`researchTasksFor(speciesKey)` is species-aware, so a species with no wild route
+gets observable tasks (obtain / feed / use moves) instead of impossible defeat
+rows.
 
 Still open (optional extra Legends-style tasks):
 

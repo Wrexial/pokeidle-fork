@@ -881,7 +881,9 @@
   "description": "A mysterious island where Alola's rarest Pokemon dwell.",
   "routeKey": "alola-raid",
   "background": "/backgrounds/cave.webp",
-  "connections": [],
+  "connections": [
+   "alola-ultra-space"
+  ],
   "unlock": {
    "battlesAtLocation": [
     {
@@ -1960,5 +1962,30 @@
   },
   "biome": "forest",
   "background": "/backgrounds/grassland.webp"
+ },
+ "alola-ultra-space": {
+  "id": "alola-ultra-space",
+  "name": "Ultra Space",
+  "type": "facility",
+  "region": "alola",
+  "description": "A shifting pocket of Ultra Space reached through the wormhole, where the Ultra Beasts and Alola’s legends wait beyond the doors.",
+  "routeKey": "alola-ultra-space",
+  "connections": [
+   "alola-raid"
+  ],
+  "unlock": {
+   "championDefeated": "alola",
+   "requires": [
+    "alola-raid",
+    "alola-poni-island"
+   ]
+  },
+  "unlockOrder": 700020,
+  "position": {
+   "x": 14,
+   "y": 95
+  },
+  "background": "/backgrounds/cave.webp",
+  "biome": "cave"
  }
 }

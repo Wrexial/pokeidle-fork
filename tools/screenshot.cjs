@@ -989,6 +989,15 @@ async function main() {
         '32-safari-areas.png',
         '.safari-area-card-east',
       ],
+      [
+        'Ultra Warp',
+        'alola',
+        'alola-ultra-space',
+        'alola-ultra-space',
+        ['alola-iki-town', 'alola-route-1', 'alola-poni-island', 'alola-raid', 'alola-ultra-space'],
+        '.ultra-warp-field',
+        '34-ultra-warp.png',
+      ],
     ]
     for (const [name, region, location, route, unlocked, selector, file, action] of fixedScenes) {
       await cdp.eval(

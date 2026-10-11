@@ -80,6 +80,7 @@ export function enterMinigame(state, phase, cost = 0, log) {
     state.phase === 'teraRaid' ||
     state.phase === 'pokeword' ||
     state.phase === 'berryBlender' ||
+    state.phase === 'ultraWarp' ||
     state.phase === 'routeActivity' ||
     state.phase === 'wonderTrade'
   )

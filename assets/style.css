@@ -14461,6 +14461,162 @@ img {
     text-align: center
 }
 
+/* --- Ultra Warp Ride (Alola) -------------------------------------------- */
+.ultra-warp-scene {
+    background-image: url(/backgrounds/cave.webp)
+}
+
+.ultra-warp-field-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 460px;
+    gap: 8px
+}
+
+.ultra-warp-field {
+    position: relative;
+    width: 100%;
+    height: 340px;
+    background: radial-gradient(circle at 50% 0%,#3a1a6a 0%,#180a38 45%,#05030f 100%);
+    border: 2px solid #8a5cff66;
+    border-radius: 12px;
+    overflow: hidden;
+    touch-action: none;
+    cursor: crosshair
+}
+
+.ultra-warp-field::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(180deg,transparent 0 18px,#966eff14 18px 20px);
+    animation: ultra-warp-scroll 1s linear infinite
+}
+
+@keyframes ultra-warp-scroll {
+    from {
+        background-position-y: 0
+    }
+    to {
+        background-position-y: 20px
+    }
+}
+
+.ultra-warp-object {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    font-size: 24px;
+    line-height: 1;
+    z-index: 2
+}
+
+.ultra-warp-object.ring {
+    color: #6ff2ff;
+    text-shadow: 0 0 6px #6ff2ff
+}
+
+.ultra-warp-object.gold {
+    color: #ffe066;
+    text-shadow: 0 0 8px #ffe066
+}
+
+.ultra-warp-object.debris {
+    filter: grayscale(.4) drop-shadow(0 0 4px #000)
+}
+
+.ultra-warp-rider {
+    position: absolute;
+    width: 54px;
+    height: 54px;
+    transform: translate(-50%,-50%);
+    image-rendering: pixelated;
+    z-index: 3;
+    filter: drop-shadow(0 0 8px #b98cff)
+}
+
+.ultra-warp-controls {
+    display: flex;
+    justify-content: center;
+    gap: 16px
+}
+
+.ultra-warp-score-line {
+    color: #dbeaff;
+    font-size: 12px;
+    text-align: center
+}
+
+.ultra-warp-doors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px
+}
+
+.ultra-warp-doors-hint {
+    margin: 0;
+    font-size: 9px;
+    color: var(--parchment)
+}
+
+.ultra-warp-door-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px
+}
+
+.ultra-warp-door {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 104px;
+    padding: 10px 12px;
+    background: radial-gradient(circle at 50% 30%,#4a1f8f,#150830);
+    border: 2px solid #8a5cff;
+    border-radius: 10px;
+    color: var(--parchment);
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 0 12px #8a5cff44
+}
+
+.ultra-warp-door:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 14px #ffe06666
+}
+
+.ultra-warp-door.tier-1 {
+    border-color: #6ff2ff;
+    box-shadow: 0 0 12px #6ff2ff55
+}
+
+.ultra-warp-door.tier-2 {
+    border-color: #ffd54a;
+    box-shadow: 0 0 16px #ffd54a77
+}
+
+.ultra-warp-door-tier {
+    font-size: 8px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    color: #c8b8ff
+}
+
+.ultra-warp-door-sprite {
+    width: 56px;
+    height: 56px;
+    image-rendering: pixelated
+}
+
+.ultra-warp-door-name {
+    font-size: 9px;
+    font-weight: 700
+}
+
 /* --- Type Fusion (Unova) ------------------------------------------------ */
 .type-fusion-scene {
     background-image: url(/backgrounds/town.webp)

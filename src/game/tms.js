@@ -83,6 +83,7 @@ export const MINIGAME_TM_TYPES = {
   teraRaid: null,
   pokeword: null,
   berryBlender: ['Grass'],
+  ultraWarp: ['Psychic', 'Dragon'],
 }
 
 /** TM type pool per route activity (only the loot activity pays out here).

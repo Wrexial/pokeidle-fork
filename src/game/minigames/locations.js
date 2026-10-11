@@ -45,6 +45,7 @@ export const MINIGAME_LOCATIONS = {
   'paldea-area-zero': 'teraRaid',
   'unova-aspertia-city': 'pokeword',
   'sinnoh-hearthome-city': 'berryBlender',
+  'alola-ultra-space': 'ultraWarp',
 }
 
 /**

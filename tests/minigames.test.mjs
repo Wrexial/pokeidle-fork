@@ -1465,6 +1465,7 @@ test('every minigame is linked to a real area in its own region', () => {
     teraRaid: 'paldea',
     pokeword: 'unova',
     berryBlender: 'sinnoh',
+    ultraWarp: 'alola',
   }
   // Every catalogued minigame has exactly one home area, and vice versa: no
   // orphaned info entries and no locations pointing at missing metadata.
@@ -1492,7 +1493,7 @@ test('minigamesInRegion groups them by region', () => {
   assert.deepEqual(minigamesInRegion('kanto').sort(), ['championGauntlet', 'gameCorner', 'safari', 'whack'])
   assert.deepEqual(minigamesInRegion('johto').sort(), ['bugContest', 'pokeathlon', 'puzzleLeague', 'ruinsPuzzle'])
   assert.ok(minigamesInRegion('hoenn').includes('contest'))
-  assert.deepEqual(minigamesInRegion('alola').sort(), ['battleRoyal', 'mantineSurf', 'pokePelago'])
+  assert.deepEqual(minigamesInRegion('alola').sort(), ['battleRoyal', 'mantineSurf', 'pokePelago', 'ultraWarp'])
   assert.deepEqual(minigamesInRegion('galar').sort(), ['curry', 'dynamaxAdventures', 'rotomRally'])
   assert.deepEqual(minigamesInRegion('paldea').sort(), ['academyQuiz', 'ogreOustin', 'picnic', 'teraRaid'])
   assert.deepEqual(minigamesInRegion('sinnoh').sort(), ['berryBlender', 'iceSlide', 'mining', 'pokeRadar', 'unownPicross'])

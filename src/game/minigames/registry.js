@@ -35,6 +35,7 @@ import { POKESHOT_COST, POKESHOT_SECONDS } from './pokeshot.js'
 import { TERA_RAID_COST } from './tera-raid.js'
 import { POKEWORD_COST, POKEWORD_ROUNDS, POKEWORD_SECONDS } from './pokeword.js'
 import { BERRY_BLENDER_COST, BERRY_BLENDER_MS } from './berry-blender.js'
+import { ULTRA_WARP_COST, ULTRA_WARP_SECONDS } from './ultra-warp.js'
 
 import { MINIGAME_AREAS, MINIGAME_IDS, MINIGAME_LOCATIONS } from './locations.js'
 export { MINIGAME_AREAS, MINIGAME_IDS, MINIGAME_LOCATIONS }
@@ -82,6 +83,7 @@ export const MINIGAME_PHASES = {
   teraRaid: 'teraRaid',
   pokeword: 'pokeword',
   berryBlender: 'berryBlender',
+  ultraWarp: 'ultraWarp',
 }
 
 /**
@@ -172,6 +174,7 @@ export const MINIGAME_START_ACTION = {
   teraRaid: 'START_TERA_RAID',
   pokeword: 'START_POKEWORD',
   berryBlender: 'START_BERRY_BLENDER',
+  ultraWarp: 'START_ULTRA_WARP',
 }
 
 /**
@@ -393,6 +396,12 @@ export const MINIGAME_INFO = {
     action: 'START BLENDING',
     hint: `The blender's speed always sags, so tap to rev it back up \u2014 but keep the needle inside the sweet spot as it sweeps back and forth over ${BERRY_BLENDER_MS / 1000} seconds. A smoother blend pays better. Entry is $${BERRY_BLENDER_COST.toLocaleString()}.`,
   },
+  ultraWarp: {
+    title: 'Ultra Warp Ride',
+    cost: ULTRA_WARP_COST,
+    action: 'RIDE THE WORMHOLE',
+    hint: `Ride through a wormhole for ${ULTRA_WARP_SECONDS} seconds, collecting rings and dodging debris. The cleaner the run, the rarer the wormhole it reaches \u2014 then pick one of the doors and keep the legendary waiting beyond it. Entry is $${ULTRA_WARP_COST.toLocaleString()}.`,
+  },
 }
 
 /**
@@ -576,6 +585,11 @@ export const MINIGAME_TUTORIALS = {
     'The blender\u2019s speed always sags \u2014 tap to rev it back up.',
     'Keep the needle inside the sweet spot as it sweeps back and forth.',
     `A smoother blend over ${BERRY_BLENDER_MS / 1000} seconds pays better.`,
+  ],
+  ultraWarp: [
+    'Steer the rider left and right with the arrow keys, by dragging, or with the buttons.',
+    'Ride through rings to build your score and dodge the debris \u2014 the cleaner the run, the deeper the wormhole it reaches.',
+    'At the end, pick one of the wormholes you reached and keep the legendary waiting inside it.',
   ],
 }
 

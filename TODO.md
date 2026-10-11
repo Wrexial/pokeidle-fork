@@ -17,12 +17,10 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 1 — Worth the effort
 
-1. **#78 Alola Ultra Warp Ride** — M · ★★★ — a warp minigame to reach the Ultra
-   Beasts and legends.
-2. **#66 Battle Frontier facilities** — M–L · ★★½ — rule-variant facilities on
+1. **#66 Battle Frontier facilities** — M–L · ★★½ — rule-variant facilities on
    the Tower / Maison scenes.
-3. **#61 Focus / target hunting** — S–M · ★★½.
-4. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
+2. **#61 Focus / target hunting** — S–M · ★★½.
+3. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
 
 ### Tier 2 — Big, defer
 
@@ -265,27 +263,6 @@ A sweep over the small input controls so like looks like like.
 - [ ] Check the settings toggles and the radio-style option lists match too.
 
 Effort: **small–medium**.
-
-## 78. Alola Ultra Warp Ride (warp minigame)
-
-Alola's Ultra Beasts are in — all 11 are present and sit on the region's Raid
-Island pool (27 entries) — but there is no Ultra Space and no way to reach them
-besides the ordinary Raid Island pick. Add the **Ultra Warp Ride**: ride
-Solgaleo / Lunala through a wormhole and steer for the rarest destination.
-
-- [ ] Add an **Ultra Space** point of interest in Alola (a post-game location,
-      or a hub on the existing Raid Island) that launches the minigame.
-- [ ] Design the ride: a scrolling wormhole tunnel the player steers through,
-      collecting rings / dodging debris. The furthest, cleanest run reaches the
-      rarest wormhole.
-- [ ] Map the destination to a species drawn from Alola's raid pool — the 11
-      Ultra Beasts plus the regional legends — so a good run can pick the target
-      instead of leaving it to the raid's weighted roll.
-- [ ] Reuse the fixed-minigame plumbing (registry entry, phase + scene, a
-      `START_*` action, the idle-loop pause list, a tutorial) and the Raid Island
-      encounter data for the destination.
-
-Effort: **medium**.
 
 ## 79. Johto Poké Ball crafting (Kurt)
 

@@ -6,6 +6,7 @@ import { dailyEventByKey, rollDailyEvent, todayKey } from '../../data/daily-even
 import { pokemonSpecies } from '../../data/gameData.js'
 import { SHINY_CHAIN_FIRST_TARGET, formatReward, prepareNextBattle } from '../progression.js'
 import { questLabel, rollQuests } from '../quests.js'
+import { applyResearchEarnings } from '../research.js'
 import { withNotification } from '../reducer-helpers.js'
 
 /**
@@ -48,7 +49,7 @@ export function markCaught(state, action) {
             pokedexCaught,
           }
   return withNotification(
-    nextState,
+    applyResearchEarnings(nextState, speciesKey),
     isNewSpecies
       ? {
           message: `${speciesName} was registered in the Pokédex!`,
@@ -77,10 +78,13 @@ export function markShinyCaught(state, action) {
   return state.shinyCaught.includes(speciesKey)
     ? state
     : withNotification(
-        {
-          ...state,
-          shinyCaught: [...state.shinyCaught, speciesKey],
-        },
+        applyResearchEarnings(
+          {
+            ...state,
+            shinyCaught: [...state.shinyCaught, speciesKey],
+          },
+          speciesKey
+        ),
         {
           message: `Shiny ${pokemonSpecies[speciesKey]?.name ?? speciesKey} was caught!`,
           tone: 'shiny',

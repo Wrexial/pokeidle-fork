@@ -12,6 +12,7 @@ import { createVolatileState } from '../../combat.js'
 import { fieldWeatherFor } from '../../weather.js'
 import { tickGarden } from '../../garden.js'
 import { tickPelago } from '../../pelago.js'
+import { creditResearchDefeat } from '../../research.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { gainFriendship, isBattleReady } from '../../pokemon.js'
 import { advanceShinyTarget, computeUnlockedLocations, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from '../../progression.js'
@@ -225,6 +226,9 @@ export function consumeEvent(state, action) {
     garden = state.garden,
     pelago = state.pelago,
     shinyChain = state.shinyChain,
+    researchDefeated = state.researchDefeated,
+    researchClaimed = state.researchClaimed,
+    researchPoints = state.researchPoints,
     party = state.party,
     hatchedEgg = /** @type {Pokemon[]} */ ([]),
     inventory = state.inventory,
@@ -263,6 +267,14 @@ export function consumeEvent(state, action) {
     !state.bossBattle
   ) {
     wildBattlesWon++
+    // Field research: count the defeat and credit any newly-earned points.
+    const researched = creditResearchDefeat(
+      { ...state, researchDefeated },
+      state.enemyPokemon?.speciesKey
+    )
+    researchDefeated = researched.researchDefeated
+    researchClaimed = researched.researchClaimed
+    researchPoints = researched.researchPoints
     // Battling together builds friendship (and can unlock friendship evolutions).
     playerPokemon &&
       (playerPokemon = {
@@ -423,6 +435,9 @@ export function consumeEvent(state, action) {
     enemyPokemon,
     wildBattlesWon,
     battlesWonByLocation,
+    researchDefeated,
+    researchClaimed,
+    researchPoints,
     weather,
     battleHazards,
     terrain,

@@ -710,6 +710,46 @@ async function main() {
       console.log('WARNING: no assign-a-job button found')
     }
 
+    // Field research: the Pokedex detail panel's research block + shop.
+    await cdp.eval(
+      `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+        JSON.stringify({
+          ...minigameSave('kanto', 'palletTown', 'route1', ['palletTown']),
+          pokedexCaught: ['bulbasaur'],
+          pokedexSeen: ['bulbasaur'],
+          researchDefeated: { bulbasaur: 4 },
+          researchClaimed: { bulbasaur: 3 },
+          researchPoints: 5,
+        })
+      )}); 'ok'`
+    )
+    await cdp.send('Page.navigate', { url: APP_URL })
+    await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'research data')
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+    )
+    await sleep(600)
+    const openedDex = await cdp.eval(
+      `(() => { const b = [...document.querySelectorAll('.backpack-tab-bar .tab-btn')].find((el) => /dex/i.test(el.textContent)); if (!b) return false; b.click(); return true })()`
+    )
+    if (openedDex) {
+      await cdp.waitFor(`!!document.querySelector('.pokedex-tile')`, 5000, 'pokedex tiles')
+      await cdp.eval(`(() => { document.querySelector('.pokedex-tile').click(); return true })()`)
+      await cdp.waitFor(`!!document.querySelector('.research-panel')`, 5000, 'research panel')
+      await sleep(200)
+      await cdp.screenshot(path.join(OUT, '31-research.png'))
+      const openedShop = await cdp.eval(
+        `(() => { const b = [...document.querySelectorAll('.research-head .job-btn')].find((el) => /SHOP/.test(el.textContent)); if (!b) return false; b.click(); return true })()`
+      )
+      if (openedShop) {
+        await cdp.waitFor(`!!document.querySelector('.research-shop-modal')`, 5000, 'research shop')
+        await cdp.screenshot(path.join(OUT, '31b-research-shop.png'))
+      }
+      console.log('Field research ok')
+    } else {
+      console.log('WARNING: no Dex tab for research')
+    }
+
     // Click FIGHT in the Gauntlet to exercise the run loop (the fresh save's
     // Charmander will lose, which still shows the result + reward screens).
     if (await cdp.eval(`!!document.querySelector('.gauntlet-bracket')`)) {

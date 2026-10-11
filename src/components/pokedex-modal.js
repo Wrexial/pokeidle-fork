@@ -23,6 +23,7 @@ import { useGame } from '../game/context.js'
 import { useUi } from '../game/ui-context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { PokedexTile } from './pokedex-tile.js'
+import { ResearchPanel } from './research-panel.js'
 
 /** @param {{ onClose?: () => void, inline?: boolean }} props */
 export function PokedexModal({ onClose, inline = false }) {
@@ -424,6 +425,7 @@ export function PokedexModal({ onClose, inline = false }) {
                     )
                   }),
                 }),
+              activeStatus !== 'unseen' && jsx(ResearchPanel, { speciesKey: activeKey }),
             ],
           }),
       ],

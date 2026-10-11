@@ -15,6 +15,7 @@ import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } f
 import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } from './reducer/pelago.js'
 import { assignJob, collectJob, takeJobEncounter, unassignJob, accrueJobFinds } from './reducer/jobs.js'
 import { claimGift, startStaticEncounter } from './reducer/gifts.js'
+import { buyResearchItem } from './reducer/research.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, recordGameCornerWin, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startChampionGauntlet, startBugContest, startContest, startCurry, startDoubles, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack, startMantineSurf, startRotomRally, startOgreOustin, startTypeFusion, startUnownPicross, startPokeshot, startTeraRaid, startPokeword, startBerryBlender } from './reducer/minigames.js'
 import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
@@ -90,6 +91,12 @@ export const initialGameState = {
   pelago: createPelago(),
   /** Field Jobs: Pokemon posted to auto-run route activities (see game/jobs.js). */
   jobs: createJobs(),
+  /** Field research: wild defeats per species (see game/research.js). */
+  researchDefeated: {},
+  /** Research points already credited per species (so a balance is spendable). */
+  researchClaimed: {},
+  /** Unspent Research Points. */
+  researchPoints: 0,
   /** The last Pelago collection, shown in a result card until dismissed. */
   pelagoCollect: null,
   trainerBattle: null,
@@ -533,6 +540,8 @@ export function gameReducer(state, action) {
       return takeJobEncounter(state, action)
     case 'ACCRUE_JOBS':
       return accrueJobFinds(state, action)
+    case 'BUY_RESEARCH_ITEM':
+      return buyResearchItem(state, action)
     case 'COLLECT_MINING':
       return collectMining(state, action)
     case 'BUY_REWARD_ITEM':

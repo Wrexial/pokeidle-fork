@@ -4270,6 +4270,104 @@ img {
     align-self: flex-end
 }
 
+/* Field research (Pokedex detail) and the Research Shop. */
+.research-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 8px;
+    background: rgba(10,14,10,.4);
+    border: 1px solid #4a6a8a;
+    border-radius: 6px
+}
+
+.research-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap
+}
+
+.research-title {
+    font-size: 9px;
+    color: #8fd0ff
+}
+
+.research-level {
+    font-size: 8px;
+    color: var(--gold)
+}
+
+.research-level.complete {
+    color: #8fdc6a
+}
+
+.research-tasks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px
+}
+
+.research-task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 8px;
+    color: #cbbfa6
+}
+
+.research-task.done {
+    color: #8fdc6a
+}
+
+.research-task-progress {
+    color: #a99a7d
+}
+
+.research-task.done .research-task-progress {
+    color: #8fdc6a
+}
+
+.research-shop-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.research-shop-row {
+    display: flex;
+    align-items: center;
+    gap: 8px
+}
+
+.research-shop-name {
+    flex: 1;
+    font-size: 9px;
+    color: var(--parchment)
+}
+
+.research-shop-owned {
+    font-size: 7px;
+    color: #a99a7d
+}
+
+.research-shop-cost {
+    min-width: 48px;
+    text-align: right;
+    font-size: 9px;
+    color: var(--gold)
+}
+
+.research-shop-cost.short {
+    color: #e88a8a
+}
+
 .location-minigame-start {
     width: 100%;
     padding: 6px 8px;

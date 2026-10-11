@@ -35,19 +35,17 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 3 — New ideas (route activities, idle depth, endgame)
 
-7. **#63 Field research tasks** — M–L · ★★★★ — per-species tasks and a
-   research shop.
-8. **#69 Legendary quests** — M · ★★★.
-9. **#65 Prestige perks** — M–L · ★★★.
-10. **#71 Breeding project queue** — M · ★★★.
-11. **#62 Offline depth** — M · ★★★.
-12. **#72 QoL pass** — S–M · ★★★.
-13. **#67 Ribbons + ribbon case** — S–M · ★★½.
-14. **#68 Generation-completion rewards** — S · ★★.
-15. **#59 Activity goals & per-route mastery** — S–M · ★★.
-16. **#61 Focus / target hunting** — S–M · ★★½.
-17. **#66 Battle Frontier facilities** — M–L · ★★½.
-18. **#70 Recurring rival** — M · ★★½.
+7. **#69 Legendary quests** — M · ★★★.
+8. **#65 Prestige perks** — M–L · ★★★.
+9. **#71 Breeding project queue** — M · ★★★.
+10. **#62 Offline depth** — M · ★★★.
+11. **#72 QoL pass** — S–M · ★★★.
+12. **#67 Ribbons + ribbon case** — S–M · ★★½.
+13. **#68 Generation-completion rewards** — S · ★★.
+14. **#59 Activity goals & per-route mastery** — S–M · ★★.
+15. **#61 Focus / target hunting** — S–M · ★★½.
+16. **#66 Battle Frontier facilities** — M–L · ★★½.
+17. **#70 Recurring rival** — M · ★★½.
 
 ---
 
@@ -217,14 +215,6 @@ Richer offline reports and queued work: which routes/activities ran, what was
 caught, and a catch-up simulation that matches `offline.js`.
 
 Effort: **medium**.
-
-## 63. Field research tasks
-
-A Legends-style research level per species: tasks (see/catch/defeat N, win with
-a type, land a bullseye, evolve) award research points that spend in a research
-shop. New state; reuse `pokedex-sources.js` and the achievement-queue pattern.
-
-Effort: **medium–large**.
 
 ## 65. Prestige perks
 

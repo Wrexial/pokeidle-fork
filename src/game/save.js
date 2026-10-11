@@ -17,6 +17,7 @@ import { GAME_CORNER_PRIZE_GOAL } from './minigames/game-corner.js'
 import { PELAGO_MAX_READY, PELAGO_SLOTS, createPelago } from './pelago.js'
 import { RODS, rodsForRegionCount, routeActivityIds } from './minigames.js'
 import { JOB_MAX_READY, accrueJobs, jobCycleMs, jobKey } from './jobs.js'
+import { RESEARCH_MAX_POINTS } from './research.js'
 import { GIFTS, STATIC_ENCOUNTERS } from './gifts.js'
 import { initialGameState } from './reducer.js'
 import { SHINY_CHAIN_FIRST_TARGET, computeOfflineReward, entryRoutePath } from './progression.js'
@@ -501,6 +502,22 @@ export function repairSave(saved) {
     }
   }
 
+  // Field research: keep only real species and sane counters.
+  const researchDefeated = /** @type {Record<string, number>} */ ({}),
+    savedDefeated =
+      saved.researchDefeated && typeof saved.researchDefeated === 'object'
+        ? saved.researchDefeated
+        : {}
+  for (const [speciesKey, count] of Object.entries(savedDefeated))
+    if (pokemonSpecies[speciesKey] && Number.isFinite(count) && count > 0)
+      researchDefeated[speciesKey] = Math.min(1_000_000, Math.floor(count))
+  const researchClaimed = /** @type {Record<string, number>} */ ({}),
+    savedClaimed =
+      saved.researchClaimed && typeof saved.researchClaimed === 'object' ? saved.researchClaimed : {}
+  for (const [speciesKey, points] of Object.entries(savedClaimed))
+    if (pokemonSpecies[speciesKey] && Number.isFinite(points) && points > 0)
+      researchClaimed[speciesKey] = Math.min(RESEARCH_MAX_POINTS, Math.floor(points))
+
   // Repair save data that references content which no longer exists (regions,
   // routes and locations have been rebuilt several times), so an old save can't
   // put the game loop into an unknown location and crash.
@@ -695,6 +712,9 @@ export function repairSave(saved) {
     garden,
     pelago,
     jobs,
+    researchDefeated,
+    researchClaimed,
+    researchPoints: Math.max(0, Math.floor(Number(saved.researchPoints) || 0)),
     shinySeen,
     alwaysCatchShinies: saved.alwaysCatchShinies ?? true,
     defeatedGyms,
@@ -857,6 +877,9 @@ export const SAVED_STATE_KEYS = [
   'garden',
   'pelago',
   'jobs',
+  'researchDefeated',
+  'researchClaimed',
+  'researchPoints',
   'shinySeen',
   'defeatedGyms',
   'defeatedEliteFour',

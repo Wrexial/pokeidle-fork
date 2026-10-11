@@ -582,6 +582,12 @@ type GameState = {
   pelago: Pelago
   /** Field Jobs: Pokemon auto-running route activities (see game/jobs.js). */
   jobs: FieldJobs
+  /** Field research: wild defeats per species (see game/research.js). */
+  researchDefeated: Record<string, number>
+  /** Research points already credited per species. */
+  researchClaimed: Record<string, number>
+  /** Unspent Research Points. */
+  researchPoints: number
   /** The last Pelago collection, shown in a result card until dismissed. */
   pelagoCollect: PelagoCollect | null
   defeatedGyms: string[]

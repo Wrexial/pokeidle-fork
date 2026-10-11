@@ -98,6 +98,12 @@ export const CHANGELOG = [
           ],
         },
         {
+          heading: 'Research',
+          items: [
+            'Field research gives every species five tasks \u2014 catch it, defeat it 3/10/25 times in the wild, and catch its shiny \u2014 that earn Research Points as you play. It reads the Pokedex plus a new per-species wild-defeat count, so there is nothing extra to babysit, and each species tracks its own research level (up to 10) in the Pokedex detail. The points spend in a Research Shop on Exp. Candy, Rare Candy, every evolution stone, Bottle Caps and a Master Ball.',
+          ],
+        },
+        {
           heading: 'Fixes',
           items: [
             'A failed startup can no longer cost you your save: the self-heal that resets a stuck save now copies every slot aside first and puts them back on the next successful load, and a single transient failure just reloads instead of erasing anything',

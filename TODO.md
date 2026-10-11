@@ -55,6 +55,12 @@ renumbered, so the gaps below are items that shipped.
 21. **#76 Legends Arceus / Hisui areas (Sinnoh)** — M · ★★★ — ancient Sinnoh as a
     post-game zone.
 22. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
+23. **#78 Alola Ultra Warp Ride** — M · ★★★ — a warp minigame to reach the Ultra
+    Beasts and legends.
+24. **#79 Johto Poké Ball crafting (Kurt)** — M · ★★★ — Apricorn/berry crafting
+    and the seven Apricorn balls.
+25. **#80 Companion affection perks** — S–M · ★★ — a high-affection Pokémon
+    "toughs it out" at 1 HP.
 
 ---
 
@@ -388,6 +394,79 @@ A sweep over the small input controls so like looks like like.
 - [ ] Check the settings toggles and the radio-style option lists match too.
 
 Effort: **small–medium**.
+
+## 78. Alola Ultra Warp Ride (warp minigame)
+
+Alola's Ultra Beasts are in — all 11 are present and sit on the region's Raid
+Island pool (27 entries) — but there is no Ultra Space and no way to reach them
+besides the ordinary Raid Island pick. Add the **Ultra Warp Ride**: ride
+Solgaleo / Lunala through a wormhole and steer for the rarest destination.
+
+- [ ] Add an **Ultra Space** point of interest in Alola (a post-game location,
+      or a hub on the existing Raid Island) that launches the minigame.
+- [ ] Design the ride: a scrolling wormhole tunnel the player steers through,
+      collecting rings / dodging debris. The furthest, cleanest run reaches the
+      rarest wormhole.
+- [ ] Map the destination to a species drawn from Alola's raid pool — the 11
+      Ultra Beasts plus the regional legends — so a good run can pick the target
+      instead of leaving it to the raid's weighted roll.
+- [ ] Reuse the fixed-minigame plumbing (registry entry, phase + scene, a
+      `START_*` action, the idle-loop pause list, a tutorial) and the Raid Island
+      encounter data for the destination.
+
+Effort: **medium**.
+
+## 79. Johto Poké Ball crafting (Kurt)
+
+Johto's signature ball-crafting has no home yet: the game ships 13 balls
+(Poké / Great / Ultra, the situational set and the Master Ball) but **no Apricorn
+balls and no crafting**. Add **Kurt** in Azalea Town and the seven Apricorn balls.
+
+- [ ] Add the **Apricorn** items (Red, Blue, Yellow, Green, Pink, White, Black),
+      gathered on Johto routes — or grown/harvested, since the user framed this as
+      berry crafting; the Berry Garden (`garden.js`) grows Oran / Sitrus / Lum
+      today, so either add Apricorns to it or give the trees their own gathering.
+- [ ] Add the seven balls with their real effects: **Level** (lower-level foes),
+      **Lure** (fishing), **Friend** (sets friendship), **Heavy** (heavier foes),
+      **Love** (opposite gender), **Fast** (fast / fleeing foes) and **Moon**
+      (Moon Stone evolvers).
+- [ ] Wire each ball's catch-rate modifier into `src/game/catching.js` and the
+      auto-catch ball picker, alongside the existing situational balls.
+- [ ] The crafting loop: hand Kurt the Apricorns and collect the balls after a
+      few wild wins (his canonical turnaround), or make it instant.
+- [ ] Sprites via `tools/download-item-sprites.cjs` (add the new ids to its
+      name map).
+
+Effort: **medium**.
+
+## 80. Companion affection perks (tough it out)
+
+In the games, a Pokémon with high affection (Amie / Refresh / Camp) can **tough
+out** a would-be KO at 1 HP — "X toughed it out so you wouldn't feel sad!" —
+on top of the other affection effects (shaking off status, dodging a move, extra
+crits, bonus EXP). The game has both halves already but they don't meet:
+
+- **Friendship** is a per-Pokémon value (`gainFriendship`, friendship
+evolutions), and the **companion** (`src/game/companion.js`) has care stats
+(fullness / happiness / energy / cleanliness) and already grants +15% EXP when
+all four are at 50+.
+- Neither affects **survival** in battle today.
+
+- [ ] In the damage step (`src/game/combat/turn.js`, beside
+      `abilitySurvivesAtFullHp` / Endure / `heldSurvivesAtFullHp`), when the
+      player's Pokémon would faint, roll a chance to leave it at **1 HP** with
+      the log line "X toughed it out so you wouldn't feel sad!".
+- [ ] Gate it on affection: the pinned companion with high care (or a high
+      friendship value) — scale the chance with the care stats so a well-kept
+      buddy is likelier to hang on.
+- [ ] Allow it **once per battle** (like the Focus Sash) so a Pokémon can't
+      chain-survive, and show it clearly in the battle log / a toast.
+- [ ] Optional extras if we want the full affection set: shake off a status
+      condition, dodge a move, or a bumped crit rate — but the 1 HP save is the
+      headline.
+
+Effort: **small–medium** (one hook, one roll and a log line; the state already
+exists).
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

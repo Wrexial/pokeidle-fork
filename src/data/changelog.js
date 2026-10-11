@@ -39,6 +39,7 @@ export const CHANGELOG = [
           'Out-of-battle abilities got a pass: Flame Body, Magma Armor and Steam Engine halve egg hatching, Static and Lightning Rod draw Electric wilds, Magnet Pull draws Steel and Storm Drain Water, Cute Charm biases a wild’s gender, Super Luck and Compound Eyes double wild held-item odds, and Illuminate draws 50% more item drops.',
           'Fishing has real bite rolls (Suction Cups and Sticky Hold steady the line, and the rarest fish are "multi-catch", needing a second perfect reel), Honey gives a 1.5x catch-rate bonus, and a third battle style joins Set and Switch: Training keeps your lead in for the EXP but swaps it out below a third of its HP (a Lv. 100 lead shares its EXP with the party).',
           'A well-kept companion can tough out a would-be knockout at 1 HP (\u201cX toughed it out so you wouldn\u2019t feel sad!\u201d). The chance scales with its care stats, applies only to the pinned Pokemon while it is in battle, and can save it once per battle like a Focus Sash.',
+          'The move buttons show each move\u2019s type effectiveness against the current foe (\u00d72, \u00d7\u00bd, \u00d70) and flag an estimated knockout with a KO tag.',
         ],
       },
       {
@@ -70,6 +71,7 @@ export const CHANGELOG = [
           'The Town Map marks a fully-caught route with a teal marker and "All Pokemon caught" legend entry, and marks the Day-Care, Berry Garden, Battle Tower, every Raid Island and the Ruins of Alph and Tanoby Ruins with named service markers.',
           'Settings gained a Display section (animated or static sprites, damage numbers and shiny sparkles), the game keeps the screen awake while open, and a cafe opened in each region’s main city, selling a Poffin (+30 friendship) or a Poke Bean.',
           'Settings gained Auto-Heal, which tops the party up at the Pokemon Center whenever the map is idle and someone is hurt, and a Default Catch Rule (mode, level threshold and enabled balls) for every route you have not customised from its Catch Settings.',
+          'The Box can sort by total IVs, and a TEAM button in the Party header saves the current party as a preset and restores it in one tap (pulling any missing Pokemon back out of the Box).',
         ],
       },
       {

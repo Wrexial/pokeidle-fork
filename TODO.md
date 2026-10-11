@@ -289,8 +289,15 @@ Effort: **medium**.
 
 ## 72. QoL pass
 
-Team presets, box bulk-release/sort by IV, damage/effectiveness preview on the
-battle move buttons, and JSON save export/import.
+Done: box sort by total IVs; a damage/effectiveness preview on the battle move
+buttons (a type multiplier, plus a KO tag from `estimateMoveDamage`); party
+team presets (`src/components/team-presets.js`, saved in the save and restored
+by `APPLY_TEAM_PRESET`); and JSON save export/import in Settings.
+
+Still open:
+
+- [ ] Box bulk-release (multi-select or a filtered "release all"); the Box
+      already has one-tap "Release Duplicates".
 
 Effort: **small–medium**.
 

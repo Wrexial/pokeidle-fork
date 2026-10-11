@@ -11,6 +11,7 @@ import { ExpBar } from './exp-bar.js'
 import { ItemIcon } from './item-icon.js'
 import { HpBar } from './hp-bar.js'
 import { StatsPanel } from './stats-panel.js'
+import { TeamPresets } from './team-presets.js'
 
 /** @param {{ inspected: Inspected, setInspected: (value: Inspected) => void, releaseConfirm: string | null, setReleaseConfirm: (value: string | null) => void, dragSource?: 'party' | 'box' | null, dragFromIndex?: number | null, dropTargetIndex?: number | null, dropPosition?: 'above' | 'below' | null, onDragStart?: any, onDragOver?: any, onDrop?: any, onDragEnd?: any }} props */
 export function PartyPanel({
@@ -138,6 +139,7 @@ export function PartyPanel({
             className: 'panel-title',
             children: 'Party',
           }),
+          jsx(TeamPresets, {}),
           jsx('button', {
             className: `heal-btn${(state.phase === 'idle' || state.phase === 'battling' || state.phase === 'victory' || state.phase === 'defeat') && state.party.some((member) => member.currentHp < member.maxHp) ? '' : ' disabled'}`,
             onClick: () => {

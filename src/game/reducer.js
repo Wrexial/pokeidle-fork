@@ -17,7 +17,7 @@ import { assignJob, collectJob, takeJobEncounter, unassignJob, accrueJobFinds } 
 import { claimGift, startStaticEncounter } from './reducer/gifts.js'
 import { buyResearchItem } from './reducer/research.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, recordGameCornerWin, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startChampionGauntlet, startBugContest, startContest, startCurry, startDoubles, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack, startMantineSurf, startRotomRally, startOgreOustin, startTypeFusion, startUnownPicross, startPokeshot, startTeraRaid, startPokeword, startBerryBlender } from './reducer/minigames.js'
-import { boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, setBoxSort, setMoves, setNickname, startEvolution, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
+import { applyTeamPreset, boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, deleteTeamPreset, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseHatchling, releasePokemon, reorderBox, reorderParty, saveTeamPreset, setBoxSort, setMoves, setNickname, startEvolution, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
 import { addLog, clearLevelUp, dismissNotification, markCatchRoute, markTutorialSeen, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoHeal, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleDamageNumbers, toggleLargeText, toggleMartCollapsed, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx, toggleShinySparkles, toggleSpriteStyle } from './reducer/settings.js'
 import { phaseIdle, prestigeRegion, resetEliteFour, selectStarter, travel, unlockRegion } from './reducer/world.js'
@@ -61,6 +61,8 @@ export const initialGameState = {
   box: [],
   /** Chosen box sort (see BOX_SORT_FIELDS / BOX_SORT_DIRECTIONS). */
   boxSort: 'dex_asc',
+  /** Saved party presets, most recent last (see game/reducer/pokemon/team-presets.js). */
+  teamPresets: [],
   /** Newly hatched Pokemon shown in the hatch popup (null when dismissed). */
   hatchResult: null,
   autoCatch: !0,
@@ -370,6 +372,12 @@ export function gameReducer(state, action) {
       return reorderBox(state, action)
     case 'SET_BOX_SORT':
       return setBoxSort(state, action)
+    case 'SAVE_TEAM_PRESET':
+      return saveTeamPreset(state, action)
+    case 'DELETE_TEAM_PRESET':
+      return deleteTeamPreset(state, action)
+    case 'APPLY_TEAM_PRESET':
+      return applyTeamPreset(state, action)
     case 'RELEASE_POKEMON':
       return releasePokemon(state, action)
     case 'RELEASE_FAINTED':

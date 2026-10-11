@@ -11,7 +11,7 @@ import { hasClaimableQuests } from '../game/quests.js'
 import { biomeBackgroundFor, biomeForLocation, BIOME_FILTERS, DAY_NIGHT_FILTERS, locationImages } from '../data/ui.js'
 import { useDayPhase } from '../hooks.js'
 import { getDexStatus, shouldOfferMasterBall } from '../game/catching.js'
-import { battleSpecies } from '../game/combat.js'
+import { battleSpecies, estimateMoveDamage, getTypeMultiplier } from '../game/combat.js'
 import { BattleWeatherOverlay } from './battle-weather-overlay.js'
 import { isFemalePokemon } from '../game/breeding.js'
 import { WEATHER_ICONS, WEATHER_NAMES } from '../game/weather.js'
@@ -67,6 +67,44 @@ import { RouteActivityScene } from './route-activity-scene.js'
 import { WonderTradeScene } from './wonder-trade-scene.js'
 import { PokeballIcon } from './pokeball-icon.js'
 import { SpeedControls } from './speed-controls.js'
+
+/**
+ * A move's effectiveness against the current foe and a rough KO estimate, for
+ * the manual move buttons. Status moves (and a missing foe) return null.
+ * @param {any} moveDef
+ * @param {any} playerPokemon
+ * @param {any} enemyPokemon
+ * @returns {{ multiplier: number, ko: boolean } | null}
+ */
+function movePreview(moveDef, playerPokemon, enemyPokemon) {
+  if (!enemyPokemon || !moveDef || !(moveDef.power > 0)) return null
+  const physical = moveDef.category === 'physical',
+    attack = physical ? playerPokemon.attack : playerPokemon.spAttack,
+    defense = physical ? enemyPokemon.defense : enemyPokemon.spDefense,
+    attackStage = playerPokemon.statStages?.[physical ? 'attack' : 'spAttack'] ?? 0,
+    defenseStage = enemyPokemon.statStages?.[physical ? 'defense' : 'spDefense'] ?? 0,
+    estimate = estimateMoveDamage(
+      playerPokemon.level,
+      attack,
+      defense,
+      moveDef,
+      playerPokemon.types ?? [],
+      enemyPokemon.types ?? [],
+      attackStage,
+      defenseStage
+    ),
+    multiplier = getTypeMultiplier(moveDef.type, enemyPokemon.types ?? [])
+  return { multiplier, ko: estimate >= (enemyPokemon.currentHp ?? 0) }
+}
+
+/** @param {number} multiplier */
+function formatEffectiveness(multiplier) {
+  if (multiplier === 0) return '\u00d70'
+  if (multiplier === 0.25) return '\u00d7\u00bc'
+  if (multiplier === 0.5) return '\u00d7\u00bd'
+  if (multiplier === 0.125) return '\u00d7\u215b'
+  return `\u00d7${multiplier}`
+}
 
 /** @param {{ onOpenMenu: (menu: import('./battle-menu-modals.js').BattleMenuKey) => void }} props */
 export function BattleScene({ onOpenMenu }) {
@@ -595,7 +633,8 @@ export function BattleScene({ onOpenMenu }) {
               jsx('div', {
                 className: 'move-grid',
                 children: playerPokemon.moves.map((moveId) => {
-                  const moveDef = moveData[moveId]
+                  const moveDef = moveData[moveId],
+                    preview = moveDef ? movePreview(moveDef, playerPokemon, enemyPokemon) : null
                   return moveDef
                     ? jsxs(
                         'div',
@@ -652,6 +691,29 @@ export function BattleScene({ onOpenMenu }) {
                                 }),
                               ],
                             }),
+                            preview && (preview.multiplier !== 1 || preview.ko)
+                              ? jsxs('div', {
+                                  className: 'move-preview',
+                                  children: [
+                                    preview.multiplier !== 1 &&
+                                      jsx('span', {
+                                        className: `move-effectiveness${
+                                          preview.multiplier > 1
+                                            ? ' strong'
+                                            : preview.multiplier === 0
+                                              ? ' immune'
+                                              : ' weak'
+                                        }`,
+                                        children: formatEffectiveness(preview.multiplier),
+                                      }),
+                                    preview.ko &&
+                                      jsx('span', {
+                                        className: 'move-ko',
+                                        children: 'KO',
+                                      }),
+                                  ],
+                                })
+                              : null,
                           ],
                         },
                         moveId

@@ -64,6 +64,32 @@ test('the Game Corner prize track survives a save round-trip', () => {
   assert.equal(repaired.gameCornerProgress, 13)
 })
 
+test('repairSave keeps well-formed team presets and drops junk', () => {
+  const repaired = repairSave(
+    serializeSave({
+      ...startedGame(),
+      teamPresets: [
+        { id: 'a', name: 'Alpha', members: ['1', '2'] },
+        { id: 'b', members: ['3'] },
+        { name: 'no members' },
+        'nonsense',
+      ],
+    })
+  )
+  assert.equal(repaired.teamPresets.length, 2)
+  assert.deepEqual(repaired.teamPresets[0], { id: 'a', name: 'Alpha', members: ['1', '2'] })
+  assert.equal(repaired.teamPresets[1].name, 'Team 2')
+  assert.deepEqual(repaired.teamPresets[1].members, ['3'])
+  // A too-long preset is trimmed to a party of six.
+  const capped = repairSave(
+    serializeSave({
+      ...startedGame(),
+      teamPresets: [{ id: 'c', name: 'Big', members: ['1', '2', '3', '4', '5', '6', '7', '8'] }],
+    })
+  )
+  assert.equal(capped.teamPresets[0].members.length, 6)
+})
+
 test('repairSave reverts a Pokemon saved in a Mega / Gigantamax form', () => {
   const base = startedGame()
   /** @param {string} speciesKey @param {string} name @param {string[]} types */

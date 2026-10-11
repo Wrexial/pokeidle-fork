@@ -6,7 +6,7 @@ import { BOX_SORT_FIELDS } from '../../data/ui.js'
 import { resolvePokemonMoves } from './evolution.js'
 import { calculateRequiredExperience } from './exp.js'
 import { BASE_FRIENDSHIP } from './friendship.js'
-import { calculatePokemonStats, generateIVs } from './stats.js'
+import { IV_STAT_ORDER, calculatePokemonStats, generateIVs } from './stats.js'
 
 /**
  * Roll a species' ability: usually one of its normal abilities, with a small
@@ -169,10 +169,19 @@ export function sortBoxMembers(box, mode = 'dex') {
     byShinyAsc = (left, right) => Number(left.isShiny) - Number(right.isShiny),
     /** @type {(left: Pokemon, right: Pokemon) => number} */
     byNewest = (left, right) => Number(left.id) - Number(right.id),
+    /** @type {(pokemon: Pokemon) => number} */
+    ivTotal = (pokemon) =>
+      IV_STAT_ORDER.reduce(
+        (sum, statKey) => sum + (Number(pokemon.ivs?.[statKey]) || 0),
+        0
+      ),
+    /** @type {(left: Pokemon, right: Pokemon) => number} */
+    byIv = (left, right) => ivTotal(left) - ivTotal(right),
     /** @type {Record<string, (left: Pokemon, right: Pokemon) => number>} */
     fields = {
       dex: byDex,
       level: byLevelAsc,
+      iv: byIv,
       name: byName,
       shiny: byShinyAsc,
       newest: byNewest,

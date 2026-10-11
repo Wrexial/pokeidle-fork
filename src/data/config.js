@@ -7,6 +7,9 @@ export const evValue = 0
 /** Victory Tokens awarded each time a region is prestiged (map progress reset). */
 export const prestigeTokenReward = 3
 
+/** How many saved team presets a save keeps (oldest is dropped past this). */
+export const MAX_TEAM_PRESETS = 8
+
 /** Odds that a Cinnabar Island battle is a MissingNo. encounter (1 in 1000). */
 export const missingnoEncounterChance = 1 / 1000
 

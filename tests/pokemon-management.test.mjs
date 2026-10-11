@@ -200,9 +200,27 @@ test('box sorts honour the field and direction', () => {
   assert.equal(order(sortBoxMembers(box, 'newest')), 'caterpie,rattata,pidgey')
 })
 
+test('box sorts by total IVs', () => {
+  const box = [
+    createPokemon('pidgey', 10, '1'),
+    createPokemon('rattata', 10, '2'),
+    createPokemon('caterpie', 10, '3'),
+  ]
+  box[0].ivs = { hp: 31, attack: 31, defense: 31, spAttack: 31, spDefense: 31, speed: 31 }
+  box[1].ivs = { hp: 0, attack: 0, defense: 0, spAttack: 0, spDefense: 0, speed: 0 }
+  box[2].ivs = { hp: 15, attack: 15, defense: 15, spAttack: 15, spDefense: 15, speed: 15 }
+  const order = (/** @type {any[]} */ members) =>
+    members.map((member) => member.speciesKey).join(',')
+  assert.equal(order(sortBoxMembers(box, 'iv_desc')), 'pidgey,caterpie,rattata')
+  assert.equal(order(sortBoxMembers(box, 'iv_asc')), 'rattata,caterpie,pidgey')
+  // The field-only legacy value defaults to highest-IVs-first.
+  assert.equal(order(sortBoxMembers(box, 'iv')), 'pidgey,caterpie,rattata')
+})
+
 test('the sort button cycles the field and the mode button flips the direction', () => {
   assert.equal(nextBoxSortField('dex_asc'), 'level_asc')
-  assert.equal(nextBoxSortField('level_desc'), 'name_desc')
+  assert.equal(nextBoxSortField('level_desc'), 'iv_desc')
+  assert.equal(nextBoxSortField('iv_desc'), 'name_desc')
   assert.equal(toggleBoxSortDirection('dex_asc'), 'dex_desc')
   assert.equal(toggleBoxSortDirection('level_desc'), 'level_asc')
 })
@@ -235,5 +253,71 @@ test('Wonder Trade never hands back a battle-only form', async () => {
   assert.ok(
     WONDER_TRADE_POOL.every((speciesKey) => !isTerminalForm(speciesKey)),
     'no Mega / Primal / Gigantamax forms'
+  )
+})
+
+test('team presets save the current party and restore it', () => {
+  const a = createPokemon('bulbasaur', 5, '1'),
+    b = createPokemon('charmander', 5, '2'),
+    c = createPokemon('squirtle', 5, '3'),
+    base = {
+      ...initialGameState,
+      phase: 'idle',
+      party: [a, b],
+      box: [c],
+      playerPokemon: a,
+      activePlayerPokemonIndex: 0,
+    },
+    saved = gameReducer(base, { type: 'SAVE_TEAM_PRESET', payload: {} })
+  assert.equal(saved.teamPresets.length, 1)
+  assert.deepEqual(saved.teamPresets[0].members, ['1', '2'])
+
+  const preset = { id: 'p1', name: 'Test', members: ['3', '1'] },
+    applied = gameReducer(
+      { ...base, teamPresets: [preset] },
+      { type: 'APPLY_TEAM_PRESET', payload: { presetId: 'p1' } }
+    )
+  assert.deepEqual(
+    applied.party.map((member) => member.id),
+    ['3', '1', '2'],
+    'preset members lead, the rest of the party follows'
+  )
+  assert.deepEqual(applied.box, [], 'the boxed member left the box')
+  assert.equal(applied.playerPokemon.id, '3')
+
+  // A member that no longer exists is skipped, and the rest of the party stays.
+  const ghost = { id: 'p2', name: 'Ghost', members: ['999', '2'] },
+    appliedGhost = gameReducer(
+      { ...base, teamPresets: [ghost] },
+      { type: 'APPLY_TEAM_PRESET', payload: { presetId: 'p2' } }
+    )
+  assert.deepEqual(appliedGhost.party.map((member) => member.id), ['2', '1'])
+
+  // Applying mid-battle is a no-op.
+  const battling = { ...base, phase: 'battling', teamPresets: [preset] }
+  assert.equal(
+    gameReducer(battling, { type: 'APPLY_TEAM_PRESET', payload: { presetId: 'p1' } }),
+    battling
+  )
+
+  // Deleting removes it.
+  const deleted = gameReducer(
+    { ...base, teamPresets: [preset] },
+    { type: 'DELETE_TEAM_PRESET', payload: { presetId: 'p1' } }
+  )
+  assert.equal(deleted.teamPresets.length, 0)
+})
+
+test('team presets cap at MAX_TEAM_PRESETS', async () => {
+  const { MAX_TEAM_PRESETS } = await import('../src/data/config.js'),
+    member = createPokemon('bulbasaur', 5, '1')
+  let state = { ...initialGameState, phase: 'idle', party: [member], playerPokemon: member }
+  for (let index = 0; index < MAX_TEAM_PRESETS + 2; index++)
+    state = gameReducer(state, { type: 'SAVE_TEAM_PRESET', payload: {} })
+  assert.equal(state.teamPresets.length, MAX_TEAM_PRESETS)
+  assert.equal(
+    new Set(state.teamPresets.map((preset) => preset.id)).size,
+    MAX_TEAM_PRESETS,
+    'preset ids stay unique'
   )
 })

@@ -2,7 +2,7 @@
 // save. Split out of context.js so the provider is just React wiring and this
 // repair logic stays testable on its own.
 
-import { BATTLE_TOWER_REGION, LEGACY_SAVE_KEYS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, getActiveSlot, regionalStarters, saveSlotKey, setActiveSlot } from '../data/config.js'
+import { BATTLE_TOWER_REGION, LEGACY_SAVE_KEYS, MAX_TEAM_PRESETS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, getActiveSlot, regionalStarters, saveSlotKey, setActiveSlot } from '../data/config.js'
 import { dailyEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
@@ -678,6 +678,24 @@ export function repairSave(saved) {
     party,
     box,
     boxSort: typeof saved.boxSort === 'string' ? saved.boxSort : initialGameState.boxSort,
+    // Saved party presets: keep well-formed entries only, and drop one that
+    // somehow grew past the cap (or past a six-Pokemon party).
+    teamPresets: (Array.isArray(saved.teamPresets) ? saved.teamPresets : [])
+      .filter(
+        (/** @type {any} */ preset) =>
+          preset && typeof preset === 'object' && Array.isArray(preset.members)
+      )
+      .slice(-MAX_TEAM_PRESETS)
+      .map((/** @type {any} */ preset, /** @type {number} */ index) => ({
+        id: typeof preset.id === 'string' && preset.id ? preset.id : `team-${index}`,
+        name:
+          typeof preset.name === 'string' && preset.name.trim()
+            ? preset.name.trim().slice(0, 24)
+            : `Team ${index + 1}`,
+        members: preset.members
+          .filter((/** @type {any} */ memberId) => typeof memberId === 'string')
+          .slice(0, 6),
+      })),
     autoCatch: saved.autoCatch ?? true,
     nextPokemonId: nextId,
     currentLocation: safeLocation,
@@ -861,6 +879,7 @@ export const SAVED_STATE_KEYS = [
   'party',
   'box',
   'boxSort',
+  'teamPresets',
   'nextPokemonId',
   'currentLocation',
   'unlockedLocations',

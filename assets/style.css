@@ -1112,6 +1112,43 @@ img {
     opacity: .7
 }
 
+.move-preview {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 7px;
+    font-weight: 700
+}
+
+.move-effectiveness {
+    padding: 1px 4px;
+    border-radius: 2px;
+    background: #00000038;
+    color: #fff
+}
+
+.move-effectiveness.strong {
+    background: #2e7d32;
+    color: #eaffea
+}
+
+.move-effectiveness.weak {
+    background: #8a3a1a;
+    color: #ffe6d6
+}
+
+.move-effectiveness.immune {
+    background: #333;
+    color: #bbb
+}
+
+.move-ko {
+    padding: 1px 4px;
+    border-radius: 2px;
+    background: var(--gold);
+    color: #1a1008
+}
+
 .move-actions {
     display: flex;
     align-items: center;
@@ -5558,6 +5595,112 @@ img {
     color: #999;
     cursor: not-allowed;
     box-shadow: none
+}
+
+.team-presets-btn {
+    margin-left: auto;
+    margin-right: 6px;
+    font-size: 7px;
+    padding: 2px 6px;
+    background: linear-gradient(180deg,#5a7ab0,#46618f);
+    color: #fff;
+    border: 2px solid #2e3f5f;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: .5px;
+    box-shadow: 1px 1px #0000004d,inset 1px 1px #fff3
+}
+
+.team-presets-btn:hover {
+    background: linear-gradient(180deg,#6a8ac0,#5a7ab0)
+}
+
+.team-presets-modal {
+    max-width: 360px
+}
+
+.team-presets-empty {
+    font-size: 9px;
+    color: #5a4838;
+    margin: 8px 0
+}
+
+.team-presets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 8px 0
+}
+
+.team-presets-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #00000012;
+    padding: 4px 6px;
+    border-radius: 3px
+}
+
+.team-presets-name {
+    flex: 1;
+    min-width: 0;
+    font-size: 8px;
+    font-weight: 700;
+    color: #3a2818;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.team-presets-count {
+    font-size: 7px;
+    color: #6a4a20
+}
+
+.team-presets-apply {
+    font-family: inherit;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 3px 8px;
+    background: var(--gold-dark);
+    color: var(--parchment);
+    border: 2px solid var(--gold);
+    cursor: pointer
+}
+
+.team-presets-apply:disabled {
+    opacity: .5;
+    cursor: not-allowed
+}
+
+.team-presets-delete {
+    font-family: inherit;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 3px 6px;
+    background: transparent;
+    color: #8a3a1a;
+    border: 1px solid #8a3a1a;
+    cursor: pointer
+}
+
+.team-presets-save {
+    font-family: inherit;
+    width: 100%;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 8px;
+    margin-top: 6px;
+    background: var(--gold-dark);
+    color: var(--parchment);
+    border: 2px solid var(--gold);
+    cursor: pointer
+}
+
+.team-presets-save:disabled {
+    opacity: .5;
+    cursor: not-allowed
 }
 
 .shop-panel {

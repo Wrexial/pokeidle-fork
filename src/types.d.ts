@@ -97,6 +97,9 @@ type Pokemon = BattlePokemon & {
   isShiny: boolean
 }
 
+/** A saved party arrangement (see game/reducer/pokemon/team-presets.js). */
+type TeamPreset = { id: string; name: string; members: string[] }
+
 /** A pinned companion and its care stats (see game/companion.js). */
 type Companion = {
   id: string | null
@@ -489,6 +492,8 @@ type GameState = {
   routeActivity?: string | null
   /** Chosen box sort, stored as "<field>_<direction>" (see BOX_SORT_FIELDS / BOX_SORT_DIRECTIONS). */
   boxSort: string
+  /** Saved party presets, most recent last. */
+  teamPresets: TeamPreset[]
   /** The most recently hatched egg, shown in the hatch popup until dismissed. */
   hatchResult: Pokemon | null
   battleLog: string[]

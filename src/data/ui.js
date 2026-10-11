@@ -258,6 +258,7 @@ export const CATCH_MODE_OPTIONS = [
 export const BOX_SORT_FIELDS = [
   { value: 'dex', label: 'Dex', defaultDirection: 'asc' },
   { value: 'level', label: 'Lv', defaultDirection: 'desc' },
+  { value: 'iv', label: 'IVs', defaultDirection: 'desc' },
   { value: 'name', label: 'A-Z', defaultDirection: 'asc' },
   { value: 'shiny', label: '\u2605', defaultDirection: 'desc' },
   { value: 'newest', label: 'New', defaultDirection: 'desc' },

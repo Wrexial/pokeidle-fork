@@ -7,6 +7,7 @@ import { dailyEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
 import { ROUTE_ACTIVITIES } from './minigames/route-activities.js'
+import { BREEDING_GOALS, MAX_BREEDING_PROJECTS } from './breeding-projects.js'
 import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility, rollSize, RIBBONS } from './pokemon.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
@@ -434,7 +435,33 @@ export function repairSave(saved) {
     daycare = {
       parents: daycareParents.slice(0, 2),
       progress: typeof saved.daycare?.progress === 'number' ? saved.daycare.progress : 0,
-    }
+    },
+    // Breeding tracker + project queue: clamp the counters and drop projects
+    // that name a missing species or an unknown goal.
+    breeding = (() => {
+      const raw = saved.breeding && typeof saved.breeding === 'object' ? saved.breeding : {},
+        goals = new Set(BREEDING_GOALS.map((entry) => entry.value)),
+        projects = (Array.isArray(raw.projects) ? raw.projects : [])
+          .filter(
+            (/** @type {any} */ project) =>
+              project && pokemonSpecies[project.speciesKey] && goals.has(project.goal)
+          )
+          .slice(-MAX_BREEDING_PROJECTS)
+          .map((/** @type {any} */ project, /** @type {number} */ index) => ({
+            id: typeof project.id === 'string' && project.id ? project.id : `bp-${index}`,
+            speciesKey: project.speciesKey,
+            goal: project.goal,
+            ...(project.goal === 'nature' && typeof project.nature === 'string'
+              ? { nature: project.nature }
+              : {}),
+          }))
+      return {
+        eggsHatched: Math.max(0, Math.floor(Number(raw.eggsHatched) || 0)),
+        shinyEggsHatched: Math.max(0, Math.floor(Number(raw.shinyEggsHatched) || 0)),
+        eggsSinceShiny: Math.max(0, Math.floor(Number(raw.eggsSinceShiny) || 0)),
+        projects,
+      }
+    })()
 
   // Companion care: keep the pinned Pokemon only if it still exists, and clamp
   // the care stats. Garden plots are rebuilt to the current plot count.
@@ -771,6 +798,7 @@ export function repairSave(saved) {
     pokerus,
     quests,
     daycare,
+    breeding,
     companion,
     gameCornerProgress: Math.max(
       0,
@@ -949,6 +977,7 @@ export const SAVED_STATE_KEYS = [
   'pokerus',
   'quests',
   'daycare',
+  'breeding',
   'companion',
   'gameCornerProgress',
   'garden',

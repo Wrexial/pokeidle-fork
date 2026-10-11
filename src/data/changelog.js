@@ -80,6 +80,7 @@ export const CHANGELOG = [
           'A species with no wild route (evolved forms, starters, fossils, gifts, statics and the rest) no longer shows impossible “defeat it in the wild” research tasks: it observes the species instead — obtain it, feed it a berry, and use its moves in battle — for the same points.',
           'Ribbons are in: a Pokemon earns a permanent award for milestones (Effort at Lv. 100, Best Friends at max friendship), Gym / Elite Four / Champion wins, Battle Tower floors and cleared Contests or the Champions’ Gauntlet. A ribbon case on the stats panel lists everything an individual has earned.',
           'Route activities track mastery: the best hit quality you\u2019ve scored for each activity on a route is remembered, the location panel shows how many are at a perfect hit or better, and clearing every activity on a route pays a one-time bonus and marks it mastered.',
+          'The Day-Care tracks your breeding now: it counts eggs and shinies hatched and eggs since the last shiny, and you can queue breeding projects \u2014 hatch a shiny, all-31 IVs, or a specific nature \u2014 that complete the moment a matching Egg hatches.',
         ],
       },
       {

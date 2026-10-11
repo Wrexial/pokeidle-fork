@@ -38,7 +38,8 @@ renumbered, so the gaps below are items that shipped.
 
 7. **#69 Legendary quests** — M · ★★★.
 8. **#65 Prestige perks** — M–L · ★★★.
-9. **#71 Breeding project queue** — M · ★★★.
+9. **#71 Breeding project queue** — shipped; optional Masuda odds and
+   per-project hatch counters remain.
 10. **#62 Offline depth** — M · ★★★.
 11. **#72 QoL pass** — S–M · ★★★ — IV sort, move preview and team presets
     shipped; box bulk-release remains.
@@ -309,7 +310,19 @@ Effort: **medium**.
 
 ## 71. Breeding project queue & shiny tracking
 
-A day-care project queue, surfaced Masuda odds, and a shiny-egg tracker.
+Done: `src/game/breeding-projects.js` has a per-save breeding tracker (eggs
+hatched, shinies hatched, eggs since the last shiny) and an ordered project
+queue. A project targets the current pair's species with a goal — any hatch, a
+shiny, all-31 IVs, or a specific nature — and completes the moment a matching
+Egg hatches (`advanceBreeding` in `reducer/battle/events.js`). The Day-Care panel
+shows the counters, the queue with a remove button, and a goal picker (the
+shiny odds were already surfaced there).
+
+Still open (optional):
+
+- [ ] Explicit Masuda odds (a language/region tag on a parent) rather than the
+      current shiny-parent boost.
+- [ ] A per-project hatch counter (eggs spent toward each project).
 
 Effort: **medium**.
 

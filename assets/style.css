@@ -16219,3 +16219,75 @@ img {
     color: #b8860b;
     font-weight: 700
 }
+
+/* Daycare breeding tracker and project queue. */
+.daycare-tracker {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 8px 0;
+    padding: 6px 8px;
+    background: #00000012;
+    border-radius: 3px
+}
+
+.daycare-tracker-line {
+    font-size: 8px;
+    color: #3a2818
+}
+
+.daycare-tracker-empty {
+    font-size: 8px;
+    color: #6a4a20
+}
+
+.daycare-project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px
+}
+
+.daycare-project-row {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.daycare-project-name {
+    flex: 1;
+    min-width: 0;
+    font-size: 8px;
+    color: #3a2818;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.daycare-project-remove {
+    font-family: inherit;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 2px 6px;
+    background: transparent;
+    color: #8a3a1a;
+    border: 1px solid #8a3a1a;
+    cursor: pointer
+}
+
+.daycare-project-add {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 4px
+}
+
+.daycare-project-select {
+    font-family: inherit;
+    font-size: 8px;
+    padding: 3px 4px;
+    background: #f0e8d0;
+    color: #2a1808;
+    border: 2px solid #8a7a60;
+    border-radius: 0
+}

@@ -10,7 +10,14 @@ import {
   daycareEggBattles,
 } from '../data/config.js'
 import { mapData, pokemonSpecies } from '../data/gameData.js'
+import { NATURES } from '../data/natures.js'
 import { useGame } from '../game/context.js'
+import {
+  BREEDING_GOALS,
+  MAX_BREEDING_PROJECTS,
+  breedingGoalLabel,
+  createBreedingTracker,
+} from '../game/breeding-projects.js'
 import {
   breedingCompatibility,
   eggSpeciesKey,
@@ -68,6 +75,8 @@ function ParentSlot({ pokemon }) {
 export function DaycarePanel() {
   const { state, dispatch } = useGame(),
     [query, setQuery] = React.useState(''),
+    [projectGoal, setProjectGoal] = React.useState('any'),
+    [projectNature, setProjectNature] = React.useState(NATURES[0]?.key ?? 'hardy'),
     location = mapData[state.currentLocation],
     regionId = location?.region ?? 'kanto',
     daycareLocation = DAYCARE_LOCATIONS[regionId]
@@ -76,6 +85,8 @@ export function DaycarePanel() {
 
   const { parents, progress } = state.daycare,
     compatibility = breedingCompatibility(parents),
+    breeding = state.breeding ?? createBreedingTracker(),
+    projects = breeding.projects ?? [],
     breedable = compatibility.ok,
     ready = breedable && progress >= daycareEggBattles,
     hasShinyParent = parents.some((parent) => parent.isShiny),
@@ -167,6 +178,92 @@ export function DaycarePanel() {
             }),
           ],
         }),
+      jsxs('div', {
+        className: 'daycare-tracker',
+        children: [
+          jsx('span', {
+            className: 'daycare-tracker-line',
+            children: `Eggs hatched: ${breeding.eggsHatched} \u00b7 Shinies: ${breeding.shinyEggsHatched} \u00b7 Since a shiny: ${breeding.eggsSinceShiny}`,
+          }),
+          jsx('span', {
+            className: 'daycare-tracker-line',
+            children: `Projects (${projects.length}/${MAX_BREEDING_PROJECTS})`,
+          }),
+          projects.length === 0
+            ? jsx('span', {
+                className: 'daycare-tracker-empty',
+                children: 'No breeding projects queued.',
+              })
+            : jsx('div', {
+                className: 'daycare-project-list',
+                children: projects.map((project) =>
+                  jsxs(
+                    'div',
+                    {
+                      className: 'daycare-project-row',
+                      children: [
+                        jsx('span', {
+                          className: 'daycare-project-name',
+                          children: `${pokemonSpecies[project.speciesKey]?.name ?? project.speciesKey} \u00b7 ${breedingGoalLabel(project)}`,
+                        }),
+                        jsx('button', {
+                          className: 'daycare-project-remove',
+                          title: 'Remove project',
+                          onClick: () =>
+                            dispatch({
+                              type: 'REMOVE_BREEDING_PROJECT',
+                              payload: { projectId: project.id },
+                            }),
+                          children: 'X',
+                        }),
+                      ],
+                    },
+                    project.id
+                  )
+                ),
+              }),
+          breedable &&
+            eggSpecies &&
+            projects.length < MAX_BREEDING_PROJECTS &&
+            jsxs('div', {
+              className: 'daycare-project-add',
+              children: [
+                jsx('select', {
+                  className: 'daycare-project-select',
+                  value: projectGoal,
+                  onChange: /** @param {React.ChangeEvent<HTMLSelectElement>} event */ (event) =>
+                    setProjectGoal(event.target.value),
+                  children: BREEDING_GOALS.map((goal) =>
+                    jsx('option', { value: goal.value, children: goal.label }, goal.value)
+                  ),
+                }),
+                projectGoal === 'nature' &&
+                  jsx('select', {
+                    className: 'daycare-project-select',
+                    value: projectNature,
+                    onChange: /** @param {React.ChangeEvent<HTMLSelectElement>} event */ (event) =>
+                      setProjectNature(event.target.value),
+                    children: NATURES.map((nature) =>
+                      jsx('option', { value: nature.key, children: nature.name }, nature.key)
+                    ),
+                  }),
+                jsx('button', {
+                  className: 'gym-fight-btn',
+                  onClick: () =>
+                    dispatch({
+                      type: 'ADD_BREEDING_PROJECT',
+                      payload: {
+                        speciesKey: eggKey,
+                        goal: projectGoal,
+                        nature: projectGoal === 'nature' ? projectNature : undefined,
+                      },
+                    }),
+                  children: 'QUEUE',
+                }),
+              ],
+            }),
+        ],
+      }),
       breedable &&
         eggSpecies &&
         jsx('div', {

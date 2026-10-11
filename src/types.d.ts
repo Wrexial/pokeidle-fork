@@ -104,6 +104,17 @@ type Pokemon = BattlePokemon & {
 /** A saved party arrangement (see game/reducer/pokemon/team-presets.js). */
 type TeamPreset = { id: string; name: string; members: string[] }
 
+/** One queued breeding goal (see game/breeding-projects.js). */
+type BreedingProject = { id: string; speciesKey: string; goal: string; nature?: string }
+
+/** Breeding counters and the project queue (see game/breeding-projects.js). */
+type BreedingTracker = {
+  eggsHatched: number
+  shinyEggsHatched: number
+  eggsSinceShiny: number
+  projects: BreedingProject[]
+}
+
 /** A pinned companion and its care stats (see game/companion.js). */
 type Companion = {
   id: string | null
@@ -603,6 +614,8 @@ type GameState = {
   offlineReport?: { awayMs: number, money: number, items: Record<string, number> } | null
   /** Daycare parents (up to 2) and battles toward the next egg. */
   daycare: { parents: Pokemon[]; progress: number }
+  /** Breeding tracker (eggs / shinies hatched) and the project queue (see game/breeding-projects.js). */
+  breeding: BreedingTracker
   /** The pinned companion and its care stats (see game/companion.js). */
   companion: Companion
   /** Winning slot lines banked toward the Game Corner prize track. */

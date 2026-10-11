@@ -6,6 +6,7 @@ import { mapData } from '../../../data/gameData.js'
 import { APRICORN_IDS, consumableItems } from '../../../data/items.js'
 import { getTmInfo, tmItemId } from '../../../data/tms.js'
 import { canBreed } from '../../breeding.js'
+import { advanceBreeding, breedingGoalLabel } from '../../breeding-projects.js'
 import { abilityOf } from '../../abilities.js'
 import { tickCompanion } from '../../companion.js'
 import { createVolatileState } from '../../combat.js'
@@ -479,10 +480,14 @@ export function consumeEvent(state, action) {
     syncedState = withNotification(syncedState, dropNotification)
   if (hatchedEgg.length > 0) {
     for (const hatched of hatchedEgg) {
-      const hatchKey = hatched.speciesKey
+      const hatchKey = hatched.speciesKey,
+        // Breeding tracker + project queue: count the hatch and complete the
+        // front project when it matches.
+        breedingResult = advanceBreeding(syncedState.breeding, hatched)
       syncedState = withNotification(
         {
           ...syncedState,
+          breeding: breedingResult.breeding,
           pokedexSeen: syncedState.pokedexSeen.includes(hatchKey)
             ? syncedState.pokedexSeen
             : [...syncedState.pokedexSeen, hatchKey],
@@ -510,6 +515,13 @@ export function consumeEvent(state, action) {
           dedupeKey: `hatch:${hatched.id}`,
         }
       )
+      if (breedingResult.completed)
+        syncedState = withNotification(syncedState, {
+          message: `Breeding project complete: ${hatched.name} (${breedingGoalLabel(breedingResult.completed)})!`,
+          tone: 'shiny',
+          icon: '\u{1f3c6}',
+          dedupeKey: `breedingproject:${breedingResult.completed.id}`,
+        })
     }
     syncedState = { ...syncedState, hatchResult: hatchedEgg[hatchedEgg.length - 1] }
   }

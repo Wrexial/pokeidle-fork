@@ -6,7 +6,7 @@ import { BATTLE_TOWER_REGION, LEGACY_SAVE_KEYS, MAX_TEAM_PRESETS, SAVE_BACKUP_KE
 import { dailyEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
-import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility } from './pokemon.js'
+import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility, rollSize } from './pokemon.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
 import { isTerminalForm } from '../data/mega-evolution.js'
@@ -151,8 +151,19 @@ export function repairSave(saved) {
   let box = /** @type {any[]} */ (Array.isArray(saved.box) ? saved.box : []).map(withId)
 
   playerPokemon.ivs || (playerPokemon.ivs = generateIVs())
-  party = party.map((pokemon) => (pokemon.ivs ? pokemon : { ...pokemon, ivs: generateIVs() }))
-  box = box.map((pokemon) => (pokemon.ivs ? pokemon : { ...pokemon, ivs: generateIVs() }))
+  // Older saves predate per-individual sizes, so roll one in.
+  if (playerPokemon.size === void 0) playerPokemon.size = rollSize()
+  /** @param {any} pokemon */
+  const withDerivedPokemonFields = (pokemon) =>
+    pokemon.ivs && pokemon.size !== void 0
+      ? pokemon
+      : {
+          ...pokemon,
+          ...(pokemon.ivs ? {} : { ivs: generateIVs() }),
+          ...(pokemon.size === void 0 ? { size: rollSize() } : {}),
+        }
+  party = party.map(withDerivedPokemonFields)
+  box = box.map(withDerivedPokemonFields)
 
   // If the save's core Pokemon reference species that no longer exist, start
   // fresh instead of crashing during render.

@@ -6,6 +6,7 @@ import { BOX_SORT_FIELDS } from '../../data/ui.js'
 import { resolvePokemonMoves } from './evolution.js'
 import { calculateRequiredExperience } from './exp.js'
 import { BASE_FRIENDSHIP } from './friendship.js'
+import { rollSize } from './sizes.js'
 import { IV_STAT_ORDER, calculatePokemonStats, generateIVs } from './stats.js'
 
 /**
@@ -109,6 +110,8 @@ export function createPokemon(speciesKey, level, id, isShiny = !1, inheritance) 
     heldItem: null,
     isShiny,
     gmax: false,
+    // Per-individual size (0-255), mapped to an XS-XL rating for display.
+    size: inheritance?.size ?? rollSize(),
     ...(inheritedEggMoves.length > 0 ? { eggMoves: [...new Set(inheritedEggMoves)] } : {}),
   }
 }

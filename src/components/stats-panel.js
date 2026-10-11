@@ -23,7 +23,7 @@ import { moveTooltip } from '../game/move-info.js'
 import { itemTooltip } from '../game/progression.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol, isFemalePokemon } from '../game/breeding.js'
-import { abilityDisplayName, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName } from '../game/pokemon.js'
+import { abilityDisplayName, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, isAlphaPokemon, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName, sizeRating, sizeTooltip } from '../game/pokemon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
 
 /** @param {{ pokemon: Pokemon, source: 'party' | 'box', partyLength: number, onAction: () => void, onClose: () => void, evolutionInfo?: { entries: { targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string, isForm: boolean }[] } | null, onEvolve?: (index: number) => void, onRelease?: () => void, canRelease?: boolean, reorder?: { index: number, length: number, onMove: (toIndex: number) => void } | null }} props */
@@ -482,6 +482,14 @@ export function StatsPanel({
           jsxs('span', {
             className: 'stats-panel-ivs-title',
             children: ['IVs \u00b7 ', ivJudge.verdict, ' (', ivJudge.total, '/186)'],
+          }),
+          jsx('span', {
+            className: `stats-panel-size${isAlphaPokemon(pokemon) ? ' alpha' : ''}`,
+            'data-tooltip': sizeTooltip(pokemon),
+            children: [
+              `Size ${sizeRating(pokemon.size)}`,
+              isAlphaPokemon(pokemon) ? ' \u2605 ALPHA' : '',
+            ],
           }),
           jsx('div', {
             className: 'stats-panel-iv-grid',

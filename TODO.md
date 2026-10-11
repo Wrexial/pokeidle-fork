@@ -50,8 +50,8 @@ renumbered, so the gaps below are items that shipped.
 17. **#70 Recurring rival** — M · ★★½.
 18. **#73 Weather system on routes** — S–M · ★★ — there is no world weather
     system, so the weather-favoured activities can almost never trigger.
-19. **#74 Pokemon sizes (XS–XL)** — S–M · ★★½ — a Legends-style size roll per
-    individual.
+19. **#74 Pokemon sizes (XS–XL)** — shipped; the alpha bonus and research hook
+    remain.
 20. **#75 Legends Z-A area (Kalos)** — M · ★★★ — Lumiose City's Wild Zones as a
     post-game zone.
 21. **#76 Legends Arceus / Hisui areas (Sinnoh)** — M · ★★★ — ancient Sinnoh as a
@@ -346,25 +346,25 @@ the work is a world weather value plus wiring it into `fieldWeatherFor`).
 ## 74. Pokemon sizes (XS–XL) (gap)
 
 In Legends: Arceus every Pokemon has a size, shown as a rating from XS to XL,
-with larger specimens worth more and research tasks asking for them. The game has
-no size concept today: `pokemon-species.json` carries a `weight` (used by Heat
-Crash / Heavy Slam / Low Kick / Grass Knot) but **no `height`**, and an
-individual only rolls IVs, a nature and an ability.
+with larger specimens worth more and research tasks asking for them.
 
-- [ ] Roll a per-individual `size` value when a Pokemon is created (a variance
-      around the species' baseline, like IVs), and map it to a rating
-      (XS / S / M / L / XL).
-- [ ] Show the rating (and maybe the numeric value) in the stats panel beside
-      the IVs, with a plain-English tooltip.
-- [ ] Optionally add an **alpha** flag for the very largest specimens (Arceus's
-      alphas) — a small EXP/money bonus and a Box marker.
-- [ ] Tie it into **Field research** (#63, shipped): tasks such as "catch a large
-      specimen" and "catch an XL specimen". Size is per-individual, so the
-      research counter has to watch caught individuals, not just species.
-- [ ] Decide the baseline: roll around `weight`, or add `height` to the species
-      data with a PokeAPI pass (like `fetch-weights.cjs`).
+Done: every individual rolls a `size` (0-255, clustered around the middle like a
+bell so the extremes are rare) in `src/game/pokemon/sizes.js`, mapped to an
+XS / S / M / L / XL rating. The stats panel shows the rating beside the IVs with
+a plain-English tooltip, the very largest (size 240+) are flagged **★ ALPHA**,
+and older saves get a size rolled in on load. Sizes are cosmetic so far.
 
-Effort: **small–medium** (the roll and UI are small; the research hook and a
+Still open:
+
+- [ ] Bake the size into an **alpha** stat/EXP bonus (and a Box marker).
+- [ ] Tie it into **Field research**: "catch a large specimen" / "catch an XL
+      specimen" tasks. Size is per-individual, so the research counter has to
+      watch caught individuals, not just species.
+- [ ] Add `height` to the species data (a PokeAPI pass like `fetch-weights.cjs`)
+      and scale the roll by the species' baseline, so a Wailord and a Diglett
+      aren't judged on the same scale.
+
+Effort: **small–medium** (the roll and UI shipped; the research hook and a
 height fetch are the extra).
 
 ## 75. Legends Z-A area (Kalos post-game zone)

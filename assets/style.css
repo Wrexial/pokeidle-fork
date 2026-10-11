@@ -2692,6 +2692,18 @@ img {
     gap: 3px
 }
 
+.stats-panel-size {
+    align-self: flex-start;
+    font-size: 7px;
+    font-weight: 700;
+    color: #5a4838;
+    letter-spacing: .5px
+}
+
+.stats-panel-size.alpha {
+    color: #b8860b
+}
+
 .iv-chip {
     flex: 1;
     text-align: center;

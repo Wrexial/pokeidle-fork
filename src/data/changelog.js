@@ -28,6 +28,12 @@ export const CHANGELOG = [
         ],
       },
       {
+        heading: 'Pokemon',
+        items: [
+          'Every Pokemon has a size now, rolled per individual like its IVs and shown beside them as an XS–XL rating on the stats panel. The very largest specimens (size 240+) are alphas and are flagged ★ ALPHA. Sizes are cosmetic for now and older saves get one rolled in on load.',
+        ],
+      },
+      {
         heading: 'Battles',
         items: [
           'Another batch of damaging moves does what it says now: Tri Attack and Dire Claw roll several status conditions, Wake-Up Slap and Smelling Salts double against — and cure — a sleeping or paralyzed target, Facade, Hex, Venoshock and Brine double under their condition, Expanding Force, Rising Voltage and Misty Explosion get their terrain boost, Bolt Beak and Fishious Rend double when moving first, Payback, Avalanche and Revenge double when the foe moved first, and Assist, Me First, Retaliate, Round and Echoed Voice all work.',

@@ -94,6 +94,8 @@ type Pokemon = BattlePokemon & {
   eggStepsRemaining?: number
   /** Egg moves this Pokemon inherited by breeding; re-learnable for this individual. */
   eggMoves?: string[]
+  /** Per-individual size (0-255), shown as an XS-XL rating (see game/pokemon/sizes.js). */
+  size?: number
   isShiny: boolean
 }
 
@@ -156,6 +158,8 @@ type BreedingInheritance = {
   moves?: string[]
   /** Egg moves inherited from a parent (see egg-moves.json). */
   eggMoves?: string[]
+  /** A size to pass down instead of rolling a fresh one. */
+  size?: number
 }
 
 type Inspected = { source: string; id: string } | null

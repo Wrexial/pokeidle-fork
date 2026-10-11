@@ -48,6 +48,13 @@ renumbered, so the gaps below are items that shipped.
 17. **#70 Recurring rival** — M · ★★½.
 18. **#73 Weather system on routes** — S–M · ★★ — there is no world weather
     system, so the weather-favoured activities can almost never trigger.
+19. **#74 Pokemon sizes (XS–XL)** — S–M · ★★½ — a Legends-style size roll per
+    individual.
+20. **#75 Legends Z-A area (Kalos)** — M · ★★★ — Lumiose City's Wild Zones as a
+    post-game zone.
+21. **#76 Legends Arceus / Hisui areas (Sinnoh)** — M · ★★★ — ancient Sinnoh as a
+    post-game zone.
+22. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
 
 ---
 
@@ -304,6 +311,83 @@ Options when we pick this up:
 
 Effort: **small–medium** (the weather mechanics and battle side already exist;
 the work is a world weather value plus wiring it into `fieldWeatherFor`).
+
+## 74. Pokemon sizes (XS–XL) (gap)
+
+In Legends: Arceus every Pokemon has a size, shown as a rating from XS to XL,
+with larger specimens worth more and research tasks asking for them. The game has
+no size concept today: `pokemon-species.json` carries a `weight` (used by Heat
+Crash / Heavy Slam / Low Kick / Grass Knot) but **no `height`**, and an
+individual only rolls IVs, a nature and an ability.
+
+- [ ] Roll a per-individual `size` value when a Pokemon is created (a variance
+      around the species' baseline, like IVs), and map it to a rating
+      (XS / S / M / L / XL).
+- [ ] Show the rating (and maybe the numeric value) in the stats panel beside
+      the IVs, with a plain-English tooltip.
+- [ ] Optionally add an **alpha** flag for the very largest specimens (Arceus's
+      alphas) — a small EXP/money bonus and a Box marker.
+- [ ] Tie it into **Field research** (#63, shipped): tasks such as "catch a large
+      specimen" and "catch an XL specimen". Size is per-individual, so the
+      research counter has to watch caught individuals, not just species.
+- [ ] Decide the baseline: roll around `weight`, or add `height` to the species
+      data with a PokeAPI pass (like `fetch-weights.cjs`).
+
+Effort: **small–medium** (the roll and UI are small; the research hook and a
+height fetch are the extra).
+
+## 75. Legends Z-A area (Kalos post-game zone)
+
+Legends: Z-A is set in Lumiose City, with Wild Zones carved out of the city. The
+game already ships the Z-A **Mega Evolutions** (the "Z" variants in
+`src/data/mega-evolution.js`), but not the setting itself.
+
+- [ ] Add **Lumiose City** as a post-game `type: 'zone'` hub on Kalos (like the
+      DLC and Sevii zones), gated on the Kalos Champion, with the **Wild Zones**
+      as hidden sub-areas, each with its own wild table.
+- [ ] Reuse the zone plumbing: `ZONES` / `lib/zone-areas.cjs` in the generator, or
+      `apply-zone-areas.cjs` on the committed data, then `apply-zone-layout.cjs`
+      and `generate-encounter-index.cjs`.
+- [ ] Pick the Wild Zone species from Kalos's generation (and any Z-A-only forms)
+      that fit an inner-city setting.
+
+Effort: **medium** (map data, encounters and a generator pass; the zone model
+already exists).
+
+## 76. Legends Arceus / Hisui areas (Sinnoh post-game zone)
+
+Legends: Arceus is set in Hisui, the ancient Sinnoh. The game already ships every
+**Hisuian form** (`h-*` species are grouped in the Pokedex and obtainable), but
+not the region.
+
+- [ ] Add **Hisui** as a post-game zone on **Sinnoh**, gated on the Sinnoh
+      Champion: a Jubilife Village hub plus the five areas — Obsidian Fieldlands,
+      Crimson Mirelands, Cobalt Coastlands, Coronet Highlands and Alabaster
+      Icelands — as sub-areas with their own wild tables.
+- [ ] The noble / ride Pokemon could be statics or Raid Island additions, and the
+      space-time distortions a swarm-style event.
+- [ ] Same zone plumbing as #75; keep the Hisuian species' acquisition paths
+      consistent so nothing is orphaned.
+
+Effort: **medium**.
+
+## 77. UI consistency pass (sliders / steppers)
+
+A sweep over the small input controls so like looks like like.
+
+- [ ] **Slider-style controls.** There is currently **no shared slider visual** —
+      a search of `src/` and `assets/` finds no `<input type="range">` and no
+      `slider` class at all, so anything slider-ish (the catch-settings level
+      threshold number input, the shop quantity steppers, the battle speed
+      buttons, the Town Map zoom) is styled ad hoc. Consolidate them onto one
+      shared slider/stepper component (track + fill + handle) sized for the pixel
+      UI. *(If a specific control is what you meant by "sliders", name it and this
+      item starts from there.)*
+- [ ] Check the segmented selectors (battle speed, sprite style, sort fields) use
+      the same active / inactive treatment.
+- [ ] Check the settings toggles and the radio-style option lists match too.
+
+Effort: **small–medium**.
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

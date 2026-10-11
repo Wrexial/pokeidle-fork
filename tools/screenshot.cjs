@@ -695,6 +695,16 @@ async function main() {
       console.log('job worker:', JSON.stringify(jobInfo))
       await sleep(300)
       await cdp.screenshot(path.join(OUT, '30-jobs.png'))
+      // Open the Field Jobs summary modal from the location panel button.
+      const openedJobs = await cdp.eval(
+        `(() => { const b = document.querySelector('.location-jobs-btn'); if (!b) return false; b.click(); return true })()`
+      )
+      if (openedJobs) {
+        await cdp.waitFor(`!!document.querySelector('.field-jobs-modal')`, 5000, 'field jobs modal')
+        await sleep(200)
+        await cdp.screenshot(path.join(OUT, '30b-jobs-modal.png'))
+        console.log('Field jobs modal ok')
+      }
       console.log('Field jobs ok')
     } else {
       console.log('WARNING: no assign-a-job button found')

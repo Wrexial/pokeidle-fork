@@ -19,8 +19,51 @@ import {
 /** How many jobs can run at once. */
 export const JOB_SLOTS = 4
 
-/** Real time one job cycle takes to bank a find. */
+/** Real time one job cycle takes to bank a find (at the weakest worker). */
 export const JOB_CYCLE_MS = 150_000
+
+/** The fastest a worker can cycle, before ability bonuses. */
+export const JOB_MIN_CYCLE_MS = 60_000
+
+/** How much an ability speeds a job up (fraction off the cycle time).
+ * @type {Record<string, number>} */
+export const JOB_ABILITY_BONUS = {
+  pickup: 0.15,
+  honeyGather: 0.15,
+  illuminate: 0.1,
+  quickFeet: 0.1,
+  suctionCups: 0.08,
+  stickyHold: 0.08,
+  compoundEyes: 0.08,
+  superLuck: 0.08,
+}
+
+/**
+ * How long a worker takes per find: a higher level cycles faster, and a few
+ * abilities speed it up further.
+ * @param {number} level
+ * @param {string | null | undefined} ability
+ * @returns {number}
+ */
+export function jobCycleMs(level, ability) {
+  const clamped = Math.max(1, Math.min(100, level ?? 5)),
+    progress = Math.max(0, Math.min(1, (clamped - 5) / 95)),
+    levelCycle = JOB_CYCLE_MS - (JOB_CYCLE_MS - JOB_MIN_CYCLE_MS) * progress,
+    bonus = JOB_ABILITY_BONUS[ability ?? ''] ?? 0
+  return Math.max(45_000, Math.round(levelCycle * (1 - bonus)))
+}
+
+/**
+ * Human duration like "2m 30s" or "45s".
+ * @param {number} ms
+ * @returns {string}
+ */
+export function formatJobCycle(ms) {
+  const totalSeconds = Math.max(1, Math.round(ms / 1000)),
+    minutes = Math.floor(totalSeconds / 60),
+    seconds = totalSeconds % 60
+  return minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`
+}
 
 /** Banked finds a single job can hold before it stops counting. */
 export const JOB_MAX_READY = 8
@@ -48,6 +91,7 @@ export const JOB_MONEY = {
  * @property {string} activityId
  * @property {string} pokemonId
  * @property {number} progressMs
+ * @property {number} cycleMs Cycle length for this worker (see jobCycleMs).
  * @property {number} money
  * @property {Record<string, number>} items
  * @property {{ speciesKey: string, level: number }[]} encounters
@@ -118,9 +162,10 @@ export function accrueJobs(jobs, elapsedMs) {
       money = job.money ?? 0,
       cycles = job.cycles ?? 0,
       ready = jobReadyCount(job),
-      banked = false
-    while (progress >= JOB_CYCLE_MS && ready < JOB_MAX_READY) {
-      progress -= JOB_CYCLE_MS
+      banked = false,
+      cycle = job.cycleMs && job.cycleMs > 0 ? job.cycleMs : JOB_CYCLE_MS
+    while (progress >= cycle && ready < JOB_MAX_READY) {
+      progress -= cycle
       cycles += 1
       ready += 1
       const find = rollJobFind(job)
@@ -132,7 +177,7 @@ export function accrueJobs(jobs, elapsedMs) {
       banked = true
     }
     // At the cap, hold progress just below a cycle so nothing is lost while full.
-    if (ready >= JOB_MAX_READY) progress = Math.min(progress, JOB_CYCLE_MS - 1)
+    if (ready >= JOB_MAX_READY) progress = Math.min(progress, cycle - 1)
     if (progress === job.progressMs && !banked) continue
     if (!next) next = { ...jobs }
     next[key] = { ...job, progressMs: progress, money, items, encounters, cycles }

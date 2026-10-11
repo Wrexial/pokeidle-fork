@@ -14,6 +14,7 @@ import { computeUnlockedLocations, frontierUnlocks, minigameRequirementMet, regi
 import { servicePoisFor, cafeFor } from '../game/services.js'
 import { MinigameCard } from './minigame-card.js'
 import { JobControls } from './job-controls.js'
+import { FieldJobsModal } from './field-jobs-modal.js'
 import { GiftPanel } from './gift-panel.js'
 import { FossilPanel } from './fossil-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
@@ -36,9 +37,12 @@ export function LocationPanel({ onOpenCatchSettings }) {
     // locked area are shown. They are tucked behind a toggle so they don't bury
     // the gates the player can actually work towards.
     [showBlockedGates, setShowBlockedGates] = React.useState(false),
+    // The Field Jobs summary modal (see job-controls.js / field-jobs-modal.js).
+    [showJobs, setShowJobs] = React.useState(false),
     unlockedNow = computeUnlockedLocations(state),
     unlockedNowSet = new Set(unlockedNow),
     location = mapData[state.currentLocation],
+    jobCount = Object.keys(state.jobs ?? {}).length,
     // Every locked location on the current region's frontier (adjacent to
     // somewhere already unlocked), soonest first. Several can become available
     // at once — a town with two routes, a badge gate plus its neighbour — so
@@ -724,6 +728,12 @@ export function LocationPanel({ onOpenCatchSettings }) {
           className: 'location-description',
           children: location.description,
         }),
+        jobCount > 0 &&
+          jsx('button', {
+            className: 'location-jobs-btn',
+            onClick: () => setShowJobs(true),
+            children: `\u2699\ufe0f Field Jobs (${jobCount})`,
+          }),
         servicePois.length > 0 &&
           jsxs('div', {
             className: 'location-services',
@@ -833,6 +843,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
         location.id === 'cinnabarIsland' && jsx(FossilPanel, {}),
         jsx(GiftPanel, { locationId: location.id }),
         nextUnlocksSection,
+        showJobs && jsx(FieldJobsModal, { onClose: () => setShowJobs(false) }),
       ],
     }),
   })

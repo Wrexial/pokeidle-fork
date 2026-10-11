@@ -3,7 +3,7 @@
 // battle.
 
 import { mapData } from '../../data/gameData.js'
-import { JOB_SLOTS, accrueJobs, jobKey, jobReadyCount } from '../jobs.js'
+import { JOB_SLOTS, accrueJobs, jobCycleMs, jobKey, jobReadyCount } from '../jobs.js'
 import { routeActivityIds } from '../minigames.js'
 
 /**
@@ -36,6 +36,7 @@ export function assignJob(state, action) {
   if (!findWorker(state, pokemonId)) return state
   // A Pokemon can only hold one job at a time.
   if (Object.values(jobs).some((job) => job.pokemonId === pokemonId)) return state
+  const worker = findWorker(state, pokemonId)
   return {
     ...state,
     jobs: {
@@ -45,6 +46,7 @@ export function assignJob(state, action) {
         activityId,
         pokemonId,
         progressMs: 0,
+        cycleMs: jobCycleMs(worker?.pokemon.level ?? 5, worker?.pokemon.ability),
         money: 0,
         items: {},
         encounters: [],
@@ -131,8 +133,22 @@ export function takeJobEncounter(state, action) {
 export function accrueJobFinds(state, action) {
   const elapsedMs = action.payload?.elapsedMs ?? 0
   if (elapsedMs <= 0) return state
-  const jobs = accrueJobs(state.jobs ?? {}, elapsedMs)
-  return jobs === state.jobs ? state : { ...state, jobs }
+  const jobs = state.jobs ?? {}
+  if (Object.keys(jobs).length === 0) return state
+  // Refresh each job's cycle from its worker so levelling up or a new ability
+  // (nothing assigns abilities later, but evolutions/levels do) is reflected.
+  const refreshed = { ...jobs }
+  for (const key of Object.keys(jobs)) {
+    const job = jobs[key],
+      worker = [...(state.party ?? []), ...(state.box ?? [])].find(
+        (member) => member.id === job.pokemonId
+      )
+    if (!worker) continue
+    const cycle = jobCycleMs(worker.level, worker.ability)
+    if (cycle !== job.cycleMs) refreshed[key] = { ...job, cycleMs: cycle }
+  }
+  const accrued = accrueJobs(refreshed, elapsedMs)
+  return accrued === state.jobs ? state : { ...state, jobs: accrued }
 }
 
 /**

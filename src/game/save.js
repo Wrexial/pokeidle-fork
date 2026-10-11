@@ -16,7 +16,7 @@ import { GARDEN_BERRIES, createGarden } from './garden.js'
 import { GAME_CORNER_PRIZE_GOAL } from './minigames/game-corner.js'
 import { PELAGO_MAX_READY, PELAGO_SLOTS, createPelago } from './pelago.js'
 import { RODS, rodsForRegionCount, routeActivityIds } from './minigames.js'
-import { JOB_CYCLE_MS, JOB_MAX_READY, accrueJobs, jobKey } from './jobs.js'
+import { JOB_MAX_READY, accrueJobs, jobCycleMs, jobKey } from './jobs.js'
 import { GIFTS, STATIC_ENCOUNTERS } from './gifts.js'
 import { initialGameState } from './reducer.js'
 import { SHINY_CHAIN_FIRST_TARGET, computeOfflineReward, entryRoutePath } from './progression.js'
@@ -473,6 +473,8 @@ export function repairSave(saved) {
     if (!rawJob.locationId || !rawJob.activityId || !companionIds.has(rawJob.pokemonId)) continue
     const location = mapData[rawJob.locationId]
     if (!location || !routeActivityIds(location).includes(rawJob.activityId)) continue
+    const worker = [...party, ...box].find((member) => member.id === rawJob.pokemonId),
+      cycleMs = jobCycleMs(worker?.level ?? 5, worker?.ability)
     const items = /** @type {Record<string, number>} */ ({})
     if (rawJob.items && typeof rawJob.items === 'object')
       for (const [itemId, quantity] of Object.entries(rawJob.items))
@@ -490,7 +492,8 @@ export function repairSave(saved) {
       locationId: rawJob.locationId,
       activityId: rawJob.activityId,
       pokemonId: rawJob.pokemonId,
-      progressMs: Math.max(0, Math.min(JOB_CYCLE_MS - 1, Math.floor(Number(rawJob.progressMs) || 0))),
+      progressMs: Math.max(0, Math.min(cycleMs - 1, Math.floor(Number(rawJob.progressMs) || 0))),
+      cycleMs,
       money: Math.max(0, Math.floor(Number(rawJob.money) || 0)),
       items,
       encounters,

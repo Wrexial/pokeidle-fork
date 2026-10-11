@@ -6,7 +6,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { completedGenerations, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { createBattlePokemon } from '../game/combat.js'
-import { JOB_CYCLE_MS, JOB_SLOTS, jobKey, jobReadyCount } from '../game/jobs.js'
+import { JOB_ABILITY_BONUS, JOB_SLOTS, formatJobCycle, jobCycleMs, jobKey, jobReadyCount } from '../game/jobs.js'
 import { ROUTE_ACTIVITIES, activityRewardName } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { checkShinyOdds, shinyOddsForSpecies } from '../game/progression.js'
@@ -33,9 +33,16 @@ export function JobControls({ locationId, activityId }) {
     slotsFull = slotsUsed >= JOB_SLOTS,
     worker = job ? [...(state.party ?? []), ...(state.box ?? [])].find((p) => p.id === job.pokemonId) : null,
     ready = job ? jobReadyCount(job) : 0,
-    progress = job ? Math.min(1, job.progressMs / JOB_CYCLE_MS) : 0,
+    progress = job
+      ? Math.min(1, job.progressMs / (job.cycleMs ?? jobCycleMs(worker?.level ?? 5, worker?.ability)))
+      : 0,
     itemEntries = job ? Object.entries(job.items ?? {}).filter(([, quantity]) => quantity > 0) : [],
     encounters = job?.encounters ?? [],
+    cycleMs = job ? (job.cycleMs ?? jobCycleMs(worker?.level ?? 5, worker?.ability)) : 0,
+    abilityBonus =
+      job && (JOB_ABILITY_BONUS[worker?.ability ?? ''] ?? 0) > 0
+        ? `fast worker (${worker?.ability ?? 'ability'})`
+        : null,
     hasLoot = (job?.money ?? 0) > 0 || itemEntries.length > 0
 
   if (!activity) return null
@@ -111,10 +118,14 @@ export function JobControls({ locationId, activityId }) {
           }),
         ],
       }),
-      jsxs('div', {
+      jsx('div', {
         className: 'job-progress',
         title: `${Math.round(progress * 100)}% to the next find`,
         children: jsx('div', { className: 'job-progress-fill', style: { width: `${progress * 100}%` } }),
+      }),
+      jsx('span', {
+        className: 'job-rate',
+        children: [`A find every ~${formatJobCycle(cycleMs)}`, abilityBonus ? ` \u00b7 ${abilityBonus}` : ''],
       }),
       ready > 0
         ? jsxs('div', {

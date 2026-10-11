@@ -4150,6 +4150,126 @@ img {
     image-rendering: pixelated
 }
 
+.job-rate {
+    font-size: 7px;
+    color: #8fa3b8
+}
+
+.location-jobs-btn {
+    align-self: flex-start;
+    margin: 0 0 8px;
+    font-family: inherit;
+    font-size: 8px;
+    letter-spacing: .3px;
+    padding: 4px 8px;
+    color: #8fd0ff;
+    background: rgba(10,14,10,.5);
+    border: 1px solid #4a6a8a;
+    border-radius: 4px;
+    cursor: pointer
+}
+
+.location-jobs-btn:hover {
+    filter: brightness(1.15)
+}
+
+.field-jobs-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,.7)
+}
+
+.field-jobs-modal {
+    box-sizing: border-box;
+    width: 520px;
+    max-width: 92vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 16px;
+    color: var(--parchment);
+    background: linear-gradient(180deg,#2a241c,#1a160f);
+    border: 2px solid #8a7040;
+    border-radius: 8px
+}
+
+.field-jobs-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.field-jobs-title {
+    font-size: 12px;
+    color: var(--gold)
+}
+
+.field-jobs-empty {
+    margin: 0;
+    font-size: 9px;
+    line-height: 1.5;
+    color: #cbbfa6
+}
+
+.field-jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+
+.field-job {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid #4a4034;
+    border-radius: 6px
+}
+
+.field-job-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px
+}
+
+.field-job-name {
+    font-size: 9px;
+    color: var(--parchment)
+}
+
+.field-job-location {
+    font-size: 8px;
+    color: #b9a06a
+}
+
+.field-job-worker {
+    font-size: 8px;
+    color: #8fd0ff
+}
+
+.field-job-idle {
+    font-size: 8px;
+    color: #a99a7d
+}
+
+.field-job-ready {
+    display: flex;
+    flex-direction: column;
+    gap: 4px
+}
+
+.field-jobs-collect-all {
+    align-self: flex-end
+}
+
 .location-minigame-start {
     width: 100%;
     padding: 6px 8px;

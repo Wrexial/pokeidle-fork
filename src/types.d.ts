@@ -124,6 +124,7 @@ type FieldJob = {
   activityId: string
   pokemonId: string
   progressMs: number
+  cycleMs: number
   money: number
   items: Record<string, number>
   encounters: { speciesKey: string; level: number }[]

@@ -11,6 +11,8 @@ const {
   JOB_SLOTS,
   accrueJobs,
   createJobs,
+  formatJobCycle,
+  jobCycleMs,
   jobKey,
   jobReadyCount,
   rollJobFind,
@@ -238,4 +240,38 @@ test('save repair keeps valid jobs and drops stale ones', () => {
   assert.equal(repaired.jobs[key].items.expCandyS, 3)
   assert.ok(!repaired.jobs['nowhere:forage'], 'a job on a missing location is dropped')
   assert.ok(!repaired.jobs['stale:worker'], 'a job with a released worker is dropped')
+})
+
+test('a stronger or speedier worker banks finds faster', () => {
+  const low = jobCycleMs(5, null),
+    high = jobCycleMs(100, null),
+    speedy = jobCycleMs(100, 'pickup')
+  assert.ok(high < low, 'a higher level cycles faster')
+  assert.ok(speedy < high, 'a speed ability cycles faster still')
+  assert.ok(low <= JOB_CYCLE_MS, 'the base cycle is the slowest')
+  assert.ok(speedy >= 45_000, 'the cycle never drops below the floor')
+  assert.equal(formatJobCycle(150_000), '2m 30s')
+  assert.equal(formatJobCycle(45_000), '45s')
+})
+
+test('ASSIGN_JOB records the worker cycle and accrual uses it', () => {
+  const worker = { id: 'p1', speciesKey: 'charmander', level: 80, currentHp: 20, maxHp: 20 },
+    base = { ...initialGameState, party: [worker], jobs: {} },
+    key = jobKey(forageLocation.id, 'forage'),
+    assigned = gameReducer(base, {
+      type: 'ASSIGN_JOB',
+      payload: { locationId: forageLocation.id, activityId: 'forage', pokemonId: 'p1' },
+    }),
+    original = Math.random
+  assert.equal(assigned.jobs[key].cycleMs, jobCycleMs(80, undefined))
+  try {
+    Math.random = () => 0
+    const accrued = gameReducer(assigned, {
+      type: 'ACCRUE_JOBS',
+      payload: { elapsedMs: assigned.jobs[key].cycleMs },
+    })
+    assert.equal(accrued.jobs[key].cycles, 1, 'one full worker cycle banks a find')
+  } finally {
+    Math.random = original
+  }
 })

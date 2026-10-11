@@ -597,6 +597,10 @@ type GameState = {
   jobs: FieldJobs
   /** Field research: wild defeats per species (see game/research.js). */
   researchDefeated: Record<string, number>
+  /** Field research: berries fed to a species, for non-wild species. */
+  researchFed: Record<string, number>
+  /** Field research: moves used by a species, for non-wild species. */
+  researchMoves: Record<string, number>
   /** Research points already credited per species. */
   researchClaimed: Record<string, number>
   /** Unspent Research Points. */

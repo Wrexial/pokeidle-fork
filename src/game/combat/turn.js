@@ -1029,6 +1029,8 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       message: `${attack.attacker.name} used ${moveDef.name}!`,
       data: {
         target: attack.isPlayer ? 'enemy' : 'player',
+        // The move actually used (the base id), so field research can track it.
+        moveId: attack.moveId,
       },
     })
     // Two-turn moves: the user charges this turn and strikes on the next. A

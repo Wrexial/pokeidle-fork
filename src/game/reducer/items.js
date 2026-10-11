@@ -4,9 +4,11 @@ import { encounterData, moveData, pokemonSpecies } from '../../data/gameData.js'
 import { activeItems, consumableItems, fossilItems, heldItems, pokeBalls } from '../../data/items.js'
 import { canGigantamax } from '../../data/mega-evolution.js'
 import { natureName, randomNature } from '../../data/natures.js'
+import { isPlantableBerry } from '../garden.js'
 import { MAX_FRIENDSHIP, IV_STAT_ORDER, applyMoveLearning, calculatePokemonStats, calculateRequiredExperience, gainFriendship, getLevelUpResults } from '../pokemon.js'
 import { getItemSellPrice, isActiveEffectItem } from '../progression.js'
 import { withNotification } from '../reducer-helpers.js'
+import { creditResearchFeed } from '../research.js'
 import { markCaught } from './collection.js'
 import { catchPokemon } from './pokemon/management.js'
 
@@ -423,8 +425,13 @@ export function useItemOnPokemon(state, action) {
   }
   const party = [...state.party]
   party[memberIndex] = member
+  // Field research: feeding the species a berry is one of its research tasks
+  // for the Pokemon that have no wild route to study (Legends: Arceus style).
+  const fedState = isPlantableBerry(itemId)
+    ? creditResearchFeed(state, member.speciesKey)
+    : state
   return {
-    ...state,
+    ...fedState,
     party,
     playerPokemon:
       state.activePlayerPokemonIndex === memberIndex ? member : state.playerPokemon,

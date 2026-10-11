@@ -12,7 +12,7 @@ import { createVolatileState } from '../../combat.js'
 import { fieldWeatherFor } from '../../weather.js'
 import { tickGarden } from '../../garden.js'
 import { tickPelago } from '../../pelago.js'
-import { creditResearchDefeat } from '../../research.js'
+import { creditResearchDefeat, creditResearchMove } from '../../research.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { gainFriendship, isBattleReady } from '../../pokemon.js'
 import { advanceShinyTarget, computeUnlockedLocations, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from '../../progression.js'
@@ -227,6 +227,7 @@ export function consumeEvent(state, action) {
     pelago = state.pelago,
     shinyChain = state.shinyChain,
     researchDefeated = state.researchDefeated,
+    researchMoves = state.researchMoves,
     researchClaimed = state.researchClaimed,
     researchPoints = state.researchPoints,
     party = state.party,
@@ -259,6 +260,17 @@ export function consumeEvent(state, action) {
     party = party.map((member, index) =>
       index === state.activePlayerPokemonIndex ? { ...member, moves: updatedMoves } : member
     )
+  }
+  // Field research: a move used by the active player Pokemon counts toward its
+  // move-use task (only the player's attacks carry the enemy as the target).
+  if (event.type === 'attack' && event.data?.target === 'enemy') {
+    const moveResearched = creditResearchMove(
+      { ...state, researchMoves },
+      state.playerPokemon?.speciesKey
+    )
+    researchMoves = moveResearched.researchMoves
+    researchClaimed = moveResearched.researchClaimed
+    researchPoints = moveResearched.researchPoints
   }
   if (
     event.type === 'faint' &&
@@ -436,6 +448,7 @@ export function consumeEvent(state, action) {
     wildBattlesWon,
     battlesWonByLocation,
     researchDefeated,
+    researchMoves,
     researchClaimed,
     researchPoints,
     weather,

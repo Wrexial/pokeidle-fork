@@ -60,7 +60,8 @@ export const CHANGELOG = [
         items: [
           'The game works offline now: a service worker caches the app, and an Offline Play section in Settings shows the download size and fetches every sprite, backdrop, item icon and data file with a progress bar. The art and data were right-sized and minified for it (the backdrops moved to WebP) and offline uses the static sprites, keeping the download well under 50 MB.',
           'The cached app also keeps itself up to date: it checks for a new service worker on boot, when the network returns and when the tab becomes visible, and reloads a backgrounded tab into the new build, so an active battle is never interrupted.',
-          'Field research: every species has five tasks (catch it, defeat it 3 / 10 / 25 times in the wild, catch its shiny) that earn Research Points. It reads the Pokedex plus a per-species wild-defeat count, tracks a research level up to 10 in the Pokedex detail, and spends the points in a Research Shop on candy, evolution stones, Bottle Caps and a Master Ball.',
+          'Field research: every species has five tasks that earn Research Points. It reads the Pokedex plus a per-species wild-defeat count, tracks a research level up to 10 in the Pokedex detail, and spends the points in a Research Shop on candy, evolution stones, Bottle Caps and a Master Ball.',
+          'A species with no wild route (evolved forms, starters, fossils, gifts, statics and the rest) no longer shows impossible “defeat it in the wild” research tasks: it observes the species instead — obtain it, feed it a berry, and use its moves in battle — for the same points.',
         ],
       },
       {

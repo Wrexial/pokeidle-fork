@@ -97,6 +97,10 @@ export const initialGameState = {
   jobs: createJobs(),
   /** Field research: wild defeats per species (see game/research.js). */
   researchDefeated: {},
+  /** Field research: berries fed to a species, for non-wild species. */
+  researchFed: {},
+  /** Field research: moves used by a species, for non-wild species. */
+  researchMoves: {},
   /** Research points already credited per species (so a balance is spendable). */
   researchClaimed: {},
   /** Unspent Research Points. */

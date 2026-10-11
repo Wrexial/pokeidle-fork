@@ -65,8 +65,8 @@ renumbered, so the gaps below are items that shipped.
     dodge / crit extras remain.
 26. **#81 Research Shop diversification** — S–M · ★★ — the shop mostly
     restocks the evolution stones the Kecleon Shop already sells.
-27. **#82 Research tasks for non-wild species** — M · ★★½ — most species can't
-    do the shared "Defeat N in the wild" tasks at all.
+27. **#82 Research tasks for non-wild species** — shipped; only optional extra
+    Legends-style tasks remain.
 
 ---
 
@@ -528,43 +528,32 @@ generic, but brand-new items also need sprites).
 
 ## 82. Research tasks for non-wild species (Legends-style tasks)
 
-Every species shares the same five research tasks (`RESEARCH_TASKS` in
-`src/game/research.js`): catch 1, defeat 3 / 10 / 25 in the wild, and catch its
-shiny. The three defeat tasks are 10 of the 16 possible points, but **533 of the
-1292 species are in neither a wild route nor a raid pool** (298 base species
-plus 235 forms — evolved forms, starters, fossils, gifts and statics, Game
-Corner prizes, breeding-only babies, and so on), so their research is stuck: the
-Pokedex detail shows three impossible "Defeat N in the wild" rows and the
-species can never reach research level 10. Only wild defeats count (trainer and
-boss battles are excluded), and only raid defeats among the non-route content.
+The problem: every species shared the same five research tasks, three of which
+were "Defeat 3 / 10 / 25 in the wild". **533 of the 1292 species are in neither
+a wild route nor a raid pool** (298 base species plus 235 forms — evolved forms,
+starters, fossils, gifts and statics, Game Corner prizes, breeding-only babies,
+and so on), so those three rows were impossible and the species could never
+reach research level 10.
 
-Take a cue from **Legends: Arceus**, whose research tasks are per-species and go
-well beyond "catch / defeat":
+Done (Legends: Arceus style):
 
-- [ ] Make the task list species-aware (`researchTasksFor(speciesKey)`): keep the
-      defeat ladder for a species that actually spawns on a wild route (or in a
-      raid pool), and give the rest tasks they can do — evolve it, hatch it,
-      level it to N, win N battles with it, feed it a berry, see it use a move.
-- [ ] **Berry feeding**: count a berry given to the species (the Berry Garden
-      grows them; the companion already has a feed action). A per-species
-      `researchFed` counter or reuse the garden/companion data.
-- [ ] **Move tracking**: a per-species `researchMovesUsed` counter that watches
-      the moves a species actually uses in battle ("see it use X", "defeat a foe
-      with a super-effective move"), which also gives each species a different
-      shape of task.
-- [ ] Other Legends-style tasks worth modelling: catch without the target
-      noticing, catch a large / alpha specimen (ties into #74), defeat with a
-      specific move type, and "use it enough times".
-- [ ] Keep the points comparable: if the ladder shrinks for a species, either
-      rebalance its alternative tasks to the same weight or make
-      `RESEARCH_MAX_POINTS` / `RESEARCH_MAX_LEVEL` per-species, so levels and
-      the progress bar stay honest.
-- [ ] `src/components/research-panel.js` renders task labels generically, so it
-      mainly needs the new counters surfaced; the save gains the new counters
-      (bump `SAVE_VERSION` only if the shape changes incompatibly).
+- `researchTasksFor(speciesKey)` (`src/game/research.js`) is species-aware:
+  a species that spawns on a wild route or a raid pool keeps the wild-defeat
+  ladder, and everything else gets an observable set instead — obtain it, feed
+  it a berry, use 10 / 25 of its moves, catch its shiny. Both sets total the
+  same 16 points, so the level curve and `RESEARCH_MAX_POINTS` are unchanged.
+- **Move tracking**: `creditResearchMove` counts a move the active species
+  actually uses (the `attack` battle event now carries its `moveId`).
+- **Berry feeding**: `creditResearchFeed` counts a garden berry used on a
+  species through the bag.
+- New `researchFed` / `researchMoves` counters persist in the save and repair
+  like `researchDefeated`; the Pokedex detail already renders the new labels.
 
-Effort: **medium** (species-aware tasks plus a few new counters and their save
-handling; the task/shop UI is already generic).
+Still open (optional extra Legends-style tasks):
+
+- [ ] Catch a large / alpha specimen (ties into #74), or defeat a foe with a
+      super-effective move of a given type.
+- [ ] A per-species "see it use <specific move>" flavour task for more variety.
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

@@ -1,25 +1,71 @@
 // Field research: per-species tasks that earn Research Points (RP), which spend
-// in the Research Shop. Progress is derived from counters the game already
-// keeps (pokedexCaught, shinyCaught) plus a per-species wild-defeat count, so
-// no per-species task state has to be authored.
+// in the Research Shop. A species' task list depends on whether it can be found
+// in the wild: wild species share a defeat ladder, and the rest observe the
+// species (obtain, feed, use its moves). Progress is derived from the Pokedex
+// plus a few per-species counters.
 
-import { pokemonSpecies } from '../data/gameData.js'
+import { encounterData, pokemonSpecies } from '../data/gameData.js'
 
 /**
- * The research tasks every species shares. `kind: 'defeat'` reads the species'
- * wild-defeat counter; the others read the Pokedex.
- * @type {{ id: string, kind?: 'defeat', label: string, need: number, points: number }[]}
+ * Research tasks for a species that actually spawns on a wild route (or a raid
+ * pool), so the wild-defeat ladder is reachable. `kind` picks the counter the
+ * task reads (`defeat` = its wild-defeat count, `catch` / `shiny` = Pokedex).
+ * @type {{ id: string, kind: 'catch' | 'defeat' | 'shiny', label: string, need: number, points: number }[]}
  */
-export const RESEARCH_TASKS = [
-  { id: 'catch', label: 'Catch 1', need: 1, points: 1 },
+export const RESEARCH_TASKS_WILD = [
+  { id: 'catch', kind: 'catch', label: 'Catch 1', need: 1, points: 1 },
   { id: 'defeat3', kind: 'defeat', label: 'Defeat 3 in the wild', need: 3, points: 2 },
   { id: 'defeat10', kind: 'defeat', label: 'Defeat 10 in the wild', need: 10, points: 3 },
   { id: 'defeat25', kind: 'defeat', label: 'Defeat 25 in the wild', need: 25, points: 5 },
-  { id: 'shiny', label: 'Catch its shiny', need: 1, points: 5 },
+  { id: 'shiny', kind: 'shiny', label: 'Catch its shiny', need: 1, points: 5 },
 ]
 
-/** Total points a single species can yield. */
-export const RESEARCH_MAX_POINTS = RESEARCH_TASKS.reduce((sum, task) => sum + task.points, 0)
+/**
+ * Research tasks for a species that can never be found on a wild route (evolved
+ * forms, starters, fossils, gifts/statics, Game Corner prizes, breeding-only
+ * babies, ...). The wild-defeat ladder would be impossible, so it observes the
+ * species instead (feed it a berry, use its moves), Legends: Arceus style. The
+ * point total matches the wild set so research levels stay comparable.
+ * @type {{ id: string, kind: 'catch' | 'fed' | 'moves' | 'shiny', label: string, need: number, points: number }[]}
+ */
+export const RESEARCH_TASKS_NON_WILD = [
+  { id: 'catch', kind: 'catch', label: 'Obtain 1', need: 1, points: 1 },
+  { id: 'fed', kind: 'fed', label: 'Feed it a berry', need: 1, points: 2 },
+  { id: 'moves10', kind: 'moves', label: 'Use 10 of its moves', need: 10, points: 3 },
+  { id: 'moves25', kind: 'moves', label: 'Use 25 of its moves', need: 25, points: 5 },
+  { id: 'shiny', kind: 'shiny', label: 'Catch its shiny', need: 1, points: 5 },
+]
+
+/** Total points a single species can yield (both task sets add up to this). */
+export const RESEARCH_MAX_POINTS = RESEARCH_TASKS_WILD.reduce((sum, task) => sum + task.points, 0)
+
+/** Cached set of every species that appears in a wild route or raid pool. @type {Set<string> | null} */
+let wildSpeciesSet = null
+
+/**
+ * Whether `speciesKey` can be found (and so defeated) in the wild: any route
+ * encounter bucket or raid pool. Non-wild species get the alternative task set.
+ * @param {string} speciesKey
+ * @returns {boolean}
+ */
+export function isWildSpecies(speciesKey) {
+  if (!wildSpeciesSet) {
+    wildSpeciesSet = new Set()
+    for (const bucket of Object.values(encounterData ?? {}))
+      for (const encounter of bucket?.encounters ?? []) wildSpeciesSet.add(encounter.speciesKey)
+  }
+  return wildSpeciesSet.has(speciesKey)
+}
+
+/**
+ * The research task list for a species: the wild-defeat ladder when it spawns
+ * somewhere, otherwise the observation set (obtain / feed / use moves).
+ * @param {string} speciesKey
+ * @returns {typeof RESEARCH_TASKS_WILD | typeof RESEARCH_TASKS_NON_WILD}
+ */
+export function researchTasksFor(speciesKey) {
+  return isWildSpecies(speciesKey) ? RESEARCH_TASKS_WILD : RESEARCH_TASKS_NON_WILD
+}
 
 /** Research level 10 is a fully completed species. */
 export const RESEARCH_MAX_LEVEL = 10
@@ -42,20 +88,26 @@ export const RESEARCH_MAX_LEVEL = 10
 export function speciesResearch(state, speciesKey) {
   const caught = (state.pokedexCaught ?? []).includes(speciesKey),
     shiny = (state.shinyCaught ?? []).includes(speciesKey),
-    defeated = state.researchDefeated?.[speciesKey] ?? 0
-  const tasks = RESEARCH_TASKS.map((task) => {
+    defeated = state.researchDefeated?.[speciesKey] ?? 0,
+    fed = state.researchFed?.[speciesKey] ?? 0,
+    moves = state.researchMoves?.[speciesKey] ?? 0
+  const tasks = researchTasksFor(speciesKey).map((task) => {
     const raw =
       task.kind === 'defeat'
         ? defeated
-        : task.id === 'catch'
-          ? caught
-            ? 1
-            : 0
-          : task.id === 'shiny'
-            ? shiny
-              ? 1
-              : 0
-            : 0
+        : task.kind === 'fed'
+          ? fed
+          : task.kind === 'moves'
+            ? moves
+            : task.kind === 'catch'
+              ? caught
+                ? 1
+                : 0
+              : task.kind === 'shiny'
+                ? shiny
+                  ? 1
+                  : 0
+                : 0
     return {
       id: task.id,
       label: task.label,
@@ -65,16 +117,14 @@ export function speciesResearch(state, speciesKey) {
       done: raw >= task.need,
     }
   })
-  const earned = tasks.reduce((sum, task) => sum + (task.done ? task.points : 0), 0)
+  const max = tasks.reduce((sum, task) => sum + task.points, 0),
+    earned = tasks.reduce((sum, task) => sum + (task.done ? task.points : 0), 0)
   return {
     tasks,
     earned,
-    max: RESEARCH_MAX_POINTS,
-    level: Math.min(
-      RESEARCH_MAX_LEVEL,
-      Math.round((earned / RESEARCH_MAX_POINTS) * RESEARCH_MAX_LEVEL)
-    ),
-    complete: earned >= RESEARCH_MAX_POINTS,
+    max,
+    level: Math.min(RESEARCH_MAX_LEVEL, Math.round((earned / max) * RESEARCH_MAX_LEVEL)),
+    complete: earned >= max,
   }
 }
 
@@ -108,6 +158,34 @@ export function creditResearchDefeat(state, speciesKey) {
   const researchDefeated = { ...(state.researchDefeated ?? {}) }
   researchDefeated[speciesKey] = (researchDefeated[speciesKey] ?? 0) + 1
   return applyResearchEarnings({ ...state, researchDefeated }, speciesKey)
+}
+
+/**
+ * Count a berry fed to `speciesKey`, for species with no wild route to study.
+ * @param {GameState} state
+ * @param {string | undefined | null} speciesKey
+ * @returns {GameState}
+ */
+export function creditResearchFeed(state, speciesKey) {
+  // Only a species with no wild route reads this counter.
+  if (!speciesKey || !pokemonSpecies[speciesKey] || isWildSpecies(speciesKey)) return state
+  const researchFed = { ...(state.researchFed ?? {}) }
+  researchFed[speciesKey] = (researchFed[speciesKey] ?? 0) + 1
+  return applyResearchEarnings({ ...state, researchFed }, speciesKey)
+}
+
+/**
+ * Count a move used by `speciesKey` in battle, for species with no wild route.
+ * @param {GameState} state
+ * @param {string | undefined | null} speciesKey
+ * @returns {GameState}
+ */
+export function creditResearchMove(state, speciesKey) {
+  // Only a species with no wild route reads this counter.
+  if (!speciesKey || !pokemonSpecies[speciesKey] || isWildSpecies(speciesKey)) return state
+  const researchMoves = { ...(state.researchMoves ?? {}) }
+  researchMoves[speciesKey] = (researchMoves[speciesKey] ?? 0) + 1
+  return applyResearchEarnings({ ...state, researchMoves }, speciesKey)
 }
 
 /**

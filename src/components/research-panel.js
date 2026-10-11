@@ -5,7 +5,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { consumableItems, evolutionItems, heldItems, pokeBalls } from '../data/items.js'
 import { useGame } from '../game/context.js'
-import { RESEARCH_MAX_POINTS, RESEARCH_SHOP, speciesResearch } from '../game/research.js'
+import { RESEARCH_SHOP, speciesResearch } from '../game/research.js'
 import { ItemIcon } from './item-icon.js'
 
 /** @param {string} itemId */
@@ -108,7 +108,7 @@ export function ResearchPanel({ speciesKey }) {
             children: [
               `Lv.${research.level}`,
               ' \u00b7 ',
-              `${research.earned}/${RESEARCH_MAX_POINTS} RP`,
+              `${research.earned}/${research.max} RP`,
               research.complete ? ' \u00b7 COMPLETE' : '',
             ],
           }),

@@ -503,14 +503,23 @@ export function repairSave(saved) {
   }
 
   // Field research: keep only real species and sane counters.
-  const researchDefeated = /** @type {Record<string, number>} */ ({}),
-    savedDefeated =
-      saved.researchDefeated && typeof saved.researchDefeated === 'object'
-        ? saved.researchDefeated
-        : {}
-  for (const [speciesKey, count] of Object.entries(savedDefeated))
-    if (pokemonSpecies[speciesKey] && Number.isFinite(count) && count > 0)
-      researchDefeated[speciesKey] = Math.min(1_000_000, Math.floor(count))
+  /**
+   * Sanitise a per-species research counter map.
+   * @param {any} raw
+   * @returns {Record<string, number>}
+   */
+  const sanitizeResearchCounters = (raw) => {
+    /** @type {Record<string, number>} */
+    const counters = {}
+    const source = raw && typeof raw === 'object' ? raw : {}
+    for (const [speciesKey, count] of Object.entries(source))
+      if (pokemonSpecies[speciesKey] && Number.isFinite(count) && count > 0)
+        counters[speciesKey] = Math.min(1_000_000, Math.floor(/** @type {number} */ (count)))
+    return counters
+  }
+  const researchDefeated = sanitizeResearchCounters(saved.researchDefeated),
+    researchFed = sanitizeResearchCounters(saved.researchFed),
+    researchMoves = sanitizeResearchCounters(saved.researchMoves)
   const researchClaimed = /** @type {Record<string, number>} */ ({}),
     savedClaimed =
       saved.researchClaimed && typeof saved.researchClaimed === 'object' ? saved.researchClaimed : {}
@@ -731,6 +740,8 @@ export function repairSave(saved) {
     pelago,
     jobs,
     researchDefeated,
+    researchFed,
+    researchMoves,
     researchClaimed,
     researchPoints: Math.max(0, Math.floor(Number(saved.researchPoints) || 0)),
     shinySeen,
@@ -902,6 +913,8 @@ export const SAVED_STATE_KEYS = [
   'pelago',
   'jobs',
   'researchDefeated',
+  'researchFed',
+  'researchMoves',
   'researchClaimed',
   'researchPoints',
   'shinySeen',

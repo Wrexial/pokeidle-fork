@@ -12,7 +12,7 @@ import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from '
 import { useGame } from './context.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './catching.js'
 import { abilityOf } from './abilities.js'
-import { companionExpMultiplier, companionToughOutChance } from './companion.js'
+import { companionExpMultiplier, companionToughOutChance, friendshipToughOutChance } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch, chooseTrainingSwitch } from './combat.js'
 import { isBattleReady } from './pokemon.js'
 import { genderForPokemon } from './breeding.js'
@@ -442,12 +442,13 @@ export function useGameLoop() {
               confusionTurns: playerVolatile.confusionTurns ?? 0,
               leechSeeded: playerVolatile.leechSeeded ?? !1,
               heldItemUsed: playerVolatile.heldItemUsed ?? !1,
-              // The affection save only applies to the pinned companion.
+              // The affection save: the pinned companion uses its care, and
+              // any other active Pokemon falls back to its own friendship.
               toughOutChance:
                 currentGameState.companion?.id &&
                 currentGameState.companion.id === currentGameState.playerPokemon.id
                   ? companionToughOutChance(currentGameState.companion)
-                  : 0,
+                  : friendshipToughOutChance(currentGameState.playerPokemon),
               toughOutUsed: playerVolatile.toughOutUsed ?? !1,
               protectChain: playerVolatile.protectChain ?? 0,
               tauntTurns: playerVolatile.tauntTurns ?? 0,

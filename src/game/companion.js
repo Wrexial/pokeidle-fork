@@ -3,6 +3,8 @@
 // bonus, so it is worth checking in between battles — but neglect only pauses
 // the bonus, it never harms the Pokemon.
 
+import { MAX_FRIENDSHIP } from './pokemon/friendship.js'
+
 /** Care stats start (and cap) at this value. */
 export const COMPANION_MAX_CARE = 100
 
@@ -20,6 +22,12 @@ export const COMPANION_TOUGH_OUT_MIN_CARE = 60
 
 /** Best-case chance to tough out a knockout, at full care. */
 export const COMPANION_TOUGH_OUT_MAX_CHANCE = 0.3
+
+/** Friendship a non-companion needs before it can also tough out a knockout. */
+export const FRIENDSHIP_TOUGH_OUT_MIN = 220
+
+/** Best-case chance a high-friendship non-companion toughs out a knockout. */
+export const FRIENDSHIP_TOUGH_OUT_MAX_CHANCE = 0.15
 
 /** Money each feed costs. */
 export const COMPANION_FEED_COST = 500
@@ -156,6 +164,21 @@ export function companionToughOutChance(companion) {
   const progress =
     (average - COMPANION_TOUGH_OUT_MIN_CARE) / (COMPANION_MAX_CARE - COMPANION_TOUGH_OUT_MIN_CARE)
   return Math.min(1, Math.max(0, progress)) * COMPANION_TOUGH_OUT_MAX_CHANCE
+}
+
+/**
+ * The chance a non-companion Pokemon toughs out a knockout from its own
+ * friendship alone, so a maxed bond is worth something even without pinning it.
+ * Half the best companion rate at full friendship, and zero below the gate.
+ * @param {{ friendship?: number } | null | undefined} pokemon
+ * @returns {number}
+ */
+export function friendshipToughOutChance(pokemon) {
+  const friendship = pokemon?.friendship ?? 0
+  if (friendship < FRIENDSHIP_TOUGH_OUT_MIN) return 0
+  const progress =
+    (friendship - FRIENDSHIP_TOUGH_OUT_MIN) / (MAX_FRIENDSHIP - FRIENDSHIP_TOUGH_OUT_MIN)
+  return Math.min(1, Math.max(0, progress)) * FRIENDSHIP_TOUGH_OUT_MAX_CHANCE
 }
 
 /**

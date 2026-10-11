@@ -39,7 +39,7 @@ export const CHANGELOG = [
       {
         heading: 'Battles',
         items: [
-          'A well-kept companion can tough out a would-be knockout at 1 HP (“X toughed it out so you wouldn’t feel sad!”). The chance scales with its care stats, applies only to the pinned Pokemon while it is in battle, and can save it once per battle like a Focus Sash.',
+          'A well-kept companion can tough out a would-be knockout at 1 HP (“X toughed it out so you wouldn’t feel sad!”). The chance scales with its care stats, and any other Pokemon with near-max friendship gets a smaller version of the same save while it is in battle. It can fire once per battle, like a Focus Sash.',
         ],
       },
       {

@@ -307,9 +307,8 @@ The 1 HP "tough it out" save shipped (`src/game/companion.js`,
 
 Still open (optional extras if we want the full affection set):
 
-- [ ] Shake off a status condition, dodge a move, or a bumped crit rate.
-- [ ] Let a high-friendship non-companion benefit too, if the companion-only
-      gate feels too narrow.
+- [ ] Shake off a status condition, dodge a move, or a bumped crit rate (a
+      high-friendship non-companion already gets a smaller tough-it-out save).
 
 ## 81. Research Shop diversification
 

@@ -13,16 +13,19 @@ const {
   COMPANION_MAX_CARE,
   COMPANION_TOUGH_OUT_MAX_CHANCE,
   COMPANION_TOUGH_OUT_MIN_CARE,
+  FRIENDSHIP_TOUGH_OUT_MAX_CHANCE,
+  FRIENDSHIP_TOUGH_OUT_MIN,
   applyCareAction,
   companionExpMultiplier,
   companionMood,
   companionToughOutChance,
   createCompanionCare,
+  friendshipToughOutChance,
   isCompanionContent,
   tickCompanion,
 } = await import('../src/game/companion.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
-const { createPokemon } = await import('../src/game/pokemon.js')
+const { createPokemon, MAX_FRIENDSHIP } = await import('../src/game/pokemon.js')
 
 test('companion mood reflects the lowest care stat', () => {
   assert.equal(companionMood(createCompanionCare(null, 0)), null)
@@ -51,6 +54,17 @@ test('a tougher-out chance scales with companion care', () => {
   assert.ok(midChance > 0 && midChance < COMPANION_TOUGH_OUT_MAX_CHANCE)
   const better = { ...full, fullness: 95, happiness: 95, energy: 95, cleanliness: 95 }
   assert.ok(companionToughOutChance(better) > midChance)
+})
+
+test('a high-friendship non-companion can also tough it out', () => {
+  assert.equal(friendshipToughOutChance(null), 0)
+  assert.equal(friendshipToughOutChance({ friendship: FRIENDSHIP_TOUGH_OUT_MIN - 1 }), 0)
+  assert.equal(
+    friendshipToughOutChance({ friendship: MAX_FRIENDSHIP }),
+    FRIENDSHIP_TOUGH_OUT_MAX_CHANCE
+  )
+  const mid = friendshipToughOutChance({ friendship: FRIENDSHIP_TOUGH_OUT_MIN + 10 })
+  assert.ok(mid > 0 && mid < FRIENDSHIP_TOUGH_OUT_MAX_CHANCE)
 })
 
 test('companion care helpers', () => {

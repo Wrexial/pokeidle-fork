@@ -21,6 +21,7 @@ import { BattleTowerPanel } from './battle-tower-panel.js'
 import { GymLocationPanel } from './gym-location-panel.js'
 import { LeagueLocationPanel } from './league-location-panel.js'
 import { DaycarePanel } from './daycare-panel.js'
+import { KurtPanel } from './kurt-panel.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 import { CafePanel } from './cafe-panel.js'
@@ -781,6 +782,7 @@ export function LocationPanel({ onOpenCatchSettings }) {
         jsx(GymLocationPanel, {}),
         jsx(LeagueLocationPanel, {}),
         jsx(DaycarePanel, {}),
+        jsx(KurtPanel, {}),
         cafe && jsx(CafePanel, { cafe }),
         routeEncounters &&
           routeKey &&

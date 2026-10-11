@@ -44,6 +44,15 @@ if (mapData['alola-poke-pelago'])
     hint: 'Plant and harvest berries from the Poke Pelago garden.',
   })
 
+// Kurt's Apricorn Ball workshop lives in Johto's Azalea Town.
+if (mapData['johto-azalea-town'])
+  addServicePoi('johto-azalea-town', {
+    kind: 'kurt',
+    icon: '\u{1f330}',
+    label: 'Kurt\u2019s Workshop',
+    hint: 'Carve Apricorns found on Johto routes into special balls.',
+  })
+
 // The Battle Tower is a facility on Hoenn Route 111.
 if (BATTLE_TOWER_LOCATION && mapData[BATTLE_TOWER_LOCATION])
   addServicePoi(BATTLE_TOWER_LOCATION, {

@@ -191,6 +191,48 @@ export const pokeballColors = {
       ring: '#8a20a0',
       dot: '#f0d060',
     },
+    levelball: {
+      top: '#e07020',
+      bottom: '#e8dcc0',
+      ring: '#2a1808',
+      dot: '#f0d060',
+    },
+    lureball: {
+      top: '#3060c8',
+      bottom: '#e8dcc0',
+      ring: '#30b0d0',
+      dot: '#2a1808',
+    },
+    friendball: {
+      top: '#4a9a3a',
+      bottom: '#e8dcc0',
+      ring: '#f0d060',
+      dot: '#2a1808',
+    },
+    heavyball: {
+      top: '#5a6a7a',
+      bottom: '#c8b890',
+      ring: '#2a1808',
+      dot: '#2a1808',
+    },
+    loveball: {
+      top: '#e060a0',
+      bottom: '#e8dcc0',
+      ring: '#f0d060',
+      dot: '#2a1808',
+    },
+    fastball: {
+      top: '#f0d020',
+      bottom: '#e8dcc0',
+      ring: '#e04040',
+      dot: '#2a1808',
+    },
+    moonball: {
+      top: '#3a3a7a',
+      bottom: '#e8dcc0',
+      ring: '#f0d060',
+      dot: '#f0d060',
+    },
     masterball: {
       top: '#7030a0',
       bottom: '#e8dcc0',

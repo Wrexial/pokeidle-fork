@@ -1,7 +1,7 @@
 // Split from src/game/logic.js.
 
 import { ballOrder, pokeBalls } from '../data/items.js'
-import { pokemonSpecies } from '../data/gameData.js'
+import { evolutionData, pokemonSpecies } from '../data/gameData.js'
 import { getCatchRule } from './progression.js'
 import { isNightTime } from './day-night.js'
 
@@ -43,6 +43,36 @@ export function getBallModifier(ballId, context = {}) {
       return context.isCave || context.isNight ? 3 : 1
     case 'nestball':
       return Math.max(1, Math.min(4, (41 - (context.level ?? 50)) / 10))
+    // Kurt's Apricorn Balls.
+    case 'levelball': {
+      const leadLevel = context.leadLevel ?? 0,
+        level = context.level ?? 50
+      if (!leadLevel) return 1
+      if (level * 4 <= leadLevel) return 8
+      if (level * 2 <= leadLevel) return 4
+      return level <= leadLevel ? 2 : 1
+    }
+    case 'lureball':
+      return context.isWater ? 5 : 1
+    case 'heavyball': {
+      const weight = pokemonSpecies[context.speciesKey ?? '']?.weight ?? 0
+      return weight >= 300 ? 8 : weight >= 200 ? 4 : weight >= 100 ? 1 : 0.5
+    }
+    case 'loveball': {
+      const lead = context.leadGender,
+        foe = context.enemyGender
+      return lead && foe && lead !== 'genderless' && foe !== 'genderless' && lead !== foe ? 8 : 1
+    }
+    case 'fastball': {
+      const baseSpeed = pokemonSpecies[context.speciesKey ?? '']?.baseStats?.speed ?? 0
+      return baseSpeed >= 100 ? 4 : 1
+    }
+    case 'moonball':
+      return (evolutionData[context.speciesKey ?? ''] ?? []).some(
+        (evolution) => evolution.item === 'moonStone'
+      )
+        ? 4
+        : 1
     default:
       return ball.ballModifier
   }

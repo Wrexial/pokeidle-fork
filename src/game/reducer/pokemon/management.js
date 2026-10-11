@@ -276,6 +276,8 @@ export function catchPokemon(state, action) {
   let newPokemon = gender ? { ...rolledPokemon, gender } : rolledPokemon
   if (heldItem) newPokemon = { ...newPokemon, heldItem }
   if (ability) newPokemon = { ...newPokemon, ability }
+  // The Friend Ball sets a high starting friendship.
+  if (pokeballUsed === 'friendball') newPokemon = { ...newPokemon, friendship: 200 }
   let inventory = state.inventory
   if (pokeballUsed) {
     const ownedCount = inventory[pokeballUsed] ?? 0

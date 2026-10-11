@@ -179,6 +179,9 @@ export const expCandyDropChance = 0.012
 /** Chance a wild win drops the much rarer Rare Candy. */
 export const rareCandyDropChance = 0.0015
 
+/** Chance a wild win on a Johto route turns up an Apricorn for Kurt. */
+export const apricornDropChance = 0.12
+
 /**
  * Chance a headbutted tree or rustled contest bush shakes out a second Pokemon.
  * You can only keep one, so the other flees \u2014 the "awwhh" moment.

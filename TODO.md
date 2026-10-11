@@ -58,8 +58,7 @@ renumbered, so the gaps below are items that shipped.
 22. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
 23. **#78 Alola Ultra Warp Ride** — M · ★★★ — a warp minigame to reach the Ultra
     Beasts and legends.
-24. **#79 Johto Poké Ball crafting (Kurt)** — M · ★★★ — Apricorn/berry crafting
-    and the seven Apricorn balls.
+24. **#79 Johto Poké Ball crafting (Kurt)** — shipped.
 25. **#80 Companion affection perks** — shipped; the optional status-shake /
     dodge / crit extras remain.
 26. **#81 Research Shop diversification** — shipped; the shop now stocks the
@@ -437,24 +436,23 @@ Effort: **medium**.
 
 ## 79. Johto Poké Ball crafting (Kurt)
 
-Johto's signature ball-crafting has no home yet: the game ships 13 balls
-(Poké / Great / Ultra, the situational set and the Master Ball) but **no Apricorn
-balls and no crafting**. Add **Kurt** in Azalea Town and the seven Apricorn balls.
+Done: Kurt's Apricorn Balls are in.
 
-- [ ] Add the **Apricorn** items (Red, Blue, Yellow, Green, Pink, White, Black),
-      gathered on Johto routes — or grown/harvested, since the user framed this as
-      berry crafting; the Berry Garden (`garden.js`) grows Oran / Sitrus / Lum
-      today, so either add Apricorns to it or give the trees their own gathering.
-- [ ] Add the seven balls with their real effects: **Level** (lower-level foes),
-      **Lure** (fishing), **Friend** (sets friendship), **Heavy** (heavier foes),
-      **Love** (opposite gender), **Fast** (fast / fleeing foes) and **Moon**
-      (Moon Stone evolvers).
-- [ ] Wire each ball's catch-rate modifier into `src/game/catching.js` and the
-      auto-catch ball picker, alongside the existing situational balls.
-- [ ] The crafting loop: hand Kurt the Apricorns and collect the balls after a
-      few wild wins (his canonical turnaround), or make it instant.
-- [ ] Sprites via `tools/download-item-sprites.cjs` (add the new ids to its
-      name map).
+- The seven **Apricorns** (Red, Blue, Yellow, Green, Pink, White, Black) drop
+  from wild wins on Johto routes (`apricornDropChance`) and have sprites.
+- The seven **balls** (Level, Lure, Friend, Heavy, Love, Fast, Moon) are real
+  `pokeBalls`, auto-catchable, with their situational rates in
+  `getBallModifier` (Level vs the lead, Lure on water, Heavy by species weight,
+  Love by opposite gender, Fast by base Speed, Moon for Moon Stone evolvers);
+  the Friend Ball sets 200 friendship on catch.
+- **Kurt's workshop** in Azalea Town (a service POI + `kurt-panel.js`) carves
+  one Apricorn into its ball for free, via `CRAFT_APRICORN_BALL`.
+
+Still open (optional):
+
+- [ ] The canonical delayed turnaround (hand Kurt Apricorns, collect after a few
+      wild wins) instead of the instant carve.
+- [ ] Grow Apricorns in the Berry Garden as well as finding them on routes.
 
 Effort: **medium**.
 

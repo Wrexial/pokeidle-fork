@@ -52,6 +52,14 @@ const SEREBII_NAMES = {
   curry: 'packagedcurry',
   pokebean: 'tinofbeans',
   poffin: 'sweetheart',
+  // Serebii names the Apricorns colour-first.
+  apricornRed: 'redapricorn',
+  apricornBlue: 'blueapricorn',
+  apricornYellow: 'yellowapricorn',
+  apricornGreen: 'greenapricorn',
+  apricornPink: 'pinkapricorn',
+  apricornWhite: 'whiteapricorn',
+  apricornBlack: 'blackapricorn',
 }
 
 /** Every item id that can appear in the bag, a shop or an auction lot. */

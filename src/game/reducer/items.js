@@ -603,3 +603,38 @@ export function setAlwaysCatchShinies(state, action) {
     alwaysCatchShinies: action.payload.value,
   }
 }
+
+/**
+ * Handle the `CRAFT_APRICORN_BALL` action: Kurt (Azalea Town) carves one
+ * Apricorn into the ball it maps to.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function craftApricornBall(state, action) {
+  const apricornId = action.payload?.apricornId,
+    apricorn = consumableItems[apricornId],
+    ballId = apricorn?.kurtBall,
+    owned = state.inventory[apricornId] ?? 0
+  if (!ballId || !pokeBalls[ballId] || owned <= 0) return state
+  return withNotification(
+    {
+      ...state,
+      inventory: {
+        ...state.inventory,
+        [apricornId]: owned - 1,
+        [ballId]: (state.inventory[ballId] ?? 0) + 1,
+      },
+      battleLog: [
+        ...state.battleLog,
+        `Kurt carved a ${apricorn.name} into a ${pokeBalls[ballId].name}!`,
+      ].slice(-50),
+    },
+    {
+      message: `Kurt made a ${pokeBalls[ballId].name}!`,
+      tone: 'success',
+      icon: '\u{1f534}',
+      dedupeKey: `kurt:${ballId}:${Math.random()}`,
+    }
+  )
+}

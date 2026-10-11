@@ -15,6 +15,7 @@ import { abilityOf } from './abilities.js'
 import { companionExpMultiplier, companionToughOutChance } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch, chooseTrainingSwitch } from './combat.js'
 import { isBattleReady } from './pokemon.js'
+import { genderForPokemon } from './breeding.js'
 import { awardExperience, checkShinyOdds, encountersForPhase, isHoneyActive, partyNeedsHealing, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
 
 export function useGameLoop() {
@@ -821,10 +822,17 @@ export function useGameLoop() {
           }
           const enemyPokemon = currentGameState.enemyPokemon
           const catchContext = {
+            speciesKey: enemyPokemon.speciesKey,
             level: enemyPokemon.level,
             types: pokemonSpecies[enemyPokemon.speciesKey]?.types ?? [],
             alreadyCaught: currentGameState.pokedexCaught.includes(enemyPokemon.speciesKey),
             turn: currentGameState.battleTurn ?? 1,
+            // Apricorn Ball context: the lead's level / gender and the foe's gender.
+            leadLevel: currentGameState.playerPokemon?.level ?? 0,
+            leadGender: currentGameState.playerPokemon
+              ? genderForPokemon(currentGameState.playerPokemon)
+              : undefined,
+            enemyGender: genderForPokemon(enemyPokemon),
             isWater: isWaterLocation(mapData[currentGameState.currentLocation]),
             isCave: isCaveLocation(mapData[currentGameState.currentLocation]),
             isNight: isNightTime(),

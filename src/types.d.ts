@@ -202,6 +202,8 @@ type ConsumableItem = {
   ivTraining?: 'lowest' | 'all'
   /** Changes the target's ability: `capsule` cycles its normal abilities, `patch` toggles the hidden one. */
   abilityChange?: 'capsule' | 'patch'
+  /** Apricorn -> the ball Kurt carves it into (see game/reducer/items.js). */
+  kurtBall?: string
 }
 
 type PokeBall = {
@@ -250,6 +252,14 @@ type CatchContext = {
   isCave?: boolean
   /** Whether it is night locally (Dusk Ball). */
   isNight?: boolean
+  /** The target's species key (Heavy / Fast / Moon Ball). */
+  speciesKey?: string
+  /** The player's active Pokemon's level (Level Ball). */
+  leadLevel?: number
+  /** The player's active Pokemon's gender (Love Ball). */
+  leadGender?: 'male' | 'female' | 'genderless'
+  /** The target's gender (Love Ball). */
+  enemyGender?: 'male' | 'female' | 'genderless'
   /** Whether Honey is boosting this species on the route (catch bonus). */
   honey?: boolean
 }

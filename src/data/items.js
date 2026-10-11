@@ -116,6 +116,57 @@ export const pokeBalls = {
       buyPrice: null,
       ballModifier: 1.5,
     },
+    // Kurt's Apricorn Balls: `ballModifier` is the fallback; getBallModifier
+    // (src/game/catching.js) bumps it when the situation matches.
+    levelball: {
+      id: 'levelball',
+      name: 'Level Ball',
+      description: 'Catches a much lower-leveled Pokemon more easily (up to x8).',
+      buyPrice: null,
+      ballModifier: 1,
+    },
+    lureball: {
+      id: 'lureball',
+      name: 'Lure Ball',
+      description: 'A x5 catch rate on a water route.',
+      buyPrice: null,
+      ballModifier: 1,
+    },
+    friendball: {
+      id: 'friendball',
+      name: 'Friend Ball',
+      description: 'A standard ball that sets a caught Pokemon\u2019s friendship to 200.',
+      buyPrice: null,
+      ballModifier: 1,
+    },
+    heavyball: {
+      id: 'heavyball',
+      name: 'Heavy Ball',
+      description: 'Catches heavier Pokemon more easily (up to x8, and worse on light ones).',
+      buyPrice: null,
+      ballModifier: 1,
+    },
+    loveball: {
+      id: 'loveball',
+      name: 'Love Ball',
+      description: 'A x8 catch rate on a wild Pokemon of the opposite gender to your lead.',
+      buyPrice: null,
+      ballModifier: 1,
+    },
+    fastball: {
+      id: 'fastball',
+      name: 'Fast Ball',
+      description: 'A x4 catch rate on a Pokemon with a high base Speed.',
+      buyPrice: null,
+      ballModifier: 1,
+    },
+    moonball: {
+      id: 'moonball',
+      name: 'Moon Ball',
+      description: 'A x4 catch rate on a Pokemon that evolves with a Moon Stone.',
+      buyPrice: null,
+      ballModifier: 1,
+    },
     masterball: {
       id: 'masterball',
       name: 'Master Ball',
@@ -136,6 +187,13 @@ export const ballOrder = [
   'diveball',
   'nestball',
   'duskball',
+  'levelball',
+  'lureball',
+  'friendball',
+  'heavyball',
+  'loveball',
+  'fastball',
+  'moonball',
   'ultraball',
   'masterball',
 ]
@@ -606,7 +664,85 @@ export const consumableItems = {
       sellPrice: null,
       abilityChange: 'patch',
     },
+    // Apricorns: the nuts Kurt carves into Apricorn Balls (see game/kurt.js).
+    apricornRed: {
+      id: 'apricornRed',
+      name: 'Red Apricorn',
+      description: 'A red Apricorn. Kurt in Azalea Town can carve it into a Level Ball.',
+      category: 'items',
+      buyPrice: null,
+      sellPrice: 100,
+      kurtBall: 'levelball',
+    },
+    apricornBlue: {
+      id: 'apricornBlue',
+      name: 'Blue Apricorn',
+      description: 'A blue Apricorn. Kurt in Azalea Town can carve it into a Lure Ball.',
+      category: 'items',
+      buyPrice: null,
+      sellPrice: 100,
+      kurtBall: 'lureball',
+    },
+    apricornYellow: {
+      id: 'apricornYellow',
+      name: 'Yellow Apricorn',
+      description: 'A yellow Apricorn. Kurt in Azalea Town can carve it into a Moon Ball.',
+      category: 'items',
+      buyPrice: null,
+      sellPrice: 100,
+      kurtBall: 'moonball',
+    },
+    apricornGreen: {
+      id: 'apricornGreen',
+      name: 'Green Apricorn',
+      description: 'A green Apricorn. Kurt in Azalea Town can carve it into a Friend Ball.',
+      category: 'items',
+      buyPrice: null,
+      sellPrice: 100,
+      kurtBall: 'friendball',
+    },
+    apricornPink: {
+      id: 'apricornPink',
+      name: 'Pink Apricorn',
+      description: 'A pink Apricorn. Kurt in Azalea Town can carve it into a Love Ball.',
+      category: 'items',
+      buyPrice: null,
+      sellPrice: 100,
+      kurtBall: 'loveball',
+    },
+    apricornWhite: {
+      id: 'apricornWhite',
+      name: 'White Apricorn',
+      description: 'A white Apricorn. Kurt in Azalea Town can carve it into a Fast Ball.',
+      category: 'items',
+      buyPrice: null,
+      sellPrice: 100,
+      kurtBall: 'fastball',
+    },
+    apricornBlack: {
+      id: 'apricornBlack',
+      name: 'Black Apricorn',
+      description: 'A black Apricorn. Kurt in Azalea Town can carve it into a Heavy Ball.',
+      category: 'items',
+      buyPrice: null,
+      sellPrice: 100,
+      kurtBall: 'heavyball',
+    },
   }
+
+/**
+ * The seven Apricorns Kurt carves into balls, in a stable order.
+ * @type {string[]}
+ */
+export const APRICORN_IDS = [
+  'apricornRed',
+  'apricornBlue',
+  'apricornYellow',
+  'apricornGreen',
+  'apricornPink',
+  'apricornWhite',
+  'apricornBlack',
+]
 
 /**
  * Weighted treasure drops, common to rare. Higher-level battles bias the roll

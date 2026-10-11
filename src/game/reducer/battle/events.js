@@ -1,9 +1,9 @@
 // // Core battle pipeline: start an encounter, run a turn, consume its events. Split from game/reducer/battle.js.
 
-import { daycareEggBattles, expCandyDropChance, rareCandyDropChance, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wildTmDropChance } from '../../../data/config.js'
+import { apricornDropChance, daycareEggBattles, expCandyDropChance, rareCandyDropChance, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wildTmDropChance } from '../../../data/config.js'
 import { dailyDropMultiplier } from '../../../data/daily-events.js'
 import { mapData } from '../../../data/gameData.js'
-import { consumableItems } from '../../../data/items.js'
+import { APRICORN_IDS, consumableItems } from '../../../data/items.js'
 import { getTmInfo, tmItemId } from '../../../data/tms.js'
 import { canBreed } from '../../breeding.js'
 import { abilityOf } from '../../abilities.js'
@@ -386,6 +386,15 @@ export function consumeEvent(state, action) {
         [valuableId]: (inventory[valuableId] ?? 0) + 1,
       }
       secretNotices.push(`You found a ${consumableItems[valuableId].name}!`)
+    }
+    // Apricorns grow on Johto's routes and feed Kurt's ball crafting.
+    if (
+      mapData[state.currentLocation]?.region === 'johto' &&
+      Math.random() < dropChance(apricornDropChance)
+    ) {
+      const apricornId = APRICORN_IDS[Math.floor(Math.random() * APRICORN_IDS.length)]
+      inventory = { ...inventory, [apricornId]: (inventory[apricornId] ?? 0) + 1 }
+      secretNotices.push(`You found a ${consumableItems[apricornId].name}!`)
     }
     const candyId = Math.random() < dropChance(rareCandyDropChance) ? 'rareCandy' : null
     if (candyId || Math.random() < dropChance(expCandyDropChance)) {

@@ -90,6 +90,11 @@ export function completeHealing(state, action) {
       playerVolatile: createVolatileState(),
       battleEvents: [],
       pendingEvents: [
+        // A rival's (or any boss's) opening lines play first.
+        ...(bossBattle.dialogue ?? []).map((/** @type {string} */ line) => ({
+          type: 'status',
+          message: `${bossBattle.trainerName}: \u201c${line}\u201d`,
+        })),
         {
           type: 'trainerAppear',
           message: `${bossBattle.trainerName} wants to battle!`,

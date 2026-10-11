@@ -6,7 +6,7 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { gymLeaderData, mapData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam } from '../game/progression.js'
-import { buildRivalTeam, rivalChallenge, rivalName } from '../game/rival.js'
+import { buildRivalTeam, rivalChallenge, rivalDialogue, rivalName, rivalSpriteKey } from '../game/rival.js'
 
 export function RivalPanel() {
   const { state, dispatch } = useGame(),
@@ -24,6 +24,7 @@ export function RivalPanel() {
   if (!ready || location?.type !== 'town') return null
 
   const name = rivalName(regionId),
+    dialogue = rivalDialogue(regionId, stage),
     levels = team.map((member) => member.level),
     levelRange = levels.length ? `Lv.${Math.min(...levels)}\u2013${Math.max(...levels)}` : '',
     canFight = state.party.some((member) => member.currentHp > 0),
@@ -54,8 +55,10 @@ export function RivalPanel() {
           trainerName: name,
           trainerClass: 'ace',
           trainerTeam: buildTrainerTeam(team),
-          spriteKey: 'acetrainer',
+          spriteKey: rivalSpriteKey(regionId),
           region: regionId,
+          // Shown as the trainer's opening lines in the battle text box.
+          dialogue: dialogue.intro,
         },
       },
     })
@@ -100,6 +103,10 @@ export function RivalPanel() {
             ],
           }),
         ],
+      }),
+      jsx('div', {
+        className: 'rival-quote',
+        children: `\u201c${dialogue.intro[0]}\u201d`,
       }),
       jsx('div', {
         className: 'tower-hint',

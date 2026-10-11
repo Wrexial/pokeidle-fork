@@ -6,10 +6,13 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const {
+  RIVAL_DIALOGUE,
   RIVAL_MILESTONES,
   buildRivalTeam,
   rivalChallenge,
+  rivalDialogue,
   rivalName,
+  rivalSpriteKey,
 } = await import('../src/game/rival.js')
 const { pokemonSpecies } = await import('../src/data/gameData.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -52,6 +55,19 @@ test('the rival is ready at each badge milestone and done after the last', () =>
     rivalChallenge({ rivals: { kanto: RIVAL_MILESTONES.length } }, 'kanto', 8).ready,
     false
   )
+})
+
+test('every rival has a sprite key and dialogue', () => {
+  const regions = ['kanto', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola', 'galar', 'paldea']
+  for (const regionId of regions) {
+    assert.ok(RIVAL_DIALOGUE[regionId], `${regionId} has dialogue`)
+    const sprite = rivalSpriteKey(regionId)
+    assert.ok(sprite && sprite !== 'acetrainer', `${regionId} has a rival sprite`)
+    const dialogue = rivalDialogue(regionId, 0)
+    assert.ok(dialogue.intro.length > 0 && dialogue.win && dialogue.lose)
+  }
+  assert.equal(rivalSpriteKey('nonsense'), 'acetrainer')
+  assert.equal(rivalDialogue('nonsense', 0).intro.length > 0, true, 'falls back to a real rival')
 })
 
 test('buildRivalTeam scales and stays in the region generation', () => {
@@ -104,6 +120,41 @@ test('beating the rival advances the stage and pays the bonus', () => {
   })
   assert.ok(!lost.rivals.kanto)
   assert.equal(lost.inventory.rareCandy, undefined)
+})
+
+test('a full set of rival wins earns the Rival Ribbon', () => {
+  const base = {
+      ...initialGameState,
+      phase: 'battling',
+      money: 1000,
+      inventory: {},
+      rivals: { kanto: RIVAL_MILESTONES.length - 1 },
+      party: [{ id: '1', speciesKey: 'bulbasaur', level: 30, currentHp: 60, maxHp: 60 }],
+      playerPokemon: { id: '1', speciesKey: 'bulbasaur', level: 30, currentHp: 60, maxHp: 60 },
+      bossBattle: {
+        bossId: 'rival-kanto-3',
+        bossType: 'rival',
+        trainerName: 'Blue',
+        trainerClass: 'ace',
+        trainerTeam: [],
+        currentTrainerPokemonIndex: 0,
+        spriteKey: 'blue',
+        region: 'kanto',
+      },
+      bossQueue: [],
+    },
+    won = gameReducer(base, {
+      type: 'BOSS_BATTLE_END',
+      payload: { won: true, moneyDelta: 100 },
+    })
+  assert.equal(won.rivals.kanto, RIVAL_MILESTONES.length)
+  assert.ok(won.party[0].ribbons?.includes('rival'), 'the party earns the Rival Ribbon')
+  // A win before the last milestone does not.
+  const early = gameReducer(
+    { ...base, rivals: { kanto: 0 }, bossBattle: { ...base.bossBattle, bossId: 'rival-kanto-0' } },
+    { type: 'BOSS_BATTLE_END', payload: { won: true, moneyDelta: 100 } }
+  )
+  assert.ok(!early.party[0].ribbons?.includes('rival'))
 })
 
 test('repairSave sanitises the rival record', () => {

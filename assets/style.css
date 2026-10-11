@@ -17015,3 +17015,14 @@ img {
 .box-filter-segmented {
     flex: 0 0 auto
 }
+
+/* Rival panel: the rival's opening line above the challenge hint. */
+.rival-quote {
+    font-size: 9px;
+    font-style: italic;
+    line-height: 1.5;
+    color: #3a2818;
+    margin: 2px 0 6px;
+    padding-left: 8px;
+    border-left: 2px solid #c08a2a66
+}

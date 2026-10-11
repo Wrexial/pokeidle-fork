@@ -27,7 +27,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #24, #25, #56, #62, #65, #67, #69–#76,
+See the numbered sections below: #24, #25, #56, #62, #65, #67, #69, #71–#76,
 #79, #81. They are optional extras rather than missing features.
 
 ---
@@ -167,17 +167,6 @@ Still open (optional):
 - [ ] Relic-collecting steps (new items found on routes) instead of the
       Pokédex-percentage step.
 - [ ] Per-legendary boss battles with dialogue rather than a standard raid.
-
-## 70. Recurring rival
-
-Each region has a named rival who challenges you at 2 / 4 / 6 / 8 badges with a
-party-scaled team (`src/game/rival.js`, `rival-panel.js`).
-
-Still open (optional):
-
-- [ ] Rival dialogue before/after the battle.
-- [ ] A rival-specific sprite instead of the Ace Trainer stand-in.
-- [ ] A Rival Ribbon on the party for a full set of wins.
 
 ## 71. Breeding project queue & shiny tracking
 

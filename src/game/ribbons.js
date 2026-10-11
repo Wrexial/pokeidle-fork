@@ -57,6 +57,12 @@ export const RIBBONS = {
     description: 'Cleared the Champions\u2019 Gauntlet.',
     icon: '\u{2694}',
   },
+  rival: {
+    id: 'rival',
+    name: 'Rival Ribbon',
+    description: 'Beat the rival at every milestone.',
+    icon: '\u{1f91d}',
+  },
   shiny: {
     id: 'shiny',
     name: 'Shiny Ribbon',

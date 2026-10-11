@@ -33,7 +33,7 @@ export const CHANGELOG = [
       {
         heading: 'Trainers',
         items: [
-          'A recurring rival challenges you in each region: Blue, Silver, Wally, Barry, Hugh, Calem, Hau, Hop and Nemona turn up in town once you have earned 2, 4, 6 and 8 badges, each with a team that scales to your party. Beating one pays a rising cash bonus and a Rare Candy.',
+          'A recurring rival challenges you in each region: Blue, Silver, Wally, Barry, Hugh, Calem, Hau, Hop and Nemona turn up in town once you have earned 2, 4, 6 and 8 badges, each with a team that scales to your party. Each rival has their own sprite and speaks before the battle and again after a win or loss, and beating one pays a rising cash bonus and a Rare Candy. Win at all four milestones and the party earns the Rival Ribbon.',
         ],
       },
       {

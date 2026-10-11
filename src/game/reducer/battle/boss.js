@@ -8,6 +8,7 @@ import { fieldWeatherFor } from '../../weather.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { computeUnlockedLocations, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from '../../progression.js'
 import { frontierTokenReward } from '../../battle-frontier.js'
+import { RIVAL_MILESTONES, rivalDialogue } from '../../rival.js'
 import { awardRibbonToParty } from '../../pokemon.js'
 import { settleUnlockTokens, recordSeenPokemon, withNotification } from '../../reducer-helpers.js'
 import { gymTmType, rollUnownedTm } from '../../tms.js'
@@ -249,10 +250,12 @@ export function bossBattleEnd(state, action) {
     if (bossType === 'rival') {
       const rivalRegion = state.bossBattle.region ?? 'kanto',
         stage = rivals?.[rivalRegion] ?? 0,
-        reward = 2000 + stage * 1000
+        reward = 2000 + stage * 1000,
+        winLine = rivalDialogue(rivalRegion, stage).win
       rivals = { ...(rivals ?? {}), [rivalRegion]: stage + 1 }
       rivalBonus = reward
       inventory = { ...inventory, rareCandy: (inventory.rareCandy ?? 0) + 1 }
+      notifications.push(`${state.bossBattle.trainerName}: \u201c${winLine}\u201d`)
       toastNotifications.push({
         message: `${state.bossBattle.trainerName} was beaten! +$${reward.toLocaleString()} and a Rare Candy.`,
         tone: 'shiny',
@@ -282,6 +285,13 @@ export function bossBattleEnd(state, action) {
           dedupeKey: `tm:${bossId}`,
         })
     }
+  }
+  // A rival loss offers a parting line too.
+  if (!won && state.bossBattle?.bossType === 'rival') {
+    const rivalRegion = state.bossBattle.region ?? 'kanto'
+    notifications.push(
+      `${state.bossBattle.trainerName}: \u201c${rivalDialogue(rivalRegion, rivals?.[rivalRegion] ?? 0).lose}\u201d`
+    )
   }
   if (won && state.bossQueue.length > 0) {
     const [nextBoss, ...remainingQueue] = state.bossQueue,
@@ -383,6 +393,13 @@ export function bossBattleEnd(state, action) {
   if (championJustDefeated) finalResult = settleUnlockTokens(finalResult)
   const bossRibbon = won ? ribbonForBossType(state.bossBattle?.bossType) : null
   if (bossRibbon) finalResult = withPartyRibbon(finalResult, bossRibbon)
+  // Beating the rival at the last milestone earns the Rival Ribbon.
+  if (
+    won &&
+    state.bossBattle?.bossType === 'rival' &&
+    (rivals?.[state.bossBattle.region ?? 'kanto'] ?? 0) >= RIVAL_MILESTONES.length
+  )
+    finalResult = withPartyRibbon(finalResult, 'rival')
   for (const toastNotification of toastNotifications)
     finalResult = withNotification(finalResult, toastNotification)
   return finalResult

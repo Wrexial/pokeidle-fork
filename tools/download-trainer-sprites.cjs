@@ -24,6 +24,23 @@ const SHOWDOWN = 'https://play.pokemonshowdown.com/sprites/trainers'
 
 const FORCE = process.argv.includes('--force')
 
+/**
+ * Extra sprites not named by trainer-classes.json: the recurring rivals' art
+ * (see RIVAL_SPRITE_KEYS in src/game/rival.js). Keep the keys in sync there.
+ * @type {string[]}
+ */
+const EXTRA_SPRITES = [
+  'blue',
+  'silver',
+  'wally',
+  'barry',
+  'hugh',
+  'calem',
+  'hau',
+  'hop',
+  'nemona-masters',
+]
+
 /** Streams `url` to `filepath`; resolves true on 200, false on 404. */
 function downloadFile(url, filepath) {
   return fetch(url, { headers: { 'User-Agent': 'pokemon-idle-sprite-fetcher' } }).then(
@@ -41,7 +58,7 @@ async function main() {
   const classes = /** @type {Record<string, string>} */ (
       JSON.parse(fs.readFileSync(CLASSES_PATH, 'utf8'))
     ),
-    spriteKeys = [...new Set(Object.values(classes))].sort(),
+    spriteKeys = [...new Set([...Object.values(classes), ...EXTRA_SPRITES])].sort(),
     missing = []
   for (const key of spriteKeys) {
     const filepath = path.join(SPRITE_DIR, `${key}.png`)

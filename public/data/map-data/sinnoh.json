@@ -1514,7 +1514,8 @@
   "region": "sinnoh",
   "description": "The Sinnoh Pokémon League.",
   "connections": [
-   "sinnoh-sea-route-230"
+   "sinnoh-sea-route-230",
+   "hisui"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2159,5 +2160,182 @@
   },
   "biome": "ruins",
   "background": "/backgrounds/grassland.webp"
+ },
+ "hisui": {
+  "id": "hisui",
+  "name": "Hisui",
+  "type": "zone",
+  "region": "sinnoh",
+  "description": "Ancient Sinnoh, reached through a rift in time once the Sinnoh Champion is beaten.",
+  "routeKey": "hisui-obsidian-fieldlands",
+  "background": "/backgrounds/grassland.webp",
+  "biome": "grassland",
+  "connections": [
+   "sinnoh-league",
+   "hisui-obsidian-fieldlands",
+   "hisui-crimson-mirelands",
+   "hisui-cobalt-coastlands",
+   "hisui-coronet-highlands",
+   "hisui-alabaster-icelands"
+  ],
+  "unlock": {
+   "championDefeated": "sinnoh"
+  },
+  "unlockOrder": 900100,
+  "position": {
+   "x": 93,
+   "y": 15
+  },
+  "subAreas": [
+   {
+    "id": "hisui-obsidian-fieldlands",
+    "name": "Obsidian Fieldlands"
+   },
+   {
+    "id": "hisui-crimson-mirelands",
+    "name": "Crimson Mirelands"
+   },
+   {
+    "id": "hisui-cobalt-coastlands",
+    "name": "Cobalt Coastlands"
+   },
+   {
+    "id": "hisui-coronet-highlands",
+    "name": "Coronet Highlands"
+   },
+   {
+    "id": "hisui-alabaster-icelands",
+    "name": "Alabaster Icelands"
+   }
+  ]
+ },
+ "hisui-obsidian-fieldlands": {
+  "id": "hisui-obsidian-fieldlands",
+  "name": "Obsidian Fieldlands",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "Wide grasslands and a lake, the first area of Hisui.",
+  "routeKey": "hisui-obsidian-fieldlands",
+  "background": "/backgrounds/grassland.webp",
+  "biome": "grassland",
+  "connections": [
+   "hisui"
+  ],
+  "unlock": {
+   "requires": [
+    "hisui"
+   ]
+  },
+  "unlockOrder": 900101,
+  "position": {
+   "x": 86.39,
+   "y": 8.6
+  },
+  "hidden": true,
+  "zone": "hisui"
+ },
+ "hisui-crimson-mirelands": {
+  "id": "hisui-crimson-mirelands",
+  "name": "Crimson Mirelands",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A marshy lowland of bogs and old ruins.",
+  "routeKey": "hisui-crimson-mirelands",
+  "background": "/backgrounds/swamp.webp",
+  "biome": "swamp",
+  "connections": [
+   "hisui"
+  ],
+  "unlock": {
+   "requires": [
+    "hisui",
+    "hisui-obsidian-fieldlands"
+   ]
+  },
+  "unlockOrder": 900102,
+  "position": {
+   "x": 95,
+   "y": 9.65
+  },
+  "hidden": true,
+  "zone": "hisui"
+ },
+ "hisui-cobalt-coastlands": {
+  "id": "hisui-cobalt-coastlands",
+  "name": "Cobalt Coastlands",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "Windy beaches and a chain of islands.",
+  "routeKey": "hisui-cobalt-coastlands",
+  "background": "/backgrounds/beach.webp",
+  "biome": "coast",
+  "connections": [
+   "hisui"
+  ],
+  "unlock": {
+   "requires": [
+    "hisui",
+    "hisui-crimson-mirelands"
+   ]
+  },
+  "unlockOrder": 900103,
+  "position": {
+   "x": 90.93,
+   "y": 20.63
+  },
+  "hidden": true,
+  "zone": "hisui"
+ },
+ "hisui-coronet-highlands": {
+  "id": "hisui-coronet-highlands",
+  "name": "Coronet Highlands",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "The rugged slopes around Mount Coronet.",
+  "routeKey": "hisui-coronet-highlands",
+  "background": "/backgrounds/mountain.webp",
+  "biome": "mountain",
+  "connections": [
+   "hisui"
+  ],
+  "unlock": {
+   "requires": [
+    "hisui",
+    "hisui-cobalt-coastlands"
+   ]
+  },
+  "unlockOrder": 900104,
+  "position": {
+   "x": 81.69,
+   "y": 20.18
+  },
+  "hidden": true,
+  "zone": "hisui"
+ },
+ "hisui-alabaster-icelands": {
+  "id": "hisui-alabaster-icelands",
+  "name": "Alabaster Icelands",
+  "type": "route",
+  "region": "sinnoh",
+  "description": "A frozen expanse of snowfields and ice caves.",
+  "routeKey": "hisui-alabaster-icelands",
+  "background": "/backgrounds/tundra.webp",
+  "biome": "tundra",
+  "connections": [
+   "hisui"
+  ],
+  "unlock": {
+   "requires": [
+    "hisui",
+    "hisui-coronet-highlands"
+   ]
+  },
+  "unlockOrder": 900105,
+  "position": {
+   "x": 78.78,
+   "y": 13.02
+  },
+  "hidden": true,
+  "zone": "hisui"
  }
 }

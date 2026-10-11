@@ -26,6 +26,7 @@ export const CHANGELOG = [
           'Paldea is a linear Victory Road route now: its province zones, gym towns and landmarks open in the real gym order (Katy, Brassius, Iono, Kofu, Larry, Ryme, Tulip, Grusha) behind the previous badge and a party level, so the wilds ramp smoothly from Lv. 3 to Lv. 75.',
           'Ogerpon’s three masks, Terapagos’s Terastal and Stellar formes and Bloodmoon Ursaluna are obtainable now (the masks, a Tera Orb and a Peat Block are Reward Shop items that switch the forme from the party screen), and Wimpod, Rellor and Slither Wing have real wild routes instead of being Bug-Catching-Contest-only.',
           'The world has weather now: each area rolls rain, sun, sandstorm or snow (or stays clear) every 15 real minutes, weighted by its biome, and shows it beside the day/night chip on the Town Map. A battle starts under that weather, and the rain- and sun-favoured route activities can fire anywhere instead of only on the seven permanently weather-struck routes.',
+          'Hisui opens as a Sinnoh post-game zone: beat the Sinnoh Champion and a rift at the League leads to ancient Sinnoh \u2014 the Obsidian Fieldlands, Crimson Mirelands, Cobalt Coastlands, Coronet Highlands and Alabaster Icelands, each with its own wild table (Hisuian forms included).',
         ],
       },
       {

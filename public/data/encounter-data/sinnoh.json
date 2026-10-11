@@ -5502,5 +5502,468 @@
     "maxLevel": 48
    }
   ]
+ },
+ "hisui-obsidian-fieldlands": {
+  "name": "Obsidian Fieldlands",
+  "encounters": [
+   {
+    "speciesKey": "starly",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "bidoof",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "shinx",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "kricketot",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "budew",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "h-growlithe",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "wurmple",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "ponyta",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "eevee",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "mimeJR",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "h-voltorb",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "combee",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "drifloon",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "buneary",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "hisui-crimson-mirelands": {
+  "name": "Crimson Mirelands",
+  "encounters": [
+   {
+    "speciesKey": "bidoof",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "budew",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "psyduck",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "h-qwilfish",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "croagunk",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "carnivine",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "skorupi",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "tangela",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "yanma",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "paras",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "h-sneasel",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "ralts",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "shellos",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "wooper",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "hippopotas",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "hisui-cobalt-coastlands": {
+  "name": "Cobalt Coastlands",
+  "encounters": [
+   {
+    "speciesKey": "spheal",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "shellos",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "buizel",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "remoraid",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "mantyke",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "finneon",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "tentacool",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "qwilfish",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "chatot",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "wailmer",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "piplup",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "magikarp",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "gastly",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "swinub",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "sealeo",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "hisui-coronet-highlands": {
+  "name": "Coronet Highlands",
+  "encounters": [
+   {
+    "speciesKey": "machop",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "geodude",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "bronzor",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "riolu",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "h-sneasel",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "nosepass",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "meditite",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "chingling",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "h-braviary",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "onix",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "h-sliggoo",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "gible",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "absol",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "duskull",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   }
+  ]
+ },
+ "hisui-alabaster-icelands": {
+  "name": "Alabaster Icelands",
+  "encounters": [
+   {
+    "speciesKey": "snorunt",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "snover",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "swinub",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "bergmite",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "h-avalugg",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "h-zoroark",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "gabite",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "vulpix",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "sneasel",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "glalie",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "froslass",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "h-decidueye",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "zubat",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   },
+   {
+    "speciesKey": "h-samurott",
+    "weight": 10,
+    "minLevel": 68,
+    "maxLevel": 72
+   }
+  ]
  }
 }

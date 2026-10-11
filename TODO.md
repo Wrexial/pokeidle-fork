@@ -57,8 +57,8 @@ renumbered, so the gaps below are items that shipped.
     remain.
 20. **#75 Legends Z-A area (Kalos)** — M · ★★★ — Lumiose City's Wild Zones as a
     post-game zone.
-21. **#76 Legends Arceus / Hisui areas (Sinnoh)** — M · ★★★ — ancient Sinnoh as a
-    post-game zone.
+21. **#76 Legends Arceus / Hisui areas (Sinnoh)** — shipped; nobles / ride
+    Pokemon remain optional.
 22. **#77 UI consistency pass (sliders / steppers)** — S–M · ★★.
 23. **#78 Alola Ultra Warp Ride** — M · ★★★ — a warp minigame to reach the Ultra
     Beasts and legends.
@@ -451,18 +451,17 @@ already exists).
 
 ## 76. Legends Arceus / Hisui areas (Sinnoh post-game zone)
 
-Legends: Arceus is set in Hisui, the ancient Sinnoh. The game already ships every
-**Hisuian form** (`h-*` species are grouped in the Pokedex and obtainable), but
-not the region.
+Done: **Hisui** is a Sinnoh post-game `type: 'zone'` hub on the map, gated on the
+Sinnoh Champion and reached from the League. Its five areas — Obsidian
+Fieldlands, Crimson Mirelands, Cobalt Coastlands, Coronet Highlands and
+Alabaster Icelands — are hidden sub-areas with their own wild tables (Sinnoh
+species plus the Hisuian forms), ring-laid for the focused map view. Added by
+`tools/add-hisui-zone.cjs` (idempotent) with the encounter index regenerated.
 
-- [ ] Add **Hisui** as a post-game zone on **Sinnoh**, gated on the Sinnoh
-      Champion: a Jubilife Village hub plus the five areas — Obsidian Fieldlands,
-      Crimson Mirelands, Cobalt Coastlands, Coronet Highlands and Alabaster
-      Icelands — as sub-areas with their own wild tables.
-- [ ] The noble / ride Pokemon could be statics or Raid Island additions, and the
-      space-time distortions a swarm-style event.
-- [ ] Same zone plumbing as #75; keep the Hisuian species' acquisition paths
-      consistent so nothing is orphaned.
+Still open (optional):
+
+- [ ] A Jubilife Village hub location and the noble / ride Pokemon as statics or
+      Raid Island additions, and space-time distortions as a swarm event.
 
 Effort: **medium**.
 

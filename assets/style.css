@@ -3173,6 +3173,17 @@ img {
     white-space: nowrap
 }
 
+.weather-chip {
+    flex: 0 0 auto;
+    font-size: 7px;
+    color: #8a7a60;
+    white-space: nowrap
+}
+
+.weather-chip.active {
+    color: var(--gold)
+}
+
 .map-search-toggle,.map-legend-toggle {
     flex: 0 0 auto;
     font-family: var(--font-pixel);

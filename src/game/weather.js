@@ -14,14 +14,86 @@ export const WEATHER_TURNS = 5
  */
 export const FIELD_WEATHER_TURNS = 99
 
+/** One full world-weather period: 15 real minutes. */
+export const WORLD_WEATHER_MS = 15 * 60 * 1000
+
+/**
+ * The weathers a biome can roll, with `null` meaning clear. Duplicates weight
+ * the roll, so most biomes are clear more often than not. A cave is sheltered.
+ * @type {Record<string, (string | null)[]>}
+ */
+const BIOME_WEATHER_ROLLS = {
+  desert: ['sandstorm', 'sun', null, null, null, null],
+  volcanic: ['sun', null, null, null],
+  tundra: ['snow', null, null, null],
+  swamp: ['rain', null, null, null],
+  coast: ['rain', null, null, null],
+  forest: ['rain', null, null, null, null],
+  autumn: ['rain', null, null, null, null],
+  ruins: ['sandstorm', null, null, null, null],
+  mountain: ['snow', 'rain', null, null, null, null],
+  grassland: ['rain', 'sun', null, null, null],
+  cave: [null],
+}
+
+/** Human names for the world-weather chip. @type {Record<string, string>} */
+export const WORLD_WEATHER_LABELS = {
+  rain: 'Rain',
+  sun: 'Sun',
+  sandstorm: 'Sandstorm',
+  snow: 'Snow',
+}
+
+/**
+ * A stable 32-bit hash of a string (FNV-1a), so the same seed always picks the
+ * same weather without storing anything.
+ * @param {string} value
+ * @returns {number}
+ */
+function hashString(value) {
+  let hash = 2166136261
+  for (let index = 0; index < value.length; index++) {
+    hash ^= value.charCodeAt(index)
+    hash = Math.imul(hash, 16777619)
+  }
+  return hash >>> 0
+}
+
+/**
+ * The world weather a location is under right now, derived from the 15-minute
+ * cycle and its region/biome so it is identical across saves and reloads. A
+ * location with a permanent `weather` field keeps that; a location with no
+ * region (a bare test object) is clear.
+ * @param {{ region?: string, biome?: string, weather?: string } | null | undefined} location
+ * @param {number} [now]
+ * @returns {string | null}
+ */
+export function worldWeatherAt(location, now = Date.now()) {
+  if (location?.weather) return location.weather
+  if (!location?.region) return null
+  const bucket = Math.floor(now / WORLD_WEATHER_MS),
+    biome = location.biome ?? 'grassland',
+    rolls = BIOME_WEATHER_ROLLS[biome] ?? BIOME_WEATHER_ROLLS.grassland,
+    seed = hashString(`${location.region}|${biome}|${bucket}`)
+  return rolls[seed % rolls.length]
+}
+
+/** Milliseconds until the world weather changes. @param {number} [now] */
+export function msUntilWeatherChange(now = Date.now()) {
+  return Math.max(1000, WORLD_WEATHER_MS - (now % WORLD_WEATHER_MS))
+}
+
 /**
  * The weather a battle at `location` starts under, or null. A route can carry a
- * permanent `weather` field (a permanently raining route, a sandstorm desert).
+ * permanent `weather` field (a permanently raining route, a sandstorm desert);
+ * otherwise the world weather cycle applies.
  * @param {MapLocation | undefined | null} location
+ * @param {number} [now]
  * @returns {{ type: string, turns: number } | null}
  */
-export function fieldWeatherFor(location) {
-  return location?.weather ? { type: location.weather, turns: FIELD_WEATHER_TURNS } : null
+export function fieldWeatherFor(location, now = Date.now()) {
+  const type = worldWeatherAt(location, now)
+  return type ? { type, turns: FIELD_WEATHER_TURNS } : null
 }
 
 /** Abilities that set weather on entry. @type {Record<string, string>} */

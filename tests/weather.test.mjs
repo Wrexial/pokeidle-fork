@@ -10,6 +10,9 @@ const {
   applyWeatherToMove,
   FIELD_WEATHER_TURNS,
   fieldWeatherFor,
+  msUntilWeatherChange,
+  worldWeatherAt,
+  WORLD_WEATHER_MS,
   weatherDamageMultiplier,
   weatherResidualDamage,
 } = await import('../src/game/weather.js')
@@ -255,6 +258,43 @@ test('a location field weather starts the battle under it', () => {
   })
   assert.equal(mapData['hoenn-route-119'].weather, 'rain', 'Route 119 is permanently rainy')
   assert.equal(mapData['hoenn-route-111'].weather, 'sandstorm')
+})
+
+test('the world weather cycle is deterministic and changes over time', () => {
+  const location = { region: 'kanto', biome: 'grassland' }
+  // The same 15-minute bucket always picks the same weather.
+  assert.equal(worldWeatherAt(location, 0), worldWeatherAt(location, 1000))
+  // Across buckets, grassland sees both clear and weather.
+  const samples = Array.from({ length: 60 }, (_, index) =>
+    worldWeatherAt(location, index * WORLD_WEATHER_MS)
+  )
+  assert.ok(samples.some((sample) => sample === null), 'clear weather happens')
+  assert.ok(samples.some((sample) => sample !== null), 'weather happens')
+  // A cave is sheltered, a permanent weather wins, and a bare object is clear.
+  assert.equal(worldWeatherAt({ region: 'kanto', biome: 'cave' }, 0), null)
+  assert.equal(worldWeatherAt({ region: 'kanto', weather: 'rain' }, 0), 'rain')
+  assert.equal(worldWeatherAt({}, 0), null)
+  assert.equal(worldWeatherAt(null), null)
+  // A desert is sandstorm-prone at least sometimes.
+  assert.ok(
+    Array.from({ length: 40 }, (_, index) =>
+      worldWeatherAt({ region: 'kanto', biome: 'desert' }, index * WORLD_WEATHER_MS)
+    ).includes('sandstorm')
+  )
+  // The weather timer lands inside one period.
+  assert.equal(msUntilWeatherChange(0), WORLD_WEATHER_MS)
+  assert.equal(msUntilWeatherChange(WORLD_WEATHER_MS - 500), 1000)
+  assert.ok(msUntilWeatherChange(WORLD_WEATHER_MS / 3) <= WORLD_WEATHER_MS)
+})
+
+test('fieldWeatherFor falls back to the world weather', () => {
+  const real = { region: 'kanto', biome: 'grassland' },
+    at = (/** @type {number} */ now) => fieldWeatherFor(real, now)
+  // Some bucket in the cycle gives a real weather, others null.
+  const results = Array.from({ length: 60 }, (_, index) => at(index * WORLD_WEATHER_MS))
+  assert.ok(results.some((result) => result === null))
+  const weathered = results.find((result) => result)
+  assert.ok(weathered && weathered.turns === FIELD_WEATHER_TURNS)
 })
 
 test('time-gated encounters follow the day/night phase', () => {

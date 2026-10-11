@@ -9,6 +9,7 @@ import { createRoadPaths, getRegionUnlockTokens, pickRaidLegendary, raidProgress
 import { servicePoiKinds } from '../game/services.js'
 import { MapNode } from './map-node.js'
 import { DayPhaseChip } from './day-phase-chip.js'
+import { WeatherChip } from './weather-chip.js'
 
 // Nodes are positioned as percentages, so the layout doesn't change here — this
 // only sets the pixel size of the virtual canvas the map is drawn on. It's
@@ -552,6 +553,7 @@ export function TownMap() {
             children: [state.wildBattlesWon, 'W ', state.trainerBattlesWon, 'T'],
           }),
           jsx(DayPhaseChip, {}),
+          jsx(WeatherChip, {}),
           jsx('button', {
             type: 'button',
             className: `map-search-toggle${searchOpen ? ' active' : ''}`,

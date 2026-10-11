@@ -8,6 +8,7 @@ import { useGame } from './game/context.js'
 import { playSfx, startMusic, stopMusic, unlockAudio } from './game/audio.js'
 import { awaySummary } from './game/progression.js'
 import { dayPhaseAt, msUntilPhaseChange } from './game/day-night.js'
+import { msUntilWeatherChange, worldWeatherAt } from './game/weather.js'
 import { isOnline, subscribeOnline } from './game/network.js'
 
 /**
@@ -30,6 +31,29 @@ export function useDayPhase() {
     return () => clearTimeout(timer)
   }, [])
   return phase
+}
+
+/**
+ * The world weather at the player's current location, re-rendering only when it
+ * changes (every 15 real minutes). Null means clear.
+ * @returns {{ type: string | null }}
+ */
+export function useWorldWeather() {
+  const { state } = useGame(),
+    location = mapData[state.currentLocation],
+    [weather, setWeather] = React.useState(() => worldWeatherAt(location))
+  React.useEffect(() => {
+    /** @type {ReturnType<typeof setTimeout> | undefined} */
+    let timer
+    const schedule = () => {
+      const next = worldWeatherAt(mapData[state.currentLocation])
+      setWeather((current) => (current === next ? current : next))
+      timer = setTimeout(schedule, msUntilWeatherChange() + 500)
+    }
+    schedule()
+    return () => clearTimeout(timer)
+  }, [state.currentLocation])
+  return { type: weather }
 }
 
 /**

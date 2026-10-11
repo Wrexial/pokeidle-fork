@@ -25,6 +25,7 @@ export const CHANGELOG = [
           'Thirty-three more landmarks the scraper used to drop are real wild areas now — the Unova Black 2 / White 2 areas, Hoenn’s Jagged Pass and Scorched Slab, Sinnoh’s Floaroma Meadow, Ramanas Park and Trophy Garden, Kalos’s Parfum Palace and Unknown Dungeon, Alola’s Haina Desert and Resolution Cave, Paldea’s Dalizapa Passage and more — Johto’s Whirl Islands are a proper four-cave zone, and the Galar Wild Area, Poni Island and Area Zero gained more habitats.',
           'Paldea is a linear Victory Road route now: its province zones, gym towns and landmarks open in the real gym order (Katy, Brassius, Iono, Kofu, Larry, Ryme, Tulip, Grusha) behind the previous badge and a party level, so the wilds ramp smoothly from Lv. 3 to Lv. 75.',
           'Ogerpon’s three masks, Terapagos’s Terastal and Stellar formes and Bloodmoon Ursaluna are obtainable now (the masks, a Tera Orb and a Peat Block are Reward Shop items that switch the forme from the party screen), and Wimpod, Rellor and Slither Wing have real wild routes instead of being Bug-Catching-Contest-only.',
+          'The world has weather now: each area rolls rain, sun, sandstorm or snow (or stays clear) every 15 real minutes, weighted by its biome, and shows it beside the day/night chip on the Town Map. A battle starts under that weather, and the rain- and sun-favoured route activities can fire anywhere instead of only on the seven permanently weather-struck routes.',
         ],
       },
       {

@@ -105,7 +105,14 @@ type Pokemon = BattlePokemon & {
 type TeamPreset = { id: string; name: string; members: string[] }
 
 /** One queued breeding goal (see game/breeding-projects.js). */
-type BreedingProject = { id: string; speciesKey: string; goal: string; nature?: string }
+type BreedingProject = {
+  id: string
+  speciesKey: string
+  goal: string
+  nature?: string
+  /** Eggs spent chasing this project (see advanceBreeding). */
+  hatches?: number
+}
 
 /** Breeding counters and the project queue (see game/breeding-projects.js). */
 type BreedingTracker = {

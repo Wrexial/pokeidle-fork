@@ -31,7 +31,7 @@ export function createBreedingTracker() {
  * @param {string} speciesKey
  * @param {string} goal
  * @param {string} [nature]
- * @returns {{ id: string, speciesKey: string, goal: string, nature?: string } | null}
+ * @returns {{ id: string, speciesKey: string, goal: string, nature?: string, hatches: number } | null}
  */
 export function createBreedingProject(speciesKey, goal, nature) {
   if (!speciesKey) return null
@@ -42,6 +42,8 @@ export function createBreedingProject(speciesKey, goal, nature) {
     speciesKey,
     goal: validGoal,
     ...(validGoal === 'nature' ? { nature } : {}),
+    // Eggs spent chasing this project.
+    hatches: 0,
   }
 }
 
@@ -79,13 +81,19 @@ export function hatchProjectMatches(project, hatched) {
 export function advanceBreeding(breeding, hatched) {
   const current = breeding ?? createBreedingTracker(),
     projects = current.projects ?? [],
-    completed = hatchProjectMatches(projects[0], hatched) ? projects[0] : null
+    completed = hatchProjectMatches(projects[0], hatched) ? projects[0] : null,
+    // Count this egg toward the front project even when it does not complete
+    // it, so a long shiny hunt shows how many eggs it has taken.
+    counted =
+      projects.length > 0
+        ? [{ ...projects[0], hatches: (projects[0].hatches ?? 0) + 1 }, ...projects.slice(1)]
+        : projects
   return {
     breeding: {
       eggsHatched: current.eggsHatched + 1,
       shinyEggsHatched: current.shinyEggsHatched + (hatched.isShiny ? 1 : 0),
       eggsSinceShiny: hatched.isShiny ? 0 : current.eggsSinceShiny + 1,
-      projects: completed ? projects.slice(1) : projects,
+      projects: completed ? counted.slice(1) : counted,
     },
     completed,
   }

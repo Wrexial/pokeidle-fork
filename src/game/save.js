@@ -456,6 +456,7 @@ export function repairSave(saved) {
             ...(project.goal === 'nature' && typeof project.nature === 'string'
               ? { nature: project.nature }
               : {}),
+            hatches: Math.max(0, Math.floor(Number(project.hatches) || 0)),
           }))
       return {
         eggsHatched: Math.max(0, Math.floor(Number(raw.eggsHatched) || 0)),

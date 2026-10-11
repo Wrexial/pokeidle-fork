@@ -205,7 +205,6 @@ Still open (optional):
 
 - [ ] Explicit Masuda odds (a language/region tag on a parent) rather than the
       current shiny-parent boost.
-- [ ] A per-project hatch counter (eggs spent toward each project).
 
 ## 73. Weather system on routes
 

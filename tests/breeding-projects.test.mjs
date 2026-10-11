@@ -91,6 +91,8 @@ test('advanceBreeding counts hatches and completes the front project', () => {
   assert.equal(plain.breeding.eggsHatched, 1)
   assert.equal(plain.breeding.eggsSinceShiny, 1)
   assert.equal(plain.breeding.projects.length, 2)
+  assert.equal(plain.breeding.projects[0].hatches, 1, 'the egg counts toward the front project')
+  assert.equal(plain.breeding.projects[1].hatches, 0, 'a queued project is untouched')
   assert.equal(plain.completed, null)
   // A shiny hatch completes the front project and resets the shiny counter.
   const shiny = advanceBreeding(plain.breeding, hatch('magikarp', { isShiny: true }))
@@ -98,6 +100,7 @@ test('advanceBreeding counts hatches and completes the front project', () => {
   assert.equal(shiny.breeding.shinyEggsHatched, 1)
   assert.equal(shiny.breeding.eggsSinceShiny, 0)
   assert.equal(shiny.breeding.projects.length, 1, 'the finished project leaves the queue')
+  assert.equal(shiny.breeding.projects[0].hatches, 0, 'the next project starts its own count')
   assert.equal(shiny.completed.id, shinyProject.id)
 })
 
@@ -164,4 +167,16 @@ test('repairSave sanitises the breeding tracker', () => {
     'unknown species / goals drop, valid ones stay'
   )
   assert.equal(repaired.breeding.projects[1].nature, 'jolly')
+  // A project's hatch counter is preserved (and defaults to 0).
+  assert.equal(repaired.breeding.projects[0].hatches, 0)
+  const withHatches = repairSave(
+    serializeSave({
+      ...base,
+      breeding: {
+        ...createBreedingTracker(),
+        projects: [{ id: 'a', speciesKey: 'magikarp', goal: 'shiny', hatches: 7.9 }],
+      },
+    })
+  )
+  assert.equal(withHatches.breeding.projects[0].hatches, 7)
 })

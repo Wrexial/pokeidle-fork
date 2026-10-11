@@ -196,7 +196,7 @@ export function DaycarePanel() {
               })
             : jsx('div', {
                 className: 'daycare-project-list',
-                children: projects.map((project) =>
+                children: projects.map((project, projectIndex) =>
                   jsxs(
                     'div',
                     {
@@ -204,7 +204,7 @@ export function DaycarePanel() {
                       children: [
                         jsx('span', {
                           className: 'daycare-project-name',
-                          children: `${pokemonSpecies[project.speciesKey]?.name ?? project.speciesKey} \u00b7 ${breedingGoalLabel(project)}`,
+                          children: `${pokemonSpecies[project.speciesKey]?.name ?? project.speciesKey} \u00b7 ${breedingGoalLabel(project)}${projectIndex === 0 ? ` \u00b7 ${project.hatches ?? 0} egg${(project.hatches ?? 0) === 1 ? '' : 's'}` : ''}`,
                         }),
                         jsx('button', {
                           className: 'daycare-project-remove',

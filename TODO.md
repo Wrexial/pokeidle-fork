@@ -17,12 +17,13 @@ renumbered, so the gaps below are items that shipped.
 
 ### Tier 1 — High impact, worth the effort
 
-1. **#24 Move data pass** — M · ★★★ — the doubles-only moves and the
-   PP / Z-Move keep-or-drop decisions.
-2. **#25 Battle engine pass** — M–L · ★★★ — the remaining doubles abilities,
-   Illusion, more berries / Rocky Helmet, and battle polish.
-3. **#18 Better settings** — M · ★★★ — cosmetic options, the default catch
-   rule in Settings, auto-heal; account controls blocked on #19.
+1. **#24 Move data pass** — M · ★★★ — Quick/Wide Guard's side protection and
+   the PP / Z-Move keep-or-drop decisions.
+2. **#25 Battle engine pass** — M–L · ★★★ — Illusion, more berries / Rocky
+   Helmet, and battle polish.
+3. **#18 Better settings** — M · ★★★ — more cosmetic options if wanted;
+   account controls blocked on #19 (auto-heal, the default catch rule and two
+   Display toggles shipped).
 4. **#43 Multi-battles (triple / rotation)** — M–L · ★★½ — build on the
    shipped doubles engine.
 
@@ -39,9 +40,10 @@ renumbered, so the gaps below are items that shipped.
 8. **#65 Prestige perks** — M–L · ★★★.
 9. **#71 Breeding project queue** — M · ★★★.
 10. **#62 Offline depth** — M · ★★★.
-11. **#72 QoL pass** — S–M · ★★★.
+11. **#72 QoL pass** — S–M · ★★★ — IV sort, move preview and team presets
+    shipped; box bulk-release remains.
 12. **#67 Ribbons + ribbon case** — S–M · ★★½.
-13. **#68 Generation-completion rewards** — S · ★★.
+13. **#68 Generation-completion rewards** — done.
 14. **#59 Activity goals & per-route mastery** — S–M · ★★.
 15. **#61 Focus / target hunting** — S–M · ★★½.
 16. **#66 Battle Frontier facilities** — M–L · ★★½.
@@ -59,8 +61,8 @@ renumbered, so the gaps below are items that shipped.
     Beasts and legends.
 24. **#79 Johto Poké Ball crafting (Kurt)** — M · ★★★ — Apricorn/berry crafting
     and the seven Apricorn balls.
-25. **#80 Companion affection perks** — S–M · ★★ — a high-affection Pokémon
-    "toughs it out" at 1 HP.
+25. **#80 Companion affection perks** — shipped; the optional status-shake /
+    dodge / crit extras remain.
 
 ---
 
@@ -264,9 +266,10 @@ Effort: **small–medium**.
 
 ## 68. Generation-completion rewards
 
-Per-generation Pokedex certificates/items beyond the Shiny Charm.
-
-Effort: **small**.
+A generation's dex completion already pays 3 Victory Tokens and a Master Ball
+(not just the Shiny Charm), shows a certificate scene
+(`dex-complete-scene.js`), lists each generation's completion and shiny odds in
+Records, and feeds the per-generation Shiny Charm. **No open items.**
 
 ## 69. Legendary quests
 

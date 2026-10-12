@@ -16845,7 +16845,12 @@ img {
 
 .legendary-intro-modal {
     max-width: 320px;
-    text-align: center
+    text-align: center;
+    /* This boss scene is dark, but it reuses the light `.battle-info-modal`
+       shell; without its own background the light intro text is invisible. */
+    background: linear-gradient(180deg,#2a1e14,#1a1208);
+    border-color: var(--gold);
+    color: var(--parchment)
 }
 
 .legendary-intro-head {

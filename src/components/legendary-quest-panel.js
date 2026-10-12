@@ -14,7 +14,7 @@ import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemo
  * lines read before the raid begins.
  * @param {{ regionId: string, quest: NonNullable<ReturnType<typeof legendaryQuestStatus>>, onClose: () => void }} props
  */
-function LegendaryIntroModal({ regionId, quest, onClose }) {
+export function LegendaryIntroModal({ regionId, quest, onClose }) {
   const { state, dispatch } = useGame(),
     species = pokemonSpecies[quest.legendary],
     lines = legendaryDialogue(regionId)

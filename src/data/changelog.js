@@ -95,6 +95,7 @@ export const CHANGELOG = [
           'A held item given to your active Pokemon no longer vanishes. The bag updated the party slot but not the active-Pokemon copy the battle uses, so the next sync wrote the old (empty) copy back over it; both copies are updated now, and putting an item away clears both.',
           'A battle can no longer freeze after an action the reducer ignores: the idle loop’s batched dispatch always produces a fresh state, so a single no-op (a stale turn, an already-ended encounter, ...) cannot leave the loop waiting forever for a commit that never comes.',
           'A region’s box legendary is now earned only through its Legendary Quest: it no longer appears in the Raid Island’s random raid roll, its wild encounters, or as a roaming legendary. Once the quest’s steps are done, the Raid Island hands it over directly.',
+          'A finished Legendary Quest no longer drops you straight into the raid from the Town Map or the Pokedex: clicking the Raid Island now opens the challenge scene first, so you can read it and confirm the battle (the quest panel’s own CHALLENGE button already worked this way).',
           'The Champions’ Gauntlet and the Battle Maison now close when you collect their prizes — their end action was being ignored, which left the reward screen (and the game) stuck after a run.',
         ],
       },

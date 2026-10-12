@@ -11,6 +11,7 @@ import { servicePoiKinds } from '../game/services.js'
 import { MapNode } from './map-node.js'
 import { DayPhaseChip } from './day-phase-chip.js'
 import { WeatherChip } from './weather-chip.js'
+import { LegendaryIntroModal } from './legendary-quest-panel.js'
 
 // Nodes are positioned as percentages, so the layout doesn't change here — this
 // only sets the pixel size of the virtual canvas the map is drawn on. It's
@@ -111,6 +112,13 @@ export function TownMap() {
     // just that hub and its sub-areas (hidden routes included) with a back bar.
     [focusZone, setFocusZone] = React.useState(/** @type {string | null} */ (null)),
     [pendingUnlock, setPendingUnlock] = React.useState(/** @type {string | null} */ (null)),
+    // A ready Legendary Quest: clicking the Raid Island opens its challenge
+    // scene (the boss intro) instead of dropping straight into the raid.
+    [raidQuest, setRaidQuest] = React.useState(
+      /** @type {{ regionId: string, quest: NonNullable<ReturnType<typeof legendaryQuestStatus>> } | null} */ (
+        null
+      )
+    ),
     [searchQuery, setSearchQuery] = React.useState(''),
     [searchOpen, setSearchOpen] = React.useState(!1),
     [legendOpen, setLegendOpen] = React.useState(!1),
@@ -148,18 +156,20 @@ export function TownMap() {
       if (state.raidCooldownEnd && Date.now() < state.raidCooldownEnd) return
       const regionId = locationData.region ?? 'kanto',
         // Once the Legendary Quest's steps are done, the Raid Island hands the
-        // player its box legendary directly instead of a weighted roll.
-        quest = legendaryQuestStatus(state, regionId),
-        pool = raidLegendaryPoolFor(regionId),
-        legendary =
-          quest?.ready && quest.raidLocation === location
-            ? { speciesKey: quest.legendary, level: quest.level }
-            : pickRaidLegendary(
-                pool,
-                state.pokedexSeen,
-                state.pokedexCaught,
-                raidProgressFor(state, regionId)
-              )
+        // player its box legendary directly instead of a weighted roll. The
+        // challenge opens its boss scene first, so the raid never auto-starts
+        // from the map and skips the intro.
+        quest = legendaryQuestStatus(state, regionId)
+      if (quest?.ready && quest.raidLocation === location) {
+        setRaidQuest({ regionId, quest })
+        return
+      }
+      const legendary = pickRaidLegendary(
+        raidLegendaryPoolFor(regionId),
+        state.pokedexSeen,
+        state.pokedexCaught,
+        raidProgressFor(state, regionId)
+      )
       if (!legendary) return
       dispatch({
         type: 'START_RAID',
@@ -987,6 +997,12 @@ export function TownMap() {
           }),
         ],
       }),
+      raidQuest &&
+        jsx(LegendaryIntroModal, {
+          regionId: raidQuest.regionId,
+          quest: raidQuest.quest,
+          onClose: () => setRaidQuest(null),
+        }),
     ],
   })
 }

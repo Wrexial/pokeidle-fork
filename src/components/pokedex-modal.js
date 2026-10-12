@@ -25,6 +25,7 @@ import { useUi } from '../game/ui-context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { PokedexTile } from './pokedex-tile.js'
 import { ResearchPanel } from './research-panel.js'
+import { LegendaryIntroModal } from './legendary-quest-panel.js'
 
 /** @param {{ onClose?: () => void, inline?: boolean }} props */
 export function PokedexModal({ onClose, inline = false }) {
@@ -67,6 +68,13 @@ export function PokedexModal({ onClose, inline = false }) {
     totalEntries = countedIndexes.length,
     [query, setQuery] = React.useState(''),
     [searchOpen, setSearchOpen] = React.useState(!1),
+    // A ready Legendary Quest opened from the raid link: show its boss scene
+    // instead of starting the raid under the player's feet.
+    [raidQuest, setRaidQuest] = React.useState(
+      /** @type {{ regionId: string, quest: NonNullable<ReturnType<typeof legendaryQuestStatus>> } | null} */ (
+        null
+      )
+    ),
     gridIndexes = React.useMemo(() => {
       const matches = speciesMatchingSearch(query)
       if (!matches) return filteredIndexes
@@ -350,19 +358,23 @@ export function PokedexModal({ onClose, inline = false }) {
                                     quest = legendaryQuestStatus(state, region),
                                     // The box legendary is quest-only: its raid
                                     // starts once the quest is ready, never
-                                    // from the weighted random roll.
+                                    // from the weighted random roll. The
+                                    // challenge opens its boss scene first.
                                     questReady =
-                                      quest?.ready && quest.legendary === activeKey,
-                                    pool = raidPoolFor(region),
-                                    target = questReady
-                                      ? { speciesKey: quest.legendary, level: quest.level }
-                                      : pool.find((entry) => entry.speciesKey === activeKey) ??
-                                        pickRaidLegendary(
-                                          pool,
-                                          state.pokedexSeen,
-                                          state.pokedexCaught,
-                                          raidProgressFor(state, region)
-                                        )
+                                      quest?.ready && quest.legendary === activeKey
+                                  if (questReady && quest) {
+                                    setRaidQuest({ regionId: region, quest })
+                                    return
+                                  }
+                                  const pool = raidPoolFor(region),
+                                    target =
+                                      pool.find((entry) => entry.speciesKey === activeKey) ??
+                                      pickRaidLegendary(
+                                        pool,
+                                        state.pokedexSeen,
+                                        state.pokedexCaught,
+                                        raidProgressFor(state, region)
+                                      )
                                   if (!target) return
                                   dispatch({
                                     type: 'START_RAID',
@@ -435,6 +447,12 @@ export function PokedexModal({ onClose, inline = false }) {
                 }),
               activeStatus !== 'unseen' && jsx(ResearchPanel, { speciesKey: activeKey }),
             ],
+          }),
+        raidQuest &&
+          jsx(LegendaryIntroModal, {
+            regionId: raidQuest.regionId,
+            quest: raidQuest.quest,
+            onClose: () => setRaidQuest(null),
           }),
       ],
     })

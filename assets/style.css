@@ -16296,6 +16296,16 @@ img {
     border-radius: 6px
 }
 
+.doubles-arena-triple .doubles-sprite {
+    width: 44px;
+    height: 44px
+}
+
+.doubles-arena-triple .doubles-fighter {
+    min-width: 80px;
+    padding: 3px
+}
+
 .doubles-side {
     display: flex;
     flex-direction: column;

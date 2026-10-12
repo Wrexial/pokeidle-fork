@@ -1083,6 +1083,7 @@ export function useGameLoop() {
       state.phase === 'battleRoyal' ||
       state.phase === 'championGauntlet' ||
       state.phase === 'doubles' ||
+      state.phase === 'triples' ||
       state.phase === 'dynamaxAdventures' ||
       state.phase === 'lightsOut' ||
       state.phase === 'curry' ||

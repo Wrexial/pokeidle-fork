@@ -1,8 +1,9 @@
-// Kalos's Battle Maison doubles court, played as a full-stage scene while the
-// reducer is in the `doubles` phase. Two of the player's Pokemon face two foes
-// at once; each round every battler picks a target, the actions resolve in
-// speed order and spread moves hit both. A fainted ally is replaced from the
-// bench; clearing both foes wins the bout.
+// The Battle Maison doubles court and the Battle Tower's triple court, played
+// as a full-stage scene while the reducer is in the `doubles` / `triples` phase.
+// Two (or three) of the player's Pokemon face the same number of foes at once;
+// each round every battler picks a target, the actions resolve in speed order
+// and spread moves hit the other side. A fainted ally is replaced from the
+// bench; clearing every foe wins the bout.
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
@@ -15,6 +16,8 @@ import {
   doublesPrize,
   runDoublesRound,
   toBattlePokemon,
+  triplesOpponents,
+  triplesPrize,
 } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { MinigameRewardScreen, useMinigameClaim } from './minigame-reward.js'
@@ -68,24 +71,34 @@ function DoublesFighter({ pokemon, side, active, hit }) {
   })
 }
 
-export function DoublesScene() {
+/**
+ * @param {{ size?: number }} props
+ */
+export function DoublesScene({ size = 2 }) {
   const { state, dispatch } = useGame(),
+    minigameId = size === 3 ? 'triples' : 'doubles',
+    buildOpponents = size === 3 ? triplesOpponents : doublesOpponents,
+    prizeFor = size === 3 ? triplesPrize : doublesPrize,
     initialState = React.useMemo(() => {
       const squad = state.party.map((member) => toBattlePokemon(member, { isPlayer: true }))
       return {
-        allies: squad.filter((member) => member.currentHp > 0).slice(0, 2),
-        bench: squad.filter((member) => member.currentHp > 0).slice(2),
+        allies: squad.filter((member) => member.currentHp > 0).slice(0, size),
+        bench: squad.filter((member) => member.currentHp > 0).slice(size),
       }
-    }, [state.party]),
+    }, [state.party, size]),
     [allies, setAllies] = React.useState(initialState.allies),
     [bench, setBench] = React.useState(initialState.bench),
     baseLevel = Math.max(5, ...state.party.map((member) => member.level)),
     [foes, setFoes] = React.useState(() =>
-      doublesOpponents(baseLevel, 1).map((info) => createOpponent(info.speciesKey, info.level))
+      buildOpponents(baseLevel, 1).map((info) => createOpponent(info.speciesKey, info.level))
     ),
     [wins, setWins] = React.useState(0),
     [phase, setPhase] = React.useState(/** @type {'ready' | 'done'} */ ('ready')),
-    [log, setLog] = React.useState('Two of your Pokemon step onto the doubles court.'),
+    [log, setLog] = React.useState(
+      size === 3
+        ? 'Three of your Pokemon step onto the triple court.'
+        : 'Two of your Pokemon step onto the doubles court.'
+    ),
     [lastMessages, setLastMessages] = React.useState(/** @type {string[]} */ ([])),
     [hit, setHit] = React.useState(/** @type {'ally' | 'foe' | null} */ (null)),
     [result, setResult] = React.useState(
@@ -104,9 +117,9 @@ export function DoublesScene() {
     setHit(round.log.some((line) => /used/.test(line)) ? 'foe' : null)
     window.setTimeout(() => setHit(null), 500)
 
-    // Tag a fresh bench Pokemon in for any fainted ally. Both slots are kept
-    // (a fainted slot stays as a downed placeholder when the bench is empty),
-    // so the round engine and its residual pass always see a full pair.
+    // Tag a fresh bench Pokemon in for any fainted ally. Every slot is kept (a
+    // fainted slot stays as a downed placeholder when the bench is empty), so
+    // the round engine and its residual pass always see a full side.
     let benchLeft = [...bench]
     const activeAllies = nextAllies.map((member) => {
       if (member.currentHp > 0 || benchLeft.length === 0) return member
@@ -136,16 +149,16 @@ export function DoublesScene() {
       setAllies(healed)
       setWins(nextWins)
       setFoes(
-        doublesOpponents(baseLevel, nextWins + 1).map((info) =>
+        buildOpponents(baseLevel, nextWins + 1).map((info) =>
           createOpponent(info.speciesKey, info.level)
         )
       )
-      setLog(`Bout ${nextWins} won! The squad recovers a little and two new foes step up.`)
+      setLog(`Bout ${nextWins} won! The squad recovers a little and new foes step up.`)
       if (state.sfxEnabled) playSfx('good')
       return
     }
-    // One foe down but the other is still standing: fight on. The fainted slot
-    // stays in place so the next round still sees a pair.
+    // One foe down but the rest are still standing: fight on. The fainted slot
+    // stays in place so the next round still sees a full side.
     setFoes(nextFoes)
     setLog(`The round ends \u2014 ${nextFoes.filter((foe) => foe.currentHp > 0).length} foe(s) left.`)
     if (state.sfxEnabled) playSfx('good')
@@ -155,7 +168,7 @@ export function DoublesScene() {
   function finish(totalWins) {
     if (settledRef.current) return
     settledRef.current = !0
-    const prize = doublesPrize(totalWins)
+    const prize = prizeFor(totalWins)
     setResult(prize)
     setLog(`${prize.label} \u2014 ${totalWins} bout${totalWins === 1 ? '' : 's'} won.`)
     setPhase('done')
@@ -166,17 +179,21 @@ export function DoublesScene() {
     collect(
       {
         type: 'END_MINIGAME',
-        payload: { minigame: 'doubles', score: wins, completed: wins > 0 },
+        payload: { minigame: minigameId, score: wins, completed: wins > 0 },
       },
       result ? { type: 'CLAIM_MINIGAME_REWARD', payload: result } : null
     )
   }
 
-  const bestWins = state.minigameRecords?.doubles?.best ?? 0,
+  const bestWins = state.minigameRecords?.[minigameId]?.best ?? 0,
+    region = mapData[state.currentLocation]?.region,
     courtName =
-      mapData[state.currentLocation]?.region === 'hoenn'
-        ? 'Battle Tower Doubles'
-        : 'Battle Maison Doubles'
+      size === 3
+        ? 'Battle Tower Triples'
+        : region === 'hoenn'
+          ? 'Battle Tower Doubles'
+          : 'Battle Maison Doubles',
+    slots = Array.from({ length: size }, (_, index) => index)
   return jsxs('div', {
     className: 'minigame-scene doubles-scene',
     children: [
@@ -207,27 +224,33 @@ export function DoublesScene() {
               ]
             : [
                 jsxs('div', {
-                  className: 'doubles-arena',
+                  className: `doubles-arena${size === 3 ? ' doubles-arena-triple' : ''}`,
                   children: [
                     jsxs('div', {
                       className: 'doubles-side',
-                      children: [
-                        jsx(DoublesFighter, {
-                          pokemon: allies[0],
-                          side: 'ally',
-                          active: true,
-                          hit: hit === 'ally',
-                        }),
-                        jsx(DoublesFighter, { pokemon: allies[1], side: 'ally' }),
-                      ],
+                      children: slots.map((index) =>
+                        jsx(
+                          DoublesFighter,
+                          {
+                            pokemon: allies[index],
+                            side: 'ally',
+                            active: index === 0,
+                            hit: hit === 'ally',
+                          },
+                          `ally-${index}`
+                        )
+                      ),
                     }),
                     jsx('span', { className: 'doubles-versus', children: 'VS' }),
                     jsxs('div', {
                       className: 'doubles-side',
-                      children: [
-                        jsx(DoublesFighter, { pokemon: foes[0], side: 'foe', hit: hit === 'foe' }),
-                        jsx(DoublesFighter, { pokemon: foes[1], side: 'foe' }),
-                      ],
+                      children: slots.map((index) =>
+                        jsx(
+                          DoublesFighter,
+                          { pokemon: foes[index], side: 'foe', hit: hit === 'foe' },
+                          `foe-${index}`
+                        )
+                      ),
                     }),
                   ],
                 }),

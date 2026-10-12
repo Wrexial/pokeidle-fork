@@ -13,6 +13,9 @@ import { resolveBattleTurn } from '../combat/turn.js'
 /** Money spent to enter the Maison. */
 export const DOUBLES_COST = 600
 
+/** Money spent on a triple-battle run at the Battle Tower. */
+export const TRIPLES_COST = 900
+
 /** Hard cap so a stall war can never hang the scene. */
 export const DOUBLES_MAX_ROUNDS = 60
 
@@ -156,6 +159,21 @@ function poolPick() {
 export function doublesOpponents(baseLevel, wave = 1) {
   const level = Math.max(5, Math.min(100, Math.round(baseLevel + wave * 2)))
   return [poolPick(), poolPick()].map((speciesKey) => ({
+    speciesKey,
+    level,
+    name: pokemonSpecies[speciesKey]?.name ?? speciesKey,
+  }))
+}
+
+/**
+ * A trio of opponents for a triple battle, scaled above the player's level.
+ * @param {number} baseLevel
+ * @param {number} [wave]
+ * @returns {{ speciesKey: string, level: number, name: string }[]}
+ */
+export function triplesOpponents(baseLevel, wave = 1) {
+  const level = Math.max(5, Math.min(100, Math.round(baseLevel + wave * 2)))
+  return [poolPick(), poolPick(), poolPick()].map((speciesKey) => ({
     speciesKey,
     level,
     name: pokemonSpecies[speciesKey]?.name ?? speciesKey,
@@ -600,9 +618,12 @@ export function runDoublesRound(allies, foes, options = {}) {
     battler.quashed = !1
   }
   // Residual damage (status, Leftovers, Leech Seed, screens) once per round.
-  // Guard the slots in case a side is ever shorter than a pair.
-  for (const [ally, foe] of [[allies[0], foes[0]], [allies[1], foes[1]]])
-    if (ally && foe) applyEndOfTurn(ally, foe, events, weather, terrain, deterministic)
+  // Pair up allies and foes by slot so each battler's residuals run once, even
+  // when a side is short (or a triple battle has three per side).
+  const slots = Math.max(allies.length, foes.length)
+  for (let index = 0; index < slots; index++)
+    if (allies[index] && foes[index])
+      applyEndOfTurn(allies[index], foes[index], events, weather, terrain, deterministic)
   return { events, log }
 }
 
@@ -644,4 +665,19 @@ export function doublesPrize(wins) {
   if (wins >= 1)
     return { money: 800, items: [{ itemId: 'expCandyM', quantity: 1 }], label: 'First bout won' }
   return { money: 200, items: [{ itemId: 'expCandyS', quantity: 1 }], label: 'Knocked out early' }
+}
+
+/**
+ * Prize for the number of triple-battle bouts won: the doubles purse plus 40%,
+ * since a triple run fields a whole squad.
+ * @param {number} wins
+ * @returns {{ money: number, items: { itemId: string, quantity: number }[], label: string }}
+ */
+export function triplesPrize(wins) {
+  const base = doublesPrize(wins)
+  return {
+    ...base,
+    money: Math.round(base.money * 1.4),
+    label: base.label.replace('Maison', 'Tower'),
+  }
 }

@@ -23,7 +23,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 1. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
    doc and real ops for modest player value today.
-2. **#43 Multi-battles (triple / rotation)** — M–L · ★★½.
+2. **#43 Multi-battles (rotation / free-for-all)** — M–L · ★★½.
 
 ### Tier 3 — Small follow-ups on shipped systems
 
@@ -58,12 +58,13 @@ Effort: **large** (auth + conflict handling + a new server to run).
 ## 43. Multi-battles (double / triple / rotation) as a minigame
 
 The **doubles** 2v2 minigame shipped at Kalos's Battle Maison (and now Hoenn's
-Battle Tower), including the ally abilities, the doubles-only moves and
-Quick/Wide Guard side protection.
+Battle Tower), and **triple** 3v3 battles run at the Battle Tower too — both
+including the ally abilities, the doubles-only moves and Quick/Wide Guard side
+protection.
 
 Still open:
 
-- [ ] Triple and rotation battles.
+- [ ] Rotation battles.
 - [ ] A 3-way / 4-way free-for-all variant (the Battle Royal is the closest
       thing today).
 

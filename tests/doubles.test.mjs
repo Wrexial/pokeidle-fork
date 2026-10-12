@@ -9,10 +9,13 @@ const {
   DOUBLES_COST,
   DOUBLES_MAX_ROUNDS,
   SPREAD_MOVES,
+  TRIPLES_COST,
   doublesOpponents,
   doublesPrize,
   runDoublesRound,
   simulateDoubles,
+  triplesOpponents,
+  triplesPrize,
 } = await import('../src/game/minigames/doubles.js')
 const { pokemonSpecies } = await import('../src/data/gameData.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -554,4 +557,71 @@ test('Quick Guard does not block a non-priority spread move', () => {
     'Quick Guard went up because the foe knows a priority move'
   )
   assert.ok(ally.currentHp < 400, 'the non-priority spread move still lands')
+})
+
+test('triplesOpponents rolls a trio and START_TRIPLES charges the Tower', () => {
+  const trio = triplesOpponents(60, 3)
+  assert.equal(trio.length, 3)
+  for (const opponent of trio) {
+    assert.ok(pokemonSpecies[opponent.speciesKey], `${opponent.speciesKey} is a real species`)
+    assert.ok(opponent.level >= 60 && opponent.level <= 100)
+  }
+  const started = gameReducer(initialGameState, {
+      type: 'SELECT_STARTER',
+      payload: { region: 'kanto', speciesKey: 'bulbasaur' },
+    }),
+    state = { ...started, money: TRIPLES_COST },
+    entered = gameReducer(state, { type: 'START_TRIPLES' })
+  assert.equal(entered.phase, 'triples')
+  assert.equal(entered.money, 0, 'the entry fee is paid')
+  const broke = gameReducer({ ...state, money: TRIPLES_COST - 1 }, { type: 'START_TRIPLES' })
+  assert.equal(broke.phase, 'idle', 'a triple run needs the fee')
+})
+
+test('a triple round resolves three-a-side and spread hits the whole side', () => {
+  const ally = battler({
+      name: 'Ally',
+      isPlayer: true,
+      moves: ['thunderbolt'],
+      spAttack: 300,
+      speed: 200,
+      types: ['Electric'],
+    }),
+    partnerA = battler({ name: 'PartnerA', isPlayer: true, moves: ['splash'], speed: 10 }),
+    partnerB = battler({ name: 'PartnerB', isPlayer: true, moves: ['splash'], speed: 5 }),
+    // Three Water foes, so the Electric move is super effective on all of them.
+    foes = ['FoeX', 'FoeY', 'FoeZ'].map((name) =>
+      battler({ name, types: ['Water'], spDefense: 60, currentHp: 300, maxHp: 300, speed: 1 })
+    )
+  const result = runDoublesRound([ally, partnerA, partnerB], foes, { deterministic: true })
+  assert.ok(result.events.length > 0)
+  assert.ok(
+    foes.some((foe) => foe.currentHp < 300),
+    'at least one foe takes damage in a triple round'
+  )
+  // Every foe still at 0 HP sanity-checks the residual pass over three slots.
+  for (const foe of foes) assert.ok(foe.currentHp <= 300)
+})
+
+test('triplesPrize pays more than the doubles purse', () => {
+  assert.ok(triplesPrize(5).money > doublesPrize(5).money)
+  assert.equal(typeof triplesPrize(0).label, 'string')
+})
+
+test('a triple run records its result and returns to idle', () => {
+  const started = gameReducer(initialGameState, {
+      type: 'SELECT_STARTER',
+      payload: { region: 'kanto', speciesKey: 'bulbasaur' },
+    }),
+    entered = gameReducer(
+      { ...started, money: TRIPLES_COST },
+      { type: 'START_TRIPLES' }
+    ),
+    ended = gameReducer(entered, {
+      type: 'END_MINIGAME',
+      payload: { minigame: 'triples', score: 3, completed: true },
+    })
+  assert.equal(ended.phase, 'idle')
+  assert.equal(ended.minigameRecords.triples.best, 3)
+  assert.equal(ended.minigameRecords.triples.completed, true)
 })

@@ -7,7 +7,7 @@ import { BATTLE_TOWER_REGION } from '../data/config.js'
 import { mapData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { buildTowerFloor } from '../game/progression.js'
-import { DOUBLES_COST } from '../game/minigames/doubles.js'
+import { DOUBLES_COST, TRIPLES_COST } from '../game/minigames/doubles.js'
 
 export function BattleTowerPanel() {
   const { state, dispatch } = useGame(),
@@ -141,6 +141,31 @@ export function BattleTowerPanel() {
           dispatch({ type: 'START_DOUBLES' })
         },
         children: 'ENTER THE DOUBLES COURT',
+      }),
+      jsxs('div', {
+        className: 'location-section-title',
+        style: { marginTop: '10px' },
+        children: 'Triples Court',
+      }),
+      jsx('div', {
+        className: 'tower-hint',
+        children: `Field three Pokemon against three at once, $${TRIPLES_COST} a run. Every battler picks its own target and spread moves hit the whole opposite side.`,
+      }),
+      jsx('button', {
+        className: 'gym-fight-btn',
+        style: { width: '100%' },
+        disabled: !fightable || state.money < TRIPLES_COST,
+        onClick: () => {
+          if (!fightable) return
+          if (
+            state.phase === 'battling' ||
+            state.phase === 'victory' ||
+            state.phase === 'defeat'
+          )
+            dispatch({ type: 'PHASE_IDLE' })
+          dispatch({ type: 'START_TRIPLES' })
+        },
+        children: 'ENTER THE TRIPLES COURT',
       }),
     ],
   })

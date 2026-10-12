@@ -129,6 +129,7 @@ export function BattleScene({ onOpenMenu }) {
   if (state.phase === 'battleRoyal') return jsx(BattleRoyalScene, {})
   if (state.phase === 'championGauntlet') return jsx(ChampionGauntletScene, {})
   if (state.phase === 'doubles') return jsx(DoublesScene, {})
+  if (state.phase === 'triples') return jsx(DoublesScene, { size: 3 })
   if (state.phase === 'dynamaxAdventures') return jsx(DynamaxAdventuresScene, {})
   if (state.phase === 'lightsOut') return jsx(LightsOutScene, {})
   if (state.phase === 'curry') return jsx(CurryScene, {})

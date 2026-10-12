@@ -56,6 +56,15 @@ export function heldItemBoostType(itemId) {
   return itemId ? (BOOST_ITEM_TYPE[itemId] ?? null) : null
 }
 
+/**
+ * The type-boosting held item that suits `type`, or null for an unknown one.
+ * @param {string | null | undefined} type
+ * @returns {string | null}
+ */
+export function heldTypeBoostItem(type) {
+  return type ? (TYPE_BOOST_ITEM[type] ?? null) : null
+}
+
 /** @type {string[]} */
 export const WILD_HELD_ITEMS = [...WILD_BERRIES, ...TYPE_BOOST_ITEMS]
 

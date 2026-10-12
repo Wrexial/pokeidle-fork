@@ -4412,6 +4412,26 @@ img {
     color: #8fdc6a
 }
 
+.research-reward {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    font-size: 8px;
+    color: #b8a583
+}
+
+.research-reward-label {
+    color: #8a7a5e
+}
+
+.research-reward-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    color: #d9c8a6
+}
+
 .research-shop-list {
     display: flex;
     flex-direction: column;

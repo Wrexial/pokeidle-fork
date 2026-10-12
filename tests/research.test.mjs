@@ -19,6 +19,7 @@ const {
   researchTasksFor,
   signatureMoveFor,
   speciesResearch,
+  speciesResearchReward,
 } = await import('../src/game/research.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { repairSave, serializeSave } = await import('../src/game/save.js')
@@ -159,6 +160,30 @@ test('a fully researched species reaches level 10', () => {
   assert.equal(research.earned, RESEARCH_MAX_POINTS)
   assert.equal(research.level, 10)
   assert.ok(research.complete)
+})
+
+test('completing a species research pays a type-matched reward once', () => {
+  assert.deepEqual(speciesResearchReward('charmander'), { charcoal: 1 })
+  assert.deepEqual(speciesResearchReward('bulbasaur'), { miracleSeed: 1 })
+  assert.deepEqual(speciesResearchReward('pikachu'), { magnet: 1 })
+  assert.equal(speciesResearchReward('notapokemon'), null)
+
+  // Every task done but nothing claimed yet, so the next credit completes it.
+  const base = {
+    ...initialGameState,
+    pokedexCaught: ['pikachu'],
+    shinyCaught: ['pikachu'],
+    researchDefeated: { pikachu: 25 },
+    researchLarge: { pikachu: 1 },
+    researchSuperEffective: { pikachu: 1 },
+    researchMoveIds: { pikachu: [signatureMoveFor('pikachu')] },
+  }
+  const rewarded = applyResearchEarnings(base, 'pikachu')
+  assert.equal(rewarded.inventory.magnet, 1, 'the Electric booster is granted')
+  assert.equal(rewarded.researchRewarded.pikachu, true)
+  // Crediting it again never hands out a second copy.
+  const again = applyResearchEarnings(rewarded, 'pikachu')
+  assert.equal(again.inventory.magnet ?? 0, 1)
 })
 
 test('a large specimen credits the large-specimen task', () => {

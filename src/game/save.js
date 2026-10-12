@@ -645,6 +645,14 @@ export function repairSave(saved) {
   for (const [speciesKey, points] of Object.entries(savedClaimed))
     if (pokemonSpecies[speciesKey] && Number.isFinite(points) && points > 0)
       researchClaimed[speciesKey] = Math.min(RESEARCH_MAX_POINTS, Math.floor(points))
+  // Species whose one-time research completion reward was already granted.
+  const researchRewarded = Object.fromEntries(
+    Object.entries(
+      saved.researchRewarded && typeof saved.researchRewarded === 'object'
+        ? saved.researchRewarded
+        : {}
+    ).filter(([speciesKey, rewarded]) => pokemonSpecies[speciesKey] && rewarded === true)
+  )
 
   // Repair save data that references content which no longer exists (regions,
   // routes and locations have been rebuilt several times), so an old save can't
@@ -945,6 +953,7 @@ export function repairSave(saved) {
     researchSuperEffective,
     researchMoveIds,
     researchClaimed,
+    researchRewarded,
     researchPoints: Math.max(0, Math.floor(Number(saved.researchPoints) || 0)),
     shinySeen,
     alwaysCatchShinies: saved.alwaysCatchShinies ?? true,
@@ -1147,6 +1156,7 @@ export const SAVED_STATE_KEYS = [
   'researchSuperEffective',
   'researchMoveIds',
   'researchClaimed',
+  'researchRewarded',
   'researchPoints',
   'shinySeen',
   'defeatedGyms',

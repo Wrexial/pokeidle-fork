@@ -5,7 +5,10 @@
 // plus a few per-species counters.
 
 import { encounterData, moveData, pokemonSpecies } from '../data/gameData.js'
+import { heldItems } from '../data/items.js'
 import { awardRibbon } from './ribbons.js'
+import { heldTypeBoostItem } from './held-items.js'
+import { withNotification } from './reducer-helpers.js'
 import { resolvePokemonMoves } from './pokemon/evolution.js'
 import { sizeRating } from './pokemon/sizes.js'
 
@@ -198,6 +201,54 @@ export function speciesResearch(state, speciesKey) {
 }
 
 /**
+ * The one-time reward for completing a species' field research: a type-boosting
+ * held item that matches its primary type, so the reward is tied to the species
+ * the points came from. Null for a species with no type/matching item.
+ * @param {string} speciesKey
+ * @returns {Record<string, number> | null}
+ */
+export function speciesResearchReward(speciesKey) {
+  const itemId = heldTypeBoostItem(pokemonSpecies[speciesKey]?.types?.[0])
+  return itemId ? { [itemId]: 1 } : null
+}
+
+/**
+ * Grant a species' research completion reward once (tracked in
+ * `researchRewarded`, so a reload can't re-claim it). Returns the same state
+ * when the species isn't complete or was already rewarded.
+ * @param {GameState} state
+ * @param {string} speciesKey
+ * @returns {GameState}
+ */
+export function grantResearchCompletionReward(state, speciesKey) {
+  if (!speciesKey || !pokemonSpecies[speciesKey] || state.researchRewarded?.[speciesKey]) return state
+  if (!speciesResearch(state, speciesKey).complete) return state
+  const reward = speciesResearchReward(speciesKey)
+  if (!reward) return state
+  const inventory = { ...state.inventory }
+  for (const [itemId, quantity] of Object.entries(reward))
+    inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+  const name = pokemonSpecies[speciesKey].name ?? speciesKey,
+    rewardText = Object.entries(reward)
+      .map(([itemId, quantity]) => `${heldItems[itemId]?.name ?? itemId}${quantity > 1 ? ` x${quantity}` : ''}`)
+      .join(', ')
+  return withNotification(
+    {
+      ...state,
+      inventory,
+      researchRewarded: { ...(state.researchRewarded ?? {}), [speciesKey]: true },
+    },
+    {
+      message: `Field research complete: ${name}! +${rewardText}`,
+      tone: 'success',
+      icon: '\u{1f52c}',
+      dedupeKey: `research-reward:${speciesKey}`,
+      kind: 'research',
+    }
+  )
+}
+
+/**
  * Credit any newly completed research for a species into the spendable balance.
  * Pure; returns the same reference when nothing new was earned.
  * @param {GameState} state
@@ -209,11 +260,13 @@ export function applyResearchEarnings(state, speciesKey) {
   const earned = speciesResearch(state, speciesKey).earned,
     claimed = state.researchClaimed?.[speciesKey] ?? 0
   if (earned <= claimed) return state
-  return {
+  const next = {
     ...state,
     researchPoints: (state.researchPoints ?? 0) + (earned - claimed),
     researchClaimed: { ...(state.researchClaimed ?? {}), [speciesKey]: earned },
   }
+  // Completing every task also pays a one-time species-themed reward.
+  return grantResearchCompletionReward(next, speciesKey)
 }
 
 /**
@@ -235,8 +288,11 @@ export function applyResearchRibbon(state, speciesKey) {
     return next
   }
   const party = (state.party ?? []).map(addRibbon),
-    box = (state.box ?? []).map(addRibbon)
-  return changed ? { ...state, party, box } : state
+    box = (state.box ?? []).map(addRibbon),
+    // Re-check the one-time completion reward here too, so a save that finished
+    // a species before the reward existed still collects it.
+    ribbonState = changed ? { ...state, party, box } : state
+  return grantResearchCompletionReward(ribbonState, speciesKey)
 }
 
 /**

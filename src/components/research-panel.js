@@ -5,7 +5,7 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { consumableItems, evolutionItems, heldItems, pokeBalls } from '../data/items.js'
 import { useGame } from '../game/context.js'
-import { RESEARCH_SHOP, speciesResearch } from '../game/research.js'
+import { RESEARCH_SHOP, speciesResearch, speciesResearchReward } from '../game/research.js'
 import { ItemIcon } from './item-icon.js'
 
 /** @param {string} itemId */
@@ -95,6 +95,7 @@ export function ResearchPanel({ speciesKey }) {
   const { state } = useGame(),
     [shopOpen, setShopOpen] = React.useState(false),
     research = speciesResearch(state, speciesKey),
+    reward = speciesResearchReward(speciesKey),
     points = state.researchPoints ?? 0
   return jsxs('div', {
     className: 'research-panel',
@@ -140,6 +141,26 @@ export function ResearchPanel({ speciesKey }) {
           )
         ),
       }),
+      reward &&
+        jsxs('div', {
+          className: 'research-reward',
+          children: [
+            jsx('span', { className: 'research-reward-label', children: 'Completion reward' }),
+            ...Object.entries(reward).map(([itemId]) =>
+              jsxs(
+                'span',
+                {
+                  className: 'research-reward-item',
+                  children: [
+                    jsx(ItemIcon, { itemId, size: 16 }),
+                    itemName(itemId),
+                  ],
+                },
+                itemId
+              )
+            ),
+          ],
+        }),
       shopOpen && jsx(ResearchShopModal, { onClose: () => setShopOpen(false) }),
     ],
   })

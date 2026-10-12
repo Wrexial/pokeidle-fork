@@ -120,6 +120,8 @@ export const initialGameState = {
   researchMoveIds: {},
   /** Research points already credited per species (so a balance is spendable). */
   researchClaimed: {},
+  /** Species whose one-time research completion reward has been granted. */
+  researchRewarded: {},
   /** Unspent Research Points. */
   researchPoints: 0,
   /** The last Pelago collection, shown in a result card until dismissed. */

@@ -27,7 +27,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #24, #25, #56, #62, #69, #75–#76, #81. They
+See the numbered sections below: #24, #25, #56, #62, #69, #75–#76. They
 are optional extras rather than missing features.
 
 ---
@@ -166,21 +166,6 @@ Still open (optional):
 
 - [ ] A Jubilife Village hub location and the noble / ride Pokemon as statics or
       Raid Island additions, and space-time distortions as a swarm event.
-
-## 81. Research Shop diversification
-
-The Research Shop now sells a research-flavoured set (the Exp. Candy ladder,
-Rare Candy, the Ability Capsule / Patch, Bottle Caps, the six EV vitamins and a
-Master Ball) instead of the Kecleon evolution stones. The Lucky Egg and Amulet
-Coin held items are auction-only.
-
-Still open (optional):
-
-- [ ] A species-specific research reward tied to the species the points came
-      from.
-
-*(PP Up / PP Max are off the table — PP stays unimplemented, and the vitamins
-shipped as the EV system.)*
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

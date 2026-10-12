@@ -13,6 +13,7 @@ const {
   syncMilestoneRibbons,
   syncObtainedRibbons,
 } = await import('../src/game/ribbons.js')
+const { applyResearchRibbon, signatureMoveFor } = await import('../src/game/research.js')
 const { createPokemon, generateIVs } = await import('../src/game/pokemon.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { repairSave, serializeSave } = await import('../src/game/save.js')
@@ -147,6 +148,60 @@ test('a loss hands out no ribbon', () => {
       payload: { won: false, moneyDelta: -10 },
     })
   assert.ok(!ended.party[0].ribbons?.includes('gym'))
+})
+
+test('there is a League Ribbon per region and a Research Ribbon', () => {
+  for (const regionId of ['kanto', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola', 'galar', 'paldea']) {
+    assert.ok(RIBBONS[`league-${regionId}`], `${regionId} has a League Ribbon`)
+    assert.match(RIBBONS[`league-${regionId}`].name, /League Ribbon/)
+  }
+  assert.equal(RIBBONS.research.name, 'Research Ribbon')
+})
+
+test('beating a region\u2019s Champion earns that region\u2019s League Ribbon', () => {
+  const starter = createPokemon('bulbasaur', 60, 1),
+    base = {
+      ...initialGameState,
+      phase: 'battling',
+      party: [starter],
+      playerPokemon: starter,
+      bossBattle: {
+        bossId: 'champion-kanto',
+        bossType: 'champion',
+        trainerName: 'Champion',
+        trainerClass: 'champion',
+        trainerTeam: [],
+        currentTrainerPokemonIndex: 0,
+        spriteKey: 'champion',
+        region: 'kanto',
+      },
+      bossQueue: [],
+    },
+    won = gameReducer(base, {
+      type: 'BOSS_BATTLE_END',
+      payload: { won: true, moneyDelta: 100 },
+    })
+  assert.ok(won.party[0].ribbons?.includes('league-kanto'), 'the Kanto League Ribbon is awarded')
+})
+
+test('completing a species\u2019 research awards the Research Ribbon to its individuals', () => {
+  const signature = signatureMoveFor('pidgey'),
+    member = { id: '1', speciesKey: 'pidgey', level: 20, currentHp: 40, maxHp: 40, ribbons: [] },
+    base = {
+      ...initialGameState,
+      party: [member],
+      pokedexCaught: ['pidgey'],
+      shinyCaught: ['pidgey'],
+      researchDefeated: { pidgey: 25 },
+      researchLarge: { pidgey: 1 },
+      researchSuperEffective: { pidgey: 1 },
+      researchMoveIds: { pidgey: [signature] },
+    }
+  const awarded = applyResearchRibbon(base, 'pidgey')
+  assert.ok(awarded.party[0].ribbons.includes('research'))
+  // A species that isn't finished yet is untouched.
+  const partial = { ...base, researchDefeated: { pidgey: 1 } }
+  assert.equal(applyResearchRibbon(partial, 'pidgey'), partial)
 })
 
 test('repairSave drops unknown ribbon ids and keeps real ones', () => {

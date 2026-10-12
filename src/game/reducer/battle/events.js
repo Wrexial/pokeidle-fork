@@ -14,7 +14,7 @@ import { fieldWeatherFor } from '../../weather.js'
 import { tickGarden } from '../../garden.js'
 import { tickPelago } from '../../pelago.js'
 import { advanceHuntEncounter } from '../../hunt.js'
-import { creditResearchDefeat, creditResearchLarge, creditResearchMove, creditResearchSuperEffective, isLargeSpecimen } from '../../research.js'
+import { applyResearchRibbon, creditResearchDefeat, creditResearchLarge, creditResearchMove, creditResearchSuperEffective, isLargeSpecimen } from '../../research.js'
 import { emptyBattleHazards } from '../../hazards.js'
 import { gainFriendship, isBattleReady, syncObtainedRibbons } from '../../pokemon.js'
 import { prestigeMultipliers } from '../../prestige.js'
@@ -501,6 +501,8 @@ export function consumeEvent(state, action) {
     pelago,
     inventory,
   })
+  // A species whose field research just completed earns the Research Ribbon.
+  syncedState = applyResearchRibbon(syncedState, state.enemyPokemon?.speciesKey)
   for (const dropNotification of dropNotifications)
     syncedState = withNotification(syncedState, dropNotification)
   if (hatchedEgg.length > 0) {
@@ -560,6 +562,7 @@ export function consumeEvent(state, action) {
       // An XL hatch counts toward the "large specimen" research task.
       if (isLargeSpecimen(ribbonedHatch))
         syncedState = creditResearchLarge(syncedState, hatchKey)
+      syncedState = applyResearchRibbon(syncedState, hatchKey)
     }
     syncedState = { ...syncedState, hatchResult: hatchedEgg[hatchedEgg.length - 1] }
   }

@@ -7,7 +7,7 @@ import { pokemonSpecies } from '../../data/gameData.js'
 import { SHINY_CHAIN_FIRST_TARGET, formatReward, prepareNextBattle } from '../progression.js'
 import { recordHuntCatch } from '../hunt.js'
 import { questLabel, rollQuests } from '../quests.js'
-import { applyResearchEarnings } from '../research.js'
+import { applyResearchEarnings, applyResearchRibbon } from '../research.js'
 import { withNotification } from '../reducer-helpers.js'
 
 /**
@@ -52,7 +52,7 @@ export function markCaught(state, action) {
           },
     nextState = hunted === state.hunt ? baseState : { ...baseState, hunt: hunted }
   return withNotification(
-    applyResearchEarnings(nextState, speciesKey),
+    applyResearchRibbon(applyResearchEarnings(nextState, speciesKey), speciesKey),
     isNewSpecies
       ? {
           message: `${speciesName} was registered in the Pokédex!`,

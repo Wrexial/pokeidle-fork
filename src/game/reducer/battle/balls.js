@@ -13,7 +13,7 @@ import {
 } from '../../catching.js'
 import { createPokemon, insertIntoBox, syncObtainedRibbons } from '../../pokemon.js'
 import { isHoneyActive, prepareNextBattle } from '../../progression.js'
-import { creditResearchLarge, isLargeSpecimen } from '../../research.js'
+import { applyResearchEarnings, applyResearchRibbon, creditResearchLarge, isLargeSpecimen } from '../../research.js'
 import { markCaught, markShinyCaught } from '../collection.js'
 import { catchPokemon } from '../pokemon/management.js'
 import { withNotification } from '../../reducer-helpers.js'
@@ -189,8 +189,13 @@ export function completeMasterBall(state, action) {
     state.party.length < 6
       ? { ...caughtState, party: [...state.party, caughtPokemon] }
       : { ...caughtState, box: insertIntoBox(state.box, caughtPokemon, state.boxSort) }
-  // An XL catch counts toward the "large specimen" research task.
+  // An XL catch counts toward the "large specimen" research task, and the
+  // catch itself credits (and can complete) the species' research.
   if (isLargeSpecimen(caughtPokemon)) caughtState = creditResearchLarge(caughtState, speciesKey)
+  caughtState = applyResearchRibbon(
+    applyResearchEarnings(caughtState, speciesKey),
+    speciesKey
+  )
   caughtState = prepareNextBattle(caughtState)
   if (state.inRaid)
     caughtState = {

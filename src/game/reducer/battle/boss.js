@@ -79,16 +79,18 @@ export function startBossBattle(state, action) {
 
 /**
  * The ribbon a beaten boss awards the party, or null for an untracked one.
+ * A Champion hands out that region's own League Ribbon.
  * @param {string | undefined} bossType
+ * @param {string} [regionId]
  * @returns {string | null}
  */
-function ribbonForBossType(bossType) {
+function ribbonForBossType(bossType, regionId) {
   return bossType === 'gym'
     ? 'gym'
     : bossType === 'e4'
       ? 'elite'
       : bossType === 'champion'
-        ? 'league'
+        ? `league-${regionId ?? 'kanto'}`
         : null
 }
 
@@ -357,7 +359,7 @@ export function bossBattleEnd(state, action) {
     })
     if (championJustDefeated) result = settleUnlockTokens(result)
     // A win hands the party the boss's ribbon.
-    const queueRibbon = won ? ribbonForBossType(state.bossBattle?.bossType) : null
+    const queueRibbon = won ? ribbonForBossType(state.bossBattle?.bossType, state.bossBattle?.region) : null
     if (queueRibbon) result = withPartyRibbon(result, queueRibbon)
     for (const toastNotification of toastNotifications)
       result = withNotification(result, toastNotification)
@@ -391,7 +393,7 @@ export function bossBattleEnd(state, action) {
     unlockedLocations: computeUnlockedLocations(finalState),
   })
   if (championJustDefeated) finalResult = settleUnlockTokens(finalResult)
-  const bossRibbon = won ? ribbonForBossType(state.bossBattle?.bossType) : null
+  const bossRibbon = won ? ribbonForBossType(state.bossBattle?.bossType, state.bossBattle?.region) : null
   if (bossRibbon) finalResult = withPartyRibbon(finalResult, bossRibbon)
   // Beating the rival at the last milestone earns the Rival Ribbon.
   if (

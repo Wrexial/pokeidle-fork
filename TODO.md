@@ -27,8 +27,8 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #24, #25, #56, #62, #67, #69, #71–#76,
-#79, #81. They are optional extras rather than missing features.
+See the numbered sections below: #24, #25, #56, #62, #69, #71–#76, #79, #81.
+They are optional extras rather than missing features.
 
 ---
 
@@ -134,17 +134,6 @@ Still open:
       win, so they don't tick offline today).
 
 Effort: **medium**.
-
-## 67. Ribbons + ribbon case
-
-Eight ribbons and the per-Pokemon ribbon case shipped (`src/game/ribbons.js`).
-
-Still open (optional):
-
-- [ ] Per-region League ribbons, or a ribbon for a full Field-research species
-      (the shiny and first-catch ribbons shipped).
-
-Effort: **small–medium**.
 
 ## 69. Legendary quests
 

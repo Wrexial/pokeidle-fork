@@ -2,6 +2,7 @@
 // in the ribbon case on the stats panel. Like the games, a ribbon is permanent
 // and travels with the individual.
 
+import { regions } from '../data/gameData.js'
 import { MAX_FRIENDSHIP } from './pokemon/friendship.js'
 
 /**
@@ -75,7 +76,23 @@ export const RIBBONS = {
     description: 'The first of its species registered in the Pok\u00e9dex.',
     icon: '\u{1f4d6}',
   },
+  research: {
+    id: 'research',
+    name: 'Research Ribbon',
+    description: 'Completed this species\u2019 field research.',
+    icon: '\u{1f52c}',
+  },
 }
+
+// One League Ribbon per region, so beating Kanto's Champion reads differently
+// from beating Paldea's.
+for (const region of regions)
+  RIBBONS[`league-${region.id}`] = {
+    id: `league-${region.id}`,
+    name: `${region.name} League Ribbon`,
+    description: `Helped beat the ${region.name} Champion.`,
+    icon: '\u{1f451}',
+  }
 
 /**
  * Award the ribbons a Pokemon earns the moment it is obtained: a shiny is

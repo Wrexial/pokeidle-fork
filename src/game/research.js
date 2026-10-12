@@ -5,6 +5,7 @@
 // plus a few per-species counters.
 
 import { encounterData, moveData, pokemonSpecies } from '../data/gameData.js'
+import { awardRibbon } from './ribbons.js'
 import { resolvePokemonMoves } from './pokemon/evolution.js'
 import { sizeRating } from './pokemon/sizes.js'
 
@@ -213,6 +214,29 @@ export function applyResearchEarnings(state, speciesKey) {
     researchPoints: (state.researchPoints ?? 0) + (earned - claimed),
     researchClaimed: { ...(state.researchClaimed ?? {}), [speciesKey]: earned },
   }
+}
+
+/**
+ * Award the Research Ribbon to the species' individuals once its field
+ * research is complete. Returns the same state when nothing changed.
+ * @param {GameState} state
+ * @param {string | undefined | null} speciesKey
+ * @returns {GameState}
+ */
+export function applyResearchRibbon(state, speciesKey) {
+  if (!speciesKey || !pokemonSpecies[speciesKey]) return state
+  if (!speciesResearch(state, speciesKey).complete) return state
+  let changed = false
+  /** @param {Pokemon} member */
+  const addRibbon = (member) => {
+    if (member?.speciesKey !== speciesKey) return member
+    const next = awardRibbon(member, 'research')
+    if (next !== member) changed = true
+    return next
+  }
+  const party = (state.party ?? []).map(addRibbon),
+    box = (state.box ?? []).map(addRibbon)
+  return changed ? { ...state, party, box } : state
 }
 
 /**

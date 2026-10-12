@@ -8,10 +8,15 @@ installGameData()
 const {
   ALPHA_EXP_MULTIPLIER,
   ALPHA_SIZE,
+  SIZE_FACTOR_MAX,
+  SIZE_FACTOR_MIN,
   SIZE_RATINGS,
   alphaExpMultiplier,
+  formatHeight,
   isAlphaPokemon,
   rollSize,
+  sizeFactor,
+  sizeHeight,
   sizeRating,
   sizeTooltip,
 } = await import('../src/game/pokemon.js')
@@ -53,6 +58,36 @@ test('the largest specimens are alphas', () => {
   assert.equal(isAlphaPokemon(null), false)
   assert.match(sizeTooltip({ size: 255 }), /alpha/i)
   assert.doesNotMatch(sizeTooltip({ size: 100 }), /alpha/i)
+})
+
+test('sizeHeight scales the roll by the species baseline', () => {
+  assert.equal(sizeFactor(0), SIZE_FACTOR_MIN)
+  assert.equal(sizeFactor(255), SIZE_FACTOR_MAX)
+  assert.equal(sizeFactor(undefined), 1)
+  // A middle roll is the species' own height; the extremes are 0.75x / 1.25x.
+  assert.equal(sizeHeight({ size: 128 }, 2), 2)
+  assert.equal(sizeHeight({ size: 0 }, 2), 1.5)
+  assert.equal(sizeHeight({ size: 255 }, 2), 2.5)
+  // A Wailord and a Diglett keep their own scales.
+  const wailord = sizeHeight({ size: 128 }, 14.5),
+    diglett = sizeHeight({ size: 128 }, 0.2)
+  assert.ok(wailord > 14 && wailord < 15, `Wailord ~14.5 m, got ${wailord}`)
+  assert.ok(diglett > 0.1 && diglett < 0.3, `Diglett ~0.2 m, got ${diglett}`)
+  // No species height -> no physical size.
+  assert.equal(sizeHeight({ size: 128 }, undefined), null)
+  assert.equal(sizeHeight({ size: 128 }, 0), null)
+})
+
+test('formatHeight and the tooltip name a physical size', () => {
+  assert.equal(formatHeight(0.5), '0.5 m')
+  assert.equal(formatHeight(2), '2 m')
+  assert.equal(formatHeight(14.5), '14.5 m')
+  const tip = sizeTooltip({ size: 255 }, 2)
+  assert.match(tip, /XL/)
+  assert.match(tip, /2\.5 m/)
+  assert.match(tip, /alpha/i)
+  // Without a species height the tooltip still reads sensibly.
+  assert.doesNotMatch(sizeTooltip({ size: 100 }), / m\b/)
 })
 
 test('an alpha earns bonus EXP', () => {

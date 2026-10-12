@@ -27,7 +27,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #24, #25, #56, #62, #69, #74–#76, #81. They
+See the numbered sections below: #24, #25, #56, #62, #69, #75–#76, #81. They
 are optional extras rather than missing features.
 
 ---
@@ -146,17 +146,6 @@ Still open (optional):
 - [ ] Relic-collecting steps (new items found on routes) instead of the
       Pokédex-percentage step.
 - [ ] Per-legendary boss battles with dialogue rather than a standard raid.
-
-## 74. Pokemon sizes (XS–XL)
-
-Every individual rolls a size mapped to an XS–XL rating (with a ★ ALPHA marker
-for the very largest) on the stats panel (`src/game/pokemon/sizes.js`).
-
-Still open:
-
-- [ ] Add `height` to the species data (a PokeAPI pass like `fetch-weights.cjs`)
-      and scale the roll by the species' baseline, so a Wailord and a Diglett
-      aren't judged on the same scale.
 
 ## 75. Legends Z-A area (Kalos post-game zone)
 

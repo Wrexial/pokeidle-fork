@@ -23,7 +23,7 @@ import { moveTooltip } from '../game/move-info.js'
 import { itemTooltip } from '../game/progression.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol, isFemalePokemon } from '../game/breeding.js'
-import { abilityDisplayName, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, isAlphaPokemon, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName, sizeRating, sizeTooltip, totalEvs } from '../game/pokemon.js'
+import { abilityDisplayName, formatHeight, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, isAlphaPokemon, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName, sizeHeight, sizeRating, sizeTooltip, totalEvs } from '../game/pokemon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
 import { RibbonCase } from './ribbon-case.js'
 
@@ -60,6 +60,7 @@ export function StatsPanel({
             : 0
         : 0
   if (!species) return null
+  const pokemonHeight = sizeHeight(pokemon, species.height)
   function commitName() {
     dispatch({
       type: 'SET_NICKNAME',
@@ -486,9 +487,10 @@ export function StatsPanel({
           }),
           jsx('span', {
             className: `stats-panel-size${isAlphaPokemon(pokemon) ? ' alpha' : ''}`,
-            'data-tooltip': sizeTooltip(pokemon),
+            'data-tooltip': sizeTooltip(pokemon, species.height),
             children: [
               `Size ${sizeRating(pokemon.size)}`,
+              pokemonHeight != null ? ` \u00b7 ${formatHeight(pokemonHeight)}` : '',
               isAlphaPokemon(pokemon) ? ' \u2605 ALPHA' : '',
             ],
           }),

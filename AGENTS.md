@@ -523,6 +523,12 @@ One-off scripts used to build the data JSON (not run during dev/build):
   weight-based moves (Heat Crash, Heavy Slam, Low Kick, Grass Knot, see
   `src/game/combat/variable-power.js`). Needs no network (the responses are
   cached by fetch-abilities.cjs); re-run after adding species/form ids.
+- `fetch-heights.cjs` — writes each species' `height` (metres) from PokeAPI into
+  `public/data/pokemon-species.json`; it caches its own `/pokemon/{id}`
+  responses under `tools/cache/`, so it runs standalone and is resumable. Forms
+  PokeAPI only models as forms (the Unown letters) inherit their base species'
+  height. Drives the physical size a Pokemon's rolled size maps to in
+  `src/game/pokemon/sizes.js`; re-run after adding species/form ids.
 - `fetch-tm-learnsets.cjs` — reads each species' cached `/pokemon/{id}` response
   and writes `public/data/tm-learnsets.json`, the machine (TM) moves it can learn
   in its newest game. Feeds the Move Tutor (`getTutorMoves` in

@@ -59,6 +59,7 @@ for (const key of realSpecies) {
   if (!Object.values(entry.baseStats ?? {}).some((stat) => stat > 0))
     fail(`species ${key} has no base stats`)
   if (!entry.growthRate) fail(`species ${key} has no growth rate`)
+  if (!(entry.height > 0)) fail(`species ${key} has no height`)
 }
 for (const [key, moves] of Object.entries(learnsets)) {
   if (!speciesKeys.has(key)) fail(`learnset for unknown species ${key}`)

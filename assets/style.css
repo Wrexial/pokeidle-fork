@@ -16340,6 +16340,76 @@ img {
     color: #cbbfa6
 }
 
+.ffa-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%
+}
+
+.ffa-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 6px;
+    background: #00000047;
+    border: 1px solid #6a5836;
+    border-radius: 5px
+}
+
+.ffa-card.player {
+    border-color: var(--gold)
+}
+
+.ffa-card.down {
+    opacity: .6
+}
+
+.ffa-card.hit {
+    animation: royalHit .5s ease
+}
+
+.ffa-card-name {
+    font-size: 8px;
+    font-weight: 700;
+    color: #f0e6c8
+}
+
+.ffa-sprite {
+    width: 48px;
+    height: 48px;
+    image-rendering: pixelated
+}
+
+.ffa-mon-name {
+    font-size: 7px;
+    color: #c8b488
+}
+
+.ffa-pips {
+    display: flex;
+    gap: 3px;
+    margin-top: 2px
+}
+
+.ffa-pip {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4a3c28
+}
+
+.ffa-pip.alive {
+    background: #48b048
+}
+
+.ffa-remaining {
+    font-size: 6px;
+    color: #8a7a60
+}
+
 .doubles-side {
     display: flex;
     flex-direction: column;

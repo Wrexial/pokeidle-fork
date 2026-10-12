@@ -40,6 +40,7 @@ import { BattleRoyalScene } from './battle-royal-scene.js'
 import { ChampionGauntletScene } from './champion-gauntlet-scene.js'
 import { DoublesScene } from './doubles-scene.js'
 import { RotationScene } from './rotation-scene.js'
+import { FreeForAllScene } from './free-for-all-scene.js'
 import { DynamaxAdventuresScene } from './dynamax-adventures-scene.js'
 import { LightsOutScene } from './lights-out-scene.js'
 import { CurryScene } from './curry-scene.js'
@@ -132,6 +133,7 @@ export function BattleScene({ onOpenMenu }) {
   if (state.phase === 'doubles') return jsx(DoublesScene, {})
   if (state.phase === 'triples') return jsx(DoublesScene, { size: 3 })
   if (state.phase === 'rotation') return jsx(RotationScene, {})
+  if (state.phase === 'freeForAll') return jsx(FreeForAllScene, {})
   if (state.phase === 'dynamaxAdventures') return jsx(DynamaxAdventuresScene, {})
   if (state.phase === 'lightsOut') return jsx(LightsOutScene, {})
   if (state.phase === 'curry') return jsx(CurryScene, {})

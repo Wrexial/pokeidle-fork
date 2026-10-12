@@ -63,6 +63,7 @@ export const MINIGAME_PHASES = {
   doubles: 'doubles',
   triples: 'triples',
   rotation: 'rotation',
+  freeForAll: 'freeForAll',
   dynamaxAdventures: 'dynamaxAdventures',
   lightsOut: 'lightsOut',
   curry: 'curry',

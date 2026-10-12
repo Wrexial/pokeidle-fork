@@ -61,6 +61,7 @@ export const CHANGELOG = [
           'The doubles court has a second home: Hoenn’s Battle Tower now offers the 2v2 doubles run beside its floor climb.',
           'Hoenn’s Battle Tower runs triple battles too: field three Pokemon against three, every battler picking its own target and spread moves hitting the whole opposite side. A fainted Pokemon is replaced from the bench until one side runs out.',
           'The Battle Tower also runs rotation battles: field a trio but fight with one active Pokemon at a time. Rotating your active Pokemon is free before each round, so you can answer the foe’s lead, and a fainted member is replaced by the next healthy one until a side is down to nothing.',
+          'And a free-for-all: four trainers — you and three rivals — each field a team, everyone can hit everyone, and the last trainer with a Pokemon standing wins the bout. Your Pokemon picks its own target each round, so you can let it run unattended while you outlast the field.',
           'Alola’s Ultra Warp Ride is in: the new Ultra Space post-game location (east of the Raid Island, open once the Alola Champion is beaten) sends you riding through a wormhole for 30 seconds, steering left and right to collect rings and dodge debris. The cleaner the run, the deeper the wormhole it reaches \u2014 then pick one of the doors and keep the Ultra Beast or legendary waiting inside, drawn from Alola’s Raid Island pool instead of left to the raid roll.',
         ],
       },

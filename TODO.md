@@ -23,12 +23,10 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 1. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
    doc and real ops for modest player value today.
-2. **#43 Multi-battles (free-for-all)** — M–L · ★★½.
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #43. They
-are optional extras rather than missing features.
+_(empty — every shipped system's follow-ups are done.)_
 
 ---
 
@@ -54,23 +52,6 @@ client-only today with `localStorage` saves. Worth a short design doc first.
       save shape changes.
 
 Effort: **large** (auth + conflict handling + a new server to run).
-
-## 43. Multi-battles (free-for-all)
-
-The **doubles** 2v2 minigame shipped at Kalos's Battle Maison (and now Hoenn's
-Battle Tower), **triple** 3v3 battles run at the Battle Tower too (including the
-ally abilities, the doubles-only moves and Quick/Wide Guard side protection),
-and **rotation** battles field a trio with one active fighter.
-
-Still open:
-
-- [ ] A 3-way / 4-way free-for-all variant (the Battle Royal is the closest
-      thing today).
-
-Relevant code: `src/game/minigames/doubles.js`,
-`src/game/minigames/rotation.js`, `src/components/doubles-scene.js`,
-`src/components/rotation-scene.js`, `src/game/reducer/minigames.js`, and
-`src/game/minigames/registry.js`.
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

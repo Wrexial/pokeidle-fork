@@ -1085,6 +1085,7 @@ export function useGameLoop() {
       state.phase === 'doubles' ||
       state.phase === 'triples' ||
       state.phase === 'rotation' ||
+      state.phase === 'freeForAll' ||
       state.phase === 'dynamaxAdventures' ||
       state.phase === 'lightsOut' ||
       state.phase === 'curry' ||

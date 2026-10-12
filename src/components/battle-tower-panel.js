@@ -9,6 +9,7 @@ import { useGame } from '../game/context.js'
 import { buildTowerFloor } from '../game/progression.js'
 import { DOUBLES_COST, TRIPLES_COST } from '../game/minigames/doubles.js'
 import { ROTATION_COST } from '../game/minigames/rotation.js'
+import { FFA_COST } from '../game/minigames/free-for-all.js'
 
 export function BattleTowerPanel() {
   const { state, dispatch } = useGame(),
@@ -192,6 +193,31 @@ export function BattleTowerPanel() {
           dispatch({ type: 'START_ROTATION' })
         },
         children: 'ENTER THE ROTATION COURT',
+      }),
+      jsxs('div', {
+        className: 'location-section-title',
+        style: { marginTop: '10px' },
+        children: 'Free-for-All',
+      }),
+      jsx('div', {
+        className: 'tower-hint',
+        children: `Four trainers, one ring, $${FFA_COST} a run. Everyone can hit everyone and the last trainer standing wins the bout; outlast all three rivals to keep going.`,
+      }),
+      jsx('button', {
+        className: 'gym-fight-btn',
+        style: { width: '100%' },
+        disabled: !fightable || state.money < FFA_COST,
+        onClick: () => {
+          if (!fightable) return
+          if (
+            state.phase === 'battling' ||
+            state.phase === 'victory' ||
+            state.phase === 'defeat'
+          )
+            dispatch({ type: 'PHASE_IDLE' })
+          dispatch({ type: 'START_FREE_FOR_ALL' })
+        },
+        children: 'ENTER THE FREE-FOR-ALL',
       }),
     ],
   })

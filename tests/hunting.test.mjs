@@ -11,6 +11,8 @@ const { applyEncounterModifiers, resolveActiveModifiers, resolvePokemonEncounter
 const { swarmBattleCount, swarmShinyMultiplier, swarmShinyOddsFloor } = await import(
   '../src/data/config.js'
 )
+const { rollSwarm } = await import('../src/game/reducer-helpers.js')
+const { mapData } = await import('../src/data/gameData.js')
 
 /** Run `fn` with `Math.random` pinned to a constant, then restore it. */
 function withRandom(/** @type {number} */ value, /** @type {() => any} */ fn) {
@@ -141,4 +143,18 @@ test('a swarm never beats 1 in 256 shiny odds', () => {
       )
     )
   assert.equal(result.isShiny, false)
+})
+
+test('a Hisui space-time distortion rolls a Hisui route', () => {
+  const hisuiRoutes = Object.keys(mapData).filter((id) => mapData[id]?.zone === 'hisui')
+  assert.ok(hisuiRoutes.length > 0, 'Hisui areas exist')
+  const state = { unlockedLocations: [...hisuiRoutes, 'route22'] }
+  // A zero roll is below the distortion chance, so the swarm becomes one.
+  const distortion = withRandom(0, () => rollSwarm(state))
+  assert.equal(distortion.distortion, true)
+  assert.equal(mapData[distortion.routeKey]?.zone, 'hisui', 'it forms on a Hisui route')
+  assert.ok(distortion.speciesKey, 'it picks a species')
+  // A high roll keeps it an ordinary swarm.
+  const normal = withRandom(0.9, () => rollSwarm(state))
+  assert.equal(normal.distortion, false)
 })

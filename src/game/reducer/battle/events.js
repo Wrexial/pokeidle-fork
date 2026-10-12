@@ -344,11 +344,13 @@ export function consumeEvent(state, action) {
         // The notice names the area but not the Pokemon, so the swarm is a
         // reason to go and look rather than a spoiler in the battle log.
         const swarmArea = mapData[swarm.routeKey]?.name ?? swarm.routeKey
-        swarmNotice = `A swarm spawned in the ${swarmArea} area!`
+        swarmNotice = swarm.distortion
+          ? `A space-time distortion is forming in the ${swarmArea}!`
+          : `A swarm spawned in the ${swarmArea} area!`
         dropNotifications.push({
           message: swarmNotice,
           tone: 'info',
-          icon: '\u{1f41d}',
+          icon: swarm.distortion ? '\u{1f300}' : '\u{1f41d}',
           dedupeKey: `swarm:${swarm.routeKey}`,
         })
       }

@@ -1,7 +1,7 @@
 // Shared helpers for the reducer handlers (toast queue, minigame entry,
 // leftover unlock tokens and swarm rolls). Split from game/reducer.js.
 
-import { swarmBattleCount } from '../data/config.js'
+import { spaceTimeDistortionChance, swarmBattleCount } from '../data/config.js'
 import { encounterData, mapData, pokemonSpecies, baseRegions } from '../data/gameData.js'
 import { getRegionUnlockTokens, prepareNextBattle } from './progression.js'
 
@@ -174,18 +174,23 @@ export function recordSeenPokemon(state, pokemon) {
 
 /**
  * Pick a random unlocked route and one of its rarer species for a new swarm.
+ * In Hisui, a space-time distortion sometimes forms instead: the same boosted
+ * rare-species event, themed to the zone.
  * @param {GameState} state
- * @returns {{ routeKey: string, speciesKey: string, battlesRemaining: number } | null}
+ * @returns {{ routeKey: string, speciesKey: string, battlesRemaining: number, distortion: boolean } | null}
  */
 export function rollSwarm(state) {
   const routes = state.unlockedLocations.filter(
     (id) => mapData[id]?.type === 'route' && encounterData[id]?.encounters?.length
   )
   if (routes.length === 0) return null
-  const routeKey = routes[Math.floor(Math.random() * routes.length)],
+  const hisuiRoutes = routes.filter((id) => mapData[id]?.zone === 'hisui'),
+    distortion = hisuiRoutes.length > 0 && Math.random() < spaceTimeDistortionChance,
+    pool = distortion ? hisuiRoutes : routes,
+    routeKey = pool[Math.floor(Math.random() * pool.length)],
     encounters = encounterData[routeKey].encounters,
     rarest = [...encounters].sort((left, right) => left.weight - right.weight)[0]
   return rarest
-    ? { routeKey, speciesKey: rarest.speciesKey, battlesRemaining: swarmBattleCount }
+    ? { routeKey, speciesKey: rarest.speciesKey, battlesRemaining: swarmBattleCount, distortion }
     : null
 }

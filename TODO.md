@@ -100,12 +100,12 @@ Still open (optional):
 
 Hisui's five areas shipped as a Sinnoh post-game zone
 (`tools/add-hisui-zone.cjs`); each area holds its frenzied noble and its ride
-Pokemon as one-off static encounters.
+Pokemon as one-off static encounters, and a Hisui swarm can form a space-time
+distortion.
 
 Still open (optional):
 
-- [ ] A Jubilife Village hub location, and space-time distortions as a swarm
-      event.
+- [ ] A Jubilife Village hub location.
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

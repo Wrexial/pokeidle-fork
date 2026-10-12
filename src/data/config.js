@@ -26,6 +26,11 @@ export const wonderTradeShinyOdds = 512
 
 /** Chance per wild win that a new swarm appears on a random unlocked route. */
 export const swarmSpawnChance = 0.01
+/**
+ * Chance a swarm roll becomes a Hisui space-time distortion instead, once any
+ * Hisui area is unlocked (it spawns on a Hisui route and is themed as one).
+ */
+export const spaceTimeDistortionChance = 0.25
 /** How many wild battles an active swarm lasts. */
 export const swarmBattleCount = 256
 /** Shiny-odds multiplier for the species a swarm is boosting (4x as likely). */

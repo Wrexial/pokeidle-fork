@@ -630,7 +630,7 @@ type GameState = {
   shinyCaught: string[]
   shinyChain: { speciesKey: string | null; count: number; radar?: number; target?: number }
   /** A route temporarily overrun by one species. */
-  swarm: { routeKey: string; speciesKey: string; battlesRemaining: number } | null
+  swarm: { routeKey: string; speciesKey: string; battlesRemaining: number; distortion?: boolean } | null
   /** Rare party-wide 2x EXP boost with a wild-battle countdown. */
   pokerus?: { battlesRemaining: number } | null
   /** Today's daily quests (see src/game/quests.js). */

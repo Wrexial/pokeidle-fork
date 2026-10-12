@@ -2,8 +2,9 @@
 
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
-import { MOBILE_TABS } from '../data/ui.js'
+import { MOBILE_TABS, biomeForLocation } from '../data/ui.js'
 import { encounterData, raidPoolFor, mapData } from '../data/gameData.js'
+import { effectiveWeatherAt } from '../game/weather.js'
 import { useGame } from '../game/context.js'
 import { getEvolutionOptions } from '../game/breeding.js'
 import { LocationPanel } from './location-panel.js'
@@ -70,8 +71,24 @@ export function MobileTabs() {
     }, [boxInspected, state.box, dispatch]),
     evolutionInfo = React.useMemo(() => {
       if (!boxPokemon || state.phase === 'evolving') return
-      return { entries: getEvolutionOptions(boxPokemon, state.inventory) }
-    }, [boxPokemon, state.phase, state.inventory]),
+      // Field evolutions (Moss Rock, Magnetic Field, rain, ...) are checked
+      // against the location the player is standing at right now.
+      return {
+        entries: getEvolutionOptions(boxPokemon, state.inventory, {
+          locationId: location?.id ?? state.currentLocation,
+          locationName: location?.name ?? '',
+          biome: biomeForLocation(location),
+          weather: effectiveWeatherAt(location, state.lingeringWeather),
+        }),
+      }
+    }, [
+      boxPokemon,
+      state.phase,
+      state.inventory,
+      location,
+      state.currentLocation,
+      state.lingeringWeather,
+    ]),
     handleEvolve = React.useCallback(
       /** @param {any} evolutionEntry */ (evolutionEntry) => {
         if (!boxPokemon || !evolutionInfo) return

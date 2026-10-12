@@ -8,6 +8,8 @@ import { randomNature } from '../data/natures.js'
 import { masudaShinyOdds } from '../data/config.js'
 import {
   IV_STAT_ORDER,
+  fieldEvolutionMet,
+  fieldEvolutionRequirements,
   generateIVs,
   getFamilyLearnset,
   getPreEvolutionChain,
@@ -36,9 +38,11 @@ function isFormChange(evolution) {
  * variants only offer the form matching this Pokemon's gender).
  * @param {Pokemon} pokemon
  * @param {Record<string, number>} inventory
+ * @param {FieldContext} [field] The player's current location/biome/weather,
+ *   for the field evolution gates.
  * @returns {{ targetName: string, canEvolve: boolean, requirementLabel: string, targetKey: string, itemId?: string, isForm: boolean }[]}
  */
-export function getEvolutionOptions(pokemon, inventory) {
+export function getEvolutionOptions(pokemon, inventory, field) {
   // Mega / Primal / Gigantamax forms are terminal battle forms, not evolutions.
   if (isTerminalForm(pokemon.speciesKey)) return []
   const evolutionChain = evolutionData[pokemon.speciesKey]
@@ -55,7 +59,8 @@ export function getEvolutionOptions(pokemon, inventory) {
         itemOwned = !evolution.item || (inventory[evolution.item] ?? 0) > 0,
         friendshipMet = !evolution.friendship || (pokemon.friendship ?? 0) >= evolution.friendship,
         seasonMet = !evolution.season || evolution.season === currentSeason(),
-        canEvolve = levelMet && itemOwned && friendshipMet && seasonMet,
+        fieldMet = fieldEvolutionMet(evolution, field),
+        canEvolve = levelMet && itemOwned && friendshipMet && seasonMet && fieldMet,
         requirementParts = []
       if (evolution.level) requirementParts.push(`Lv. ${evolution.level}`)
       if (evolution.item) {
@@ -68,6 +73,7 @@ export function getEvolutionOptions(pokemon, inventory) {
         requirementParts.push(
           `${SEASONS.find((season) => season.id === evolution.season)?.label ?? evolution.season} only`
         )
+      requirementParts.push(...fieldEvolutionRequirements(evolution, field))
       return {
         targetName: targetSpecies?.name ?? evolution.into,
         canEvolve,

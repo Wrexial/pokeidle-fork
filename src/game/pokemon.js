@@ -4,7 +4,7 @@
 
 export { getPokemonSpriteUrl, getPokemonSpriteFallbackUrl, getEggSpriteUrl, getTrainerSpriteUrl, getBossTrainerSpriteUrl, seasonalSpriteId } from './pokemon/sprites.js'
 export { calculateHpStat, calculateOtherStat, calculatePokemonStats, generateIVs, getPerfectIVs, IV_STAT_ORDER, IV_STAT_LABELS, ivStatLabel, ivVerdict, judgeIVs, EV_STAT_ORDER, createEmptyEvs, totalEvs } from './pokemon/stats.js'
-export { getPreEvolutionChain, getFamilyLearnset, resolvePokemonMoves, getTutorMoves, isTutorMove, applyMoveLearning, canEvolveFurther, getThreeStageBaseSpecies } from './pokemon/evolution.js'
+export { getPreEvolutionChain, getFamilyLearnset, resolvePokemonMoves, getTutorMoves, isTutorMove, applyMoveLearning, canEvolveFurther, getThreeStageBaseSpecies, fieldEvolutionMet, fieldEvolutionRequirements } from './pokemon/evolution.js'
 export { speciesHasType, challengeEligibleSpecies, monotypeSpeciesPool } from './pokemon/monotype.js'
 export { BASE_FRIENDSHIP, MAX_FRIENDSHIP, gainFriendship } from './pokemon/friendship.js'
 export { SIZE_RATINGS, SIZE_RATING_HINTS, SIZE_FACTOR_MIN, SIZE_FACTOR_MAX, ALPHA_SIZE, ALPHA_EXP_MULTIPLIER, rollSize, sizeRating, sizeFactor, sizeHeight, formatHeight, isAlphaPokemon, alphaExpMultiplier, sizeTooltip } from './pokemon/sizes.js'

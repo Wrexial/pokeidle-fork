@@ -401,7 +401,9 @@
   "magneton": [
     {
       "into": "magnezone",
-      "level": 45
+      "level": 45,
+      "biome": "cave",
+      "hint": "Level up in a cave (Magnetic Field)"
     }
   ],
   "doduo": [
@@ -684,11 +686,13 @@
     },
     {
       "into": "glaceon",
-      "item": "iceStone"
+      "biome": "tundra",
+      "hint": "Level up near an Ice Rock (tundra)"
     },
     {
       "into": "leafeon",
-      "item": "leafStone"
+      "biome": "forest",
+      "hint": "Level up near a Moss Rock (forest)"
     },
     {
       "into": "sylveon",
@@ -1257,7 +1261,9 @@
   "nosepass": [
     {
       "into": "probopass",
-      "level": 35
+      "level": 35,
+      "biome": "cave",
+      "hint": "Level up in a cave (Magnetic Field)"
     }
   ],
   "skitty": [
@@ -2469,7 +2475,9 @@
   "sliggoo": [
     {
       "into": "goodra",
-      "level": 50
+      "level": 50,
+      "weather": "rain",
+      "hint": "Level up while it is raining"
     }
   ],
   "phantump": [
@@ -3633,7 +3641,9 @@
   "h-sliggoo": [
     {
       "into": "h-goodra",
-      "level": 50
+      "level": 50,
+      "weather": "rain",
+      "hint": "Level up while it is raining"
     }
   ],
   "basculin-w": [

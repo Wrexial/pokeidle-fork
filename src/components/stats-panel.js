@@ -240,7 +240,7 @@ export function StatsPanel({
                 disabled: !evolutionEntry.canEvolve,
                 title: evolutionEntry.isForm
                   ? 'Change between forms \u2014 not an evolution'
-                  : void 0,
+                  : evolutionEntry.requirementLabel,
                 children: [
                   jsx('span', {
                     className: 'evolve-btn-label',

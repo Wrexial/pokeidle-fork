@@ -130,6 +130,58 @@ export function applyMoveLearning(speciesKey, currentMoves, newMoveIds, protecte
   return { moves, learned, forgotten, pending }
 }
 
+/** Friendly biome phrases for a generic field-gate label. @type {Record<string, string>} */
+const BIOME_GATE_PHRASES = {
+  grassland: 'a grassy route',
+  forest: 'a forest',
+  autumn: 'an autumn forest',
+  cave: 'a cave',
+  coast: 'the coast',
+  mountain: 'the mountains',
+  desert: 'a desert',
+  volcanic: 'a volcanic area',
+  tundra: 'the tundra',
+  swamp: 'a swamp',
+  ruins: 'the ruins',
+  town: 'a town',
+}
+
+/**
+ * Whether a field evolution gate is met by the player's current surroundings.
+ * An evolution may require a specific `location`, a `biome` and/or a `weather`;
+ * every gate present on it must match. An evolution without any field gate is
+ * always met.
+ * @param {Evolution} evolution
+ * @param {FieldContext | null | undefined} field
+ * @returns {boolean}
+ */
+export function fieldEvolutionMet(evolution, field) {
+  if (evolution.location && evolution.location !== field?.locationId) return false
+  if (evolution.biome && evolution.biome !== field?.biome) return false
+  if (evolution.weather && evolution.weather !== field?.weather) return false
+  return true
+}
+
+/**
+ * The player-facing descriptions of an evolution's field gate, one per gate.
+ * A `hint` on the evolution replaces the generic wording so a specific method
+ * ("near a Moss Rock") can be named. An evolution without a field gate returns
+ * an empty list.
+ * @param {Evolution} evolution
+ * @param {FieldContext | null | undefined} field
+ * @returns {string[]}
+ */
+export function fieldEvolutionRequirements(evolution, field) {
+  if (evolution.hint) return [evolution.hint]
+  const parts = []
+  if (evolution.location)
+    parts.push(field?.locationName ? `At ${field.locationName}` : 'At a specific place')
+  if (evolution.biome)
+    parts.push(`In ${BIOME_GATE_PHRASES[evolution.biome] ?? evolution.biome}`)
+  if (evolution.weather) parts.push(`During ${evolution.weather}`)
+  return parts
+}
+
 /**
  * Whether a species has an ordinary (non-form) evolution left, used by the
  * Eviolite. Megas/Gigantamax and alternate-form ids are ignored.

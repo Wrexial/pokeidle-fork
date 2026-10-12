@@ -460,6 +460,14 @@ One-off scripts used to build the data JSON (not run during dev/build):
   (`tokenShopItems` in `src/data/items.js`). Idempotent; re-run after any
   re-extraction of `evolution-data.json`. Because item evolutions carry no
   `level`, `generate-regions.cjs` gives them a nominal one for team-maturity.
+- `add-field-evolutions.cjs` — attaches the location/biome/weather evolution
+  gates that need a place or a moment: Eevee→Leafeon (Moss Rock, forest)
+  and Eevee→Glaceon (Ice Rock, tundra) drop their Leaf/Ice Stone and become
+  field-only, Magneton→Magnezone and Nosepass→Probopass need a cave's Magnetic
+  Field (keeping their level), and Sliggoo/H-Sliggoo→Goodra need rain. The
+  `hint` on each gate is the label the party/box evolve button shows. Idempotent;
+  run it after `add-evolution-items.cjs` (which no longer touches Eevee's
+  Leafeon/Glaceon edges).
 - `add-friendship-evolutions.cjs` — rewrites the evolutions that canonically
   require high friendship (Golbat→Crobat, Chansey→Blissey, Pichu→Pikachu,
   Cleffa/Igglybuff, Togepi, Azurill, Budew, Buneary, Chingling, Munchlax, Riolu,

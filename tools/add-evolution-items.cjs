@@ -55,7 +55,8 @@ const ITEM_EVOLUTIONS = {
     exeggcute: ['exeggutor', 'a-exeggutor'],
     nuzleaf: ['shiftry'],
     pansage: ['simisage'],
-    eevee: ['leafeon'],
+    // Eevee -> Leafeon is a field evolution (Moss Rock / forest); see
+    // add-field-evolutions.cjs. Do not re-add the Leaf Stone here.
   },
   moonStone: {
     nidorina: ['nidoqueen'],
@@ -91,7 +92,8 @@ const ITEM_EVOLUTIONS = {
   iceStone: {
     'a-vulpix': ['a-ninetales'],
     'a-sandshrew': ['a-sandslash'],
-    eevee: ['glaceon'],
+    // Eevee -> Glaceon is a field evolution (Ice Rock / tundra); see
+    // add-field-evolutions.cjs. Do not re-add the Ice Stone here.
     crabrawler: ['crabominable'],
   },
   ovalStone: {

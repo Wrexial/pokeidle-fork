@@ -2,7 +2,9 @@
 
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
-import { pokemonSpecies } from '../data/gameData.js'
+import { mapData, pokemonSpecies } from '../data/gameData.js'
+import { biomeForLocation } from '../data/ui.js'
+import { effectiveWeatherAt } from '../game/weather.js'
 import { useGame } from '../game/context.js'
 import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, pokemonDisplayName } from '../game/pokemon.js'
 import { getEvolutionOptions, isFemalePokemon } from '../game/breeding.js'
@@ -105,8 +107,24 @@ export function PartyPanel({
     }, [setReleaseConfirm]),
     evolutionInfo = React.useMemo(() => {
       if (!inspectedPokemon || state.phase === 'evolving') return
-      return { entries: getEvolutionOptions(inspectedPokemon, state.inventory) }
-    }, [inspectedPokemon, state.phase, state.inventory]),
+      // Field evolutions (Moss Rock, Magnetic Field, rain, ...) are checked
+      // against the location the player is standing at right now.
+      const location = mapData[state.currentLocation]
+      return {
+        entries: getEvolutionOptions(inspectedPokemon, state.inventory, {
+          locationId: location?.id ?? state.currentLocation,
+          locationName: location?.name ?? '',
+          biome: biomeForLocation(location),
+          weather: effectiveWeatherAt(location, state.lingeringWeather),
+        }),
+      }
+    }, [
+      inspectedPokemon,
+      state.phase,
+      state.inventory,
+      state.currentLocation,
+      state.lingeringWeather,
+    ]),
     handleEvolve = React.useCallback(
       /** @param {number} evolutionEntry */ (evolutionEntry) => {
         if (!inspectedPokemon || !evolutionInfo) return

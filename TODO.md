@@ -38,7 +38,7 @@ number and full detail further down. Promote into the tiers above once scoped.
 - **Medium:** #82 Pokewalker · #85 Form dex · #89 Mystery Gift ·
   #90 Professor's story · #91 Auto-battle policy · #92 Raid events ·
   #93 Tower ladders · #96 Berry market.
-- **Quick wins:** #81 Field evolutions · #84 Marks ·
+- **Quick wins:** #84 Marks ·
   #94 Dowsing Machine · #95 Hide-and-seek · #97 Run summary · #98 Hotkeys.
 
 ---
@@ -50,18 +50,6 @@ order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
 player-facing value (★ = nice to have, ★★★★★ = core missing feature).
 
 **Living world & encounters**
-
-## 81. Weather / location-gated evolutions
-
-Real evolution methods that need a place or a moment: Moss Rock (Leafeon), Ice
-Rock (Glaceon), Magnetic Field (Magneton/Nosepass), plus season/weather gates.
-
-- [ ] Extend `src/game/pokemon/evolution.js` + `evolution-data.json` with a
-      `location`/`biome`/`weather` gate.
-- [ ] Check the gate against the current location in the party/box evolve UI.
-- [ ] Give each gated evolution an in-game hint so it is discoverable.
-
-Effort: **S**. Gain: ★★★.
 
 ## 82. Pokewalker / step resource
 

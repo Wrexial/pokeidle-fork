@@ -834,6 +834,8 @@ type MapLocation = {
   background?: string
   /** a permanent field weather this location's battles start under ("rain", "sun", ...) */
   weather?: string
+  /** terrain/scene biome (forest, cave, tundra, ...); drives scenery and field evolutions */
+  biome?: string
   /** zone sub-areas shown in the location panel (hub nodes only) */
   subAreas?: { id: string, name: string }[]
   mart?: Mart
@@ -867,7 +869,31 @@ type MapLocation = {
   [key: string]: any
 }
 
-type Evolution = { into: string; level?: number; item?: string; friendship?: number; gender?: 'male' | 'female'; season?: 'spring' | 'summer' | 'autumn' | 'winter'; [key: string]: any }
+/** The current surroundings a field evolution gate is checked against. */
+type FieldContext = {
+  locationId?: string
+  locationName?: string
+  biome?: string
+  weather?: string | null
+}
+
+type Evolution = {
+  into: string
+  level?: number
+  item?: string
+  friendship?: number
+  gender?: 'male' | 'female'
+  season?: 'spring' | 'summer' | 'autumn' | 'winter'
+  /** a specific location id the Pokemon must be standing at to evolve */
+  location?: string
+  /** the current location's biome (forest, cave, tundra, ...) required to evolve */
+  biome?: string
+  /** the current field weather (rain, sun, snow, ...) required to evolve */
+  weather?: string
+  /** player-facing description of the field gate, shown on the evolve button */
+  hint?: string
+  [key: string]: any
+}
 
 interface Window {
   /** set by the boot guard in index.html; flipped once the app mounts */

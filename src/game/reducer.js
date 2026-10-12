@@ -7,6 +7,7 @@ import { createCompanionCare } from './companion.js'
 import { createGarden } from './garden.js'
 import { createPelago } from './pelago.js'
 import { createJobs } from './jobs.js'
+import { createPokewalker } from './pokewalker.js'
 import { DEFAULT_ROD } from './minigames.js'
 import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, endHorde, executeTurn, fleeBattle, gmaxEvolve, hordeRound, megaEvolve, startBossBattle, startEncounter, startHorde, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
 import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain, advanceSosChain, resetSosChain } from './reducer/collection.js'
@@ -26,6 +27,7 @@ import { completeHealing, healingStep, nuzlockeGameOver, startHealing } from './
 import { addLog, clearLevelUp, dismissNotification, markCatchRoute, markTutorialSeen, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoHeal, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleDamageNumbers, toggleHordes, toggleLargeText, toggleMartCollapsed, toggleMoveAnimations, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx, toggleShinySparkles, toggleSpriteStyle } from './reducer/settings.js'
 import { buyPrestigePerk, phaseIdle, prestigeRegion, resetEliteFour, resetPrestigePerks, selectStarter, travel, unlockRegion } from './reducer/world.js'
 import { startFrontier } from './reducer/frontier.js'
+import { accruePokewalker, spendPokewalker } from './reducer/pokewalker.js'
 
 /** @type {GameState} */
 export const initialGameState = {
@@ -102,6 +104,8 @@ export const initialGameState = {
   pelago: createPelago(),
   /** Field Jobs: Pokemon posted to auto-run route activities (see game/jobs.js). */
   jobs: createJobs(),
+  /** Pokewalker steps banked while away, spent on walk rewards (see game/pokewalker.js). */
+  pokewalker: createPokewalker(),
   /** Focus hunt: a species or type whose encounter rate is boosted (see game/hunt.js). */
   hunt: null,
   /** A battle-introduced weather still lingering on its route (see game/weather.js). */
@@ -664,6 +668,10 @@ export function gameReducer(state, action) {
       return collectJob(state, action)
     case 'TAKE_JOB_ENCOUNTER':
       return takeJobEncounter(state, action)
+    case 'ACCRUE_POKEWALKER':
+      return accruePokewalker(state, action)
+    case 'SPEND_POKEWALKER':
+      return spendPokewalker(state, action)
     case 'ACCRUE_JOBS':
       return accrueJobFinds(state, action)
     case 'BUY_RESEARCH_ITEM':

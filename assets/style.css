@@ -7660,8 +7660,156 @@ img {
 }
 
 .daily-event-btn.claimable,
-.companion-btn.claimable {
+.companion-btn.claimable,
+.pokewalker-btn.claimable {
     animation: dailyPulse 1.6s ease-in-out infinite
+}
+
+.pokewalker-modal {
+    width: min(460px, 100%)
+}
+
+.pokewalker-modal-content {
+    padding: 4px 2px
+}
+
+.pokewalker-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.pokewalker-balance {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 6px;
+    color: #3a2818
+}
+
+.pokewalker-balance-icon {
+    font-size: 22px;
+    line-height: 1
+}
+
+.pokewalker-balance-value {
+    font-size: 22px;
+    font-weight: 700
+}
+
+.pokewalker-balance-value small {
+    font-size: 10px;
+    font-weight: 400;
+    color: #5a4838
+}
+
+.pokewalker-hint {
+    margin: 0;
+    font-size: 9px;
+    line-height: 1.45;
+    color: #5a4838;
+    text-align: center
+}
+
+.pokewalker-daily {
+    display: flex;
+    flex-direction: column;
+    gap: 4px
+}
+
+.pokewalker-daily-label {
+    font-size: 9px;
+    color: #3a2818
+}
+
+.pokewalker-daily-bar {
+    height: 8px;
+    background: #00000022;
+    border: 1px solid #a89870;
+    border-radius: 3px;
+    overflow: hidden
+}
+
+.pokewalker-daily-fill {
+    height: 100%;
+    background: #4c9a4c
+}
+
+.pokewalker-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.pokewalker-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px;
+    text-align: left;
+    background: #e8dcc0;
+    border: 2px solid #a89870;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit
+}
+
+.pokewalker-option:not(.disabled):hover {
+    background: #f2e8cc;
+    border-color: var(--gold)
+}
+
+.pokewalker-option.disabled {
+    opacity: .5;
+    cursor: not-allowed
+}
+
+.pokewalker-option-icon {
+    font-size: 20px;
+    line-height: 1
+}
+
+.pokewalker-option-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0
+}
+
+.pokewalker-option-name {
+    font-size: 10px;
+    font-weight: 700;
+    color: #3a2818
+}
+
+.pokewalker-option-desc {
+    font-size: 8px;
+    line-height: 1.35;
+    color: #5a4838
+}
+
+.pokewalker-option-cost {
+    flex-shrink: 0;
+    font-size: 9px;
+    font-weight: 700;
+    color: #3a2818;
+    white-space: nowrap
+}
+
+.pokewalker-total {
+    margin: 0;
+    font-size: 8px;
+    text-align: center;
+    color: #5a4838
+}
+
+.offline-report-steps {
+    display: block;
+    margin-top: 6px;
+    font-size: 10px;
+    color: #3a2818;
+    text-align: center
 }
 
 .companion-modal {

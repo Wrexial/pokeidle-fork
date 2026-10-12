@@ -14,12 +14,13 @@ import { completedGenerations, speciesKeysByGeneration } from '../data/gameData.
 import { useGame } from '../game/context.js'
 import { shinyOddsForCompletedGenerations } from '../game/progression.js'
 import { CompanionCarePanel } from './companion-panel.js'
+import { PokewalkerPanel } from './pokewalker-panel.js'
 import { DailyEventModal } from './daily-event-modal.js'
 import { QuestsModal } from './quests-modal.js'
 import { SettingsModal } from './settings-modal.js'
 
 /**
- * @typedef {'info' | 'settings' | 'daily' | 'quests' | 'companion'} BattleMenuKey
+ * @typedef {'info' | 'settings' | 'daily' | 'quests' | 'companion' | 'pokewalker'} BattleMenuKey
  */
 
 /** @param {{ menu: BattleMenuKey | null, onClose: () => void }} props */
@@ -66,6 +67,38 @@ export function BattleMenuModals({ menu, onClose }) {
             jsx('div', {
               className: 'battle-info-content companion-modal-content',
               children: jsx(CompanionCarePanel, {}),
+            }),
+          ],
+        }),
+      }),
+      document.body
+    )
+  if (menu === 'pokewalker')
+    return createPortal(
+      jsx('div', {
+        className: 'battle-info-overlay',
+        onClick: onClose,
+        children: jsxs('div', {
+          className: 'battle-info-modal pokewalker-modal',
+          onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
+          children: [
+            jsxs('div', {
+              className: 'battle-info-header',
+              children: [
+                jsx('span', {
+                  className: 'battle-info-title',
+                  children: 'Pokewalker',
+                }),
+                jsx('button', {
+                  className: 'battle-info-close',
+                  onClick: onClose,
+                  children: 'X',
+                }),
+              ],
+            }),
+            jsx('div', {
+              className: 'battle-info-content pokewalker-modal-content',
+              children: jsx(PokewalkerPanel, {}),
             }),
           ],
         }),

@@ -26,6 +26,7 @@ import { JOB_MAX_READY, accrueJobs, jobCycleMs, jobKey, summarizeJobAccrual } fr
 import { RESEARCH_MAX_POINTS } from './research.js'
 import { GIFTS, STATIC_ENCOUNTERS } from './gifts.js'
 import { simulateOfflineCatches } from './offline-catch.js'
+import { accruePokewalker, createPokewalker } from './pokewalker.js'
 import { initialGameState } from './reducer.js'
 import { SHINY_CHAIN_FIRST_TARGET, computeOfflineReward, entryRoutePath, simulateOfflineWildWins } from './progression.js'
 
@@ -812,6 +813,17 @@ export function repairSave(saved) {
     activeEffects = (Array.isArray(saved.activeEffects) ? saved.activeEffects : []).filter(
       /** @param {any} effect */ (effect) => effect && typeof effect === 'object' && effect.type in activeItems
     ),
+    // Pokewalker steps: clamp to non-negative integers so a corrupt save can't
+    // bank a negative balance (which would make every spend fail).
+    pokewalker = (() => {
+      const walker = createPokewalker(),
+        raw = saved.pokewalker && typeof saved.pokewalker === 'object' ? saved.pokewalker : {}
+      walker.steps = Math.max(0, Math.floor(Number(raw.steps) || 0))
+      walker.dailySteps = Math.max(0, Math.floor(Number(raw.dailySteps) || 0))
+      walker.dailyDate = typeof raw.dailyDate === 'string' ? raw.dailyDate : ''
+      walker.totalSteps = Math.max(0, Math.floor(Number(raw.totalSteps) || 0))
+      return walker
+    })(),
     dailyEvent =
       saved.dailyEvent &&
       typeof saved.dailyEvent === 'object' &&
@@ -977,6 +989,7 @@ export function repairSave(saved) {
     kurtCrafts,
     pelago,
     jobs,
+    pokewalker,
     researchDefeated,
     researchFed,
     researchMoves,
@@ -1124,7 +1137,13 @@ export function loadSavedState(slot = getActiveSlot() || 1) {
   const awayMs = typeof saved.savedAt === 'number' ? Date.now() - saved.savedAt : 0,
     accruedJobs = accrueJobs(repaired.jobs ?? {}, awayMs),
     jobReport = summarizeJobAccrual(repaired.jobs ?? {}, accruedJobs),
-    withJobs = accruedJobs === repaired.jobs ? repaired : { ...repaired, jobs: accruedJobs },
+    // Pokewalker steps bank from the same away window (capped per day).
+    stepAccrual = accruePokewalker(repaired.pokewalker, awayMs),
+    withSteps =
+      stepAccrual.gained <= 0 && stepAccrual.pokewalker === repaired.pokewalker
+        ? repaired
+        : { ...repaired, pokewalker: stepAccrual.pokewalker },
+    withJobs = accruedJobs === repaired.jobs ? withSteps : { ...withSteps, jobs: accruedJobs },
     offlineReward = computeOfflineReward(withJobs, awayMs)
   if (!offlineReward) return withJobs
   const inventory = { ...withJobs.inventory }
@@ -1158,6 +1177,7 @@ export function loadSavedState(slot = getActiveSlot() || 1) {
     money: rewarded.money + offlineReward.money,
     offlineReport: {
       ...offlineReward,
+      steps: stepAccrual.gained,
       jobs: jobReport,
       systems: simulation?.summary ?? [],
       caught: catches?.caught ?? [],
@@ -1213,6 +1233,7 @@ export const SAVED_STATE_KEYS = [
   'kurtCrafts',
   'pelago',
   'jobs',
+  'pokewalker',
   'researchDefeated',
   'researchFed',
   'researchMoves',

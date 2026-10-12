@@ -77,6 +77,20 @@ export const manualInputTimeoutMs = 60_000
 /** Money granted per hour away per level of your highest party Pokemon. */
 export const offlineMoneyPerHourPerLevel = 40
 
+/**
+ * Pokewalker: steps accrue from real time away (and slowly while idle), are
+ * capped per day, and buy small quality-of-life rewards.
+ */
+export const pokewalkerStepsPerHour = 900
+export const pokewalkerDailyCap = 9000
+export const pokewalkerEggCost = 400
+export const pokewalkerItemCost = 250
+export const pokewalkerRevealCost = 600
+/** Egg steps a Pokewalker spend removes from every party egg. */
+export const pokewalkerEggSteps = 512
+/** Day-Care battles a Pokewalker spend adds toward the next egg. */
+export const pokewalkerEggDaycareProgress = 10
+
 /** Battles two daycare parents need to produce an egg. */
 export const daycareEggBattles = 50
 

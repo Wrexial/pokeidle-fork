@@ -13,7 +13,8 @@ export function OfflineProgressModal() {
   const { state, dispatch } = useGame(),
     report = state.offlineReport
   if (!report) return null
-  const dismiss = () => dispatch({ type: 'CLEAR_OFFLINE_REPORT' })
+  const dismiss = () => dispatch({ type: 'CLEAR_OFFLINE_REPORT' }),
+    steps = report.steps ?? 0
   return jsx('div', {
     className: 'battle-info-overlay',
     onClick: dismiss,
@@ -51,6 +52,12 @@ export function OfflineProgressModal() {
               className: 'offline-report-reward',
               children: formatReward(report),
             }),
+            steps > 0
+              ? jsx('span', {
+                  className: 'offline-report-steps',
+                  children: `Your Pokemon walked ${steps.toLocaleString()} steps \u2014 banked in the Pokewalker.`,
+                })
+              : null,
             report.caught && report.caught.length > 0
               ? jsxs('div', {
                   className: 'offline-report-jobs',

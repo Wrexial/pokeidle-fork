@@ -1271,7 +1271,9 @@ export function useGameLoop() {
   }, [state.phase, state.speed, state.paused, tick, getTickDelay])
   // Field Jobs bank on real time, independent of the battle tick and the
   // current phase (they keep working while a minigame is open), so they get
-  // their own interval that hands the reducer the elapsed wall-clock time.
+  // their own interval that hands the reducer the elapsed wall-clock time. The
+  // Pokewalker walks alongside them, banking a slow trickle of steps while the
+  // game is open.
   React.useEffect(() => {
     let last = Date.now()
     const id = setInterval(() => {
@@ -1279,6 +1281,7 @@ export function useGameLoop() {
         elapsed = now - last
       last = now
       dispatch({ type: 'ACCRUE_JOBS', payload: { elapsedMs: elapsed } })
+      dispatch({ type: 'ACCRUE_POKEWALKER', payload: { elapsedMs: elapsed } })
     }, 10_000)
     return () => clearInterval(id)
   }, [dispatch])

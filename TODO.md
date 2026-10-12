@@ -35,7 +35,7 @@ number and full detail further down. Promote into the tiers above once scoped.
 - **Strong candidates:** #78 Seasons · #83 Trainer Card, titles & avatar ·
   #88 Villain-team questlines (each fills a real gap for the effort).
 - **Big but wanted:** #87 Secret Base · #86 Pokemon Bank.
-- **Medium:** #82 Pokewalker · #85 Form dex · #89 Mystery Gift ·
+- **Medium:** #85 Form dex · #89 Mystery Gift ·
   #90 Professor's story · #91 Auto-battle policy · #92 Raid events ·
   #93 Tower ladders · #96 Berry market.
 - **Quick wins:** #84 Marks ·
@@ -48,20 +48,6 @@ number and full detail further down. Promote into the tiers above once scoped.
 The numbered entries below are the brainstorm referenced from the priority
 order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
 player-facing value (★ = nice to have, ★★★★★ = core missing feature).
-
-**Living world & encounters**
-
-## 82. Pokewalker / step resource
-
-A real-time idle currency ("steps") that accrues while away and is spent on
-hatch speed, item finds, or revealing rare route spawns. Very on-genre.
-
-- [ ] Accrue steps in `src/game/offline.js` from the away window (like the
-      existing offline-catch replay).
-- [ ] A Pokewalker panel with spend options and a daily cap.
-- [ ] Fold it into the "while you were away" report.
-
-Effort: **medium**. Gain: ★★★★.
 
 **Meta, collection & customization**
 

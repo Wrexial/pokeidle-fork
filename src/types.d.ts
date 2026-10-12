@@ -492,6 +492,18 @@ type ActiveEffect = {
   [key: string]: any
 }
 
+/** Pokewalker: the idle step currency banked from real time away. */
+type Pokewalker = {
+  /** Spendable balance. */
+  steps: number
+  /** Steps banked today (reset at local midnight). */
+  dailySteps: number
+  /** Local date key (YYYY-MM-DD) the daily total belongs to. */
+  dailyDate: string
+  /** Lifetime steps earned. */
+  totalSteps: number
+}
+
 /** A transient on-screen toast. Not persisted between sessions. */
 type GameNotification = {
   id: number
@@ -663,6 +675,8 @@ type GameState = {
     caught?: string[]
     /** Balls spent on the offline auto-catches. */
     ballsUsed?: Record<string, number>
+    /** Steps banked into the Pokewalker while away. */
+    steps?: number
   } | null
   /** Daycare parents (up to 2) and battles toward the next egg. */
   daycare: { parents: Pokemon[]; progress: number }
@@ -680,6 +694,8 @@ type GameState = {
   pelago: Pelago
   /** Field Jobs: Pokemon auto-running route activities (see game/jobs.js). */
   jobs: FieldJobs
+  /** Pokewalker steps banked while away (see game/pokewalker.js). */
+  pokewalker: Pokewalker
   /** Field research: wild defeats per species (see game/research.js). */
   researchDefeated: Record<string, number>
   /** Field research: berries fed to a species, for non-wild species. */

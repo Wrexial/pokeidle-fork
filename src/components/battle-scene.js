@@ -11,6 +11,7 @@ import { hasClaimableQuests } from '../game/quests.js'
 import { biomeBackgroundFor, biomeForLocation, BIOME_FILTERS, DAY_NIGHT_FILTERS, locationImages } from '../data/ui.js'
 import { useDayPhase } from '../hooks.js'
 import { getDexStatus, shouldOfferMasterBall } from '../game/catching.js'
+import { POKEWALKER_MIN_COST } from '../game/pokewalker.js'
 import { battleSpecies, estimateMoveDamage, getTypeMultiplier } from '../game/combat.js'
 import { BattleWeatherOverlay } from './battle-weather-overlay.js'
 import { isFemalePokemon } from '../game/breeding.js'
@@ -357,6 +358,14 @@ export function BattleScene({ onOpenMenu }) {
           }),
           // Companion care moves out of Poké Pelago once it is unlocked, so it
           // sits with the dailies instead of hiding behind the Alola hub.
+          jsx('button', {
+            className: `battle-info-btn pokewalker-btn${
+              (state.pokewalker?.steps ?? 0) >= POKEWALKER_MIN_COST ? ' claimable' : ''
+            }`,
+            onClick: () => onOpenMenu('pokewalker'),
+            title: 'Pokewalker',
+            children: '\u{1f462}',
+          }),
           state.unlockedLocations?.includes('alola-poke-pelago') &&
             jsx('button', {
               className: `battle-info-btn companion-btn${

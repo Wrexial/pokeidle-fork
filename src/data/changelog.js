@@ -58,6 +58,7 @@ export const CHANGELOG = [
         heading: 'Minigames',
         items: [
           'Quick Guard and Wide Guard shield the user’s whole side in the Battle Maison doubles now (from priority and spread moves), and the Maison AI raises them when the opposing pair threatens one.',
+          'The doubles court has a second home: Hoenn’s Battle Tower now offers the 2v2 doubles run beside its floor climb.',
           'Alola’s Ultra Warp Ride is in: the new Ultra Space post-game location (east of the Raid Island, open once the Alola Champion is beaten) sends you riding through a wormhole for 30 seconds, steering left and right to collect rings and dodge debris. The cleaner the run, the deeper the wormhole it reaches \u2014 then pick one of the doors and keep the Ultra Beast or legendary waiting inside, drawn from Alola’s Raid Island pool instead of left to the raid roll.',
         ],
       },

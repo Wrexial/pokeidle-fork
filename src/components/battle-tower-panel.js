@@ -7,6 +7,7 @@ import { BATTLE_TOWER_REGION } from '../data/config.js'
 import { mapData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { buildTowerFloor } from '../game/progression.js'
+import { DOUBLES_COST } from '../game/minigames/doubles.js'
 
 export function BattleTowerPanel() {
   const { state, dispatch } = useGame(),
@@ -115,6 +116,31 @@ export function BattleTowerPanel() {
           nextFloor > 1
             ? `FIGHT FLOOR ${nextFloor}`
             : 'ENTER THE BATTLE TOWER',
+      }),
+      jsxs('div', {
+        className: 'location-section-title',
+        style: { marginTop: '10px' },
+        children: 'Doubles Court',
+      }),
+      jsx('div', {
+        className: 'tower-hint',
+        children: `Send out two Pokemon against two at once, $${DOUBLES_COST} a run. Spread moves hit both foes and a fainted Pokemon is replaced from the bench until one side runs out.`,
+      }),
+      jsx('button', {
+        className: 'gym-fight-btn',
+        style: { width: '100%' },
+        disabled: !fightable || state.money < DOUBLES_COST,
+        onClick: () => {
+          if (!fightable) return
+          if (
+            state.phase === 'battling' ||
+            state.phase === 'victory' ||
+            state.phase === 'defeat'
+          )
+            dispatch({ type: 'PHASE_IDLE' })
+          dispatch({ type: 'START_DOUBLES' })
+        },
+        children: 'ENTER THE DOUBLES COURT',
       }),
     ],
   })

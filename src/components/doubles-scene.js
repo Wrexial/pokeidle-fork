@@ -6,7 +6,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { pokemonSpecies } from '../data/gameData.js'
+import { mapData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { playSfx } from '../game/audio.js'
 import {
@@ -172,7 +172,11 @@ export function DoublesScene() {
     )
   }
 
-  const bestWins = state.minigameRecords?.doubles?.best ?? 0
+  const bestWins = state.minigameRecords?.doubles?.best ?? 0,
+    courtName =
+      mapData[state.currentLocation]?.region === 'hoenn'
+        ? 'Battle Tower Doubles'
+        : 'Battle Maison Doubles'
   return jsxs('div', {
     className: 'minigame-scene doubles-scene',
     children: [
@@ -180,7 +184,7 @@ export function DoublesScene() {
       jsxs('div', {
         className: 'minigame-scene-header',
         children: [
-          jsx('span', { className: 'minigame-scene-title', children: 'Battle Maison Doubles' }),
+          jsx('span', { className: 'minigame-scene-title', children: courtName }),
           jsxs('span', {
             className: 'minigame-scene-tally',
             children: [`Bouts won ${wins}`, bestWins > 0 ? ` \u00b7 Best ${bestWins}` : ''],

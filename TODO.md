@@ -57,15 +57,15 @@ Effort: **large** (auth + conflict handling + a new server to run).
 
 ## 43. Multi-battles (double / triple / rotation) as a minigame
 
-The **doubles** 2v2 minigame shipped at Kalos's Battle Maison, including the
-ally abilities, the doubles-only moves and Quick/Wide Guard side protection.
+The **doubles** 2v2 minigame shipped at Kalos's Battle Maison (and now Hoenn's
+Battle Tower), including the ally abilities, the doubles-only moves and
+Quick/Wide Guard side protection.
 
 Still open:
 
 - [ ] Triple and rotation battles.
 - [ ] A 3-way / 4-way free-for-all variant (the Battle Royal is the closest
       thing today).
-- [ ] A doubles home in more regions (currently only Kalos's Battle Maison).
 
 Relevant code: `src/game/minigames/doubles.js`,
 `src/components/doubles-scene.js`, `src/game/reducer/minigames.js`, and

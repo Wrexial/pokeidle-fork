@@ -6,6 +6,7 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const {
+  DOUBLES_COST,
   DOUBLES_MAX_ROUNDS,
   SPREAD_MOVES,
   doublesOpponents,
@@ -14,6 +15,21 @@ const {
   simulateDoubles,
 } = await import('../src/game/minigames/doubles.js')
 const { pokemonSpecies } = await import('../src/data/gameData.js')
+const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
+
+test('START_DOUBLES can be launched from any region (a second doubles home)', () => {
+  const started = gameReducer(initialGameState, {
+      type: 'SELECT_STARTER',
+      payload: { region: 'kanto', speciesKey: 'bulbasaur' },
+    }),
+    state = { ...started, money: DOUBLES_COST }
+  const entered = gameReducer(state, { type: 'START_DOUBLES' })
+  assert.equal(entered.phase, 'doubles')
+  assert.equal(entered.money, 0, 'the entry fee is paid')
+  // Without the fee the action is a no-op.
+  const broke = gameReducer({ ...state, money: DOUBLES_COST - 1 }, { type: 'START_DOUBLES' })
+  assert.equal(broke.phase, 'idle')
+})
 
 /** @param {Record<string, any>} [overrides] */
 function battler(overrides = {}) {

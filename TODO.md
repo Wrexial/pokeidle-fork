@@ -27,7 +27,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #43, #62, #75–#76. They
+See the numbered sections below: #43, #62. They
 are optional extras rather than missing features.
 
 ---
@@ -85,27 +85,6 @@ Still open:
       report can name what was caught.
 
 Effort: **medium**.
-
-## 75. Legends Z-A area (Kalos post-game zone)
-
-Lumiose City's five Wild Zones shipped as a Kalos post-game zone
-(`tools/add-lumiose-zone.cjs`).
-
-Still open (optional):
-
-- [ ] A Jubilife-style Lumiose hub scene and the Z-A Mega "Z" forms as an
-      area-specific mechanic.
-
-## 76. Legends Arceus / Hisui areas (Sinnoh post-game zone)
-
-Hisui's five areas shipped as a Sinnoh post-game zone
-(`tools/add-hisui-zone.cjs`); each area holds its frenzied noble and its ride
-Pokemon as one-off static encounters, and a Hisui swarm can form a space-time
-distortion.
-
-Still open (optional):
-
-- [ ] A Jubilife Village hub location.
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

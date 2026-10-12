@@ -6,6 +6,7 @@
 import { pokemonSpecies } from '../../../data/gameData.js'
 import {
   chooseMegaForm,
+  inZAMegaZone,
   isPrimalForm,
   megaAbility,
   megaEvolveReady,
@@ -23,7 +24,7 @@ export function megaEvolve(state, action) {
   if (state.phase !== 'battling' || !megaEvolveReady(state)) return state
   const pokemon = state.playerPokemon
   if (!pokemon) return state
-  const formKey = chooseMegaForm(pokemon.speciesKey, pokemon)
+  const formKey = chooseMegaForm(pokemon.speciesKey, pokemon, inZAMegaZone(state.currentLocation))
   if (!formKey) return state
   const form = pokemonSpecies[formKey],
     volatile = state.playerVolatile ?? createVolatileState(),

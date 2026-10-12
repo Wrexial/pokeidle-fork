@@ -5,7 +5,10 @@
 // battle-only: it lives on `playerVolatile.formKey`, so it reverts when the
 // battle ends and never touches the saved Pokemon.
 
-import { abilityData, evolutionData, pokemonSpecies } from './gameData.js'
+import { abilityData, evolutionData, mapData, pokemonSpecies } from './gameData.js'
+
+/** The zone where Legends: Z-A's upgraded "Z" Mega forms can be triggered. */
+export const ZA_MEGA_ZONE = 'lumiose-wild-zones'
 
 /** The held item that enables a Mega Evolution (or Primal Reversion) in battle. */
 export const MEGA_STONE_ITEM = 'megaStone'
@@ -153,22 +156,39 @@ export function gmaxEvolveReady(state) {
 /**
  * The Mega form a Pokemon would take. Species with two Megas (Charizard, Mewtwo)
  * use the physical X forme when their Attack is higher, the special Y otherwise.
+ * Legends: Z-A's upgraded "Z" variants (Mega Absol Z, Mega Garchomp Z, Mega
+ * Lucario Z) are an area perk: they only appear inside the Lumiose Wild Zones,
+ * so pass `allowZVariants` when the battle is happening there.
  * @param {string} speciesKey
  * @param {{ attack?: number, spAttack?: number } | null | undefined} pokemon
+ * @param {boolean} [allowZVariants]
  * @returns {string | null}
  */
-export function chooseMegaForm(speciesKey, pokemon) {
+export function chooseMegaForm(speciesKey, pokemon, allowZVariants = false) {
   const forms = megaFormsFor(speciesKey)
   if (forms.length === 0) return null
   if (forms.length === 1) return forms[0]
-  // Legends Z-A added upgraded "Z" variants (Mega Absol Z, Mega Garchomp Z,
-  // Mega Lucario Z) alongside the original Mega; prefer the newer one.
-  const zForm = forms.find((form) => /\sz$/.test(form))
-  if (zForm) return zForm
-  const special = (pokemon?.spAttack ?? 0) > (pokemon?.attack ?? 0),
-    yForm = forms.find((form) => /\sy$/.test(form)),
-    xForm = forms.find((form) => /\sx$/.test(form))
-  return (special ? yForm : xForm) ?? forms[0]
+  if (allowZVariants) {
+    const zForm = forms.find((form) => /\sz$/.test(form))
+    if (zForm) return zForm
+  }
+  // Otherwise fall back to the original Mega(s), picking X/Y by stat lean.
+  const originals = forms.filter((form) => !/\sz$/.test(form)),
+    pool = originals.length > 0 ? originals : forms,
+    special = (pokemon?.spAttack ?? 0) > (pokemon?.attack ?? 0),
+    yForm = pool.find((form) => /\sy$/.test(form)),
+    xForm = pool.find((form) => /\sx$/.test(form))
+  return (special ? yForm : xForm) ?? pool[0]
+}
+
+/**
+ * Whether a location is inside the Lumiose Wild Zones, where the Legends: Z-A
+ * "Z" Mega forms can be triggered.
+ * @param {string | null | undefined} locationId
+ * @returns {boolean}
+ */
+export function inZAMegaZone(locationId) {
+  return !!locationId && mapData[locationId]?.zone === ZA_MEGA_ZONE
 }
 
 /**

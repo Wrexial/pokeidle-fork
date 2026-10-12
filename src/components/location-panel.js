@@ -13,6 +13,7 @@ import { masteryProgress } from '../game/route-mastery.js'
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations, frontierUnlocks, minigameRequirementMet, regionProgressionGoal, unlockBlockers } from '../game/progression.js'
 import { servicePoisFor, cafeFor } from '../game/services.js'
+import { postgameHubFor } from '../data/postgame-hubs.js'
 import { MinigameCard } from './minigame-card.js'
 import { JobControls } from './job-controls.js'
 import { FieldJobsModal } from './field-jobs-modal.js'
@@ -30,6 +31,7 @@ import { KurtPanel } from './kurt-panel.js'
 import { RouteEncounterGrid } from './route-encounter-grid.js'
 import { ShopPanel } from './shop-panel.js'
 import { CafePanel } from './cafe-panel.js'
+import { PostgameHubModal } from './postgame-hub-modal.js'
 
 /** @param {{ onOpenCatchSettings: () => void, onOpenHunt?: () => void }} props */
 export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
@@ -45,6 +47,8 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
     [showBlockedGates, setShowBlockedGates] = React.useState(false),
     // The Field Jobs summary modal (see job-controls.js / field-jobs-modal.js).
     [showJobs, setShowJobs] = React.useState(false),
+    // The post-game base-camp modal (Hisui's Jubilife Village, the Lumiose plaza).
+    [showHub, setShowHub] = React.useState(false),
     unlockedNow = computeUnlockedLocations(state),
     unlockedNowSet = new Set(unlockedNow),
     location = mapData[state.currentLocation],
@@ -267,6 +271,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
           })
         : null
   if (!location) return null
+  const zoneHub = postgameHubFor(location.id)
 
   // The minigame or route activity played from here. Fixed minigames live at a
   // single POI; route activities depend on the terrain (water, undergrowth).
@@ -606,6 +611,23 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
             className: 'location-description',
             children: location.description,
           }),
+          zoneHub &&
+            jsxs('div', {
+              className: 'postgame-hub-card',
+              children: [
+                jsx('button', {
+                  className: 'gym-fight-btn champion',
+                  style: { width: '100%' },
+                  onClick: () => setShowHub(true),
+                  children: `${zoneHub.icon} VISIT ${zoneHub.name.toUpperCase()}`,
+                }),
+                jsx('p', {
+                  className: 'settings-hint',
+                  children:
+                    'The base camp: heal your party, restock at the shop and set out into the zone.',
+                }),
+              ],
+            }),
           jsx('div', {
             className: 'location-section-title',
             children: 'Areas',
@@ -698,6 +720,12 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
           // and Hapu), so offer the challenge from the hub panel too.
           jsx(GymLocationPanel, {}),
           nextUnlocksSection,
+          showHub &&
+            zoneHub &&
+            jsx(PostgameHubModal, {
+              locationId: location.id,
+              onClose: () => setShowHub(false),
+            }),
         ],
       }),
     })

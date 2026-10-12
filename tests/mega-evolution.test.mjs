@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { MEGA_STONE_ITEM, MEGA_FORMS, chooseMegaForm, isMegaForm, isMegaOrPrimalForm, isPrimalForm, megaAbility, megaEvolveReady, megaFormsFor } = await import(
+const { MEGA_STONE_ITEM, MEGA_FORMS, ZA_MEGA_ZONE, chooseMegaForm, inZAMegaZone, isMegaForm, isMegaOrPrimalForm, isPrimalForm, megaAbility, megaEvolveReady, megaFormsFor } = await import(
   '../src/data/mega-evolution.js'
 )
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -50,10 +50,27 @@ test('a two-Mega species picks X for physical and Y for special', () => {
   assert.equal(chooseMegaForm('pikachu', { attack: 1, spAttack: 1 }), null)
 })
 
-test('a Mega with a Z-A variant prefers the newer Z form', () => {
-  assert.equal(chooseMegaForm('lucario', { attack: 200, spAttack: 100 }), 'm-lucario z')
-  assert.equal(chooseMegaForm('garchomp', { attack: 200, spAttack: 100 }), 'm-garchomp z')
-  assert.equal(chooseMegaForm('absol', { attack: 200, spAttack: 100 }), 'm-absol z')
+test('the Legends Z-A "Z" Mega forms are a Lumiose Wild Zone perk', () => {
+  // Outside the zone, a Mega with a "Z" variant uses the original forme.
+  assert.equal(chooseMegaForm('lucario', { attack: 200, spAttack: 100 }), 'm-lucario')
+  assert.equal(chooseMegaForm('garchomp', { attack: 200, spAttack: 100 }), 'm-garchomp')
+  assert.equal(chooseMegaForm('absol', { attack: 200, spAttack: 100 }), 'm-absol')
+  // Inside it, the upgraded Z forme wins.
+  assert.equal(chooseMegaForm('lucario', { attack: 200, spAttack: 100 }, true), 'm-lucario z')
+  assert.equal(chooseMegaForm('garchomp', { attack: 200, spAttack: 100 }, true), 'm-garchomp z')
+  assert.equal(chooseMegaForm('absol', { attack: 200, spAttack: 100 }, true), 'm-absol z')
+  // A species without a Z variant is unaffected by the flag.
+  assert.equal(chooseMegaForm('charizard', { attack: 200, spAttack: 100 }, true), 'm-charizard x')
+})
+
+test('inZAMegaZone only matches the Lumiose Wild Zones', () => {
+  assert.equal(ZA_MEGA_ZONE, 'lumiose-wild-zones')
+  // The zone's areas are battles; the hub itself spawns no wild encounters.
+  assert.equal(inZAMegaZone('lumiose-wild-zone-1'), true)
+  assert.equal(inZAMegaZone('lumiose-wild-zone-5'), true)
+  assert.equal(inZAMegaZone('kalos-lumiose-city'), false)
+  assert.equal(inZAMegaZone('hisui-obsidian-fieldlands'), false)
+  assert.equal(inZAMegaZone(undefined), false)
 })
 
 test('Mega forms carry their own ability', () => {

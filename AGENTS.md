@@ -138,6 +138,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `src/data/config.js` | Tuning constants: shiny odds, cooldowns, starters/legendaries, save keys. |
 | `src/data/moves.js` | Type chart + move-category icons. |
 | `src/data/ui.js` | UI constants: speed options, stat-bar colors, rarity labels, drag defaults, backgrounds. |
+| `src/data/postgame-hubs.js` | The base camps for the post-game zones (Hisui's Jubilife Village, the Lumiose Wild Zones' plaza): name, backdrop, greeting and shop, rendered by `postgame-hub-modal.js` from the zone hub panel. |
 | `src/data/changelog.js` | `GAME_VERSION`, `LAST_SEEN_VERSION_KEY`, `CHANGELOG`. |
 | `src/game/pokemon.js` | Barrel re-exporting `src/game/pokemon/`: `sprites`, `stats` (stat/IV maths), `evolution` (chains/learnsets), `friendship`, `exp` (curves/yields) and `creation` (`createPokemon`, box helpers). |
 | `src/game/combat.js` | Battle math barrel re-exporting `src/game/combat/`: `damage` (type chart, stat stages, damage), `status` (status/volatile effects), `volatile` (volatile state, speed, screens), `ai` (move choice), `setup` (`createBattlePokemon`), `turn` (`resolveBattleTurn`) and `end-of-turn` (residual/field decay). |

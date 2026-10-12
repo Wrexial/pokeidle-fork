@@ -17026,3 +17026,41 @@ img {
     padding-left: 8px;
     border-left: 2px solid #c08a2a66
 }
+
+/* Stat panel EVs (raised only by vitamins). */
+.stats-panel-evs-title {
+    display: block;
+    margin-top: 6px;
+    font-size: 8px;
+    font-weight: 700;
+    color: #3a2818
+}
+
+.stats-panel-ev-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    margin-top: 2px
+}
+
+.ev-chip {
+    font-size: 7px;
+    padding: 1px 4px;
+    border: 1px solid #00000033;
+    border-radius: 3px;
+    background: #00000012;
+    color: #6a5a48
+}
+
+.ev-chip.trained {
+    background: #c08a2a26;
+    border-color: #c08a2a88;
+    color: #5a3a10
+}
+
+.ev-chip.maxed {
+    background: #c08a2a55;
+    border-color: #8a6820;
+    color: #2a1808;
+    font-weight: 700
+}

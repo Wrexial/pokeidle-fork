@@ -30,7 +30,8 @@ function buildSharedExpEntry(partyIndex, member, expGained) {
       memberSpecies,
       lastLevelUp.newLevel,
       member.ivs,
-      member.nature
+      member.nature,
+      member.evs
     ),
     memberNewMoves = memberLevelUps.flatMap((entry) => entry.newMoves)
   return {
@@ -110,7 +111,13 @@ export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplie
     levelUps = getLevelUpResults(playerPokemon.speciesKey, playerSpecies.growthRate, playerPokemon.level, newTotalExp)
   if (finalExp > 0 && levelUps.length > 0) {
     const lastLevelUp = levelUps[levelUps.length - 1],
-      newStats = calculatePokemonStats(playerSpecies, lastLevelUp.newLevel, playerPokemon.ivs, playerPokemon.nature),
+      newStats = calculatePokemonStats(
+        playerSpecies,
+        lastLevelUp.newLevel,
+        playerPokemon.ivs,
+        playerPokemon.nature,
+        playerPokemon.evs
+      ),
       newMoves = levelUps.flatMap((moveId) => moveId.newMoves)
     dispatch({
       type: 'APPLY_EXP',

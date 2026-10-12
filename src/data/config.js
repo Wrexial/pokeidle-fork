@@ -2,7 +2,15 @@
 
 import { autoCatchBallOrder } from './items.js'
 
-export const evValue = 0
+/**
+ * Effort Values: raised only by vitamins (never by battles), each point worth
+ * a quarter of a stat point at level 100. A vitamin adds `EV_VITAMIN_GAIN`
+ * EVs to one stat, up to `EV_MAX_PER_STAT`, with a total cap of
+ * `EV_MAX_TOTAL` across every stat.
+ */
+export const EV_VITAMIN_GAIN = 10
+export const EV_MAX_PER_STAT = 252
+export const EV_MAX_TOTAL = 510
 
 /** Victory Tokens awarded each time a region is prestiged (map progress reset). */
 export const prestigeTokenReward = 3

@@ -23,7 +23,7 @@ import { moveTooltip } from '../game/move-info.js'
 import { itemTooltip } from '../game/progression.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol, isFemalePokemon } from '../game/breeding.js'
-import { abilityDisplayName, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, isAlphaPokemon, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName, sizeRating, sizeTooltip } from '../game/pokemon.js'
+import { abilityDisplayName, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, isAlphaPokemon, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName, sizeRating, sizeTooltip, totalEvs } from '../game/pokemon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
 import { RibbonCase } from './ribbon-case.js'
 
@@ -502,6 +502,26 @@ export function StatsPanel({
                   className: `iv-chip iv-${iv.label.toLowerCase().replace(/\s+/g, '-')}`,
                   title: `${iv.label} (${iv.value}/31)`,
                   children: [IV_STAT_LABELS[statKey], ' ', iv.value],
+                },
+                statKey
+              )
+            }),
+          }),
+          jsxs('span', {
+            className: 'stats-panel-evs-title',
+            'data-tooltip': 'Effort Values: raised only by vitamins, up to 252 per stat and 510 total.',
+            children: ['EVs \u00b7 ', totalEvs(pokemon.evs), '/510'],
+          }),
+          jsx('div', {
+            className: 'stats-panel-ev-grid',
+            children: IV_STAT_ORDER.map((statKey) => {
+              const value = pokemon.evs?.[statKey] ?? 0
+              return jsxs(
+                'span',
+                {
+                  className: `ev-chip${value >= 252 ? ' maxed' : value > 0 ? ' trained' : ''}`,
+                  title: `${IV_STAT_LABELS[statKey]} (${value}/252 EVs)`,
+                  children: [IV_STAT_LABELS[statKey], ' ', value],
                 },
                 statKey
               )

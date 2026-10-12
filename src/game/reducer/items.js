@@ -4,8 +4,9 @@ import { abilityData, encounterData, moveData, pokemonSpecies } from '../../data
 import { activeItems, consumableItems, fossilItems, heldItems, pokeBalls } from '../../data/items.js'
 import { canGigantamax } from '../../data/mega-evolution.js'
 import { natureName, randomNature } from '../../data/natures.js'
+import { EV_MAX_PER_STAT, EV_MAX_TOTAL, EV_VITAMIN_GAIN } from '../../data/config.js'
 import { isPlantableBerry } from '../garden.js'
-import { MAX_FRIENDSHIP, IV_STAT_ORDER, abilityDisplayName, applyMoveLearning, calculatePokemonStats, calculateRequiredExperience, gainFriendship, getLevelUpResults } from '../pokemon.js'
+import { MAX_FRIENDSHIP, IV_STAT_ORDER, IV_STAT_LABELS, abilityDisplayName, applyMoveLearning, calculatePokemonStats, calculateRequiredExperience, createEmptyEvs, gainFriendship, getLevelUpResults, totalEvs } from '../pokemon.js'
 import { getItemSellPrice, isActiveEffectItem } from '../progression.js'
 import { withNotification } from '../reducer-helpers.js'
 import { creditResearchFeed } from '../research.js'
@@ -293,7 +294,8 @@ export function useItemOnPokemon(state, action) {
       pokemonSpecies[member.speciesKey],
       member.level,
       member.ivs,
-      nextNature
+      nextNature,
+      member.evs
     )
     member = {
       ...member,
@@ -323,7 +325,8 @@ export function useItemOnPokemon(state, action) {
         pokemonSpecies[member.speciesKey],
         member.level,
         nextIvs,
-        member.nature
+        member.nature,
+        member.evs
       ),
       hpGain = Math.max(0, newStats.hp - member.maxHp)
     member = {
@@ -363,6 +366,48 @@ export function useItemOnPokemon(state, action) {
     if (!nextAbility || nextAbility === member.ability) return state
     member.ability = nextAbility
     log.push(`${member.name}'s ability became ${abilityDisplayName(nextAbility)}!`)
+  } else if (item.evvitamin) {
+    // Vitamins are the only source of EVs. Each adds a flat amount to one
+    // stat, capped per-stat and in total, and several can be fed at once.
+    const stat = item.evvitamin,
+      requested = Math.max(1, Math.floor(action.payload.quantity ?? 1)),
+      evs = { ...createEmptyEvs(), ...(member.evs ?? {}) }
+    // Feeding several at once tops the stat up to the per-stat cap (and stops
+    // at the total cap), consuming only the vitamins actually used.
+    let applies = 0
+    while (applies < requested && applies < owned && evs[stat] < EV_MAX_PER_STAT) {
+      const totalNow = totalEvs(evs)
+      if (totalNow >= EV_MAX_TOTAL) break
+      const gain = Math.min(EV_VITAMIN_GAIN, EV_MAX_PER_STAT - evs[stat], EV_MAX_TOTAL - totalNow)
+      evs[stat] += gain
+      applies++
+    }
+    if (applies <= 0) return state
+    const newStats = calculatePokemonStats(
+        pokemonSpecies[member.speciesKey],
+        member.level,
+        member.ivs,
+        member.nature,
+        evs
+      ),
+      hpGain = Math.max(0, newStats.hp - member.maxHp)
+    member = {
+      ...member,
+      evs,
+      maxHp: newStats.hp,
+      currentHp: Math.min(newStats.hp, member.currentHp + hpGain),
+      attack: newStats.attack,
+      defense: newStats.defense,
+      spAttack: newStats.spAttack,
+      spDefense: newStats.spDefense,
+      speed: newStats.speed,
+    }
+    consumed = applies
+    log.push(
+      applies > 1
+        ? `${member.name} used ${applies}x ${item.name} \u2014 ${IV_STAT_LABELS[stat] ?? stat} EVs are now ${evs[stat]}/${EV_MAX_PER_STAT}.`
+        : `${member.name}'s ${IV_STAT_LABELS[stat] ?? stat} EVs rose to ${evs[stat]}/${EV_MAX_PER_STAT}!`
+    )
   } else if (item.category === 'medicine') {
     if (item.revive) {
       if (member.currentHp > 0) return state
@@ -405,7 +450,13 @@ export function useItemOnPokemon(state, action) {
       member.totalExp = newTotalExp
       if (levelUps.length > 0) {
         const lastLevelUp = levelUps[levelUps.length - 1],
-          newStats = calculatePokemonStats(species, lastLevelUp.newLevel, member.ivs, member.nature),
+          newStats = calculatePokemonStats(
+            species,
+            lastLevelUp.newLevel,
+            member.ivs,
+            member.nature,
+            member.evs
+          ),
           hpGain = newStats.hp - member.maxHp
         member = {
           ...member,

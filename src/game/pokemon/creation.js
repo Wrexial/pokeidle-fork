@@ -7,7 +7,7 @@ import { resolvePokemonMoves } from './evolution.js'
 import { calculateRequiredExperience } from './exp.js'
 import { BASE_FRIENDSHIP } from './friendship.js'
 import { rollSize } from './sizes.js'
-import { IV_STAT_ORDER, calculatePokemonStats, generateIVs } from './stats.js'
+import { IV_STAT_ORDER, calculatePokemonStats, createEmptyEvs, generateIVs } from './stats.js'
 
 /**
  * Roll a species' ability: usually one of its normal abilities, with a small
@@ -82,7 +82,9 @@ export function createPokemon(speciesKey, level, id, isShiny = !1, inheritance) 
   const species = pokemonSpecies[speciesKey],
     ivs = inheritance?.ivs ?? generateIVs(),
     nature = inheritance?.nature ?? randomNature(),
-    stats = calculatePokemonStats(species, level, ivs, nature),
+    // Effort Values start empty; only vitamins raise them.
+    evs = createEmptyEvs(),
+    stats = calculatePokemonStats(species, level, ivs, nature, evs),
     moves =
       inheritance?.moves && inheritance.moves.length > 0
         ? inheritance.moves
@@ -104,6 +106,7 @@ export function createPokemon(speciesKey, level, id, isShiny = !1, inheritance) 
     spDefense: stats.spDefense,
     speed: stats.speed,
     ivs,
+    evs,
     nature,
     friendship: BASE_FRIENDSHIP,
     ability: rollAbility(speciesKey),

@@ -4,7 +4,8 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { bagCategories, consumableItems, heldItems } from '../data/items.js'
 import { canGigantamax } from '../data/mega-evolution.js'
-import { MAX_FRIENDSHIP, IV_STAT_ORDER } from '../game/pokemon.js'
+import { EV_MAX_PER_STAT, EV_MAX_TOTAL } from '../data/config.js'
+import { MAX_FRIENDSHIP, IV_STAT_ORDER, totalEvs } from '../game/pokemon.js'
 import { useGame } from '../game/context.js'
 import { ItemIcon } from './item-icon.js'
 import {
@@ -28,6 +29,10 @@ function canUseOn(item, member) {
   if (item.natureMint) return true
   if (item.ivTraining)
     return IV_STAT_ORDER.some((stat) => (member.ivs?.[stat] ?? 0) < 31)
+  if (item.evvitamin)
+    return (
+      (member.evs?.[item.evvitamin] ?? 0) < EV_MAX_PER_STAT && totalEvs(member.evs) < EV_MAX_TOTAL
+    )
   if (item.category === 'medicine')
     return item.revive
       ? member.currentHp <= 0
@@ -182,9 +187,9 @@ export function BagPanel() {
                       ' on:',
                     ],
                   }),
-                  // Candies can be applied in bulk; medicine and held items are
-                  // one at a time.
-                  targetItem.category === 'candy' &&
+                  // Candies and vitamins can be applied in bulk; other
+                  // medicine and held items are one at a time.
+                  (targetItem.category === 'candy' || targetItem.evvitamin) &&
                     jsxs('div', {
                       className: 'bag-use-qty',
                       children: [
@@ -220,7 +225,7 @@ export function BagPanel() {
                                   itemId: targetItemId,
                                   pokemonId: member.id,
                                   quantity:
-                                    targetItem.category !== 'candy'
+                                    targetItem.category !== 'candy' && !targetItem.evvitamin
                                       ? 1
                                       : useQty === 'all'
                                         ? (targetItemId ? state.inventory[targetItemId] : 1) ?? 1

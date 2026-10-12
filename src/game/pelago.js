@@ -101,7 +101,13 @@ export function grantExperience(pokemon, expGained) {
     )
   if (levelUps.length === 0) return { ...pokemon, totalExp: newTotalExp }
   const lastLevelUp = levelUps[levelUps.length - 1],
-    stats = calculatePokemonStats(species, lastLevelUp.newLevel, pokemon.ivs, pokemon.nature),
+    stats = calculatePokemonStats(
+      species,
+      lastLevelUp.newLevel,
+      pokemon.ivs,
+      pokemon.nature,
+      pokemon.evs
+    ),
     { moves } = applyMoveLearning(
       pokemon.speciesKey,
       pokemon.moves,

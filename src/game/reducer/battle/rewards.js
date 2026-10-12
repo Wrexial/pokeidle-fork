@@ -165,7 +165,7 @@ export function debugMaxLevel(state, action) {
     species = pokemon ? pokemonSpecies[pokemon.speciesKey] : null
   if (!pokemon || !species) return state
   const maxLevel = 100,
-    stats = calculatePokemonStats(species, maxLevel, pokemon.ivs, pokemon.nature),
+    stats = calculatePokemonStats(species, maxLevel, pokemon.ivs, pokemon.nature, pokemon.evs),
     maxedMoves = resolvePokemonMoves(pokemon.speciesKey, maxLevel),
     maxedPokemon = {
       ...pokemon,

@@ -318,6 +318,13 @@ export const RESEARCH_SHOP = [
   { itemId: 'abilityPatch', cost: 20 },
   { itemId: 'bottleCap', cost: 15 },
   { itemId: 'goldBottleCap', cost: 30 },
+  // Vitamins: Effort Values, which only vitamins can raise.
+  { itemId: 'hpUp', cost: 4 },
+  { itemId: 'protein', cost: 4 },
+  { itemId: 'iron', cost: 4 },
+  { itemId: 'calcium', cost: 4 },
+  { itemId: 'zinc', cost: 4 },
+  { itemId: 'carbos', cost: 4 },
   { itemId: 'masterball', cost: 100 },
 ]
 

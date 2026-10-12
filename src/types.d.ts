@@ -71,6 +71,8 @@ type Pokemon = BattlePokemon & {
   id: string
   totalExp: number
   ivs: Record<string, number>
+  /** Effort Values per stat, raised only by vitamins (0-252 each, 510 total). */
+  evs?: Record<string, number>
   /** Pre-hyper-training IVs, so a bred egg can't inherit the boosts. */
   naturalIvs?: Record<string, number>
   /** One of the 25 nature keys (see src/data/natures.js). */
@@ -232,6 +234,8 @@ type ConsumableItem = {
   ivTraining?: 'lowest' | 'all'
   /** Changes the target's ability: `capsule` cycles its normal abilities, `patch` toggles the hidden one. */
   abilityChange?: 'capsule' | 'patch'
+  /** A vitamin: the stat whose EVs it raises by 10 (see src/data/config.js). */
+  evvitamin?: 'hp' | 'attack' | 'defense' | 'spAttack' | 'spDefense' | 'speed'
   /** Apricorn -> the ball Kurt carves it into (see game/reducer/items.js). */
   kurtBall?: string
 }

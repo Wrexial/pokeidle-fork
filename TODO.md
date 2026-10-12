@@ -225,13 +225,14 @@ Still open (optional):
 ## 81. Research Shop diversification
 
 The Research Shop now sells a research-flavoured set (the Exp. Candy ladder,
-Rare Candy, Poffin, the Ability Capsule / Patch, Bottle Caps, a Master Ball)
-instead of the Kecleon evolution stones.
+Rare Candy, Poffin, the Ability Capsule / Patch, Bottle Caps, the six EV
+vitamins, a Master Ball) instead of the Kecleon evolution stones.
 
 Still open (optional):
 
-- [ ] Training items (PP Up / PP Max, vitamins) or research-only held items
-      (Lucky Egg, Amulet Coin) once PP / EVs are modelled.
+- [ ] Research-only held items (Lucky Egg, Amulet Coin). (PP Up / PP Max are
+off the table — PP stays unimplemented, and the vitamins shipped as the EV
+system.)
 - [ ] A species-specific research reward tied to the species the points came
       from.
 

@@ -96,7 +96,13 @@ export function applyBattleForm(pokemon) {
   if (!pokemon?.formKey) return pokemon
   const form = battleSpecies(pokemon.formKey)
   if (!form) return pokemon
-  const stats = calculatePokemonStats(form, pokemon.level, pokemon.ivs ?? getPerfectIVs(), pokemon.nature)
+  const stats = calculatePokemonStats(
+    form,
+    pokemon.level,
+    pokemon.ivs ?? getPerfectIVs(),
+    pokemon.nature,
+    pokemon.evs
+  )
   pokemon.speciesKey = pokemon.formKey
   pokemon.name = form.name
   pokemon.types = form.types

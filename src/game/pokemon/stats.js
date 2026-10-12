@@ -1,25 +1,26 @@
 // Base-stat maths, stat calculation and IV judging. Split from game/pokemon.js.
 
-import { evValue } from '../../data/config.js'
 import { natureStatModifiers } from '../../data/natures.js'
 
 /**
  * @param {number} baseStat
  * @param {number} level
  * @param {number} iv
+ * @param {number} [ev] Effort Values for the stat (0-252).
  */
-export function calculateHpStat(baseStat, level, iv) {
-  return Math.floor(((2 * baseStat + iv + Math.floor(evValue / 4)) * level) / 100) + level + 10
+export function calculateHpStat(baseStat, level, iv, ev = 0) {
+  return Math.floor(((2 * baseStat + iv + Math.floor(ev / 4)) * level) / 100) + level + 10
 }
 
 /**
  * @param {number} baseStat
  * @param {number} level
  * @param {number} iv
+ * @param {number} [ev] Effort Values for the stat (0-252).
  */
-export function calculateOtherStat(baseStat, level, iv) {
+export function calculateOtherStat(baseStat, level, iv, ev = 0) {
   return Math.floor(
-    (Math.floor(((2 * baseStat + iv + Math.floor(evValue / 4)) * level) / 100) + 5) * 1
+    (Math.floor(((2 * baseStat + iv + Math.floor(ev / 4)) * level) / 100) + 5) * 1
   )
 }
 
@@ -28,22 +29,56 @@ export function calculateOtherStat(baseStat, level, iv) {
  * @param {number} level
  * @param {Record<string, number>} ivs
  * @param {string} [nature]
+ * @param {Record<string, number>} [evs] Effort Values per stat (vitamin-trained).
  * @returns {StatBlock}
  */
-export function calculatePokemonStats(species, level, ivs, nature) {
+export function calculatePokemonStats(species, level, ivs, nature, evs) {
   // A nature raises one non-HP stat by 10% and lowers another by 10%. HP is
   // never affected. Unknown/neutral natures leave every stat untouched.
   const modifiers = natureStatModifiers(nature),
     applyNature = /** @param {string} statKey @param {number} value */ (statKey, value) =>
-      modifiers[statKey] ? Math.floor(value * modifiers[statKey]) : value
+      modifiers[statKey] ? Math.floor(value * modifiers[statKey]) : value,
+    ev = /** @param {string} statKey */ (statKey) => evs?.[statKey] ?? 0
   return {
-    hp: calculateHpStat(species.baseStats.hp, level, ivs.hp),
-    attack: applyNature('attack', calculateOtherStat(species.baseStats.attack, level, ivs.attack)),
-    defense: applyNature('defense', calculateOtherStat(species.baseStats.defense, level, ivs.defense)),
-    spAttack: applyNature('spAttack', calculateOtherStat(species.baseStats.spAttack, level, ivs.spAttack)),
-    spDefense: applyNature('spDefense', calculateOtherStat(species.baseStats.spDefense, level, ivs.spDefense)),
-    speed: applyNature('speed', calculateOtherStat(species.baseStats.speed, level, ivs.speed)),
+    hp: calculateHpStat(species.baseStats.hp, level, ivs.hp, ev('hp')),
+    attack: applyNature(
+      'attack',
+      calculateOtherStat(species.baseStats.attack, level, ivs.attack, ev('attack'))
+    ),
+    defense: applyNature(
+      'defense',
+      calculateOtherStat(species.baseStats.defense, level, ivs.defense, ev('defense'))
+    ),
+    spAttack: applyNature(
+      'spAttack',
+      calculateOtherStat(species.baseStats.spAttack, level, ivs.spAttack, ev('spAttack'))
+    ),
+    spDefense: applyNature(
+      'spDefense',
+      calculateOtherStat(species.baseStats.spDefense, level, ivs.spDefense, ev('spDefense'))
+    ),
+    speed: applyNature(
+      'speed',
+      calculateOtherStat(species.baseStats.speed, level, ivs.speed, ev('speed'))
+    ),
   }
+}
+
+/** The six EV stat keys, in the order the stat panel shows them. */
+export const EV_STAT_ORDER = ['hp', 'attack', 'defense', 'spAttack', 'spDefense', 'speed']
+
+/** A blank (all-zero) EV block. @returns {Record<string, number>} */
+export function createEmptyEvs() {
+  return { hp: 0, attack: 0, defense: 0, spAttack: 0, spDefense: 0, speed: 0 }
+}
+
+/**
+ * Total EVs a Pokemon has been trained with.
+ * @param {Record<string, number> | null | undefined} evs
+ * @returns {number}
+ */
+export function totalEvs(evs) {
+  return EV_STAT_ORDER.reduce((sum, stat) => sum + (evs?.[stat] ?? 0), 0)
 }
 
 /** @returns {StatBlock} */

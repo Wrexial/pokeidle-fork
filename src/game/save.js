@@ -2,7 +2,7 @@
 // save. Split out of context.js so the provider is just React wiring and this
 // repair logic stays testable on its own.
 
-import { BATTLE_TOWER_REGION, LEGACY_SAVE_KEYS, MAX_TEAM_PRESETS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, getActiveSlot, regionalStarters, saveSlotKey, setActiveSlot } from '../data/config.js'
+import { BATTLE_TOWER_REGION, EV_MAX_PER_STAT, EV_MAX_TOTAL, LEGACY_SAVE_KEYS, MAX_TEAM_PRESETS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, getActiveSlot, regionalStarters, saveSlotKey, setActiveSlot } from '../data/config.js'
 import { dailyEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
@@ -12,7 +12,7 @@ import { RIVAL_MILESTONES } from './rival.js'
 import { PRESTIGE_PERKS } from './prestige.js'
 import { FRONTIER_FACILITIES } from './battle-frontier.js'
 import { isValidHuntTarget } from './hunt.js'
-import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, resolvePokemonMoves, rollAbility, rollSize, RIBBONS } from './pokemon.js'
+import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, createEmptyEvs, EV_STAT_ORDER, resolvePokemonMoves, rollAbility, rollSize, RIBBONS } from './pokemon.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
 import { isTerminalForm } from '../data/mega-evolution.js'
@@ -169,6 +169,24 @@ export function repairSave(saved) {
   // Older saves predate per-individual sizes, so roll one in.
   if (playerPokemon.size === void 0) playerPokemon.size = rollSize()
   /**
+   * Clamp a stored EV block: 0-252 per stat, 510 in total (trimming the
+   * largest stats first if a save somehow exceeds the budget).
+   * @param {any} raw
+   * @returns {Record<string, number>}
+   */
+  const sanitizeEvs = (raw) => {
+    const source = raw && typeof raw === 'object' ? raw : {},
+      evs = createEmptyEvs()
+    for (const stat of EV_STAT_ORDER)
+      evs[stat] = Math.max(0, Math.min(EV_MAX_PER_STAT, Math.floor(Number(source[stat]) || 0)))
+    while (EV_STAT_ORDER.reduce((sum, stat) => sum + evs[stat], 0) > EV_MAX_TOTAL) {
+      const largest = EV_STAT_ORDER.reduce((a, b) => (evs[b] > evs[a] ? b : a), EV_STAT_ORDER[0])
+      if (evs[largest] <= 0) break
+      evs[largest] -= 1
+    }
+    return evs
+  }
+  /**
    * Fill in the per-individual fields an old save may lack and drop unknown
    * ribbon ids. Returns the same reference when nothing changed.
    * @param {any} pokemon
@@ -177,13 +195,16 @@ export function repairSave(saved) {
     const ribbons = Array.isArray(pokemon.ribbons)
         ? pokemon.ribbons.filter((/** @type {string} */ id) => RIBBONS[id])
         : null,
-      needsRibbonFix = ribbons && ribbons.length !== pokemon.ribbons.length
-    if (pokemon.ivs && pokemon.size !== void 0 && !needsRibbonFix) return pokemon
+      needsRibbonFix = ribbons && ribbons.length !== pokemon.ribbons.length,
+      evs = sanitizeEvs(pokemon.evs),
+      needsEvFix = JSON.stringify(evs) !== JSON.stringify(pokemon.evs)
+    if (pokemon.ivs && pokemon.size !== void 0 && !needsRibbonFix && !needsEvFix) return pokemon
     return {
       ...pokemon,
       ...(pokemon.ivs ? {} : { ivs: generateIVs() }),
       ...(pokemon.size === void 0 ? { size: rollSize() } : {}),
       ...(needsRibbonFix ? { ribbons } : {}),
+      ...(needsEvFix ? { evs } : {}),
     }
   }
   party = party.map(withDerivedPokemonFields)
@@ -210,7 +231,7 @@ export function repairSave(saved) {
     if (!species) return pokemon
     const level = pokemon.level || 1,
       nature = pokemon.nature && natureByKey[pokemon.nature] ? pokemon.nature : randomNature(),
-      stats = calculatePokemonStats(species, level, pokemon.ivs, nature)
+      stats = calculatePokemonStats(species, level, pokemon.ivs, nature, pokemon.evs)
     return {
       ...pokemon,
       speciesKey: base,
@@ -270,7 +291,7 @@ export function repairSave(saved) {
     if (pokemon.nature && natureByKey[pokemon.nature]) return pokemon
     const nature = randomNature(),
       species = pokemonSpecies[pokemon.speciesKey],
-      stats = calculatePokemonStats(species, pokemon.level || 1, pokemon.ivs, nature)
+      stats = calculatePokemonStats(species, pokemon.level || 1, pokemon.ivs, nature, pokemon.evs)
     return {
       ...pokemon,
       nature,

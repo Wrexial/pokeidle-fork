@@ -11,7 +11,7 @@ import { gmaxEvolveReady, megaEvolveReady } from '../data/mega-evolution.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from '../data/daily-events.js'
 import { useGame } from './context.js'
-import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch } from './catching.js'
+import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, selectBestBall, shouldAutoCatch, shouldForceCatch } from './catching.js'
 import { abilityOf } from './abilities.js'
 import { companionCritBonus, companionDodgeChance, companionExpMultiplier, companionStatusCureChance, companionToughOutChance, friendshipToughOutChance } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch, chooseTrainingSwitch } from './combat.js'
@@ -919,7 +919,7 @@ export function useGameLoop() {
             expBonus,
             currentGameState.battleParticipants
           )
-          const forceCatch = enemyPokemon.isShiny && currentGameState.alwaysCatchShinies
+          const forceCatch = shouldForceCatch(currentGameState, enemyPokemon)
           if (
             !enemyPokemon.noCatch &&
             (forceCatch ||

@@ -187,6 +187,20 @@ export function shouldAutoCatch(state, routeKey, speciesKey, level, isShiny) {
 }
 
 /**
+ * Whether this encounter must be thrown at regardless of the player's catch
+ * rules. A one-off static (the red Gyarados, a Hisui noble or ride Pokemon) is
+ * only claimed by catching it, so it always gets a ball even when its species
+ * is already registered and the default `pokedex_new` rule would skip it. A
+ * shiny is included when the Always-Catch-Shinies setting is on.
+ * @param {GameState} state
+ * @param {{ isShiny?: boolean, staticId?: string }} [enemy]
+ * @returns {boolean}
+ */
+export function shouldForceCatch(state, enemy) {
+  return !!((enemy?.isShiny && state.alwaysCatchShinies) || enemy?.staticId)
+}
+
+/**
  * @param {GameState} state
  * @param {string} routeKey
  * @param {string} speciesKey

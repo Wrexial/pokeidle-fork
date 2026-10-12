@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { calculateCatchChance, getBallModifier, getDexStatus, isCaveLocation, isNightTime, isWaterLocation, selectBestBall, shouldOfferMasterBall, HONEY_CATCH_BONUS } = await import(
+const { calculateCatchChance, getBallModifier, getDexStatus, isCaveLocation, isNightTime, isWaterLocation, selectBestBall, shouldForceCatch, shouldOfferMasterBall, HONEY_CATCH_BONUS } = await import(
   '../src/game/catching.js'
 )
 const { isHoneyActive } = await import('../src/game/progression.js')
@@ -55,6 +55,16 @@ test('getDexStatus reports the strongest Pokedex state first', () => {
 test('the Master Ball is offered for legendaries even once caught', () => {
   assert.equal(shouldOfferMasterBall({ pokedexCaught: [] }, 'mewtwo'), true)
   assert.equal(shouldOfferMasterBall({ pokedexCaught: ['mewtwo'] }, 'mewtwo'), true)
+})
+
+test('a one-off static is always thrown at, even if already registered', () => {
+  const state = { alwaysCatchShinies: false }
+  // The species could already sit in the Pokedex (a wild h-avalugg), so the
+  // default pokedex_new rule would skip it; a static must still get a ball.
+  assert.equal(shouldForceCatch(state, { staticId: 'static-hisui-avalugg' }), true)
+  assert.equal(shouldForceCatch(state, {}), false)
+  assert.equal(shouldForceCatch({ alwaysCatchShinies: true }, { isShiny: true }), true)
+  assert.equal(shouldForceCatch({ alwaysCatchShinies: false }, { isShiny: true }), false)
 })
 
 test('a hard-to-catch new species is offered the Master Ball', () => {

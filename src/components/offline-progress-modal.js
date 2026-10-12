@@ -87,6 +87,30 @@ export function OfflineProgressModal() {
                   ],
                 })
               : null,
+            report.systems && report.systems.length > 0
+              ? jsxs('div', {
+                  className: 'offline-report-jobs',
+                  children: [
+                    jsx('span', {
+                      className: 'offline-report-jobs-title',
+                      children: 'Kept running while you were away',
+                    }),
+                    report.systems.map((system, index) =>
+                      jsx(
+                        'div',
+                        {
+                          className: 'offline-report-job',
+                          children: jsx('span', {
+                            className: 'offline-report-job-name',
+                            children: system.label,
+                          }),
+                        },
+                        `${system.id}-${index}`
+                      )
+                    ),
+                  ],
+                })
+              : null,
             jsx('button', {
               className: 'offline-report-btn',
               onClick: dismiss,

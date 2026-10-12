@@ -73,16 +73,16 @@ Relevant code: `src/game/minigames/doubles.js`,
 
 ## 62. Offline depth
 
-The "while you were away" report already itemises the Field Jobs that ran
-(`offlineReport.jobs`).
+The "while you were away" report itemises the Field Jobs that ran
+(`offlineReport.jobs`), and the per-wild-win systems — Poké Pelago, the Berry
+Garden, Kurt's Apricorn crafting and the Day-Care — keep advancing offline
+too (`offlineReport.systems`, via `simulateOfflineWildWins`).
 
 Still open:
 
 - [ ] A full catch-up simulation that replays the idle loop offline (battles,
       encounters, auto-catches) instead of the flat money + candy reward, so the
       report can name what was caught.
-- [ ] Include the Pelago / garden / daycare in the report (they advance per wild
-      win, so they don't tick offline today).
 
 Effort: **medium**.
 

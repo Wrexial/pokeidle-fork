@@ -653,6 +653,8 @@ type GameState = {
       items: Record<string, number>
       encounters: number
     }[]
+    /** Per-win systems that advanced while away (Pelago, garden, Kurt, Day-Care). */
+    systems?: { id: string; label: string }[]
   } | null
   /** Daycare parents (up to 2) and battles toward the next egg. */
   daycare: { parents: Pokemon[]; progress: number }

@@ -51,6 +51,12 @@ export const pokerusDurationBattles = 150
 /** Offline progress: minimum time away to award anything, and the cap. */
 export const offlineMinMs = 60_000
 export const offlineCapMs = 8 * 3_600_000
+/**
+ * Wild wins the offline catch-up assumes per hour away, so the per-win systems
+ * (Pelago, garden, Kurt's crafts, the Day-Care) keep advancing while the tab is
+ * closed. Kept conservative — an idle player wins far more than this.
+ */
+export const offlineBattlesPerHour = 240
 /** How long a manual battle waits for the player before falling back to auto. */
 export const manualInputTimeoutMs = 60_000
 /** Money granted per hour away per level of your highest party Pokemon. */

@@ -1,6 +1,10 @@
 // // Offline-progress calculation and the "while you were away" summary. Split from game/progression.js.
 
-import { offlineCapMs, offlineMinMs, offlineMoneyPerHourPerLevel } from '../../data/config.js'
+import { canBreed } from '../breeding.js'
+import { tickGarden } from '../garden.js'
+import { tickKurtCrafts } from '../kurt.js'
+import { tickPelago } from '../pelago.js'
+import { daycareEggBattles, offlineBattlesPerHour, offlineCapMs, offlineMinMs, offlineMoneyPerHourPerLevel } from '../../data/config.js'
 
 /**
  * Summarise what happened while the tab was hidden, or null when nothing worth
@@ -58,6 +62,88 @@ export function formatAwayDuration(ms) {
     hours = Math.floor(totalMinutes / 60),
     minutes = totalMinutes % 60
   return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`
+}
+
+/**
+ * Estimate the wild wins an away window would have produced.
+ * @param {number} cappedMs
+ * @returns {number}
+ */
+export function offlineWildWinEstimate(cappedMs) {
+  return Math.floor((cappedMs / 3_600_000) * offlineBattlesPerHour)
+}
+
+/**
+ * Replay the per-wild-win systems — Poke Pelago, the Berry Garden, Kurt's
+ * crafting and the Day-Care — across an away window so they don't stand still
+ * while the tab is closed. Only the pure tick functions run, so this is
+ * deterministic; random drops, eggs and battles stay online. Returns null when
+ * there is nothing to advance.
+ * @param {GameState} state
+ * @param {number} cappedMs
+ * @returns {{ pelago: any, garden: any, kurtCrafts: any, daycare: any, battles: number, summary: { id: string, label: string }[] } | null}
+ */
+export function simulateOfflineWildWins(state, cappedMs) {
+  const battles = offlineWildWinEstimate(cappedMs)
+  if (battles <= 0) return null
+  let pelago = state.pelago,
+    garden = state.garden,
+    kurtCrafts = state.kurtCrafts,
+    daycare = state.daycare,
+    pelagoBanked = 0,
+    gardenChanged = false,
+    kurtCompleted = 0,
+    daycareAdvanced = false
+  /** @param {any} banked */
+  const bankedCount = (banked) =>
+    banked ? Object.values(banked).reduce((sum, island) => sum + (island?.ready ?? 0), 0) : 0
+  for (let index = 0; index < battles; index++) {
+    if (pelago) {
+      const before = bankedCount(pelago),
+        next = tickPelago(pelago)
+      if (next !== pelago) {
+        pelago = next
+        pelagoBanked += bankedCount(pelago) - before
+      }
+    }
+    if (garden?.plots?.some((/** @type {any} */ plot) => plot && plot.battlesRemaining > 0)) {
+      const next = tickGarden(garden)
+      gardenChanged = gardenChanged || next !== garden
+      garden = next
+    }
+    if (kurtCrafts?.length) {
+      const readyBefore = kurtCrafts.filter(
+          (/** @type {any} */ craft) => craft.battlesRemaining <= 0
+        ).length,
+        next = tickKurtCrafts(kurtCrafts)
+      kurtCompleted +=
+        next.filter((/** @type {any} */ craft) => craft.battlesRemaining <= 0).length - readyBefore
+      kurtCrafts = next
+    }
+    if (
+      daycare?.parents?.length === 2 &&
+      canBreed(daycare.parents) &&
+      daycare.progress < daycareEggBattles
+    ) {
+      daycare = { ...daycare, progress: daycare.progress + 1 }
+      daycareAdvanced = true
+    }
+  }
+  const summary = []
+  if (pelagoBanked > 0)
+    summary.push({
+      id: 'pelago',
+      label: `Poke Pelago banked ${pelagoBanked} cycle${pelagoBanked === 1 ? '' : 's'}`,
+    })
+  if (gardenChanged) summary.push({ id: 'garden', label: 'The Berry Garden ripened' })
+  if (kurtCompleted > 0)
+    summary.push({
+      id: 'kurt',
+      label: `Kurt finished ${kurtCompleted} Apricorn Ball${kurtCompleted === 1 ? '' : 's'}`,
+    })
+  if (daycareAdvanced) summary.push({ id: 'daycare', label: 'The Day-Care made progress' })
+  if (summary.length === 0) return null
+  return { pelago, garden, kurtCrafts, daycare, battles, summary }
 }
 
 /**

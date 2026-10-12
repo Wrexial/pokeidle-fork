@@ -544,42 +544,12 @@ function recordMinigame(state, result) {
  * @returns {GameState}
  */
 export function endMinigame(state, action) {
-  if (
-    !(
-      state.phase === 'mining' ||
-      state.phase === 'gameCorner' ||
-      state.phase === 'academyQuiz' ||
-      state.phase === 'voltorbFlip' ||
-      state.phase === 'auctionHouse' ||
-      state.phase === 'contest' ||
-      state.phase === 'pokeathlon' ||
-      state.phase === 'pokeRadar' ||
-      state.phase === 'battleRoyal' ||
-      state.phase === 'dynamaxAdventures' ||
-      state.phase === 'lightsOut' ||
-      state.phase === 'curry' ||
-      state.phase === 'pokestar' ||
-      state.phase === 'puzzleLeague' ||
-      state.phase === 'memory' ||
-      state.phase === 'whack' ||
-      state.phase === 'musical' ||
-      state.phase === 'picnic' ||
-      state.phase === 'pokeballFactory' ||
-      state.phase === 'ruinsPuzzle' ||
-      state.phase === 'iceSlide' ||
-      state.phase === 'pelago' ||
-      state.phase === 'mantineSurf' ||
-      state.phase === 'rotomRally' ||
-      state.phase === 'ogreOustin' ||
-      state.phase === 'typeFusion' ||
-      state.phase === 'unownPicross' ||
-      state.phase === 'pokeshot' ||
-      state.phase === 'teraRaid' ||
-      state.phase === 'pokeword' ||
-      state.phase === 'berryBlender' ||
-      state.phase === 'ultraWarp'
-    )
-  )
+  // Any registered minigame phase ends here. The Bug-Catching Contest and the
+  // Safari Zone have their own end actions, so an END_MINIGAME for them is
+  // ignored. Driving this off the registry keeps new minigames from being
+  // forgotten (the old hand-written list missed the Maison and the Gauntlet).
+  const phaseMinigame = minigameIdForPhase(state.phase)
+  if (!phaseMinigame || phaseMinigame === 'bugContest' || phaseMinigame === 'safari')
     return state
   const result = minigameResult(state, action)
   let next = recordMinigame({ ...state, ...createIdleBattleState() }, result)

@@ -82,6 +82,12 @@ export const CHANGELOG = [
           'The Display section gained damage-number and shiny-sparkle toggles, the Box can sort by total IVs, the move buttons show their type effectiveness and flag an estimated KO, and a TEAM button in the Party header saves the party as a preset you can restore in one tap.',
         ],
       },
+      {
+        heading: 'Fixes',
+        items: [
+          'The Champions’ Gauntlet and the Battle Maison now close when you collect their prizes — their end action was being ignored, which left the reward screen (and the game) stuck after a run.',
+        ],
+      },
     ],
   },
   {

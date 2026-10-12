@@ -195,6 +195,9 @@ export const rareCandyDropChance = 0.0015
 /** Chance a wild win on a Johto route turns up an Apricorn for Kurt. */
 export const apricornDropChance = 0.12
 
+/** Chance a wild win on a wild route turns up an Ancient Relic (quest item). */
+export const relicDropChance = 0.08
+
 /**
  * Chance a headbutted tree or rustled contest bush shakes out a second Pokemon.
  * You can only keep one, so the other flees \u2014 the "awwhh" moment.

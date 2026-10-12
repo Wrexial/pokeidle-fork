@@ -124,6 +124,8 @@ export const initialGameState = {
   researchRewarded: {},
   /** Unspent Research Points. */
   researchPoints: 0,
+  /** Ancient Relics recovered per region, for the legendary quests. */
+  relics: {},
   /** The last Pelago collection, shown in a result card until dismissed. */
   pelagoCollect: null,
   trainerBattle: null,

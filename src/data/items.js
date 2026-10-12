@@ -631,6 +631,15 @@ export const consumableItems = {
       buyPrice: null,
       sellPrice: 12000,
     },
+    ancientRelic: {
+      id: 'ancientRelic',
+      name: 'Ancient Relic',
+      description:
+        'A relic dug out of a wild route. Each region keeps its own count toward its legendary quest, and spare relics sell at a mart.',
+      category: 'valuables',
+      buyPrice: null,
+      sellPrice: 1500,
+    },
     natureMint: {
       id: 'natureMint',
       name: 'Nature Mint',

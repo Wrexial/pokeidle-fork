@@ -2,10 +2,10 @@
 // of leaving it to the Raid Island's weighted roll. Completing the steps lets
 // you challenge the legendary directly; the quest is done once it is caught.
 
-import { baseRegions, gymLeaderData, mapData, regions, speciesKeysByGeneration } from '../data/gameData.js'
+import { gymLeaderData, mapData, regions } from '../data/gameData.js'
 
-/** Fraction of a region's generation that must be registered for the last step. */
-export const QUEST_SPECIES_FRACTION = 0.4
+/** Ancient Relics a region's legendary quest asks for. */
+export const QUEST_RELIC_COUNT = 10
 
 /**
  * The box legendary each region's quest hunts, with a short quest name.
@@ -36,17 +36,6 @@ export function raidLocationFor(regionId) {
 }
 
 /**
- * The region's generation index (region order == generation order).
- * @param {string} regionId
- * @returns {number}
- */
-function generationForRegion(regionId) {
-  const region = baseRegions.find((entry) => entry.id === regionId),
-    index = regions.findIndex((entry) => entry.id === regionId)
-  return region ? regions.indexOf(region) : Math.max(0, index)
-}
-
-/**
  * The quest's steps and progress for a region, or null when there is no quest.
  * @param {GameState} state
  * @param {string} regionId
@@ -67,9 +56,7 @@ export function legendaryQuestStatus(state, regionId) {
   const regionGyms = gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === regionId),
     badgeCount = regionGyms.filter((gym) => state.defeatedGyms.includes(gym.id)).length,
     champion = state.defeatedChampions.includes(regionId),
-    genSpecies = speciesKeysByGeneration[generationForRegion(regionId)] ?? [],
-    speciesNeed = Math.max(1, Math.ceil(genSpecies.length * QUEST_SPECIES_FRACTION)),
-    speciesCaught = genSpecies.filter((key) => state.pokedexCaught.includes(key)).length,
+    relicCount = state.relics?.[regionId] ?? 0,
     caught = state.pokedexCaught.includes(quest.legendary),
     level =
       regions
@@ -91,11 +78,11 @@ export function legendaryQuestStatus(state, regionId) {
         need: 1,
       },
       {
-        id: 'species',
-        label: `Register ${speciesNeed} of its generation in the Pokédex`,
-        done: speciesCaught >= speciesNeed,
-        progress: Math.min(speciesCaught, speciesNeed),
-        need: speciesNeed,
+        id: 'relics',
+        label: `Recover ${QUEST_RELIC_COUNT} Ancient Relics in ${regionId}`,
+        done: relicCount >= QUEST_RELIC_COUNT,
+        progress: Math.min(relicCount, QUEST_RELIC_COUNT),
+        need: QUEST_RELIC_COUNT,
       },
     ]
   return {

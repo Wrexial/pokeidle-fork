@@ -60,6 +60,8 @@ const SEREBII_NAMES = {
   apricornPink: 'pinkapricorn',
   apricornWhite: 'whiteapricorn',
   apricornBlack: 'blackapricorn',
+  // The Ancient Relic quest item borrows the Relic Crown art.
+  ancientRelic: 'reliccrown',
 }
 
 /** Every item id that can appear in the bag, a shop or an auction lot. */

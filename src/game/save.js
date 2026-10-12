@@ -653,6 +653,13 @@ export function repairSave(saved) {
         : {}
     ).filter(([speciesKey, rewarded]) => pokemonSpecies[speciesKey] && rewarded === true)
   )
+  // Ancient Relics recovered per region (for the legendary quests).
+  const relics = /** @type {Record<string, number>} */ ({})
+  for (const [regionId, count] of Object.entries(
+    saved.relics && typeof saved.relics === 'object' ? saved.relics : {}
+  ))
+    if (regions.some((region) => region.id === regionId) && Number.isFinite(count) && count > 0)
+      relics[regionId] = Math.min(1_000_000, Math.floor(/** @type {number} */ (count)))
 
   // Repair save data that references content which no longer exists (regions,
   // routes and locations have been rebuilt several times), so an old save can't
@@ -955,6 +962,7 @@ export function repairSave(saved) {
     researchClaimed,
     researchRewarded,
     researchPoints: Math.max(0, Math.floor(Number(saved.researchPoints) || 0)),
+    relics,
     shinySeen,
     alwaysCatchShinies: saved.alwaysCatchShinies ?? true,
     defeatedGyms,
@@ -1158,6 +1166,7 @@ export const SAVED_STATE_KEYS = [
   'researchClaimed',
   'researchRewarded',
   'researchPoints',
+  'relics',
   'shinySeen',
   'defeatedGyms',
   'defeatedEliteFour',

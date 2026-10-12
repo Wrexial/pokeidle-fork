@@ -1,6 +1,6 @@
 // // Core battle pipeline: start an encounter, run a turn, consume its events. Split from game/reducer/battle.js.
 
-import { apricornDropChance, daycareEggBattles, expCandyDropChance, rareCandyDropChance, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wildTmDropChance } from '../../../data/config.js'
+import { apricornDropChance, daycareEggBattles, expCandyDropChance, rareCandyDropChance, relicDropChance, swarmSpawnChance, valuableDropChance, wildMasterBallChance, wildTmDropChance } from '../../../data/config.js'
 import { dailyDropMultiplier } from '../../../data/daily-events.js'
 import { mapData } from '../../../data/gameData.js'
 import { APRICORN_IDS, consumableItems } from '../../../data/items.js'
@@ -247,6 +247,7 @@ export function consumeEvent(state, action) {
     researchSuperEffective = state.researchSuperEffective,
     researchMoveIds = state.researchMoveIds,
     researchClaimed = state.researchClaimed,
+    relics = state.relics,
     researchPoints = state.researchPoints,
     party = state.party,
     hatchedEgg = /** @type {Pokemon[]} */ ([]),
@@ -431,6 +432,17 @@ export function consumeEvent(state, action) {
       inventory = { ...inventory, [apricornId]: (inventory[apricornId] ?? 0) + 1 }
       secretNotices.push(`You found a ${consumableItems[apricornId].name}!`)
     }
+    // Ancient Relics are dug out of a region's wild routes and count toward
+    // that region's legendary quest.
+    if (
+      mapData[state.currentLocation]?.type === 'route' &&
+      Math.random() < relicDropChance
+    ) {
+      const relicRegion = mapData[state.currentLocation]?.region ?? 'kanto'
+      relics = { ...relics, [relicRegion]: (relics?.[relicRegion] ?? 0) + 1 }
+      inventory = { ...inventory, ancientRelic: (inventory.ancientRelic ?? 0) + 1 }
+      secretNotices.push('You dug up an Ancient Relic!')
+    }
     const candyId = Math.random() < dropChance(rareCandyDropChance) ? 'rareCandy' : null
     if (candyId || Math.random() < dropChance(expCandyDropChance)) {
       const foundCandyId = candyId ?? rollCandyDrop(dropLevel)
@@ -496,6 +508,7 @@ export function consumeEvent(state, action) {
     researchSuperEffective,
     researchMoveIds,
     researchClaimed,
+    relics,
     researchPoints,
     weather,
     lingeringWeather,

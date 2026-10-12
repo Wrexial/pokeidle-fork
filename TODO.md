@@ -137,14 +137,12 @@ Effort: **medium**.
 
 ## 69. Legendary quests
 
-Each region's Raid Island tracks a multi-step hunt (badges / Champion / 40% of
-its generation) that unlocks a direct raid for its box legendary
-(`src/game/legendary-quests.js`).
+Each region's Raid Island tracks a multi-step hunt (badges / Champion / ten
+Ancient Relics recovered on that region's routes) that unlocks a direct raid
+for its box legendary (`src/game/legendary-quests.js`).
 
 Still open (optional):
 
-- [ ] Relic-collecting steps (new items found on routes) instead of the
-      Pokédex-percentage step.
 - [ ] Per-legendary boss battles with dialogue rather than a standard raid.
 
 ## 75. Legends Z-A area (Kalos post-game zone)

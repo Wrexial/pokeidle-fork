@@ -233,6 +233,8 @@ export function clearHeldItem(state, action) {
     ...state,
     party: fromParty ? state.party.map(replace) : state.party,
     box: fromParty ? state.box : state.box.map(replace),
+    // Keep the active copy in step, or the next sync would put the item back.
+    playerPokemon: fromParty && state.playerPokemon?.id === pokemonId ? updated : state.playerPokemon,
     inventory: {
       ...state.inventory,
       [member.heldItem]: (state.inventory[member.heldItem] ?? 0) + 1,
@@ -262,11 +264,16 @@ export function useItemOnPokemon(state, action) {
   if (heldItem) {
     const member = state.party[memberIndex],
       previous = member.heldItem,
+      equipped = { ...member, heldItem: itemId },
       party = [...state.party]
-    party[memberIndex] = { ...member, heldItem: itemId }
+    party[memberIndex] = equipped
     return {
       ...state,
       party,
+      // Keep the active-Pokemon copy in step: `syncActivePokemonIntoParty`
+      // writes `playerPokemon` back over its party slot, so a stale copy would
+      // silently revert the item (and the next autosave would keep the loss).
+      playerPokemon: state.playerPokemon?.id === pokemonId ? equipped : state.playerPokemon,
       inventory: {
         ...state.inventory,
         [itemId]: owned - 1,

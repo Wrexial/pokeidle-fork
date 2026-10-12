@@ -258,15 +258,24 @@ export const initialGameState = {
  */
 export function gameReducer(state, action) {
   switch (action.type) {
-    case 'BATCH':
+    case 'BATCH': {
       // Fold the actions a single idle tick dispatched into one state update
       // (see the buffering in `useGameLoop`). Applying them in order keeps the
       // exact same semantics as dispatching them one at a time.
-      return (action.payload?.actions ?? []).reduce(
+      const batchedActions = action.payload?.actions ?? []
+      if (batchedActions.length === 0) return state
+      const reduced = batchedActions.reduce(
         /** @param {GameState} currentState @param {GameAction} batchedAction */
         (currentState, batchedAction) => gameReducer(currentState, batchedAction),
         state
       )
+      // A batch whose actions all turned out to be no-ops still has to wake the
+      // idle loop: React bails out of rendering (and skips the effect that
+      // clears `waitingForCommitRef`) when a reducer returns the identical
+      // state, which would freeze the loop after a single ignored action. A
+      // fresh, shallow reference forces the commit without changing any slice.
+      return reduced === state ? { ...state } : reduced
+    }
     case 'SELECT_STARTER':
       return selectStarter(state, action)
     case 'UNLOCK_REGION':

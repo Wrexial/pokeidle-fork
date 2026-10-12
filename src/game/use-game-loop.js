@@ -57,14 +57,16 @@ export function useGameLoop() {
           flushScheduledRef.current = false
           const bufferedActions = pendingActionsRef.current
           pendingActionsRef.current = []
-          if (bufferedActions.length === 1) rawDispatch(bufferedActions[0])
-          else if (bufferedActions.length > 1)
-            rawDispatch({
-              type: 'BATCH',
-              payload: {
-                actions: bufferedActions,
-              },
-            })
+          if (bufferedActions.length === 0) return
+          // Always fold through BATCH: the reducer guarantees a fresh state
+          // reference even when every action was a no-op, which keeps the
+          // commit guard below from deadlocking (see the BATCH case).
+          rawDispatch({
+            type: 'BATCH',
+            payload: {
+              actions: bufferedActions,
+            },
+          })
         })
       },
       [rawDispatch]
@@ -701,7 +703,9 @@ export function useGameLoop() {
             return
           }
           manualWaitRef.current = 0
-          const turnEvents = resolveBattleTurn(
+          let turnEvents
+          try {
+            turnEvents = resolveBattleTurn(
               playerBattlePokemon,
               enemyBattlePokemon,
               isTrainerBattle,
@@ -718,6 +722,15 @@ export function useGameLoop() {
               !1,
               inverseBattle
             )
+          } catch (error) {
+            // A throwing turn used to freeze the loop silently (the dispatch
+            // below never ran, so the game looked stuck). Log it and bail out
+            // of the encounter so the game keeps going.
+            console.error('Battle turn failed', error)
+            dispatch({ type: 'ADD_LOG', payload: { message: 'The battle glitched and was abandoned.' } })
+            dispatch({ type: 'PHASE_IDLE' })
+            return
+          }
           dispatch({
             type: 'EXECUTE_TURN',
             payload: {

@@ -10,6 +10,7 @@ const { resolveBattleTurn } = await import('../src/game/combat.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { getItemCategory } = await import('../src/game/progression.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
+const { syncActivePokemonIntoParty } = await import('../src/game/progression.js')
 const { moveData } = await import('../src/data/gameData.js')
 
 /**
@@ -308,6 +309,52 @@ test('Sticky Hold keeps an item through Knock Off', () => {
     resolveBattleTurn(player, enemy, false)
     assert.equal(enemy.heldItem, 'leftovers')
   })
+})
+
+test('a held item equipped on the active Pokemon survives a party sync', () => {
+  const active = createPokemon('bulbasaur', 10, 'a'),
+    other = createPokemon('charmander', 10, 'b'),
+    state = {
+      ...initialGameState,
+      party: [active, other],
+      playerPokemon: active,
+      activePlayerPokemonIndex: 0,
+      inventory: { leftovers: 1 },
+    },
+    equipped = gameReducer(state, {
+      type: 'USE_ITEM_ON_POKEMON',
+      payload: { itemId: 'leftovers', pokemonId: 'a' },
+    })
+  assert.equal(equipped.party[0].heldItem, 'leftovers')
+  assert.equal(equipped.playerPokemon.heldItem, 'leftovers', 'the active copy is updated too')
+  // The idle loop writes playerPokemon back over its party slot mid-battle, so
+  // the item has to survive that sync (otherwise it silently vanishes).
+  const synced = syncActivePokemonIntoParty(equipped)
+  assert.equal(synced.party[0].heldItem, 'leftovers')
+  assert.equal(synced.playerPokemon.heldItem, 'leftovers')
+  // Putting it away clears both copies and returns the item to the bag.
+  const cleared = gameReducer(synced, { type: 'CLEAR_HELD_ITEM', payload: { pokemonId: 'a' } })
+  assert.equal(cleared.party[0].heldItem, null)
+  assert.equal(cleared.playerPokemon.heldItem, null)
+  assert.equal(cleared.inventory.leftovers, 1)
+})
+
+test('a held item equipped on a bench Pokemon leaves the active copy alone', () => {
+  const active = createPokemon('bulbasaur', 10, 'a'),
+    bench = createPokemon('charmander', 10, 'b'),
+    state = {
+      ...initialGameState,
+      party: [active, bench],
+      playerPokemon: active,
+      activePlayerPokemonIndex: 0,
+      inventory: { choiceBand: 1 },
+    },
+    equipped = gameReducer(state, {
+      type: 'USE_ITEM_ON_POKEMON',
+      payload: { itemId: 'choiceBand', pokemonId: 'b' },
+    })
+  assert.equal(equipped.party[1].heldItem, 'choiceBand')
+  assert.equal(equipped.playerPokemon.heldItem, null, 'the active copy is untouched')
 })
 
 test('the reducer equips and removes held items', () => {

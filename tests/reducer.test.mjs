@@ -433,6 +433,22 @@ test('BATCH with no actions returns the state unchanged', () => {
   assert.equal(gameReducer(state, { type: 'BATCH' }), state)
 })
 
+test('a BATCH of no-op actions still returns a fresh state reference', () => {
+  // The idle loop only clears its commit guard in an effect, and React skips
+  // that effect when a reducer returns the identical state. A batch that turned
+  // out to be a no-op must therefore surface as a new reference (same content)
+  // so a single ignored action can't freeze the loop.
+  const state = startedGame()
+  // An unknown action type falls through the reducer unchanged.
+  const batched = gameReducer(state, {
+    type: 'BATCH',
+    payload: { actions: [{ type: 'NOT_A_REAL_ACTION' }] },
+  })
+  assert.notEqual(batched, state, 'the reference changes')
+  assert.deepEqual(batched.party, state.party, 'the content is unchanged')
+  assert.equal(batched.phase, state.phase)
+})
+
 test('Healing Wish heals the next Pokemon sent out', () => {
   const base = startedGame(),
     active = { ...base.party[0], currentHp: 10 },

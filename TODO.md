@@ -6,7 +6,7 @@ file only tracks what is **still open**. See `AGENTS.md` for architecture,
 commands and data conventions.
 
 Section numbers are stable references (`#24`, `#36`, …) and are deliberately not
-renumbered, so the gaps below are items that shipped.
+renumbered, so the gaps below are items that shipped or were dropped.
 
 ---
 
@@ -21,8 +21,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 2 — Big, defer
 
-1. **#19 Online sync** — L · ★★★ — the project's first backend; needs a design
-   doc and real ops for modest player value today.
+_(empty — the game stays client-only, so the online-sync idea was dropped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
@@ -41,31 +40,6 @@ number and full detail further down. Promote into the tiers above once scoped.
   #93 Tower ladders · #96 Berry market.
 - **Quick wins:** #80 SOS chaining · #81 Field evolutions · #84 Marks ·
   #94 Dowsing Machine · #95 Hide-and-seek · #97 Run summary · #98 Hotkeys.
-
----
-
-## 19. Online sync (cloud saves via a database)
-
-This would be the project's **first backend** — the app is deliberately
-client-only today with `localStorage` saves. Worth a short design doc first.
-
-- [ ] Pick a backend: a managed BaaS (Supabase / Firebase — auth + Postgres /
-      Firestore) vs a small custom API.
-- [ ] Auth: an anonymous device id that can later be linked to an account
-      (email / OAuth) so a save can follow the player across devices.
-- [ ] Sync model: a save is a single JSON blob, so at minimum keep a
-      server-side revision + `savedAt` and never blindly overwrite a newer
-      remote (last-write-wins is easy to lose a save with).
-- [ ] Offline-first: the game must keep working with no network; sync in the
-      background and reconcile on reconnect.
-- [ ] Conflict handling: pick a winner / offer a choice; keep a small server
-      history so a bad sync is recoverable.
-- [ ] Privacy & security: ownership rules (RLS), rate limits, and what is
-      stored.
-- [ ] Migration: reuse `repairSave` on download and bump `SAVE_VERSION` if the
-      save shape changes.
-
-Effort: **large** (auth + conflict handling + a new server to run).
 
 ---
 

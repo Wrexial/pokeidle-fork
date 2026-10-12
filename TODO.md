@@ -27,7 +27,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #62, #69, #75–#76. They
+See the numbered sections below: #43, #62, #75–#76. They
 are optional extras rather than missing features.
 
 ---
@@ -85,16 +85,6 @@ Still open:
       report can name what was caught.
 
 Effort: **medium**.
-
-## 69. Legendary quests
-
-Each region's Raid Island tracks a multi-step hunt (badges / Champion / ten
-Ancient Relics recovered on that region's routes) that unlocks a direct raid
-for its box legendary (`src/game/legendary-quests.js`).
-
-Still open (optional):
-
-- [ ] Per-legendary boss battles with dialogue rather than a standard raid.
 
 ## 75. Legends Z-A area (Kalos post-game zone)
 

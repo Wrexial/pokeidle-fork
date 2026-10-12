@@ -16695,6 +16695,56 @@ img {
     color: #b8860b
 }
 
+.legendary-intro-modal {
+    max-width: 320px;
+    text-align: center
+}
+
+.legendary-intro-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 0 8px
+}
+
+.legendary-intro-sprite {
+    width: 80px;
+    height: 80px;
+    image-rendering: pixelated
+}
+
+.legendary-intro-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #f0e2c0
+}
+
+.legendary-intro-target {
+    font-size: 9px;
+    color: #cbbfa6
+}
+
+.legendary-intro-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0 0 12px
+}
+
+.legendary-intro-line {
+    margin: 0;
+    font-size: 9px;
+    line-height: 1.5;
+    color: #e4d6b8
+}
+
+.legendary-intro-actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px
+}
+
 /* --- Focus hunt (#61) --------------------------------------------------- */
 .hunt-bar {
     display: flex;

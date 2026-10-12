@@ -1,16 +1,102 @@
 // The multi-step Legendary Quest for a region, shown on its Raid Island.
-// Completing the steps unlocks a direct challenge for the box legendary.
+// Completing the steps unlocks a direct challenge for the box legendary, which
+// opens with a short pre-battle scene so the raid reads as a boss encounter.
 
+import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { legendaryQuestStatus } from '../game/legendary-quests.js'
+import { legendaryDialogue, legendaryQuestStatus } from '../game/legendary-quests.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+
+/**
+ * The pre-battle scene for a legendary: its sprite, the quest title and the
+ * lines read before the raid begins.
+ * @param {{ regionId: string, quest: NonNullable<ReturnType<typeof legendaryQuestStatus>>, onClose: () => void }} props
+ */
+function LegendaryIntroModal({ regionId, quest, onClose }) {
+  const { state, dispatch } = useGame(),
+    species = pokemonSpecies[quest.legendary],
+    lines = legendaryDialogue(regionId)
+  return jsx('div', {
+    className: 'battle-info-overlay',
+    onClick: onClose,
+    children: jsxs('div', {
+      className: 'battle-info-modal legendary-intro-modal',
+      onClick: /** @param {React.MouseEvent} mouseEvent */ (mouseEvent) =>
+        mouseEvent.stopPropagation(),
+      children: [
+        jsx('div', {
+          className: 'legendary-intro-head',
+          children: [
+            species &&
+              jsx('img', {
+                className: 'legendary-intro-sprite',
+                src: getPokemonSpriteUrl(species.id),
+                onError: /** @param {{ target: HTMLImageElement }} event */ (event) =>
+                  (event.target.src = getPokemonSpriteFallbackUrl(species.id)),
+                alt: species.name,
+              }),
+            jsx('span', {
+              className: 'legendary-intro-title',
+              children: quest.name,
+            }),
+            jsx('span', {
+              className: 'legendary-intro-target',
+              children: `${species?.name ?? quest.legendary} \\u00b7 Lv.${quest.level}`,
+            }),
+          ],
+        }),
+        jsx('div', {
+          className: 'legendary-intro-lines',
+          children: lines.map((line, index) =>
+            jsx(
+              'p',
+              {
+                className: 'legendary-intro-line',
+                children: line,
+              },
+              index
+            )
+          ),
+        }),
+        jsxs('div', {
+          className: 'legendary-intro-actions',
+          children: [
+            jsx('button', {
+              className: 'battle-info-close',
+              onClick: onClose,
+              children: 'BACK',
+            }),
+            jsx('button', {
+              className: 'gym-fight-btn champion',
+              onClick: () => {
+                onClose()
+                dispatch({
+                  type: 'START_RAID',
+                  payload: {
+                    legendary: quest.legendary,
+                    level: quest.level,
+                    region: regionId,
+                    location: quest.raidLocation,
+                  },
+                })
+              },
+              disabled: state.party.every((member) => member.currentHp <= 0),
+              children: `CHALLENGE ${(species?.name ?? quest.legendary).toUpperCase()}`,
+            }),
+          ],
+        }),
+      ],
+    }),
+  })
+}
 
 /** @param {{ regionId: string }} props */
 export function LegendaryQuestPanel({ regionId }) {
-  const { state, dispatch } = useGame(),
-    quest = legendaryQuestStatus(state, regionId)
+  const { state } = useGame(),
+    quest = legendaryQuestStatus(state, regionId),
+    [confirming, setConfirming] = React.useState(false)
   if (!quest) return null
   const species = pokemonSpecies[quest.legendary],
     canChallenge =
@@ -76,20 +162,12 @@ export function LegendaryQuestPanel({ regionId }) {
             className: 'gym-fight-btn champion',
             style: { width: '100%' },
             disabled: !canChallenge,
-            onClick: () =>
-              dispatch({
-                type: 'START_RAID',
-                payload: {
-                  legendary: quest.legendary,
-                  level: quest.level,
-                  region: regionId,
-                  location: quest.raidLocation,
-                },
-              }),
+            onClick: () => setConfirming(true),
             children: quest.ready
               ? `CHALLENGE ${(species?.name ?? quest.legendary).toUpperCase()}`
               : 'COMPLETE THE STEPS FIRST',
           }),
+      confirming && jsx(LegendaryIntroModal, { regionId, quest, onClose: () => setConfirming(false) }),
     ],
   })
 }

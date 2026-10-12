@@ -24,6 +24,59 @@ export const LEGENDARY_QUESTS = {
 }
 
 /**
+ * A short pre-battle scene for each legendary quest's boss: the lines a
+ * challenger reads before committing to the raid.
+ * @type {Record<string, string[]>}
+ */
+export const LEGENDARY_DIALOGUE = {
+  kanto: [
+    'The air in the cave turns heavy and cold.',
+    'A single psychic eye opens in the dark \u2014 it has been waiting for you.',
+  ],
+  johto: [
+    'The sea below the Whirl Islands goes still.',
+    'A silver wing breaks the surface, and the whole sky darkens.',
+  ],
+  hoenn: [
+    'The clouds above the tower spiral into a single ring.',
+    'A green serpent uncoils through the stratosphere, roaring.',
+  ],
+  sinnoh: [
+    'The rift tears wider, and gravity turns sideways.',
+    'Something ancient and furious drags itself out of the distortion.',
+  ],
+  unova: [
+    'Frost crawls up the walls of the cavern.',
+    'A grey dragon fused with ice rises, and the air itself cracks.',
+  ],
+  kalos: [
+    'Petals drift down from nowhere, then stop mid-air.',
+    'A towering, luminous shape steps out of the light \u2014 and offers you a choice.',
+  ],
+  alola: [
+    'The prism splits the light into a hundred colours.',
+    'A creature of glass and shadow unfolds from the shards.',
+  ],
+  galar: [
+    'The sky over the island turns a sickly red.',
+    'Something enormous and alien touches down, and the ground hums.',
+  ],
+  paldea: [
+    'Crystals erupt from the earth in every direction.',
+    'The shell of a sleeping titan shifts, and a thousand years of dust falls away.',
+  ],
+}
+
+/**
+ * The pre-battle lines for a region's legendary boss, or an empty list.
+ * @param {string} regionId
+ * @returns {string[]}
+ */
+export function legendaryDialogue(regionId) {
+  return LEGENDARY_DIALOGUE[regionId] ?? []
+}
+
+/**
  * The region's Raid Island location id, or null.
  * @param {string} regionId
  * @returns {string | null}

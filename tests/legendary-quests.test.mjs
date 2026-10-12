@@ -6,8 +6,10 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const {
+  LEGENDARY_DIALOGUE,
   LEGENDARY_QUESTS,
   QUEST_RELIC_COUNT,
+  legendaryDialogue,
   legendaryQuestStatus,
   raidLocationFor,
 } = await import('../src/game/legendary-quests.js')
@@ -26,6 +28,16 @@ test('each region has a quest with a real legendary and a Raid Island', () => {
     assert.ok(quest.name, `${regionId} has a quest name`)
     assert.ok(raidLocationFor(regionId), `${regionId} has a Raid Island`)
   }
+})
+
+test('each legendary quest has a pre-battle scene', () => {
+  for (const regionId of Object.keys(LEGENDARY_QUESTS)) {
+    const lines = LEGENDARY_DIALOGUE[regionId]
+    assert.ok(Array.isArray(lines) && lines.length > 0, `${regionId} has intro lines`)
+    for (const line of lines) assert.equal(typeof line, 'string')
+    assert.deepEqual(legendaryDialogue(regionId), lines)
+  }
+  assert.deepEqual(legendaryDialogue('nonsense'), [])
 })
 
 test('the quest steps track badges, the Champion and the region relics', () => {

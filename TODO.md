@@ -27,7 +27,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #24, #62, #69, #75–#76. They
+See the numbered sections below: #62, #69, #75–#76. They
 are optional extras rather than missing features.
 
 ---
@@ -54,21 +54,6 @@ client-only today with `localStorage` saves. Worth a short design doc first.
       save shape changes.
 
 Effort: **large** (auth + conflict handling + a new server to run).
-
-## 24. Move data pass
-
-`possible-moves.json` carries `name / type / category / power / accuracy / pp /
-priority / effect`, and `src/data/move-effects.js` layers richer effects on top.
-The effect set (healing, multi-hit, crit stages, hazards, weather, terrain,
-phazing, swaps, the status conditionals and multi-status rolls, the
-doubles-only moves and the Apricorn Balls' catch rates) is done.
-
-PP is stored but deliberately unused — an idle auto-battler has no PP
-management, so it stays as data only.
-
-Still open (design call):
-
-- [ ] Z-moves / G-Max moves are otherwise dead data — decide keep/drop.
 
 ## 43. Multi-battles (double / triple / rotation) as a minigame
 

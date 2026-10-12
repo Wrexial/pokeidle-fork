@@ -6,9 +6,9 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const { resolveBattleTurn } = await import('../src/game/combat.js')
-const { moveData } = await import('../src/data/gameData.js')
+const { moveData, pokemonSpecies } = await import('../src/data/gameData.js')
 const { Z_MOVE_BY_TYPE, zMoveBasePower } = await import('../src/data/z-moves.js')
-const { maxMoveBasePower } = await import('../src/data/max-moves.js')
+const { GMAX_MOVE_BY_SPECIES, maxMoveBasePower } = await import('../src/data/max-moves.js')
 
 /**
  * @param {Record<string, any>} [overrides]
@@ -43,6 +43,15 @@ function withFixedRandom(value, body) {
     Math.random = originalRandom
   }
 }
+
+test('every Z-Move and G-Max move map points at real move data', () => {
+  for (const [type, moveId] of Object.entries(Z_MOVE_BY_TYPE))
+    assert.ok(moveData[moveId]?.name, `Z-Move for ${type} (${moveId}) is in the move table`)
+  for (const [speciesKey, moveId] of Object.entries(GMAX_MOVE_BY_SPECIES)) {
+    assert.ok(pokemonSpecies[speciesKey], `${speciesKey} is a real species`)
+    assert.ok(moveData[moveId]?.name, `G-Max move for ${speciesKey} (${moveId}) is in the move table`)
+  }
+})
 
 test('the Z-Move power curve matches the games', () => {
   assert.equal(zMoveBasePower(40), 100)

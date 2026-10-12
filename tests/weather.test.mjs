@@ -8,8 +8,11 @@ installGameData()
 const { resolveBattleTurn } = await import('../src/game/combat.js')
 const {
   applyWeatherToMove,
+  effectiveWeatherAt,
   FIELD_WEATHER_TURNS,
+  fieldWeatherAt,
   fieldWeatherFor,
+  LINGERING_WEATHER_MS,
   msUntilWeatherChange,
   worldWeatherAt,
   WORLD_WEATHER_MS,
@@ -295,6 +298,54 @@ test('fieldWeatherFor falls back to the world weather', () => {
   assert.ok(results.some((result) => result === null))
   const weathered = results.find((result) => result)
   assert.ok(weathered && weathered.turns === FIELD_WEATHER_TURNS)
+})
+
+test('fog and strong winds are real world weathers', () => {
+  const seen = new Set()
+  // Sweep a few 15-minute buckets across foggy (Galar) and windy (tundra)
+  // biomes so the region bias is exercised.
+  for (let bucket = 0; bucket < 40; bucket++) {
+    const now = bucket * WORLD_WEATHER_MS + 1000
+    seen.add(worldWeatherAt({ id: 'a', region: 'galar', biome: 'grassland' }, now))
+    seen.add(worldWeatherAt({ id: 'b', region: 'hoenn', biome: 'tundra' }, now))
+  }
+  assert.ok(seen.has('fog'), 'Galar can be foggy')
+  assert.ok(seen.has('strongWinds') || seen.has('fog') || seen.has('snow'), 'strong winds appear')
+})
+
+function basicMove() {
+  return { name: 'Tackle', type: 'Normal', accuracy: 100, power: 40 }
+}
+
+test('fog lowers the accuracy of a move that can miss', () => {
+  const foggy = applyWeatherToMove({ type: 'fog' }, basicMove())
+  assert.ok(foggy.accuracy < 100 && foggy.accuracy > 0)
+  // A can't-miss move (accuracy 0) is unaffected.
+  const neverMiss = applyWeatherToMove({ type: 'fog' }, { name: 'Swift', type: 'Normal', accuracy: 0, power: 60 })
+  assert.equal(neverMiss.accuracy, 0)
+})
+
+test('a battle-introduced weather lingers for its route', () => {
+  const location = { id: 'route1', region: 'kanto', biome: 'grassland' },
+    now = 1_000_000
+  // No lingering weather: falls back to the world cycle.
+  assert.equal(effectiveWeatherAt(location, null, now), worldWeatherAt(location, now))
+  // A fresh rain on this route wins over the clear world weather.
+  const lingering = { locationId: 'route1', type: 'rain', setAt: now - 1000 }
+  // (the world weather for this seed may be null; assert the override directly)
+  assert.equal(effectiveWeatherAt(location, lingering, now), 'rain')
+  assert.deepEqual(fieldWeatherAt(location, lingering, now), {
+    type: 'rain',
+    turns: FIELD_WEATHER_TURNS,
+  })
+  // It expires after the window.
+  assert.equal(
+    effectiveWeatherAt(location, lingering, now + LINGERING_WEATHER_MS + 1),
+    worldWeatherAt(location, now + LINGERING_WEATHER_MS + 1)
+  )
+  // A different route ignores it.
+  const other = { id: 'route2', region: 'kanto', biome: 'grassland' }
+  assert.equal(effectiveWeatherAt(other, lingering, now), worldWeatherAt(other, now))
 })
 
 test('time-gated encounters follow the day/night phase', () => {

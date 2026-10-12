@@ -10,7 +10,7 @@ import { advanceBreeding, breedingGoalLabel } from '../../breeding-projects.js'
 import { abilityOf } from '../../abilities.js'
 import { tickCompanion } from '../../companion.js'
 import { createVolatileState } from '../../combat.js'
-import { fieldWeatherFor } from '../../weather.js'
+import { fieldWeatherAt } from '../../weather.js'
 import { tickGarden } from '../../garden.js'
 import { tickPelago } from '../../pelago.js'
 import { advanceHuntEncounter } from '../../hunt.js'
@@ -68,7 +68,7 @@ export function startEncounter(state, action) {
       ],
       currentEventIndex: 0,
       battleTurn: 0,
-      weather: fieldWeatherFor(mapData[state.currentLocation]),
+      weather: fieldWeatherAt(mapData[state.currentLocation], state.lingeringWeather),
       battleHazards: emptyBattleHazards(),
       terrain: null,
       playerVolatile: createVolatileState(),
@@ -190,11 +190,18 @@ export function consumeEvent(state, action) {
     wildBattlesWon = state.wildBattlesWon,
     battlesWonByLocation = state.battlesWonByLocation,
     weather = state.weather,
+    lingeringWeather = state.lingeringWeather,
     battleHazards = state.battleHazards,
     terrain = state.terrain
   event.type === 'weather' &&
     event.data &&
     (weather = event.data.weather ?? weather)
+  // A weather a move or ability introduced lingers on the route for a while,
+  // so its activities (and the next battle) read as that weather.
+  if (event.type === 'weather' && event.data)
+    lingeringWeather = weather?.type
+      ? { locationId: state.currentLocation, type: weather.type, setAt: Date.now() }
+      : null
   event.type === 'hazards' &&
     event.data &&
     (battleHazards = event.data.hazards ?? battleHazards)
@@ -487,6 +494,7 @@ export function consumeEvent(state, action) {
     researchClaimed,
     researchPoints,
     weather,
+    lingeringWeather,
     battleHazards,
     terrain,
     activeEffects,

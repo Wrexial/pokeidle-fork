@@ -65,7 +65,7 @@ import {
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { checkShinyOdds, shinyOddsForSpecies } from '../game/progression.js'
 import { dayPhaseAt } from '../game/day-night.js'
-import { fieldWeatherFor } from '../game/weather.js'
+import { effectiveWeatherAt } from '../game/weather.js'
 
 /** @typedef {'hit' | 'perfect' | 'ultra'} ActivityQuality */
 
@@ -553,7 +553,7 @@ export function RouteActivityScene() {
   function conditionFavoured() {
     return activityConditionMatches(activity, {
       time: dayPhaseAt().isNight ? 'night' : 'day',
-      weather: fieldWeatherFor(mapData[state.currentLocation])?.type ?? null,
+      weather: effectiveWeatherAt(mapData[state.currentLocation], state.lingeringWeather) ?? null,
     })
   }
 

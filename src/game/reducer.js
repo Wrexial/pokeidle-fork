@@ -102,6 +102,8 @@ export const initialGameState = {
   jobs: createJobs(),
   /** Focus hunt: a species or type whose encounter rate is boosted (see game/hunt.js). */
   hunt: null,
+  /** A battle-introduced weather still lingering on its route (see game/weather.js). */
+  lingeringWeather: null,
   /** Field research: wild defeats per species (see game/research.js). */
   researchDefeated: {},
   /** Field research: berries fed to a species, for non-wild species. */

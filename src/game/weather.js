@@ -17,6 +17,24 @@ export const FIELD_WEATHER_TURNS = 99
 /** One full world-weather period: 15 real minutes. */
 export const WORLD_WEATHER_MS = 15 * 60 * 1000
 
+/** How long a weather a battle introduced (Rain Dance, Drizzle, ...) lingers. */
+export const LINGERING_WEATHER_MS = WORLD_WEATHER_MS
+
+/**
+ * A per-region flavour added to the biome's weather roll, so Hoenn rains more
+ * and Alola has more sun (Galar is famously foggy).
+ * @type {Record<string, string[]>}
+ */
+const REGION_WEATHER_BIAS = {
+  johto: ['rain'],
+  hoenn: ['rain', 'sun'],
+  sinnoh: ['snow'],
+  kalos: ['rain', 'fog'],
+  alola: ['sun', 'sun'],
+  galar: ['rain', 'fog', 'fog'],
+  paldea: ['sun'],
+}
+
 /**
  * The weathers a biome can roll, with `null` meaning clear. Duplicates weight
  * the roll, so most biomes are clear more often than not. A cave is sheltered.
@@ -25,14 +43,14 @@ export const WORLD_WEATHER_MS = 15 * 60 * 1000
 const BIOME_WEATHER_ROLLS = {
   desert: ['sandstorm', 'sun', null, null, null, null],
   volcanic: ['sun', null, null, null],
-  tundra: ['snow', null, null, null],
-  swamp: ['rain', null, null, null],
-  coast: ['rain', null, null, null],
-  forest: ['rain', null, null, null, null],
-  autumn: ['rain', null, null, null, null],
-  ruins: ['sandstorm', null, null, null, null],
-  mountain: ['snow', 'rain', null, null, null, null],
-  grassland: ['rain', 'sun', null, null, null],
+  tundra: ['snow', 'snow', 'strongWinds', null, null, null],
+  swamp: ['rain', 'fog', null, null, null],
+  coast: ['rain', 'strongWinds', null, null, null],
+  forest: ['rain', 'fog', null, null, null, null],
+  autumn: ['rain', 'fog', null, null, null, null],
+  ruins: ['sandstorm', 'fog', null, null, null, null],
+  mountain: ['snow', 'rain', 'strongWinds', null, null, null],
+  grassland: ['rain', 'sun', 'fog', null, null, null],
   cave: [null],
 }
 
@@ -42,6 +60,8 @@ export const WORLD_WEATHER_LABELS = {
   sun: 'Sun',
   sandstorm: 'Sandstorm',
   snow: 'Snow',
+  fog: 'Fog',
+  strongWinds: 'Strong Winds',
 }
 
 /**
@@ -73,9 +93,32 @@ export function worldWeatherAt(location, now = Date.now()) {
   if (!location?.region) return null
   const bucket = Math.floor(now / WORLD_WEATHER_MS),
     biome = location.biome ?? 'grassland',
-    rolls = BIOME_WEATHER_ROLLS[biome] ?? BIOME_WEATHER_ROLLS.grassland,
+    rolls = [
+      ...(BIOME_WEATHER_ROLLS[biome] ?? BIOME_WEATHER_ROLLS.grassland),
+      ...(REGION_WEATHER_BIAS[location.region] ?? []),
+    ],
     seed = hashString(`${location.region}|${biome}|${bucket}`)
   return rolls[seed % rolls.length]
+}
+
+/**
+ * The field weather in effect at a location: a battle-introduced weather that
+ * is still fresh wins over the world cycle, so a Rain Dance-buffed fight keeps
+ * reading as rainy at the route's activities.
+ * @param {{ id?: string, region?: string, biome?: string, weather?: string } | null | undefined} location
+ * @param {{ locationId?: string, type?: string | null, setAt?: number } | null | undefined} lingering
+ * @param {number} [now]
+ * @returns {string | null}
+ */
+export function effectiveWeatherAt(location, lingering, now = Date.now()) {
+  if (
+    lingering?.type &&
+    lingering.locationId &&
+    lingering.locationId === location?.id &&
+    now - (lingering.setAt ?? 0) < LINGERING_WEATHER_MS
+  )
+    return lingering.type
+  return worldWeatherAt(location, now)
 }
 
 /** Milliseconds until the world weather changes. @param {number} [now] */
@@ -93,6 +136,19 @@ export function msUntilWeatherChange(now = Date.now()) {
  */
 export function fieldWeatherFor(location, now = Date.now()) {
   const type = worldWeatherAt(location, now)
+  return type ? { type, turns: FIELD_WEATHER_TURNS } : null
+}
+
+/**
+ * The weather a battle starts under, honouring a still-fresh battle-introduced
+ * weather at this location (see {@link effectiveWeatherAt}).
+ * @param {{ id?: string, region?: string, biome?: string, weather?: string } | null | undefined} location
+ * @param {{ locationId?: string, type?: string | null, setAt?: number } | null | undefined} lingering
+ * @param {number} [now]
+ * @returns {{ type: string, turns: number } | null}
+ */
+export function fieldWeatherAt(location, lingering, now = Date.now()) {
+  const type = effectiveWeatherAt(location, lingering, now)
   return type ? { type, turns: FIELD_WEATHER_TURNS } : null
 }
 
@@ -127,6 +183,7 @@ export const WEATHER_NAMES = {
   harshSunlight: 'extremely harsh sunlight',
   heavyRain: 'a heavy downpour',
   strongWinds: 'strong winds',
+  fog: 'fog',
 }
 
 /** Icon per weather for the battle badge. @type {Record<string, string>} */
@@ -139,6 +196,7 @@ export const WEATHER_ICONS = {
   harshSunlight: '\u2600',
   heavyRain: '\ud83c\udf27',
   strongWinds: '\ud83c\udf00',
+  fog: '\ud83c\udf2b',
 }
 
 /**
@@ -156,6 +214,9 @@ export function applyWeatherToMove(weather, moveDef) {
     return { ...moveDef, type: WEATHER_BALL_TYPES[weather.type], power: (moveDef.power ?? 0) * 2 }
   const perfectInRain = weather.type === 'rain' && (name === 'Thunder' || name === 'Hurricane'),
     perfectInSnow = (weather.type === 'snow' || weather.type === 'hail') && name === 'Blizzard'
+  // Fog thickens the air: every move that can miss is a little less accurate.
+  if (weather.type === 'fog' && moveDef.accuracy > 0 && moveDef.accuracy <= 100)
+    return { ...moveDef, accuracy: Math.max(1, Math.round(moveDef.accuracy * 0.9)) }
   return perfectInRain || perfectInSnow ? { ...moveDef, accuracy: 0 } : moveDef
 }
 

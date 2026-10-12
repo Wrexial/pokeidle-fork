@@ -17071,3 +17071,21 @@ img {
     font-size: 7px;
     color: #6a5a48
 }
+
+/* Fog: two soft grey haze layers drifting sideways. */
+.battle-weather-badge.weather-fog { border-color: #b0b8c0 }
+
+.battle-weather-overlay.weather-fog:before {
+    background: linear-gradient(90deg,rgba(210,216,224,.12),rgba(210,216,224,.4) 50%,rgba(210,216,224,.12));
+    animation: weatherFog 9s ease-in-out infinite
+}
+
+.battle-weather-overlay.weather-fog:after {
+    background: linear-gradient(90deg,rgba(190,198,208,.08),rgba(190,198,208,.28) 50%,rgba(190,198,208,.08));
+    animation: weatherFog 13s ease-in-out infinite reverse
+}
+
+@keyframes weatherFog {
+    0%,to { transform: translateX(-6%); opacity: .8 }
+    50% { transform: translateX(6%); opacity: 1 }
+}

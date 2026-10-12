@@ -8,7 +8,7 @@ import { useGame } from './game/context.js'
 import { playSfx, startMusic, stopMusic, unlockAudio } from './game/audio.js'
 import { awaySummary } from './game/progression.js'
 import { dayPhaseAt, msUntilPhaseChange } from './game/day-night.js'
-import { msUntilWeatherChange, worldWeatherAt } from './game/weather.js'
+import { effectiveWeatherAt, msUntilWeatherChange } from './game/weather.js'
 import { isOnline, subscribeOnline } from './game/network.js'
 
 /**
@@ -41,18 +41,21 @@ export function useDayPhase() {
 export function useWorldWeather() {
   const { state } = useGame(),
     location = mapData[state.currentLocation],
-    [weather, setWeather] = React.useState(() => worldWeatherAt(location))
+    [weather, setWeather] = React.useState(() =>
+      effectiveWeatherAt(location, state.lingeringWeather)
+    )
   React.useEffect(() => {
     /** @type {ReturnType<typeof setTimeout> | undefined} */
     let timer
     const schedule = () => {
-      const next = worldWeatherAt(mapData[state.currentLocation])
-      setWeather((current) => (current === next ? current : next))
+      const current = mapData[state.currentLocation],
+        next = effectiveWeatherAt(current, state.lingeringWeather)
+      setWeather((previous) => (previous === next ? previous : next))
       timer = setTimeout(schedule, msUntilWeatherChange() + 500)
     }
     schedule()
     return () => clearTimeout(timer)
-  }, [state.currentLocation])
+  }, [state.currentLocation, state.lingeringWeather])
   return { type: weather }
 }
 

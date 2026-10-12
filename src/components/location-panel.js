@@ -8,7 +8,7 @@ import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoo
 import { areaInfoFor } from '../data/ui.js'
 import { MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_TUTORIALS, ROUTE_ACTIVITIES, ROUTE_ACTIVITY_TUTORIALS, activityConditionLabel, activityConditionMatches, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { dayPhaseAt } from '../game/day-night.js'
-import { fieldWeatherFor } from '../game/weather.js'
+import { effectiveWeatherAt } from '../game/weather.js'
 import { masteryProgress } from '../game/route-mastery.js'
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations, frontierUnlocks, minigameRequirementMet, regionProgressionGoal, unlockBlockers } from '../game/progression.js'
@@ -276,7 +276,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
     mastery = masteryProgress(state, location.id),
     activityConditionContext = {
       time: /** @type {'day' | 'night'} */ (dayPhaseAt().isNight ? 'night' : 'day'),
-      weather: fieldWeatherFor(location)?.type ?? null,
+      weather: effectiveWeatherAt(location, state.lingeringWeather) ?? null,
     },
     minigameBusy = [
       'evolving',

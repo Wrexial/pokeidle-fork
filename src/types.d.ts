@@ -705,6 +705,8 @@ type GameState = {
   prestigePerks: Record<string, number>
   /** The active focus hunt, or null (see game/hunt.js). */
   hunt: Hunt | null
+  /** A battle-introduced weather still lingering on its route (see game/weather.js). */
+  lingeringWeather: { locationId: string; type: string; setAt: number } | null
   /** Best result per minigame, for `unlock.minigame` gates (see endMinigame). */
   minigameRecords: Record<string, { best: number; completed: boolean }>
   /** Best activity hit quality per route, for route mastery (see game/route-mastery.js). */

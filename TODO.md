@@ -27,7 +27,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #24, #25, #56, #62, #69, #73–#76, #79, #81.
+See the numbered sections below: #24, #25, #56, #62, #69, #74–#76, #79, #81.
 They are optional extras rather than missing features.
 
 ---
@@ -146,17 +146,6 @@ Still open (optional):
 - [ ] Relic-collecting steps (new items found on routes) instead of the
       Pokédex-percentage step.
 - [ ] Per-legendary boss battles with dialogue rather than a standard raid.
-
-## 73. Weather system on routes
-
-A 15-minute world weather cycle feeds `fieldWeatherFor` and the activity
-conditions, with a chip beside the day/night one (`src/game/weather.js`).
-
-Still open (optional):
-
-- [ ] Let an activity also count the current *battle* weather, so a Rain
-      Dance-buffed fight reads as rainy.
-- [ ] Add more weather types (fog, strong winds) or a per-region flavour.
 
 ## 74. Pokemon sizes (XS–XL)
 

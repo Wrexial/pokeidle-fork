@@ -950,6 +950,20 @@ export function repairSave(saved) {
     prestigePoints,
     prestigePerks,
     hunt,
+    // A lingering battle weather, if its route still exists.
+    lingeringWeather:
+      saved.lingeringWeather &&
+      typeof saved.lingeringWeather === 'object' &&
+      mapData[saved.lingeringWeather.locationId] &&
+      typeof saved.lingeringWeather.type === 'string'
+        ? {
+            locationId: saved.lingeringWeather.locationId,
+            type: saved.lingeringWeather.type,
+            setAt: Number.isFinite(saved.lingeringWeather.setAt)
+              ? saved.lingeringWeather.setAt
+              : Date.now(),
+          }
+        : null,
     towerFloor: repairedTowerFloor,
     towerBest: repairedTowerBest,
     frontierFloor: repairedFrontierFloor,
@@ -1129,6 +1143,7 @@ export const SAVED_STATE_KEYS = [
   'prestigePoints',
   'prestigePerks',
   'hunt',
+  'lingeringWeather',
   'minigameRecords',
   'routeMastery',
   'masteredRoutes',

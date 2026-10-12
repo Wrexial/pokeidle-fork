@@ -84,6 +84,9 @@ test('the Research Shop stocks the ability items and no evolution stones', async
     ids = RESEARCH_SHOP.map((entry) => entry.itemId)
   assert.ok(ids.includes('abilityCapsule'))
   assert.ok(ids.includes('abilityPatch'))
+  // Research-only held items.
+  assert.ok(ids.includes('luckyEgg'))
+  assert.ok(ids.includes('amuletCoin'))
   // The evolution stones live in the Kecleon Shop, so the Research Shop keeps
   // its own identity instead of restocking them.
   for (const stone of ['fireStone', 'waterStone', 'thunderStone', 'leafStone'])

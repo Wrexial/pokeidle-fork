@@ -15,6 +15,7 @@ import { abilityOf } from './abilities.js'
 import { companionCritBonus, companionDodgeChance, companionExpMultiplier, companionStatusCureChance, companionToughOutChance, friendshipToughOutChance } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch, chooseTrainingSwitch } from './combat.js'
 import { isBattleReady } from './pokemon.js'
+import { heldMoneyMultiplier } from './held-items.js'
 import { genderForPokemon } from './breeding.js'
 import { prestigeMultipliers } from './prestige.js'
 import { awardExperience, checkShinyOdds, encountersForPhase, isHoneyActive, partyNeedsHealing, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
@@ -106,8 +107,16 @@ export function useGameLoop() {
           companionExpMultiplier(currentGameState.companion) *
           prestige.experience,
         dailyPrizeBonus = dailyPrizeMultiplier(currentGameState.dailyEvent) * prestige.fortune,
-        // Happy Hour doubles the prize money from this battle.
+        // Happy Hour doubles the prize money from this battle; an Amulet Coin
+        // held by any battler doubles it again.
         happyHourBonus = currentGameState.playerVolatile?.happyHour ? 2 : 1,
+        amuletBonus = Math.max(
+          1,
+          ...(currentGameState.battleParticipants ?? []).map((id) => {
+            const member = currentGameState.party.find((candidate) => candidate.id === id)
+            return member ? heldMoneyMultiplier(member) : 1
+          })
+        ),
         // The Radiant perk raises wild shiny odds on top of any daily bonus.
         dailyShinyBonus = dailyShinyMultiplier(currentGameState.dailyEvent) * prestige.shiny
       switch (currentGameState.phase) {
@@ -789,7 +798,7 @@ export function useGameLoop() {
                   const maxLevel = Math.max(
                       ...trainerBattle.trainerTeam.map((member) => member.level)
                     ),
-                    payout = trainerClassPayouts[trainerBattle.trainerClass] * maxLevel * dailyPrizeBonus * happyHourBonus
+                    payout = trainerClassPayouts[trainerBattle.trainerClass] * maxLevel * dailyPrizeBonus * happyHourBonus * amuletBonus
                   currentGameState.bossBattle
                     ? dispatch({
                         type: 'BOSS_BATTLE_END',
@@ -838,7 +847,7 @@ export function useGameLoop() {
               })
             else {
               const maxLevel = Math.max(...trainerBattle.trainerTeam.map((member) => member.level)),
-                payout = trainerClassPayouts[trainerBattle.trainerClass] * maxLevel * dailyPrizeBonus * happyHourBonus
+                payout = trainerClassPayouts[trainerBattle.trainerClass] * maxLevel * dailyPrizeBonus * happyHourBonus * amuletBonus
               currentGameState.bossBattle
                 ? dispatch({
                     type: 'BOSS_BATTLE_END',

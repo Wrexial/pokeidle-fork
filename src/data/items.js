@@ -300,6 +300,22 @@ export const heldItems = {
     sellPrice: 2000,
     effect: { type: 'rockyHelmet' },
   },
+  luckyEgg: {
+    id: 'luckyEgg',
+    name: 'Lucky Egg',
+    description: 'The holder gains 50% more EXP from every battle.',
+    buyPrice: null,
+    sellPrice: 4000,
+    effect: { type: 'expBoost', multiplier: 1.5 },
+  },
+  amuletCoin: {
+    id: 'amuletCoin',
+    name: 'Amulet Coin',
+    description: 'Doubles the prize money when its holder takes part in a trainer battle.',
+    buyPrice: null,
+    sellPrice: 4000,
+    effect: { type: 'moneyBoost', multiplier: 2 },
+  },
   // --- pinch berries: eaten at a quarter HP (half with Gluttony) for a boost ---
   liechiBerry: {
     id: 'liechiBerry',

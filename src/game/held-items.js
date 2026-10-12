@@ -164,6 +164,28 @@ export function heldChoiceItem(pokemon) {
 }
 
 /**
+ * The EXP multiplier a held item applies to its holder's own EXP gain (Lucky
+ * Egg). This is read after the battle, so Klutz and Magic Room don't apply.
+ * @param {{ heldItem?: string | null } | null | undefined} pokemon
+ * @returns {number}
+ */
+export function heldExpMultiplier(pokemon) {
+  const effect = pokemon?.heldItem ? heldItems[pokemon.heldItem]?.effect : null
+  return effect?.type === 'expBoost' ? (effect.multiplier ?? 1) : 1
+}
+
+/**
+ * The prize-money multiplier a held item applies when its holder took part in
+ * the battle (Amulet Coin). Read after the battle.
+ * @param {{ heldItem?: string | null } | null | undefined} pokemon
+ * @returns {number}
+ */
+export function heldMoneyMultiplier(pokemon) {
+  const effect = pokemon?.heldItem ? heldItems[pokemon.heldItem]?.effect : null
+  return effect?.type === 'moneyBoost' ? (effect.multiplier ?? 1) : 1
+}
+
+/**
  * Damage multiplier for the attacker's held item (Life Orb, type boosters).
  * @param {BattlePokemon} pokemon
  * @param {Move} moveDef

@@ -2,6 +2,7 @@
 
 import { pokemonSpecies } from '../../data/gameData.js'
 import { expShareActiveMultiplier, expSharePartyMultiplier } from '../../data/config.js'
+import { heldExpMultiplier } from '../held-items.js'
 import { alphaExpMultiplier, calculateExpYield, calculatePokemonStats, getLevelUpResults, isBattleReady } from '../pokemon.js'
 
 /**
@@ -13,8 +14,10 @@ import { alphaExpMultiplier, calculateExpYield, calculatePokemonStats, getLevelU
  * @returns {{ partyIndex: number, pokemonId: string, expGained: number, newLevel?: number, newMoves?: string[], newStats?: { maxHp: number, attack: number, defense: number, spAttack: number, spDefense: number, speed: number } }}
  */
 function buildSharedExpEntry(partyIndex, member, expGained) {
-  // An alpha earns a little more EXP from the same battle.
-  const awardedExp = Math.floor(expGained * alphaExpMultiplier(member)),
+  // An alpha earns a little more EXP from the same battle; a Lucky Egg adds more.
+  const awardedExp = Math.floor(
+      expGained * alphaExpMultiplier(member) * heldExpMultiplier(member)
+    ),
     memberSpecies = pokemonSpecies[member.speciesKey],
     memberTotalExp = member.totalExp + awardedExp,
     memberLevelUps = getLevelUpResults(
@@ -103,7 +106,9 @@ export function awardExperience(dispatch, playerPokemon, enemyPokemon, multiplie
   }
   const finalExp = activeCanEarnExp
       ? Math.floor(
-          (participantExp.get(activeIndex) ?? gainedExp) * alphaExpMultiplier(playerPokemon)
+          (participantExp.get(activeIndex) ?? gainedExp) *
+            alphaExpMultiplier(playerPokemon) *
+            heldExpMultiplier(playerPokemon)
         )
       : 0,
     playerSpecies = pokemonSpecies[playerPokemon.speciesKey],

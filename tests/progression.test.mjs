@@ -292,6 +292,28 @@ test('an alpha earns the +20% EXP bonus from a battle', () => {
   assert.equal(alpha, Math.floor(base * 1.2))
 })
 
+test('a Lucky Egg gives its holder 50% more EXP', () => {
+  const enemy = { speciesKey: 'rattata', level: 20 },
+    base = calculateExpYield(pokemonSpecies.rattata, 20),
+    collect = /** @param {any} member */ (member) => {
+      const actions = []
+      awardExperience(
+        (action) => actions.push(action),
+        member,
+        enemy,
+        1,
+        false,
+        [member],
+        0
+      )
+      return actions.find((action) => action.type === 'APPLY_EXP').payload.expGained
+    },
+    normal = collect({ ...createPokemon('charmander', 50, 'a'), size: 100 }),
+    egg = collect({ ...createPokemon('charmander', 50, 'b'), size: 100, heldItem: 'luckyEgg' })
+  assert.equal(normal, base)
+  assert.equal(egg, Math.floor(base * 1.5))
+})
+
 test('a fainted participant earns no EXP and does not dilute the survivors', () => {
   const fainted = { ...createPokemon('charmander', 50, 'a'), currentHp: 0 },
     active = createPokemon('pidgey', 10, 'b'),

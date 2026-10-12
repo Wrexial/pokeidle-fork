@@ -349,6 +349,9 @@ export const RESEARCH_SHOP = [
   { itemId: 'calcium', cost: 4 },
   { itemId: 'zinc', cost: 4 },
   { itemId: 'carbos', cost: 4 },
+  // Research-only held items: a Lucky Egg for EXP and an Amulet Coin for cash.
+  { itemId: 'luckyEgg', cost: 25 },
+  { itemId: 'amuletCoin', cost: 20 },
   { itemId: 'masterball', cost: 100 },
 ]
 

@@ -1,6 +1,7 @@
 {
   "abilityCapsule": "abilityCapsule.png",
   "abilityPatch": "abilityPatch.png",
+  "amuletCoin": "amuletCoin.png",
   "apicotBerry": "apicotBerry.png",
   "apricornBlack": "apricornBlack.png",
   "apricornBlue": "apricornBlue.png",
@@ -85,6 +86,7 @@
   "liechiBerry": "liechiBerry.png",
   "lifeOrb": "lifeOrb.png",
   "linkCable": "linkCable.png",
+  "luckyEgg": "luckyEgg.png",
   "lumBerry": "lumBerry.png",
   "magmarizer": "magmarizer.png",
   "magnet": "magnet.png",

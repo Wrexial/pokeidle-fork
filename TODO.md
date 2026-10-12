@@ -182,15 +182,16 @@ Still open (optional):
 
 The Research Shop now sells a research-flavoured set (the Exp. Candy ladder,
 Rare Candy, Poffin, the Ability Capsule / Patch, Bottle Caps, the six EV
-vitamins, a Master Ball) instead of the Kecleon evolution stones.
+vitamins, a Master Ball, plus the Lucky Egg and Amulet Coin held items) instead
+of the Kecleon evolution stones.
 
 Still open (optional):
 
-- [ ] Research-only held items (Lucky Egg, Amulet Coin). (PP Up / PP Max are
-      off the table — PP stays unimplemented, and the vitamins shipped as the
-      EV system.)
 - [ ] A species-specific research reward tied to the species the points came
       from.
+
+*(PP Up / PP Max are off the table — PP stays unimplemented, and the vitamins
+shipped as the EV system.)*
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { heldStatMultiplier, rollHeldItem, rollWildHeldItem, WILD_HELD_ITEMS } = await import('../src/game/held-items.js')
+const { heldExpMultiplier, heldMoneyMultiplier, heldStatMultiplier, rollHeldItem, rollWildHeldItem, WILD_HELD_ITEMS } = await import('../src/game/held-items.js')
 const { resolveBattleTurn } = await import('../src/game/combat.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { getItemCategory } = await import('../src/game/progression.js')
@@ -52,6 +52,14 @@ test('held items are their own bag category and carry their stat boosts', () => 
   assert.equal(heldStatMultiplier({ heldItem: 'choiceBand' }, 'spAttack'), 1)
   assert.equal(heldStatMultiplier({ heldItem: 'eviolite' }, 'defense', true), 1.5)
   assert.equal(heldStatMultiplier({ heldItem: 'eviolite' }, 'defense', false), 1)
+})
+
+test('the Lucky Egg and Amulet Coin boost EXP and prize money', () => {
+  assert.equal(heldExpMultiplier({ heldItem: 'luckyEgg' }), 1.5)
+  assert.equal(heldExpMultiplier({ heldItem: 'leftovers' }), 1)
+  assert.equal(heldExpMultiplier(null), 1)
+  assert.equal(heldMoneyMultiplier({ heldItem: 'amuletCoin' }), 2)
+  assert.equal(heldMoneyMultiplier({ heldItem: 'leftovers' }), 1)
 })
 
 test('Leftovers heals at the end of the turn', () => {

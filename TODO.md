@@ -28,6 +28,20 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 _(empty — every shipped system's follow-ups are done.)_
 
+### Feature ideas (0.25.0 brainstorm)
+
+A backlog of candidate features gathered from a brainstorm. Each has a stable
+number and full detail further down. Promote into the tiers above once scoped.
+
+- **Strong candidates:** #78 Seasons · #83 Trainer Card, titles & avatar ·
+  #88 Villain-team questlines (each fills a real gap for the effort).
+- **Big but wanted:** #87 Secret Base · #86 Pokemon Bank.
+- **Medium:** #79 Hordes · #82 Pokewalker · #85 Form dex · #89 Mystery Gift ·
+  #90 Professor's story · #91 Auto-battle policy · #92 Raid events ·
+  #93 Tower ladders · #96 Berry market.
+- **Quick wins:** #80 SOS chaining · #81 Field evolutions · #84 Marks ·
+  #94 Dowsing Machine · #95 Hide-and-seek · #97 Run summary · #98 Hotkeys.
+
 ---
 
 ## 19. Online sync (cloud saves via a database)
@@ -52,6 +66,264 @@ client-only today with `localStorage` saves. Worth a short design doc first.
       save shape changes.
 
 Effort: **large** (auth + conflict handling + a new server to run).
+
+---
+
+## Feature ideas
+
+The numbered entries below are the brainstorm referenced from the priority
+order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
+player-facing value (★ = nice to have, ★★★★★ = core missing feature).
+
+**Living world & encounters**
+
+## 78. Seasons
+
+Layer a slow seasonal cycle (spring / summer / autumn / winter) on top of the
+existing day/night clock (`src/game/day-night.js`); nothing here exists yet.
+
+- [ ] Pick the period (e.g. one real week per season, or a multiple of the
+      60-minute in-game day) and expose `currentSeason()`.
+- [ ] Show it as a chip beside the day/night and weather chips.
+- [ ] Data pass (`tools/apply-seasons.cjs`, mirroring `apply-weather-time.cjs`)
+      tags encounter buckets with `season`; `encountersForPhase` falls back to
+      the full table when a season would be empty.
+- [ ] Season-gated forms/evolutions (Deerling/Sawsbuck, Burmy/Wormadam, …).
+- [ ] Retint the Town Map terrain per season and reweight the weather roll.
+
+Effort: **medium**. Gain: ★★★★★.
+
+## 79. Horde encounters
+
+Wild battles are 1v1 only. Add 3–5-of-a-species pack battles that reuse the
+doubles round engine (`src/game/minigames/doubles.js`).
+
+- [ ] A wild-encounter variant that spawns a pack; spread moves hit the whole
+      pack, a single-target move picks one.
+- [ ] Clearing the whole pack pays extra EXP/drops; cap it so it stays idle-
+      friendly.
+- [ ] Optional: a rare "horde" rate per route and a Settings toggle.
+
+Effort: **medium**. Gain: ★★★.
+
+## 80. SOS chaining
+
+A per-route chain counter that builds with consecutive wild wins and tilts
+hidden-ability / shiny odds, shown as a chip on the location panel. Distinct
+from the Poke Radar minigame.
+
+- [ ] Track a `chain` per route in game state (reset on leaving / losing).
+- [ ] Feed the chain into the hidden-ability roll (`rollAbility`) and the wild
+      shiny roll (`src/game/progression.js`).
+- [ ] Show current chain + best chain, and reward reaching thresholds.
+
+Effort: **S–M**. Gain: ★★★.
+
+## 81. Weather / location-gated evolutions
+
+Real evolution methods that need a place or a moment: Moss Rock (Leafeon), Ice
+Rock (Glaceon), Magnetic Field (Magneton/Nosepass), plus season/weather gates.
+
+- [ ] Extend `src/game/pokemon/evolution.js` + `evolution-data.json` with a
+      `location`/`biome`/`weather` gate.
+- [ ] Check the gate against the current location in the party/box evolve UI.
+- [ ] Give each gated evolution an in-game hint so it is discoverable.
+
+Effort: **S**. Gain: ★★★.
+
+## 82. Pokewalker / step resource
+
+A real-time idle currency ("steps") that accrues while away and is spent on
+hatch speed, item finds, or revealing rare route spawns. Very on-genre.
+
+- [ ] Accrue steps in `src/game/offline.js` from the away window (like the
+      existing offline-catch replay).
+- [ ] A Pokewalker panel with spend options and a daily cap.
+- [ ] Fold it into the "while you were away" report.
+
+Effort: **medium**. Gain: ★★★★.
+
+**Meta, collection & customization**
+
+## 83. Trainer Card, titles & avatar
+
+Completely absent today. Titles come from achievements/ribbons, outfits unlock
+at milestones, and the card is exportable and shown on the save slot.
+
+- [ ] A `trainerProfile` save field (name already exists; add title, outfit,
+      badge case, favourite Pokemon).
+- [ ] Title list fed by `src/data/achievements.js` + `src/game/ribbons.js`.
+- [ ] Outfit/avatar unlocks bought or earned, stored per profile.
+- [ ] Render the card on the save slot and add a shareable PNG export.
+
+Effort: **medium**. Gain: ★★★★★.
+
+## 84. Pokemon marks
+
+Random per-individual marks with titles (Sleepy, Lunchtime, Alpha, Shiny), like
+Gen 8. Cheap collection flavour.
+
+- [ ] Roll a mark in `src/game/pokemon/creation.js` against a small table.
+- [ ] Show the mark + title on the stats panel and in the Box.
+- [ ] Add a `mark:` filter/sort to the Box.
+
+Effort: **S**. Gain: ★★.
+
+## 85. Living form-dex + completion rewards
+
+The Pokedex groups forms by dex number but does not reward set completion.
+
+- [ ] Track every form/gender/regional variant per species (the form model in
+      `src/data/pokemon-forms.js` already has the pieces).
+- [ ] Pay a reward per completed family, per regional set and per generation.
+- [ ] Add a form-completion view to the Pokedex.
+
+Effort: **medium**. Gain: ★★★★.
+
+## 86. Pokemon Bank across save slots
+
+The three save slots are isolated. Add a "cloud" panel to move individuals
+between saves; all localStorage, no backend.
+
+- [ ] A separate localStorage bank blob with its own capacity.
+- [ ] Deposit/withdraw UI that reuses `repairSave` on the way in/out.
+- [ ] Guard against cloning a Pokemon into two saves.
+
+Effort: **medium**. Gain: ★★★.
+
+## 87. Secret Base / hideout
+
+Pick a route, decorate a base with furniture/plushies/trophies, earn passive
+bonuses and a daily yield. Reuses the Pelago/Garden patterns.
+
+- [ ] A base owned per save with a decoration inventory and a placement grid.
+- [ ] A shop for furniture and trophies (milestone rewards).
+- [ ] Passive bonuses + a collectable daily yield (idle hook).
+
+Effort: **large**. Gain: ★★★.
+
+**Narrative & quests**
+
+## 88. Villain-team questlines
+
+The rival exists but no antagonist organisation does. Grunt hideouts gated
+behind badges, an admin, a boss with a legendary. The biggest content gap.
+
+- [ ] One org per region (Rocket / Aqua / Magma / Galactic / Plasma / Flare /
+      Skull / Yell / Star) with a hideout location and a short arc.
+- [ ] Reuse the trainer/gym/raid plumbing for grunts, admins and the boss.
+- [ ] A post-arc reward (a legendary quest, a Master Ball, a key item).
+
+Effort: **large**. Gain: ★★★★★.
+
+## 89. Mystery Gift / distributions
+
+Rotating date-gated mythical gifts and redeem codes, Wonder-Card style. No
+backend needed.
+
+- [ ] A date/rotation table for gift species, reusing `src/game/gifts.js`.
+- [ ] A Mystery Gift panel with a claim state and a Wonder Card view.
+- [ ] Optionally accept offline "codes" (a signed string) later.
+
+Effort: **medium**. Gain: ★★★★.
+
+## 90. Professor's story chain
+
+A multi-region questline beyond the per-species research tasks.
+
+- [ ] Extend `src/game/quests.js` with a chained regional storyline.
+- [ ] Step rewards (items, a charm, a Master Ball) and a final capstone.
+
+Effort: **medium**. Gain: ★★★.
+
+**Battle depth**
+
+## 91. Configurable auto-battle policy
+
+AUTO currently chooses moves for the player. Let players set rules instead: prefer
+STAB, avoid contact vs Rocky Helmet, switch below X%, item at Y%.
+
+- [ ] A settings shape for move/switching/item policy.
+- [ ] Feed it into `src/game/combat/ai.js` (used for the player's auto turns).
+- [ ] A compact editor in Settings with sensible defaults.
+
+Effort: **S–M**. Gain: ★★★★.
+
+## 92. Rotating raid events
+
+Tera raids exist; add Gmax raid bosses on a daily/weekly rotation with a
+simulated ally.
+
+- [ ] A rotation table picked by `daily-events.js` / date.
+- [ ] A boss modifier on the existing Tera Raid scene.
+- [ ] Event-only rewards and a completion record.
+
+Effort: **medium**. Gain: ★★★.
+
+## 93. Battle Tower ladder modifiers
+
+Weekly rotating rule sets on top of the existing Tower/Frontier (inverse, no
+items, weather-lock, no healing).
+
+- [ ] A modifier registry + a weekly pick.
+- [ ] Apply modifiers in `src/game/battle-frontier.js` / the Tower run.
+- [ ] Show the active modifier on the panel and in Records.
+
+Effort: **medium**. Gain: ★★★.
+
+**Activities & economy**
+
+## 94. Dowsing Machine
+
+A grid search for hidden items on a route; reuses the mining/dig grid UI.
+
+- [ ] A per-route hidden-item set, respawning daily.
+- [ ] A hot/cold grid minigame using `src/game/minigames/mining.js` patterns.
+
+Effort: **S**. Gain: ★★.
+
+## 95. Hide-and-seek spots
+
+Hidden Pokemon spots that reveal rare spawns, using the Picross / Ruins reveal
+pattern.
+
+- [ ] Spots on a route that reveal a bonus encounter when found.
+- [ ] Reuse the `unown-picross` / `ruins-puzzle` reveal UI.
+
+Effort: **S**. Gain: ★★.
+
+## 96. Berry / commodity market
+
+Daily price swings; buy low, sell high across days. A gentle idle economy.
+
+- [ ] A price table with daily fluctuation (seeded like `daily-events.js`).
+- [ ] A buy/sell UI (extends `src/game/shop.js`).
+- [ ] Keep it optional so it never blocks normal play.
+
+Effort: **medium**. Gain: ★★★.
+
+**Interface**
+
+## 97. Run summary / milestone timeline
+
+A shareable recap of a run's high points (catches, shinies, badges, first level
+100), beyond the flat Records panel.
+
+- [ ] Record milestone events into a capped timeline.
+- [ ] Render a summary modal + an image export.
+
+Effort: **S**. Gain: ★★★.
+
+## 98. Rebindable hotkeys
+
+Power users idling for hours would appreciate it.
+
+- [ ] A keybinding settings section and a small resolver.
+- [ ] Cover the common actions (battle speed, manual/auto, catch).
+
+Effort: **S**. Gain: ★★.
+
+---
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

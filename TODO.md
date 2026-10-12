@@ -27,7 +27,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #24, #25, #56, #62, #69, #75–#76. They
+See the numbered sections below: #24, #62, #69, #75–#76. They
 are optional extras rather than missing features.
 
 ---
@@ -70,24 +70,6 @@ Still open (design call):
 
 - [ ] Z-moves / G-Max moves are otherwise dead data — decide keep/drop.
 
-## 25. Battle engine pass
-
-`resolveBattleTurn` (`src/game/combat.js`) is complete for damage, status, stat
-changes, weather/terrain, the contact abilities, the form-change subsystem and
-the ally (doubles) abilities.
-
-Still open:
-
-- [ ] Illusion (deferred: its disguise is cosmetic plus an AI read, which an
-      idle auto-battler barely shows).
-- [ ] Overworld-only abilities (no effect in an idle auto-battler): Illuminate,
-      Run Away.
-- [ ] Battle polish: move animations / hit feedback (damage numbers already
-      float over the sprite and have a Settings toggle).
-
-*(Switching on a bad matchup is intentionally discarded: an auto-switching
-opponent is frustrating to play against.)*
-
 ## 43. Multi-battles (double / triple / rotation) as a minigame
 
 The **doubles** 2v2 minigame shipped at Kalos's Battle Maison, including the
@@ -103,22 +85,6 @@ Still open:
 Relevant code: `src/game/minigames/doubles.js`,
 `src/components/doubles-scene.js`, `src/game/reducer/minigames.js`, and
 `src/game/minigames/registry.js`.
-
-## 56. Multi-effect move pass
-
-The move data supports a primary effect plus one `secondary`, and
-`public/reference.html` is the live checklist of every implemented effect.
-
-Still open:
-
-- [ ] Moves that carry a third effect (a primary effect plus two riders), which
-      the single `secondary` slot still cannot express.
-
-Relevant code: `src/data/move-effects.js`, `src/game/combat/turn.js`,
-`src/game/move-info.js`, and `public/reference.html` (regenerate with
-`node tools/generate-reference.cjs`).
-
-Effort: **small** (the remaining bits are one-offs).
 
 ## 62. Offline depth
 

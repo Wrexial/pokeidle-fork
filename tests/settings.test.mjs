@@ -148,6 +148,14 @@ test('damage numbers and shiny sparkles default on and toggle', () => {
   assert.equal(noSparkle.showDamageNumbers, true)
 })
 
+test('move impacts default on and toggle independently', () => {
+  assert.equal(initialGameState.showMoveAnimations, true)
+  const off = gameReducer(initialGameState, { type: 'TOGGLE_MOVE_ANIMATIONS' })
+  assert.equal(off.showMoveAnimations, false)
+  assert.equal(off.showDamageNumbers, true, 'the other display toggles are untouched')
+  assert.equal(gameReducer(off, { type: 'TOGGLE_MOVE_ANIMATIONS' }).showMoveAnimations, true)
+})
+
 test('SET_DEFAULT_CATCH_RULE updates only the default rule', () => {
   const defaultRule = { ...initialGameState.globalCatchDefaults }
   const withLevel = gameReducer(initialGameState, {

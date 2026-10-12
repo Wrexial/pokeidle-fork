@@ -2577,6 +2577,11 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           damage: dealtDamage,
           hpAfter: attack.defender.currentHp,
           hpMax: attack.defender.maxHp,
+          // The move that landed, so the battle scene can flash a matching
+          // impact over the target.
+          moveId: attack.moveId,
+          moveType: moveDef?.type,
+          moveCategory: moveDef?.category,
         },
       }),
       anyCrit &&

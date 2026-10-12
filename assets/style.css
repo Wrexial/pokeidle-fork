@@ -776,6 +776,60 @@ img {
     }
 }
 
+/* A short type-coloured burst where a damaging move lands (Move Impacts). */
+.move-impact {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 82%;
+    height: 82%;
+    margin: -41% 0 0 -41%;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 3;
+    background: radial-gradient(circle, var(--type-color, #fff) 0%, transparent 62%);
+    animation: moveImpact .3s ease-out forwards
+}
+
+.move-impact-physical {
+    background:
+        linear-gradient(115deg, transparent 42%, rgba(255,255,255,.95) 48%, transparent 54%),
+        radial-gradient(circle, var(--type-color, #fff) 0%, transparent 60%);
+    animation: moveImpactPhysical .28s ease-out forwards
+}
+
+@keyframes moveImpact {
+    0% {
+        opacity: 0;
+        transform: scale(.35)
+    }
+
+    35% {
+        opacity: .9
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(1.15)
+    }
+}
+
+@keyframes moveImpactPhysical {
+    0% {
+        opacity: 0;
+        transform: scale(.5) rotate(-12deg)
+    }
+
+    40% {
+        opacity: 1
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(1.05) rotate(-12deg)
+    }
+}
+
 .damage-float {
     position: absolute;
     top: 0;
@@ -814,6 +868,10 @@ img {
 
     .damage-float {
         animation: damageFloatReduced .7s ease-out forwards
+    }
+
+    .move-impact {
+        display: none
     }
 }
 

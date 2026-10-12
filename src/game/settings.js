@@ -49,6 +49,7 @@ export const SETTINGS_KEYS = /** @type {const} */ ([
   'largeText',
   'spriteStyle',
   'showDamageNumbers',
+  'showMoveAnimations',
   'showShinySparkles',
   'martCollapsed',
   'seenTutorials',

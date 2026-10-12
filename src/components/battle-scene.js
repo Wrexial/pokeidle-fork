@@ -192,6 +192,19 @@ export function BattleScene({ onOpenMenu }) {
             key: battleEvents.length,
           }
         : null,
+    // A type-coloured burst over the sprite a move lands on.
+    moveImpact =
+      state.showMoveAnimations &&
+      isLatestDamage &&
+      lastDamageEvent?.type === 'damage' &&
+      lastDamageEvent?.data?.moveType
+        ? {
+            target: lastDamageEvent.data.target,
+            type: String(lastDamageEvent.data.moveType).toLowerCase(),
+            category: lastDamageEvent.data.moveCategory === 'special' ? 'special' : 'physical',
+            key: battleEvents.length,
+          }
+        : null,
     lastProtectEvent = battleEvents.filter((event) => event.type === 'protect').pop(),
     protectEffect =
       lastProtectEvent && battleEvents.indexOf(lastProtectEvent) === battleEvents.length - 1
@@ -487,6 +500,10 @@ export function BattleScene({ onOpenMenu }) {
                 className: 'damage-float',
                 children: `-${damageFloat.amount}`,
               }, `enemy-float-${damageFloat.key}`),
+            moveImpact?.target === 'enemy' &&
+              jsx('div', {
+                className: `move-impact move-impact-${moveImpact.category} type-bg-${moveImpact.type}`,
+              }, `enemy-impact-${moveImpact.key}`),
             protectEffect?.target === 'enemy' && !protectEffect.failed &&
               jsx('div', { className: 'protect-shield' }),
             protectEffect?.target === 'enemy' &&
@@ -530,6 +547,10 @@ export function BattleScene({ onOpenMenu }) {
               className: 'damage-float',
               children: `-${damageFloat.amount}`,
             }, `player-float-${damageFloat.key}`),
+          moveImpact?.target === 'player' &&
+            jsx('div', {
+              className: `move-impact move-impact-${moveImpact.category} type-bg-${moveImpact.type}`,
+            }, `player-impact-${moveImpact.key}`),
           protectEffect?.target === 'player' && !protectEffect.failed &&
             jsx('div', { className: 'protect-shield' }),
           protectEffect?.target === 'player' &&

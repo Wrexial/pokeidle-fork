@@ -448,6 +448,13 @@ export function SettingsModal({ onClose }) {
                           : 'Damage Numbers: OFF',
                       }),
                       jsx('button', {
+                        className: `settings-toggle-btn${state.showMoveAnimations ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_MOVE_ANIMATIONS' }),
+                        children: state.showMoveAnimations
+                          ? 'Move Impacts: ON'
+                          : 'Move Impacts: OFF',
+                      }),
+                      jsx('button', {
                         className: `settings-toggle-btn${state.showShinySparkles ? ' active' : ''}`,
                         onClick: () => dispatch({ type: 'TOGGLE_SHINY_SPARKLES' }),
                         children: state.showShinySparkles
@@ -457,7 +464,7 @@ export function SettingsModal({ onClose }) {
                       jsx('p', {
                         className: 'settings-hint',
                         children:
-                          'Damage Numbers float the damage dealt over a sprite in battle, and Shiny Sparkles marks a shiny Pokemon with a twinkle.',
+                          'Damage Numbers float the damage dealt over a sprite in battle, Move Impacts flash a colour-coded burst where a move lands, and Shiny Sparkles marks a shiny Pokemon with a twinkle.',
                       }),
                     ],
                   }),

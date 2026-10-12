@@ -289,6 +289,19 @@ export function toggleDamageNumbers(state) {
 }
 
 /**
+ * Handle the `TOGGLE_MOVE_ANIMATIONS` action: flash a move's impact over the
+ * sprite it hit, or hide it for a calmer scene.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function toggleMoveAnimations(state) {
+  return {
+    ...state,
+    showMoveAnimations: !state.showMoveAnimations,
+  }
+}
+
+/**
  * Handle the `TOGGLE_SHINY_SPARKLES` action: sparkle a shiny Pokemon's sprite
  * in battle, or hide the effect.
  * @param {GameState} state

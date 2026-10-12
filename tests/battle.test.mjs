@@ -101,6 +101,38 @@ test('poison deals end-of-turn residual damage', () => {
   assert.ok(player.currentHp < 80)
 })
 
+test('a damaging move tags its damage event with the move type and category', () => {
+  const originalRandom = Math.random
+  Math.random = () => 0.5
+  try {
+    const player = battler({
+        name: 'Player',
+        isPlayer: true,
+        moves: ['flamethrower'],
+        speed: 200,
+        spAttack: 300,
+      }),
+      enemy = battler({
+        name: 'Foe',
+        moves: ['splash'],
+        currentHp: 9999,
+        maxHp: 9999,
+        spDefense: 1,
+      }),
+      events = resolveBattleTurn(player, enemy, false),
+      damage = events.find(
+        (/** @type {any} */ event) => event.type === 'damage' && event.data?.target === 'enemy'
+      )
+    assert.ok(damage, 'the move dealt damage')
+    // The battle scene reads these to flash a matching impact over the target.
+    assert.equal(damage.data.moveType, 'Fire')
+    assert.equal(damage.data.moveCategory, 'special')
+    assert.equal(damage.data.moveId, 'flamethrower')
+  } finally {
+    Math.random = originalRandom
+  }
+})
+
 test('a roaming legendary can flee at the end of a turn', () => {
   const originalRandom = Math.random
   Math.random = () => 0

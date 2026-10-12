@@ -744,6 +744,14 @@ type GameState = {
   enemyTurnSpent?: boolean
   /** The move chosen for the next manual turn (null when none). */
   pendingPlayerMove?: string | null
+  /** Rare wild pack battles are enabled (see game/horde.js). */
+  hordeEncounters: boolean
+  /** The live pack during the `horde` phase, or null. */
+  hordePack: any[] | null
+  /** The player's battle Pokemon during the `horde` phase, or null. */
+  hordePlayer: any | null
+  /** The rolling horde battle log. */
+  hordeLog: string[]
   alwaysCatchShinies: boolean
   trainerBattle: TrainerBattle | null
   bossBattle: TrainerBattle | null

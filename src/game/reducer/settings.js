@@ -142,6 +142,18 @@ export function toggleAutoHeal(state) {
 }
 
 /**
+ * Handle the `TOGGLE_HORDES` action: allow the rare wild pack battles.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function toggleHordes(state) {
+  return {
+    ...state,
+    hordeEncounters: state.hordeEncounters === false,
+  }
+}
+
+/**
  * Handle the `TOGGLE_BROWSER_NOTIFICATIONS` action.
  * @param {GameState} state
  * @param {GameAction} action

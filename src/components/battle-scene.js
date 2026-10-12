@@ -39,6 +39,7 @@ import { PokeRadarScene } from './poke-radar-scene.js'
 import { BattleRoyalScene } from './battle-royal-scene.js'
 import { ChampionGauntletScene } from './champion-gauntlet-scene.js'
 import { DoublesScene } from './doubles-scene.js'
+import { HordeScene } from './horde-scene.js'
 import { RotationScene } from './rotation-scene.js'
 import { FreeForAllScene } from './free-for-all-scene.js'
 import { DynamaxAdventuresScene } from './dynamax-adventures-scene.js'
@@ -131,6 +132,7 @@ export function BattleScene({ onOpenMenu }) {
   if (state.phase === 'battleRoyal') return jsx(BattleRoyalScene, {})
   if (state.phase === 'championGauntlet') return jsx(ChampionGauntletScene, {})
   if (state.phase === 'doubles') return jsx(DoublesScene, {})
+  if (state.phase === 'horde') return jsx(HordeScene, {})
   if (state.phase === 'triples') return jsx(DoublesScene, { size: 3 })
   if (state.phase === 'rotation') return jsx(RotationScene, {})
   if (state.phase === 'freeForAll') return jsx(FreeForAllScene, {})

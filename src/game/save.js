@@ -1009,6 +1009,8 @@ export function repairSave(saved) {
     victoryTokens: saved.victoryTokens ?? 0,
     autoProceed: saved.autoProceed ?? false,
     autoHeal: !!saved.autoHeal,
+    // Hordes default on; a save only turns them off by saying so.
+    hordeEncounters: saved.hordeEncounters !== false,
     // Damage numbers and shiny sparkles are on unless a save explicitly turned
     // them off (an older save has neither field).
     showDamageNumbers: saved.showDamageNumbers !== !1,

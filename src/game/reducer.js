@@ -8,7 +8,7 @@ import { createGarden } from './garden.js'
 import { createPelago } from './pelago.js'
 import { createJobs } from './jobs.js'
 import { DEFAULT_ROD } from './minigames.js'
-import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, executeTurn, fleeBattle, gmaxEvolve, megaEvolve, startBossBattle, startEncounter, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
+import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, endHorde, executeTurn, fleeBattle, gmaxEvolve, hordeRound, megaEvolve, startBossBattle, startEncounter, startHorde, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
 import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain } from './reducer/collection.js'
 import { buyCafeItem, buyItem, buyRewardItem, clearHeldItem, collectKurtBalls, craftApricornBall, reviveFossil, sellItem, setAlwaysCatchShinies, setCatchRule, setDefaultCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
@@ -23,7 +23,7 @@ import { createBreedingTracker } from './breeding-projects.js'
 import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRouteActivity, endSafari, payMinigameFee, recordGameCornerWin, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startChampionGauntlet, startBugContest, startContest, startCurry, startDoubles, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack, startMantineSurf, startRotomRally, startOgreOustin, startTypeFusion, startUnownPicross, startPokeshot, startTeraRaid, startPokeword, startBerryBlender, startUltraWarp, startTriples, startRotation, startFreeForAll } from './reducer/minigames.js'
 import { applyTeamPreset, boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, deleteTeamPreset, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseFiltered, releaseHatchling, releasePokemon, reorderBox, reorderParty, saveTeamPreset, setBoxSort, setMoves, setNickname, startEvolution, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
-import { addLog, clearLevelUp, dismissNotification, markCatchRoute, markTutorialSeen, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoHeal, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleDamageNumbers, toggleLargeText, toggleMartCollapsed, toggleMoveAnimations, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx, toggleShinySparkles, toggleSpriteStyle } from './reducer/settings.js'
+import { addLog, clearLevelUp, dismissNotification, markCatchRoute, markTutorialSeen, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoHeal, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleDamageNumbers, toggleHordes, toggleLargeText, toggleMartCollapsed, toggleMoveAnimations, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx, toggleShinySparkles, toggleSpriteStyle } from './reducer/settings.js'
 import { buyPrestigePerk, phaseIdle, prestigeRegion, resetEliteFour, resetPrestigePerks, selectStarter, travel, unlockRegion } from './reducer/world.js'
 import { startFrontier } from './reducer/frontier.js'
 
@@ -249,6 +249,14 @@ export const initialGameState = {
   enemyTurnSpent: !1,
   /** The move the player picked for the next manual turn (null when none). */
   pendingPlayerMove: null,
+  /** Rare pack battles of one wild species (see game/horde.js). */
+  hordeEncounters: !0,
+  /** The live pack during the `horde` phase, or null. */
+  hordePack: null,
+  /** The player's battle Pokemon during the `horde` phase, or null. */
+  hordePlayer: null,
+  /** The rolling horde battle log. */
+  hordeLog: [],
 }
 
 /**
@@ -470,6 +478,8 @@ export function gameReducer(state, action) {
       return toggleAutoProceed(state, action)
     case 'TOGGLE_AUTO_HEAL':
       return toggleAutoHeal(state)
+    case 'TOGGLE_HORDES':
+      return toggleHordes(state)
     case 'TOGGLE_BROWSER_NOTIFICATIONS':
       return toggleBrowserNotifications(state, action)
     case 'TOGGLE_NOTIFY_SHINY':
@@ -656,6 +666,12 @@ export function gameReducer(state, action) {
       return buyRewardItem(state, action)
     case 'START_RAID':
       return startRaid(state, action)
+    case 'START_HORDE':
+      return startHorde(state, action)
+    case 'HORDE_ROUND':
+      return hordeRound(state, action)
+    case 'END_HORDE':
+      return endHorde(state, action)
     case 'UPDATE_VOLATILE':
       return updateVolatile(state, action)
     case 'USE_EFFECT_ITEM':

@@ -40,6 +40,7 @@ export const SETTINGS_KEYS = /** @type {const} */ ([
   'globalCatchDefaults',
   'autoProceed',
   'autoHeal',
+  'hordeEncounters',
   'browserNotifications',
   'notifyShiny',
   'notifyRare',

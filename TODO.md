@@ -35,7 +35,7 @@ number and full detail further down. Promote into the tiers above once scoped.
 - **Strong candidates:** #78 Seasons · #83 Trainer Card, titles & avatar ·
   #88 Villain-team questlines (each fills a real gap for the effort).
 - **Big but wanted:** #87 Secret Base · #86 Pokemon Bank.
-- **Medium:** #79 Hordes · #82 Pokewalker · #85 Form dex · #89 Mystery Gift ·
+- **Medium:** #82 Pokewalker · #85 Form dex · #89 Mystery Gift ·
   #90 Professor's story · #91 Auto-battle policy · #92 Raid events ·
   #93 Tower ladders · #96 Berry market.
 - **Quick wins:** #80 SOS chaining · #81 Field evolutions · #84 Marks ·
@@ -50,19 +50,6 @@ order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
 player-facing value (★ = nice to have, ★★★★★ = core missing feature).
 
 **Living world & encounters**
-
-## 79. Horde encounters
-
-Wild battles are 1v1 only. Add 3–5-of-a-species pack battles that reuse the
-doubles round engine (`src/game/minigames/doubles.js`).
-
-- [ ] A wild-encounter variant that spawns a pack; spread moves hit the whole
-      pack, a single-target move picks one.
-- [ ] Clearing the whole pack pays extra EXP/drops; cap it so it stays idle-
-      friendly.
-- [ ] Optional: a rare "horde" rate per route and a Settings toggle.
-
-Effort: **medium**. Gain: ★★★.
 
 ## 80. SOS chaining
 

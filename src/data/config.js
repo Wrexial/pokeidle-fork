@@ -38,6 +38,16 @@ export const swarmShinyMultiplier = 4
 /** Best shiny odds a swarm can reach — never better than 1 in 256. */
 export const swarmShinyOddsFloor = 256
 
+/** Chance per wild encounter that it becomes a horde (a pack of one species). */
+export const hordeEncounterChance = 0.04
+/** A horde packs this many of its species (inclusive). */
+export const HORDE_SIZE_MIN = 3
+export const HORDE_SIZE_MAX = 5
+/** Hard cap on horde rounds, so a stall war can never hang the idle loop. */
+export const HORDE_MAX_ROUNDS = 40
+/** Cap on extra drop rolls a cleared horde pays, keeping it idle-friendly. */
+export const HORDE_DROP_ROLLS_CAP = 3
+
 /** Chance per wild encounter that a region's roaming legendary appears. */
 export const roamerEncounterChance = 1 / 1500
 /** Chance per turn that a fighting roamer flees. */

@@ -259,6 +259,17 @@ export function SettingsModal({ onClose }) {
                         children:
                           'Auto-Heal sends your party to the Pokemon Center whenever the map is idle and someone is hurt, so an unattended run stays topped up.',
                       }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${state.hordeEncounters !== false ? ' active' : ''}`,
+                        onClick: () => dispatch({ type: 'TOGGLE_HORDES' }),
+                        children:
+                          state.hordeEncounters !== false ? 'Hordes: ON' : 'Hordes: OFF',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Hordes are rare wild battles against a pack of 3-5 of one species. Spread moves hit the whole pack, and clearing it pays bonus EXP and extra item drops. Turn them off to keep every wild encounter a single Pokemon.',
+                      }),
                       jsxs('div', {
                         className: 'settings-default-catch',
                         children: [

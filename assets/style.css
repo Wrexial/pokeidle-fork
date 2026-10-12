@@ -16585,6 +16585,32 @@ img {
     text-overflow: ellipsis
 }
 
+/* Horde battle: a single player facing a pack of 3-5 of one species. */
+.horde-pack {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 8px;
+    width: 100%
+}
+
+.horde-fighter .doubles-sprite {
+    width: 44px;
+    height: 44px
+}
+
+.horde-player {
+    display: flex;
+    justify-content: center;
+    width: 100%
+}
+
+.horde-hint {
+    font-size: 8px;
+    color: #cbbfa6
+}
+
 .cafe-panel {
     display: flex;
     flex-direction: column;

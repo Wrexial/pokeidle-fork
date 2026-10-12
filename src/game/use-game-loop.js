@@ -3,7 +3,7 @@
 // hooks.js so the cross-cutting UI hooks stay small.
 
 import React from 'react'
-import { trainerClassPayouts, missingnoEncounterChance, mewUnderTruckChance, swarmShinyMultiplier, swarmShinyOddsFloor, manualInputTimeoutMs } from '../data/config.js'
+import { trainerClassPayouts, hordeEncounterChance, missingnoEncounterChance, mewUnderTruckChance, swarmShinyMultiplier, swarmShinyOddsFloor, manualInputTimeoutMs } from '../data/config.js'
 import { ballOrder } from '../data/items.js'
 import { withoutQuestLegendary } from '../data/legendary-quests.js'
 import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerData } from '../data/gameData.js'
@@ -20,6 +20,8 @@ import { currentSeason } from './seasons.js'
 import { heldMoneyMultiplier } from './held-items.js'
 import { genderForPokemon } from './breeding.js'
 import { prestigeMultipliers } from './prestige.js'
+import { buildHorde, hordeAlive, hordeExpMultiplier, rollHordeSize } from './horde.js'
+import { runDoublesRound } from './minigames/doubles.js'
 import { awardExperience, checkShinyOdds, encountersForPhase, isHoneyActive, partyNeedsHealing, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
 
 export function useGameLoop() {
@@ -316,16 +318,17 @@ export function useGameLoop() {
               currentGameState.currentRoute,
               currentGameState.shinyChain
             ),
+            roamerData = resolveRoamer(
+              regionId,
+              currentGameState.pokedexSeen,
+              currentGameState.pokedexCaught,
+              completedGenerationSet,
+              dailyShinyBonus,
+              currentGameState.challengeMonotype,
+              raidProgressFor(currentGameState, regionId)
+            ),
             spawningPokemonData =
-              resolveRoamer(
-                regionId,
-                currentGameState.pokedexSeen,
-                currentGameState.pokedexCaught,
-                completedGenerationSet,
-                dailyShinyBonus,
-                currentGameState.challengeMonotype,
-                raidProgressFor(currentGameState, regionId)
-              ) ??
+              roamerData ??
               resolvePokemonEncounter(
                 routeEncounterData,
                 activeModifierMultipliers,
@@ -342,6 +345,14 @@ export function useGameLoop() {
                 // The focus hunt makes its target much more likely.
                 currentGameState.hunt ?? null
               ),
+            // A horde is a rare pack of the rolled species (never a roamer, so
+            // legendaries keep their solo chase).
+            hordeRoll =
+              !roamerData &&
+              !currentGameState.challengeRestrictCatches &&
+              currentGameState.battleMode !== 'manual' &&
+              currentGameState.hordeEncounters !== !1 &&
+              Math.random() < hordeEncounterChance,
             catchRouteKey = currentGameState.currentRoute ?? '',
             routeCatchUsed =
               !!currentGameState.challengeRestrictCatches &&
@@ -367,6 +378,37 @@ export function useGameLoop() {
               type: 'MARK_CATCH_ROUTE',
               payload: { routeKey: catchRouteKey },
             })
+          if (hordeRoll) {
+            const hordeSize = rollHordeSize(),
+              hordePack = buildHorde(spawningPokemonData.speciesKey, spawningPokemonData.level, {
+                size: hordeSize,
+                leadAbility: currentGameState.playerPokemon?.ability ?? null,
+                leadGender: currentGameState.playerPokemon?.gender ?? null,
+              })
+            ;(dispatch({
+              type: 'START_HORDE',
+              payload: { enemies: hordePack },
+            }),
+              dispatch({
+                type: 'MARK_SEEN',
+                payload: {
+                  speciesKey: spawningPokemonData.speciesKey,
+                },
+              }),
+              dispatch({
+                type: 'UPDATE_SHINY_CHAIN',
+                payload: {
+                  speciesKey: spawningPokemonData.speciesKey,
+                },
+              }),
+              dispatch({
+                type: 'ADD_LOG',
+                payload: {
+                  message: `A horde of ${hordeSize} ${spawningPokemonData.species.name} appeared!`,
+                },
+              }))
+            break
+          }
           ;(dispatch({
             type: 'START_ENCOUNTER',
             payload: {
@@ -745,6 +787,77 @@ export function useGameLoop() {
             payload: {
               player: playerVolatileUpdate,
               enemy: enemyVolatileUpdate,
+            },
+          })
+          break
+        }
+        case 'horde': {
+          const hordePlayer = currentGameState.hordePlayer,
+            pack = currentGameState.hordePack ?? []
+          if (!hordePlayer || pack.length === 0) {
+            dispatch({ type: 'PHASE_IDLE' })
+            return
+          }
+          // The whole pack is down: pay the capped extra EXP here (the loop
+          // owns the bonuses) and let END_HORDE hand out the drops.
+          if (!pack.some(hordeAlive)) {
+            const activeForExp = currentGameState.playerPokemon,
+              hordeExpShare =
+                currentGameState.activeEffects.some(
+                  (/** @type {any} */ effect) => effect.type === 'expShare'
+                ) ||
+                (currentGameState.battleStyle === 'training' &&
+                  (activeForExp?.level ?? 0) >= 100)
+            if (activeForExp)
+              awardExperience(
+                dispatch,
+                activeForExp,
+                pack[0],
+                hordeExpMultiplier(pack.length),
+                hordeExpShare,
+                currentGameState.party,
+                currentGameState.activePlayerPokemonIndex,
+                expBonus,
+                currentGameState.battleParticipants
+              )
+            dispatch({ type: 'END_HORDE', payload: { won: !0, size: pack.length } })
+            return
+          }
+          if (!hordeAlive(hordePlayer)) {
+            dispatch({ type: 'END_HORDE', payload: { won: !1, size: pack.length } })
+            return
+          }
+          // One doubles round: the pack acts together and a single-target move
+          // picks one of them (a spread move hits them all).
+          const hordeAllies = [
+              {
+                ...hordePlayer,
+                statStages: { ...(hordePlayer.statStages ?? {}) },
+                moves: hordePlayer.moves ?? [],
+              },
+            ],
+            hordeFoes = pack.map((/** @type {any} */ member) => ({
+              ...member,
+              statStages: { ...(member.statStages ?? {}) },
+            }))
+          let hordeResult
+          try {
+            hordeResult = runDoublesRound(hordeAllies, hordeFoes)
+          } catch (error) {
+            console.error('Horde round failed', error)
+            dispatch({
+              type: 'ADD_LOG',
+              payload: { message: 'The horde scattered and was abandoned.' },
+            })
+            dispatch({ type: 'END_HORDE', payload: { won: !1, size: pack.length } })
+            return
+          }
+          dispatch({
+            type: 'HORDE_ROUND',
+            payload: {
+              player: hordeAllies[0],
+              pack: hordeFoes,
+              log: hordeResult.log,
             },
           })
           break

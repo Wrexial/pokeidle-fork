@@ -11,6 +11,7 @@ const { pokemonSpecies, regions, raidLegendaryPoolFor, raidPoolFor, gymLeaderDat
 const { pickRaidLegendary, raidLegendaryWeight, raidProgressFor, resolveRoamer } = await import(
   '../src/game/progression.js'
 )
+const { LEGENDARY_QUESTS } = await import('../src/data/legendary-quests.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 
 /** @param {Record<string, any>} [overrides] */
@@ -43,8 +44,17 @@ test('every region keeps a legendary-only Raid Island', () => {
       )
     const keys = legendary.map((entry) => entry.speciesKey)
     assert.equal(new Set(keys).size, keys.length, `${region.id} lists a species twice`)
-    assert.deepEqual(raidPoolFor(region.id), legendary)
-    assert.deepEqual(raidLegendaryPoolFor(region.id), legendary)
+    // The region's box legendary is earned through its Legendary Quest, so the
+    // random pool accessors leave it out (and only it).
+    const questLegendary = LEGENDARY_QUESTS[region.id]?.legendary,
+      randomPool = legendary.filter((entry) => entry.speciesKey !== questLegendary)
+    assert.deepEqual(raidPoolFor(region.id), randomPool)
+    assert.deepEqual(raidLegendaryPoolFor(region.id), randomPool)
+    if (questLegendary)
+      assert.ok(
+        !randomPool.some((entry) => entry.speciesKey === questLegendary),
+        `${region.id} keeps ${questLegendary} quest-exclusive`
+      )
   }
 })
 

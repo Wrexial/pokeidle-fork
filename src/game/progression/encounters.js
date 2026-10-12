@@ -2,6 +2,7 @@
 
 import { roamerEncounterChance, shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance } from '../../data/config.js'
 import { GENERATION_DEX_RANGES, evolutionData, gymLeaderData, isSpeciesCharmed, pokemonSpecies, regions } from '../../data/gameData.js'
+import { withoutQuestLegendary } from '../../data/legendary-quests.js'
 import { challengeEligibleSpecies, speciesHasType } from '../pokemon.js'
 import { HUNT_ENCOUNTER_MULTIPLIER, huntMatchesSpecies } from '../hunt.js'
 
@@ -349,11 +350,14 @@ export function pickRaidLegendary(pool, pokedexSeen, pokedexCaught, progress = 0
  */
 export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGenerationSet, shinyBonus = 1, monotype = null, progress = 0) {
   const region = regions.find((candidate) => candidate.id === regionId),
-    candidates = (region?.raidPool ?? []).filter(
-      (entry) =>
-        pokemonSpecies[entry.speciesKey]?.legendary &&
-        !pokedexCaught.includes(entry.speciesKey) &&
-        (!monotype || speciesHasType(entry.speciesKey, monotype))
+    candidates = withoutQuestLegendary(
+      regionId,
+      (region?.raidPool ?? []).filter(
+        (entry) =>
+          pokemonSpecies[entry.speciesKey]?.legendary &&
+          !pokedexCaught.includes(entry.speciesKey) &&
+          (!monotype || speciesHasType(entry.speciesKey, monotype))
+      )
     )
   if (candidates.length === 0 || Math.random() >= roamerEncounterChance) return null
   const entry = pickRaidLegendary(candidates, pokedexSeen, pokedexCaught, progress)

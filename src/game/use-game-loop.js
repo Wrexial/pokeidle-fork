@@ -5,6 +5,7 @@
 import React from 'react'
 import { trainerClassPayouts, missingnoEncounterChance, mewUnderTruckChance, swarmShinyMultiplier, swarmShinyOddsFloor, manualInputTimeoutMs } from '../data/config.js'
 import { ballOrder } from '../data/items.js'
+import { withoutQuestLegendary } from '../data/legendary-quests.js'
 import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerData } from '../data/gameData.js'
 import { gmaxEvolveReady, megaEvolveReady } from '../data/mega-evolution.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
@@ -263,14 +264,19 @@ export function useGameLoop() {
           const currentEncounterData =
             encounterData[currentGameState.currentRoute]
           if (!currentEncounterData) return
+          const regionId = mapData[currentGameState.currentLocation]?.region ?? 'kanto'
           // Time-gated finds (a Hoothoot that only shows at night, ...): keep the
           // phase-matching entries, falling back to the full table when a route
-          // would otherwise be empty (see encountersForPhase).
+          // would otherwise be empty (see encountersForPhase). The region's box
+          // legendary is always dropped: it is earned through its Legendary
+          // Quest, never a random raid-island spawn.
           const wildEncounterData = {
             ...currentEncounterData,
-            encounters: encountersForPhase(currentEncounterData.encounters, isNightTime()),
+            encounters: withoutQuestLegendary(
+              regionId,
+              encountersForPhase(currentEncounterData.encounters, isNightTime())
+            ),
           },
-            regionId = mapData[currentGameState.currentLocation]?.region ?? 'kanto',
             activeSwarm =
               currentGameState.swarm?.routeKey === currentGameState.currentRoute
                 ? currentGameState.swarm

@@ -99,10 +99,11 @@ export function LegendaryQuestPanel({ regionId }) {
     [confirming, setConfirming] = React.useState(false)
   if (!quest) return null
   const species = pokemonSpecies[quest.legendary],
+    // The challenge can be taken from the Raid Island even mid-session (it just
+    // restarts the raid with the quest's box legendary).
     canChallenge =
       quest.ready &&
       !!quest.raidLocation &&
-      !state.inRaid &&
       state.phase !== 'healing' &&
       state.party.some((member) => member.currentHp > 0)
   return jsxs('div', {

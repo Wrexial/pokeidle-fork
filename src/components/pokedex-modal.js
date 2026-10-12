@@ -17,6 +17,7 @@ import {
   raidPoolFor,
 } from '../data/gameData.js'
 import { pickRaidLegendary, raidProgressFor } from '../game/progression.js'
+import { legendaryQuestStatus } from '../game/legendary-quests.js'
 import { pokedexSourceLabels } from '../game/pokedex-sources.js'
 import { speciesMatchingSearch } from '../game/species-search.js'
 import { useGame } from '../game/context.js'
@@ -346,15 +347,22 @@ export function PokedexModal({ onClose, inline = false }) {
                                 // roster) instead of travelling there.
                                 if (isRaid) {
                                   const region = location.region ?? 'kanto',
+                                    quest = legendaryQuestStatus(state, region),
+                                    // The box legendary is quest-only: its raid
+                                    // starts once the quest is ready, never
+                                    // from the weighted random roll.
+                                    questReady =
+                                      quest?.ready && quest.legendary === activeKey,
                                     pool = raidPoolFor(region),
-                                    target =
-                                      pool.find((entry) => entry.speciesKey === activeKey) ??
-                                      pickRaidLegendary(
-                                        pool,
-                                        state.pokedexSeen,
-                                        state.pokedexCaught,
-                                        raidProgressFor(state, region)
-                                      )
+                                    target = questReady
+                                      ? { speciesKey: quest.legendary, level: quest.level }
+                                      : pool.find((entry) => entry.speciesKey === activeKey) ??
+                                        pickRaidLegendary(
+                                          pool,
+                                          state.pokedexSeen,
+                                          state.pokedexCaught,
+                                          raidProgressFor(state, region)
+                                        )
                                   if (!target) return
                                   dispatch({
                                     type: 'START_RAID',

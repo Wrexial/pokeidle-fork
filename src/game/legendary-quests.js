@@ -3,25 +3,12 @@
 // you challenge the legendary directly; the quest is done once it is caught.
 
 import { gymLeaderData, mapData, regions } from '../data/gameData.js'
+import { LEGENDARY_QUESTS } from '../data/legendary-quests.js'
+
+export { LEGENDARY_QUESTS }
 
 /** Ancient Relics a region's legendary quest asks for. */
 export const QUEST_RELIC_COUNT = 10
-
-/**
- * The box legendary each region's quest hunts, with a short quest name.
- * @type {Record<string, { legendary: string, name: string }>}
- */
-export const LEGENDARY_QUESTS = {
-  kanto: { legendary: 'mewtwo', name: 'The Psychic Cat' },
-  johto: { legendary: 'lugia', name: 'The Diving Pokemon' },
-  hoenn: { legendary: 'rayquaza', name: 'The Sky High Pokemon' },
-  sinnoh: { legendary: 'giratina', name: 'The Renegade' },
-  unova: { legendary: 'kyurem', name: 'The Boundary Pokemon' },
-  kalos: { legendary: 'xerneas', name: 'The Life Pokemon' },
-  alola: { legendary: 'necrozma', name: 'The Prism Pokemon' },
-  galar: { legendary: 'eternatus', name: 'The Eternity Pokemon' },
-  paldea: { legendary: 'terapagos', name: 'The Tera Pokemon' },
-}
 
 /**
  * A short pre-battle scene for each legendary quest's boss: the lines a

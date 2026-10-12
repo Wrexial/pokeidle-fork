@@ -6,6 +6,7 @@ import { baseRegions, encounterData, raidLegendaryPoolFor, mapAreas, mapData, po
 import { biomeForLocation } from '../data/ui.js'
 import { useGame } from '../game/context.js'
 import { createRoadPaths, getRegionUnlockTokens, pickRaidLegendary, raidProgressFor } from '../game/progression.js'
+import { legendaryQuestStatus } from '../game/legendary-quests.js'
 import { servicePoiKinds } from '../game/services.js'
 import { MapNode } from './map-node.js'
 import { DayPhaseChip } from './day-phase-chip.js'
@@ -145,20 +146,27 @@ export function TownMap() {
     const locationData = mapData[location]
     if (locationData?.type === 'raid') {
       if (state.raidCooldownEnd && Date.now() < state.raidCooldownEnd) return
-      const pool = raidLegendaryPoolFor(locationData.region ?? 'kanto'),
-        legendary = pickRaidLegendary(
-          pool,
-          state.pokedexSeen,
-          state.pokedexCaught,
-          raidProgressFor(state, locationData.region ?? 'kanto')
-        )
+      const regionId = locationData.region ?? 'kanto',
+        // Once the Legendary Quest's steps are done, the Raid Island hands the
+        // player its box legendary directly instead of a weighted roll.
+        quest = legendaryQuestStatus(state, regionId),
+        pool = raidLegendaryPoolFor(regionId),
+        legendary =
+          quest?.ready && quest.raidLocation === location
+            ? { speciesKey: quest.legendary, level: quest.level }
+            : pickRaidLegendary(
+                pool,
+                state.pokedexSeen,
+                state.pokedexCaught,
+                raidProgressFor(state, regionId)
+              )
       if (!legendary) return
       dispatch({
         type: 'START_RAID',
         payload: {
           legendary: legendary.speciesKey,
           level: legendary.level,
-          region: locationData.region ?? 'kanto',
+          region: regionId,
           location,
         },
       })

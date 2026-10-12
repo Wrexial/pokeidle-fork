@@ -1,6 +1,7 @@
 // Split from the former assets/index.js.
 
 import { applyMoveOverrides } from './move-effects.js'
+import { withoutQuestLegendary } from './legendary-quests.js'
 import { buildFormModel } from './pokemon-forms.js'
 
 async function startApp() {
@@ -167,7 +168,7 @@ export function dlcParentRegion(regionId) {
  */
 export function raidPoolFor(regionId) {
   const region = regions.find((candidate) => candidate.id === regionId)
-  return region ? [...(region.raidPool ?? [])] : []
+  return region ? withoutQuestLegendary(regionId, [...(region.raidPool ?? [])]) : []
 }
 
 /**
@@ -176,7 +177,8 @@ export function raidPoolFor(regionId) {
  * @returns {{ speciesKey: string, level: number }[]}
  */
 export function raidLegendaryPoolFor(regionId) {
-  return regions.find((region) => region.id === regionId)?.raidPool ?? []
+  const region = regions.find((region) => region.id === regionId)
+  return region ? withoutQuestLegendary(regionId, region.raidPool ?? []) : []
 }
 
 /**

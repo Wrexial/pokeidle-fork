@@ -16,8 +16,12 @@ const {
 const {
   gymLeaderData,
   pokemonSpecies,
+  raidLegendaryPoolFor,
+  raidPoolFor,
   regions,
 } = await import('../src/data/gameData.js')
+const { isQuestLegendary } = await import('../src/data/legendary-quests.js')
+const { resolveRoamer } = await import('../src/game/progression.js')
 const { initialGameState } = await import('../src/game/reducer.js')
 const { gameReducer } = await import('../src/game/reducer.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
@@ -119,6 +123,40 @@ test('a wild win on a route can unearth an Ancient Relic', () => {
       won = gameReducer(state, { type: 'CONSUME_EVENT' })
     assert.equal(won.relics.kanto, 1, 'Kanto relics are tracked')
     assert.equal(won.inventory.ancientRelic, 1, 'the relic item lands in the bag')
+  } finally {
+    Math.random = originalRandom
+  }
+})
+
+test('the box legendary is quest-exclusive, never a random raid or roamer', () => {
+  for (const [regionId, quest] of Object.entries(LEGENDARY_QUESTS)) {
+    assert.ok(isQuestLegendary(regionId, quest.legendary), 'the helper knows the box legendary')
+    assert.ok(
+      !raidPoolFor(regionId).some((entry) => entry.speciesKey === quest.legendary),
+      `${regionId}'s random raid pool leaves ${quest.legendary} out`
+    )
+    assert.ok(
+      !raidLegendaryPoolFor(regionId).some((entry) => entry.speciesKey === quest.legendary),
+      `${regionId}'s raid-headline pool leaves ${quest.legendary} out`
+    )
+    // The quest still knows where to send the player: the raw roster has it.
+    assert.ok(
+      (regions.find((region) => region.id === regionId)?.raidPool ?? []).some(
+        (entry) => entry.speciesKey === quest.legendary
+      ),
+      `${regionId}'s roster still carries ${quest.legendary} for the quest`
+    )
+  }
+  // A forced roamer roll never turns up the box legendary.
+  const originalRandom = Math.random
+  try {
+    Math.random = () => 0
+    for (const [regionId, quest] of Object.entries(LEGENDARY_QUESTS)) {
+      for (let roll = 0; roll < 10; roll++) {
+        const roamer = resolveRoamer(regionId, [], [], new Set(), 1, null, 12)
+        if (roamer) assert.notEqual(roamer.speciesKey, quest.legendary)
+      }
+    }
   } finally {
     Math.random = originalRandom
   }

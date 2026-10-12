@@ -90,6 +90,7 @@ export const CHANGELOG = [
       {
         heading: 'Fixes',
         items: [
+          'A region’s box legendary is now earned only through its Legendary Quest: it no longer appears in the Raid Island’s random raid roll, its wild encounters, or as a roaming legendary. Once the quest’s steps are done, the Raid Island hands it over directly.',
           'The Champions’ Gauntlet and the Battle Maison now close when you collect their prizes — their end action was being ignored, which left the reward screen (and the game) stuck after a run.',
         ],
       },

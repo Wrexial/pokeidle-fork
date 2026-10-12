@@ -5,6 +5,7 @@
 // of leaving the catch to the raid's weighted roll.
 
 import { pokemonSpecies, regions } from '../../data/gameData.js'
+import { withoutQuestLegendary } from '../../data/legendary-quests.js'
 
 /** Money spent per ride. */
 export const ULTRA_WARP_COST = 600
@@ -153,9 +154,10 @@ export const ULTRA_WARP_TIERS = [
 ]
 
 const alolaRaidPool = new Set(
-  (regions.find((region) => region.id === 'alola')?.raidPool ?? []).map(
-    (entry) => entry.speciesKey
-  )
+  withoutQuestLegendary(
+    'alola',
+    regions.find((region) => region.id === 'alola')?.raidPool ?? []
+  ).map((entry) => entry.speciesKey)
 )
 
 /** The real, warp-reachable species for a wormhole tier. @param {number} tier */

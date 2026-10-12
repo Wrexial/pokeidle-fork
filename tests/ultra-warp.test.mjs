@@ -21,12 +21,12 @@ const {
 } = await import('../src/game/minigames/ultra-warp.js')
 const { MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_TUTORIALS } =
   await import('../src/game/minigames.js')
-const { mapData, pokemonSpecies, regions } = await import('../src/data/gameData.js')
+const { mapData, pokemonSpecies, raidLegendaryPoolFor } = await import('../src/data/gameData.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 
-const alolaRaidPool = regions
-  .find((region) => region.id === 'alola')
-  .raidPool.map((entry) => entry.speciesKey)
+// Only the random-access legendaries: Alola's box legendary (Necrozma) is
+// earned through its Legendary Quest, not a wormhole.
+const alolaRaidPool = raidLegendaryPoolFor('alola').map((entry) => entry.speciesKey)
 
 test('the tunnel speeds up as the ride runs on', () => {
   assert.ok(warpFallMs(0) > warpFallMs(15_000))

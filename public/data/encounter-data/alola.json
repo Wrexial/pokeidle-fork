@@ -289,7 +289,8 @@
     "weight": 8,
     "minLevel": 9,
     "maxLevel": 11,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    }
   ]
  },
@@ -331,7 +332,8 @@
     "speciesKey": "growlithe",
     "weight": 3,
     "minLevel": 13,
-    "maxLevel": 15
+    "maxLevel": 15,
+    "season": "summer"
    },
    {
     "speciesKey": "smeargle",
@@ -1328,25 +1330,29 @@
     "speciesKey": "paras",
     "weight": 3,
     "minLevel": 49,
-    "maxLevel": 51
+    "maxLevel": 51,
+    "season": "autumn"
    },
    {
     "speciesKey": "parasect",
     "weight": 3,
     "minLevel": 49,
-    "maxLevel": 51
+    "maxLevel": 51,
+    "season": "autumn"
    },
    {
     "speciesKey": "morelull",
     "weight": 3,
     "minLevel": 49,
-    "maxLevel": 51
+    "maxLevel": 51,
+    "season": "autumn"
    },
    {
     "speciesKey": "shiinotic",
     "weight": 3,
     "minLevel": 49,
-    "maxLevel": 51
+    "maxLevel": 51,
+    "season": "autumn"
    },
    {
     "speciesKey": "caterpie",
@@ -1408,7 +1414,8 @@
     "speciesKey": "torkoal",
     "weight": 5,
     "minLevel": 53,
-    "maxLevel": 55
+    "maxLevel": 55,
+    "season": "summer"
    },
    {
     "speciesKey": "chansey",
@@ -1489,7 +1496,8 @@
     "weight": 8,
     "minLevel": 53,
     "maxLevel": 55,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    }
   ]
  },
@@ -1667,7 +1675,8 @@
     "speciesKey": "snorunt",
     "weight": 5,
     "minLevel": 61,
-    "maxLevel": 63
+    "maxLevel": 63,
+    "season": "winter"
    },
    {
     "speciesKey": "absol",
@@ -1953,7 +1962,8 @@
     "speciesKey": "castform",
     "weight": 28,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "summer"
    },
    {
     "speciesKey": "scraggy",
@@ -2363,7 +2373,8 @@
     "speciesKey": "growlithe",
     "weight": 12,
     "minLevel": 21,
-    "maxLevel": 23
+    "maxLevel": 23,
+    "season": "summer"
    },
    {
     "speciesKey": "rattata",
@@ -2675,13 +2686,15 @@
     "speciesKey": "sneasel",
     "weight": 20,
     "minLevel": 41,
-    "maxLevel": 43
+    "maxLevel": 43,
+    "season": "winter"
    },
    {
     "speciesKey": "snorunt",
     "weight": 20,
     "minLevel": 41,
-    "maxLevel": 43
+    "maxLevel": 43,
+    "season": "winter"
    },
    {
     "speciesKey": "absol",
@@ -3350,7 +3363,8 @@
     "speciesKey": "phantump",
     "weight": 20,
     "minLevel": 21,
-    "maxLevel": 23
+    "maxLevel": 23,
+    "season": "autumn"
    },
    {
     "speciesKey": "misdreavus",
@@ -3439,7 +3453,8 @@
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "cubone",
@@ -3590,7 +3605,8 @@
     "speciesKey": "growlithe",
     "weight": 20,
     "minLevel": 21,
-    "maxLevel": 23
+    "maxLevel": 23,
+    "season": "summer"
    },
    {
     "speciesKey": "diglett",
@@ -3692,7 +3708,8 @@
     "speciesKey": "torkoal",
     "weight": 20,
     "minLevel": 41,
-    "maxLevel": 43
+    "maxLevel": 43,
+    "season": "summer"
    },
    {
     "speciesKey": "mudbray",
@@ -3725,7 +3742,8 @@
     "weight": 8,
     "minLevel": 41,
     "maxLevel": 43,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "cubone",
@@ -3867,7 +3885,8 @@
     "weight": 8,
     "minLevel": 41,
     "maxLevel": 43,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "mareanie",
@@ -4096,7 +4115,8 @@
     "weight": 8,
     "minLevel": 41,
     "maxLevel": 43,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "mudbray",
@@ -4138,7 +4158,8 @@
     "weight": 8,
     "minLevel": 41,
     "maxLevel": 43,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "wimpod",
@@ -4497,7 +4518,8 @@
     "speciesKey": "exeggcute",
     "weight": 20,
     "minLevel": 69,
-    "maxLevel": 71
+    "maxLevel": 71,
+    "season": "summer"
    },
    {
     "speciesKey": "magikarp",
@@ -4516,14 +4538,16 @@
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "parasect",
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "psyduck",
@@ -4913,13 +4937,15 @@
     "speciesKey": "cottonee",
     "weight": 20,
     "minLevel": 69,
-    "maxLevel": 71
+    "maxLevel": 71,
+    "season": "spring"
    },
    {
     "speciesKey": "petilil",
     "weight": 20,
     "minLevel": 69,
-    "maxLevel": 71
+    "maxLevel": 71,
+    "season": "spring"
    },
    {
     "speciesKey": "rockruff",
@@ -4939,14 +4965,16 @@
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "parasect",
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "diglett",
@@ -4960,7 +4988,8 @@
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "cubone",
@@ -5009,7 +5038,8 @@
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    }
   ]
  }

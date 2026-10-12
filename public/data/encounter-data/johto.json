@@ -35,7 +35,8 @@
     "weight": 3,
     "minLevel": 3,
     "maxLevel": 5,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "chikorita",
@@ -193,7 +194,8 @@
     "weight": 3,
     "minLevel": 8,
     "maxLevel": 10,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "zubat",
@@ -313,7 +315,8 @@
     "weight": 3,
     "minLevel": 11,
     "maxLevel": 13,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "zubat",
@@ -387,7 +390,8 @@
     "weight": 5,
     "minLevel": 14,
     "maxLevel": 16,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "qwilfish",
@@ -452,7 +456,8 @@
     "weight": 18,
     "minLevel": 17,
     "maxLevel": 19,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "rattata",
@@ -705,7 +710,8 @@
     "speciesKey": "growlithe",
     "weight": 10,
     "minLevel": 24,
-    "maxLevel": 26
+    "maxLevel": 26,
+    "season": "summer"
    },
    {
     "speciesKey": "nidoranF",
@@ -817,13 +823,15 @@
     "speciesKey": "vulpix",
     "weight": 4,
     "minLevel": 27,
-    "maxLevel": 29
+    "maxLevel": 29,
+    "season": "summer"
    },
    {
     "speciesKey": "growlithe",
     "weight": 4,
     "minLevel": 27,
-    "maxLevel": 29
+    "maxLevel": 29,
+    "season": "summer"
    },
    {
     "speciesKey": "gastly",
@@ -935,13 +943,15 @@
     "speciesKey": "vulpix",
     "weight": 4,
     "minLevel": 30,
-    "maxLevel": 32
+    "maxLevel": 32,
+    "season": "summer"
    },
    {
     "speciesKey": "growlithe",
     "weight": 4,
     "minLevel": 30,
-    "maxLevel": 32
+    "maxLevel": 32,
+    "season": "summer"
    },
    {
     "speciesKey": "noctowl",
@@ -2336,13 +2346,15 @@
     "speciesKey": "vulpix",
     "weight": 7,
     "minLevel": 70,
-    "maxLevel": 72
+    "maxLevel": 72,
+    "season": "summer"
    },
    {
     "speciesKey": "growlithe",
     "weight": 7,
     "minLevel": 70,
-    "maxLevel": 72
+    "maxLevel": 72,
+    "season": "summer"
    },
    {
     "speciesKey": "gloom",
@@ -2369,7 +2381,8 @@
     "weight": 3,
     "minLevel": 70,
     "maxLevel": 72,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "diglett",
@@ -2478,7 +2491,8 @@
     "speciesKey": "sneasel",
     "weight": 12,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "winter"
    },
    {
     "speciesKey": "misdreavus",
@@ -2623,7 +2637,8 @@
     "speciesKey": "paras",
     "weight": 12,
     "minLevel": 20,
-    "maxLevel": 22
+    "maxLevel": 22,
+    "season": "autumn"
    },
    {
     "speciesKey": "oddish",
@@ -2899,7 +2914,8 @@
     "weight": 8,
     "minLevel": 14,
     "maxLevel": 16,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "caterpie",
@@ -3156,13 +3172,15 @@
     "speciesKey": "swinub",
     "weight": 20,
     "minLevel": 58,
-    "maxLevel": 60
+    "maxLevel": 60,
+    "season": "winter"
    },
    {
     "speciesKey": "piloswine",
     "weight": 20,
     "minLevel": 58,
-    "maxLevel": 60
+    "maxLevel": 60,
+    "season": "winter"
    },
    {
     "speciesKey": "delibird",
@@ -3174,7 +3192,8 @@
     "speciesKey": "sneasel",
     "weight": 12,
     "minLevel": 58,
-    "maxLevel": 60
+    "maxLevel": 60,
+    "season": "winter"
    },
    {
     "speciesKey": "zubat",
@@ -3579,7 +3598,8 @@
     "weight": 8,
     "minLevel": 5,
     "maxLevel": 7,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    }
   ]
  },
@@ -3626,7 +3646,8 @@
     "speciesKey": "sunkern",
     "weight": 12,
     "minLevel": 26,
-    "maxLevel": 28
+    "maxLevel": 28,
+    "season": "spring"
    },
    {
     "speciesKey": "spinarak",
@@ -3668,7 +3689,8 @@
     "weight": 8,
     "minLevel": 26,
     "maxLevel": 28,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "bellsprout",
@@ -3801,7 +3823,8 @@
     "weight": 8,
     "minLevel": 3,
     "maxLevel": 5,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    }
   ]
  },
@@ -3836,7 +3859,8 @@
     "speciesKey": "sunkern",
     "weight": 12,
     "minLevel": 70,
-    "maxLevel": 72
+    "maxLevel": 72,
+    "season": "spring"
    },
    {
     "speciesKey": "pidgeotto",
@@ -4026,7 +4050,8 @@
     "weight": 8,
     "minLevel": 69,
     "maxLevel": 71,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    }
   ]
  },
@@ -4043,19 +4068,22 @@
     "speciesKey": "sneasel",
     "weight": 20,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "winter"
    },
    {
     "speciesKey": "swinub",
     "weight": 20,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "winter"
    },
    {
     "speciesKey": "snover",
     "weight": 12,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "winter"
    },
    {
     "speciesKey": "meditite",

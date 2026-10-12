@@ -778,6 +778,12 @@ One-off scripts used to build the data JSON (not run during dev/build):
   nocturnal / diurnal species with a `time: "night"` / `"day"` tag on every
   encounter bucket (`encountersForPhase` filters by the day/night cycle, falling
   back to the full table when a phase would be empty). Idempotent (`--dry`).
+- `apply-seasons.cjs` — data-only pass for #78: tags clearly seasonal species
+  with a `season` (spring/summer/autumn/winter) on every encounter bucket so
+  the slow seasonal cycle changes a route's wild table. `encountersForPhase`
+  filters by season and falls back to the phase's table when a season would be
+  empty, and any species a `caughtOnRoute` gate asks for is left ungated so the
+  gate can never go impossible off-season. Idempotent (`--dry`).
 - `apply-biomes.cjs` — data-only pass that writes a `biome` onto every location
   in `map-data/<region>.json` (forest, autumn, desert, swamp, volcanic, tundra,
   ruins, or the base grassland / coast / mountain / cave) using

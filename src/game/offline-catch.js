@@ -6,7 +6,8 @@
 
 import { encounterData, mapData, pokemonSpecies } from '../data/gameData.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, shouldAutoCatch } from './catching.js'
-import { offlineWildWinEstimate } from './progression.js'
+import { offlineWildWinEstimate, encountersForPhase } from './progression.js'
+import { currentSeason } from './seasons.js'
 import { prestigeMultipliers } from './prestige.js'
 
 /** Hard cap on catch rolls replayed offline, so a long away window stays cheap. */
@@ -41,7 +42,8 @@ export function simulateOfflineCatches(state, awayMs, random = Math.random) {
   const routeKey = state.currentRoute,
     bucket = encounterData[routeKey]
   if (!bucket?.encounters?.length) return null
-  const battles = Math.min(MAX_OFFLINE_CATCHES, offlineWildWinEstimate(awayMs))
+  const encounters = encountersForPhase(bucket.encounters, isNightTime(), currentSeason()),
+    battles = Math.min(MAX_OFFLINE_CATCHES, offlineWildWinEstimate(awayMs))
   if (battles <= 0) return null
   const location = mapData[state.currentLocation] ?? mapData[routeKey],
     baseContext = {
@@ -58,7 +60,7 @@ export function simulateOfflineCatches(state, awayMs, random = Math.random) {
   const caught = new Set(),
     ballsUsed = /** @type {Record<string, number>} */ ({})
   for (let index = 0; index < battles; index++) {
-    const encounter = pickEncounter(bucket.encounters, random),
+    const encounter = pickEncounter(encounters, random),
       speciesKey = encounter.speciesKey,
       level =
         encounter.minLevel +

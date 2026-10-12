@@ -162,7 +162,8 @@
     "speciesKey": "seedot",
     "weight": 5,
     "minLevel": 13,
-    "maxLevel": 15
+    "maxLevel": 15,
+    "season": "autumn"
    },
    {
     "speciesKey": "nickit",
@@ -242,13 +243,15 @@
     "speciesKey": "vulpix",
     "weight": 4,
     "minLevel": 20,
-    "maxLevel": 22
+    "maxLevel": 22,
+    "season": "summer"
    },
    {
     "speciesKey": "growlithe",
     "weight": 4,
     "minLevel": 20,
-    "maxLevel": 22
+    "maxLevel": 22,
+    "season": "summer"
    },
    {
     "speciesKey": "mudbray",
@@ -378,7 +381,8 @@
     "speciesKey": "budew",
     "weight": 1,
     "minLevel": 28,
-    "maxLevel": 30
+    "maxLevel": 30,
+    "season": "spring"
    },
    {
     "speciesKey": "ferroseed",
@@ -536,7 +540,8 @@
     "speciesKey": "helioptile",
     "weight": 7,
     "minLevel": 43,
-    "maxLevel": 45
+    "maxLevel": 45,
+    "season": "summer"
    },
    {
     "speciesKey": "dugtrio",
@@ -591,7 +596,8 @@
     "speciesKey": "torkoal",
     "weight": 1,
     "minLevel": 43,
-    "maxLevel": 45
+    "maxLevel": 45,
+    "season": "summer"
    },
    {
     "speciesKey": "trapinch",
@@ -736,13 +742,15 @@
     "speciesKey": "snom",
     "weight": 20,
     "minLevel": 58,
-    "maxLevel": 60
+    "maxLevel": 60,
+    "season": "winter"
    },
    {
     "speciesKey": "sneasel",
     "weight": 11,
     "minLevel": 58,
-    "maxLevel": 60
+    "maxLevel": 60,
+    "season": "winter"
    },
    {
     "speciesKey": "sandaconda",
@@ -766,7 +774,8 @@
     "speciesKey": "snorunt",
     "weight": 6,
     "minLevel": 58,
-    "maxLevel": 60
+    "maxLevel": 60,
+    "season": "winter"
    },
    {
     "speciesKey": "rhyhorn",
@@ -784,7 +793,8 @@
     "speciesKey": "snover",
     "weight": 5,
     "minLevel": 58,
-    "maxLevel": 60
+    "maxLevel": 60,
+    "season": "winter"
    },
    {
     "speciesKey": "dusclops",
@@ -833,7 +843,8 @@
     "speciesKey": "vanillish",
     "weight": 3,
     "minLevel": 58,
-    "maxLevel": 60
+    "maxLevel": 60,
+    "season": "winter"
    },
    {
     "speciesKey": "hippowdon",
@@ -851,7 +862,8 @@
     "speciesKey": "solrock",
     "weight": 1,
     "minLevel": 58,
-    "maxLevel": 60
+    "maxLevel": 60,
+    "season": "summer"
    },
    {
     "speciesKey": "drapion",
@@ -892,7 +904,8 @@
     "speciesKey": "bergmite",
     "weight": 90,
     "minLevel": 65,
-    "maxLevel": 67
+    "maxLevel": 67,
+    "season": "winter"
    },
    {
     "speciesKey": "clobbopus",
@@ -1042,19 +1055,22 @@
     "speciesKey": "snover",
     "weight": 8,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "winter"
    },
    {
     "speciesKey": "vanillish",
     "weight": 8,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "winter"
    },
    {
     "speciesKey": "cubchoo",
     "weight": 8,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "winter"
    },
    {
     "speciesKey": "klang",
@@ -1066,13 +1082,15 @@
     "speciesKey": "abomasnow",
     "weight": 7,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "winter"
    },
    {
     "speciesKey": "beartic",
     "weight": 6,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "winter"
    },
    {
     "speciesKey": "rhydon",
@@ -1084,25 +1102,29 @@
     "speciesKey": "sneasel",
     "weight": 4,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "winter"
    },
    {
     "speciesKey": "snom",
     "weight": 3,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "winter"
    },
    {
     "speciesKey": "glalie",
     "weight": 3,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "winter"
    },
    {
     "speciesKey": "vanilluxe",
     "weight": 3,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "winter"
    },
    {
     "speciesKey": "stonjourner",
@@ -1286,7 +1308,8 @@
     "speciesKey": "snom",
     "weight": 12,
     "minLevel": 35,
-    "maxLevel": 37
+    "maxLevel": 37,
+    "season": "winter"
    },
    {
     "speciesKey": "milcery",
@@ -1327,7 +1350,8 @@
     "weight": 8,
     "minLevel": 35,
     "maxLevel": 37,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "nuzleaf",
@@ -1643,14 +1667,16 @@
     "weight": 8,
     "minLevel": 24,
     "maxLevel": 26,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "growlithe",
     "weight": 8,
     "minLevel": 24,
     "maxLevel": 26,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "machop",
@@ -2453,7 +2479,8 @@
     "speciesKey": "swinub",
     "weight": 12,
     "minLevel": 35,
-    "maxLevel": 37
+    "maxLevel": 37,
+    "season": "winter"
    },
    {
     "speciesKey": "larvitar",
@@ -2488,7 +2515,8 @@
     "weight": 8,
     "minLevel": 35,
     "maxLevel": 37,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "g-yamask",
@@ -3251,7 +3279,8 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "delibird",
@@ -3272,21 +3301,24 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "snorunt",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "glalie",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "bronzong",
@@ -3300,7 +3332,8 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    }
   ]
  },
@@ -3377,7 +3410,8 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "bronzong",
@@ -3412,7 +3446,8 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    }
   ]
  },
@@ -3488,7 +3523,8 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "boldore",
@@ -4195,7 +4231,8 @@
     "speciesKey": "snom",
     "weight": 20,
     "minLevel": 75,
-    "maxLevel": 77
+    "maxLevel": 77,
+    "season": "winter"
    },
    {
     "speciesKey": "g-stunfisk",
@@ -4373,7 +4410,8 @@
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "remoraid",
@@ -4430,7 +4468,8 @@
     "speciesKey": "snom",
     "weight": 12,
     "minLevel": 75,
-    "maxLevel": 77
+    "maxLevel": 77,
+    "season": "winter"
    },
    {
     "speciesKey": "morpeko",
@@ -4477,7 +4516,8 @@
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "boldore",
@@ -4523,7 +4563,8 @@
     "speciesKey": "snom",
     "weight": 20,
     "minLevel": 75,
-    "maxLevel": 77
+    "maxLevel": 77,
+    "season": "winter"
    },
    {
     "speciesKey": "h-sneasel",
@@ -4535,13 +4576,15 @@
     "speciesKey": "snover",
     "weight": 20,
     "minLevel": 75,
-    "maxLevel": 77
+    "maxLevel": 77,
+    "season": "winter"
    },
    {
     "speciesKey": "swinub",
     "weight": 12,
     "minLevel": 75,
-    "maxLevel": 77
+    "maxLevel": 77,
+    "season": "winter"
    },
    {
     "speciesKey": "g-darumaka",
@@ -4614,7 +4657,8 @@
     "speciesKey": "snom",
     "weight": 20,
     "minLevel": 75,
-    "maxLevel": 77
+    "maxLevel": 77,
+    "season": "winter"
    },
    {
     "speciesKey": "g-darumaka",
@@ -4632,7 +4676,8 @@
     "speciesKey": "swinub",
     "weight": 12,
     "minLevel": 75,
-    "maxLevel": 77
+    "maxLevel": 77,
+    "season": "winter"
    },
    {
     "speciesKey": "morpeko",
@@ -4645,7 +4690,8 @@
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "g-yamask",
@@ -4758,7 +4804,8 @@
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "rolycoly",
@@ -4772,7 +4819,8 @@
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "cufant",
@@ -4856,14 +4904,16 @@
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "snom",
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "g-slowpoke",
@@ -4948,14 +4998,16 @@
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "snom",
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "g-slowpoke",
@@ -5053,7 +5105,8 @@
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "rolycoly",
@@ -5067,7 +5120,8 @@
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "cufant",
@@ -5151,14 +5205,16 @@
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "snom",
     "weight": 8,
     "minLevel": 75,
     "maxLevel": 77,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "g-slowpoke",

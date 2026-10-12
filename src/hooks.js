@@ -8,6 +8,7 @@ import { useGame } from './game/context.js'
 import { playSfx, startMusic, stopMusic, unlockAudio } from './game/audio.js'
 import { awaySummary } from './game/progression.js'
 import { dayPhaseAt, msUntilPhaseChange } from './game/day-night.js'
+import { seasonAt, msUntilSeasonChange } from './game/seasons.js'
 import { effectiveWeatherAt, msUntilWeatherChange } from './game/weather.js'
 import { isOnline, subscribeOnline } from './game/network.js'
 
@@ -31,6 +32,28 @@ export function useDayPhase() {
     return () => clearTimeout(timer)
   }, [])
   return phase
+}
+
+/**
+ * The current season, re-rendering only when the season changes. One season is
+ * four in-game days (four real hours) — see src/game/seasons.js.
+ * @returns {ReturnType<typeof seasonAt>}
+ */
+export function useSeason() {
+  const [season, setSeason] = React.useState(() => seasonAt())
+  React.useEffect(() => {
+    /** @type {ReturnType<typeof setTimeout> | undefined} */
+    let timer
+    const schedule = () => {
+      const next = seasonAt()
+      // Only re-render when the season actually changes.
+      setSeason((current) => (current.id === next.id ? current : next))
+      timer = setTimeout(schedule, msUntilSeasonChange() + 50)
+    }
+    schedule()
+    return () => clearTimeout(timer)
+  }, [])
+  return season
 }
 
 /**

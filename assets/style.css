@@ -3247,6 +3247,46 @@ img {
     color: var(--gold)
 }
 
+.season-chip {
+    flex: 0 0 auto;
+    font-size: 7px;
+    white-space: nowrap
+}
+
+.season-chip.season-spring {
+    color: #f0a8c2
+}
+
+.season-chip.season-summer {
+    color: #f2c44f
+}
+
+.season-chip.season-autumn {
+    color: #d98a3a
+}
+
+.season-chip.season-winter {
+    color: #a8d8f0
+}
+
+/* The seasonal retint of the generated terrain layer. The base colours stay
+   the source of truth; each season grades them without touching the data. */
+.town-map[data-season="spring"] .town-map-terrain {
+    filter: saturate(1.1) brightness(1.03) hue-rotate(4deg)
+}
+
+.town-map[data-season="summer"] .town-map-terrain {
+    filter: saturate(1.22) brightness(1.08) hue-rotate(-4deg)
+}
+
+.town-map[data-season="autumn"] .town-map-terrain {
+    filter: sepia(.22) saturate(1.28) brightness(.96) hue-rotate(-10deg)
+}
+
+.town-map[data-season="winter"] .town-map-terrain {
+    filter: saturate(.45) brightness(1.14)
+}
+
 .map-search-toggle,.map-legend-toggle {
     flex: 0 0 auto;
     font-family: var(--font-pixel);

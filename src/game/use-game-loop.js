@@ -16,6 +16,7 @@ import { abilityOf } from './abilities.js'
 import { companionCritBonus, companionDodgeChance, companionExpMultiplier, companionStatusCureChance, companionToughOutChance, friendshipToughOutChance } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch, chooseTrainingSwitch } from './combat.js'
 import { isBattleReady } from './pokemon.js'
+import { currentSeason } from './seasons.js'
 import { heldMoneyMultiplier } from './held-items.js'
 import { genderForPokemon } from './breeding.js'
 import { prestigeMultipliers } from './prestige.js'
@@ -276,7 +277,7 @@ export function useGameLoop() {
             ...currentEncounterData,
             encounters: withoutQuestLegendary(
               regionId,
-              encountersForPhase(currentEncounterData.encounters, isNightTime())
+              encountersForPhase(currentEncounterData.encounters, isNightTime(), currentSeason())
             ),
           },
             activeSwarm =

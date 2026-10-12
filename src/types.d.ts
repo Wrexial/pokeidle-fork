@@ -768,6 +768,8 @@ type EncounterEntry = {
   shinyOddsFloor?: number
   /** Only active during this day/night phase ("night" or "day"); unset = any time. */
   time?: 'day' | 'night'
+  /** Only active during this season; unset = any season. */
+  season?: 'spring' | 'summer' | 'autumn' | 'winter'
 }
 
 type EncounterData = { name: string; encounters: EncounterEntry[]; [key: string]: any }
@@ -853,7 +855,7 @@ type MapLocation = {
   [key: string]: any
 }
 
-type Evolution = { into: string; level?: number; item?: string; friendship?: number; gender?: 'male' | 'female'; [key: string]: any }
+type Evolution = { into: string; level?: number; item?: string; friendship?: number; gender?: 'male' | 'female'; season?: 'spring' | 'summer' | 'autumn' | 'winter'; [key: string]: any }
 
 interface Window {
   /** set by the boot guard in index.html; flipped once the app mounts */

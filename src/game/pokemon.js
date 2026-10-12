@@ -2,7 +2,7 @@
 // sprites, stats, evolution, friendship, exp and creation. Re-exported here so
 // callers keep importing from game/pokemon.js.
 
-export { getPokemonSpriteUrl, getPokemonSpriteFallbackUrl, getEggSpriteUrl, getTrainerSpriteUrl, getBossTrainerSpriteUrl } from './pokemon/sprites.js'
+export { getPokemonSpriteUrl, getPokemonSpriteFallbackUrl, getEggSpriteUrl, getTrainerSpriteUrl, getBossTrainerSpriteUrl, seasonalSpriteId } from './pokemon/sprites.js'
 export { calculateHpStat, calculateOtherStat, calculatePokemonStats, generateIVs, getPerfectIVs, IV_STAT_ORDER, IV_STAT_LABELS, ivStatLabel, ivVerdict, judgeIVs, EV_STAT_ORDER, createEmptyEvs, totalEvs } from './pokemon/stats.js'
 export { getPreEvolutionChain, getFamilyLearnset, resolvePokemonMoves, getTutorMoves, isTutorMove, applyMoveLearning, canEvolveFurther, getThreeStageBaseSpecies } from './pokemon/evolution.js'
 export { speciesHasType, challengeEligibleSpecies, monotypeSpeciesPool } from './pokemon/monotype.js'

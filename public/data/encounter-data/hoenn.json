@@ -58,7 +58,8 @@
     "weight": 8,
     "minLevel": 3,
     "maxLevel": 5,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "ralts",
@@ -140,7 +141,8 @@
     "speciesKey": "seedot",
     "weight": 9,
     "minLevel": 7,
-    "maxLevel": 9
+    "maxLevel": 9,
+    "season": "autumn"
    },
    {
     "speciesKey": "poochyena",
@@ -296,7 +298,8 @@
     "weight": 8,
     "minLevel": 9,
     "maxLevel": 11,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "taillow",
@@ -414,7 +417,8 @@
     "weight": 8,
     "minLevel": 11,
     "maxLevel": 13,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "ralts",
@@ -521,7 +525,8 @@
     "weight": 8,
     "minLevel": 13,
     "maxLevel": 15,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "taillow",
@@ -641,7 +646,8 @@
     "weight": 8,
     "minLevel": 15,
     "maxLevel": 17,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "taillow",
@@ -748,7 +754,8 @@
     "weight": 8,
     "minLevel": 17,
     "maxLevel": 19,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "taillow",
@@ -877,7 +884,8 @@
     "weight": 8,
     "minLevel": 19,
     "maxLevel": 21,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    }
   ]
  },
@@ -1216,7 +1224,8 @@
     "speciesKey": "numel",
     "weight": 16,
     "minLevel": 28,
-    "maxLevel": 30
+    "maxLevel": 30,
+    "season": "summer"
    },
    {
     "speciesKey": "machop",
@@ -1307,7 +1316,8 @@
     "weight": 8,
     "minLevel": 28,
     "maxLevel": 30,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "nuzleaf",
@@ -1413,7 +1423,8 @@
     "weight": 8,
     "minLevel": 30,
     "maxLevel": 32,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "trapinch",
@@ -1487,7 +1498,8 @@
     "speciesKey": "seedot",
     "weight": 9,
     "minLevel": 32,
-    "maxLevel": 34
+    "maxLevel": 34,
+    "season": "autumn"
    },
    {
     "speciesKey": "lombre",
@@ -1799,7 +1811,8 @@
     "speciesKey": "roselia",
     "weight": 9,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "season": "spring"
    },
    {
     "speciesKey": "poochyena",
@@ -1824,7 +1837,8 @@
     "speciesKey": "seedot",
     "weight": 1,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "season": "autumn"
    },
    {
     "speciesKey": "surskit",
@@ -2026,7 +2040,8 @@
     "speciesKey": "tropius",
     "weight": 2,
     "minLevel": 42,
-    "maxLevel": 44
+    "maxLevel": 44,
+    "season": "summer"
    },
    {
     "speciesKey": "pelipper",
@@ -2082,7 +2097,8 @@
     "weight": 8,
     "minLevel": 42,
     "maxLevel": 44,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    }
   ]
  },
@@ -2156,7 +2172,8 @@
     "speciesKey": "seedot",
     "weight": 1,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "season": "autumn"
    },
    {
     "speciesKey": "surskit",
@@ -2404,7 +2421,8 @@
     "weight": 8,
     "minLevel": 48,
     "maxLevel": 50,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "gulpin",
@@ -2736,7 +2754,8 @@
     "weight": 8,
     "minLevel": 54,
     "maxLevel": 56,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "gulpin",
@@ -2966,7 +2985,8 @@
     "weight": 8,
     "minLevel": 59,
     "maxLevel": 61,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    }
   ]
  },
@@ -3078,7 +3098,8 @@
     "weight": 8,
     "minLevel": 61,
     "maxLevel": 63,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    }
   ]
  },
@@ -3898,7 +3919,8 @@
     "weight": 8,
     "minLevel": 15,
     "maxLevel": 17,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "taillow",
@@ -3935,7 +3957,8 @@
     "speciesKey": "solrock",
     "weight": 20,
     "minLevel": 32,
-    "maxLevel": 34
+    "maxLevel": 34,
+    "season": "summer"
    },
    {
     "speciesKey": "lunatone",
@@ -4022,7 +4045,8 @@
     "weight": 8,
     "minLevel": 32,
     "maxLevel": 34,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    }
   ]
  },
@@ -4039,7 +4063,8 @@
     "speciesKey": "snorunt",
     "weight": 20,
     "minLevel": 57,
-    "maxLevel": 59
+    "maxLevel": 59,
+    "season": "winter"
    },
    {
     "speciesKey": "sealeo",
@@ -4233,7 +4258,8 @@
     "weight": 8,
     "minLevel": 61,
     "maxLevel": 63,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "gulpin",
@@ -4330,7 +4356,8 @@
     "weight": 8,
     "minLevel": 67,
     "maxLevel": 69,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "shuppet",
@@ -4470,7 +4497,8 @@
     "speciesKey": "numel",
     "weight": 20,
     "minLevel": 29,
-    "maxLevel": 31
+    "maxLevel": 31,
+    "season": "summer"
    },
    {
     "speciesKey": "machop",
@@ -4482,7 +4510,8 @@
     "speciesKey": "torkoal",
     "weight": 20,
     "minLevel": 29,
-    "maxLevel": 31
+    "maxLevel": 31,
+    "season": "summer"
    },
    {
     "speciesKey": "grimer",
@@ -4656,7 +4685,8 @@
     "weight": 8,
     "minLevel": 26,
     "maxLevel": 28,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "sandshrew",
@@ -4875,7 +4905,8 @@
     "weight": 8,
     "minLevel": 5,
     "maxLevel": 7,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "ralts",
@@ -5010,7 +5041,8 @@
     "speciesKey": "numel",
     "weight": 20,
     "minLevel": 28,
-    "maxLevel": 30
+    "maxLevel": 30,
+    "season": "summer"
    },
    {
     "speciesKey": "machop",
@@ -5034,7 +5066,8 @@
     "speciesKey": "torkoal",
     "weight": 12,
     "minLevel": 28,
-    "maxLevel": 30
+    "maxLevel": 30,
+    "season": "summer"
    }
   ]
  },
@@ -5045,13 +5078,15 @@
     "speciesKey": "torkoal",
     "weight": 20,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "season": "summer"
    },
    {
     "speciesKey": "numel",
     "weight": 20,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "season": "summer"
    },
    {
     "speciesKey": "slugma",

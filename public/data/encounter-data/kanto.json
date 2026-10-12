@@ -164,7 +164,8 @@
     "weight": 8,
     "minLevel": 7,
     "maxLevel": 9,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "mankey",
@@ -253,7 +254,8 @@
     "weight": 8,
     "minLevel": 9,
     "maxLevel": 11,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "tentacool",
@@ -418,7 +420,8 @@
     "speciesKey": "paras",
     "weight": 25,
     "minLevel": 13,
-    "maxLevel": 15
+    "maxLevel": 15,
+    "season": "autumn"
    },
    {
     "speciesKey": "zubat",
@@ -952,7 +955,8 @@
     "weight": 8,
     "minLevel": 21,
     "maxLevel": 23,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "caterpie",
@@ -1633,7 +1637,8 @@
     "speciesKey": "vulpix",
     "weight": 3,
     "minLevel": 24,
-    "maxLevel": 26
+    "maxLevel": 26,
+    "season": "summer"
    },
    {
     "speciesKey": "jigglypuff",
@@ -1645,7 +1650,8 @@
     "speciesKey": "growlithe",
     "weight": 3,
     "minLevel": 24,
-    "maxLevel": 26
+    "maxLevel": 26,
+    "season": "summer"
    },
    {
     "speciesKey": "spearow",
@@ -1725,13 +1731,15 @@
     "speciesKey": "vulpix",
     "weight": 5,
     "minLevel": 34,
-    "maxLevel": 36
+    "maxLevel": 36,
+    "season": "summer"
    },
    {
     "speciesKey": "growlithe",
     "weight": 5,
     "minLevel": 34,
-    "maxLevel": 36
+    "maxLevel": 36,
+    "season": "summer"
    },
    {
     "speciesKey": "abra",
@@ -2574,7 +2582,8 @@
     "speciesKey": "ponyta",
     "weight": 6,
     "minLevel": 44,
-    "maxLevel": 46
+    "maxLevel": 46,
+    "season": "summer"
    },
    {
     "speciesKey": "krabby",
@@ -2802,7 +2811,8 @@
     "speciesKey": "exeggcute",
     "weight": 5,
     "minLevel": 56,
-    "maxLevel": 58
+    "maxLevel": 58,
+    "season": "summer"
    },
    {
     "speciesKey": "rhyhorn",
@@ -2821,7 +2831,8 @@
     "speciesKey": "paras",
     "weight": 4,
     "minLevel": 56,
-    "maxLevel": 58
+    "maxLevel": 58,
+    "season": "autumn"
    },
    {
     "speciesKey": "venonat",
@@ -2869,7 +2880,8 @@
     "speciesKey": "parasect",
     "weight": 1,
     "minLevel": 56,
-    "maxLevel": 58
+    "maxLevel": 58,
+    "season": "autumn"
    },
    {
     "speciesKey": "chansey",
@@ -3395,7 +3407,8 @@
     "speciesKey": "ponyta",
     "weight": 10,
     "minLevel": 67,
-    "maxLevel": 69
+    "maxLevel": 69,
+    "season": "summer"
    },
    {
     "speciesKey": "raticate",
@@ -3421,13 +3434,15 @@
     "speciesKey": "vulpix",
     "weight": 4,
     "minLevel": 67,
-    "maxLevel": 69
+    "maxLevel": 69,
+    "season": "summer"
    },
    {
     "speciesKey": "growlithe",
     "weight": 4,
     "minLevel": 67,
-    "maxLevel": 69
+    "maxLevel": 69,
+    "season": "summer"
    },
    {
     "speciesKey": "magmar",
@@ -4157,7 +4172,8 @@
     "speciesKey": "parasect",
     "weight": 6,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "autumn"
    },
    {
     "speciesKey": "kadabra",
@@ -4361,19 +4377,22 @@
     "speciesKey": "ponyta",
     "weight": 20,
     "minLevel": 63,
-    "maxLevel": 66
+    "maxLevel": 66,
+    "season": "summer"
    },
    {
     "speciesKey": "rapidash",
     "weight": 20,
     "minLevel": 63,
-    "maxLevel": 66
+    "maxLevel": 66,
+    "season": "summer"
    },
    {
     "speciesKey": "growlithe",
     "weight": 20,
     "minLevel": 63,
-    "maxLevel": 66
+    "maxLevel": 66,
+    "season": "summer"
    },
    {
     "speciesKey": "machop",
@@ -4402,13 +4421,15 @@
     "speciesKey": "ponyta",
     "weight": 20,
     "minLevel": 66,
-    "maxLevel": 69
+    "maxLevel": 69,
+    "season": "summer"
    },
    {
     "speciesKey": "rapidash",
     "weight": 20,
     "minLevel": 66,
-    "maxLevel": 69
+    "maxLevel": 69,
+    "season": "summer"
    },
    {
     "speciesKey": "magmar",
@@ -4544,7 +4565,8 @@
     "speciesKey": "exeggcute",
     "weight": 6,
     "minLevel": 66,
-    "maxLevel": 69
+    "maxLevel": 69,
+    "season": "summer"
    }
   ]
  },
@@ -4585,13 +4607,15 @@
     "speciesKey": "swinub",
     "weight": 12,
     "minLevel": 68,
-    "maxLevel": 71
+    "maxLevel": 71,
+    "season": "winter"
    },
    {
     "speciesKey": "sneasel",
     "weight": 12,
     "minLevel": 68,
-    "maxLevel": 71
+    "maxLevel": 71,
+    "season": "winter"
    },
    {
     "speciesKey": "lapras",
@@ -4638,13 +4662,15 @@
     "speciesKey": "hoppip",
     "weight": 12,
     "minLevel": 65,
-    "maxLevel": 68
+    "maxLevel": 68,
+    "season": "spring"
    },
    {
     "speciesKey": "sunkern",
     "weight": 12,
     "minLevel": 65,
-    "maxLevel": 68
+    "maxLevel": 68,
+    "season": "spring"
    }
   ]
  },
@@ -4655,25 +4681,29 @@
     "speciesKey": "hoppip",
     "weight": 20,
     "minLevel": 67,
-    "maxLevel": 70
+    "maxLevel": 70,
+    "season": "spring"
    },
    {
     "speciesKey": "skiploom",
     "weight": 20,
     "minLevel": 67,
-    "maxLevel": 70
+    "maxLevel": 70,
+    "season": "spring"
    },
    {
     "speciesKey": "sunkern",
     "weight": 20,
     "minLevel": 67,
-    "maxLevel": 70
+    "maxLevel": 70,
+    "season": "spring"
    },
    {
     "speciesKey": "sunflora",
     "weight": 12,
     "minLevel": 67,
-    "maxLevel": 70
+    "maxLevel": 70,
+    "season": "spring"
    },
    {
     "speciesKey": "pidgeotto",

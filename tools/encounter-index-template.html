@@ -307,6 +307,30 @@
         background: #f6e3a1;
         color: #7a5b00;
       }
+      .season {
+        font-size: 10px;
+        font-weight: 700;
+        padding: 1px 7px;
+        border-radius: 999px;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+      .season.spring {
+        background: #f6c6d8;
+        color: #7a1f45;
+      }
+      .season.summer {
+        background: #f6d760;
+        color: #7a5b00;
+      }
+      .season.autumn {
+        background: #e0a45c;
+        color: #5c2f05;
+      }
+      .season.winter {
+        background: #bcdcf0;
+        color: #144a66;
+      }
       .mon .lv {
         grid-area: lv;
         font-size: 12px;
@@ -391,8 +415,9 @@
       Levels are the game's tuned encounter band; rate is each species' share of
       the location's encounter rolls. A <span class="time day">☀ day</span> or
       <span class="time night">🌙 night</span> tag marks a species that only shows in
-      that phase, and a weather tag marks a route whose battles start under that
-      field weather. Raid Islands list their region's legendary
+      that phase, a <span class="season winter">❄️ winter</span> tag marks a
+      seasonal species, and a weather tag marks a route whose battles start under
+      that field weather. Raid Islands list their region's legendary
       pool. Regenerate with <code>node tools/generate-encounter-index.cjs</code>.
     </footer>
 
@@ -441,12 +466,18 @@
               esc(entry.time === 'night' ? '🌙 night' : '☀ day') +
               '</span>'
             : ''
+          var SEASON_ICONS = { spring: '🌸', summer: '☀️', autumn: '🍂', winter: '❄️' }
+          var seasonBadge = entry.season
+            ? '<span class="season ' + esc(entry.season) + '">' +
+              (SEASON_ICONS[entry.season] || '') + ' ' + esc(entry.season) +
+              '</span>'
+            : ''
           return (
             '<div class="mon">' +
             '<img class="sprite" loading="lazy" src="' + spriteUrl(info.id) + '" alt="' + esc(info.name) + '" ' +
             "onerror=\"this.onerror=null;this.src='" + fallbackUrl(info.id) + "'\">" +
             '<div class="info"><div class="mon-name">' + esc(info.name) + '</div>' +
-            '<div class="types">' + types + timeBadge + '</div></div>' +
+            '<div class="types">' + types + timeBadge + seasonBadge + '</div></div>' +
             '<div class="lv">' + lv + '</div>' +
             '<div class="rate"><div class="bar-track"><div class="bar" style="width:' +
             Math.min(100, rate * 100).toFixed(1) + '%"></div></div><span>' + percent + '%</span></div>' +

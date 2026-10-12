@@ -19,7 +19,8 @@
     "weight": 30,
     "minLevel": 3,
     "maxLevel": 5,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "fletchling",
@@ -93,7 +94,8 @@
     "weight": 30,
     "minLevel": 3,
     "maxLevel": 5,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "sprigatito",
@@ -258,7 +260,8 @@
     "weight": 30,
     "minLevel": 15,
     "maxLevel": 17,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "fletchling",
@@ -314,7 +317,8 @@
     "weight": 30,
     "minLevel": 15,
     "maxLevel": 17,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "bronzor",
@@ -374,7 +378,8 @@
     "speciesKey": "shroomish",
     "weight": 30,
     "minLevel": 20,
-    "maxLevel": 22
+    "maxLevel": 22,
+    "season": "autumn"
    },
    {
     "speciesKey": "sudowoodo",
@@ -392,7 +397,8 @@
     "speciesKey": "foongus",
     "weight": 30,
     "minLevel": 20,
-    "maxLevel": 22
+    "maxLevel": 22,
+    "season": "autumn"
    },
    {
     "speciesKey": "jigglypuff",
@@ -471,7 +477,8 @@
     "speciesKey": "numel",
     "weight": 30,
     "minLevel": 24,
-    "maxLevel": 26
+    "maxLevel": 26,
+    "season": "summer"
    },
    {
     "speciesKey": "mudbray",
@@ -658,7 +665,8 @@
     "speciesKey": "petilil",
     "weight": 12,
     "minLevel": 29,
-    "maxLevel": 31
+    "maxLevel": 31,
+    "season": "spring"
    }
   ]
  },
@@ -700,7 +708,8 @@
     "speciesKey": "floette",
     "weight": 28,
     "minLevel": 34,
-    "maxLevel": 36
+    "maxLevel": 36,
+    "season": "spring"
    },
    {
     "speciesKey": "haunter",
@@ -1246,7 +1255,8 @@
     "speciesKey": "floette",
     "weight": 28,
     "minLevel": 58,
-    "maxLevel": 60
+    "maxLevel": 60,
+    "season": "spring"
    },
    {
     "speciesKey": "scyther",
@@ -1315,7 +1325,8 @@
     "minLevel": 58,
     "maxLevel": 60,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    }
   ]
  },
@@ -1452,7 +1463,8 @@
     "speciesKey": "floette",
     "weight": 28,
     "minLevel": 68,
-    "maxLevel": 70
+    "maxLevel": 70,
+    "season": "spring"
    },
    {
     "speciesKey": "eiscue",
@@ -1471,7 +1483,8 @@
     "weight": 15,
     "minLevel": 68,
     "maxLevel": 70,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "kilowattrel",
@@ -1502,7 +1515,8 @@
     "weight": 15,
     "minLevel": 68,
     "maxLevel": 70,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "vivillon",
@@ -1520,7 +1534,8 @@
     "speciesKey": "glalie",
     "weight": 10,
     "minLevel": 68,
-    "maxLevel": 70
+    "maxLevel": 70,
+    "season": "winter"
    },
    {
     "speciesKey": "hoppip",
@@ -1528,7 +1543,8 @@
     "minLevel": 68,
     "maxLevel": 70,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    }
   ]
  },
@@ -1690,7 +1706,8 @@
     "weight": 8,
     "minLevel": 68,
     "maxLevel": 70,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "mareanie",
@@ -1810,7 +1827,8 @@
     "weight": 8,
     "minLevel": 68,
     "maxLevel": 70,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "barboach",
@@ -2247,14 +2265,16 @@
     "weight": 8,
     "minLevel": 4,
     "maxLevel": 6,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "sunkern",
     "weight": 8,
     "minLevel": 4,
     "maxLevel": 6,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "meditite",
@@ -2268,7 +2288,8 @@
     "weight": 8,
     "minLevel": 4,
     "maxLevel": 6,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "gible",
@@ -2365,14 +2386,16 @@
     "weight": 8,
     "minLevel": 55,
     "maxLevel": 57,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "sunkern",
     "weight": 8,
     "minLevel": 55,
     "maxLevel": 57,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "murkrow",
@@ -2478,14 +2501,16 @@
     "weight": 8,
     "minLevel": 32,
     "maxLevel": 34,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "sunkern",
     "weight": 8,
     "minLevel": 32,
     "maxLevel": 34,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "murkrow",
@@ -2510,13 +2535,15 @@
     "speciesKey": "sneasel",
     "weight": 20,
     "minLevel": 60,
-    "maxLevel": 62
+    "maxLevel": 62,
+    "season": "winter"
    },
    {
     "speciesKey": "snover",
     "weight": 20,
     "minLevel": 60,
-    "maxLevel": 62
+    "maxLevel": 62,
+    "season": "winter"
    },
    {
     "speciesKey": "cetoddle",
@@ -2562,14 +2589,16 @@
     "weight": 8,
     "minLevel": 60,
     "maxLevel": 62,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "sunkern",
     "weight": 8,
     "minLevel": 60,
     "maxLevel": 62,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "dunsparce",
@@ -2611,7 +2640,8 @@
     "weight": 8,
     "minLevel": 60,
     "maxLevel": 62,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    }
   ]
  },
@@ -2646,14 +2676,16 @@
     "speciesKey": "numel",
     "weight": 12,
     "minLevel": 27,
-    "maxLevel": 29
+    "maxLevel": 29,
+    "season": "summer"
    },
    {
     "speciesKey": "hoppip",
     "weight": 8,
     "minLevel": 27,
     "maxLevel": 29,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "murkrow",
@@ -2716,7 +2748,8 @@
     "weight": 8,
     "minLevel": 27,
     "maxLevel": 29,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "dunsparce",
@@ -2780,14 +2813,16 @@
     "weight": 8,
     "minLevel": 56,
     "maxLevel": 58,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "sunkern",
     "weight": 8,
     "minLevel": 56,
     "maxLevel": 58,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "murkrow",
@@ -2822,7 +2857,8 @@
     "weight": 8,
     "minLevel": 56,
     "maxLevel": 58,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "shuppet",
@@ -2968,7 +3004,8 @@
     "weight": 8,
     "minLevel": 68,
     "maxLevel": 70,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "skrelp",
@@ -3081,7 +3118,8 @@
     "weight": 8,
     "minLevel": 68,
     "maxLevel": 70,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "skrelp",
@@ -3158,7 +3196,8 @@
     "minLevel": 72,
     "maxLevel": 74,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "jumpluff",
@@ -3166,7 +3205,8 @@
     "minLevel": 72,
     "maxLevel": 74,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "sunkern",
@@ -3174,7 +3214,8 @@
     "minLevel": 72,
     "maxLevel": 74,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "sunflora",
@@ -3182,21 +3223,24 @@
     "minLevel": 72,
     "maxLevel": 74,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "shroomish",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "petilil",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "deerling",
@@ -3217,7 +3261,8 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "axew",
@@ -3273,7 +3318,8 @@
     "minLevel": 72,
     "maxLevel": 74,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "jumpluff",
@@ -3281,7 +3327,8 @@
     "minLevel": 72,
     "maxLevel": 74,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "sunkern",
@@ -3289,7 +3336,8 @@
     "minLevel": 72,
     "maxLevel": 74,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "sunflora",
@@ -3297,21 +3345,24 @@
     "minLevel": 72,
     "maxLevel": 74,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "shroomish",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "petilil",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "spring"
    },
    {
     "speciesKey": "deerling",
@@ -3332,7 +3383,8 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "axew",
@@ -3402,7 +3454,8 @@
     "minLevel": 72,
     "maxLevel": 74,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "jumpluff",
@@ -3410,7 +3463,8 @@
     "minLevel": 72,
     "maxLevel": 74,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "sunkern",
@@ -3418,7 +3472,8 @@
     "minLevel": 72,
     "maxLevel": 74,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "sunflora",
@@ -3426,7 +3481,8 @@
     "minLevel": 72,
     "maxLevel": 74,
     "variety": true,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "misdreavus",
@@ -3441,7 +3497,8 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "sableye",
@@ -3498,14 +3555,16 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "shroomish",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "smoliv",
@@ -3526,7 +3585,8 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "nacli",
@@ -3596,21 +3656,24 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "seedot",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "shroomish",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "applin",
@@ -3681,14 +3744,16 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "shroomish",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "smoliv",
@@ -3709,7 +3774,8 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "tarountula",
@@ -3774,13 +3840,15 @@
     "speciesKey": "seedot",
     "weight": 20,
     "minLevel": 72,
-    "maxLevel": 74
+    "maxLevel": 74,
+    "season": "autumn"
    },
    {
     "speciesKey": "shroomish",
     "weight": 12,
     "minLevel": 72,
-    "maxLevel": 74
+    "maxLevel": 74,
+    "season": "autumn"
    },
    {
     "speciesKey": "dipplin",
@@ -3808,7 +3876,8 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "tarountula",
@@ -3879,21 +3948,24 @@
     "speciesKey": "numel",
     "weight": 12,
     "minLevel": 72,
-    "maxLevel": 74
+    "maxLevel": 74,
+    "season": "summer"
    },
    {
     "speciesKey": "seedot",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "shroomish",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "applin",
@@ -3978,21 +4050,24 @@
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "seedot",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "shroomish",
     "weight": 8,
     "minLevel": 72,
     "maxLevel": 74,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "applin",
@@ -4082,7 +4157,8 @@
     "weight": 8,
     "minLevel": 78,
     "maxLevel": 80,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "axew",
@@ -4368,7 +4444,8 @@
     "weight": 8,
     "minLevel": 78,
     "maxLevel": 80,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    }
   ]
  },

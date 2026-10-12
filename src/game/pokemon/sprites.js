@@ -1,8 +1,28 @@
 // Sprite URL helpers (Pokemon, eggs and trainers). Split from game/pokemon.js.
 
 import { animatedSprites, genderedSprites, trainerClasses } from '../../data/gameData.js'
+import { ANIMATED_ONLY_SEASONAL_FORMS, currentSeason, SEASONAL_FORM_IDS } from '../seasons.js'
 import { isOnline } from '../network.js'
 import { getSpriteStyle } from '../settings.js'
+
+/**
+ * Swap the sprite id for a species whose form follows the season (Deerling,
+ * Sawsbuck, Burmy, Wormadam, Cherrim). Returns the id unchanged otherwise. The
+ * seasonal art is committed beside the base art as `<id>-<suffix>`; the static
+ * set has no seasonal shiny fronts and Wormadam's seasonal art is animated
+ * only, so those keep the base artwork.
+ * @param {number | string} spriteId
+ * @param {{ animated?: boolean, isShiny?: boolean, season?: 'spring' | 'summer' | 'autumn' | 'winter' }} [options]
+ * @returns {number | string}
+ */
+export function seasonalSpriteId(spriteId, options = {}) {
+  const id = Number(spriteId),
+    suffix = SEASONAL_FORM_IDS[id]?.[options.season ?? currentSeason()]
+  if (!suffix) return spriteId
+  if (!options.animated && (options.isShiny || ANIMATED_ONLY_SEASONAL_FORMS.has(id)))
+    return spriteId
+  return `${spriteId}-${suffix}`
+}
 
 /**
  * Animated sprite directory. It is a merged set: the official Gen V
@@ -52,10 +72,11 @@ export function getPokemonSpriteUrl(spriteId, isBack = !1, isShiny = !1, isFemal
     return getPokemonSpriteFallbackUrl(spriteId, isBack, isShiny, true)
   if (!Number.isFinite(key) || key === 0 || missing.includes(key))
     return getPokemonSpriteFallbackUrl(spriteId, isBack, isShiny, isFemale)
-  const baseUrl = '/sprites/pokemon/versions/generation-v/black-white/animated'
+  const baseUrl = '/sprites/pokemon/versions/generation-v/black-white/animated',
+    seasonalId = seasonalSpriteId(spriteId, { animated: true, isShiny })
   return `${baseUrl}/${isBack ? 'back/' : ''}${isShiny ? 'shiny/' : ''}${
     useFemale ? 'female/' : ''
-  }${spriteId}.gif`
+  }${seasonalId}.gif`
 }
 
 /**
@@ -74,10 +95,11 @@ export function getPokemonSpriteFallbackUrl(spriteId, isBack = !1, isShiny = !1,
         ? genderedSprites.back
         : genderedSprites.front,
     useFemale = isFemale && female.includes(key),
-    baseUrl = '/sprites/pokemon'
+    baseUrl = '/sprites/pokemon',
+    seasonalId = seasonalSpriteId(spriteId, { isShiny })
   return `${baseUrl}/${isBack ? 'back/' : ''}${isShiny ? 'shiny/' : ''}${
     useFemale ? 'female/' : ''
-  }${spriteId}.png`
+  }${seasonalId}.png`
 }
 
 /**

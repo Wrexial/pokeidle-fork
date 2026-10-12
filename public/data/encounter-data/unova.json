@@ -522,7 +522,8 @@
     "weight": 8,
     "minLevel": 17,
     "maxLevel": 19,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "patrat",
@@ -576,7 +577,8 @@
     "speciesKey": "vanillite",
     "weight": 8,
     "minLevel": 20,
-    "maxLevel": 22
+    "maxLevel": 22,
+    "season": "winter"
    },
    {
     "speciesKey": "swadloon",
@@ -594,7 +596,8 @@
     "speciesKey": "foongus",
     "weight": 5,
     "minLevel": 20,
-    "maxLevel": 22
+    "maxLevel": 22,
+    "season": "autumn"
    },
    {
     "speciesKey": "azumarill",
@@ -618,7 +621,8 @@
     "speciesKey": "castform",
     "weight": 1,
     "minLevel": 20,
-    "maxLevel": 22
+    "maxLevel": 22,
+    "season": "summer"
    },
    {
     "speciesKey": "leavanny",
@@ -630,7 +634,8 @@
     "speciesKey": "cottonee",
     "weight": 2,
     "minLevel": 20,
-    "maxLevel": 22
+    "maxLevel": 22,
+    "season": "spring"
    }
   ]
  },
@@ -659,7 +664,8 @@
     "speciesKey": "cubchoo",
     "weight": 13,
     "minLevel": 23,
-    "maxLevel": 25
+    "maxLevel": 25,
+    "season": "winter"
    },
    {
     "speciesKey": "blitzle",
@@ -695,7 +701,8 @@
     "speciesKey": "foongus",
     "weight": 3,
     "minLevel": 23,
-    "maxLevel": 25
+    "maxLevel": 25,
+    "season": "autumn"
    },
    {
     "speciesKey": "pidove",
@@ -784,7 +791,8 @@
     "speciesKey": "cryogonal",
     "weight": 1,
     "minLevel": 26,
-    "maxLevel": 28
+    "maxLevel": 28,
+    "season": "winter"
    },
    {
     "speciesKey": "poliwag",
@@ -955,7 +963,8 @@
     "weight": 8,
     "minLevel": 29,
     "maxLevel": 31,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    }
   ]
  },
@@ -1008,7 +1017,8 @@
     "speciesKey": "foongus",
     "weight": 6,
     "minLevel": 32,
-    "maxLevel": 34
+    "maxLevel": 34,
+    "season": "autumn"
    },
    {
     "speciesKey": "stoutland",
@@ -1164,7 +1174,8 @@
     "speciesKey": "foongus",
     "weight": 3,
     "minLevel": 35,
-    "maxLevel": 37
+    "maxLevel": 37,
+    "season": "autumn"
    },
    {
     "speciesKey": "azumarill",
@@ -1199,7 +1210,8 @@
     "speciesKey": "roselia",
     "weight": 13,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "season": "spring"
    },
    {
     "speciesKey": "tranquill",
@@ -1212,13 +1224,15 @@
     "weight": 10,
     "minLevel": 38,
     "maxLevel": 40,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "combee",
     "weight": 10,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "season": "spring"
    },
    {
     "speciesKey": "pinsir",
@@ -1256,7 +1270,8 @@
     "speciesKey": "ponyta",
     "weight": 5,
     "minLevel": 38,
-    "maxLevel": 40
+    "maxLevel": 40,
+    "season": "summer"
    },
    {
     "speciesKey": "cherrim",
@@ -1295,7 +1310,8 @@
     "weight": 1,
     "minLevel": 38,
     "maxLevel": 40,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "roserade",
@@ -1415,7 +1431,8 @@
     "speciesKey": "solrock",
     "weight": 5,
     "minLevel": 40,
-    "maxLevel": 42
+    "maxLevel": 42,
+    "season": "summer"
    },
    {
     "speciesKey": "kingler",
@@ -1498,7 +1515,8 @@
     "speciesKey": "tropius",
     "weight": 8,
     "minLevel": 43,
-    "maxLevel": 45
+    "maxLevel": 45,
+    "season": "summer"
    },
    {
     "speciesKey": "absol",
@@ -1962,7 +1980,8 @@
     "speciesKey": "tropius",
     "weight": 5,
     "minLevel": 55,
-    "maxLevel": 57
+    "maxLevel": 57,
+    "season": "summer"
    },
    {
     "speciesKey": "carnivine",
@@ -2091,7 +2110,8 @@
     "weight": 8,
     "minLevel": 58,
     "maxLevel": 60,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "munna",
@@ -2258,7 +2278,8 @@
     "weight": 19,
     "minLevel": 64,
     "maxLevel": 66,
-    "time": "day"
+    "time": "day",
+    "season": "spring"
    },
    {
     "speciesKey": "poliwag",
@@ -2489,7 +2510,8 @@
     "speciesKey": "amoonguss",
     "weight": 10,
     "minLevel": 70,
-    "maxLevel": 72
+    "maxLevel": 72,
+    "season": "autumn"
    },
    {
     "speciesKey": "golduck",
@@ -2519,7 +2541,8 @@
     "speciesKey": "solrock",
     "weight": 5,
     "minLevel": 70,
-    "maxLevel": 72
+    "maxLevel": 72,
+    "season": "summer"
    },
    {
     "speciesKey": "azumarill",
@@ -2617,7 +2640,8 @@
     "speciesKey": "amoonguss",
     "weight": 5,
     "minLevel": 73,
-    "maxLevel": 75
+    "maxLevel": 75,
+    "season": "autumn"
    },
    {
     "speciesKey": "mienfoo",
@@ -2789,13 +2813,15 @@
     "speciesKey": "cottonee",
     "weight": 12,
     "minLevel": 11,
-    "maxLevel": 13
+    "maxLevel": 13,
+    "season": "spring"
    },
    {
     "speciesKey": "petilil",
     "weight": 12,
     "minLevel": 11,
-    "maxLevel": 13
+    "maxLevel": 13,
+    "season": "spring"
    },
    {
     "speciesKey": "pansage",
@@ -2944,7 +2970,8 @@
     "weight": 8,
     "minLevel": 20,
     "maxLevel": 22,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "trapinch",
@@ -2958,7 +2985,8 @@
     "weight": 8,
     "minLevel": 20,
     "maxLevel": 22,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "croagunk",
@@ -3120,7 +3148,8 @@
     "speciesKey": "cubchoo",
     "weight": 12,
     "minLevel": 23,
-    "maxLevel": 25
+    "maxLevel": 25,
+    "season": "winter"
    },
    {
     "speciesKey": "relicanth",
@@ -3169,7 +3198,8 @@
     "weight": 8,
     "minLevel": 23,
     "maxLevel": 25,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "trapinch",
@@ -3183,7 +3213,8 @@
     "weight": 8,
     "minLevel": 23,
     "maxLevel": 25,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "croagunk",
@@ -3281,7 +3312,8 @@
     "weight": 8,
     "minLevel": 26,
     "maxLevel": 28,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "trapinch",
@@ -3295,7 +3327,8 @@
     "weight": 8,
     "minLevel": 26,
     "maxLevel": 28,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "croagunk",
@@ -3401,7 +3434,8 @@
     "weight": 8,
     "minLevel": 14,
     "maxLevel": 16,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "patrat",
@@ -3445,13 +3479,15 @@
     "speciesKey": "piloswine",
     "weight": 20,
     "minLevel": 40,
-    "maxLevel": 42
+    "maxLevel": 42,
+    "season": "winter"
    },
    {
     "speciesKey": "vanillish",
     "weight": 12,
     "minLevel": 40,
-    "maxLevel": 42
+    "maxLevel": 42,
+    "season": "winter"
    },
    {
     "speciesKey": "metang",
@@ -3491,7 +3527,8 @@
     "weight": 8,
     "minLevel": 40,
     "maxLevel": 42,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "munna",
@@ -3512,14 +3549,16 @@
     "weight": 8,
     "minLevel": 40,
     "maxLevel": 42,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "cryogonal",
     "weight": 8,
     "minLevel": 40,
     "maxLevel": 42,
-    "variety": true
+    "variety": true,
+    "season": "winter"
    },
    {
     "speciesKey": "metapod",
@@ -3576,7 +3615,8 @@
     "weight": 8,
     "minLevel": 43,
     "maxLevel": 45,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "starmie",
@@ -3737,7 +3777,8 @@
     "weight": 8,
     "minLevel": 26,
     "maxLevel": 28,
-    "variety": true
+    "variety": true,
+    "season": "autumn"
    },
    {
     "speciesKey": "joltik",
@@ -3955,7 +3996,8 @@
     "weight": 8,
     "minLevel": 14,
     "maxLevel": 16,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "patrat",
@@ -4012,7 +4054,8 @@
     "speciesKey": "numel",
     "weight": 12,
     "minLevel": 23,
-    "maxLevel": 25
+    "maxLevel": 25,
+    "season": "summer"
    },
    {
     "speciesKey": "barboach",
@@ -4089,7 +4132,8 @@
     "weight": 8,
     "minLevel": 23,
     "maxLevel": 25,
-    "variety": true
+    "variety": true,
+    "season": "summer"
    },
    {
     "speciesKey": "croagunk",
@@ -4113,19 +4157,22 @@
     "speciesKey": "foongus",
     "weight": 20,
     "minLevel": 43,
-    "maxLevel": 45
+    "maxLevel": 45,
+    "season": "autumn"
    },
    {
     "speciesKey": "petilil",
     "weight": 20,
     "minLevel": 43,
-    "maxLevel": 45
+    "maxLevel": 45,
+    "season": "spring"
    },
    {
     "speciesKey": "cottonee",
     "weight": 12,
     "minLevel": 43,
-    "maxLevel": 45
+    "maxLevel": 45,
+    "season": "spring"
    },
    {
     "speciesKey": "sewaddle",
@@ -4207,7 +4254,8 @@
     "speciesKey": "growlithe",
     "weight": 20,
     "minLevel": 14,
-    "maxLevel": 16
+    "maxLevel": 16,
+    "season": "summer"
    },
    {
     "speciesKey": "patrat",
@@ -4382,13 +4430,15 @@
     "speciesKey": "cottonee",
     "weight": 20,
     "minLevel": 49,
-    "maxLevel": 51
+    "maxLevel": 51,
+    "season": "spring"
    },
    {
     "speciesKey": "petilil",
     "weight": 20,
     "minLevel": 49,
-    "maxLevel": 51
+    "maxLevel": 51,
+    "season": "spring"
    },
    {
     "speciesKey": "sewaddle",
@@ -4487,31 +4537,36 @@
     "speciesKey": "cottonee",
     "weight": 20,
     "minLevel": 45,
-    "maxLevel": 47
+    "maxLevel": 47,
+    "season": "spring"
    },
    {
     "speciesKey": "petilil",
     "weight": 20,
     "minLevel": 45,
-    "maxLevel": 47
+    "maxLevel": 47,
+    "season": "spring"
    },
    {
     "speciesKey": "vulpix",
     "weight": 20,
     "minLevel": 45,
-    "maxLevel": 47
+    "maxLevel": 47,
+    "season": "summer"
    },
    {
     "speciesKey": "growlithe",
     "weight": 12,
     "minLevel": 45,
-    "maxLevel": 47
+    "maxLevel": 47,
+    "season": "summer"
    },
    {
     "speciesKey": "foongus",
     "weight": 12,
     "minLevel": 45,
-    "maxLevel": 47
+    "maxLevel": 47,
+    "season": "autumn"
    }
   ]
  },
@@ -4668,13 +4723,15 @@
     "speciesKey": "foongus",
     "weight": 20,
     "minLevel": 43,
-    "maxLevel": 45
+    "maxLevel": 45,
+    "season": "autumn"
    },
    {
     "speciesKey": "amoonguss",
     "weight": 12,
     "minLevel": 43,
-    "maxLevel": 45
+    "maxLevel": 45,
+    "season": "autumn"
    },
    {
     "speciesKey": "deerling",

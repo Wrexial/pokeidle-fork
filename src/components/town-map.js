@@ -5,12 +5,14 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { baseRegions, encounterData, raidLegendaryPoolFor, mapAreas, mapData, pokemonSpecies, regions } from '../data/gameData.js'
 import { biomeForLocation } from '../data/ui.js'
 import { useGame } from '../game/context.js'
+import { useSeason } from '../hooks.js'
 import { createRoadPaths, getRegionUnlockTokens, pickRaidLegendary, raidProgressFor } from '../game/progression.js'
 import { legendaryQuestStatus } from '../game/legendary-quests.js'
 import { servicePoiKinds } from '../game/services.js'
 import { MapNode } from './map-node.js'
 import { DayPhaseChip } from './day-phase-chip.js'
 import { WeatherChip } from './weather-chip.js'
+import { SeasonChip } from './season-chip.js'
 import { LegendaryIntroModal } from './legendary-quest-panel.js'
 
 // Nodes are positioned as percentages, so the layout doesn't change here — this
@@ -103,7 +105,8 @@ function terrainFor(location, bucket) {
 /** @typedef {{ x: number, y: number, scale: number }} MapView */
 
 export function TownMap() {
-  const { state, dispatch } = useGame(),
+  const season = useSeason(),
+    { state, dispatch } = useGame(),
     { currentLocation, unlockedLocations } = state,
     currentLocationData = mapData[currentLocation],
     currentRegion = displayRegionFor(currentLocationData?.region ?? 'kanto'),
@@ -554,6 +557,7 @@ export function TownMap() {
 
   return jsxs('div', {
     className: 'town-map',
+    'data-season': season.id,
     children: [
       jsxs('div', {
         className: 'town-map-header',
@@ -572,6 +576,7 @@ export function TownMap() {
           }),
           jsx(DayPhaseChip, {}),
           jsx(WeatherChip, {}),
+          jsx(SeasonChip, {}),
           jsx('button', {
             type: 'button',
             className: `map-search-toggle${searchOpen ? ' active' : ''}`,

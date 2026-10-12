@@ -3,6 +3,7 @@
 import { breedingData, eggMoves, evolutionData, pokemonSpecies } from '../data/gameData.js'
 import { evolutionItems } from '../data/items.js'
 import { isMegaOrPrimalForm, isTerminalForm } from '../data/mega-evolution.js'
+import { currentSeason, SEASONS } from './seasons.js'
 import { randomNature } from '../data/natures.js'
 import { masudaShinyOdds } from '../data/config.js'
 import {
@@ -53,7 +54,8 @@ export function getEvolutionOptions(pokemon, inventory) {
         levelMet = !evolution.level || pokemon.level >= evolution.level,
         itemOwned = !evolution.item || (inventory[evolution.item] ?? 0) > 0,
         friendshipMet = !evolution.friendship || (pokemon.friendship ?? 0) >= evolution.friendship,
-        canEvolve = levelMet && itemOwned && friendshipMet,
+        seasonMet = !evolution.season || evolution.season === currentSeason(),
+        canEvolve = levelMet && itemOwned && friendshipMet && seasonMet,
         requirementParts = []
       if (evolution.level) requirementParts.push(`Lv. ${evolution.level}`)
       if (evolution.item) {
@@ -62,6 +64,10 @@ export function getEvolutionOptions(pokemon, inventory) {
         requirementParts.push(itemName)
       }
       if (evolution.friendship) requirementParts.push(`Friendship ${evolution.friendship}`)
+      if (evolution.season)
+        requirementParts.push(
+          `${SEASONS.find((season) => season.id === evolution.season)?.label ?? evolution.season} only`
+        )
       return {
         targetName: targetSpecies?.name ?? evolution.into,
         canEvolve,

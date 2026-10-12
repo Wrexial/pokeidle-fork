@@ -4,6 +4,7 @@
 // engine (src/game/combat.js) applies them.
 
 import { abilityOf } from './abilities.js'
+import { currentSeason } from './seasons.js'
 
 /** How many turns a weather effect lasts when set by a move. */
 export const WEATHER_TURNS = 5
@@ -33,6 +34,18 @@ const REGION_WEATHER_BIAS = {
   alola: ['sun', 'sun'],
   galar: ['rain', 'fog', 'fog'],
   paldea: ['sun'],
+}
+
+/**
+ * A per-season flavour added to the weather roll, so winter is snowier, summer
+ * sunnier and spring/autumn wetter (see src/game/seasons.js).
+ * @type {Record<string, string[]>}
+ */
+const SEASON_WEATHER_BIAS = {
+  spring: ['rain', 'rain'],
+  summer: ['sun', 'sun'],
+  autumn: ['fog', 'rain'],
+  winter: ['snow', 'snow'],
 }
 
 /**
@@ -91,13 +104,17 @@ function hashString(value) {
 export function worldWeatherAt(location, now = Date.now()) {
   if (location?.weather) return location.weather
   if (!location?.region) return null
+  const biome = location.biome ?? 'grassland'
+  // A cave is sheltered from the world weather and from the seasonal bias.
+  if (biome === 'cave') return null
   const bucket = Math.floor(now / WORLD_WEATHER_MS),
-    biome = location.biome ?? 'grassland',
+    season = currentSeason(now),
     rolls = [
       ...(BIOME_WEATHER_ROLLS[biome] ?? BIOME_WEATHER_ROLLS.grassland),
       ...(REGION_WEATHER_BIAS[location.region] ?? []),
+      ...(SEASON_WEATHER_BIAS[season] ?? []),
     ],
-    seed = hashString(`${location.region}|${biome}|${bucket}`)
+    seed = hashString(`${location.region}|${biome}|${season}|${bucket}`)
   return rolls[seed % rolls.length]
 }
 

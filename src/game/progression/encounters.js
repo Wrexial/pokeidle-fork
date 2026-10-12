@@ -247,17 +247,23 @@ export function advanceShinyTarget(chain, enemy) {
 
 /**
  * Narrow a route's encounter table to the entries available in the current
- * day/night phase, falling back to the whole table when the phase would be
- * empty (so a fully time-gated route still spawns something).
- * @template {{ time?: 'day' | 'night' }} T
+ * day/night phase and season, falling back to the whole table when the phase
+ * would be empty (so a fully time-gated route still spawns something) and to
+ * the phase-matching table when the season would be empty (so a route whose
+ * finds are all seasonal still spawns in the off-season).
+ * @template {{ time?: 'day' | 'night', season?: 'spring' | 'summer' | 'autumn' | 'winter' }} T
  * @param {T[]} encounters
  * @param {boolean} isNight
+ * @param {'spring' | 'summer' | 'autumn' | 'winter'} [season]
  * @returns {T[]}
  */
-export function encountersForPhase(encounters, isNight) {
+export function encountersForPhase(encounters, isNight, season) {
   const phase = isNight ? 'night' : 'day',
-    filtered = encounters.filter((encounter) => !encounter.time || encounter.time === phase)
-  return filtered.length > 0 ? filtered : encounters
+    timeFiltered = encounters.filter((encounter) => !encounter.time || encounter.time === phase),
+    base = timeFiltered.length > 0 ? timeFiltered : encounters
+  if (!season) return base
+  const seasonFiltered = base.filter((encounter) => !encounter.season || encounter.season === season)
+  return seasonFiltered.length > 0 ? seasonFiltered : base
 }
 
 /**

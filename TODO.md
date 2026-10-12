@@ -51,22 +51,6 @@ player-facing value (★ = nice to have, ★★★★★ = core missing feature)
 
 **Living world & encounters**
 
-## 78. Seasons
-
-Layer a slow seasonal cycle (spring / summer / autumn / winter) on top of the
-existing day/night clock (`src/game/day-night.js`); nothing here exists yet.
-
-- [ ] Pick the period (e.g. one real week per season, or a multiple of the
-      60-minute in-game day) and expose `currentSeason()`.
-- [ ] Show it as a chip beside the day/night and weather chips.
-- [ ] Data pass (`tools/apply-seasons.cjs`, mirroring `apply-weather-time.cjs`)
-      tags encounter buckets with `season`; `encountersForPhase` falls back to
-      the full table when a season would be empty.
-- [ ] Season-gated forms/evolutions (Deerling/Sawsbuck, Burmy/Wormadam, …).
-- [ ] Retint the Town Map terrain per season and reweight the weather roll.
-
-Effort: **medium**. Gain: ★★★★★.
-
 ## 79. Horde encounters
 
 Wild battles are 1v1 only. Add 3–5-of-a-species pack battles that reuse the

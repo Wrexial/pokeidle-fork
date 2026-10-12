@@ -17,6 +17,14 @@ export const GARDEN_BERRIES = {
   oranBerry: { growBattles: 20, minYield: 3, maxYield: 4 },
   sitrusBerry: { growBattles: 40, minYield: 2, maxYield: 3 },
   lumBerry: { growBattles: 50, minYield: 2, maxYield: 2 },
+  // Apricorns grow here too, so Kurt's workshop never runs dry.
+  apricornRed: { growBattles: 30, minYield: 2, maxYield: 3 },
+  apricornBlue: { growBattles: 30, minYield: 2, maxYield: 3 },
+  apricornYellow: { growBattles: 30, minYield: 2, maxYield: 3 },
+  apricornGreen: { growBattles: 30, minYield: 2, maxYield: 3 },
+  apricornPink: { growBattles: 30, minYield: 2, maxYield: 3 },
+  apricornWhite: { growBattles: 30, minYield: 2, maxYield: 3 },
+  apricornBlack: { growBattles: 30, minYield: 2, maxYield: 3 },
 }
 
 /** A fresh, empty garden. */

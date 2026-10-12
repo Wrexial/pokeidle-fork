@@ -9,6 +9,11 @@ const { getBallModifier } = await import('../src/game/catching.js')
 const { APRICORN_IDS, autoCatchBallOrder, ballOrder, consumableItems, pokeBalls } =
   await import('../src/data/items.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
+const { KURT_CRAFT_BATTLES, queueKurtCraft, readyKurtCrafts, tickKurtCrafts } = await import(
+  '../src/game/kurt.js'
+)
+const { GARDEN_BERRIES, isPlantableBerry } = await import('../src/game/garden.js')
+const { repairSave, serializeSave } = await import('../src/game/save.js')
 
 test('the seven Apricorn Balls are real, auto-catchable balls', () => {
   assert.equal(APRICORN_IDS.length, 7)
@@ -48,21 +53,33 @@ test('the Apricorn Balls apply their situational catch rates', () => {
   assert.equal(getBallModifier('moonball', { speciesKey: 'pikachu' }), 1)
 })
 
-test('Kurt carves an Apricorn into its ball', () => {
+test('Kurt queues an Apricorn, carves it over a few wins, then hands it over', () => {
   const base = { ...initialGameState, inventory: { apricornRed: 2 } },
     crafted = gameReducer(base, {
       type: 'CRAFT_APRICORN_BALL',
       payload: { apricornId: 'apricornRed' },
     })
   assert.equal(crafted.inventory.apricornRed, 1, 'the Apricorn is consumed')
-  assert.equal(crafted.inventory.levelball, 1, 'the Level Ball is granted')
+  assert.equal(crafted.inventory.levelball, undefined, 'the ball is not instant')
+  assert.equal(crafted.kurtCrafts.length, 1)
+  assert.equal(crafted.kurtCrafts[0].battlesRemaining, KURT_CRAFT_BATTLES)
 
-  // No Apricorn, no ball.
+  // Collecting does nothing until he is done.
+  assert.equal(gameReducer(crafted, { type: 'COLLECT_KURT_BALLS' }), crafted)
+  // Ten wild wins finish the craft.
+  let ticking = crafted
+  for (let win = 0; win < KURT_CRAFT_BATTLES; win++)
+    ticking = { ...ticking, kurtCrafts: tickKurtCrafts(ticking.kurtCrafts) }
+  const collected = gameReducer(ticking, { type: 'COLLECT_KURT_BALLS' })
+  assert.equal(collected.kurtCrafts.length, 0, 'the queue is emptied')
+  assert.equal(collected.inventory.levelball, 1, 'the Level Ball is granted')
+
+  // No Apricorn, no queue.
   const empty = gameReducer(
     { ...initialGameState, inventory: {} },
     { type: 'CRAFT_APRICORN_BALL', payload: { apricornId: 'apricornRed' } }
   )
-  assert.equal(empty.inventory.levelball, undefined)
+  assert.equal(empty.kurtCrafts.length, 0)
   // An unknown Apricorn is a no-op.
   assert.equal(
     gameReducer(base, { type: 'CRAFT_APRICORN_BALL', payload: { apricornId: 'nope' } }),
@@ -75,8 +92,62 @@ test('Kurt carves an Apricorn into its ball', () => {
         { type: 'CRAFT_APRICORN_BALL', payload: { apricornId } }
       ),
       ballId = /** @type {string} */ (consumableItems[apricornId].kurtBall)
-    assert.equal(one.inventory[ballId], 1, `${apricornId} -> ${ballId}`)
+    assert.equal(one.kurtCrafts[0].ballId, ballId, `${apricornId} -> ${ballId}`)
   }
+})
+
+test('the kurt craft queue helpers tick and report readiness', () => {
+  assert.deepEqual(queueKurtCraft([], 'nope'), [])
+  assert.deepEqual(queueKurtCraft(undefined, 'apricornRed'), [
+    { apricornId: 'apricornRed', ballId: 'levelball', battlesRemaining: KURT_CRAFT_BATTLES },
+  ])
+  const pending = [{ apricornId: 'apricornRed', ballId: 'levelball', battlesRemaining: 1 }]
+  assert.equal(tickKurtCrafts(pending)[0].battlesRemaining, 0)
+  assert.equal(readyKurtCrafts(tickKurtCrafts(pending)).length, 1)
+  assert.equal(readyKurtCrafts(pending).length, 0)
+  // An already-finished craft doesn't tick below zero.
+  const done = [{ apricornId: 'apricornRed', ballId: 'levelball', battlesRemaining: 0 }]
+  assert.equal(tickKurtCrafts(done), done)
+})
+
+test('Apricorns can be grown in the Berry Garden', () => {
+  for (const apricornId of APRICORN_IDS) {
+    assert.ok(isPlantableBerry(apricornId), `${apricornId} is plantable`)
+    assert.ok(GARDEN_BERRIES[apricornId].growBattles > 0)
+  }
+  const base = { ...initialGameState, inventory: { apricornRed: 1 } },
+    planted = gameReducer(base, {
+      type: 'PLANT_BERRY',
+      payload: { plotIndex: 0, berryId: 'apricornRed' },
+    })
+  assert.equal(planted.garden.plots[0].berryId, 'apricornRed')
+  assert.equal(planted.inventory.apricornRed, 0)
+  const ripe = {
+    ...planted,
+    garden: { plots: [{ berryId: 'apricornRed', battlesRemaining: 0 }, null, null, null] },
+  }
+  const harvested = gameReducer(ripe, { type: 'HARVEST_BERRY', payload: { plotIndex: 0 } })
+  assert.ok(harvested.inventory.apricornRed >= 2, 'the harvest pays a small crop')
+})
+
+test('repairSave sanitises the kurt craft queue', () => {
+  const base = gameReducer(initialGameState, {
+      type: 'SELECT_STARTER',
+      payload: { region: 'johto', speciesKey: 'chikorita' },
+    }),
+    repaired = repairSave(
+      serializeSave({
+        ...base,
+        kurtCrafts: [
+          { apricornId: 'apricornRed', ballId: 'levelball', battlesRemaining: 3 },
+          { apricornId: 'nope', ballId: 'levelball', battlesRemaining: 2 },
+          { apricornId: 'apricornBlue', battlesRemaining: -5 },
+        ],
+      })
+    )
+  assert.equal(repaired.kurtCrafts.length, 2, 'unknown Apricorns are dropped')
+  assert.equal(repaired.kurtCrafts[0].ballId, 'levelball')
+  assert.equal(repaired.kurtCrafts[1].battlesRemaining, 0, 'a negative count clamps to 0')
 })
 
 test('the Friend Ball sets a high friendship on catch', () => {

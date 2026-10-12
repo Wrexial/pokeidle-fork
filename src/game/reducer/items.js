@@ -8,6 +8,7 @@ import { EV_MAX_PER_STAT, EV_MAX_TOTAL, EV_VITAMIN_GAIN } from '../../data/confi
 import { isPlantableBerry } from '../garden.js'
 import { MAX_FRIENDSHIP, IV_STAT_ORDER, IV_STAT_LABELS, abilityDisplayName, applyMoveLearning, calculatePokemonStats, calculateRequiredExperience, createEmptyEvs, gainFriendship, getLevelUpResults, totalEvs } from '../pokemon.js'
 import { getItemSellPrice, isActiveEffectItem } from '../progression.js'
+import { queueKurtCraft, readyKurtCrafts } from '../kurt.js'
 import { withNotification } from '../reducer-helpers.js'
 import { creditResearchFeed } from '../research.js'
 import { markCaught } from './collection.js'
@@ -656,8 +657,8 @@ export function setAlwaysCatchShinies(state, action) {
 }
 
 /**
- * Handle the `CRAFT_APRICORN_BALL` action: Kurt (Azalea Town) carves one
- * Apricorn into the ball it maps to.
+ * Handle the `CRAFT_APRICORN_BALL` action: hand Kurt (Azalea Town) an Apricorn,
+ * which he carves over a few wild wins (see `collectKurtBalls`).
  * @param {GameState} state
  * @param {GameAction} action
  * @returns {GameState}
@@ -674,18 +675,47 @@ export function craftApricornBall(state, action) {
       inventory: {
         ...state.inventory,
         [apricornId]: owned - 1,
-        [ballId]: (state.inventory[ballId] ?? 0) + 1,
       },
+      kurtCrafts: queueKurtCraft(state.kurtCrafts, apricornId),
       battleLog: [
         ...state.battleLog,
-        `Kurt carved a ${apricorn.name} into a ${pokeBalls[ballId].name}!`,
+        `Kurt took the ${apricorn.name} \u2014 come back after a few battles.`,
       ].slice(-50),
     },
     {
-      message: `Kurt made a ${pokeBalls[ballId].name}!`,
+      message: `Kurt started on your ${pokeBalls[ballId].name}.`,
+      tone: 'info',
+      icon: '\u{1f528}',
+      dedupeKey: `kurtcraft:${apricornId}:${Date.now()}`,
+    }
+  )
+}
+
+/**
+ * Handle the `COLLECT_KURT_BALLS` action: pick up every ball Kurt has finished.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function collectKurtBalls(state) {
+  const ready = readyKurtCrafts(state.kurtCrafts)
+  if (ready.length === 0) return state
+  const inventory = { ...state.inventory }
+  for (const craft of ready) inventory[craft.ballId] = (inventory[craft.ballId] ?? 0) + 1
+  return withNotification(
+    {
+      ...state,
+      inventory,
+      kurtCrafts: (state.kurtCrafts ?? []).filter((craft) => craft.battlesRemaining > 0),
+      battleLog: [
+        ...state.battleLog,
+        `Collected ${ready.length} ball${ready.length === 1 ? '' : 's'} from Kurt.`,
+      ].slice(-50),
+    },
+    {
+      message: `Kurt finished ${ready.length} ball${ready.length === 1 ? '' : 's'}!`,
       tone: 'success',
       icon: '\u{1f534}',
-      dedupeKey: `kurt:${ballId}:${Math.random()}`,
+      dedupeKey: `kurtcollect:${Date.now()}`,
     }
   )
 }

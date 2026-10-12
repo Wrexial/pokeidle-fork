@@ -17089,3 +17089,49 @@ img {
     0%,to { transform: translateX(-6%); opacity: .8 }
     50% { transform: translateX(6%); opacity: 1 }
 }
+
+/* Kurt's Apricorn Ball queue (delayed turnaround). */
+.kurt-queue {
+    margin-bottom: 8px;
+    padding: 6px 7px;
+    background: #00000012;
+    border: 1px solid #00000033;
+    border-radius: 4px
+}
+
+.kurt-queue-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px
+}
+
+.kurt-queue-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: #3a2818
+}
+
+.kurt-queue-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 0;
+    font-size: 8px;
+    color: #5a4838
+}
+
+.kurt-queue-row.ready {
+    color: #2e7d32;
+    font-weight: 700
+}
+
+.kurt-queue-ball {
+    flex: 1;
+    min-width: 0
+}
+
+.kurt-queue-progress {
+    opacity: .85
+}

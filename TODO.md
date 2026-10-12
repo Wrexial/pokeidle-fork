@@ -27,8 +27,8 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #24, #25, #56, #62, #69, #74–#76, #79, #81.
-They are optional extras rather than missing features.
+See the numbered sections below: #24, #25, #56, #62, #69, #74–#76, #81. They
+are optional extras rather than missing features.
 
 ---
 
@@ -177,18 +177,6 @@ Still open (optional):
 
 - [ ] A Jubilife Village hub location and the noble / ride Pokemon as statics or
       Raid Island additions, and space-time distortions as a swarm event.
-
-## 79. Johto Poké Ball crafting (Kurt)
-
-The seven Apricorns, the seven Apricorn Balls (with their situational catch
-rates) and Kurt's Azalea Town workshop all shipped (`src/game/reducer/items.js`,
-`kurt-panel.js`).
-
-Still open (optional):
-
-- [ ] The canonical delayed turnaround (hand Kurt Apricorns, collect after a few
-      wild wins) instead of the instant carve.
-- [ ] Grow Apricorns in the Berry Garden as well as finding them on routes.
 
 ## 81. Research Shop diversification
 

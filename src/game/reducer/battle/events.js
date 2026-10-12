@@ -12,6 +12,7 @@ import { tickCompanion } from '../../companion.js'
 import { createVolatileState } from '../../combat.js'
 import { fieldWeatherAt } from '../../weather.js'
 import { tickGarden } from '../../garden.js'
+import { tickKurtCrafts } from '../../kurt.js'
 import { tickPelago } from '../../pelago.js'
 import { advanceHuntEncounter } from '../../hunt.js'
 import { applyResearchRibbon, creditResearchDefeat, creditResearchLarge, creditResearchMove, creditResearchSuperEffective, isLargeSpecimen } from '../../research.js'
@@ -238,6 +239,7 @@ export function consumeEvent(state, action) {
     daycare = state.daycare,
     companion = state.companion,
     garden = state.garden,
+    kurtCrafts = state.kurtCrafts,
     pelago = state.pelago,
     shinyChain = state.shinyChain,
     researchDefeated = state.researchDefeated,
@@ -377,6 +379,8 @@ export function consumeEvent(state, action) {
       wildBattlesWon
     )
     garden = tickGarden(garden)
+    // Kurt's Apricorn carvings (and the Poke Pelago) tick on a wild win too.
+    kurtCrafts = tickKurtCrafts(kurtCrafts)
     // Winning against a chained shiny resolves the radar chain.
     shinyChain = advanceShinyTarget(shinyChain, state.enemyPokemon)
     // Poké Pelago's passive islands tick down their cycles.
@@ -506,6 +510,7 @@ export function consumeEvent(state, action) {
     companion,
     shinyChain,
     garden,
+    kurtCrafts,
     pelago,
     inventory,
   })

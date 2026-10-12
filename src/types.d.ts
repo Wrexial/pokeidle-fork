@@ -664,6 +664,8 @@ type GameState = {
   gameCornerProgress: number
   /** The Berry Garden plots (see game/garden.js). */
   garden: Garden
+  /** Apricorns Kurt is carving, each with the wild wins left (see game/kurt.js). */
+  kurtCrafts: { apricornId: string; ballId: string; battlesRemaining: number }[]
   /** Poké Pelago's passive islands (see game/pelago.js). */
   pelago: Pelago
   /** Field Jobs: Pokemon auto-running route activities (see game/jobs.js). */

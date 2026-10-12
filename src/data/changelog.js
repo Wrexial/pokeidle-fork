@@ -50,7 +50,7 @@ export const CHANGELOG = [
           'Effort Values are in, raised only by vitamins (never by battling): HP Up, Protein, Iron, Calcium, Zinc and Carbos each add 10 EVs to one stat, up to 252 per stat and 510 total. An individual’s EVs show on its stats panel beside its IVs, and feeding several at once tops a stat up without wasting any.',
           'The Research Shop has its own identity now instead of restocking the evolution stones the Kecleon Shop already sells: it offers the full Exp. Candy ladder (S / M / L / XL), Rare Candy, Poffin, the Ability Capsule and Patch, Bottle Caps, the six EV vitamins and a Master Ball.',
           'More battle held items: the Rocky Helmet hurts a foe that makes contact for a sixth of its HP, and the six pinch Berries (Liechi, Ganlon, Salac, Petaya, Apicot, Starf) boost a stat when the holder drops to a quarter of its HP (half with Gluttony).',
-          'Kurt’s Apricorn Balls are in: Apricorns turn up on Johto routes as you win wild battles, and Kurt’s workshop in Azalea Town carves each one into its ball — Level, Lure, Friend, Heavy, Love, Fast and Moon — with their real situational catch rates.',
+          'Kurt’s Apricorn Balls are in: Apricorns turn up on Johto routes as you win wild battles (and grow in the Berry Garden now), and Kurt’s workshop in Azalea Town carves each one into its ball — Level, Lure, Friend, Heavy, Love, Fast and Moon — with their real situational catch rates. Handing him an Apricorn starts a craft that finishes after ten wild wins, and the panel shows what he is working on and lets you collect the finished balls.',
         ],
       },
       {

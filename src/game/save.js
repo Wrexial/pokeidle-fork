@@ -4,7 +4,7 @@
 
 import { BATTLE_TOWER_REGION, EV_MAX_PER_STAT, EV_MAX_TOTAL, LEGACY_SAVE_KEYS, MAX_TEAM_PRESETS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, getActiveSlot, regionalStarters, saveSlotKey, setActiveSlot } from '../data/config.js'
 import { dailyEventByKey, todayKey } from '../data/daily-events.js'
-import { activeItems, autoCatchBallOrder, pokeBalls } from '../data/items.js'
+import { activeItems, autoCatchBallOrder, consumableItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
 import { ROUTE_ACTIVITIES } from './minigames/route-activities.js'
 import { BREEDING_GOALS, MAX_BREEDING_PROJECTS } from './breeding-projects.js'
@@ -534,6 +534,21 @@ export function repairSave(saved) {
     }
   })
 
+  // Kurt's pending Apricorn carvings: keep only real Apricorns.
+  const kurtCrafts = (Array.isArray(saved.kurtCrafts) ? saved.kurtCrafts : [])
+    .map((/** @type {any} */ craft) => {
+      const apricorn = consumableItems[craft?.apricornId]
+      if (!apricorn?.kurtBall) return null
+      const remaining = Number(craft.battlesRemaining)
+      return {
+        apricornId: craft.apricornId,
+        ballId: apricorn.kurtBall,
+        battlesRemaining: Number.isFinite(remaining) ? Math.max(0, Math.floor(remaining)) : 0,
+      }
+    })
+    .filter(Boolean)
+    .slice(0, 30)
+
   // Poké Pelago islands: keep only assignments whose Pokemon still exist.
   const pelago = createPelago(),
     savedPelago = saved.pelago && typeof saved.pelago === 'object' ? saved.pelago : {}
@@ -920,6 +935,7 @@ export function repairSave(saved) {
       Math.floor(Number(saved.gameCornerProgress) || 0) % GAME_CORNER_PRIZE_GOAL
     ),
     garden,
+    kurtCrafts,
     pelago,
     jobs,
     researchDefeated,
@@ -1121,6 +1137,7 @@ export const SAVED_STATE_KEYS = [
   'companion',
   'gameCornerProgress',
   'garden',
+  'kurtCrafts',
   'pelago',
   'jobs',
   'researchDefeated',

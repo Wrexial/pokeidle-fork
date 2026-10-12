@@ -10,7 +10,7 @@ import { createJobs } from './jobs.js'
 import { DEFAULT_ROD } from './minigames.js'
 import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, executeTurn, fleeBattle, gmaxEvolve, megaEvolve, startBossBattle, startEncounter, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
 import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain } from './reducer/collection.js'
-import { buyCafeItem, buyItem, buyRewardItem, clearHeldItem, craftApricornBall, reviveFossil, sellItem, setAlwaysCatchShinies, setCatchRule, setDefaultCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
+import { buyCafeItem, buyItem, buyRewardItem, clearHeldItem, collectKurtBalls, craftApricornBall, reviveFossil, sellItem, setAlwaysCatchShinies, setCatchRule, setDefaultCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
 import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } from './reducer/pelago.js'
 import { assignJob, collectJob, takeJobEncounter, unassignJob, accrueJobFinds } from './reducer/jobs.js'
@@ -96,6 +96,8 @@ export const initialGameState = {
   gameCornerProgress: 0,
   /** The Berry Garden plots (see game/garden.js). */
   garden: createGarden(),
+  /** Apricorns Kurt is carving (see game/kurt.js). */
+  kurtCrafts: [],
   /** The Poké Pelago passive islands (see game/pelago.js). */
   pelago: createPelago(),
   /** Field Jobs: Pokemon posted to auto-run route activities (see game/jobs.js). */
@@ -327,6 +329,8 @@ export function gameReducer(state, action) {
       return setDefaultCatchRule(state, action)
     case 'CRAFT_APRICORN_BALL':
       return craftApricornBall(state, action)
+    case 'COLLECT_KURT_BALLS':
+      return collectKurtBalls(state)
     case 'REORDER_PARTY':
       return reorderParty(state, action)
     case 'PARTY_TO_BOX':

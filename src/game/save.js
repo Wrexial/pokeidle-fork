@@ -410,6 +410,27 @@ export function repairSave(saved) {
               : SHINY_CHAIN_FIRST_TARGET,
         }
       : initialGameState.shinyChain
+  // The SOS chain is a consecutive-win streak on one route. A stale route key
+  // (a removed area) drops back to an empty chain rather than blocking the load.
+  const sosChain =
+    saved.sosChain &&
+    typeof saved.sosChain === 'object' &&
+    typeof saved.sosChain.count === 'number' &&
+    saved.sosChain.count > 0 &&
+    typeof saved.sosChain.routeKey === 'string' &&
+    mapData[saved.sosChain.routeKey]
+      ? { routeKey: saved.sosChain.routeKey, count: Math.floor(saved.sosChain.count) }
+      : initialGameState.sosChain
+  const sosBestChains = Object.fromEntries(
+    Object.entries(
+      saved.sosBestChains && typeof saved.sosBestChains === 'object'
+        ? saved.sosBestChains
+        : {}
+    ).filter(
+      ([routeKey, best]) =>
+        mapData[routeKey] && typeof best === 'number' && best > 0
+    )
+  )
   const swarm =
     saved.swarm &&
     typeof saved.swarm === 'object' &&
@@ -940,6 +961,8 @@ export function repairSave(saved) {
     pokedexCaught: [...caughtSet],
     shinyCaught,
     shinyChain,
+    sosChain,
+    sosBestChains,
     swarm,
     pokerus,
     quests,
@@ -1177,6 +1200,8 @@ export const SAVED_STATE_KEYS = [
   'pokedexCaught',
   'shinyCaught',
   'shinyChain',
+  'sosChain',
+  'sosBestChains',
   'swarm',
   'pokerus',
   'quests',

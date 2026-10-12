@@ -5,6 +5,7 @@ import { GENERATION_DEX_RANGES, evolutionData, gymLeaderData, isSpeciesCharmed, 
 import { withoutQuestLegendary } from '../../data/legendary-quests.js'
 import { challengeEligibleSpecies, speciesHasType } from '../pokemon.js'
 import { HUNT_ENCOUNTER_MULTIPLIER, huntMatchesSpecies } from '../hunt.js'
+import { sosShinyMultiplier } from '../sos-chain.js'
 
 /** Cached fixpoint of the minimum level each species can exist at. @type {Map<string, number> | null} */
 let speciesLevelFloors = null
@@ -393,7 +394,7 @@ const RANDOMIZER_SPECIES = challengeEligibleSpecies
  * @param {number} levelOverride
  * @param {string | null} [monotype] Monotype challenge: only this type may appear.
  */
-function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride, monotype = null, plausible = !1) {
+function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride, monotype = null, plausible = !1, sosMultiplier = 1) {
   const minLevel = Math.min(...encounterData.encounters.map((encounter) => encounter.minLevel)),
     maxLevel = Math.max(...encounterData.encounters.map((encounter) => encounter.maxLevel)),
     level = levelOverride || minLevel + Math.floor(Math.random() * (maxLevel - minLevel + 1)),
@@ -420,7 +421,10 @@ function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonu
     speciesKey,
     level,
     isShiny: checkShinyOdds(
-      Math.max(1, Math.round(shinyOddsForSpecies(speciesKey, completedGenerationSet) / shinyBonus))
+      Math.max(
+        1,
+        Math.round(shinyOddsForSpecies(speciesKey, completedGenerationSet) / (shinyBonus * sosMultiplier))
+      )
     ),
   }
 }
@@ -433,10 +437,11 @@ function resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonu
  * @param {Set<number>} completedGenerationSet
  * @param {number} chainMultiplier
  * @param {number} shinyBonus
+ * @param {number} [sosMultiplier] SOS-chain shiny-odds multiplier.
  * @returns {number}
  */
-function shinyOddsForEncounter(encounter, completedGenerationSet, chainMultiplier, shinyBonus) {
-  const multiplier = (encounter.shinyMultiplier ?? 1) * chainMultiplier * shinyBonus,
+function shinyOddsForEncounter(encounter, completedGenerationSet, chainMultiplier, shinyBonus, sosMultiplier = 1) {
+  const multiplier = (encounter.shinyMultiplier ?? 1) * chainMultiplier * shinyBonus * sosMultiplier,
     floor = encounter.shinyOddsFloor ?? 1
   return Math.max(
     floor,
@@ -469,11 +474,13 @@ export const ENCOUNTER_TYPE_ABILITY = {
  * @param {string | null} [biasType] A lead ability's type: those species are
  *   twice as likely (Static / Magnet Pull / ...).
  * @param {Hunt | null} [focus] Focus hunt: its target is much more likely.
+ * @param {number} [sosChainCount] Consecutive wild wins on this route (SOS chain).
  * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean, isRoamer?: boolean }}
  */
-export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain, shinyBonus = 1, randomize = !1, levelOverride = 0, monotype = null, biasType = null, focus = null) {
+export function resolvePokemonEncounter(encounterData, modifiers, completedGenerationSet, shinyChain, shinyBonus = 1, randomize = !1, levelOverride = 0, monotype = null, biasType = null, focus = null, sosChainCount = 0) {
+  const sosMultiplier = sosShinyMultiplier(sosChainCount)
   if (randomize)
-    return resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride, monotype)
+    return resolveRandomEncounter(encounterData, completedGenerationSet, shinyBonus, levelOverride, monotype, !1, sosMultiplier)
   const weightedEncounters = applyEncounterModifiers(
       encounterData.encounters,
       modifiers,
@@ -493,7 +500,8 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
       shinyBonus,
       levelOverride,
       monotype,
-      !0
+      !0,
+      sosMultiplier
     )
   const basePool = monotypePool.length > 0 ? monotypePool : weightedEncounters,
     // A focus hunt makes its target much more common on the route.
@@ -527,7 +535,7 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
         isShiny:
           shinyChainGuaranteed(encounter.speciesKey, shinyChain) ||
           checkShinyOdds(
-            shinyOddsForEncounter(encounter, completedGenerationSet, chainMultiplier, shinyBonus)
+            shinyOddsForEncounter(encounter, completedGenerationSet, chainMultiplier, shinyBonus, sosMultiplier)
           ),
       }
     }
@@ -543,7 +551,8 @@ export function resolvePokemonEncounter(encounterData, modifiers, completedGener
           fallback,
           completedGenerationSet,
           shinyChainMultiplier(fallback.speciesKey, shinyChain),
-          shinyBonus
+          shinyBonus,
+          sosMultiplier
         )
       ),
   }

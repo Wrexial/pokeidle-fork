@@ -22,6 +22,7 @@ import { genderForPokemon } from './breeding.js'
 import { prestigeMultipliers } from './prestige.js'
 import { buildHorde, hordeAlive, hordeExpMultiplier, rollHordeSize } from './horde.js'
 import { runDoublesRound } from './minigames/doubles.js'
+import { sosHiddenAbilityChance } from './sos-chain.js'
 import { awardExperience, checkShinyOdds, encountersForPhase, isHoneyActive, partyNeedsHealing, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
 
 export function useGameLoop() {
@@ -270,6 +271,12 @@ export function useGameLoop() {
             encounterData[currentGameState.currentRoute]
           if (!currentEncounterData) return
           const regionId = mapData[currentGameState.currentLocation]?.region ?? 'kanto'
+          // SOS chain: consecutive wild wins on this route raise the hidden
+          // ability and shiny odds of the next encounter.
+          const sosChainCount =
+            currentGameState.sosChain?.routeKey === currentGameState.currentRoute
+              ? currentGameState.sosChain.count
+              : 0
           // Time-gated finds (a Hoothoot that only shows at night, ...): keep the
           // phase-matching entries, falling back to the full table when a route
           // would otherwise be empty (see encountersForPhase). The region's box
@@ -343,7 +350,9 @@ export function useGameLoop() {
                 // Static / Magnet Pull / Lightning Rod / Storm Drain bias the roll.
                 ENCOUNTER_TYPE_ABILITY[currentGameState.playerPokemon?.ability ?? ''] ?? null,
                 // The focus hunt makes its target much more likely.
-                currentGameState.hunt ?? null
+                currentGameState.hunt ?? null,
+                // The route's SOS chain boosts the wild shiny roll.
+                sosChainCount
               ),
             // A horde is a rare pack of the rolled species (never a roamer, so
             // legendaries keep their solo chase).
@@ -364,6 +373,8 @@ export function useGameLoop() {
                 wild: !0,
                 leadAbility: currentGameState.playerPokemon?.ability ?? null,
                 leadGender: currentGameState.playerPokemon?.gender ?? null,
+                // The SOS chain raises the hidden-ability chance.
+                hiddenAbilityChance: sosHiddenAbilityChance(sosChainCount),
               }),
               // Restrict Catches: only the first wild on a route can be caught.
               ...(currentGameState.challengeRestrictCatches
@@ -384,6 +395,7 @@ export function useGameLoop() {
                 size: hordeSize,
                 leadAbility: currentGameState.playerPokemon?.ability ?? null,
                 leadGender: currentGameState.playerPokemon?.gender ?? null,
+                hiddenAbilityChance: sosHiddenAbilityChance(sosChainCount),
               })
             ;(dispatch({
               type: 'START_HORDE',

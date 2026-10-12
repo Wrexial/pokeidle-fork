@@ -17,10 +17,12 @@ import { calculatePokemonStats, generateIVs, getPerfectIVs, resolvePokemonMoves,
  *   wild?: boolean,
  *   leadAbility?: string | null,
  *   leadGender?: string | null,
+ *   hiddenAbilityChance?: number,
  * }} [options] `wild` rolls an ability, held item and gender; `gender` rolls
  * only the gender (trainer teams). `perfectIvs` uses 31 IVs instead of random.
  * `leadAbility` / `leadGender` let out-of-combat lead abilities bias the wild
- * roll (Super Luck / Compound Eyes hold items, Cute Charm gender).
+ * roll (Super Luck / Compound Eyes hold items, Cute Charm gender);
+ * `hiddenAbilityChance` raises the hidden-ability rate (an SOS chain).
  * @returns {any}
  */
 export function createBattlePokemon(speciesKey, level, options = {}) {
@@ -32,6 +34,7 @@ export function createBattlePokemon(speciesKey, level, options = {}) {
       wild = false,
       leadAbility = null,
       leadGender = null,
+      hiddenAbilityChance,
     } = options,
     species = pokemonSpecies[speciesKey],
     ivs = perfectIvs ? getPerfectIVs() : generateIVs(),
@@ -62,7 +65,7 @@ export function createBattlePokemon(speciesKey, level, options = {}) {
     ivs,
     ...(wild
       ? {
-          ability: rollAbility(speciesKey),
+          ability: rollAbility(speciesKey, Math.random, hiddenAbilityChance),
           heldItem: rollWildHeldItem(species.types, heldItemChance),
           gender: rollGender(speciesKey, genderBias),
           isRoamer,

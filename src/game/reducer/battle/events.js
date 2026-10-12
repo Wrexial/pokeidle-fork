@@ -22,6 +22,7 @@ import { prestigeMultipliers } from '../../prestige.js'
 import { advanceShinyTarget, computeUnlockedLocations, rollCandyDrop, rollValuableDrop, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus } from '../../progression.js'
 import { advanceQuests } from '../../quests.js'
 import { rollSwarm, recordSeenPokemon, withNotification } from '../../reducer-helpers.js'
+import { advanceSosChain, resetSosChain } from '../collection.js'
 import { rollUnownedTm } from '../../tms.js'
 import { resolveRevive, resolveSwitchRequest } from './switch.js'
 
@@ -99,6 +100,8 @@ export function fleeBattle(state) {
       ...state,
       phase: 'idle',
       enemyPokemon: null,
+      // Running away breaks the SOS chain.
+      ...(state.sosChain?.count ? { sosChain: { ...state.sosChain, count: 0 } } : {}),
       pendingEvents: [
         ...state.pendingEvents,
         {
@@ -531,6 +534,25 @@ export function consumeEvent(state, action) {
   })
   // A species whose field research just completed earns the Research Ribbon.
   syncedState = applyResearchRibbon(syncedState, state.enemyPokemon?.speciesKey)
+  // SOS chain: a normal wild win extends the current route's streak, while the
+  // active Pokemon fainting (any battle) breaks it. Raids and trainer battles
+  // are not wild route wins, so they leave the chain alone.
+  if (
+    event.type === 'faint' &&
+    event.data?.target === 'enemy' &&
+    !state.trainerBattle &&
+    !state.bossBattle &&
+    !state.inRaid
+  )
+    syncedState = advanceSosChain(syncedState, {
+      type: 'ADVANCE_SOS_CHAIN',
+      payload: { routeKey: state.currentRoute },
+    })
+  else if (
+    event.type === 'defeat' ||
+    (event.type === 'faint' && event.data?.target === 'player')
+  )
+    syncedState = resetSosChain(syncedState)
   for (const dropNotification of dropNotifications)
     syncedState = withNotification(syncedState, dropNotification)
   if (hatchedEgg.length > 0) {

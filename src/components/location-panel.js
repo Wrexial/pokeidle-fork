@@ -22,6 +22,7 @@ import { FossilPanel } from './fossil-panel.js'
 import { BattleTowerPanel } from './battle-tower-panel.js'
 import { BattleFrontierPanel } from './battle-frontier-panel.js'
 import { HuntBar } from './hunt-panel.js'
+import { SosChainChip } from './sos-chain-chip.js'
 import { GymLocationPanel } from './gym-location-panel.js'
 import { RivalPanel } from './rival-panel.js'
 import { LegendaryQuestPanel } from './legendary-quest-panel.js'
@@ -765,6 +766,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
           children: location.description,
         }),
         onOpenHunt && jsx(HuntBar, { onOpen: onOpenHunt }),
+        routeEncounters && routeKey && jsx(SosChainChip, { routeKey }),
         jobCount > 0 &&
           jsx('button', {
             className: 'location-jobs-btn',

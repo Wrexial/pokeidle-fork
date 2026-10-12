@@ -17105,6 +17105,55 @@ img {
     opacity: .85
 }
 
+.sos-chain-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    margin: 2px 0 6px;
+    padding: 4px 7px;
+    background: #00000012;
+    border: 1px dashed #00000044;
+    border-radius: 3px;
+    color: var(--text-muted);
+    font-size: 8px
+}
+
+.sos-chain-chip.active {
+    border-style: solid;
+    border-color: #4a90d9;
+    background: #4a90d91e
+}
+
+.sos-chain-icon {
+    font-size: 12px;
+    line-height: 1
+}
+
+.sos-chain-text {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 1px 6px;
+    min-width: 0
+}
+
+.sos-chain-count {
+    font-weight: 700;
+    color: var(--parchment)
+}
+
+.sos-chain-best,
+.sos-chain-odds,
+.sos-chain-next {
+    color: var(--text-muted);
+    opacity: .85
+}
+
+.sos-chain-next {
+    color: #c08a2a
+}
+
 .hunt-modal {
     width: 248px
 }

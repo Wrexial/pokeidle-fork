@@ -9,6 +9,7 @@ import { recordHuntCatch } from '../hunt.js'
 import { questLabel, rollQuests } from '../quests.js'
 import { applyResearchEarnings, applyResearchRibbon } from '../research.js'
 import { withNotification } from '../reducer-helpers.js'
+import { sosRewardsCrossed } from '../sos-chain.js'
 
 /**
  * Handle the `MARK_SEEN` action.
@@ -346,6 +347,54 @@ export function claimDailyGift(state, action) {
       dedupeKey: `dailygift:${dailyEvent.date}`,
     }
   )
+}
+
+/**
+ * Handle the `ADVANCE_SOS_CHAIN` action: a wild win extends the current
+ * route's SOS chain (a win on another route starts a new one). The route's best
+ * chain is updated, and each milestone reward is paid once per route the first
+ * time its best chain passes the threshold.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function advanceSosChain(state, action) {
+  const routeKey = action.payload?.routeKey
+  if (!routeKey) return state
+  const chain = state.sosChain ?? { routeKey: null, count: 0 },
+    count = chain.routeKey === routeKey ? chain.count + 1 : 1,
+    previousBest = state.sosBestChains?.[routeKey] ?? 0,
+    best = Math.max(previousBest, count),
+    rewards = previousBest < count ? sosRewardsCrossed(previousBest, count) : [],
+    next = {
+      ...state,
+      sosChain: { routeKey, count },
+      sosBestChains: { ...(state.sosBestChains ?? {}), [routeKey]: best },
+    }
+  if (rewards.length === 0) return next
+  const inventory = { ...next.inventory }
+  for (const reward of rewards)
+    inventory[reward.itemId] = (inventory[reward.itemId] ?? 0) + reward.amount
+  return withNotification(
+    { ...next, inventory },
+    {
+      message: `SOS chain ${best}! Milestone reward: ${rewards.map((reward) => reward.label).join(' and ')}.`,
+      tone: 'success',
+      icon: '\u{1f517}',
+      dedupeKey: `sos:${routeKey}:${best}`,
+    }
+  )
+}
+
+/**
+ * Handle the `RESET_SOS_CHAIN` action: a lost battle breaks the consecutive-win
+ * streak. The route's best chain is kept.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function resetSosChain(state) {
+  if (!state.sosChain?.count) return state
+  return { ...state, sosChain: { routeKey: state.sosChain.routeKey ?? null, count: 0 } }
 }
 
 /**

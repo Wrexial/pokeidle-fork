@@ -152,6 +152,8 @@ export function travel(state, action) {
     ...prepareNextBattle(state),
     currentLocation: locationId,
     currentRoute: routeKey,
+    // Leaving a route breaks the SOS chain (its per-route record is kept).
+    sosChain: { routeKey, count: 0 },
     unlockedLocations: unlocked,
     battleLog: [...state.battleLog, `Traveled to ${location.name}!`].slice(-50),
     inRaid: !1,
@@ -237,6 +239,8 @@ export function prestigeRegion(state, action) {
       prestigePoints: (state.prestigePoints ?? 0) + PRESTIGE_POINT_REWARD,
       currentLocation: firstRoute ?? entryId ?? state.currentLocation,
       currentRoute: firstRoute ?? state.currentRoute,
+      // Prestiging resets the map, so the SOS chain starts over too.
+      sosChain: { routeKey: firstRoute ?? entryId ?? state.currentRoute, count: 0 },
       phase: 'idle',
       battleEvents: [],
       pendingEvents: [],

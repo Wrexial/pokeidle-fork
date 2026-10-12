@@ -629,6 +629,10 @@ type GameState = {
   shinySeen: string[]
   shinyCaught: string[]
   shinyChain: { speciesKey: string | null; count: number; radar?: number; target?: number }
+  /** SOS chain: consecutive wild wins on the current route (see game/sos-chain.js). */
+  sosChain: { routeKey: string | null; count: number }
+  /** Best SOS chain reached per route, for the location-panel chip. */
+  sosBestChains: Record<string, number>
   /** A route temporarily overrun by one species. */
   swarm: { routeKey: string; speciesKey: string; battlesRemaining: number; distortion?: boolean } | null
   /** Rare party-wide 2x EXP boost with a wild-battle countdown. */

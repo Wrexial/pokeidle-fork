@@ -47,7 +47,7 @@ export function hordeDropRolls(size) {
  * not caught), so the shiny roll is left to the normal solo encounter.
  * @param {string} speciesKey
  * @param {number} level
- * @param {{ size?: number, leadAbility?: string | null, leadGender?: string | null }} [options]
+ * @param {{ size?: number, leadAbility?: string | null, leadGender?: string | null, hiddenAbilityChance?: number }} [options]
  * @returns {any[]}
  */
 export function buildHorde(speciesKey, level, options = {}) {
@@ -57,6 +57,7 @@ export function buildHorde(speciesKey, level, options = {}) {
       wild: true,
       leadAbility: options.leadAbility ?? null,
       leadGender: options.leadGender ?? null,
+      hiddenAbilityChance: options.hiddenAbilityChance,
     })
   )
 }

@@ -9,17 +9,22 @@ import { BASE_FRIENDSHIP } from './friendship.js'
 import { rollSize } from './sizes.js'
 import { IV_STAT_ORDER, calculatePokemonStats, createEmptyEvs, generateIVs } from './stats.js'
 
+/** The base chance a rolled Pokemon gets its hidden ability (10%). */
+export const HIDDEN_ABILITY_CHANCE = 0.1
+
 /**
  * Roll a species' ability: usually one of its normal abilities, with a small
- * chance of its hidden ability. Returns null for a species with no data.
+ * chance of its hidden ability (raised by an SOS chain). Returns null for a
+ * species with no data.
  * @param {string} speciesKey
  * @param {() => number} [rng]
+ * @param {number} [hiddenChance] Chance of the hidden ability (0-1).
  * @returns {string | null}
  */
-export function rollAbility(speciesKey, rng = Math.random) {
+export function rollAbility(speciesKey, rng = Math.random, hiddenChance = HIDDEN_ABILITY_CHANCE) {
   const entry = abilityData[speciesKey]
   if (!entry) return null
-  if (entry.hidden && rng() < 0.1) return entry.hidden
+  if (entry.hidden && rng() < hiddenChance) return entry.hidden
   return entry.abilities?.length > 0
     ? entry.abilities[Math.floor(rng() * entry.abilities.length)]
     : (entry.hidden ?? null)

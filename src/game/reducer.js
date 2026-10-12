@@ -9,7 +9,7 @@ import { createPelago } from './pelago.js'
 import { createJobs } from './jobs.js'
 import { DEFAULT_ROD } from './minigames.js'
 import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, endHorde, executeTurn, fleeBattle, gmaxEvolve, hordeRound, megaEvolve, startBossBattle, startEncounter, startHorde, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
-import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain } from './reducer/collection.js'
+import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain, advanceSosChain, resetSosChain } from './reducer/collection.js'
 import { buyCafeItem, buyItem, buyRewardItem, clearHeldItem, collectKurtBalls, craftApricornBall, reviveFossil, sellItem, setAlwaysCatchShinies, setCatchRule, setDefaultCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
 import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } from './reducer/pelago.js'
@@ -156,6 +156,10 @@ export const initialGameState = {
   breeding: createBreedingTracker(),
   /** Consecutive encounters of one species, boosting shiny odds (DexNav). */
   shinyChain: { speciesKey: null, count: 0, radar: 0, target: 5 },
+  /** SOS chain: consecutive wild wins on the current route (see game/sos-chain.js). */
+  sosChain: { routeKey: null, count: 0 },
+  /** Best SOS chain reached per route, for the location-panel chip. */
+  sosBestChains: {},
   shinySeen: [],
   defeatedGyms: [],
   defeatedEliteFour: [],
@@ -426,6 +430,10 @@ export function gameReducer(state, action) {
       return claimDailyGift(state, action)
     case 'UPDATE_SHINY_CHAIN':
       return updateShinyChain(state, action)
+    case 'ADVANCE_SOS_CHAIN':
+      return advanceSosChain(state, action)
+    case 'RESET_SOS_CHAIN':
+      return resetSosChain(state)
     case 'MARK_SHINY_SEEN':
       return markShinySeen(state, action)
     case 'START_HEALING':

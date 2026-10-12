@@ -15,6 +15,7 @@ import { gainFriendship, isBattleReady } from '../../pokemon.js'
 import { releaseFaintedParty, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus, rollCandyDrop, rollValuableDrop } from '../../progression.js'
 import { advanceQuests } from '../../quests.js'
 import { recordSeenPokemon, withNotification } from '../../reducer-helpers.js'
+import { advanceSosChain, resetSosChain } from '../collection.js'
 import { nuzlockeGameOver, startHealing } from '../recovery.js'
 
 /**
@@ -125,7 +126,7 @@ export function endHorde(state, action) {
   if (!won) {
     // The active fainted: bring in the next battle-ready member, heal at the
     // Center, or end a Nuzlocke run — the same fate as a normal wild loss.
-    return recoverAfterHorde(base, activeIndex)
+    return recoverAfterHorde(resetSosChain(base), activeIndex)
   }
   // Clearing the pack pays a capped set of extra drops, but only counts as a
   // single wild win so the per-win systems can't be farmed by a pack.
@@ -211,6 +212,11 @@ export function endHorde(state, action) {
       icon: '🦠',
       dedupeKey: 'pokerus:infected',
     })
+  // Clearing a pack counts as one wild win, so it extends the SOS chain.
+  next = advanceSosChain(next, {
+    type: 'ADVANCE_SOS_CHAIN',
+    payload: { routeKey: state.currentRoute },
+  })
   // A double knockout still pays the clear reward, but the fainted active has
   // to be replaced or the party healed exactly like a loss.
   if (!hordeAlive(state.hordePlayer)) return recoverAfterHorde(next, activeIndex)

@@ -38,7 +38,7 @@ number and full detail further down. Promote into the tiers above once scoped.
 - **Medium:** #82 Pokewalker · #85 Form dex · #89 Mystery Gift ·
   #90 Professor's story · #91 Auto-battle policy · #92 Raid events ·
   #93 Tower ladders · #96 Berry market.
-- **Quick wins:** #80 SOS chaining · #81 Field evolutions · #84 Marks ·
+- **Quick wins:** #81 Field evolutions · #84 Marks ·
   #94 Dowsing Machine · #95 Hide-and-seek · #97 Run summary · #98 Hotkeys.
 
 ---
@@ -50,19 +50,6 @@ order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
 player-facing value (★ = nice to have, ★★★★★ = core missing feature).
 
 **Living world & encounters**
-
-## 80. SOS chaining
-
-A per-route chain counter that builds with consecutive wild wins and tilts
-hidden-ability / shiny odds, shown as a chip on the location panel. Distinct
-from the Poke Radar minigame.
-
-- [ ] Track a `chain` per route in game state (reset on leaving / losing).
-- [ ] Feed the chain into the hidden-ability roll (`rollAbility`) and the wild
-      shiny roll (`src/game/progression.js`).
-- [ ] Show current chain + best chain, and reward reaching thresholds.
-
-Effort: **S–M**. Gain: ★★★.
 
 ## 81. Weather / location-gated evolutions
 

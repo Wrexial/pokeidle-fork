@@ -31,6 +31,7 @@ const {
   persistSave,
   resolveBootSlot,
   resumeAutosave,
+  serializeSave,
   suspendAutosave,
 } = await import('../src/game/save.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -128,4 +129,34 @@ test('listSaveSlots summarises each slot', () => {
   assert.ok((slots[0].savedAt ?? 0) > 0)
   assert.equal(slots[1].empty, true)
   assert.equal(slots[2].empty, true)
+})
+
+test('an away window records offline catches in the report', () => {
+  store.clear()
+  const state = startedSave('bulbasaur')
+  state.currentRoute = 'route1'
+  state.currentLocation = 'route1'
+  state.inventory = { pokeball: 5_000 }
+  state.pokedexSeen = []
+  state.pokedexCaught = []
+  const saved = serializeSave(state)
+  saved.savedAt = Date.now() - 2 * 3_600_000
+  store.set(saveSlotKey(1), JSON.stringify(saved))
+  const original = Math.random
+  Math.random = () => 0.4
+  try {
+    const loaded = loadSavedState(1)
+    assert.ok(loaded.offlineReport, 'a report is produced')
+    assert.ok(loaded.offlineReport.caught.length > 0, 'species are named')
+    for (const key of loaded.offlineReport.caught)
+      assert.ok(loaded.pokedexCaught.includes(key), `${key} is in the Pokedex`)
+  } finally {
+    Math.random = original
+  }
+})
+
+test('a briefly-away save loads without an offline report', () => {
+  store.clear()
+  persistSave(startedSave('squirtle'), 2)
+  assert.equal(loadSavedState(2).offlineReport, null)
 })

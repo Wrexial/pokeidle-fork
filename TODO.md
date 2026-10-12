@@ -27,7 +27,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #43, #62. They
+See the numbered sections below: #43. They
 are optional extras rather than missing features.
 
 ---
@@ -71,21 +71,6 @@ Still open:
 Relevant code: `src/game/minigames/doubles.js`,
 `src/components/doubles-scene.js`, `src/game/reducer/minigames.js`, and
 `src/game/minigames/registry.js`.
-
-## 62. Offline depth
-
-The "while you were away" report itemises the Field Jobs that ran
-(`offlineReport.jobs`), and the per-wild-win systems — Poké Pelago, the Berry
-Garden, Kurt's Apricorn crafting and the Day-Care — keep advancing offline
-too (`offlineReport.systems`, via `simulateOfflineWildWins`).
-
-Still open:
-
-- [ ] A full catch-up simulation that replays the idle loop offline (battles,
-      encounters, auto-catches) instead of the flat money + candy reward, so the
-      report can name what was caught.
-
-Effort: **medium**.
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

@@ -25,6 +25,7 @@ import { RODS, rodsForRegionCount, routeActivityIds } from './minigames.js'
 import { JOB_MAX_READY, accrueJobs, jobCycleMs, jobKey, summarizeJobAccrual } from './jobs.js'
 import { RESEARCH_MAX_POINTS } from './research.js'
 import { GIFTS, STATIC_ENCOUNTERS } from './gifts.js'
+import { simulateOfflineCatches } from './offline-catch.js'
 import { initialGameState } from './reducer.js'
 import { SHINY_CHAIN_FIRST_TARGET, computeOfflineReward, entryRoutePath, simulateOfflineWildWins } from './progression.js'
 
@@ -1104,11 +1105,16 @@ export function loadSavedState(slot = getActiveSlot() || 1) {
   const inventory = { ...withJobs.inventory }
   for (const [itemId, quantity] of Object.entries(offlineReward.items))
     inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+  const rewarded = { ...withJobs, inventory }
   // Replay the per-wild-win systems across the away window so Pelago, the
   // garden, Kurt's crafts and the Day-Care keep advancing while the tab is shut.
-  const simulation = simulateOfflineWildWins(withJobs, offlineReward.awayMs)
+  const simulation = simulateOfflineWildWins(rewarded, offlineReward.awayMs)
+  // Replay the away window's wild encounters on the current route, auto-catching
+  // by the player's own rules (and spending their balls), so the report can name
+  // what was caught.
+  const catches = simulateOfflineCatches(rewarded, offlineReward.awayMs)
   return {
-    ...withJobs,
+    ...rewarded,
     ...(simulation
       ? {
           pelago: simulation.pelago,
@@ -1117,12 +1123,20 @@ export function loadSavedState(slot = getActiveSlot() || 1) {
           daycare: simulation.daycare,
         }
       : {}),
-    money: withJobs.money + offlineReward.money,
-    inventory,
+    ...(catches
+      ? {
+          inventory: catches.inventory,
+          pokedexSeen: catches.pokedexSeen,
+          pokedexCaught: catches.pokedexCaught,
+        }
+      : {}),
+    money: rewarded.money + offlineReward.money,
     offlineReport: {
       ...offlineReward,
       jobs: jobReport,
       systems: simulation?.summary ?? [],
+      caught: catches?.caught ?? [],
+      ballsUsed: catches?.ballsUsed ?? {},
     },
   }
 }

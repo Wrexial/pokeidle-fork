@@ -11,6 +11,8 @@ const { createGarden } = await import('../src/game/garden.js')
 const { createPelago } = await import('../src/game/pelago.js')
 const { createPokemon } = await import('../src/game/pokemon.js')
 const { offlineBattlesPerHour } = await import('../src/data/config.js')
+const { MAX_OFFLINE_CATCHES, simulateOfflineCatches } = await import('../src/game/offline-catch.js')
+const { encounterData } = await import('../src/data/gameData.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 
 const stateAt = (/** @type {number} */ level) => ({ party: [{ level }] })
@@ -114,6 +116,54 @@ test('simulateOfflineWildWins advances the per-win systems', () => {
   // A window with nothing to advance reports nothing.
   assert.equal(simulateOfflineWildWins({ ...initialGameState }, 0), null)
   assert.equal(simulateOfflineWildWins({ ...initialGameState }, HOUR), null)
+})
+
+test('simulateOfflineCatches replays the route auto-catcher', () => {
+  const started = gameReducer(initialGameState, {
+      type: 'SELECT_STARTER',
+      payload: { region: 'kanto', speciesKey: 'bulbasaur' },
+    }),
+    routeKey = Object.keys(encounterData).find(
+      (key) => encounterData[key]?.encounters?.length
+    ),
+    state = {
+      ...started,
+      currentRoute: routeKey,
+      currentLocation: routeKey,
+      inventory: { pokeball: 10_000 },
+      pokedexSeen: [],
+      pokedexCaught: [],
+    },
+    // A fixed rng keeps the catch rolls deterministic.
+    result = simulateOfflineCatches(state, 8 * HOUR, () => 0.4)
+  assert.ok(result, 'an away window returns a result')
+  assert.ok(result.caught.length > 0, 'at least one species is caught')
+  assert.ok(Object.keys(result.ballsUsed).length > 0, 'balls are spent')
+  assert.ok(result.inventory.pokeball < 10_000, 'the ball count drops')
+  for (const key of result.caught)
+    assert.ok(result.pokedexCaught.includes(key), `${key} is registered`)
+  // The cap keeps a very long window cheap.
+  assert.ok(MAX_OFFLINE_CATCHES > 0 && MAX_OFFLINE_CATCHES <= 1000)
+})
+
+test('simulateOfflineCatches does nothing when the route rule is off', () => {
+  const started = gameReducer(initialGameState, {
+      type: 'SELECT_STARTER',
+      payload: { region: 'kanto', speciesKey: 'bulbasaur' },
+    }),
+    routeKey = Object.keys(encounterData).find(
+      (key) => encounterData[key]?.encounters?.length
+    ),
+    state = {
+      ...started,
+      currentRoute: routeKey,
+      currentLocation: routeKey,
+      inventory: { pokeball: 10_000 },
+      pokedexSeen: [],
+      pokedexCaught: [],
+      globalCatchDefaults: { enabled: false, mode: 'always', levelThreshold: 1, enabledBalls: ['pokeball'] },
+    }
+  assert.equal(simulateOfflineCatches(state, 8 * HOUR, () => 0.4), null)
 })
 
 test('CLEAR_OFFLINE_REPORT dismisses the report', () => {

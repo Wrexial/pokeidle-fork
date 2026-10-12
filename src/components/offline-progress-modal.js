@@ -1,6 +1,7 @@
 // Split from a grouped component file.
 
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { formatAwayDuration, formatReward } from '../game/progression.js'
 
@@ -50,6 +51,26 @@ export function OfflineProgressModal() {
               className: 'offline-report-reward',
               children: formatReward(report),
             }),
+            report.caught && report.caught.length > 0
+              ? jsxs('div', {
+                  className: 'offline-report-jobs',
+                  children: [
+                    jsx('span', {
+                      className: 'offline-report-jobs-title',
+                      children: 'Auto-caught while you were away',
+                    }),
+                    jsx('div', {
+                      className: 'offline-report-job',
+                      children: jsx('span', {
+                        className: 'offline-report-job-name',
+                        children: report.caught
+                          .map((key) => pokemonSpecies[key]?.name ?? key)
+                          .join(', '),
+                      }),
+                    }),
+                  ],
+                })
+              : null,
             report.jobs && report.jobs.length > 0
               ? jsxs('div', {
                   className: 'offline-report-jobs',

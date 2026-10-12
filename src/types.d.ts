@@ -655,6 +655,10 @@ type GameState = {
     }[]
     /** Per-win systems that advanced while away (Pelago, garden, Kurt, Day-Care). */
     systems?: { id: string; label: string }[]
+    /** Species auto-caught offline on the current route (see offline-catch.js). */
+    caught?: string[]
+    /** Balls spent on the offline auto-catches. */
+    ballsUsed?: Record<string, number>
   } | null
   /** Daycare parents (up to 2) and battles toward the next egg. */
   daycare: { parents: Pokemon[]; progress: number }

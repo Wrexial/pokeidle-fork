@@ -267,21 +267,24 @@ test('the red Gyarados static is always shiny', () => {
   assert.equal(started.enemyPokemon.isShiny, true, 'the static is forced shiny')
 })
 
-test('Hisui has its five noble Pokemon as statics behind the Sinnoh Champion', () => {
-  const nobles = STATIC_ENCOUNTERS.filter((entry) => entry.id.startsWith('static-hisui-'))
+test('Hisui has its five noble and five ride Pokemon as statics', () => {
+  const hisui = STATIC_ENCOUNTERS.filter((entry) => entry.id.startsWith('static-hisui-')),
+    nobles = hisui.filter((entry) => entry.name.startsWith('Noble')),
+    rides = hisui.filter((entry) => entry.name.startsWith('Ride'))
   assert.equal(nobles.length, 5)
+  assert.equal(rides.length, 5)
   const seenSpecies = new Set()
-  for (const noble of nobles) {
-    assert.equal(noble.requires?.champion, 'sinnoh', `${noble.id} waits for the Sinnoh Champion`)
-    assert.equal(mapData[noble.location]?.region, 'sinnoh', `${noble.id} sits in Sinnoh`)
-    assert.ok(pokemonSpecies[noble.speciesKey], `${noble.speciesKey} is a real species`)
-    seenSpecies.add(noble.speciesKey)
+  for (const entry of hisui) {
+    assert.equal(entry.requires?.champion, 'sinnoh', `${entry.id} waits for the Sinnoh Champion`)
+    assert.equal(mapData[entry.location]?.region, 'sinnoh', `${entry.id} sits in Sinnoh`)
+    assert.ok(pokemonSpecies[entry.speciesKey], `${entry.speciesKey} is a real species`)
+    seenSpecies.add(entry.speciesKey)
   }
-  assert.equal(seenSpecies.size, 5, 'each noble is a distinct species')
+  assert.equal(seenSpecies.size, 10, 'each entry is a distinct species')
   // The gate keeps them locked until the Champion is beaten.
-  assert.equal(entryRequirementStatus(initialGameState, nobles[0]).met, false)
+  assert.equal(entryRequirementStatus(initialGameState, hisui[0]).met, false)
   assert.equal(
-    entryRequirementStatus({ ...initialGameState, defeatedChampions: ['sinnoh'] }, nobles[0]).met,
+    entryRequirementStatus({ ...initialGameState, defeatedChampions: ['sinnoh'] }, hisui[0]).met,
     true
   )
 })

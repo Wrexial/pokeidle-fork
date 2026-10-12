@@ -257,6 +257,53 @@ const BASE_STATIC_ENCOUNTERS = [
     note: 'The frenzied noble of the Alabaster Icelands.',
     requires: { champion: 'sinnoh' },
   },
+  // The ride Pokemon, found in the wild in Hisui and offered as statics so a
+  // rider can be picked up without evolving for one.
+  {
+    id: 'static-hisui-wyrdeer',
+    location: 'hisui-obsidian-fieldlands',
+    speciesKey: 'wyrdeer',
+    level: 70,
+    name: 'Ride Wyrdeer',
+    note: 'A Wyrdeer watches from the ridge, ready to carry a rider.',
+    requires: { champion: 'sinnoh' },
+  },
+  {
+    id: 'static-hisui-ursaluna',
+    location: 'hisui-crimson-mirelands',
+    speciesKey: 'ursaluna',
+    level: 71,
+    name: 'Ride Ursaluna',
+    note: 'An Ursaluna snuffles for treasure in the bog.',
+    requires: { champion: 'sinnoh' },
+  },
+  {
+    id: 'static-hisui-basculegion',
+    location: 'hisui-cobalt-coastlands',
+    speciesKey: 'basculegion',
+    level: 71,
+    name: 'Ride Basculegion',
+    note: 'A Basculegion rides the surf just off the shore.',
+    requires: { champion: 'sinnoh' },
+  },
+  {
+    id: 'static-hisui-sneasler',
+    location: 'hisui-coronet-highlands',
+    speciesKey: 'sneasler',
+    level: 72,
+    name: 'Ride Sneasler',
+    note: 'A Sneasler scales the cliffs with ease.',
+    requires: { champion: 'sinnoh' },
+  },
+  {
+    id: 'static-hisui-braviary',
+    location: 'hisui-alabaster-icelands',
+    speciesKey: 'h-braviary',
+    level: 72,
+    name: 'Ride Braviary',
+    note: 'A Hisuian Braviary circles overhead.',
+    requires: { champion: 'sinnoh' },
+  },
 ]
 
 /** @type {StaticEncounter[]} */

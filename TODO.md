@@ -109,13 +109,13 @@ Still open (optional):
 ## 76. Legends Arceus / Hisui areas (Sinnoh post-game zone)
 
 Hisui's five areas shipped as a Sinnoh post-game zone
-(`tools/add-hisui-zone.cjs`), and each area holds its frenzied noble as a
-one-off static encounter.
+(`tools/add-hisui-zone.cjs`); each area holds its frenzied noble and its ride
+Pokemon as one-off static encounters.
 
 Still open (optional):
 
-- [ ] A Jubilife Village hub location and the ride Pokemon as statics or Raid
-      Island additions, and space-time distortions as a swarm event.
+- [ ] A Jubilife Village hub location, and space-time distortions as a swarm
+      event.
 
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.

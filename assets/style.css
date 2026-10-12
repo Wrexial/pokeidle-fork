@@ -16306,6 +16306,40 @@ img {
     padding: 3px
 }
 
+.rotation-fighter {
+    position: relative;
+    font: inherit;
+    color: inherit;
+    cursor: pointer
+}
+
+.rotation-fighter:disabled {
+    cursor: default
+}
+
+.rotation-fighter:not(:disabled):hover {
+    border-color: var(--gold)
+}
+
+.rotation-active-tag {
+    margin-top: 2px;
+    font-size: 6px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    color: #1c1206;
+    background: var(--gold);
+    border-radius: 3px;
+    padding: 0 3px
+}
+
+.rotation-hint {
+    margin: 6px 0 0;
+    font-size: 8px;
+    line-height: 1.4;
+    text-align: center;
+    color: #cbbfa6
+}
+
 .doubles-side {
     display: flex;
     flex-direction: column;

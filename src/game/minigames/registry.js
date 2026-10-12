@@ -62,6 +62,7 @@ export const MINIGAME_PHASES = {
   championGauntlet: 'championGauntlet',
   doubles: 'doubles',
   triples: 'triples',
+  rotation: 'rotation',
   dynamaxAdventures: 'dynamaxAdventures',
   lightsOut: 'lightsOut',
   curry: 'curry',

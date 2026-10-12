@@ -8,6 +8,7 @@ import { mapData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { buildTowerFloor } from '../game/progression.js'
 import { DOUBLES_COST, TRIPLES_COST } from '../game/minigames/doubles.js'
+import { ROTATION_COST } from '../game/minigames/rotation.js'
 
 export function BattleTowerPanel() {
   const { state, dispatch } = useGame(),
@@ -166,6 +167,31 @@ export function BattleTowerPanel() {
           dispatch({ type: 'START_TRIPLES' })
         },
         children: 'ENTER THE TRIPLES COURT',
+      }),
+      jsxs('div', {
+        className: 'location-section-title',
+        style: { marginTop: '10px' },
+        children: 'Rotation Court',
+      }),
+      jsx('div', {
+        className: 'tower-hint',
+        children: `Field a trio but fight with one at a time, $${ROTATION_COST} a run. Rotate your active Pokemon for free before each round to answer the foe's lead.`,
+      }),
+      jsx('button', {
+        className: 'gym-fight-btn',
+        style: { width: '100%' },
+        disabled: !fightable || state.money < ROTATION_COST,
+        onClick: () => {
+          if (!fightable) return
+          if (
+            state.phase === 'battling' ||
+            state.phase === 'victory' ||
+            state.phase === 'defeat'
+          )
+            dispatch({ type: 'PHASE_IDLE' })
+          dispatch({ type: 'START_ROTATION' })
+        },
+        children: 'ENTER THE ROTATION COURT',
       }),
     ],
   })

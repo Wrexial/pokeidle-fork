@@ -84,9 +84,12 @@ test('the Research Shop stocks the ability items and no evolution stones', async
     ids = RESEARCH_SHOP.map((entry) => entry.itemId)
   assert.ok(ids.includes('abilityCapsule'))
   assert.ok(ids.includes('abilityPatch'))
-  // Research-only held items.
-  assert.ok(ids.includes('luckyEgg'))
-  assert.ok(ids.includes('amuletCoin'))
+  // Poffin is sold at the region cafes (and blended in the Berry Garden), so
+  // the Research Shop leaves it to them.
+  assert.ok(!ids.includes('poffin'))
+  // The Lucky Egg and Amulet Coin are auction-only held items.
+  assert.ok(!ids.includes('luckyEgg'))
+  assert.ok(!ids.includes('amuletCoin'))
   // The evolution stones live in the Kecleon Shop, so the Research Shop keeps
   // its own identity instead of restocking them.
   for (const stone of ['fireStone', 'waterStone', 'thunderStone', 'leafStone'])

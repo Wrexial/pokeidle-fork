@@ -337,11 +337,10 @@ export const RESEARCH_SHOP = [
   { itemId: 'expCandyL', cost: 10 },
   { itemId: 'expCandyXL', cost: 20 },
   { itemId: 'rareCandy', cost: 15 },
-  { itemId: 'poffin', cost: 5 },
-  { itemId: 'abilityCapsule', cost: 25 },
-  { itemId: 'abilityPatch', cost: 40 },
-  { itemId: 'bottleCap', cost: 30 },
-  { itemId: 'goldBottleCap', cost: 60 },
+  { itemId: 'abilityCapsule', cost: 150 },
+  { itemId: 'abilityPatch', cost: 200 },
+  { itemId: 'bottleCap', cost: 100 },
+  { itemId: 'goldBottleCap', cost: 250 },
   // Vitamins: Effort Values, which only vitamins can raise.
   { itemId: 'hpUp', cost: 6 },
   { itemId: 'protein', cost: 6 },
@@ -349,9 +348,6 @@ export const RESEARCH_SHOP = [
   { itemId: 'calcium', cost: 6 },
   { itemId: 'zinc', cost: 6 },
   { itemId: 'carbos', cost: 6 },
-  // Premium held items: a Lucky Egg for EXP and an Amulet Coin for cash.
-  { itemId: 'luckyEgg', cost: 250 },
-  { itemId: 'amuletCoin', cost: 200 },
   { itemId: 'masterball', cost: 1000 },
 ]
 

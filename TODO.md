@@ -181,9 +181,9 @@ Still open (optional):
 ## 81. Research Shop diversification
 
 The Research Shop now sells a research-flavoured set (the Exp. Candy ladder,
-Rare Candy, Poffin, the Ability Capsule / Patch, Bottle Caps, the six EV
-vitamins, a Master Ball, plus the Lucky Egg and Amulet Coin held items) instead
-of the Kecleon evolution stones.
+Rare Candy, the Ability Capsule / Patch, Bottle Caps, the six EV vitamins and a
+Master Ball) instead of the Kecleon evolution stones. The Lucky Egg and Amulet
+Coin held items are auction-only.
 
 Still open (optional):
 

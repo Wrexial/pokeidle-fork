@@ -18,7 +18,6 @@ const {
 } = await import('../src/data/items.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { AUCTION_LOTS } = await import('../src/game/minigames.js')
-const { RESEARCH_SHOP } = await import('../src/game/research.js')
 const { getItemSellPrice, isActiveEffectItem, itemTooltip } = await import('../src/game/progression.js')
 
 const allStandardItems = [
@@ -55,15 +54,10 @@ test('battle held items come from the Grand Auction House, not marts', () => {
     .filter((entry) => heldItems[entry.itemId])
   assert.equal(martHeld.length, 0, 'marts no longer sell held battle items')
   const auctioned = new Set(
-      AUCTION_LOTS.flatMap((lot) => lot.items.map((item) => item.itemId))
-    ),
-    // The Lucky Egg and Amulet Coin are research-only, sold for Research Points.
-    researchOnly = new Set(RESEARCH_SHOP.map((entry) => entry.itemId))
+    AUCTION_LOTS.flatMap((lot) => lot.items.map((item) => item.itemId))
+  )
   for (const itemId of Object.keys(heldItems))
-    assert.ok(
-      auctioned.has(itemId) || researchOnly.has(itemId),
-      `${itemId} is not in any auction lot or the Research Shop`
-    )
+    assert.ok(auctioned.has(itemId), `${itemId} is not in any auction lot`)
 })
 
 test('buying balls awards a free Premier Ball per 10', () => {

@@ -276,9 +276,17 @@ test('the Research Shop tops out at a 1000 RP Master Ball', () => {
       entry.cost <= 1000,
       `${entry.itemId} should not cost more than a Master Ball`
     )
-  // The Lucky Egg and Amulet Coin are premium but well below the Master Ball.
-  assert.equal(RESEARCH_SHOP.find((entry) => entry.itemId === 'luckyEgg')?.cost, 250)
-  assert.equal(RESEARCH_SHOP.find((entry) => entry.itemId === 'amuletCoin')?.cost, 200)
+  // The ability items and Bottle Caps are the premium non-ball buys.
+  for (const [itemId, cost] of [
+    ['bottleCap', 100],
+    ['abilityCapsule', 150],
+    ['abilityPatch', 200],
+    ['goldBottleCap', 250],
+  ]) {
+    const entry = RESEARCH_SHOP.find((candidate) => candidate.itemId === itemId)
+    assert.equal(entry?.cost, cost)
+    assert.ok(cost >= 100 && cost <= 250, `${itemId} should sit in the 100-250 RP band`)
+  }
 })
 
 test('save repair sanitises research counters', () => {

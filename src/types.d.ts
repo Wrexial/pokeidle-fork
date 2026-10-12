@@ -73,6 +73,8 @@ type Pokemon = BattlePokemon & {
   ivs: Record<string, number>
   /** Effort Values per stat, raised only by vitamins (0-252 each, 510 total). */
   evs?: Record<string, number>
+  /** The region it was caught/hatched in (drives the Masuda method). */
+  originRegion?: string
   /** Pre-hyper-training IVs, so a bred egg can't inherit the boosts. */
   naturalIvs?: Record<string, number>
   /** One of the 25 nature keys (see src/data/natures.js). */

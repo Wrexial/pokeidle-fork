@@ -1,7 +1,8 @@
 // Daycare deposit/withdraw and egg hatching. Split from game/reducer/pokemon.js.
 
 import { breedShinyOdds, breedShinyParentOdds, daycareEggBattles } from '../../../data/config.js'
-import { canBreed, eggHatchSteps, eggSpeciesKey, inheritBreedingTraits } from '../../breeding.js'
+import { mapData } from '../../../data/gameData.js'
+import { canBreed, eggHatchSteps, eggSpeciesKey, inheritBreedingTraits, masudaShinyOddsFor } from '../../breeding.js'
 import { createEgg, insertIntoBox } from '../../pokemon.js'
 import { checkShinyOdds } from '../../progression.js'
 import { prestigeMultipliers } from '../../prestige.js'
@@ -61,18 +62,26 @@ export function hatchDaycareEgg(state, action) {
   const baseSpeciesKey = eggSpeciesKey(parents)
   if (!baseSpeciesKey) return state
   const shinyParent = parents.some((parent) => parent.isShiny),
+    // The Masuda method (two parents from different regions) beats the plain
+    // shiny-parent boost when it applies.
+    masudaOdds = masudaShinyOddsFor(parents),
+    shinyOdds = masudaOdds ?? (shinyParent ? breedShinyParentOdds : breedShinyOdds),
     // The Incubation prestige perk shortens the hatch.
     hatchSteps = Math.max(
       1,
       Math.round(eggHatchSteps(baseSpeciesKey) / prestigeMultipliers(state).hatch)
     ),
-    egg = createEgg(
-      baseSpeciesKey,
-      state.nextPokemonId,
-      checkShinyOdds(shinyParent ? breedShinyParentOdds : breedShinyOdds),
-      hatchSteps,
-      inheritBreedingTraits(parents, baseSpeciesKey)
-    ),
+    egg = {
+      ...createEgg(
+        baseSpeciesKey,
+        state.nextPokemonId,
+        checkShinyOdds(shinyOdds),
+        hatchSteps,
+        inheritBreedingTraits(parents, baseSpeciesKey)
+      ),
+      // Eggs are native to the region their Daycare is in.
+      originRegion: mapData[state.currentLocation]?.region ?? state.startRegion,
+    },
     toParty = state.party.length < 6
   return withNotification(
     {

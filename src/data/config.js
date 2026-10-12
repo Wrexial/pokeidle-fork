@@ -70,6 +70,11 @@ export const tmTeachCost = 500
 /** Shiny odds for a bred egg (1 in 4096), improved if a parent is shiny. */
 export const breedShinyOdds = 4096
 export const breedShinyParentOdds = 512
+/**
+ * Masuda method: shiny odds for an egg whose two parents come from different
+ * regions (a "foreign" parent, e.g. from a Wonder Trade).
+ */
+export const masudaShinyOdds = 683
 
 export let RAID_COOLDOWN_MS = 1 * 1e3
 /** Raid legendary levels ramp from the pool level (70/75) up to this cap. */

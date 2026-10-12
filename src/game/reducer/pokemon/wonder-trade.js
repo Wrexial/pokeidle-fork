@@ -1,7 +1,7 @@
 // Wonder Trade and its completion. Split from game/reducer/pokemon.js.
 
 import { wonderTradeShinyOdds } from '../../../data/config.js'
-import { pokemonSpecies } from '../../../data/gameData.js'
+import { baseRegions, pokemonSpecies } from '../../../data/gameData.js'
 import { isTerminalForm } from '../../../data/mega-evolution.js'
 import { createPokemon } from '../../pokemon.js'
 import { checkShinyOdds, loadActivePokemonFromParty, prepareNextBattle } from '../../progression.js'
@@ -44,12 +44,23 @@ export function wonderTrade(state, action) {
       WONDER_TRADE_POOL[Math.floor(Math.random() * WONDER_TRADE_POOL.length)],
     // Undocumented perk: trading a shiny guarantees a shiny back.
     receivedIsShiny = tradedPokemon.isShiny || checkShinyOdds(wonderTradeShinyOdds),
-    receivedPokemon = createPokemon(
-      receivedSpeciesKey,
-      tradedPokemon.level,
-      state.nextPokemonId,
-      receivedIsShiny
-    )
+    // A traded Pokemon comes from somewhere else, so it can pair up for the
+    // Masuda method with one caught locally.
+    foreignRegions = baseRegions.filter(
+      (region) => region.id !== (tradedPokemon.originRegion ?? state.startRegion)
+    ),
+    receivedPokemon = {
+      ...createPokemon(
+        receivedSpeciesKey,
+        tradedPokemon.level,
+        state.nextPokemonId,
+        receivedIsShiny
+      ),
+      originRegion:
+        foreignRegions.length > 0
+          ? foreignRegions[Math.floor(Math.random() * foreignRegions.length)].id
+          : void 0,
+    }
   // Remove the traded Pokemon (mirroring RELEASE_POKEMON).
   let baseState
   if (inBox)

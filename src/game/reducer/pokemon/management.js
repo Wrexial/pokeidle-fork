@@ -1,6 +1,6 @@
 // Catching, nicknaming, moves, favourites and releasing. Split from game/reducer/pokemon.js.
 
-import { pokemonSpecies } from '../../../data/gameData.js'
+import { mapData, pokemonSpecies } from '../../../data/gameData.js'
 import { tmItemId } from '../../../data/tms.js'
 import { tmTeachCost } from '../../../data/config.js'
 import { createPokemon, insertIntoBox, isTutorMove, judgeIVs, syncObtainedRibbons } from '../../pokemon.js'
@@ -311,6 +311,11 @@ export function catchPokemon(state, action) {
   let newPokemon = gender ? { ...rolledPokemon, gender } : rolledPokemon
   if (heldItem) newPokemon = { ...newPokemon, heldItem }
   if (ability) newPokemon = { ...newPokemon, ability }
+  // Record where it came from (drives the Masuda method when breeding).
+  newPokemon = {
+    ...newPokemon,
+    originRegion: mapData[state.currentLocation]?.region ?? state.startRegion,
+  }
   // The Friend Ball sets a high starting friendship.
   if (pokeballUsed === 'friendball') newPokemon = { ...newPokemon, friendship: 200 }
   // Obtained ribbons: a shiny is always marked, and its species' first catch

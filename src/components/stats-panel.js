@@ -16,7 +16,7 @@ const NATURE_STAT_NAMES = {
   spDefense: 'Sp. Def',
   speed: 'Speed',
 }
-import { moveData, pokemonSpecies } from '../data/gameData.js'
+import { moveData, pokemonSpecies, regions } from '../data/gameData.js'
 import { abilityTooltip } from '../data/ability-info.js'
 import { canGigantamax, MEGA_STONE_ITEM, megaFormsFor } from '../data/mega-evolution.js'
 import { moveTooltip } from '../game/move-info.js'
@@ -527,6 +527,12 @@ export function StatsPanel({
               )
             }),
           }),
+          pokemon.originRegion &&
+            jsx('span', {
+              className: 'stats-panel-origin',
+              'data-tooltip': 'Bred with a parent from another region to trigger the Masuda method.',
+              children: `Origin: ${regions.find((region) => region.id === pokemon.originRegion)?.name ?? pokemon.originRegion}`,
+            }),
         ],
       }),
       jsx(RibbonCase, { pokemon }),

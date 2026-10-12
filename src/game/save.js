@@ -168,6 +168,7 @@ export function repairSave(saved) {
   playerPokemon.ivs || (playerPokemon.ivs = generateIVs())
   // Older saves predate per-individual sizes, so roll one in.
   if (playerPokemon.size === void 0) playerPokemon.size = rollSize()
+  const knownRegionIds = new Set(regions.map((region) => region.id))
   /**
    * Clamp a stored EV block: 0-252 per stat, 510 in total (trimming the
    * largest stats first if a save somehow exceeds the budget).
@@ -197,14 +198,18 @@ export function repairSave(saved) {
         : null,
       needsRibbonFix = ribbons && ribbons.length !== pokemon.ribbons.length,
       evs = sanitizeEvs(pokemon.evs),
-      needsEvFix = JSON.stringify(evs) !== JSON.stringify(pokemon.evs)
-    if (pokemon.ivs && pokemon.size !== void 0 && !needsRibbonFix && !needsEvFix) return pokemon
+      needsEvFix = JSON.stringify(evs) !== JSON.stringify(pokemon.evs),
+      // Drop an origin region that no longer exists.
+      badOrigin = pokemon.originRegion != null && !knownRegionIds.has(pokemon.originRegion)
+    if (pokemon.ivs && pokemon.size !== void 0 && !needsRibbonFix && !needsEvFix && !badOrigin)
+      return pokemon
     return {
       ...pokemon,
       ...(pokemon.ivs ? {} : { ivs: generateIVs() }),
       ...(pokemon.size === void 0 ? { size: rollSize() } : {}),
       ...(needsRibbonFix ? { ribbons } : {}),
       ...(needsEvFix ? { evs } : {}),
+      ...(badOrigin ? { originRegion: void 0 } : {}),
     }
   }
   party = party.map(withDerivedPokemonFields)

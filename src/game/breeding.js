@@ -4,6 +4,7 @@ import { breedingData, eggMoves, evolutionData, pokemonSpecies } from '../data/g
 import { evolutionItems } from '../data/items.js'
 import { isMegaOrPrimalForm, isTerminalForm } from '../data/mega-evolution.js'
 import { randomNature } from '../data/natures.js'
+import { masudaShinyOdds } from '../data/config.js'
 import {
   IV_STAT_ORDER,
   generateIVs,
@@ -223,6 +224,18 @@ export function eggHatchSteps(speciesKey) {
       ? Object.values(species.baseStats).reduce((sum, value) => sum + value, 0)
       : 300
   return Math.max(30, Math.min(120, Math.round(total / 5)))
+}
+
+/**
+ * The Masuda method: two parents caught in different regions (e.g. one from a
+ * Wonder Trade) hatch shinies far more often. Returns the boosted odds when it
+ * applies, otherwise null. A parent with no recorded region doesn't count.
+ * @param {Pokemon[]} parents
+ * @returns {number | null}
+ */
+export function masudaShinyOddsFor(parents) {
+  const regions = new Set((parents ?? []).map((parent) => parent?.originRegion).filter(Boolean))
+  return regions.size >= 2 ? masudaShinyOdds : null
 }
 
 /** Fisher-Yates shuffle (in place). @param {any[]} items */

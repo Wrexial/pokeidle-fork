@@ -27,7 +27,7 @@ _(empty — the last Tier 1 item, #77, shipped.)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-See the numbered sections below: #24, #25, #56, #62, #69, #71–#76, #79, #81.
+See the numbered sections below: #24, #25, #56, #62, #69, #73–#76, #79, #81.
 They are optional extras rather than missing features.
 
 ---
@@ -147,16 +147,6 @@ Still open (optional):
       Pokédex-percentage step.
 - [ ] Per-legendary boss battles with dialogue rather than a standard raid.
 
-## 71. Breeding project queue & shiny tracking
-
-The Day-Care tracks eggs / shinies hatched and a breeding project queue
-(`src/game/breeding-projects.js`).
-
-Still open (optional):
-
-- [ ] Explicit Masuda odds (a language/region tag on a parent) rather than the
-      current shiny-parent boost.
-
 ## 73. Weather system on routes
 
 A 15-minute world weather cycle feeds `fieldWeatherFor` and the activity
@@ -220,8 +210,8 @@ vitamins, a Master Ball) instead of the Kecleon evolution stones.
 Still open (optional):
 
 - [ ] Research-only held items (Lucky Egg, Amulet Coin). (PP Up / PP Max are
-off the table — PP stays unimplemented, and the vitamins shipped as the EV
-system.)
+      off the table — PP stays unimplemented, and the vitamins shipped as the
+      EV system.)
 - [ ] A species-specific research reward tied to the species the points came
       from.
 

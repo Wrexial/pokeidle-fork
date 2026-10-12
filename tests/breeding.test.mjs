@@ -5,9 +5,10 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { breedingCompatibility, canBreed, eggSpeciesKey, genderForPokemon, inheritBreedingTraits, inheritEggMoves, inheritIVs, inheritMoves, inheritNature, rollGender } = await import(
+const { breedingCompatibility, canBreed, eggSpeciesKey, genderForPokemon, inheritBreedingTraits, inheritEggMoves, inheritIVs, inheritMoves, inheritNature, masudaShinyOddsFor, rollGender } = await import(
   '../src/game/breeding.js'
 )
+const { masudaShinyOdds } = await import('../src/data/config.js')
 const { createEgg, createPokemon } = await import('../src/game/pokemon.js')
 const { eggMoves, moveData, pokemonSpecies } = await import('../src/data/gameData.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -18,6 +19,50 @@ const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
  * @param {string} [id]
  */
 const parent = (speciesKey, id = '1') => ({ speciesKey, id })
+
+test('the Masuda method needs two parents from different regions', () => {
+  assert.equal(masudaShinyOddsFor([parent('ditto'), parent('bulbasaur')]), null, 'no regions = no Masuda')
+  assert.equal(
+    masudaShinyOddsFor([
+      { speciesKey: 'ditto', originRegion: 'kanto' },
+      { speciesKey: 'bulbasaur', originRegion: 'kanto' },
+    ]),
+    null,
+    'same region = no Masuda'
+  )
+  const different = masudaShinyOddsFor([
+    { speciesKey: 'ditto', originRegion: 'kanto' },
+    { speciesKey: 'bulbasaur', originRegion: 'johto' },
+  ])
+  assert.equal(different, masudaShinyOdds)
+  assert.ok(masudaShinyOdds < 4096, 'Masuda is better than full odds')
+})
+
+test('a daycare egg from mixed-region parents uses the Masuda odds', () => {
+  const original = Math.random
+  // 0.001 is a miss at 1/4096 (base) but a hit at 1/683 (Masuda).
+  Math.random = () => 0.001
+  try {
+    const ditto = { ...createPokemon('ditto', 20, 'd'), originRegion: 'kanto' },
+      sameRegion = { ...createPokemon('bulbasaur', 20, 'b'), originRegion: 'kanto' },
+      foreign = { ...createPokemon('bulbasaur', 20, 'b2'), originRegion: 'johto' },
+      base = {
+        ...initialGameState,
+        party: [createPokemon('charmander', 10, 'c')],
+        daycare: { parents: [ditto, sameRegion], progress: 50 },
+      },
+      plain = gameReducer(base, { type: 'HATCH_DAYCARE_EGG' }),
+      masuda = gameReducer(
+        { ...base, daycare: { parents: [ditto, foreign], progress: 50 } },
+        { type: 'HATCH_DAYCARE_EGG' }
+      )
+    assert.equal(plain.party[1].isShiny, false, 'the base odds miss at 0.001')
+    assert.equal(masuda.party[1].isShiny, true, 'the Masuda odds hit at 0.001')
+    assert.equal(masuda.party[1].originRegion, initialGameState.startRegion)
+  } finally {
+    Math.random = original
+  }
+})
 
 test('Cute Charm biases a wild roll toward the requested gender', () => {
   const original = Math.random

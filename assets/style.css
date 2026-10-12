@@ -17064,3 +17064,10 @@ img {
     color: #2a1808;
     font-weight: 700
 }
+
+.stats-panel-origin {
+    display: block;
+    margin-top: 4px;
+    font-size: 7px;
+    color: #6a5a48
+}

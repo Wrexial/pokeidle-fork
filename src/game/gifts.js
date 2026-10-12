@@ -211,6 +211,52 @@ const BASE_STATIC_ENCOUNTERS = [
     name: 'Flute Snorlax',
     note: 'A Snorlax is asleep across the bridge.',
   },
+  // Hisui's five noble Pokemon, fought as statics in the post-game zone.
+  {
+    id: 'static-hisui-kleavor',
+    location: 'hisui-obsidian-fieldlands',
+    speciesKey: 'kleavor',
+    level: 72,
+    name: 'Noble Kleavor',
+    note: 'The frenzied noble of the Obsidian Fieldlands.',
+    requires: { champion: 'sinnoh' },
+  },
+  {
+    id: 'static-hisui-lilligant',
+    location: 'hisui-crimson-mirelands',
+    speciesKey: 'h-lilligant',
+    level: 73,
+    name: 'Noble Lilligant',
+    note: 'The frenzied noble of the Crimson Mirelands.',
+    requires: { champion: 'sinnoh' },
+  },
+  {
+    id: 'static-hisui-arcanine',
+    location: 'hisui-cobalt-coastlands',
+    speciesKey: 'h-arcanine',
+    level: 74,
+    name: 'Noble Arcanine',
+    note: 'The frenzied noble of the Cobalt Coastlands.',
+    requires: { champion: 'sinnoh' },
+  },
+  {
+    id: 'static-hisui-electrode',
+    location: 'hisui-coronet-highlands',
+    speciesKey: 'h-electrode',
+    level: 75,
+    name: 'Noble Electrode',
+    note: 'The frenzied noble of the Coronet Highlands.',
+    requires: { champion: 'sinnoh' },
+  },
+  {
+    id: 'static-hisui-avalugg',
+    location: 'hisui-alabaster-icelands',
+    speciesKey: 'h-avalugg',
+    level: 76,
+    name: 'Noble Avalugg',
+    note: 'The frenzied noble of the Alabaster Icelands.',
+    requires: { champion: 'sinnoh' },
+  },
 ]
 
 /** @type {StaticEncounter[]} */

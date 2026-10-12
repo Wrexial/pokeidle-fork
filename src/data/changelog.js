@@ -20,7 +20,7 @@ export const CHANGELOG = [
         heading: 'Regions',
         items: [
           'The world has weather now: each area rolls rain, sun, sandstorm, snow, fog or strong winds (or stays clear) every 15 real minutes, weighted by its biome and its region (Hoenn is rainy, Alola sunny, Galar foggy), and shows it beside the day/night chip on the Town Map. A battle starts under that weather, and the rain- and sun-favoured route activities can fire anywhere instead of only on the seven permanently weather-struck routes. Fog thickens every move that can miss, strong winds blunt super-effective hits, and a weather a battle introduced (Rain Dance, Drizzle, …) lingers on the route for up to 15 minutes so its activities read the same.',
-          'Hisui opens as a Sinnoh post-game zone: beat the Sinnoh Champion and a rift at the League leads to ancient Sinnoh — the Obsidian Fieldlands, Crimson Mirelands, Cobalt Coastlands, Coronet Highlands and Alabaster Icelands, each with its own wild table (Hisuian forms included).',
+          'Hisui opens as a Sinnoh post-game zone: beat the Sinnoh Champion and a rift at the League leads to ancient Sinnoh — the Obsidian Fieldlands, Crimson Mirelands, Cobalt Coastlands, Coronet Highlands and Alabaster Icelands, each with its own wild table (Hisuian forms included). Each area also holds its frenzied noble as a one-off static encounter — Kleavor, Lilligant, Arcanine, Electrode and Avalugg — for a set battle against a Lv.72–76 boss.',
           'Lumiose City’s Wild Zones open as a Kalos post-game zone once the Kalos Champion is beaten: five numbered Wild Zones (plaza, park, canal, tunnels and the power-plant quarter), each with its own wild table.',
         ],
       },

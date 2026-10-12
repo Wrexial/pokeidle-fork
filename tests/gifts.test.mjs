@@ -267,6 +267,25 @@ test('the red Gyarados static is always shiny', () => {
   assert.equal(started.enemyPokemon.isShiny, true, 'the static is forced shiny')
 })
 
+test('Hisui has its five noble Pokemon as statics behind the Sinnoh Champion', () => {
+  const nobles = STATIC_ENCOUNTERS.filter((entry) => entry.id.startsWith('static-hisui-'))
+  assert.equal(nobles.length, 5)
+  const seenSpecies = new Set()
+  for (const noble of nobles) {
+    assert.equal(noble.requires?.champion, 'sinnoh', `${noble.id} waits for the Sinnoh Champion`)
+    assert.equal(mapData[noble.location]?.region, 'sinnoh', `${noble.id} sits in Sinnoh`)
+    assert.ok(pokemonSpecies[noble.speciesKey], `${noble.speciesKey} is a real species`)
+    seenSpecies.add(noble.speciesKey)
+  }
+  assert.equal(seenSpecies.size, 5, 'each noble is a distinct species')
+  // The gate keeps them locked until the Champion is beaten.
+  assert.equal(entryRequirementStatus(initialGameState, nobles[0]).met, false)
+  assert.equal(
+    entryRequirementStatus({ ...initialGameState, defeatedChampions: ['sinnoh'] }, nobles[0]).met,
+    true
+  )
+})
+
 test('a claimed static cannot be started again', () => {
   const entry = STATIC_ENCOUNTERS.find((candidate) => !candidate.requires) ?? STATIC_ENCOUNTERS[0],
     active = createPokemon('cyndaquil', 20, 'static-test-2'),

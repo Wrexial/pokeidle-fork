@@ -743,6 +743,14 @@ test('auction lots carry real items and a sensible appraisal', () => {
   }
 })
 
+test('the Grand Auction House stocks the Lucky Egg and Amulet Coin', () => {
+  const auctioned = new Set(
+    AUCTION_LOTS.flatMap((lot) => lot.items.map((item) => item.itemId))
+  )
+  assert.ok(auctioned.has('luckyEgg'))
+  assert.ok(auctioned.has('amuletCoin'))
+})
+
 test('auction bidding raises the price until the rivals drop out', () => {
   const lot = AUCTION_LOTS.find((candidate) => candidate.id === 'choiceSet')
   assert.ok(lot)

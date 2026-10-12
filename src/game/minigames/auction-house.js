@@ -119,6 +119,22 @@ export const AUCTION_LOTS = [
     items: [{ itemId: 'rockyHelmet', quantity: 1 }],
   },
   {
+    id: 'luckyEgg',
+    kind: 'held',
+    name: 'Lucky Egg',
+    blurb: 'A golden egg that earns its holder 50% more EXP.',
+    value: 18000,
+    items: [{ itemId: 'luckyEgg', quantity: 1 }],
+  },
+  {
+    id: 'amuletCoin',
+    kind: 'held',
+    name: 'Amulet Coin',
+    blurb: 'Doubles the prize money of its holder in battle.',
+    value: 15000,
+    items: [{ itemId: 'amuletCoin', quantity: 1 }],
+  },
+  {
     id: 'boosterFireWater',
     kind: 'held',
     name: 'Elemental Booster Set',

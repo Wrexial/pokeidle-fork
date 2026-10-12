@@ -332,27 +332,27 @@ export function creditResearchMove(state, speciesKey, moveId) {
  * @type {{ itemId: string, cost: number }[]}
  */
 export const RESEARCH_SHOP = [
-  { itemId: 'expCandyS', cost: 1 },
-  { itemId: 'expCandyM', cost: 3 },
-  { itemId: 'expCandyL', cost: 6 },
-  { itemId: 'expCandyXL', cost: 12 },
-  { itemId: 'rareCandy', cost: 8 },
-  { itemId: 'poffin', cost: 3 },
-  { itemId: 'abilityCapsule', cost: 12 },
-  { itemId: 'abilityPatch', cost: 20 },
-  { itemId: 'bottleCap', cost: 15 },
-  { itemId: 'goldBottleCap', cost: 30 },
+  { itemId: 'expCandyS', cost: 2 },
+  { itemId: 'expCandyM', cost: 5 },
+  { itemId: 'expCandyL', cost: 10 },
+  { itemId: 'expCandyXL', cost: 20 },
+  { itemId: 'rareCandy', cost: 15 },
+  { itemId: 'poffin', cost: 5 },
+  { itemId: 'abilityCapsule', cost: 25 },
+  { itemId: 'abilityPatch', cost: 40 },
+  { itemId: 'bottleCap', cost: 30 },
+  { itemId: 'goldBottleCap', cost: 60 },
   // Vitamins: Effort Values, which only vitamins can raise.
-  { itemId: 'hpUp', cost: 4 },
-  { itemId: 'protein', cost: 4 },
-  { itemId: 'iron', cost: 4 },
-  { itemId: 'calcium', cost: 4 },
-  { itemId: 'zinc', cost: 4 },
-  { itemId: 'carbos', cost: 4 },
-  // Research-only held items: a Lucky Egg for EXP and an Amulet Coin for cash.
-  { itemId: 'luckyEgg', cost: 25 },
-  { itemId: 'amuletCoin', cost: 20 },
-  { itemId: 'masterball', cost: 100 },
+  { itemId: 'hpUp', cost: 6 },
+  { itemId: 'protein', cost: 6 },
+  { itemId: 'iron', cost: 6 },
+  { itemId: 'calcium', cost: 6 },
+  { itemId: 'zinc', cost: 6 },
+  { itemId: 'carbos', cost: 6 },
+  // Premium held items: a Lucky Egg for EXP and an Amulet Coin for cash.
+  { itemId: 'luckyEgg', cost: 250 },
+  { itemId: 'amuletCoin', cost: 200 },
+  { itemId: 'masterball', cost: 1000 },
 ]
 
 /**

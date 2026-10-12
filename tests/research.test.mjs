@@ -268,6 +268,19 @@ test('the Research Shop spends points and refuses when short', () => {
   assert.equal(bogus.researchPoints, item.cost)
 })
 
+test('the Research Shop tops out at a 1000 RP Master Ball', () => {
+  const master = RESEARCH_SHOP.find((entry) => entry.itemId === 'masterball')
+  assert.equal(master?.cost, 1000)
+  for (const entry of RESEARCH_SHOP)
+    assert.ok(
+      entry.cost <= 1000,
+      `${entry.itemId} should not cost more than a Master Ball`
+    )
+  // The Lucky Egg and Amulet Coin are premium but well below the Master Ball.
+  assert.equal(RESEARCH_SHOP.find((entry) => entry.itemId === 'luckyEgg')?.cost, 250)
+  assert.equal(RESEARCH_SHOP.find((entry) => entry.itemId === 'amuletCoin')?.cost, 200)
+})
+
 test('save repair sanitises research counters', () => {
   const base = gameReducer(initialGameState, {
       type: 'SELECT_STARTER',

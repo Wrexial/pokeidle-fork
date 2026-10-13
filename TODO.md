@@ -67,21 +67,6 @@ Panel-layout and top-bar cleanups: reclaim vertical space, make the sub-tab
 hierarchy read, and fold the daily menus together. All are UI-only unless
 noted.
 
-## Make the Secret Base card collapsible (follow-up)
-
-`SecretBaseCard` (`src/components/secret-base-card.js`) always shows its
-heading, hint paragraph and start/move button on every route, which is a lot of
-space for a feature most routes don't use. Collapse it behind its section title
-like the other disclosure sections, defaulting to open only when this route *is*
-the player's base.
-
-- [ ] Add a `collapsed` state to `SecretBaseCard` toggled from the
-      `location-section-title`, with a chevron/open indicator.
-- [ ] Keep the hint and the ENTER / MOVE / SET UP button inside the expanded
-      body; show the base's location (or "not set up") in the collapsed title.
-- [ ] Match the existing disclosure styling in `assets/style.css` rather than
-      inventing a new pattern.
-
 ## Put Focus Hunt and Field Jobs on one row (follow-up)
 
 The Focus Hunt bar (`HuntBar`, `src/components/hunt-panel.js`) is a full-width

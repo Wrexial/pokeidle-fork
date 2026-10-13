@@ -31,15 +31,18 @@ export function HuntBar({ onOpen }) {
   return jsxs('button', {
     className: `hunt-bar${hunt ? ' active' : ''}`,
     onClick: onOpen,
+    title: hunt
+      ? `Focus Hunt: ${huntLabel(hunt)}`
+      : 'Focus on a species or type to find it more often',
     children: [
       jsx('span', { className: 'hunt-bar-icon', children: '\u{1f3af}' }),
       hunt
         ? jsxs('span', {
             className: 'hunt-bar-text',
             children: [
-              jsxs('span', {
+              jsx('span', {
                 className: 'hunt-bar-target',
-                children: ['Hunting ', huntLabel(hunt)],
+                children: huntLabel(hunt),
               }),
               jsxs('span', {
                 className: 'hunt-bar-progress',
@@ -52,7 +55,7 @@ export function HuntBar({ onOpen }) {
           })
         : jsx('span', {
             className: 'hunt-bar-text',
-            children: 'Focus on a species or type to find it more often',
+            children: 'Focus Hunt',
           }),
     ],
   })

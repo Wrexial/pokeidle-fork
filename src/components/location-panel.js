@@ -789,14 +789,23 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
           className: 'location-description',
           children: location.description,
         }),
-        onOpenHunt && jsx(HuntBar, { onOpen: onOpenHunt }),
-        routeEncounters && routeKey && jsx(SosChainChip, { routeKey }),
-        jobCount > 0 &&
-          jsx('button', {
-            className: 'location-jobs-btn',
-            onClick: () => setShowJobs(true),
-            children: `\u2699\ufe0f Field Jobs (${jobCount})`,
+        (onOpenHunt || activityIds.length > 0 || jobCount > 0) &&
+          jsxs('div', {
+            className: 'location-utility-row',
+            children: [
+              onOpenHunt && jsx(HuntBar, { onOpen: onOpenHunt }),
+              (activityIds.length > 0 || jobCount > 0) &&
+                jsx('button', {
+                  className: 'location-jobs-btn',
+                  onClick: () => setShowJobs(true),
+                  children:
+                    jobCount > 0
+                      ? `\u2699\ufe0f Field Jobs (${jobCount})`
+                      : '\u2699\ufe0f Field Jobs',
+                }),
+            ],
           }),
+        routeEncounters && routeKey && jsx(SosChainChip, { routeKey }),
         servicePois.length > 0 &&
           jsxs('div', {
             className: 'location-services',

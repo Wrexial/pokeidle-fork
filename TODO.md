@@ -67,22 +67,6 @@ Panel-layout and top-bar cleanups: reclaim vertical space, make the sub-tab
 hierarchy read, and fold the daily menus together. All are UI-only unless
 noted.
 
-## Put Focus Hunt and Field Jobs on one row (follow-up)
-
-The Focus Hunt bar (`HuntBar`, `src/components/hunt-panel.js`) is a full-width
-bar, and the Field Jobs entry (`location-jobs-btn`,
-`src/components/location-panel.js`) only appears under it once a job is already
-running, so there is no single "route utilities" row. Group them: make the
-Focus control read as a compact button (icon + target/short progress) and sit
-the Field Jobs button beside it.
-
-- [ ] Restyle `.hunt-bar` in `assets/style.css` as a compact button so it can
-      share a row instead of stretching full width.
-- [ ] Add a small flex row in `LocationPanel` holding `HuntBar` and the Field
-      Jobs button, and show the jobs button whenever job slots exist rather
-      than only when `jobCount > 0`.
-- [ ] Sanity-check the row on the narrow/mobile location panel.
-
 ## Collapse the daily menus into one hub (follow-up)
 
 The battle top bar (`battle-top-buttons` in `src/components/battle-scene.js`)

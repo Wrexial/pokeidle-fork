@@ -121,6 +121,7 @@ export const CHANGELOG = [
           'The Trainer tab’s four sub-views (Card / League / Records / Summary) now use the Items tab’s lighter pill strip instead of the Backpack’s blocky top-level tabs, so the second level reads as a sub-tab.',
           'Route activity cards are much more compact: the hint is one line, HOW TO PLAY is a small “?” button in the header that folds the steps away, and posting a Pokemon to a Field Job is a small header button instead of a full-width bar. A route with several activities no longer fills the panel.',
           'The Secret Base card folds away behind its section title, which shows where the base is set up (or that it is not) and only opens by default on the route it sits on. Expand it to read the hint and use ENTER / MOVE / SET UP.',
+          'The Focus Hunt control and the Field Jobs entry now share one compact “route utilities” row in the location panel: Focus reads as a button showing its target and a short progress line, and Field Jobs sits beside it, opening the summary as soon as a route has activities instead of only once a job is running.',
         ],
       },
       {

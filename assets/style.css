@@ -4416,12 +4416,14 @@ img {
 }
 
 .location-jobs-btn {
-    align-self: flex-start;
-    margin: 0 0 8px;
+    flex: 0 0 auto;
+    align-self: center;
+    margin: 0;
     font-family: inherit;
     font-size: 8px;
     letter-spacing: .3px;
     padding: 4px 8px;
+    white-space: nowrap;
     color: #8fd0ff;
     background: rgba(10,14,10,.5);
     border: 1px solid #4a6a8a;
@@ -18696,20 +18698,29 @@ img {
 }
 
 /* --- Focus hunt (#61) --------------------------------------------------- */
-.hunt-bar {
+.location-utility-row {
     display: flex;
     align-items: center;
     gap: 6px;
-    width: 100%;
+    width: 100%
+}
+
+.hunt-bar {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
     text-align: left;
-    margin: 2px 0 6px;
-    padding: 4px 7px;
+    margin: 0;
+    padding: 4px 8px;
     background: #00000012;
     border: 1px dashed #00000044;
     border-radius: 3px;
     color: var(--text-muted);
     font-family: inherit;
     font-size: 8px;
+    white-space: nowrap;
     cursor: pointer
 }
 
@@ -18730,19 +18741,34 @@ img {
 
 .hunt-bar-text {
     display: flex;
-    flex-direction: column;
-    gap: 1px;
-    min-width: 0
+    flex-direction: row;
+    align-items: baseline;
+    gap: 5px;
+    min-width: 0;
+    overflow: hidden
 }
 
 .hunt-bar-target {
+    min-width: 0;
+    overflow: hidden;
     font-weight: 700;
-    color: var(--parchment)
+    color: var(--parchment);
+    text-overflow: ellipsis;
+    white-space: nowrap
 }
 
 .hunt-bar-progress {
+    white-space: nowrap;
     color: var(--text-muted);
     opacity: .85
+}
+
+/* On phones keep the utility row on one line: the Focus button drops its
+   progress so the target name and the Field Jobs button both stay readable. */
+@media (max-width: 767px) {
+    .hunt-bar-progress {
+        display: none
+    }
 }
 
 .sos-chain-chip {

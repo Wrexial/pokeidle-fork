@@ -315,6 +315,10 @@ export function professorStoryStatus(state) {
   const claimed = new Set(
       Array.isArray(state.professorStory?.claimed) ? state.professorStory.claimed : []
     ),
+    // A region's chapter opens as soon as that region is available to the
+    // player (its start region or one opened with an Unlock Token), so the
+    // chain follows the open world instead of forcing every earlier region.
+    openRegions = new Set([state.startRegion ?? 'kanto', ...(state.unlockedRegions ?? [])]),
     registered = new Set(state.pokedexCaught),
     chapterCount = PROFESSOR_STORY.filter((chapter) => chapter.region).length,
     legendariesCaught = Object.values(QUEST_LEGENDARY_BY_REGION).filter((speciesKey) =>
@@ -325,8 +329,11 @@ export function professorStoryStatus(state) {
     ).length,
     context = { registered, chaptersClaimed, chapterCount, legendariesCaught },
     chapters = PROFESSOR_STORY.map((chapter, index) => {
-      const previous = index > 0 ? PROFESSOR_STORY[index - 1] : null,
-        unlocked = !previous || claimed.has(previous.id),
+      // The capstone (no region) stays behind every regional chapter, while a
+      // regional chapter only needs its own region to be open.
+      const unlocked = chapter.region
+          ? openRegions.has(chapter.region)
+          : chaptersClaimed >= chapterCount,
         steps = chapter.steps.map((step) => professorStepStatus(state, chapter, step, context)),
         done = steps.length > 0 && steps.every((step) => step.done),
         isClaimed = claimed.has(chapter.id)
@@ -342,7 +349,10 @@ export function professorStoryStatus(state) {
     })
   return {
     chapters,
-    current: chapters.find((chapter) => !chapter.claimed) ?? null,
+    current:
+      chapters.find((chapter) => !chapter.claimed && chapter.unlocked) ??
+      chapters.find((chapter) => !chapter.claimed) ??
+      null,
     chapterCount: chapters.length,
     claimedCount: chapters.filter((chapter) => chapter.claimed).length,
     catchBonus: chapters.reduce(

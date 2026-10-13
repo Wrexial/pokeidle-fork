@@ -66,7 +66,7 @@ test('finishing the Kanto steps makes the chapter claimable', () => {
   assert.ok(hasClaimableProfessorStory(base))
 })
 
-test('claiming a chapter pays once and unlocks the next', () => {
+test('claiming a chapter pays once without opening another region', () => {
   const base = {
       ...initialGameState,
       pokedexCaught: speciesKeysByGeneration[0].slice(0, 20),
@@ -81,7 +81,12 @@ test('claiming a chapter pays once and unlocks the next', () => {
   assert.deepEqual(claimed.professorStory.claimed, ['kanto'])
   assert.equal(claimed.money, base.money + (chapter.reward.money ?? 0))
   assert.equal(claimed.inventory.greatball, (base.inventory.greatball ?? 0) + 10)
-  assert.equal(professorStoryStatus(claimed).chapters[1].unlocked, true)
+  // Johto's chapter follows its own region, not the claimed chapter before it.
+  assert.equal(professorStoryStatus(claimed).chapters[1].unlocked, false)
+  assert.equal(
+    professorStoryStatus({ ...claimed, unlockedRegions: ['kanto', 'johto'] }).chapters[1].unlocked,
+    true
+  )
   // A second claim is a no-op.
   assert.equal(
     gameReducer(claimed, { type: 'CLAIM_STORY_CHAPTER', payload: { chapterId: 'kanto' } }),
@@ -94,7 +99,8 @@ test('an incomplete chapter cannot be claimed', () => {
     gameReducer(initialGameState, { type: 'CLAIM_STORY_CHAPTER', payload: { chapterId: 'kanto' } }),
     initialGameState
   )
-  // A locked chapter cannot be skipped to.
+  // A chapter whose region is not open cannot be claimed, even when its own
+  // steps happen to be complete.
   const almost = {
     ...initialGameState,
     pokedexCaught: speciesKeysByGeneration[4].slice(0, 40),
@@ -109,6 +115,43 @@ test('an incomplete chapter cannot be claimed', () => {
     gameReducer(almost, { type: 'CLAIM_STORY_CHAPTER', payload: { chapterId: 'unova' } }),
     almost
   )
+  // Opening Unova makes the same done chapter claimable out of chain order.
+  const opened = { ...almost, unlockedRegions: ['kanto', 'unova'] }
+  assert.ok(professorStoryStatus(opened).chapters.find((c) => c.id === 'unova').claimable)
+  assert.notEqual(
+    gameReducer(opened, { type: 'CLAIM_STORY_CHAPTER', payload: { chapterId: 'unova' } }),
+    opened
+  )
+})
+
+test('a regional chapter opens from its own region, not the chain', () => {
+  const legendary = QUEST_LEGENDARY_BY_REGION.paldea,
+    base = {
+      ...initialGameState,
+      startRegion: 'kanto',
+      unlockedRegions: ['kanto', 'paldea'],
+      pokedexCaught: [
+        ...speciesKeysByGeneration[8].slice(0, 80),
+        ...(legendary ? [legendary] : []),
+      ],
+      defeatedChampions: ['paldea'],
+    },
+    paldea = professorStoryStatus(base).chapters.find((chapter) => chapter.id === 'paldea')
+  assert.ok(paldea.unlocked)
+  assert.ok(paldea.done)
+  assert.ok(paldea.claimable)
+  // Alola (Kukui) is still closed even though the player is deep into Paldea.
+  assert.equal(
+    professorStoryStatus(base).chapters.find((chapter) => chapter.id === 'alola').unlocked,
+    false
+  )
+  // The Paldea chapter claims without Kanto's chain being finished.
+  const claimed = gameReducer(base, {
+    type: 'CLAIM_STORY_CHAPTER',
+    payload: { chapterId: 'paldea' },
+  })
+  assert.ok(claimed.professorStory.claimed.includes('paldea'))
+  assert.equal(claimed.professorStory.claimed.includes('kanto'), false)
 })
 
 test('the Catching Charm chapter grants its passive bonus once claimed', () => {

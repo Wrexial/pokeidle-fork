@@ -61,23 +61,6 @@ Reference images kept for future checks:
 
 ---
 
-## Professor's Story region gating (follow-up)
-
-The Professor's Story chapters unlock strictly in sequence: in
-`professorStoryStatus` (`src/game/quests.js`) a chapter's `unlocked` is only true
-once the previous chapter is claimed. But regions open in any order now (Unlock
-Tokens), so a player deep into, say, Paldea is still blocked from Kukui's
-chapter until they have chained through every earlier region. Gate each chapter
-on **its own region** being open instead:
-
-- [ ] Base a regional chapter's `unlocked` on the region being available to the
-      player (or just drop the pre-req and let the steps gate it), keeping the
-      `region: null` capstone behind every regional chapter.
-- [ ] Re-check the `chapters` capstone step and the "Locked · <professor>" copy
-      in `src/components/quests-modal.js`, and update
-      `tests/professor-story.test.mjs` (it currently asserts the sequential
-      chain, e.g. that a done-but-unreached Unova chapter stays unclaimable).
-
 ## Route activity theme tweaks (follow-up)
 
 Two newer route activities reuse older minigames' mechanics and read as

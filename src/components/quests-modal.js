@@ -3,6 +3,7 @@
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { regions } from '../data/gameData.js'
 import { formatReward } from '../game/progression.js'
 import { professorStoryStatus, questLabel } from '../game/quests.js'
 
@@ -194,7 +195,10 @@ function renderStory(story, dispatch) {
           },
           chapter.id
         )
-      if (!chapter.unlocked)
+      if (!chapter.unlocked) {
+        const regionName = chapter.region
+          ? regions.find(/** @param {any} region */ (region) => region.id === chapter.region)?.name
+          : null
         return jsxs(
           'div',
           {
@@ -203,12 +207,15 @@ function renderStory(story, dispatch) {
               jsx('span', { className: 'story-chapter-title', children: '???' }),
               jsx('span', {
                 className: 'story-chapter-professor',
-                children: `Locked \u00b7 ${chapter.professor}`,
+                children: regionName
+                  ? `Locked \u00b7 Open ${regionName} to begin`
+                  : `Locked \u00b7 ${chapter.professor}`,
               }),
             ],
           },
           chapter.id
         )
+      }
       return jsxs(
         'div',
         {

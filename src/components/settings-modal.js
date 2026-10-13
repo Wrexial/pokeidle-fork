@@ -9,6 +9,7 @@ import { unlockAudio } from '../game/audio.js'
 import { useGame } from '../game/context.js'
 import { decodeShareCode, encodeShareCode, repairSave, serializeSave, suspendAutosave, writeImportedSave } from '../game/save.js'
 import { MonotypeSelect } from './monotype-select.js'
+import { BankModal } from './bank-modal.js'
 import { NumberControl, SegmentedControl } from './ui-controls.js'
 import { OfflinePanel } from './offline-panel.js'
 import { PokeballIcon } from './pokeball-icon.js'
@@ -32,6 +33,7 @@ export function SettingsModal({ onClose }) {
   const [shareCode, setShareCode] = React.useState('')
   const [shareInput, setShareInput] = React.useState('')
   const [shareStatus, setShareStatus] = React.useState('')
+  const [showBank, setShowBank] = React.useState(!1)
   /** @type {React.RefObject<HTMLInputElement>} */
   const fileInputRef = React.useRef(/** @type {any} */ (null))
   function resetSave() {
@@ -735,8 +737,19 @@ export function SettingsModal({ onClose }) {
                           'The game keeps up to three independent saves. Play a different one, or start a new game in any slot.',
                       }),
                       jsx(SaveSlotsPanel, {}),
+                      jsx('button', {
+                        className: 'settings-save-btn',
+                        onClick: () => setShowBank(!0),
+                        children: '\u{1f4e6} Pokemon Bank',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Move individual Pokemon between slots: deposit them here, switch save, then withdraw them into the new save.',
+                      }),
                     ],
                   }),
+                  showBank && jsx(BankModal, { onClose: () => setShowBank(!1) }),
                 ],
               }),
         }),

@@ -147,6 +147,15 @@ export const SAVE_SLOT_COUNT = 3
 export const ACTIVE_SLOT_KEY = 'pokemon-idle-active-slot'
 
 /**
+ * Pokemon Bank: a slot-independent localStorage stash for moving individuals
+ * between saves. It lives outside every save blob so a deposited Pokemon is
+ * moved out of its slot, and it has its own capacity.
+ */
+export const BANK_KEY = 'pokemon-idle-bank'
+export const BANK_VERSION = 1
+export const BANK_CAPACITY = 30
+
+/**
  * Storage key for a save slot. Slot 1 keeps the original versioned key so
  * existing saves migrate in place; the other slots are suffixed.
  * @param {number} slot

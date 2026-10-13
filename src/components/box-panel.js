@@ -11,6 +11,7 @@ import { isFemalePokemon } from '../game/breeding.js'
 import { fuzzyNameMatch, normalizeSearchName, speciesMatchingSearch } from '../game/species-search.js'
 import { itemTooltip } from '../game/progression.js'
 import { ItemIcon } from './item-icon.js'
+import { BankModal } from './bank-modal.js'
 import { SegmentedControl } from './ui-controls.js'
 
 /** @param {{ inspected: Inspected, setInspected: (value: Inspected) => void, setReleaseConfirm: (value: string | null) => void, dragSource?: 'party' | 'box' | null, boxDragOver?: boolean, boxDragFromIndex?: number | null, boxDropTargetIndex?: number | null, onBoxDragStart?: any, onBoxSlotDragOver?: any, onBoxDragOver?: any, onBoxDrop?: any, onBoxDragLeave?: any, onDrop?: any, onDragEnd?: any }} props */
@@ -37,6 +38,7 @@ export function BoxPanel({
     [filterMode, setFilterMode] = React.useState('all'),
     [confirmDupes, setConfirmDupes] = React.useState(!1),
     [confirmFiltered, setConfirmFiltered] = React.useState(!1),
+    [showBank, setShowBank] = React.useState(!1),
     [searchOpen, setSearchOpen] = React.useState(!1),
     dexSeenSet = React.useMemo(
       () => new Set([...state.pokedexSeen, ...state.pokedexCaught]),
@@ -144,6 +146,11 @@ export function BoxPanel({
                       setSearchOpen(!searchOpen)
                     },
                     children: 'Search',
+                  }),
+                  jsx('button', {
+                    className: 'box-pokedex-btn',
+                    onClick: () => setShowBank(!0),
+                    children: 'Bank',
                   }),
                 ],
               }),
@@ -411,6 +418,7 @@ export function BoxPanel({
           }),
         ],
       }),
+      showBank && jsx(BankModal, { onClose: () => setShowBank(!1) }),
     ],
   })
 }

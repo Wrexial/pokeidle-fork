@@ -8835,6 +8835,138 @@ img {
     line-height: 1.4
 }
 
+.bank-modal {
+    width: 260px;
+    transform: scale(1.4)
+}
+
+.bank-hint {
+    margin: 0;
+    font-size: 7px;
+    line-height: 1.5;
+    color: #5a4838
+}
+
+.bank-capacity-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px
+}
+
+.bank-capacity {
+    font-size: 7px;
+    font-weight: 700;
+    color: #483828
+}
+
+.bank-tabs {
+    display: flex;
+    gap: 4px
+}
+
+.bank-tab {
+    background: none;
+    border: 1px solid #483828;
+    color: #483828;
+    font-size: 7px;
+    padding: 3px 5px;
+    cursor: pointer
+}
+
+.bank-tab.active {
+    background: #483828;
+    color: var(--parchment)
+}
+
+.bank-message {
+    margin: 0;
+    font-size: 7px;
+    color: #3a6a3a
+}
+
+.bank-message-error {
+    color: #8b3030;
+    font-weight: 700
+}
+
+.bank-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 300px;
+    overflow-y: auto
+}
+
+.bank-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 4px;
+    background: #00000010;
+    border: 1px solid #00000018
+}
+
+.bank-sprite {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+    object-fit: contain
+}
+
+.bank-row-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0
+}
+
+.bank-row-name {
+    font-size: 8px;
+    font-weight: 700;
+    color: #2a1808;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.bank-row-meta {
+    font-size: 7px;
+    color: #5a4838
+}
+
+.bank-action {
+    flex: 0 0 auto;
+    background: var(--gold-dark);
+    border: 1px solid #483828;
+    color: #2a1808;
+    font-size: 7px;
+    padding: 4px 6px;
+    cursor: pointer
+}
+
+.bank-action:hover {
+    background: var(--gold)
+}
+
+.bank-action:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: #b0a48c
+}
+
+.bank-action:disabled:hover {
+    background: #b0a48c
+}
+
+.bank-empty {
+    margin: 0;
+    padding: 8px 0;
+    font-size: 8px;
+    text-align: center;
+    opacity: 0.7
+}
+
 .settings-reset-btn {
     font-size: 9px;
     padding: 6px 12px;

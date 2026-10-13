@@ -1,6 +1,6 @@
 // Party and box ordering/swapping. Split from game/reducer/pokemon.js.
 
-import { sortBoxMembers } from '../../pokemon.js'
+import { insertIntoBox, sortBoxMembers } from '../../pokemon.js'
 import { loadActivePokemonFromParty, prepareNextBattle } from '../../progression.js'
 
 /**
@@ -114,6 +114,60 @@ export function reorderBox(state, action) {
       box,
     }
   )
+}
+
+/**
+ * Handle the `BANK_DEPOSIT` action: take a Pokemon out of the save's party or
+ * box so the Pokemon Bank can hold it. The bank blob itself is written by
+ * game/bank.js; this reducer only removes the individual from the save.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function bankDeposit(state, action) {
+  const { pokemonId, source } = action.payload ?? {}
+  if (source === 'party') {
+    if (state.party.length <= 1) return state
+    const index = state.party.findIndex((member) => member.id === pokemonId)
+    if (index < 0) return state
+    // Always leave at least one non-egg Pokemon able to battle.
+    if (!state.party.some((member, memberIndex) => memberIndex !== index && !member.isEgg))
+      return state
+    const baseState = state.phase === 'battling' ? prepareNextBattle(state) : state,
+      party = baseState.party.filter((member) => member.id !== pokemonId),
+      activeId = baseState.playerPokemon?.id,
+      newActiveIndex = activeId ? party.findIndex((member) => member.id === activeId) : 0
+    return loadActivePokemonFromParty({
+      ...baseState,
+      party,
+      activePlayerPokemonIndex: Math.max(0, newActiveIndex),
+    })
+  }
+  if (!state.box.some((member) => member.id === pokemonId)) return state
+  return {
+    ...state,
+    box: state.box.filter((member) => member.id !== pokemonId),
+  }
+}
+
+/**
+ * Handle the `BANK_WITHDRAW` action: add a repaired bank Pokemon to the box.
+ * The individual is re-keyed to the destination save's id sequence so a bank
+ * Pokemon can never collide with an existing individual in the new save.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function bankWithdraw(state, action) {
+  const { pokemon } = action.payload ?? {}
+  if (!pokemon || !pokemon.speciesKey) return state
+  const id = String(state.nextPokemonId),
+    nextPokemonId = state.nextPokemonId + 1
+  return {
+    ...state,
+    box: insertIntoBox(state.box, { ...pokemon, id }, state.boxSort),
+    nextPokemonId,
+  }
 }
 
 /**

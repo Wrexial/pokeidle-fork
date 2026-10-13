@@ -51,17 +51,6 @@ player-facing value (★ = nice to have, ★★★★★ = core missing feature)
 
 **Meta, collection & customization**
 
-## 86. Pokemon Bank across save slots
-
-The three save slots are isolated. Add a "cloud" panel to move individuals
-between saves; all localStorage, no backend.
-
-- [ ] A separate localStorage bank blob with its own capacity.
-- [ ] Deposit/withdraw UI that reuses `repairSave` on the way in/out.
-- [ ] Guard against cloning a Pokemon into two saves.
-
-Effort: **medium**. Gain: ★★★.
-
 ## 87. Secret Base / hideout
 
 Pick a route, decorate a base with furniture/plushies/trophies, earn passive

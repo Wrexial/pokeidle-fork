@@ -1365,9 +1365,11 @@ export function serializeSave(state) {
 
 /**
  * Write the current state to storage and clear the migrated legacy keys. Never
- * throws: storage may be unavailable or full.
+ * throws: storage may be unavailable or full. Returns whether the write
+ * landed, so a two-step operation (the Pokemon Bank) can roll back safely.
  * @param {GameState} state
  * @param {number} [slot]
+ * @returns {boolean}
  */
 export function persistSave(state, slot = getActiveSlot() || 1) {
   try {
@@ -1375,8 +1377,10 @@ export function persistSave(state, slot = getActiveSlot() || 1) {
     setActiveSlot(slot)
     // Migration finished: the legacy key is no longer needed.
     if (slot === 1) for (const key of LEGACY_SAVE_KEYS) localStorage.removeItem(key)
+    return true
   } catch {
     /* storage may be unavailable / full */
+    return false
   }
 }
 

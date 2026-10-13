@@ -104,11 +104,29 @@ type Pokemon = BattlePokemon & {
   mark?: string | null
   /** Ribbon ids this individual has earned (see game/ribbons.js). */
   ribbons?: string[]
+  /**
+   * Stable identity for a Pokemon that has travelled through the Pokemon Bank,
+   * so the same individual can never be cloned into two saves (see game/bank.js).
+   */
+  bankTag?: string
   isShiny: boolean
 }
 
 /** A saved party arrangement (see game/reducer/pokemon/team-presets.js). */
 type TeamPreset = { id: string; name: string; members: string[] }
+
+/** A Pokemon held in the cross-save Pokemon Bank (see game/bank.js). */
+type BankEntry = {
+  /** Stable identity carried on the Pokemon, used to prevent cloning. */
+  tag: string
+  pokemon: Pokemon
+  /** The save slot the individual was deposited from (0 when unknown). */
+  sourceSlot: number
+  depositedAt: number
+}
+
+/** The slot-independent Pokemon Bank blob stored in localStorage. */
+type BankState = { version: number, entries: BankEntry[] }
 
 /**
  * The player's editable Trainer Card profile (see game/trainer-profile.js).

@@ -2,7 +2,7 @@
 // save. Split out of context.js so the provider is just React wiring and this
 // repair logic stays testable on its own.
 
-import { BATTLE_TOWER_REGION, EV_MAX_PER_STAT, EV_MAX_TOTAL, LEGACY_SAVE_KEYS, MAX_TEAM_PRESETS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, getActiveSlot, regionalStarters, saveSlotKey, setActiveSlot } from '../data/config.js'
+import { BATTLE_TOWER_REGION, EV_MAX_PER_STAT, EV_MAX_TOTAL, LEGACY_SAVE_KEYS, MAX_TEAM_PRESETS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, fieldMoves, getActiveSlot, regionalStarters, saveSlotKey, setActiveSlot } from '../data/config.js'
 import { dailyEventByKey, raidEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, autoCatchBallOrder, consumableItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, formDexModel, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
@@ -909,6 +909,17 @@ export function repairSave(saved) {
     activeEffects = (Array.isArray(saved.activeEffects) ? saved.activeEffects : []).filter(
       /** @param {any} effect */ (effect) => effect && typeof effect === 'object' && effect.type in activeItems
     ),
+    // Field-move cooldowns: keep known moves with a finite end timestamp only.
+    fieldMoveCooldowns = Object.fromEntries(
+      Object.entries(
+        saved.fieldMoveCooldowns && typeof saved.fieldMoveCooldowns === 'object'
+          ? saved.fieldMoveCooldowns
+          : {}
+      ).filter(
+        ([moveId, cooldownEnd]) =>
+          moveId in fieldMoves && typeof cooldownEnd === 'number' && Number.isFinite(cooldownEnd)
+      )
+    ),
     // Pokewalker steps: clamp to non-negative integers so a corrupt save can't
     // bank a negative balance (which would make every spend fail).
     pokewalker = (() => {
@@ -1288,6 +1299,7 @@ export function repairSave(saved) {
     preRaidLocation: saved.inRaid ? (saved.preRaidLocation ?? null) : null,
     dailyEvent,
     activeEffects,
+    fieldMoveCooldowns,
     ...(saved.inRaid
       ? {
           currentLocation: saved.currentLocation || 'raidIsland',
@@ -1498,6 +1510,7 @@ export const SAVED_STATE_KEYS = [
   'preRaidLocation',
   'dailyEvent',
   'activeEffects',
+  'fieldMoveCooldowns',
 ]
 
 /**

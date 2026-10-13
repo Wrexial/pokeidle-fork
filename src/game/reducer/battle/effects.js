@@ -1,6 +1,8 @@
 // // Volatile state updates and consumable effect items. Split from game/reducer/battle.js.
 
+import { fieldMoves } from '../../../data/config.js'
 import { activeItems } from '../../../data/items.js'
+import { isBattleReady } from '../../pokemon.js'
 
 /**
  * Handle the `UPDATE_VOLATILE` action.
@@ -104,6 +106,30 @@ export function updateVolatile(state, action) {
 }
 
 /**
+ * Add (or extend) an active effect for a route + species. Shared by the
+ * consumable Honey/Repel items and the matching field moves.
+ * @param {ActiveEffect[]} activeEffects
+ * @param {string} type
+ * @param {string} routeKey
+ * @param {string} speciesKey
+ * @param {number} duration
+ * @returns {ActiveEffect[]}
+ */
+function mergeActiveEffect(activeEffects, type, routeKey, speciesKey, duration) {
+  const existingIndex = activeEffects.findIndex(
+    (existingEffect) => existingEffect.type === type && existingEffect.routeKey === routeKey && existingEffect.speciesKey === speciesKey
+  )
+  if (existingIndex < 0)
+    return [...activeEffects, { type, battlesRemaining: duration, routeKey, speciesKey }]
+  const nextEffects = [...activeEffects]
+  nextEffects[existingIndex] = {
+    ...nextEffects[existingIndex],
+    battlesRemaining: nextEffects[existingIndex].battlesRemaining + duration,
+  }
+  return nextEffects
+}
+
+/**
  * Handle the `USE_EFFECT_ITEM` action.
  * @param {GameState} state
  * @param {GameAction} action
@@ -115,32 +141,50 @@ export function useEffectItem(state, action) {
   if (owned <= 0) return state
   const item = activeItems[itemId]
   if (!item) return state
-  const existingIndex = /** @type {ActiveEffect[]} */ (state.activeEffects).findIndex(
-    (existingEffect) => existingEffect.type === itemId && existingEffect.routeKey === routeKey && existingEffect.speciesKey === speciesKey
-  )
-  let activeEffects
-  if (existingIndex >= 0)
-    ((activeEffects = [...state.activeEffects]),
-      (activeEffects[existingIndex] = {
-        ...activeEffects[existingIndex],
-        battlesRemaining: activeEffects[existingIndex].battlesRemaining + item.duration,
-      }))
-  else {
-    const newEffect = {
-      type: itemId,
-      battlesRemaining: item.duration,
-      routeKey,
-      speciesKey,
-    }
-    activeEffects = [...state.activeEffects, newEffect]
-  }
   return {
     ...state,
     inventory: {
       ...state.inventory,
       [itemId]: owned - 1,
     },
-    activeEffects,
+    activeEffects: mergeActiveEffect(state.activeEffects, itemId, routeKey, speciesKey, item.duration),
     battleLog: [...state.battleLog, `Used ${item.name}!`].slice(-50),
+  }
+}
+
+/**
+ * Handle the `USE_FIELD_MOVE` action: a healthy party Pokemon that knows a
+ * field move (e.g. Sweet Scent) grants the matching active effect on the
+ * current route without spending the item, once per real-time cooldown.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function useFieldMove(state, action) {
+  const { moveId, routeKey, speciesKey } = action.payload ?? {},
+    fieldMove = fieldMoves[moveId]
+  if (!fieldMove || !routeKey || !speciesKey) return state
+  const now = Date.now()
+  if (now < (state.fieldMoveCooldowns?.[moveId] ?? 0)) return state
+  const knowsMove = state.party.some(
+    (member) => isBattleReady(member) && (member.moves ?? []).includes(moveId)
+  )
+  if (!knowsMove) return state
+  const effectItem = activeItems[fieldMove.effectType]
+  if (!effectItem) return state
+  return {
+    ...state,
+    activeEffects: mergeActiveEffect(
+      state.activeEffects,
+      fieldMove.effectType,
+      routeKey,
+      speciesKey,
+      effectItem.duration
+    ),
+    fieldMoveCooldowns: {
+      ...(state.fieldMoveCooldowns ?? {}),
+      [moveId]: now + fieldMove.cooldownMs,
+    },
+    battleLog: [...state.battleLog, `${fieldMove.name} lured out wild Pokemon!`].slice(-50),
   }
 }

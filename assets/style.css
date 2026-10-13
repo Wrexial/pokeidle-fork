@@ -6388,6 +6388,7 @@ img {
 
 .pokedex-detail-effects {
     display: flex;
+    flex-wrap: wrap;
     gap: 4px;
     justify-content: center;
     padding: 2px 0
@@ -6433,6 +6434,22 @@ img {
     background: #786018;
     border-color: #c8a020;
     color: #f0d860
+}
+
+.sweet-scent-btn {
+    background: #4a3050;
+    color: #e0a8e8;
+    border-color: #7a5090
+}
+
+.sweet-scent-btn:hover:not(.disabled) {
+    background: #5a3a60
+}
+
+.sweet-scent-btn.active {
+    background: #6a2878;
+    border-color: #c060d0;
+    color: #f0c0f8
 }
 
 .effect-use-btn.disabled {

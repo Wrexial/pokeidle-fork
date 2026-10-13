@@ -2,10 +2,12 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { fieldMoves } from '../data/config.js'
 import { rarities, statBarColors } from '../data/ui.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
+import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, isBattleReady } from '../game/pokemon.js'
+import { formatCooldown } from '../game/progression.js'
 
 export const EncounterDetailPanel = React.memo(
   /** @param {{ speciesKey: string, encounter: any, rarity: string, rate: number, status: string, onClose: () => void, routeKey: string }} props */
@@ -19,7 +21,20 @@ export const EncounterDetailPanel = React.memo(
     routeKey,
   }) {
     const { state, dispatch } = useGame(),
-      species = pokemonSpecies[speciesKey]
+      [, setCooldownTick] = React.useState(0),
+      sweetScent = fieldMoves.sweetScent,
+      sweetScentCooldownEnd = state.fieldMoveCooldowns?.sweetScent ?? 0,
+      sweetScentOnCooldown = Date.now() < sweetScentCooldownEnd,
+      knowsSweetScent = state.party.some(
+        (member) => isBattleReady(member) && (member.moves ?? []).includes('sweetScent')
+      )
+    // Tick the Sweet Scent label down while its cooldown is running.
+    React.useEffect(() => {
+      if (!sweetScentOnCooldown) return
+      const timer = setInterval(() => setCooldownTick((tick) => tick + 1), 1000)
+      return () => clearInterval(timer)
+    }, [sweetScentOnCooldown])
+    const species = pokemonSpecies[speciesKey]
     if (!species) return null
     const repelCount = state.inventory.repel ?? 0,
       honeyCount = state.inventory.honey ?? 0,
@@ -48,6 +63,19 @@ export const EncounterDetailPanel = React.memo(
             type: 'USE_EFFECT_ITEM',
             payload: {
               itemId: 'honey',
+              routeKey,
+              speciesKey,
+            },
+          })
+      },
+      applySweetScent = () => {
+        !knowsSweetScent ||
+          sweetScentOnCooldown ||
+          !routeKey ||
+          dispatch({
+            type: 'USE_FIELD_MOVE',
+            payload: {
+              moveId: 'sweetScent',
               routeKey,
               speciesKey,
             },
@@ -170,6 +198,19 @@ export const EncounterDetailPanel = React.memo(
                   ? `Honey active: ${activeHoney.battlesRemaining} battles left \u2014 more common and easier to catch`
                   : `Use Honey (x${honeyCount}) \u2014 doubles encounters and boosts the catch rate`,
                 children: activeHoney ? `Honey (${activeHoney.battlesRemaining})` : `Honey (x${honeyCount})`,
+              }),
+              jsx('button', {
+                className: `effect-use-btn sweet-scent-btn${!knowsSweetScent || sweetScentOnCooldown ? ' disabled' : ''}${activeHoney ? ' active' : ''}`,
+                onClick: applySweetScent,
+                disabled: !knowsSweetScent || sweetScentOnCooldown,
+                title: !knowsSweetScent
+                  ? `${sweetScent.name}: needs a healthy party Pokemon that knows it`
+                  : sweetScentOnCooldown
+                    ? `${sweetScent.name} ready in ${formatCooldown(sweetScentCooldownEnd - Date.now())}`
+                    : `Use ${sweetScent.name} \u2014 doubles encounters and boosts the catch rate without spending Honey`,
+                children: sweetScentOnCooldown
+                  ? `${sweetScent.name} (${formatCooldown(sweetScentCooldownEnd - Date.now())})`
+                  : sweetScent.name,
               }),
             ],
           }),

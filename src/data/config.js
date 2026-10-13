@@ -115,6 +115,21 @@ export let RAID_COOLDOWN_MS = 1 * 1e3
 /** Raid legendary levels ramp from the pool level (70/75) up to this cap. */
 export const RAID_LEVEL_MAX = 100
 
+/**
+ * Out-of-combat "field moves": a party Pokemon that knows the move can apply
+ * the listed active-effect item's benefit to a wild species on the current
+ * route without spending the item, on a real-time cooldown (see the
+ * `USE_FIELD_MOVE` action). Sweet Scent stands in for Honey.
+ * @type {Record<string, { name: string, effectType: string, cooldownMs: number }>}
+ */
+export const fieldMoves = {
+  sweetScent: {
+    name: 'Sweet Scent',
+    effectType: 'honey',
+    cooldownMs: 5 * 60 * 1000,
+  },
+}
+
 export let defaultCatchSettings = {
     enabled: !0,
     mode: 'pokedex_new',

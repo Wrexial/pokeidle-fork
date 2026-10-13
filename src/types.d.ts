@@ -800,6 +800,8 @@ type GameState = {
   catchSettings: Record<string, Record<string, CatchRule>>
   globalCatchDefaults: CatchRule
   activeEffects: ActiveEffect[]
+  /** Field-move id -> the timestamp it can be used again (see `USE_FIELD_MOVE`). */
+  fieldMoveCooldowns: Record<string, number>
   /** Today's rotating daily event, or null before it is rolled. */
   dailyEvent?: { date: string, kind: string, claimed: boolean } | null
   pokedexSeen: string[]

@@ -12,7 +12,7 @@ import { createSecretBase } from './secret-base.js'
 import { createJobs } from './jobs.js'
 import { createPokewalker } from './pokewalker.js'
 import { DEFAULT_ROD } from './minigames.js'
-import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, endHorde, executeTurn, fleeBattle, gmaxEvolve, hordeRound, megaEvolve, startBossBattle, startEncounter, startHorde, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
+import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, endHorde, executeTurn, fleeBattle, gmaxEvolve, hordeRound, megaEvolve, startBossBattle, startEncounter, startHorde, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, useFieldMove, usePokeball } from './reducer/battle.js'
 import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimFormDexRewards, claimQuest, claimStoryChapter, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain, advanceSosChain, resetSosChain } from './reducer/collection.js'
 import { buyCafeItem, buyItem, buyMarketItem, buyRewardItem, clearHeldItem, collectKurtBalls, craftApricornBall, reviveFossil, sellItem, sellMarketItem, setAlwaysCatchShinies, setCatchRule, setDefaultCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
@@ -286,6 +286,8 @@ export const initialGameState = {
   preRaidLocation: null,
   playerVolatile: null,
   activeEffects: [],
+  /** Field-move id -> the timestamp it can be used again (see `USE_FIELD_MOVE`). */
+  fieldMoveCooldowns: {},
   /** Pokemon ids that have taken part in the current battle (EXP shares). */
   battleParticipants: [],
   /** The player switched or used an item this turn, so only the foe acts. */
@@ -791,6 +793,8 @@ function applyAction(state, action) {
       return updateVolatile(state, action)
     case 'USE_EFFECT_ITEM':
       return useEffectItem(state, action)
+    case 'USE_FIELD_MOVE':
+      return useFieldMove(state, action)
     case 'APPLY_SHARED_EXP':
       return applySharedExp(state, action)
     default:

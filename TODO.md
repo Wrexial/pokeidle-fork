@@ -61,22 +61,6 @@ Reference images kept for future checks:
 
 ---
 
-## Sweet Scent as field Honey (follow-up)
-
-Honey (`src/data/items.js`, the `USE_EFFECT_ITEM` reducer) is an out-of-combat,
-per-route, per-species lure: it doubles that species' encounter weight and gives
-a 1.5x catch bonus for 500 battles (`applyEncounterModifiers` / `isHoneyActive`
-in `src/game/progression/encounters.js`, offered from
-`src/components/encounter-detail-panel.js`). Sweet Scent is currently only a
-battle move, so let a party Pokemon that knows it grant the same out-of-combat
-utility instead of spending Honey.
-
-- [ ] Apply the existing `{ type: 'honey', routeKey, speciesKey,
-      battlesRemaining }` effect from a field-move button on the encounter/route
-      panel, with a cooldown (or small cost) so it doesn't fully replace the
-      item. Only the entry point is new; the effect plumbing is already there.
-- [ ] Cover the field-move path and its cooldown in the tests.
-
 ## Route activity frequency (follow-up)
 
 The Dowsing Machine and Hide-and-Seek currently appear on **every** wild route

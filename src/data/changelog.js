@@ -63,6 +63,7 @@ export const CHANGELOG = [
           'Dismantling a villain organisation pays its one-off arc reward: a Master Ball, Rare Candy, a regional training item, cash and Victory Tokens, plus that organisation\u2019s ribbon for the whole party.',
           'The Professor\u2019s Story pays a themed bundle as each chapter closes \u2014 Pok\u00e9 Balls, Rare Candies, Exp. Candies and similar \u2014 and midway through the chain Professor Juniper\u2019s Catching Charm grants a permanent +15% catch rate. The final chapter hands the party the Professor\u2019s Ribbon, three Master Balls and a large cash and Victory Token payout.',
           'A Berry and Apricorn market now runs out of every Poke Mart: the MARKET tab lists the day\u2019s buy and sell prices for Oran, Sitrus and Lum Berries and all seven Apricorns, and prices drift once a day \u2014 so a commodity bought cheap one day can be sold high on another. Each row shows the move since yesterday with an up or down arrow.',
+          'Sweet Scent now works as a field move: a healthy party Pokemon that knows it lures a chosen wild species on the current route (doubling its encounters and boosting its catch rate) without spending Honey. It has a five-minute cooldown, and the encounter panel shows the timer.',
         ],
       },
       {

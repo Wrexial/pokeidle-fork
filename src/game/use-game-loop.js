@@ -17,6 +17,7 @@ import { abilityOf } from './abilities.js'
 import { companionCritBonus, companionDodgeChance, companionExpMultiplier, companionStatusCureChance, companionToughOutChance, friendshipToughOutChance } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch, chooseTrainingSwitch } from './combat.js'
 import { chooseAutoHealItem } from './auto-battle-policy.js'
+import { battleWeatherLock, hasBattleModifier } from './ladder-modifiers.js'
 import { isBattleReady } from './pokemon.js'
 import { currentSeason } from './seasons.js'
 import { heldMoneyMultiplier } from './held-items.js'
@@ -518,11 +519,13 @@ export function useGameLoop() {
               ability: currentGameState.playerPokemon.ability,
               // The Battle Palace ignores held items for both sides.
               heldItem:
-                currentGameState.bossBattle?.rule === 'noItems'
+                hasBattleModifier(currentGameState.bossBattle, 'noItems')
                   ? null
                   : playerVolatile.heldItemOverridden
                     ? playerVolatile.heldItemOverride
                     : currentGameState.playerPokemon.heldItem ?? null,
+              // The Attrition ladder switches off every source of healing.
+              noHealing: hasBattleModifier(currentGameState.bossBattle, 'noHealing'),
               isPlayer: !0,
               isShiny: currentGameState.playerPokemon.isShiny,
               statStages: {
@@ -643,14 +646,16 @@ export function useGameLoop() {
                 currentGameState.enemyPokemon.typesOverride ??
                 currentGameState.enemyPokemon.types,
               heldItem:
-                currentGameState.bossBattle?.rule === 'noItems'
+                hasBattleModifier(currentGameState.bossBattle, 'noItems')
                   ? null
                   : currentGameState.enemyPokemon.heldItemOverridden
                     ? currentGameState.enemyPokemon.heldItemOverride
                     : currentGameState.enemyPokemon.heldItem ?? null,
+              // The Attrition ladder applies to the foe too.
+              noHealing: hasBattleModifier(currentGameState.bossBattle, 'noHealing'),
             },
             // The Battle Arena flips the type chart for both sides.
-            inverseBattle = currentGameState.bossBattle?.rule === 'inverse',
+            inverseBattle = hasBattleModifier(currentGameState.bossBattle, 'inverse'),
             isTrainerBattle =
               (currentGameState.trainerBattle ??
                 currentGameState.bossBattle) !== null,
@@ -730,7 +735,7 @@ export function useGameLoop() {
           if (
             autoItemThreshold > 0 &&
             !isTowerBattle &&
-            currentGameState.bossBattle?.rule !== 'noItems' &&
+            !hasBattleModifier(currentGameState.bossBattle, 'noItems') &&
             !currentGameState.playerTurnSpent &&
             currentGameState.battleMode !== 'manual'
           ) {
@@ -817,7 +822,8 @@ export function useGameLoop() {
               !!currentGameState.enemyTurnSpent,
               !1,
               inverseBattle,
-              currentGameState.autoBattlePolicy
+              currentGameState.autoBattlePolicy,
+              !!battleWeatherLock(currentGameState.bossBattle)
             )
           } catch (error) {
             // A throwing turn used to freeze the loop silently (the dispatch

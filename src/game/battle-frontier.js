@@ -16,6 +16,7 @@ import { rollAbility } from './pokemon/creation.js'
 import { rollSize } from './pokemon/sizes.js'
 import { calculatePokemonStats } from './pokemon/stats.js'
 import { buildTowerFloor, towerFloorLevel } from './progression.js'
+import { activeLadderRuleSet, ladderBattleFields } from './ladder-modifiers.js'
 import { hashString, mulberry32 } from './rng.js'
 
 /** The four Battle Frontier facilities, Tower aside, and the rule each runs. */
@@ -138,12 +139,14 @@ export function buildRentalParty(floor) {
 
 /**
  * The `pendingBossBattle` payload for a Frontier floor. `rule` and `facilityId`
- * ride along so the battle engine and the end handler know which variant ran.
+ * ride along so the battle engine and the end handler know which variant ran;
+ * the weekly ladder modifiers ride on top of that fixed rule.
  * @param {string} facilityId
  * @param {number} floor
- * @returns {{ bossId: string, bossType: string, trainerName: string, trainerClass: string, trainerTeam: BattlePokemon[], spriteKey: string, region: string, rule: string, facilityId: string, bossQueue: any[] }}
+ * @param {ReturnType<typeof activeLadderRuleSet>} [ladder]
+ * @returns {{ bossId: string, bossType: string, trainerName: string, trainerClass: string, trainerTeam: BattlePokemon[], spriteKey: string, region: string, rule: string, facilityId: string, modifiers: string[], ladderKey: string, ladderName: string, weatherLock: string | null, bossQueue: any[] }}
  */
-export function frontierBossBattle(facilityId, floor) {
+export function frontierBossBattle(facilityId, floor, ladder = activeLadderRuleSet()) {
   const facility = frontierFacility(facilityId) ?? FRONTIER_FACILITIES[0],
     safeFloor = Math.max(1, Math.floor(floor || 1))
   return {
@@ -156,6 +159,7 @@ export function frontierBossBattle(facilityId, floor) {
     region: 'hoenn',
     rule: facility.rule,
     facilityId: facility.id,
+    ...ladderBattleFields(ladder),
     bossQueue: [],
   }
 }

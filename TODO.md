@@ -36,7 +36,7 @@ number and full detail further down. Promote into the tiers above once scoped.
 - **Big but wanted:** #86 Pokemon Bank.
 - **Medium:** #85 Form dex · #89 Mystery Gift ·
   #90 Professor's story · #91 Auto-battle policy · #92 Raid events ·
-  #93 Tower ladders · #96 Berry market.
+  #96 Berry market.
 - **Quick wins:** #94 Dowsing Machine · #95 Hide-and-seek ·
   #97 Run summary · #98 Hotkeys.
 
@@ -47,19 +47,6 @@ number and full detail further down. Promote into the tiers above once scoped.
 The numbered entries below are the brainstorm referenced from the priority
 order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
 player-facing value (★ = nice to have, ★★★★★ = core missing feature).
-
-**Battle depth**
-
-## 93. Battle Tower ladder modifiers
-
-Weekly rotating rule sets on top of the existing Tower/Frontier (inverse, no
-items, weather-lock, no healing).
-
-- [ ] A modifier registry + a weekly pick.
-- [ ] Apply modifiers in `src/game/battle-frontier.js` / the Tower run.
-- [ ] Show the active modifier on the panel and in Records.
-
-Effort: **medium**. Gain: ★★★.
 
 **Activities & economy**
 

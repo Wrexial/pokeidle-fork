@@ -527,8 +527,9 @@ export function applyEndOfTurn(player, enemy, events, activeWeather, activeTerra
  * @param {{ type: string, turns: number } | null} weather
  * @param {{ type: string, turns: number } | null} terrain
  * @param {any} hazards
+ * @param {boolean} [weatherLock] Don't let a locked weather tick down.
  */
-export function reportFieldEffects(player, enemy, events, activeWeather, activeTerrain, activeHazards, weather, terrain, hazards) {
+export function reportFieldEffects(player, enemy, events, activeWeather, activeTerrain, activeHazards, weather, terrain, hazards, weatherLock = !1) {
   // Terrain wears off when its turns run out.
   if (activeTerrain) {
     activeTerrain = { type: activeTerrain.type, turns: activeTerrain.turns - 1 }
@@ -546,8 +547,8 @@ export function reportFieldEffects(player, enemy, events, activeWeather, activeT
       type: 'terrain',
       data: { terrain: activeTerrain },
     })
-  // Weather wears off when its turns run out.
-  if (activeWeather) {
+  // Weather wears off when its turns run out (unless the ladder locked it).
+  if (activeWeather && !weatherLock) {
     activeWeather = { type: activeWeather.type, turns: activeWeather.turns - 1 }
     if (activeWeather.turns <= 0) {
       events.push({

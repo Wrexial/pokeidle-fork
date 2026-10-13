@@ -152,7 +152,7 @@ function hashString(value) {
  * @param {string} dateKey
  * @returns {number}
  */
-function dayNumberForDateKey(dateKey) {
+export function dayNumberForDateKey(dateKey) {
   const [year, month, day] = dateKey.split('-').map(Number),
     date = new Date(year, month - 1, day)
   return Math.floor((date.getTime() - date.getTimezoneOffset() * 60000) / 86400000)

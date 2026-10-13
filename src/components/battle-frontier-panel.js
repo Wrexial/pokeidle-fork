@@ -11,7 +11,9 @@ import {
   buildRentalParty,
   frontierBossBattle,
 } from '../game/battle-frontier.js'
+import { activeLadderRuleSet } from '../game/ladder-modifiers.js'
 import { isBattleReady } from '../game/pokemon.js'
+import { LadderBanner } from './ladder-banner.js'
 
 /** Phases during which a Frontier run cannot be started. */
 const FRONTIER_BUSY_PHASES = [
@@ -31,6 +33,8 @@ export function BattleFrontierPanel() {
   const { state, dispatch } = useGame(),
     isBusy = FRONTIER_BUSY_PHASES.includes(state.phase),
     hasFighter = state.party.some((member) => isBattleReady(member)),
+    // The weekly ladder set sits on top of each facility's own rule.
+    ladder = activeLadderRuleSet(),
     // The floor/team previews are deterministic, so only rebuild them when the
     // records change (the location panel re-renders on every idle tick).
     facilities = React.useMemo(
@@ -42,11 +46,12 @@ export function BattleFrontierPanel() {
             facility,
             best,
             nextFloor,
-            opponent: frontierBossBattle(facility.id, nextFloor).trainerTeam,
+            opponent: frontierBossBattle(facility.id, nextFloor, ladder).trainerTeam,
             rental: facility.rule === 'rental' ? buildRentalParty(nextFloor) : null,
           }
         }),
-      [state.frontierBest, state.frontierFloor]
+      // The ladder content only changes when the weekly key changes.
+      [state.frontierBest, state.frontierFloor, ladder.key]
     )
 
   /** @param {{ id: string, name: string, rule: string }} facility @param {number} floor */
@@ -60,7 +65,7 @@ export function BattleFrontierPanel() {
     })
     dispatch({
       type: 'START_HEALING',
-      payload: { pendingBossBattle: frontierBossBattle(facility.id, floor) },
+      payload: { pendingBossBattle: frontierBossBattle(facility.id, floor, ladder) },
     })
   }
 
@@ -76,6 +81,7 @@ export function BattleFrontierPanel() {
         children:
           'Three rule-variant facilities beside the Tower, each a single deterministic puzzle floor: win to climb, lose and retry the same floor. Every ten floors pay a Victory Token.',
       }),
+      jsx(LadderBanner, { ladder, compact: true }),
       jsx('div', {
         className: 'frontier-facility-list',
         children: facilities.map(({ facility, best, nextFloor, opponent, rental }) => {

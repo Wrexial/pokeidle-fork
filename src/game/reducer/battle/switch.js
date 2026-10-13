@@ -6,6 +6,7 @@
 // switch itself does not cost another one.
 
 import { matchupScore } from '../../combat.js'
+import { hasBattleModifier } from '../../ladder-modifiers.js'
 import { switchPlayerPokemon, trainerSendNextPokemon } from './trainer.js'
 
 /**
@@ -15,7 +16,7 @@ import { switchPlayerPokemon, trainerSendNextPokemon } from './trainer.js'
  */
 function pickPlayerSwitchIndex(state) {
   const foe = state.enemyPokemon,
-    inverse = state.bossBattle?.rule === 'inverse'
+    inverse = hasBattleModifier(state.bossBattle, 'inverse')
   let bestIndex = -1,
     bestScore = -Infinity
   ;(state.party ?? []).forEach((member, index) => {
@@ -37,7 +38,7 @@ function pickPlayerSwitchIndex(state) {
  */
 function pickEnemySwitchIndex(state) {
   const battle = state.bossBattle ?? state.trainerBattle,
-    inverse = state.bossBattle?.rule === 'inverse'
+    inverse = hasBattleModifier(state.bossBattle, 'inverse')
   if (!battle) return -1
   const active = state.playerPokemon
   if (!active) return -1

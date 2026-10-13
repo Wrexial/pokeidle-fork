@@ -7,6 +7,8 @@ import { BATTLE_TOWER_REGION } from '../data/config.js'
 import { mapData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { buildTowerFloor } from '../game/progression.js'
+import { activeLadderRuleSet, ladderBattleFields } from '../game/ladder-modifiers.js'
+import { LadderBanner } from './ladder-banner.js'
 import { DOUBLES_COST, TRIPLES_COST } from '../game/minigames/doubles.js'
 import { ROTATION_COST } from '../game/minigames/rotation.js'
 import { FFA_COST } from '../game/minigames/free-for-all.js'
@@ -19,6 +21,8 @@ export function BattleTowerPanel() {
     // loss can be retried without replaying the climb.
     nextFloor = Math.max(state.towerFloor, towerBest + 1),
     preview = buildTowerFloor(nextFloor),
+    // The weekly ladder set is layered on the ordinary Tower rules.
+    ladder = activeLadderRuleSet(),
     canFight = state.party.some((member) => member.currentHp > 0),
     isBusy = [
       'evolving',
@@ -54,6 +58,7 @@ export function BattleTowerPanel() {
           trainerTeam: buildTowerFloor(floor),
           spriteKey: 'acetrainer',
           region: regionId,
+          ...ladderBattleFields(ladder),
         },
       },
     })
@@ -78,6 +83,7 @@ export function BattleTowerPanel() {
         children:
           'Tower battles are deterministic: the opponent is fixed and there are no critical hits, misses or damage variance. Build a team that beats the matchup \u2014 stats, types, abilities and held items decide it.',
       }),
+      jsx(LadderBanner, { ladder }),
       jsxs('div', {
         className: 'tower-preview',
         children: [

@@ -20,6 +20,7 @@ import { WEATHER_ICONS, WEATHER_NAMES } from '../game/weather.js'
 import { TERRAIN_ICONS, TERRAIN_NAMES } from '../game/terrain.js'
 import { mapData, moveData } from '../data/gameData.js'
 import { gmaxEvolveReady, megaEvolveReady } from '../data/mega-evolution.js'
+import { hasBattleModifier } from '../game/ladder-modifiers.js'
 import { useGame } from '../game/context.js'
 import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl, isBattleReady } from '../game/pokemon.js'
 import { EnemyInfoBox } from './enemy-info-box.js'
@@ -693,7 +694,7 @@ export function BattleScene({ onOpenMenu }) {
                           moveDef,
                           playerPokemon,
                           enemyPokemon,
-                          state.bossBattle?.rule === 'inverse'
+                          hasBattleModifier(state.bossBattle, 'inverse')
                         )
                       : null
                   return moveDef

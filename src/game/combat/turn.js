@@ -590,9 +590,11 @@ function applyTrapAbility(source, target) {
  *   A doubles round resolves several single actions and runs it once itself.
  * @param {{ preferStab?: boolean, avoidContact?: boolean } | null} [autoBattlePolicy]
  *   The player's auto-battle move policy, if any.
+ * @param {boolean} [weatherLock] The ladder's Weather Lock: the starting
+ *   weather can't be changed or expire for the whole battle.
  * @returns {any[]}
  */
-export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1, playerMoveChoice = null, enemySkipMove = !1, skipEndOfTurn = !1, inverseTypeChart = !1, autoBattlePolicy = null) {
+export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1, playerMoveChoice = null, enemySkipMove = !1, skipEndOfTurn = !1, inverseTypeChart = !1, autoBattlePolicy = null, weatherLock = !1) {
   const events = /** @type {any[]} */ ([])
   // Switch requests are queued and appended after the end-of-turn residual, so
   // the residuals still apply to the outgoing Pokemon.
@@ -628,7 +630,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     applyEntryAbility(enemy, player, events, !1)
     const weatherSetter =
       WEATHER_ABILITIES[abilityOf(player) ?? ''] ?? WEATHER_ABILITIES[abilityOf(enemy) ?? '']
-    if (weatherSetter)
+    if (weatherSetter && !weatherLock)
       activeWeather = { type: weatherSetter, turns: WEATHER_TURNS }
     const playerTerrain = TERRAIN_ABILITIES[abilityOf(player) ?? ''],
       enemyTerrain = TERRAIN_ABILITIES[abilityOf(enemy) ?? ''],
@@ -640,7 +642,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
       }
     // Teraform Zero clears the weather and terrain when it enters.
     if (abilityOf(player) === 'teraformZero' || abilityOf(enemy) === 'teraformZero') {
-      if (activeWeather) {
+      if (activeWeather && !weatherLock) {
         activeWeather = null
         events.push({ type: 'weather', message: 'The weather was cleared!', data: { weather: null } })
       }
@@ -2080,7 +2082,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
           message: `${attack.attacker.name} set up a hazard!`,
         })
       }
-      else if (moveDef.effect?.type === 'weather') {
+      else if (moveDef.effect?.type === 'weather' && !weatherLock) {
         activeWeather = { type: moveDef.effect.weather, turns: WEATHER_TURNS }
         events.push({
           type: 'weather',
@@ -2600,11 +2602,13 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     )
       switch (moveDef.effect.type) {
         case 'weather': {
-          activeWeather = { type: moveDef.effect.weather, turns: WEATHER_TURNS }
-          events.push({
-            type: 'weather',
-            message: `The weather became ${WEATHER_NAMES[moveDef.effect.weather] ?? moveDef.effect.weather}!`,
-          })
+          if (!weatherLock) {
+            activeWeather = { type: moveDef.effect.weather, turns: WEATHER_TURNS }
+            events.push({
+              type: 'weather',
+              message: `The weather became ${WEATHER_NAMES[moveDef.effect.weather] ?? moveDef.effect.weather}!`,
+            })
+          }
           break
         }
         case 'terrain': {
@@ -3183,7 +3187,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
         })
       }
     }
-    if (defenderAbilityOnHit === 'sandSpit') activeWeather = { type: 'sandstorm', turns: WEATHER_TURNS }
+    if (defenderAbilityOnHit === 'sandSpit' && !weatherLock) activeWeather = { type: 'sandstorm', turns: WEATHER_TURNS }
     if (defenderAbilityOnHit === 'seedSower')
       activeTerrain = {
         type: 'grassy',
@@ -3329,7 +3333,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     applyEndOfTurn(player, enemy, events, effectiveWeather, activeTerrain, deterministic)
   // Pivoting / forced switches resolve once the turn's residuals are done.
   events.push(...switchQueue)
-  reportFieldEffects(player, enemy, events, activeWeather, activeTerrain, activeHazards, weather, terrain, hazards)
+  reportFieldEffects(player, enemy, events, activeWeather, activeTerrain, activeHazards, weather, terrain, hazards, weatherLock)
   restoreGas()
   return events
 }

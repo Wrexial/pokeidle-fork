@@ -9785,6 +9785,87 @@ img {
     margin-top: 2px
 }
 
+/* Weekly Battle Tower ladder banner (#93). */
+.ladder-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 7px 9px;
+    margin-bottom: 8px;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid rgba(224,192,96,0.55);
+    border-left-width: 3px;
+    border-radius: 4px
+}
+
+.ladder-banner.compact {
+    padding: 5px 7px;
+    margin-bottom: 6px
+}
+
+.ladder-banner.ladder-standard {
+    border-left-color: #9fe0c0
+}
+
+.ladder-banner.ladder-inverse {
+    border-left-color: #c9a6ff
+}
+
+.ladder-banner.ladder-barehanded {
+    border-left-color: #f0a0a0
+}
+
+.ladder-banner.ladder-storm {
+    border-left-color: #8fc4ff
+}
+
+.ladder-banner.ladder-attrition {
+    border-left-color: #ff9fb0
+}
+
+.ladder-banner-icon {
+    font-size: 16px;
+    line-height: 1
+}
+
+.ladder-banner-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0
+}
+
+.ladder-banner-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: #ffe9a8;
+    text-transform: uppercase;
+    letter-spacing: .5px
+}
+
+.ladder-banner-hint {
+    font-size: 8px;
+    line-height: 1.4;
+    color: #f0e6d2;
+    opacity: .9
+}
+
+.ladder-banner-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 2px
+}
+
+.ladder-tag {
+    font-size: 7px;
+    color: #fff;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(224,192,96,0.5);
+    border-radius: 3px;
+    padding: 2px 4px
+}
+
 .minigame-scene {
     position: relative;
     width: 560px;

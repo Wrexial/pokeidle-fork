@@ -6,6 +6,7 @@ import { canGigantamax } from '../../data/mega-evolution.js'
 import { natureName, randomNature } from '../../data/natures.js'
 import { EV_MAX_PER_STAT, EV_MAX_TOTAL, EV_VITAMIN_GAIN } from '../../data/config.js'
 import { isPlantableBerry } from '../garden.js'
+import { hasBattleModifier } from '../ladder-modifiers.js'
 import { MAX_FRIENDSHIP, IV_STAT_ORDER, IV_STAT_LABELS, abilityDisplayName, applyMoveLearning, calculatePokemonStats, calculateRequiredExperience, createEmptyEvs, gainFriendship, getLevelUpResults, totalEvs } from '../pokemon.js'
 import { getItemSellPrice, isActiveEffectItem } from '../progression.js'
 import { queueKurtCraft, readyKurtCrafts } from '../kurt.js'
@@ -259,6 +260,13 @@ export function useItemOnPokemon(state, action) {
     owned = state.inventory[itemId] ?? 0,
     memberIndex = state.party.findIndex(/** @param {Pokemon} member */ (member) => member.id === pokemonId)
   if ((!item && !heldItem) || owned <= 0 || item?.category === 'valuables' || memberIndex < 0)
+    return state
+  // The Attrition ladder forbids in-battle medicine of any kind.
+  if (
+    state.phase === 'battling' &&
+    item?.category === 'medicine' &&
+    hasBattleModifier(state.bossBattle, 'noHealing')
+  )
     return state
   // Held items are equipped (returning whatever was held); consumables are used.
   if (heldItem) {

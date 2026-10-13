@@ -5,6 +5,7 @@ import { ACHIEVEMENTS, RECORDABLE_MINIGAMES } from '../data/achievements.js'
 import { RAID_EVENT_ROTATION } from '../data/daily-events.js'
 import { isTmItem, TM_MOVE_IDS } from '../data/tms.js'
 import { MINIGAME_INFO } from '../game/minigames.js'
+import { activeLadderRuleSet } from '../game/ladder-modifiers.js'
 import { formatReward } from '../game/progression.js'
 import { completedGenerations, gymLeaderData, isSpeciesRegistered, pokedexIndexes, regions, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
@@ -33,6 +34,9 @@ export function RecordsModal({ onClose, inline = false }) {
     clearedRaidEvents = RAID_EVENT_ROTATION.filter((event) => raidEventRecords[event.key]?.cleared)
       .length,
     clearedMinigames = RECORDABLE_MINIGAMES.filter((id) => minigameRecords[id]?.completed).length,
+    // The weekly Tower / Frontier ladder rule set (see game/ladder-modifiers.js).
+    ladder = activeLadderRuleSet(),
+    frontierBestFloor = Math.max(0, ...Object.values(state.frontierBest ?? {})),
     playedMinigames = RECORDABLE_MINIGAMES.map((id) => ({
       id,
       record: minigameRecords[id],
@@ -97,6 +101,20 @@ export function RecordsModal({ onClose, inline = false }) {
               record?.cleared ? `\u2605 Cleared \u00b7 ${record.clears}` : 'Not yet cleared',
             ]
           }),
+        ],
+      },
+      {
+        title: 'Battle Ladder',
+        rows: [
+          ['This week', `${ladder.icon} ${ladder.name}`],
+          [
+            'Modifiers',
+            ladder.modifiers.length > 0
+              ? ladder.modifiers.map((modifier) => `${modifier.icon} ${modifier.name}`).join(' \u00b7 ')
+              : 'None',
+          ],
+          ['Best Tower floor', state.towerBest?.hoenn ?? 0],
+          ['Best Frontier floor', frontierBestFloor],
         ],
       },
       {

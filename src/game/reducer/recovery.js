@@ -3,6 +3,7 @@
 import { mapData, regions } from '../../data/gameData.js'
 import { emptyBattleHazards } from '../hazards.js'
 import { createVolatileState } from '../combat.js'
+import { FIELD_WEATHER_TURNS } from '../weather.js'
 import { prepareNextBattle } from '../progression.js'
 
 /**
@@ -106,7 +107,10 @@ export function completeHealing(state, action) {
       ],
       currentEventIndex: 0,
       battleTurn: 0,
-      weather: null,
+      // A ladder's Weather Lock starts the floor under its fixed weather.
+      weather: bossBattle.weatherLock
+        ? { type: bossBattle.weatherLock, turns: FIELD_WEATHER_TURNS }
+        : null,
       battleHazards: emptyBattleHazards(),
       terrain: null,
       bossBattle: {
@@ -124,6 +128,11 @@ export function completeHealing(state, action) {
         // Battle Frontier rule variants (see game/battle-frontier.js).
         rule: bossBattle.rule,
         facilityId: bossBattle.facilityId,
+        // The weekly ladder set layered on the facility (see game/ladder-modifiers.js).
+        modifiers: bossBattle.modifiers,
+        ladderKey: bossBattle.ladderKey,
+        ladderName: bossBattle.ladderName,
+        weatherLock: bossBattle.weatherLock,
       },
       bossQueue: bossBattle.bossQueue ?? [],
       battleLog: [...state.battleLog, 'Your Pokemon were healed!'].slice(-50),

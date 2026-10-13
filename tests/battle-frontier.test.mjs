@@ -15,6 +15,17 @@ const {
 const { getTypeMultiplier, invertEffectiveness, calculateDamage, matchupScore } = await import(
   '../src/game/combat.js'
 )
+const { healBlocked } = await import('../src/game/combat/volatile.js')
+const { reportFieldEffects } = await import('../src/game/combat/end-of-turn.js')
+const {
+  LADDER_MODIFIERS,
+  LADDER_ROTATION,
+  activeLadderRuleSet,
+  battleModifierSet,
+  hasBattleModifier,
+  ladderBattleFields,
+  ladderModifier,
+} = await import('../src/game/ladder-modifiers.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { repairSave, serializeSave } = await import('../src/game/save.js')
 const { createPokemon, calculatePokemonStats, getPerfectIVs } = await import(
@@ -274,4 +285,103 @@ test('the Battle Frontier is a real Hoenn post-game location', () => {
   const species = pokemonSpecies.bulbasaur,
     stats = calculatePokemonStats(species, 50, getPerfectIVs(), 'hardy')
   assert.ok(stats.hp > 0)
+})
+
+test('the ladder modifier registry covers the four rule variants', () => {
+  assert.deepEqual(
+    LADDER_MODIFIERS.map((modifier) => modifier.id).sort(),
+    ['inverse', 'noHealing', 'noItems', 'weather']
+  )
+  assert.equal(ladderModifier('weather').weather, 'rain')
+  assert.equal(ladderModifier('nope'), null)
+  for (const entry of LADDER_ROTATION)
+    for (const id of entry.modifierIds)
+      assert.ok(ladderModifier(id), `${entry.key} references a real modifier: ${id}`)
+  // A standard week is kept in the rotation so the ladder isn't always harsh.
+  assert.ok(LADDER_ROTATION.some((entry) => entry.modifierIds.length === 0))
+})
+
+test('the weekly ladder pick is deterministic and date-based', () => {
+  const first = activeLadderRuleSet('2026-01-01'),
+    again = activeLadderRuleSet('2026-01-01'),
+    nextWeek = activeLadderRuleSet('2026-01-08')
+  assert.deepEqual(first, again, 'the same date gives the same ladder')
+  assert.equal(first.date, '2026-01-01')
+  assert.ok(first.modifiers.every((modifier) => ladderModifier(modifier.id)))
+  assert.ok(
+    first.modifierIds.every((id) => first.modifiers.some((modifier) => modifier.id === id)),
+    'the id list and the modifier objects agree'
+  )
+  // Seven days later is the next rotation slot, and the cycle wraps cleanly.
+  assert.equal(nextWeek.week, first.week + 1)
+  assert.notEqual(nextWeek.key, first.key)
+})
+
+test('the battle payload carries the merged ladder and facility modifiers', () => {
+  const ladder = {
+      key: 'barehanded',
+      name: 'Bare-Hands Ladder',
+      icon: '',
+      hint: '',
+      modifierIds: ['noItems'],
+      modifiers: [],
+      weather: null,
+      week: 0,
+      date: '2026-01-01',
+    },
+    fields = ladderBattleFields(ladder),
+    boss = frontierBossBattle('arena', 1, ladder)
+  assert.equal(fields.modifiers[0], 'noItems')
+  assert.equal(boss.rule, 'inverse')
+  assert.equal(boss.modifiers[0], 'noItems')
+  assert.equal(boss.ladderKey, 'barehanded')
+  assert.deepEqual([...battleModifierSet(boss)].sort(), ['inverse', 'noItems'])
+  assert.ok(hasBattleModifier(boss, 'inverse'), 'the facility rule still applies')
+  assert.ok(hasBattleModifier(boss, 'noItems'), 'the weekly modifier applies on top')
+  assert.ok(!hasBattleModifier(boss, 'noHealing'))
+})
+
+test('the no-healing modifier suppresses every heal source', () => {
+  assert.equal(healBlocked({ noHealing: true }), true)
+  assert.equal(healBlocked({ healBlockTurns: 2 }), true)
+  assert.equal(healBlocked({}), false)
+})
+
+test('a weather-locked ladder battle keeps its weather', () => {
+  const lockedEvents = [],
+    freeEvents = [],
+    weather = { type: 'rain', turns: 99 },
+    emptyHazards = { player: {}, enemy: {} }
+  reportFieldEffects(
+    {},
+    {},
+    lockedEvents,
+    { ...weather },
+    null,
+    emptyHazards,
+    weather,
+    null,
+    emptyHazards,
+    true
+  )
+  reportFieldEffects(
+    {},
+    {},
+    freeEvents,
+    { ...weather },
+    null,
+    emptyHazards,
+    weather,
+    null,
+    emptyHazards,
+    false
+  )
+  assert.ok(
+    !lockedEvents.some((event) => event.type === 'weather'),
+    'a locked weather never ticks down or changes'
+  )
+  assert.ok(
+    freeEvents.some((event) => event.type === 'weather'),
+    'an unlocked weather ticks down as usual'
+  )
 })

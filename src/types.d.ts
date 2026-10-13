@@ -373,6 +373,37 @@ type BattleWeather = { type: string; turns: number }
 /** Active field terrain for the current battle. */
 type BattleTerrain = { type: string; turns: number }
 
+/** A weekly Battle Tower ladder modifier (see src/game/ladder-modifiers.js). */
+type LadderModifier = {
+  id: string
+  name: string
+  icon: string
+  tagline: string
+  hint: string
+  weather?: string
+}
+
+/** The active weekly ladder rule set (see src/game/ladder-modifiers.js). */
+type LadderRuleSet = {
+  key: string
+  name: string
+  icon: string
+  hint: string
+  modifierIds: string[]
+  modifiers: LadderModifier[]
+  weather: string | null
+  week: number
+  date: string
+}
+
+/** The battle fields the ladder modifiers read (a subset of TrainerBattle). */
+type LadderBattle = {
+  rule?: string | null
+  modifiers?: string[] | null
+  weatherLock?: string | null
+  [key: string]: any
+}
+
 /** Extra information a situational ball needs at catch time. */
 type CatchContext = {
   /** Target's level (Nest Ball). */

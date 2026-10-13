@@ -214,7 +214,7 @@ export function getStatStage(volatile, statKey) {
  * @returns {boolean}
  */
 export function healBlocked(pokemon) {
-  return (pokemon.healBlockTurns ?? 0) > 0
+  return pokemon.noHealing === true || (pokemon.healBlockTurns ?? 0) > 0
 }
 
 /**

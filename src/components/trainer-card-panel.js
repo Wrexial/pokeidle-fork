@@ -321,12 +321,12 @@ export function TrainerCardPanel({ onClose, inline = false, onOpenShop }) {
     className: `trainer-card-panel${inline ? ' inline' : ''}`,
     children: [
       jsx('div', {
-        className: 'tab-bar trainer-tab-bar',
+        className: 'bag-tabs trainer-tab-bar',
         children: TRAINER_TABS.map((tabDef) =>
           jsx(
             'button',
             {
-              className: `tab-btn${tab === tabDef.id ? ' active' : ''}`,
+              className: `bag-tab${tab === tabDef.id ? ' active' : ''}`,
               onClick: () => setTab(tabDef.id),
               children: tabDef.label,
             },

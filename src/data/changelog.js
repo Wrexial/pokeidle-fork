@@ -118,6 +118,7 @@ export const CHANGELOG = [
           'A Pokemon Bank panel opens from the Box header and from Settings > Save Slots. It lists what you can deposit on one tab and what is waiting in the bank on the other, with each Pokemon’s sprite, level and source, and it shows how many of the thirty slots are used.',
           'Hotkeys are rebindable now: a Keybindings section in Settings lets you set a key for pause, battle speed up and down, the manual/auto toggle and auto-catch (click a key, press the new one, Escape cancels). The defaults work out of the box, a shared-key clash is flagged, and one button restores them.',
           'The Backpack is one trainer hub now: the League, Records and Run Summary views moved out of their own tabs into sub-tabs of the Trainer tab (Card / League / Records / Summary). The remaining top-level tabs are Trainer, Dex, Kecleon Wares and Items, and the Trainer tab opens on the card.',
+          'The Trainer tab’s four sub-views (Card / League / Records / Summary) now use the Items tab’s lighter pill strip instead of the Backpack’s blocky top-level tabs, so the second level reads as a sub-tab.',
         ],
       },
       {

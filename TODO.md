@@ -67,24 +67,6 @@ Panel-layout and top-bar cleanups: reclaim vertical space, make the sub-tab
 hierarchy read, and fold the daily menus together. All are UI-only unless
 noted.
 
-## Trainer sub-tabs should use the bag tab style (follow-up)
-
-The Backpack's Trainer tab (`src/components/trainer-card-panel.js`) renders its
-four sub-views — Card, League, Records, Summary — with the same `tab-bar` /
-`tab-btn` classes as the top-level Backpack tabs, so the two rows look identical
-and the second level doesn't read as a sub-tab. Reuse the Items tab's pill
-style instead: `src/components/bag-panel.js` renders its categories as
-`bag-tabs` / `bag-tab` buttons, a visibly lighter cluster.
-
-- [ ] Switch the `TRAINER_TABS` rendering in `src/components/trainer-card-panel.js`
-      to the `bag-tabs` / `bag-tab` markup (keep `trainer-tab-bar` as the
-      wrapper class if the layout needs it).
-- [ ] Extend/adjust the `.bag-tab` CSS in `assets/style.css` so it fits four
-      labels at the trainer panel width (it currently targets the wider bag
-      header).
-- [ ] Check the stacked mobile layout (`src/components/mobile-tabs.js`,
-      `src/components/game-layout.js`) still fits.
-
 ## Compact the route activity cards (follow-up)
 
 Each route activity renders a full-width `MinigameCard` — a big hint paragraph,

@@ -181,8 +181,8 @@ export const initialGameState = {
   breeding: createBreedingTracker(),
   /** Consecutive encounters of one species, boosting shiny odds (DexNav). */
   shinyChain: { speciesKey: null, count: 0, radar: 0, target: 5 },
-  /** SOS chain: consecutive wild wins on the current route (see game/sos-chain.js). */
-  sosChain: { routeKey: null, count: 0 },
+  /** SOS chain: consecutive same-species wild wins on the current route (see game/sos-chain.js). */
+  sosChain: { routeKey: null, speciesKey: null, count: 0 },
   /** Best SOS chain reached per route, for the location-panel chip. */
   sosBestChains: {},
   shinySeen: [],

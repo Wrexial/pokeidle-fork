@@ -27,13 +27,13 @@ function withRandom(/** @type {number} */ value, /** @type {() => any} */ fn) {
   }
 }
 
-/** Advance the SOS chain `times` on a route. */
-function advance(state, routeKey, times = 1) {
+/** Advance the SOS chain `times` on a route against one species. */
+function advance(state, routeKey, speciesKey, times = 1) {
   let next = state
   for (let index = 0; index < times; index++)
     next = gameReducer(next, {
       type: 'ADVANCE_SOS_CHAIN',
-      payload: { routeKey },
+      payload: { routeKey, speciesKey },
     })
   return next
 }
@@ -91,35 +91,51 @@ test('an SOS chain lowers the wild shiny odds', () => {
   assert.equal(chained.isShiny, true)
 })
 
-test('ADVANCE_SOS_CHAIN extends the streak and a different route restarts it', () => {
-  const one = advance(initialGameState, 'route1')
-  assert.deepEqual(one.sosChain, { routeKey: 'route1', count: 1 })
+test('ADVANCE_SOS_CHAIN extends a same-species streak and a different route restarts it', () => {
+  const one = advance(initialGameState, 'route1', 'pidgey')
+  assert.deepEqual(one.sosChain, { routeKey: 'route1', speciesKey: 'pidgey', count: 1 })
   assert.equal(one.sosBestChains.route1, 1)
-  const two = advance(one, 'route1')
+  const two = advance(one, 'route1', 'pidgey')
   assert.equal(two.sosChain.count, 2)
   assert.equal(two.sosBestChains.route1, 2)
-  const switched = advance(two, 'route2')
-  assert.deepEqual(switched.sosChain, { routeKey: 'route2', count: 1 })
+  const switched = advance(two, 'route2', 'pidgey')
+  assert.deepEqual(switched.sosChain, { routeKey: 'route2', speciesKey: 'pidgey', count: 1 })
   assert.equal(switched.sosBestChains.route1, 2, 'the old route keeps its record')
 })
 
-test('RESET_SOS_CHAIN breaks the streak but keeps the route record', () => {
-  const chained = advance(initialGameState, 'route1', 5),
+test('a different species on the same route starts a new chain', () => {
+  const chained = advance(initialGameState, 'route1', 'pidgey', 4)
+  assert.equal(chained.sosChain.count, 4)
+  const broken = advance(chained, 'route1', 'rattata')
+  assert.deepEqual(broken.sosChain, { routeKey: 'route1', speciesKey: 'rattata', count: 1 })
+  assert.equal(broken.sosBestChains.route1, 4, 'the route keeps its best same-species chain')
+  // Returning to the original species does not resume the old streak.
+  const resumed = advance(broken, 'route1', 'pidgey')
+  assert.equal(resumed.sosChain.count, 1)
+  assert.equal(resumed.sosBestChains.route1, 4)
+})
+
+test('RESET_SOS_CHAIN breaks the streak but keeps the route record and species', () => {
+  const chained = advance(initialGameState, 'route1', 'pidgey', 5),
     reset = gameReducer(chained, { type: 'RESET_SOS_CHAIN' })
   assert.equal(reset.sosChain.count, 0)
   assert.equal(reset.sosChain.routeKey, 'route1')
+  assert.equal(reset.sosChain.speciesKey, 'pidgey')
   assert.equal(reset.sosBestChains.route1, 5)
 })
 
-test('reaching a milestone pays its reward once per route', () => {
-  const ten = advance(initialGameState, 'route1', 10)
+test('reaching a milestone pays its reward once per route, not per species', () => {
+  const ten = advance(initialGameState, 'route1', 'pidgey', 10)
   assert.equal(ten.inventory.rareCandy, 1)
   assert.equal(ten.sosBestChains.route1, 10)
   // Resetting and climbing back to ten does not pay the 10-chain reward again.
-  const again = advance(gameReducer(ten, { type: 'RESET_SOS_CHAIN' }), 'route1', 10)
+  const again = advance(gameReducer(ten, { type: 'RESET_SOS_CHAIN' }), 'route1', 'pidgey', 10)
   assert.equal(again.inventory.rareCandy, 1)
+  // Chaining a second species to the same depth does not re-pay it either.
+  const otherSpecies = advance(again, 'route1', 'rattata', 10)
+  assert.equal(otherSpecies.inventory.rareCandy, 1)
   // Pushing past the next threshold pays that one.
-  const twentyFive = advance(again, 'route1', 15)
+  const twentyFive = advance(otherSpecies, 'route1', 'rattata', 15)
   assert.equal(twentyFive.inventory.expCandyL, 1)
 })
 
@@ -128,7 +144,7 @@ test('TRAVEL to another area breaks the chain', () => {
       type: 'SELECT_STARTER',
       payload: { region: 'kanto', speciesKey: 'bulbasaur' },
     }),
-    chained = advance(started, 'route1', 3),
+    chained = advance(started, 'route1', 'pidgey', 3),
     traveled = gameReducer(chained, {
       type: 'TRAVEL',
       payload: { locationId: 'palletTown' },

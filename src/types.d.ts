@@ -807,8 +807,8 @@ type GameState = {
   shinySeen: string[]
   shinyCaught: string[]
   shinyChain: { speciesKey: string | null; count: number; radar?: number; target?: number }
-  /** SOS chain: consecutive wild wins on the current route (see game/sos-chain.js). */
-  sosChain: { routeKey: string | null; count: number }
+  /** SOS chain: consecutive same-species wild wins on the current route (see game/sos-chain.js). */
+  sosChain: { routeKey: string | null; speciesKey: string | null; count: number }
   /** Best SOS chain reached per route, for the location-panel chip. */
   sosBestChains: Record<string, number>
   /** A route temporarily overrun by one species. */

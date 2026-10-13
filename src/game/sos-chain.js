@@ -1,8 +1,9 @@
-// SOS chaining: a per-route run of consecutive wild wins that slowly tilts the
-// hidden-ability and shiny odds, and pays a milestone reward when the route's
-// record reaches a threshold. Deliberately separate from the Poke Radar
-// minigame's `shinyChain` (a same-species DexNav cache), and kept pure so the
-// reducer, the encounter roll and the tests can all share it.
+// SOS chaining: a per-route run of consecutive wild wins against the same
+// species that slowly tilts the hidden-ability and shiny odds, and pays a
+// milestone reward when the route's record reaches a threshold. Deliberately
+// separate from the Poke Radar minigame's `shinyChain` (a same-species DexNav
+// cache), and kept pure so the reducer, the encounter roll and the tests can
+// all share it.
 
 /** Hidden-ability chance at chain 0 (the base `rollAbility` rate). */
 export const SOS_BASE_HIDDEN_CHANCE = 0.1
@@ -27,7 +28,9 @@ export const SOS_SHINY_MAX = 4
 
 /**
  * Milestone rewards, paid once per route the first time its best chain passes
- * the threshold. Kept in ascending order.
+ * the threshold. The record and the reward stay per route (the chain itself is
+ * per species), so chaining a second species can't re-farm them. Kept in
+ * ascending order.
  * @type {{ chain: number, itemId: string, amount: number, label: string }[]}
  */
 export const SOS_REWARDS = [

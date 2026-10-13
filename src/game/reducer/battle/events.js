@@ -539,9 +539,10 @@ export function consumeEvent(state, action) {
   })
   // A species whose field research just completed earns the Research Ribbon.
   syncedState = applyResearchRibbon(syncedState, state.enemyPokemon?.speciesKey)
-  // SOS chain: a normal wild win extends the current route's streak, while the
-  // active Pokemon fainting (any battle) breaks it. Raids and trainer battles
-  // are not wild route wins, so they leave the chain alone.
+  // SOS chain: a normal wild win extends the current route's same-species
+  // streak (a different species starts a new one), while the active Pokemon
+  // fainting (any battle) breaks it. Raids and trainer battles are not wild
+  // route wins, so they leave the chain alone.
   if (
     event.type === 'faint' &&
     event.data?.target === 'enemy' &&
@@ -551,7 +552,7 @@ export function consumeEvent(state, action) {
   )
     syncedState = advanceSosChain(syncedState, {
       type: 'ADVANCE_SOS_CHAIN',
-      payload: { routeKey: state.currentRoute },
+      payload: { routeKey: state.currentRoute, speciesKey: state.enemyPokemon?.speciesKey },
     })
   else if (
     event.type === 'defeat' ||

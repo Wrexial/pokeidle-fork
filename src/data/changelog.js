@@ -127,6 +127,7 @@ export const CHANGELOG = [
           'A region’s box legendary is now earned only through its Legendary Quest: it no longer appears in the Raid Island’s random raid roll, its wild encounters, or as a roaming legendary. Once the quest’s steps are done, the Raid Island hands it over directly.',
           'A finished Legendary Quest no longer drops you straight into the raid from the Town Map or the Pokedex: clicking the Raid Island now opens the challenge scene first, so you can read it and confirm the battle (the quest panel’s own CHALLENGE button already worked this way).',
           'The Champions’ Gauntlet and the Battle Maison now close when you collect their prizes — their end action was being ignored, which left the reward screen (and the game) stuck after a run.',
+          'SOS chaining is same-species now: the chain only grows while the same Pokemon keeps appearing, so defeating a different species on the route starts a new chain instead of letting the streak, its hidden-ability and shiny odds and its milestone rewards keep climbing off the back of another Pokemon. The route\u2019s best chain and its one-off milestone rewards are unchanged.',
         ],
       },
     ],

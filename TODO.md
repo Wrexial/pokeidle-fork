@@ -61,21 +61,6 @@ Reference images kept for future checks:
 
 ---
 
-## SOS chain should break on a new species (bug)
-
-The SOS chain keys only on the **route** (`sosChain: { routeKey, count }`; see
-`advanceSosChain` in `src/game/reducer/collection.js`), so KOing a *different*
-species on the same route keeps the streak — and its hidden-ability/shiny odds
-and milestone rewards — climbing. It should be a same-species chain: meeting a
-new species breaks it.
-
-- [ ] Store the species on the chain and reset `count` to 1 when the enemy's
-      species differs. The wild-win event already has
-      `state.enemyPokemon?.speciesKey` (`src/game/reducer/battle/events.js`).
-- [ ] Decide whether `sosBestChains` and the milestone rewards stay per route or
-      become per species, and adjust the location-panel SOS copy.
-- [ ] Cover it in `tests/sos-chain.test.mjs`.
-
 ## Sweet Scent as field Honey (follow-up)
 
 Honey (`src/data/items.js`, the `USE_EFFECT_ITEM` reducer) is an out-of-combat,

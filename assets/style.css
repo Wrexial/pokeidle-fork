@@ -18684,10 +18684,16 @@ img {
 }
 
 .sos-chain-best,
+.sos-chain-species,
 .sos-chain-odds,
 .sos-chain-next {
     color: var(--text-muted);
     opacity: .85
+}
+
+.sos-chain-species {
+    color: #4a90d9;
+    font-weight: 700
 }
 
 .sos-chain-next {

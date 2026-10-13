@@ -500,7 +500,8 @@ export function claimDailyGift(state, action) {
 
 /**
  * Handle the `ADVANCE_SOS_CHAIN` action: a wild win extends the current
- * route's SOS chain (a win on another route starts a new one). The route's best
+ * route's SOS chain while the same species keeps appearing (a win on another
+ * route, or over a different species, starts a new chain). The route's best
  * chain is updated, and each milestone reward is paid once per route the first
  * time its best chain passes the threshold.
  * @param {GameState} state
@@ -508,16 +509,19 @@ export function claimDailyGift(state, action) {
  * @returns {GameState}
  */
 export function advanceSosChain(state, action) {
-  const routeKey = action.payload?.routeKey
+  const routeKey = action.payload?.routeKey,
+    speciesKey = action.payload?.speciesKey
   if (!routeKey) return state
-  const chain = state.sosChain ?? { routeKey: null, count: 0 },
-    count = chain.routeKey === routeKey ? chain.count + 1 : 1,
+  const chain = state.sosChain ?? { routeKey: null, speciesKey: null, count: 0 },
+    sameChain =
+      chain.routeKey === routeKey && !!speciesKey && chain.speciesKey === speciesKey,
+    count = sameChain ? chain.count + 1 : 1,
     previousBest = state.sosBestChains?.[routeKey] ?? 0,
     best = Math.max(previousBest, count),
     rewards = previousBest < count ? sosRewardsCrossed(previousBest, count) : [],
     next = {
       ...state,
-      sosChain: { routeKey, count },
+      sosChain: { routeKey, speciesKey: speciesKey ?? null, count },
       sosBestChains: { ...(state.sosBestChains ?? {}), [routeKey]: best },
     }
   if (rewards.length === 0) return next
@@ -543,7 +547,14 @@ export function advanceSosChain(state, action) {
  */
 export function resetSosChain(state) {
   if (!state.sosChain?.count) return state
-  return { ...state, sosChain: { routeKey: state.sosChain.routeKey ?? null, count: 0 } }
+  return {
+    ...state,
+    sosChain: {
+      routeKey: state.sosChain.routeKey ?? null,
+      speciesKey: state.sosChain.speciesKey ?? null,
+      count: 0,
+    },
+  }
 }
 
 /**

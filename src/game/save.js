@@ -429,8 +429,9 @@ export function repairSave(saved) {
               : SHINY_CHAIN_FIRST_TARGET,
         }
       : initialGameState.shinyChain
-  // The SOS chain is a consecutive-win streak on one route. A stale route key
-  // (a removed area) drops back to an empty chain rather than blocking the load.
+  // The SOS chain is a consecutive same-species win streak on one route. A
+  // stale route key (a removed area) drops back to an empty chain rather than
+  // blocking the load.
   const sosChain =
     saved.sosChain &&
     typeof saved.sosChain === 'object' &&
@@ -438,7 +439,12 @@ export function repairSave(saved) {
     saved.sosChain.count > 0 &&
     typeof saved.sosChain.routeKey === 'string' &&
     mapData[saved.sosChain.routeKey]
-      ? { routeKey: saved.sosChain.routeKey, count: Math.floor(saved.sosChain.count) }
+      ? {
+          routeKey: saved.sosChain.routeKey,
+          speciesKey:
+            typeof saved.sosChain.speciesKey === 'string' ? saved.sosChain.speciesKey : null,
+          count: Math.floor(saved.sosChain.count),
+        }
       : initialGameState.sosChain
   const sosBestChains = Object.fromEntries(
     Object.entries(

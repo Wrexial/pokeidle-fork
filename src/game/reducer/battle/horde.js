@@ -215,10 +215,11 @@ export function endHorde(state, action) {
       icon: '🦠',
       dedupeKey: 'pokerus:infected',
     })
-  // Clearing a pack counts as one wild win, so it extends the SOS chain.
+  // Clearing a pack counts as one wild win, so it extends the SOS chain of the
+  // horde's species.
   next = advanceSosChain(next, {
     type: 'ADVANCE_SOS_CHAIN',
-    payload: { routeKey: state.currentRoute },
+    payload: { routeKey: state.currentRoute, speciesKey: state.hordePack?.[0]?.speciesKey },
   })
   // A double knockout still pays the clear reward, but the fainted active has
   // to be replaced or the party healed exactly like a loss.

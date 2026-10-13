@@ -18141,3 +18141,242 @@ img {
     opacity: 1;
     box-shadow: 0 0 6px #ffffff80
 }
+
+/* Living form-dex view (Pokedex "Forms" tab). */
+.form-dex {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-height: 0
+}
+
+.form-dex-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 3px
+}
+
+.form-dex-summary-line {
+    display: flex;
+    align-items: baseline;
+    gap: 6px
+}
+
+.form-dex-summary-label {
+    font-size: 8px;
+    font-weight: 700;
+    color: #3a2818
+}
+
+.form-dex-summary-count {
+    margin-left: auto;
+    font-size: 7px;
+    color: #5a4838
+}
+
+.form-dex-progress {
+    height: 6px;
+    background: #00000026;
+    border: 1px solid #8a7a60
+}
+
+.form-dex-progress.small {
+    height: 4px
+}
+
+.form-dex-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg,#7ac74c,#e8c84a);
+    transition: width .2s
+}
+
+.form-dex-section {
+    display: flex;
+    flex-direction: column;
+    gap: 3px
+}
+
+.form-dex-section-grow {
+    flex: 1;
+    min-height: 0
+}
+
+.form-dex-section-title {
+    font-size: 7px;
+    font-weight: 700;
+    color: #3a2818;
+    text-transform: uppercase;
+    letter-spacing: .04em
+}
+
+.form-dex-sets {
+    display: flex;
+    flex-direction: column;
+    gap: 3px
+}
+
+.form-dex-set {
+    display: flex;
+    flex-direction: column;
+    gap: 2px
+}
+
+.form-dex-set-head {
+    display: flex;
+    align-items: center;
+    gap: 4px
+}
+
+.form-dex-set-name {
+    font-size: 7px;
+    color: #3a2818
+}
+
+.form-dex-set-count,
+.form-dex-family-count,
+.form-dex-generation-count {
+    margin-left: auto;
+    font-size: 7px;
+    color: #5a4838
+}
+
+.form-dex-rewarded {
+    font-size: 7px;
+    color: #3f8a2a;
+    font-weight: 700
+}
+
+.form-dex-generations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px
+}
+
+.form-dex-generation {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px 4px;
+    border: 1px solid #b8a878;
+    background: #e8dcc0
+}
+
+.form-dex-generation.complete {
+    border-color: #3f8a2a;
+    background: #d8ecc0
+}
+
+.form-dex-generation-name {
+    font-size: 7px;
+    color: #3a2818
+}
+
+.form-dex-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px
+}
+
+.form-dex-filter-tab {
+    font-family: var(--font-pixel);
+    font-size: 7px;
+    padding: 2px 5px;
+    color: #5a4838;
+    background: #e8dcc0;
+    border: 1px solid #b8a878;
+    cursor: pointer;
+    transition: .1s
+}
+
+.form-dex-filter-tab:hover {
+    border-color: #8a6820
+}
+
+.form-dex-filter-tab.active {
+    color: #f0e0b0;
+    background: #6a4e30;
+    border-color: #8a6820
+}
+
+.form-dex-families {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-right: 2px
+}
+
+.form-dex-families::-webkit-scrollbar {
+    width: 2px
+}
+
+.form-dex-families::-webkit-scrollbar-thumb {
+    background: #8a7a60
+}
+
+.form-dex-family {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 3px 4px;
+    border: 1px solid #b8a878;
+    background: #0000000d
+}
+
+.form-dex-family.complete {
+    border-color: #3f8a2a;
+    background: #d8ecc033
+}
+
+.form-dex-family-head {
+    display: flex;
+    align-items: center;
+    gap: 4px
+}
+
+.form-dex-family-name {
+    font-size: 7px;
+    font-weight: 700;
+    color: #3a2818
+}
+
+.form-dex-family-dex {
+    font-size: 6px;
+    color: #8a7a60
+}
+
+.form-dex-targets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px
+}
+
+.form-dex-target {
+    font-family: var(--font-pixel);
+    font-size: 6px;
+    padding: 1px 4px;
+    color: #7a6a52;
+    background: #00000012;
+    border: 1px solid #b8a878;
+    cursor: pointer;
+    transition: .1s
+}
+
+.form-dex-target:hover {
+    border-color: #8a6820
+}
+
+.form-dex-target.collected {
+    color: #2a5a1a;
+    background: #a8d88880;
+    border-color: #3f8a2a
+}
+
+.form-dex-empty {
+    font-size: 7px;
+    color: #5a4838;
+    padding: 6px
+}

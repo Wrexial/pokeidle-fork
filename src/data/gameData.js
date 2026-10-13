@@ -3,6 +3,7 @@
 import { applyMoveOverrides } from './move-effects.js'
 import { withoutQuestLegendary } from './legendary-quests.js'
 import { buildFormModel } from './pokemon-forms.js'
+import { buildFormDexModel } from './form-dex.js'
 
 async function startApp() {
   await window.gameDataReady
@@ -27,6 +28,9 @@ export const formBaseMap = formModel.baseForKey
 
 /** National-dex base key -> its form keys (the base itself is excluded). */
 export const formsByBase = formModel.formsByBase
+
+/** Form species key -> its display label (base species have no entry). */
+export const formLabels = formModel.labelForKey
 
 /**
  * The national-dex base species a key belongs to (a base maps to itself).
@@ -277,6 +281,19 @@ export const speciesKeysByGeneration = GENERATION_DEX_RANGES.map(([lowId, highId
   Object.keys(pokemonSpecies).filter(
     (speciesKey) => pokemonSpecies[speciesKey].id >= lowId && pokemonSpecies[speciesKey].id <= highId
   )
+)
+
+/**
+ * The living form-dex model: every species family, its collectible form and
+ * gender targets, and the regional / generation groupings (see
+ * `src/data/form-dex.js`).
+ */
+export const formDexModel = buildFormDexModel(
+  pokemonSpecies,
+  formsByBase,
+  formLabels,
+  new Set(genderedSprites.front ?? []),
+  GENERATION_DEX_RANGES
 )
 
 /**

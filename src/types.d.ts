@@ -769,6 +769,14 @@ type GameState = {
   rivals: Record<string, number>
   /** Generation indices (0-based) whose dex-completion reward has been paid. */
   rewardedGenerations: number[]
+  /** Base species keys whose living form-dex family reward has been paid. */
+  rewardedFamilies: string[]
+  /** Regional form set ids (alolan/galarian/...) whose reward has been paid. */
+  rewardedRegionalSets: string[]
+  /** Generation indices (0-based) whose living form-dex reward has been paid. */
+  rewardedFormGenerations: number[]
+  /** Species/form key -> the visual genders caught, for gender-difference forms. */
+  formDexGenders: Record<string, string[]>
   /** Achievement ids whose one-off reward has been paid. */
   rewardedAchievements: string[]
   /** NPC gift / static-encounter ids already claimed this save. */

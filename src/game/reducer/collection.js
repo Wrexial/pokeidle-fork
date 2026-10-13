@@ -1,9 +1,16 @@
 // Reducer handlers for collection actions. Split from game/reducer.js.
 
 import { ACHIEVEMENTS } from '../../data/achievements.js'
-import { dexRewardVictoryTokens } from '../../data/config.js'
+import {
+  dexRewardVictoryTokens,
+  formDexFamilyBaseMoney,
+  formDexFamilyVariantMoney,
+  formDexGenerationReward,
+  formDexRegionalReward,
+} from '../../data/config.js'
 import { dailyEventByKey, rollDailyEvent, todayKey } from '../../data/daily-events.js'
-import { pokemonSpecies } from '../../data/gameData.js'
+import { formDexModel, pokemonSpecies } from '../../data/gameData.js'
+import { newlyCompletedFormDex } from '../../data/form-dex.js'
 import { SHINY_CHAIN_FIRST_TARGET, formatReward, prepareNextBattle } from '../progression.js'
 import { recordHuntCatch } from '../hunt.js'
 import { questLabel, rollQuests } from '../quests.js'
@@ -136,6 +143,105 @@ export function claimDexRewards(state, action) {
       tone: 'shiny',
       icon: '🏆',
       dedupeKey: `dexreward:${generationIndex}`,
+    })
+  return claimedState
+}
+
+/**
+ * Handle the `CLAIM_FORM_DEX_REWARDS` action. The Living Dex pays at three
+ * levels: a money reward per completed species family, a bundle per completed
+ * regional set, and a bigger capstone per generation whose every form is
+ * collected. The handler re-derives which requested groups are genuinely
+ * complete (and unpaid) so a stale or forged payload can't mint rewards.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function claimFormDexRewards(state, action) {
+  const pending = newlyCompletedFormDex(
+    formDexModel,
+    new Set(state.pokedexCaught),
+    state.formDexGenders ?? {},
+    {
+      families: new Set(state.rewardedFamilies ?? []),
+      regionalSets: new Set(state.rewardedRegionalSets ?? []),
+      generations: new Set(state.rewardedFormGenerations ?? []),
+    }
+  ),
+    requestedFamilies = new Set(
+      Array.isArray(action.payload?.families) ? action.payload.families : []
+    ),
+    requestedSets = new Set(
+      Array.isArray(action.payload?.regionalSets) ? action.payload.regionalSets : []
+    ),
+    requestedGenerations = new Set(
+      Array.isArray(action.payload?.generations) ? action.payload.generations : []
+    ),
+    families = pending.families.filter((base) => requestedFamilies.has(base)),
+    regionalSets = pending.regionalSets.filter((id) => requestedSets.has(id)),
+    generations = pending.generations.filter((generation) => requestedGenerations.has(generation))
+  if (families.length === 0 && regionalSets.length === 0 && generations.length === 0) return state
+
+  const familyByBase = new Map(formDexModel.families.map((family) => [family.base, family]))
+  let money = state.money,
+    victoryTokens = state.victoryTokens
+  const inventory = { ...state.inventory },
+    logLines = []
+  let familyMoney = 0
+  for (const base of families) {
+    const targetCount = familyByBase.get(base)?.targets.length ?? 1,
+      reward = formDexFamilyBaseMoney + formDexFamilyVariantMoney * Math.max(0, targetCount - 1)
+    familyMoney += reward
+    logLines.push(`Living Dex: ${pokemonSpecies[base]?.name ?? base} family complete (+$${reward.toLocaleString()}).`)
+  }
+  money += familyMoney
+  for (let index = 0; index < regionalSets.length; index++)
+    for (const [itemId, quantity] of Object.entries(formDexRegionalReward.items ?? {}))
+      inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+  money += regionalSets.length * formDexRegionalReward.money
+  victoryTokens += regionalSets.length * formDexRegionalReward.victoryTokens
+  for (let index = 0; index < generations.length; index++)
+    for (const [itemId, quantity] of Object.entries(formDexGenerationReward.items ?? {}))
+      inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+  money += generations.length * formDexGenerationReward.money
+  victoryTokens += generations.length * formDexGenerationReward.victoryTokens
+  for (const id of regionalSets)
+    logLines.push(`Living Dex: ${formDexModel.regionalSets.find((set) => set.id === id)?.label ?? id} complete!`)
+  for (const generation of generations)
+    logLines.push(`Living Dex: Generation ${generation + 1} forms complete!`)
+
+  let claimedState = /** @type {GameState} */ ({
+    ...state,
+    money,
+    victoryTokens,
+    inventory,
+    rewardedFamilies: [...(state.rewardedFamilies ?? []), ...families],
+    rewardedRegionalSets: [...(state.rewardedRegionalSets ?? []), ...regionalSets],
+    rewardedFormGenerations: [...(state.rewardedFormGenerations ?? []), ...generations],
+    battleLog: [...state.battleLog, ...logLines].slice(-50),
+  })
+  if (families.length > 0)
+    claimedState = withNotification(claimedState, {
+      message: `${families.length} form-dex famil${families.length === 1 ? 'y' : 'ies'} complete! +$${familyMoney.toLocaleString()}`,
+      tone: 'success',
+      icon: '📖',
+      dedupeKey: `formdex:families:${families.length}:${families[0]}`,
+    })
+  for (const id of regionalSets) {
+    const set = formDexModel.regionalSets.find((candidate) => candidate.id === id)
+    claimedState = withNotification(claimedState, {
+      message: `Living Dex: ${set?.label ?? id} complete! ${formatReward(formDexRegionalReward)}`,
+      tone: 'shiny',
+      icon: '🏅',
+      dedupeKey: `formdex:regional:${id}`,
+    })
+  }
+  for (const generation of generations)
+    claimedState = withNotification(claimedState, {
+      message: `Living Dex: Generation ${generation + 1} complete! ${formatReward(formDexGenerationReward)}`,
+      tone: 'shiny',
+      icon: '🏅',
+      dedupeKey: `formdex:generation:${generation}`,
     })
   return claimedState
 }

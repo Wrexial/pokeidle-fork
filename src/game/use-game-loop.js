@@ -6,7 +6,8 @@ import React from 'react'
 import { trainerClassPayouts, hordeEncounterChance, missingnoEncounterChance, mewUnderTruckChance, swarmShinyMultiplier, swarmShinyOddsFloor, manualInputTimeoutMs } from '../data/config.js'
 import { ballOrder } from '../data/items.js'
 import { withoutQuestLegendary } from '../data/legendary-quests.js'
-import { completedGenerations, encounterData, mapData, pokemonSpecies, trainerData } from '../data/gameData.js'
+import { completedGenerations, encounterData, formDexModel, mapData, pokemonSpecies, trainerData } from '../data/gameData.js'
+import { newlyCompletedFormDex } from '../data/form-dex.js'
 import { gmaxEvolveReady, megaEvolveReady } from '../data/mega-evolution.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { dailyExpMultiplier, dailyPrizeMultiplier, dailyShinyMultiplier } from '../data/daily-events.js'
@@ -1382,6 +1383,26 @@ export function useGameLoop() {
       state.inventory,
       state.minigameRecords,
       state.rewardedAchievements,
+      dispatch,
+    ]),
+    React.useEffect(() => {
+      // Pay the living form-dex rewards (family / regional set / generation) once
+      // their targets are all collected. Like the achievements, this runs on
+      // load so an older save catches up, and each reward is only paid once.
+      const caughtSet = new Set(state.pokedexCaught),
+        pending = newlyCompletedFormDex(formDexModel, caughtSet, state.formDexGenders ?? {}, {
+          families: new Set(state.rewardedFamilies ?? []),
+          regionalSets: new Set(state.rewardedRegionalSets ?? []),
+          generations: new Set(state.rewardedFormGenerations ?? []),
+        })
+      ;(pending.families.length > 0 || pending.regionalSets.length > 0 || pending.generations.length > 0) &&
+        dispatch({ type: 'CLAIM_FORM_DEX_REWARDS', payload: pending })
+    }, [
+      state.pokedexCaught,
+      state.formDexGenders,
+      state.rewardedFamilies,
+      state.rewardedRegionalSets,
+      state.rewardedFormGenerations,
       dispatch,
     ]))
 }

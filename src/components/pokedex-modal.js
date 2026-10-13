@@ -24,6 +24,7 @@ import { useGame } from '../game/context.js'
 import { useUi } from '../game/ui-context.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { PokedexTile } from './pokedex-tile.js'
+import { FormDexPanel } from './form-dex-panel.js'
 import { ResearchPanel } from './research-panel.js'
 import { LegendaryIntroModal } from './legendary-quest-panel.js'
 
@@ -68,6 +69,8 @@ export function PokedexModal({ onClose, inline = false }) {
     totalEntries = countedIndexes.length,
     [query, setQuery] = React.useState(''),
     [searchOpen, setSearchOpen] = React.useState(!1),
+    // 'grid' is the national-dex grid + detail; 'forms' is the Living Dex view.
+    [view, setView] = React.useState('grid'),
     // A ready Legendary Quest opened from the raid link: show its boss scene
     // instead of starting the raid under the player's feet.
     [raidQuest, setRaidQuest] = React.useState(
@@ -173,6 +176,17 @@ export function PokedexModal({ onClose, inline = false }) {
             jsx(
               'button',
               {
+                className: `pokedex-search-toggle${view === 'forms' ? ' active' : ''}`,
+                onClick: () => setView(view === 'forms' ? 'grid' : 'forms'),
+                title: 'Living Dex form completion',
+                'aria-label': 'Living Dex form completion',
+                children: 'Forms',
+              },
+              'pokedex-forms-toggle'
+            ),
+            jsx(
+              'button',
+              {
                 className: `pokedex-search-toggle${searchOpen ? ' active' : ''}`,
                 onClick: () => {
                   // Collapsing clears the query so the grid isn't left filtered
@@ -200,36 +214,44 @@ export function PokedexModal({ onClose, inline = false }) {
                 setQuery(event.target.value),
             }),
           }),
-        jsx('div', {
-          className: 'pokedex-modal-grid-scroll',
-          children: jsx('div', {
-            className: 'pokedex-grid',
-            children: [
-              ...pokedexTiles.map(([speciesKey]) => {
-                const status = getSlotStatus(speciesKey)
-                return jsx(
-                  PokedexTile,
-                  {
-                    speciesKey,
-                    status,
-                    rarity: 'common',
-                    isSelected: selected === speciesKey,
-                    onClick: () => setSelected(selected === speciesKey ? null : speciesKey),
-                    isShinyCaught: isSpeciesRegistered(new Set(state.shinyCaught), speciesKey),
-                    formCount: formsByBase[speciesKey]?.length ?? 0,
-                  },
-                  speciesKey
-                )
+        view === 'forms'
+          ? jsx(FormDexPanel, {
+              onSelectSpecies: /** @param {string} speciesKey */ (speciesKey) => {
+                setSelected(speciesKey)
+                setView('grid')
+              },
+            })
+          : jsx('div', {
+              className: 'pokedex-modal-grid-scroll',
+              children: jsx('div', {
+                className: 'pokedex-grid',
+                children: [
+                  ...pokedexTiles.map(([speciesKey]) => {
+                    const status = getSlotStatus(speciesKey)
+                    return jsx(
+                      PokedexTile,
+                      {
+                        speciesKey,
+                        status,
+                        rarity: 'common',
+                        isSelected: selected === speciesKey,
+                        onClick: () => setSelected(selected === speciesKey ? null : speciesKey),
+                        isShinyCaught: isSpeciesRegistered(new Set(state.shinyCaught), speciesKey),
+                        formCount: formsByBase[speciesKey]?.length ?? 0,
+                      },
+                      speciesKey
+                    )
+                  }),
+                  pokedexTiles.length === 0 &&
+                    jsx('span', {
+                      className: 'pokedex-grid-empty',
+                      children: 'No Pokemon match your search.',
+                    }),
+                ],
               }),
-              pokedexTiles.length === 0 &&
-                jsx('span', {
-                  className: 'pokedex-grid-empty',
-                  children: 'No Pokemon match your search.',
-                }),
-            ],
-          }),
-        }),
-        selected &&
+            }),
+        view !== 'forms' &&
+          selected &&
           activeKey &&
           activeSpecies &&
           jsxs('div', {

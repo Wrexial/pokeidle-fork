@@ -1,6 +1,7 @@
 // Evolution start, step and completion. Split from game/reducer/pokemon.js.
 
 import { moveLearnsets, pokemonSpecies } from '../../../data/gameData.js'
+import { recordFormDexGender } from '../../../data/form-dex.js'
 import { evolutionItems } from '../../../data/items.js'
 import { genderForPokemon } from '../../breeding.js'
 import { applyMoveLearning, calculatePokemonStats } from '../../pokemon.js'
@@ -127,7 +128,15 @@ export function completeEvolution(state, action) {
     pokedexSeen = state.pokedexSeen.includes(toSpeciesKey) ? state.pokedexSeen : [...state.pokedexSeen, toSpeciesKey],
     pokedexCaught = state.pokedexCaught.includes(toSpeciesKey)
       ? state.pokedexCaught
-      : [...state.pokedexCaught, toSpeciesKey]
+      : [...state.pokedexCaught, toSpeciesKey],
+    // The evolved form registers with the gender it already had, so a gender
+    // difference (Pikachu's tail, ...) is credited without a re-catch.
+    evolvedMember = [...party, ...box].find(
+      /** @param {Pokemon} member */ (member) => member.id === pokemonId
+    ),
+    formDexGenders = evolvedMember
+      ? recordFormDexGender(state.formDexGenders ?? {}, toSpeciesKey, genderForPokemon(evolvedMember))
+      : state.formDexGenders ?? {}
   return withNotification(
     {
       ...state,
@@ -138,6 +147,7 @@ export function completeEvolution(state, action) {
       box,
       pokedexSeen,
       pokedexCaught,
+      formDexGenders,
       battleLog: [
         ...state.battleLog,
         isForm

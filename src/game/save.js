@@ -5,7 +5,7 @@
 import { BATTLE_TOWER_REGION, EV_MAX_PER_STAT, EV_MAX_TOTAL, LEGACY_SAVE_KEYS, MAX_TEAM_PRESETS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, getActiveSlot, regionalStarters, saveSlotKey, setActiveSlot } from '../data/config.js'
 import { dailyEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, autoCatchBallOrder, consumableItems, pokeBalls } from '../data/items.js'
-import { elite4Data, encounterData, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
+import { elite4Data, encounterData, formDexModel, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
 import { ROUTE_ACTIVITIES } from './minigames/route-activities.js'
 import { BREEDING_GOALS, MAX_BREEDING_PROJECTS } from './breeding-projects.js'
 import { RIVAL_MILESTONES } from './rival.js'
@@ -20,6 +20,7 @@ import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
 import { isTerminalForm } from '../data/mega-evolution.js'
 import { POKEMON_TYPES } from '../data/moves.js'
+import { genderForPokemon } from './breeding.js'
 import { COMPANION_MAX_CARE, createCompanionCare } from './companion.js'
 import { GARDEN_BERRIES, createGarden } from './garden.js'
 import { GAME_CORNER_PRIZE_GOAL } from './minigames/game-corner.js'
@@ -853,6 +854,42 @@ export function repairSave(saved) {
       /** @param {any} index */ (index) =>
         Number.isInteger(index) && index >= 0 && index < speciesKeysByGeneration.length
     ),
+    familyBases = new Set(formDexModel.families.map((family) => family.base)),
+    regionalSetIds = new Set(formDexModel.regionalSets.map((set) => set.id)),
+    formDexGenders = (() => {
+      /** @type {Record<string, string[]>} */
+      const genders = {}
+      const source =
+        saved.formDexGenders && typeof saved.formDexGenders === 'object' ? saved.formDexGenders : {}
+      for (const [speciesKey, rawGenders] of Object.entries(source)) {
+        if (!pokemonSpecies[speciesKey]) continue
+        const valid = (Array.isArray(rawGenders) ? rawGenders : []).filter(
+          (/** @type {any} */ gender) => gender === 'male' || gender === 'female'
+        )
+        if (valid.length > 0) genders[speciesKey] = [...new Set(valid)]
+      }
+      // Seed from the current team/box so a save made before gender tracking
+      // still credits the visual genders it already owns.
+      for (const member of [...party, ...box]) {
+        if (!member?.speciesKey) continue
+        const gender = genderForPokemon(member)
+        if (gender !== 'male' && gender !== 'female') continue
+        genders[member.speciesKey] = [...new Set([...(genders[member.speciesKey] ?? []), gender])]
+      }
+      return genders
+    })(),
+    rewardedFamilies = (Array.isArray(saved.rewardedFamilies) ? saved.rewardedFamilies : []).filter(
+      /** @param {any} base */ (base) => familyBases.has(base)
+    ),
+    rewardedRegionalSets = (
+      Array.isArray(saved.rewardedRegionalSets) ? saved.rewardedRegionalSets : []
+    ).filter(/** @param {any} id */ (id) => regionalSetIds.has(id)),
+    rewardedFormGenerations = (
+      Array.isArray(saved.rewardedFormGenerations) ? saved.rewardedFormGenerations : []
+    ).filter(
+      /** @param {any} index */ (index) =>
+        Number.isInteger(index) && index >= 0 && index < speciesKeysByGeneration.length
+    ),
     rewardedAchievements = (
       Array.isArray(saved.rewardedAchievements) ? saved.rewardedAchievements : []
     ).filter(/** @param {any} id */ (id) => achievementIds.has(id)),
@@ -1027,6 +1064,10 @@ export function repairSave(saved) {
     defeatedChampions,
     rivals,
     rewardedGenerations,
+    rewardedFamilies,
+    rewardedRegionalSets,
+    rewardedFormGenerations,
+    formDexGenders,
     rewardedAchievements,
     claimedGifts: (Array.isArray(saved.claimedGifts) ? saved.claimedGifts : []).filter(
       (/** @type {string} */ id) =>
@@ -1271,6 +1312,10 @@ export const SAVED_STATE_KEYS = [
   'defeatedChampions',
   'rivals',
   'rewardedGenerations',
+  'rewardedFamilies',
+  'rewardedRegionalSets',
+  'rewardedFormGenerations',
+  'formDexGenders',
   'rewardedAchievements',
   'claimedGifts',
   'regionPrestige',

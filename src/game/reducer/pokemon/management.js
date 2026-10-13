@@ -1,8 +1,10 @@
 // Catching, nicknaming, moves, favourites and releasing. Split from game/reducer/pokemon.js.
 
 import { mapData, pokemonSpecies } from '../../../data/gameData.js'
+import { recordFormDexGender } from '../../../data/form-dex.js'
 import { tmItemId } from '../../../data/tms.js'
 import { tmTeachCost } from '../../../data/config.js'
+import { genderForPokemon } from '../../breeding.js'
 import { createPokemon, insertIntoBox, isTutorMove, judgeIVs, syncObtainedRibbons } from '../../pokemon.js'
 import { creditResearchLarge, isLargeSpecimen } from '../../research.js'
 import { advanceShinyTarget, formatReward, loadActivePokemonFromParty, prepareNextBattle, releaseFaintedParty, releaseReward, syncActivePokemonIntoParty } from '../../progression.js'
@@ -369,10 +371,17 @@ export function catchPokemon(state, action) {
             -50
           ),
         }
-  // An XL catch counts toward the "large specimen" research task.
+  // An XL catch counts toward the "large specimen" research task, and the
+  // catch records the visual gender for a gender-difference form-dex target.
+  const formDexGenders = recordFormDexGender(
+      caughtState.formDexGenders ?? {},
+      speciesKey,
+      genderForPokemon(newPokemon)
+    ),
+    nextState = formDexGenders === caughtState.formDexGenders ? caughtState : { ...caughtState, formDexGenders }
   return isLargeSpecimen(newPokemon)
-    ? creditResearchLarge(caughtState, speciesKey)
-    : caughtState
+    ? creditResearchLarge(nextState, speciesKey)
+    : nextState
 }
 
 /**

@@ -51,17 +51,6 @@ player-facing value (★ = nice to have, ★★★★★ = core missing feature)
 
 **Meta, collection & customization**
 
-## 85. Living form-dex + completion rewards
-
-The Pokedex groups forms by dex number but does not reward set completion.
-
-- [ ] Track every form/gender/regional variant per species (the form model in
-      `src/data/pokemon-forms.js` already has the pieces).
-- [ ] Pay a reward per completed family, per regional set and per generation.
-- [ ] Add a form-completion view to the Pokedex.
-
-Effort: **medium**. Gain: ★★★★.
-
 ## 86. Pokemon Bank across save slots
 
 The three save slots are isolated. Add a "cloud" panel to move individuals

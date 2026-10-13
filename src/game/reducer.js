@@ -10,7 +10,7 @@ import { createJobs } from './jobs.js'
 import { createPokewalker } from './pokewalker.js'
 import { DEFAULT_ROD } from './minigames.js'
 import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, endHorde, executeTurn, fleeBattle, gmaxEvolve, hordeRound, megaEvolve, startBossBattle, startEncounter, startHorde, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
-import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain, advanceSosChain, resetSosChain } from './reducer/collection.js'
+import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimFormDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain, advanceSosChain, resetSosChain } from './reducer/collection.js'
 import { buyCafeItem, buyItem, buyRewardItem, clearHeldItem, collectKurtBalls, craftApricornBall, reviveFossil, sellItem, setAlwaysCatchShinies, setCatchRule, setDefaultCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
 import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } from './reducer/pelago.js'
@@ -176,6 +176,14 @@ export const initialGameState = {
   rivals: {},
   /** Generation indices (0-based) whose dex-completion reward has been paid. */
   rewardedGenerations: [],
+  /** Base species keys whose living form-dex family reward has been paid. */
+  rewardedFamilies: [],
+  /** Regional form set ids whose living form-dex reward has been paid. */
+  rewardedRegionalSets: [],
+  /** Generation indices (0-based) whose living form-dex reward has been paid. */
+  rewardedFormGenerations: [],
+  /** Species key -> the visual genders caught (for gender-difference forms). */
+  formDexGenders: {},
   /** Achievement ids whose one-off reward has been paid. */
   rewardedAchievements: [],
   /** NPC gift / static-encounter ids already claimed this save. */
@@ -420,6 +428,8 @@ export function gameReducer(state, action) {
       return markShinyCaught(state, action)
     case 'CLAIM_DEX_REWARDS':
       return claimDexRewards(state, action)
+    case 'CLAIM_FORM_DEX_REWARDS':
+      return claimFormDexRewards(state, action)
     case 'CLAIM_ACHIEVEMENT_REWARDS':
       return claimAchievementRewards(state, action)
     case 'REFRESH_QUESTS':

@@ -218,6 +218,17 @@ export const shinyCharmMinOddsChance = 256
 /** Victory Tokens awarded for completing a generation's national dex. */
 export const dexRewardVictoryTokens = 3
 
+/**
+ * Living form-dex rewards. A family pays money scaled by how many forms and
+ * gender variants it asks for; a whole regional set and a whole generation pay
+ * a bigger bundle. Every level is paid once (see `rewardedFamilies` /
+ * `rewardedRegionalSets` / `rewardedFormGenerations`).
+ */
+export const formDexFamilyBaseMoney = 400
+export const formDexFamilyVariantMoney = 200
+export const formDexRegionalReward = { money: 5000, victoryTokens: 3, items: { masterball: 1 } }
+export const formDexGenerationReward = { money: 10000, victoryTokens: 5, items: { masterball: 1 } }
+
 /** Chance a wild win drops a sellable treasure. */
 export const valuableDropChance = 0.03
 

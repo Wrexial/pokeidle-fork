@@ -18,10 +18,11 @@ import { PokewalkerPanel } from './pokewalker-panel.js'
 import { DailyEventModal } from './daily-event-modal.js'
 import { MysteryGiftModal } from './mystery-gift-modal.js'
 import { QuestsModal } from './quests-modal.js'
+import { RunSummaryModal } from './run-summary-modal.js'
 import { SettingsModal } from './settings-modal.js'
 
 /**
- * @typedef {'info' | 'settings' | 'daily' | 'mystery' | 'quests' | 'companion' | 'pokewalker'} BattleMenuKey
+ * @typedef {'info' | 'settings' | 'daily' | 'mystery' | 'quests' | 'companion' | 'pokewalker' | 'summary'} BattleMenuKey
  */
 
 /** @param {{ menu: BattleMenuKey | null, onClose: () => void }} props */
@@ -43,6 +44,7 @@ export function BattleMenuModals({ menu, onClose }) {
   if (menu === 'daily') return createPortal(jsx(DailyEventModal, { onClose }), document.body)
   if (menu === 'mystery') return createPortal(jsx(MysteryGiftModal, { onClose }), document.body)
   if (menu === 'quests') return createPortal(jsx(QuestsModal, { onClose }), document.body)
+  if (menu === 'summary') return createPortal(jsx(RunSummaryModal, { onClose }), document.body)
   if (menu === 'companion')
     return createPortal(
       jsx('div', {

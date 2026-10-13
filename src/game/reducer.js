@@ -33,6 +33,7 @@ import { createTrainerProfile } from './trainer-profile.js'
 import { buyPrestigePerk, phaseIdle, prestigeRegion, resetEliteFour, resetPrestigePerks, selectStarter, travel, unlockRegion } from './reducer/world.js'
 import { startFrontier } from './reducer/frontier.js'
 import { accruePokewalker, spendPokewalker } from './reducer/pokewalker.js'
+import { recordMilestones } from './milestones.js'
 
 /** @type {GameState} */
 export const initialGameState = {
@@ -119,6 +120,8 @@ export const initialGameState = {
   jobs: createJobs(),
   /** Pokewalker steps banked while away, spent on walk rewards (see game/pokewalker.js). */
   pokewalker: createPokewalker(),
+  /** The capped run-summary timeline (see game/milestones.js). */
+  milestones: [],
   /** Focus hunt: a species or type whose encounter rate is boosted (see game/hunt.js). */
   hunt: null,
   /** A battle-introduced weather still lingering on its route (see game/weather.js). */
@@ -299,11 +302,23 @@ export const initialGameState = {
 }
 
 /**
+ * The reducer dispatch: apply the action, then fold any newly-earned run
+ * milestones into the timeline (see game/milestones.js). Wrapping here records
+ * each high point once, no matter which handler earned it.
  * @param {GameState} state
  * @param {GameAction} action
  * @returns {GameState}
  */
 export function gameReducer(state, action) {
+  return recordMilestones(state, applyAction(state, action))
+}
+
+/**
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+function applyAction(state, action) {
   switch (action.type) {
     case 'BATCH': {
       // Fold the actions a single idle tick dispatched into one state update

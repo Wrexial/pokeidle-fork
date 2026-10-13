@@ -170,6 +170,18 @@ type TrainerCardData = {
   regionId: string
 }
 
+/** One entry in the capped run-summary timeline (see game/milestones.js). */
+type Milestone = {
+  id: string
+  kind: string
+  at: number
+  key: string
+  name: string
+  detail?: string
+  /** True for a save's pre-feature backfill, shown as "earlier". */
+  backfilled?: boolean
+}
+
 /** One queued breeding goal (see game/breeding-projects.js). */
 type BreedingProject = {
   id: string
@@ -710,6 +722,8 @@ type GameState = {
   teamPresets: TeamPreset[]
   /** The player's Trainer Card profile (name, title, outfit, badge case). */
   trainerProfile?: TrainerProfile
+  /** The capped run-summary timeline (see game/milestones.js). */
+  milestones: Milestone[]
   /** The most recently hatched egg, shown in the hatch popup until dismissed. */
   hatchResult: Pokemon | null
   battleLog: string[]

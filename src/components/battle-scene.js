@@ -336,6 +336,12 @@ export function BattleScene({ onOpenMenu }) {
             children: '?',
           }),
           jsx('button', {
+            className: 'battle-info-btn run-summary-btn',
+            onClick: () => onOpenMenu('summary'),
+            title: 'Run Summary',
+            children: '\u{1f4cb}',
+          }),
+          jsx('button', {
             className: `battle-info-btn auto-proceed-btn${state.autoProceed ? ' active' : ''}`,
             onClick: () =>
               dispatch({

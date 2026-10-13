@@ -36,7 +36,7 @@ number and full detail further down. Promote into the tiers above once scoped.
 - **Big but wanted:** #86 Pokemon Bank.
 - **Medium:** #85 Form dex · #89 Mystery Gift ·
   #90 Professor's story · #91 Auto-battle policy · #92 Raid events.
-- **Quick wins:** #95 Hide-and-seek · #97 Run summary · #98 Hotkeys.
+- **Quick wins:** #95 Hide-and-seek · #98 Hotkeys.
 
 ---
 
@@ -47,16 +47,6 @@ order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
 player-facing value (★ = nice to have, ★★★★★ = core missing feature).
 
 **Interface**
-
-## 97. Run summary / milestone timeline
-
-A shareable recap of a run's high points (catches, shinies, badges, first level
-100), beyond the flat Records panel.
-
-- [ ] Record milestone events into a capped timeline.
-- [ ] Render a summary modal + an image export.
-
-Effort: **S**. Gain: ★★★.
 
 ## 98. Rebindable hotkeys
 

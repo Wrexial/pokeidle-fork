@@ -1161,6 +1161,40 @@ async function main() {
     await cdp.screenshot(path.join(OUT, '36-focus-hunt.png'))
     console.log('Focus hunt panel ok')
 
+    // Run Summary (#97): the milestone timeline modal, backfilled from an
+    // older save's notable progress.
+    const summaryBase = minigameSave('kanto', 'route1', 'route1', ['palletTown', 'route1']),
+      summaryPokemon = {
+        ...summaryBase.party[0],
+        id: '100',
+        speciesKey: 'pikachu',
+        name: 'Pikachu',
+        level: 100,
+      }
+    await cdp.eval(
+      `localStorage.setItem('pokemon-idle-save-v2', ${JSON.stringify(
+        JSON.stringify({
+          ...summaryBase,
+          party: [summaryPokemon],
+          playerPokemon: summaryPokemon,
+          pokedexSeen: ['charmander', 'pikachu', 'mewtwo'],
+          pokedexCaught: ['charmander', 'pikachu', 'mewtwo'],
+          shinyCaught: ['pikachu'],
+          defeatedGyms: ['brock', 'misty'],
+        })
+      )}); 'ok'`
+    )
+    await cdp.send('Page.navigate', { url: APP_URL })
+    await cdp.waitFor('window.gameDataDebug.status().loaded === true', 20000, 'summary data')
+    await cdp.eval(
+      `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
+    )
+    await cdp.waitFor(`!!document.querySelector('.run-summary-btn')`, 8000, 'summary button')
+    await cdp.click('.run-summary-btn')
+    await cdp.waitFor(`!!document.querySelector('.run-summary-modal')`, 5000, 'summary modal')
+    await cdp.screenshot(path.join(OUT, '37-run-summary.png'))
+    console.log('Run summary modal ok')
+
     // Region-map overviews: seed each region fully open and capture its map, so
     // road/layout problems are easy to eyeball.
     const regionDefs = JSON.parse(

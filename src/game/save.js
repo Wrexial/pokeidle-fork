@@ -17,6 +17,7 @@ import { isValidHuntTarget } from './hunt.js'
 import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, createEmptyEvs, EV_STAT_ORDER, resolvePokemonMoves, rollAbility, rollMark, rollSize, RIBBONS } from './pokemon.js'
 import { outfitById } from '../data/outfits.js'
 import { titleById } from './titles.js'
+import { backfillMilestones, recordMilestones, sanitizeMilestones } from './milestones.js'
 import { BADGE_CASE_MAX, sanitizeTrainerProfile } from './trainer-profile.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
@@ -1070,13 +1071,8 @@ export function repairSave(saved) {
     trainerProfile = sanitizeTrainerProfile(saved.trainerProfile, {
       pokemonIds: new Set([...party, ...box].map((member) => member.id)),
       gymIds: new Set(defeatedGyms),
-    })
-
-  return {
-    ...initialGameState,
-    phase: saved.nuzlockeGameOver ? 'gameOver' : 'idle',
-    startRegion: fallbackRegion,
-    starterSpeciesKey:
+    }),
+    starterSpeciesKey =
       typeof saved.starterSpeciesKey === 'string'
         ? saved.starterSpeciesKey
         : (Array.isArray(saved.pokedexCaught)
@@ -1084,6 +1080,31 @@ export function repairSave(saved) {
                 (regionalStarters[fallbackRegion] ?? []).includes(key)
               )
             : null) ?? null,
+    savedMilestones = sanitizeMilestones(saved.milestones),
+    // Older saves predate the milestone timeline; rebuild the notable parts
+    // (shinies, legendaries, badges, league wins, level 100s) so the Run
+    // Summary isn't empty for a veteran save.
+    milestones =
+      savedMilestones.length > 0
+        ? savedMilestones
+        : backfillMilestones({
+            starterSpeciesKey,
+            startRegion: fallbackRegion,
+            unlockedRegions,
+            pokedexCaught: [...caughtSet],
+            shinyCaught,
+            defeatedGyms,
+            defeatedEliteFour,
+            defeatedChampions,
+            party,
+            box,
+          })
+
+  return {
+    ...initialGameState,
+    phase: saved.nuzlockeGameOver ? 'gameOver' : 'idle',
+    startRegion: fallbackRegion,
+    starterSpeciesKey,
     playerPokemon: party[0] || playerPokemon,
     currentRoute: safeRoute,
     speed: saved.speed || initialGameState.speed,
@@ -1112,6 +1133,7 @@ export function repairSave(saved) {
           .slice(0, 6),
       })),
     trainerProfile,
+    milestones,
     autoCatch: saved.autoCatch ?? true,
     nextPokemonId: nextId,
     currentLocation: safeLocation,
@@ -1331,7 +1353,7 @@ export function loadSavedState(slot = getActiveSlot() || 1) {
   // by the player's own rules (and spending their balls), so the report can name
   // what was caught.
   const catches = simulateOfflineCatches(rewarded, offlineReward.awayMs)
-  return {
+  const withOffline = {
     ...rewarded,
     ...(simulation
       ? {
@@ -1359,6 +1381,8 @@ export function loadSavedState(slot = getActiveSlot() || 1) {
       ballsUsed: catches?.ballsUsed ?? {},
     },
   }
+  // Offline auto-catches are still run catches, so fold them into the timeline.
+  return recordMilestones(rewarded, withOffline)
 }
 /**
  * The state fields that make up a save. `serializeSave` writes exactly these
@@ -1384,6 +1408,7 @@ export const SAVED_STATE_KEYS = [
   'boxSort',
   'teamPresets',
   'trainerProfile',
+  'milestones',
   'nextPokemonId',
   'currentLocation',
   'unlockedLocations',

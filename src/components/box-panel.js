@@ -6,7 +6,7 @@ import { BOX_PAGE_SIZE, BOX_SORT_DIRECTIONS, BOX_SORT_FIELDS } from '../data/ui.
 import { baseSpeciesKey, isSpeciesRegistered, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { useUi } from '../game/ui-context.js'
-import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, isAlphaPokemon, nextBoxSortField, parseBoxSort, pokemonDisplayName, toggleBoxSortDirection } from '../game/pokemon.js'
+import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, isAlphaPokemon, markTooltip, nextBoxSortField, parseBoxSort, pokemonDisplayName, resolveMark, storedMark, toggleBoxSortDirection } from '../game/pokemon.js'
 import { isFemalePokemon } from '../game/breeding.js'
 import { fuzzyNameMatch, normalizeSearchName, speciesMatchingSearch } from '../game/species-search.js'
 import { itemTooltip } from '../game/progression.js'
@@ -50,6 +50,7 @@ export function BoxPanel({
       return state.box.filter((pokemon) => {
         if (filterMode === 'shiny' && (!pokemon.isShiny || pokemon.isEgg)) return false
         if (filterMode === 'favourite' && !pokemon.favourite) return false
+        if (filterMode === 'mark' && !resolveMark(pokemon)) return false
         if (!needle) return true
         // Never let a search reveal a hidden egg's species.
         if (pokemon.isEgg) return 'egg'.includes(needle)
@@ -215,6 +216,7 @@ export function BoxPanel({
                   { value: 'all', label: 'All' },
                   { value: 'shiny', label: 'Shiny' },
                   { value: 'favourite', label: 'Fav' },
+                  { value: 'mark', label: 'Mark' },
                 ],
                 value: filterMode,
                 onChange: /** @param {string} next */ (next) => {
@@ -309,6 +311,8 @@ export function BoxPanel({
                       : slotIndexAbsolute
                   if (pokemon) {
                     const species = pokemonSpecies[pokemon.speciesKey],
+                      mark = resolveMark(pokemon),
+                      rolledMark = storedMark(pokemon),
                       isInspected = inspected?.source === 'box' && inspected.id === pokemon.id,
                       isDraggingIndex = dragSource === 'box' && boxDragFromIndex === boxIndex,
                       isDropTarget = boxDropTargetIndex === boxIndex && dragSource !== null,
@@ -320,7 +324,8 @@ export function BoxPanel({
                         onClick: () => toggleInspected(pokemon.id),
                         title: pokemon.isEgg
                           ? `Egg \u00b7 hatches in ${pokemon.eggStepsRemaining ?? 0}`
-                          : `${pokemonDisplayName(pokemon)} Lv${pokemon.level}`,
+                          : `${pokemonDisplayName(pokemon)}${mark ? ` ${mark.title}` : ''} Lv${pokemon.level}`,
+                        'data-tooltip': !pokemon.isEgg && mark ? markTooltip(pokemon) : void 0,
                         draggable: isDraggable,
                         onDragStart: isDraggable ? /** @param {React.DragEvent} event */ (event) => onBoxDragStart(event, boxIndex, pokemon.id) : void 0,
                         onDragOver: onBoxSlotDragOver ? /** @param {React.DragEvent} event */ (event) => onBoxSlotDragOver(event, boxIndex) : void 0,
@@ -368,6 +373,13 @@ export function BoxPanel({
                                 className: 'box-alpha-marker',
                                 'data-tooltip': 'Alpha \u2014 a huge specimen (boosts EXP)',
                                 children: '\u2605',
+                              }),
+                            !pokemon.isEgg &&
+                              rolledMark &&
+                              jsx('span', {
+                                className: 'box-mark-marker',
+                                'data-tooltip': markTooltip(pokemon),
+                                children: rolledMark.icon,
                               }),
                           ],
                         }),

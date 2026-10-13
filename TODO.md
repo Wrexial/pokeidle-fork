@@ -38,8 +38,8 @@ number and full detail further down. Promote into the tiers above once scoped.
 - **Medium:** #85 Form dex · #89 Mystery Gift ·
   #90 Professor's story · #91 Auto-battle policy · #92 Raid events ·
   #93 Tower ladders · #96 Berry market.
-- **Quick wins:** #84 Marks ·
-  #94 Dowsing Machine · #95 Hide-and-seek · #97 Run summary · #98 Hotkeys.
+- **Quick wins:** #94 Dowsing Machine · #95 Hide-and-seek ·
+  #97 Run summary · #98 Hotkeys.
 
 ---
 
@@ -50,17 +50,6 @@ order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
 player-facing value (★ = nice to have, ★★★★★ = core missing feature).
 
 **Meta, collection & customization**
-
-## 84. Pokemon marks
-
-Random per-individual marks with titles (Sleepy, Lunchtime, Alpha, Shiny), like
-Gen 8. Cheap collection flavour.
-
-- [ ] Roll a mark in `src/game/pokemon/creation.js` against a small table.
-- [ ] Show the mark + title on the stats panel and in the Box.
-- [ ] Add a `mark:` filter/sort to the Box.
-
-Effort: **S**. Gain: ★★.
 
 ## 85. Living form-dex + completion rewards
 

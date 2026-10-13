@@ -304,6 +304,7 @@ export const BOX_SORT_FIELDS = [
   { value: 'name', label: 'A-Z', defaultDirection: 'asc' },
   { value: 'shiny', label: '\u2605', defaultDirection: 'desc' },
   { value: 'newest', label: 'New', defaultDirection: 'desc' },
+  { value: 'mark', label: 'Mark', defaultDirection: 'desc' },
 ]
 
 export const BOX_SORT_DIRECTIONS = [

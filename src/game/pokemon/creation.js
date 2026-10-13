@@ -6,6 +6,7 @@ import { BOX_SORT_FIELDS } from '../../data/ui.js'
 import { resolvePokemonMoves } from './evolution.js'
 import { calculateRequiredExperience } from './exp.js'
 import { BASE_FRIENDSHIP } from './friendship.js'
+import { resolveMark, rollMark } from './marks.js'
 import { rollSize } from './sizes.js'
 import { IV_STAT_ORDER, calculatePokemonStats, createEmptyEvs, generateIVs } from './stats.js'
 
@@ -120,6 +121,8 @@ export function createPokemon(speciesKey, level, id, isShiny = !1, inheritance) 
     gmax: false,
     // Per-individual size (0-255), mapped to an XS-XL rating for display.
     size: inheritance?.size ?? rollSize(),
+    // Per-individual personality mark, or null for the common unmarked case.
+    mark: rollMark(),
     ...(inheritedEggMoves.length > 0 ? { eggMoves: [...new Set(inheritedEggMoves)] } : {}),
   }
 }
@@ -175,6 +178,14 @@ export function sortBoxMembers(box, mode = 'dex') {
     byName = (left, right) => speciesName(left).localeCompare(speciesName(right)),
     /** @type {(left: Pokemon, right: Pokemon) => number} */
     byShiny = (left, right) => (left.isShiny === right.isShiny ? 0 : left.isShiny ? -1 : 1),
+    // Marked first, then by title, so the collectible titles group together.
+    /** @type {(left: Pokemon, right: Pokemon) => number} */
+    byMark = (left, right) => {
+      const leftMark = resolveMark(left),
+        rightMark = resolveMark(right)
+      if (!!leftMark !== !!rightMark) return leftMark ? 1 : -1
+      return (leftMark?.title ?? '').localeCompare(rightMark?.title ?? '')
+    },
     // Ascending is normal-first; descending is shiny-first.
     /** @type {(left: Pokemon, right: Pokemon) => number} */
     byShinyAsc = (left, right) => Number(left.isShiny) - Number(right.isShiny),
@@ -196,6 +207,7 @@ export function sortBoxMembers(box, mode = 'dex') {
       name: byName,
       shiny: byShinyAsc,
       newest: byNewest,
+      mark: byMark,
     },
     fieldComparator = fields[field] ?? byDex,
     sign = direction === 'desc' ? -1 : 1,

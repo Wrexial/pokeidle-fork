@@ -2222,6 +2222,17 @@ img {
     z-index: 2
 }
 
+.box-mark-marker {
+    position: absolute;
+    right: -2px;
+    top: -3px;
+    font-size: 10px;
+    line-height: 1;
+    text-shadow: 0 0 2px #000, 0 0 3px #000;
+    pointer-events: none;
+    z-index: 2
+}
+
 .party-info {
     flex: 1;
     min-width: 0
@@ -2658,6 +2669,21 @@ img {
     background: linear-gradient(#2a4a7a,#1a2a4a);
     border: 1px solid #60a0e0;
     padding: 1px 6px
+}
+
+.stats-panel-mark {
+    font-size: 8px;
+    font-weight: 700;
+    color: #fff3d0;
+    background: linear-gradient(#7a5a2a,#4a3618);
+    border: 1px solid #d8b060;
+    padding: 1px 6px
+}
+
+.stats-panel-mark.rare {
+    color: #fff;
+    border-color: #7ce0ff;
+    box-shadow: 0 0 4px #7ce0ff
 }
 
 .stats-panel-gmax {

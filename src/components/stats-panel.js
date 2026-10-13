@@ -23,7 +23,7 @@ import { moveTooltip } from '../game/move-info.js'
 import { itemTooltip } from '../game/progression.js'
 import { useGame } from '../game/context.js'
 import { genderForPokemon, genderSymbol, isFemalePokemon } from '../game/breeding.js'
-import { abilityDisplayName, formatHeight, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, isAlphaPokemon, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, pokemonDisplayName, sizeHeight, sizeRating, sizeTooltip, totalEvs } from '../game/pokemon.js'
+import { abilityDisplayName, formatHeight, getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, isAlphaPokemon, IV_STAT_LABELS, IV_STAT_ORDER, judgeIVs, markTooltip, pokemonDisplayName, resolveMark, sizeHeight, sizeRating, sizeTooltip, totalEvs } from '../game/pokemon.js'
 import { MoveManagerPanel } from './move-manager-panel.js'
 import { RibbonCase } from './ribbon-case.js'
 
@@ -49,6 +49,7 @@ export function StatsPanel({
     nature = pokemon.nature ? natureByKey[pokemon.nature] : null,
     friendship = pokemon.friendship ?? 70,
     ivJudge = judgeIVs(pokemon.ivs),
+    mark = resolveMark(pokemon),
     [editingName, setEditingName] = React.useState(!1),
     [nameDraft, setNameDraft] = React.useState(''),
     natureEffect = /** @param {string} statKey @returns {1 | -1 | 0} */ (statKey) =>
@@ -373,6 +374,13 @@ export function StatsPanel({
                       title: 'Ability',
                       'data-tooltip': abilityTooltip(pokemon.ability),
                       children: abilityDisplayName(pokemon.ability),
+                    }),
+                  mark &&
+                    jsx('span', {
+                      className: `stats-panel-mark${mark.id === 'rare' ? ' rare' : ''}`,
+                      title: 'Mark',
+                      'data-tooltip': markTooltip(pokemon),
+                      children: `${mark.icon} ${mark.title}`,
                     }),
                   // Only species with a Gigantamax form get the marker; it lights
                   // up once the Pokemon has eaten a Max Mushroom.

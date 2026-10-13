@@ -100,6 +100,8 @@ type Pokemon = BattlePokemon & {
   eggMoves?: string[]
   /** Per-individual size (0-255), shown as an XS-XL rating (see game/pokemon/sizes.js). */
   size?: number
+  /** Per-individual personality mark id from creation (see game/pokemon/marks.js), or null/unset for none. */
+  mark?: string | null
   /** Ribbon ids this individual has earned (see game/ribbons.js). */
   ribbons?: string[]
   isShiny: boolean

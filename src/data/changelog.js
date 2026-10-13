@@ -30,6 +30,7 @@ export const CHANGELOG = [
         items: [
           'Every Pokemon has a size now, rolled per individual like its IVs and shown beside them as an XS–XL rating on the stats panel. Every species carries its real height, so the roll is scaled into a physical size — the chip and tooltip show how tall the individual stands (a Wailord and a Diglett keep their own scales instead of sharing one). The very largest specimens are alphas and are flagged ★ ALPHA; they earn 20% more EXP from every battle, are marked ★ in the Box, and older saves get a size rolled in on load.',
           'Real field evolutions are in: some Pokemon now evolve only in the right place or moment. Eevee becomes Leafeon near a Moss Rock (any forest) and Glaceon near an Ice Rock (any tundra), Magneton and Nosepass reach Magnezone and Probopass in a cave’s Magnetic Field, and Sliggoo (including Hisuian Sliggoo) only becomes Goodra while it is raining. The party and box evolve buttons name the requirement, so you always know where to head.',
+          'Pokemon can carry a personality mark now, a little title they keep for life. A newly obtained individual has a small chance to roll one — “the Sleepy”, “the Rowdy”, “the Charismatic” and more — and the rare Recluse mark is much harder to find. A shiny or alpha that did not roll one is titled “the Shiny” or “the Alpha” instead. The mark and its title show on the stats panel and in the Box, and the Box can sort by mark or filter to marked Pokemon only.',
         ],
       },
       {

@@ -1,4 +1,4 @@
-// The Mystery Gift panel: rotating, date-gated Wonder Card distributions plus
+// The Mystery Gift panel: rotating, battle-gated Wonder Card distributions plus
 // offline redeem codes. Opened from the top-bar ticket button.
 
 import React from 'react'
@@ -16,6 +16,15 @@ import {
 } from '../game/gifts.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { ItemIcon } from './item-icon.js'
+
+/**
+ * A battle threshold for display, e.g. 1250 -> '1,250'.
+ * @param {number | null | undefined} battles
+ * @returns {string}
+ */
+function battleCountLabel(battles) {
+  return battles == null ? '' : battles.toLocaleString()
+}
 
 /** @param {{ speciesKey: string, alt: string, className?: string }} props */
 function GiftSprite({ speciesKey, alt, className }) {
@@ -70,7 +79,7 @@ function WonderCard({ gift, status, compact, onClaim }) {
               children: status.claimed
                 ? `Received \u00b7 OT ${gift.ot}`
                 : !status.unlocked
-                  ? `Opens ${status.unlockDate}`
+                  ? `Unlocks at ${battleCountLabel(status.unlockBattles)} battles`
                   : `${gift.distribution} \u00b7 OT ${gift.ot}`,
             }),
             !compact && jsx('div', { className: 'mystery-card-desc', children: gift.description }),
@@ -88,7 +97,9 @@ function WonderCard({ gift, status, compact, onClaim }) {
                   })
                 : jsx('div', {
                     className: 'mystery-card-badge locked',
-                    children: status.unlocked ? 'LOCKED' : `OPENS ${status.unlockDate}`,
+                    children: status.unlocked
+                      ? 'LOCKED'
+                      : `UNLOCKS AT ${battleCountLabel(status.unlockBattles)} BATTLES`,
                   }),
           ],
         }),
@@ -105,8 +116,8 @@ export function MysteryGiftModal({ onClose }) {
     [message, setMessage] = React.useState(
       /** @type {{ tone: string, text: string } | null} */ (null)
     ),
-    featured = featuredMysteryGift(),
-    upcoming = nextMysteryGift(),
+    featured = featuredMysteryGift(state),
+    upcoming = nextMysteryGift(state),
     claimable = claimableMysteryGifts(state),
     claimed = new Set(state.claimedGifts ?? []),
     // A claimed code gift joins the archive; unredeemed codes stay hidden.
@@ -158,7 +169,7 @@ export function MysteryGiftModal({ onClose }) {
                     jsx('div', {
                       className: 'mystery-gift-section-title',
                       children: headlineStatus.featured
-                        ? 'This Week\u2019s Wonder Card'
+                        ? 'Latest Wonder Card'
                         : 'Wonder Card',
                     }),
                     jsx(WonderCard, { gift: headline, status: headlineStatus, onClaim: claim }),
@@ -173,7 +184,7 @@ export function MysteryGiftModal({ onClose }) {
               : jsx('p', {
                   className: 'mystery-gift-empty',
                   children: upcoming
-                    ? `The next distribution opens ${upcoming.date}.`
+                    ? `The next card unlocks at ${battleCountLabel(upcoming.battles)} battles.`
                     : 'No Mystery Gift is available right now.',
                 }),
             jsxs('div', {
@@ -206,7 +217,9 @@ export function MysteryGiftModal({ onClose }) {
             upcoming &&
               jsx('div', {
                 className: 'mystery-gift-next',
-                children: `Next distribution: ${upcoming.gift.name} on ${upcoming.date}`,
+                children: `Next card: ${upcoming.gift.name} at ${battleCountLabel(
+                  upcoming.battles
+                )} battles`,
               }),
             jsx('div', { className: 'mystery-gift-section-title', children: 'Wonder Card Album' }),
             jsx('div', {

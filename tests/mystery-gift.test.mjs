@@ -8,14 +8,16 @@ const gameData = installGameData()
 const {
   MYSTERY_GIFTS,
   MYSTERY_GIFT_ROTATION,
+  MYSTERY_GIFT_BATTLE_STEP,
   claimableMysteryGifts,
   featuredMysteryGift,
   findMysteryGift,
   findMysteryGiftByCode,
   giftRewardLabel,
+  mysteryGiftProgress,
   mysteryGiftStatus,
+  mysteryGiftUnlockBattles,
   mysteryGiftUnlocked,
-  mysteryGiftWeek,
   nextMysteryGift,
 } = await import('../src/game/gifts.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
@@ -24,6 +26,14 @@ const { consumableItems, evolutionItems, fossilItems, heldItems, pokeBalls } = a
 )
 
 const { pokemonSpecies } = gameData
+
+/** A fresh state with a given number of total battles won. @param {number} battles */
+const stateWithBattles = (battles) => ({
+  ...initialGameState,
+  claimedGifts: [],
+  wildBattlesWon: battles,
+  trainerBattlesWon: 0,
+})
 
 test('every mystery gift is real data with unique ids and codes', () => {
   const ids = new Set(),
@@ -65,37 +75,43 @@ test('find helpers resolve gifts and codes', () => {
   assert.equal(findMysteryGiftByCode('nope'), null)
 })
 
-test('the weekly rotation unlocks one gift per period', () => {
+test('the battle rotation unlocks one gift per threshold', () => {
   const first = MYSTERY_GIFT_ROTATION[0],
-    second = MYSTERY_GIFT_ROTATION[1]
-  assert.equal(mysteryGiftWeek('2026-10-05'), 0)
-  assert.equal(mysteryGiftWeek('2026-10-11'), 0, 'the week runs to Sunday')
-  assert.equal(mysteryGiftWeek('2026-10-12'), 1)
-  assert.equal(featuredMysteryGift('2026-10-05')?.id, first.id)
-  assert.equal(featuredMysteryGift('2026-10-12')?.id, second.id)
-  assert.equal(mysteryGiftUnlocked(first, '2026-10-05'), true)
-  assert.equal(mysteryGiftUnlocked(second, '2026-10-05'), false, 'next week is locked')
-  assert.equal(mysteryGiftUnlocked(second, '2026-10-12'), true)
-  assert.equal(featuredMysteryGift('2026-09-28'), null, 'before launch nothing is featured')
-  assert.equal(mysteryGiftUnlocked(first, '2026-09-28'), false)
-  const next = nextMysteryGift('2026-10-05')
+    second = MYSTERY_GIFT_ROTATION[1],
+    idle = stateWithBattles(0),
+    afterOne = stateWithBattles(MYSTERY_GIFT_BATTLE_STEP),
+    afterTwo = stateWithBattles(MYSTERY_GIFT_BATTLE_STEP * 2)
+  assert.equal(mysteryGiftProgress(idle), 0, 'no card opens before the first step')
+  assert.equal(mysteryGiftProgress(afterOne), 1)
+  assert.equal(mysteryGiftProgress(afterTwo), 2)
+  assert.equal(featuredMysteryGift(idle), null, 'nothing is featured before the first step')
+  assert.equal(mysteryGiftUnlocked(first, idle), false)
+  assert.equal(mysteryGiftUnlocked(first, afterOne), true)
+  assert.equal(mysteryGiftUnlocked(second, afterOne), false, 'the next card is still locked')
+  assert.equal(mysteryGiftUnlocked(second, afterTwo), true)
+  assert.equal(featuredMysteryGift(afterOne)?.id, first.id)
+  assert.equal(featuredMysteryGift(afterTwo)?.id, second.id)
+  assert.equal(mysteryGiftUnlockBattles(first), MYSTERY_GIFT_BATTLE_STEP)
+  assert.equal(mysteryGiftUnlockBattles(second), MYSTERY_GIFT_BATTLE_STEP * 2)
+  const next = nextMysteryGift(afterOne)
   assert.equal(next?.gift.id, second.id)
-  assert.equal(next?.date, '2026-10-12')
+  assert.equal(next?.battles, MYSTERY_GIFT_BATTLE_STEP * 2)
+  assert.equal(nextMysteryGift(idle)?.battles, MYSTERY_GIFT_BATTLE_STEP)
 })
 
 test('the code gifts are always unlocked', () => {
   const codeGift = MYSTERY_GIFTS.find((gift) => gift.code)
   assert.ok(codeGift)
-  assert.equal(mysteryGiftUnlocked(codeGift, '2020-01-01'), true)
-  assert.equal(mysteryGiftStatus(initialGameState, codeGift, '2020-01-01').unlocked, true)
+  assert.equal(mysteryGiftUnlocked(codeGift, stateWithBattles(0)), true)
+  assert.equal(mysteryGiftStatus(stateWithBattles(0), codeGift).unlocked, true)
 })
 
 test('claiming the featured gift hands over the Pokemon once', () => {
   const gift = MYSTERY_GIFT_ROTATION[0],
-    claimed = gameReducer(
-      { ...initialGameState, claimedGifts: [] },
-      { type: 'CLAIM_MYSTERY_GIFT', payload: { giftId: gift.id, dateKey: '2026-10-05' } }
-    ),
+    claimed = gameReducer(stateWithBattles(MYSTERY_GIFT_BATTLE_STEP), {
+      type: 'CLAIM_MYSTERY_GIFT',
+      payload: { giftId: gift.id },
+    }),
     member = [...claimed.party, ...claimed.box].find(
       (pokemon) => pokemon.speciesKey === gift.pokemon.speciesKey
     )
@@ -105,23 +121,26 @@ test('claiming the featured gift hands over the Pokemon once', () => {
   assert.ok(claimed.pokedexCaught.includes(gift.pokemon.speciesKey))
   const twice = gameReducer(claimed, {
     type: 'CLAIM_MYSTERY_GIFT',
-    payload: { giftId: gift.id, dateKey: '2026-10-05' },
+    payload: { giftId: gift.id },
   })
   assert.equal(twice.claimedGifts.filter((id) => id === gift.id).length, 1, 'claimed only once')
 })
 
-test('a gift is refused before its distribution opens', () => {
+test('a gift is refused before its battle threshold', () => {
   const locked = MYSTERY_GIFT_ROTATION[1],
-    before = gameReducer(
-      { ...initialGameState, claimedGifts: [] },
-      { type: 'CLAIM_MYSTERY_GIFT', payload: { giftId: locked.id, dateKey: '2026-10-05' } }
-    ),
-    after = gameReducer(
-      { ...initialGameState, claimedGifts: [] },
-      { type: 'CLAIM_MYSTERY_GIFT', payload: { giftId: locked.id, dateKey: '2026-10-12' } }
-    )
-  assert.ok(!(before.claimedGifts ?? []).includes(locked.id), 'locked before its week')
-  assert.ok((after.claimedGifts ?? []).includes(locked.id), 'open in its week')
+    before = gameReducer(stateWithBattles(0), {
+      type: 'CLAIM_MYSTERY_GIFT',
+      payload: { giftId: locked.id },
+    }),
+    after = gameReducer(stateWithBattles(MYSTERY_GIFT_BATTLE_STEP * 2), {
+      type: 'CLAIM_MYSTERY_GIFT',
+      payload: { giftId: locked.id },
+    })
+  assert.ok(!(before.claimedGifts ?? []).includes(locked.id), 'locked before its threshold')
+  assert.ok(
+    (after.claimedGifts ?? []).includes(locked.id),
+    'open once the threshold is reached'
+  )
 })
 
 test('an offline code redeems its bundle', () => {
@@ -141,12 +160,12 @@ test('an offline code redeems its bundle', () => {
 })
 
 test('claimableMysteryGifts tracks opened, unclaimed cards', () => {
-  const open = claimableMysteryGifts({ ...initialGameState, claimedGifts: [] }, '2026-10-05')
+  const open = claimableMysteryGifts(stateWithBattles(MYSTERY_GIFT_BATTLE_STEP))
   assert.ok(open.some((gift) => gift.id === MYSTERY_GIFT_ROTATION[0].id))
-  assert.ok(!open.some((gift) => gift.id === MYSTERY_GIFT_ROTATION[1].id), 'next week is not open')
-  const afterClaim = claimableMysteryGifts(
-    { ...initialGameState, claimedGifts: [MYSTERY_GIFT_ROTATION[0].id] },
-    '2026-10-05'
-  )
+  assert.ok(!open.some((gift) => gift.id === MYSTERY_GIFT_ROTATION[1].id), 'next card is not open')
+  const afterClaim = claimableMysteryGifts({
+    ...stateWithBattles(MYSTERY_GIFT_BATTLE_STEP),
+    claimedGifts: [MYSTERY_GIFT_ROTATION[0].id],
+  })
   assert.ok(!afterClaim.some((gift) => gift.id === MYSTERY_GIFT_ROTATION[0].id))
 })

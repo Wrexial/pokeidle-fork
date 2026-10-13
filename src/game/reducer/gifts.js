@@ -114,7 +114,7 @@ export function claimMysteryGift(state, action) {
       ? findMysteryGift(payload.giftId)
       : findMysteryGiftByCode(payload.code)
   if (!gift) return state
-  const status = mysteryGiftStatus(state, gift, payload.dateKey)
+  const status = mysteryGiftStatus(state, gift)
   if (!status.unlocked || status.claimed || !status.met) return state
   const next = applyGiftReward(state, gift),
     reward = giftRewardLabel(gift)

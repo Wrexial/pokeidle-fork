@@ -6,7 +6,6 @@
 
 import { gymLeaderData, mapData, pokemonSpecies, regions } from '../data/gameData.js'
 import { regionalStarters } from '../data/config.js'
-import { todayKey } from '../data/daily-events.js'
 import { rewardItemName } from './minigames/mining.js'
 
 /**
@@ -447,10 +446,11 @@ export function giftRewardLabel(gift) {
 
 // --- Mystery Gifts (rotating Wonder Card distributions) ---------------------
 //
-// Rotating, date-gated Mythical distributions in the Wonder Card style. Each
-// rotation gift opens on a weekly schedule (MYSTERY_GIFT_PERIOD_DAYS) and stays
-// claimable once its week arrives, so a player who is away never loses a
-// distribution. Offline "codes" are matched against the same table; there is no
+// Rotating, battle-gated Mythical distributions in the Wonder Card style. Each
+// rotation gift opens once the player has won enough total battles (one card per
+// MYSTERY_GIFT_BATTLE_STEP) and stays claimable once its threshold is reached,
+// so an idle player unlocks the next card by playing, not by waiting for the
+// calendar. Offline "codes" are matched against the same table; there is no
 // backend, so a code is just a shared string (a signed variant could be added
 // later without changing the panel).
 
@@ -671,94 +671,75 @@ export const MYSTERY_GIFTS = [
   },
 ]
 
-const MS_PER_DAY = 24 * 60 * 60 * 1000
-
-/** The Monday the distribution schedule opens (rotation index 0). */
-export const MYSTERY_GIFT_EPOCH = '2026-10-05'
-
-/** How long each weekly distribution stays the featured one. */
-export const MYSTERY_GIFT_PERIOD_DAYS = 7
+/** How many total battles open each successive Wonder Card. */
+export const MYSTERY_GIFT_BATTLE_STEP = 250
 
 /** The rotation gifts, in schedule order (code gifts are excluded). */
 export const MYSTERY_GIFT_ROTATION = MYSTERY_GIFTS.filter((gift) => !gift.code)
 
-/** @param {string} dateKey @returns {number} */
-function dateKeyToDayNumber(dateKey) {
-  const [year, month, day] = dateKey.split('-').map(Number)
-  return Math.floor(Date.UTC(year, month - 1, day) / MS_PER_DAY)
-}
-
-/** @param {number} dayNumber @returns {string} */
-function dayNumberToDateKey(dayNumber) {
-  const date = new Date(dayNumber * MS_PER_DAY)
-  return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}-${String(
-    date.getUTCDate()
-  ).padStart(2, '0')}`
-}
-
 /**
- * The rotation index for a date (week 0 is MYSTERY_GIFT_EPOCH).
- * @param {string} [dateKey]
+ * The player's total battles won (wild + trainer), the pace of the rotation.
+ * @param {GameState} [state]
  * @returns {number}
  */
-export function mysteryGiftWeek(dateKey = todayKey()) {
-  return Math.floor(
-    (dateKeyToDayNumber(dateKey) - dateKeyToDayNumber(MYSTERY_GIFT_EPOCH)) /
-      MYSTERY_GIFT_PERIOD_DAYS
-  )
+export function mysteryGiftBattleCount(state) {
+  return (state?.wildBattlesWon ?? 0) + (state?.trainerBattlesWon ?? 0)
 }
 
 /**
- * The date a rotation gift opens, or null for a code gift.
- * @param {MysteryGiftEntry} gift
- * @returns {string | null}
+ * How many rotation cards the player has opened. Each `MYSTERY_GIFT_BATTLE_STEP`
+ * total battles opens one more; the first card opens at the first step.
+ * @param {GameState} [state]
+ * @returns {number}
  */
-export function mysteryGiftUnlockDate(gift) {
+export function mysteryGiftProgress(state) {
+  return Math.floor(mysteryGiftBattleCount(state) / MYSTERY_GIFT_BATTLE_STEP)
+}
+
+/**
+ * The total battles a rotation gift opens at, or null for a code gift.
+ * @param {MysteryGiftEntry} gift
+ * @returns {number | null}
+ */
+export function mysteryGiftUnlockBattles(gift) {
   const index = MYSTERY_GIFT_ROTATION.indexOf(gift)
   if (index < 0) return null
-  return dayNumberToDateKey(
-    dateKeyToDayNumber(MYSTERY_GIFT_EPOCH) + index * MYSTERY_GIFT_PERIOD_DAYS
-  )
+  return (index + 1) * MYSTERY_GIFT_BATTLE_STEP
 }
 
 /**
  * Whether a gift's distribution has opened. Codes are always open.
  * @param {MysteryGiftEntry} gift
- * @param {string} [dateKey]
+ * @param {GameState} [state]
  * @returns {boolean}
  */
-export function mysteryGiftUnlocked(gift, dateKey = todayKey()) {
+export function mysteryGiftUnlocked(gift, state) {
   if (gift.code) return true
   const index = MYSTERY_GIFT_ROTATION.indexOf(gift)
-  return index >= 0 && mysteryGiftWeek(dateKey) >= index
+  return index >= 0 && mysteryGiftProgress(state) > index
 }
 
 /**
- * The gift featured this period (the newest to open), or null before launch.
- * @param {string} [dateKey]
+ * The gift featured now (the newest to open), or null before the first step.
+ * @param {GameState} [state]
  * @returns {MysteryGiftEntry | null}
  */
-export function featuredMysteryGift(dateKey = todayKey()) {
-  const week = mysteryGiftWeek(dateKey)
-  if (week < 0) return null
-  return MYSTERY_GIFT_ROTATION[Math.min(week, MYSTERY_GIFT_ROTATION.length - 1)] ?? null
+export function featuredMysteryGift(state) {
+  const progress = mysteryGiftProgress(state)
+  if (progress <= 0) return null
+  return MYSTERY_GIFT_ROTATION[Math.min(progress - 1, MYSTERY_GIFT_ROTATION.length - 1)] ?? null
 }
 
 /**
- * The next rotation gift that has not opened yet, with its open date.
- * @param {string} [dateKey]
- * @returns {{ gift: MysteryGiftEntry, date: string } | null}
+ * The next rotation gift that has not opened yet, with its battle threshold.
+ * @param {GameState} [state]
+ * @returns {{ gift: MysteryGiftEntry, battles: number } | null}
  */
-export function nextMysteryGift(dateKey = todayKey()) {
-  const index = mysteryGiftWeek(dateKey) + 1,
+export function nextMysteryGift(state) {
+  const index = mysteryGiftProgress(state),
     gift = MYSTERY_GIFT_ROTATION[index]
   if (!gift) return null
-  return {
-    gift,
-    date: dayNumberToDateKey(
-      dateKeyToDayNumber(MYSTERY_GIFT_EPOCH) + index * MYSTERY_GIFT_PERIOD_DAYS
-    ),
-  }
+  return { gift, battles: (index + 1) * MYSTERY_GIFT_BATTLE_STEP }
 }
 
 /** @param {string} giftId @returns {MysteryGiftEntry | null} */
@@ -781,11 +762,10 @@ export function findMysteryGiftByCode(code) {
  * The panel status for one Mystery Gift card.
  * @param {GameState} state
  * @param {MysteryGiftEntry} gift
- * @param {string} [dateKey]
  */
-export function mysteryGiftStatus(state, gift, dateKey = todayKey()) {
+export function mysteryGiftStatus(state, gift) {
   const claimed = (state.claimedGifts ?? []).includes(gift.id),
-    unlocked = mysteryGiftUnlocked(gift, dateKey),
+    unlocked = mysteryGiftUnlocked(gift, state),
     requirement = entryRequirementStatus(state, { ...gift, location: '' })
   return {
     claimed,
@@ -793,8 +773,8 @@ export function mysteryGiftStatus(state, gift, dateKey = todayKey()) {
     met: requirement.met,
     requirements: requirement.requirements,
     claimable: unlocked && !claimed && requirement.met,
-    featured: gift.code ? false : featuredMysteryGift(dateKey)?.id === gift.id,
-    unlockDate: gift.code ? null : mysteryGiftUnlockDate(gift),
+    featured: gift.code ? false : featuredMysteryGift(state)?.id === gift.id,
+    unlockBattles: gift.code ? null : mysteryGiftUnlockBattles(gift),
   }
 }
 
@@ -802,11 +782,8 @@ export function mysteryGiftStatus(state, gift, dateKey = todayKey()) {
  * Every rotation gift the player could claim right now. Code gifts are left
  * out (they only surface once redeemed, so they never light the badge).
  * @param {GameState} state
- * @param {string} [dateKey]
  * @returns {MysteryGiftEntry[]}
  */
-export function claimableMysteryGifts(state, dateKey = todayKey()) {
-  return MYSTERY_GIFT_ROTATION.filter(
-    (gift) => mysteryGiftStatus(state, gift, dateKey).claimable
-  )
+export function claimableMysteryGifts(state) {
+  return MYSTERY_GIFT_ROTATION.filter((gift) => mysteryGiftStatus(state, gift).claimable)
 }

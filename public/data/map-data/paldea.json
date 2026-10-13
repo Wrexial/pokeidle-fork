@@ -90,7 +90,8 @@
   "region": "paldea",
   "description": "A town in the Paldea region.",
   "connections": [
-   "paldea-area-zero"
+   "paldea-area-zero",
+   "paldea-star-hideout"
   ],
   "unlock": {
    "requires": [
@@ -2154,5 +2155,27 @@
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.webp"
+ },
+ "paldea-star-hideout": {
+  "id": "paldea-star-hideout",
+  "name": "Star Base",
+  "type": "hideout",
+  "description": "A hidden Team Star base on the edge of Mesagoza, fortified with a battle-hungry squad.",
+  "connections": [
+   "paldea-mesagoza"
+  ],
+  "unlock": {
+   "badgesRequired": 4,
+   "requires": [
+    "paldea-mesagoza"
+   ]
+  },
+  "unlockOrder": 910007.5,
+  "position": {
+   "x": 54.74,
+   "y": 74.54
+  },
+  "region": "paldea",
+  "biome": "grassland"
  }
 }

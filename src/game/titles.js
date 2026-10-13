@@ -77,6 +77,13 @@ export const RIBBON_TITLES = [
     check: (context) => context.has('research'),
   },
   {
+    id: 'ribbon:villain',
+    name: 'Villain Vanquisher',
+    description: 'Dismantle a region\u2019s villain organisation.',
+    check: (context) =>
+      [...context.distinctRibbons].some((id) => id.startsWith('villain-')),
+  },
+  {
     id: 'ribbon:towerTitan',
     name: 'Tower Titan',
     description: `Earn a ${RIBBONS.tower.name}.`,

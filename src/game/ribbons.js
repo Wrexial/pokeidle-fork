@@ -3,6 +3,7 @@
 // and travels with the individual.
 
 import { regions } from '../data/gameData.js'
+import { VILLAIN_ORGS } from '../data/villain-teams.js'
 import { MAX_FRIENDSHIP } from './pokemon/friendship.js'
 
 /**
@@ -92,6 +93,15 @@ for (const region of regions)
     name: `${region.name} League Ribbon`,
     description: `Helped beat the ${region.name} Champion.`,
     icon: '\u{1f451}',
+  }
+
+// One ribbon per region's villain arc, earned by dismantling its organisation.
+for (const [regionId, org] of Object.entries(VILLAIN_ORGS))
+  RIBBONS[org.reward.ribbon] = {
+    id: org.reward.ribbon,
+    name: `${org.name} Ribbon`,
+    description: `Dismantled ${org.name} in the ${regionId} hideout.`,
+    icon: '\u{1f3f4}',
   }
 
 /**

@@ -180,6 +180,8 @@ export const initialGameState = {
   defeatedChampions: [],
   /** Rival battles won per region (see game/rival.js). */
   rivals: {},
+  /** Villain-arc stages beaten per region (see game/villain-teams.js). */
+  villainProgress: {},
   /** Generation indices (0-based) whose dex-completion reward has been paid. */
   rewardedGenerations: [],
   /** Base species keys whose living form-dex family reward has been paid. */

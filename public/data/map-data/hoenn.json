@@ -1045,7 +1045,8 @@
   "description": "A town in the Hoenn region.",
   "connections": [
    "hoenn-route-124",
-   "hoenn-route-121"
+   "hoenn-route-121",
+   "hoenn-aqua-hideout"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2081,5 +2082,27 @@
   },
   "background": "/backgrounds/mountain.webp",
   "biome": "mountain"
+ },
+ "hoenn-aqua-hideout": {
+  "id": "hoenn-aqua-hideout",
+  "name": "Aqua Hideout",
+  "type": "hideout",
+  "description": "A cavern off Lilycove hides Team Aqua watercraft and the sub that will flood the world.",
+  "connections": [
+   "hoenn-lilycove-city"
+  ],
+  "unlock": {
+   "badgesRequired": 3,
+   "requires": [
+    "hoenn-lilycove-city"
+   ]
+  },
+  "unlockOrder": 300122,
+  "position": {
+   "x": 74.33,
+   "y": 37
+  },
+  "region": "hoenn",
+  "biome": "grassland"
  }
 }

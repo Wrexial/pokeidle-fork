@@ -18751,3 +18751,59 @@ img {
     color: #5a4838;
     padding: 6px
 }
+
+/* Villain-team hideout panel: the org header, progress and arc reward. */
+.villain-panel .villain-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px
+}
+
+.villain-boss-sprite {
+    width: 48px;
+    height: 48px;
+    image-rendering: pixelated;
+    flex: 0 0 auto
+}
+
+.villain-head-text {
+    min-width: 0
+}
+
+.villain-tagline {
+    font-size: 8px;
+    font-style: italic;
+    line-height: 1.5;
+    color: #5a4838;
+    margin-top: 2px
+}
+
+.villain-progress {
+    font-size: 8px;
+    font-weight: 700;
+    color: #7a3a1a;
+    margin: 2px 0 4px
+}
+
+.villain-done {
+    margin-top: 6px;
+    padding: 6px 8px;
+    background: #c08a2a26;
+    border: 1px solid #c08a2a88;
+    border-radius: 4px
+}
+
+.villain-done-line {
+    font-size: 8px;
+    font-style: italic;
+    line-height: 1.5;
+    color: #3a2818
+}
+
+.villain-reward {
+    font-size: 8px;
+    font-weight: 700;
+    color: #7a3a1a;
+    margin-top: 4px
+}

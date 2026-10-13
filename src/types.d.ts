@@ -828,6 +828,8 @@ type GameState = {
   defeatedChampions: string[]
   /** Rival battles won per region (see game/rival.js). */
   rivals: Record<string, number>
+  /** Villain-arc stages beaten per region (see game/villain-teams.js). */
+  villainProgress: Record<string, number>
   /** Generation indices (0-based) whose dex-completion reward has been paid. */
   rewardedGenerations: number[]
   /** Base species keys whose living form-dex family reward has been paid. */
@@ -1000,6 +1002,49 @@ type MapLocation = {
   unlockOrder: number
   position: { x: number; y: number }
   [key: string]: any
+}
+
+/** The hideout map node a villain org lives in. `parent` is the town the road
+ * connects to; `badgeGate` is how many regional badges open the entrance. */
+type VillainHideout = {
+  id: string
+  name: string
+  parent: string
+  description: string
+  badgeGate: number
+}
+
+/** An admin or boss: a named trainer with a signature Pokemon and a sprite. */
+type VillainOfficer = {
+  name: string
+  title: string
+  spriteKey: string
+  signature: string
+}
+
+/** One region's antagonist organisation and its short arc. */
+type VillainOrg = {
+  region: string
+  id: string
+  name: string
+  tagline: string
+  hideout: VillainHideout
+  gruntClass: string
+  gruntLines: string[]
+  adminLines: string[]
+  bossLines: string[]
+  win: string
+  lose: string
+  admin: VillainOfficer
+  boss: VillainOfficer & { legendary: string }
+  level: number
+  types: string[]
+  reward: {
+    money: number
+    victoryTokens: number
+    items: Record<string, number>
+    ribbon: string
+  }
 }
 
 /** The current surroundings a field evolution gate is checked against. */

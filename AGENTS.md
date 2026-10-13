@@ -851,6 +851,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   from `lib/zone-areas.cjs` to an existing `type: 'zone'` hub (chained behind
   its current sub-areas) and tops their wild tables up with the region's wider
   pool. Idempotent (`--dry`); re-run `generate-encounter-index.cjs` afterwards.
+- `apply-villain-hideouts.cjs` — data-only pass (#88) that places each region's
+  villain-org hideout from `src/data/villain-teams.js` on the committed map as a
+  `type: 'hideout'` node wired to its parent town and gated on the org's badge
+  count. The arc itself (grunts, admin, legendary boss, reward) is built at
+  runtime. Idempotent (`--dry`); re-run after a map regeneration.
 - `fix-impossible-encounters.cjs` / `fix-impossible-teams.cjs` — step wild
   encounters and trainer/gym/Elite Four/Champion Pokemon back to a form that
   could exist at their level (a Lv. 3 Chesnaught becomes a Chespin), merging

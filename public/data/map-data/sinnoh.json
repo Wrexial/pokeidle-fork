@@ -804,7 +804,8 @@
   "description": "A town in the Sinnoh region, home to Maylene's Fighting Gym.",
   "connections": [
    "sinnoh-route-214",
-   "sinnoh-route-215"
+   "sinnoh-route-215",
+   "sinnoh-galactic-hideout"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2337,5 +2338,27 @@
   },
   "hidden": true,
   "zone": "hisui"
+ },
+ "sinnoh-galactic-hideout": {
+  "id": "sinnoh-galactic-hideout",
+  "name": "Galactic HQ",
+  "type": "hideout",
+  "description": "A tower of pale steel in Veilstone City, humming with the power of the lakes.",
+  "connections": [
+   "sinnoh-veilstone-city"
+  ],
+  "unlock": {
+   "badgesRequired": 3,
+   "requires": [
+    "sinnoh-veilstone-city"
+   ]
+  },
+  "unlockOrder": 400215,
+  "position": {
+   "x": 78,
+   "y": 46
+  },
+  "region": "sinnoh",
+  "biome": "grassland"
  }
 }

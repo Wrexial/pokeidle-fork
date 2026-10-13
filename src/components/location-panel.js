@@ -26,6 +26,7 @@ import { SosChainChip } from './sos-chain-chip.js'
 import { GymLocationPanel } from './gym-location-panel.js'
 import { SecretBaseCard } from './secret-base-card.js'
 import { RivalPanel } from './rival-panel.js'
+import { VillainPanel } from './villain-panel.js'
 import { LegendaryQuestPanel } from './legendary-quest-panel.js'
 import { LeagueLocationPanel } from './league-location-panel.js'
 import { DaycarePanel } from './daycare-panel.js'
@@ -821,6 +822,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
         jsx(GymLocationPanel, {}),
         location.type === 'route' && jsx(SecretBaseCard, { locationId: location.id }),
         jsx(RivalPanel, {}),
+        jsx(VillainPanel, {}),
         jsx(LeagueLocationPanel, {}),
         jsx(DaycarePanel, {}),
         jsx(KurtPanel, {}),

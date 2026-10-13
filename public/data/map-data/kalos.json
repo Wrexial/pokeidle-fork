@@ -218,7 +218,8 @@
    "kalos-route-13",
    "kalos-route-5",
    "kalos-power-plant",
-   "lumiose-wild-zones"
+   "lumiose-wild-zones",
+   "kalos-flare-hideout"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1912,5 +1913,27 @@
   },
   "hidden": true,
   "zone": "lumiose-wild-zones"
+ },
+ "kalos-flare-hideout": {
+  "id": "kalos-flare-hideout",
+  "name": "Flare Secret HQ",
+  "type": "hideout",
+  "description": "A hidden entrance in Lumiose City leads to Team Flare’s sun-coloured laboratory.",
+  "connections": [
+   "kalos-lumiose-city"
+  ],
+  "unlock": {
+   "badgesRequired": 4,
+   "requires": [
+    "kalos-lumiose-city"
+   ]
+  },
+  "unlockOrder": 600005,
+  "position": {
+   "x": 53,
+   "y": 50
+  },
+  "region": "kalos",
+  "biome": "grassland"
  }
 }

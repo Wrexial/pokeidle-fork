@@ -610,7 +610,8 @@
   "region": "galar",
   "description": "A town in the Galar region, home to Piers's Dark Gym.",
   "connections": [
-   "galar-route-9"
+   "galar-route-9",
+   "galar-yell-hideout"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2044,5 +2045,27 @@
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.webp"
+ },
+ "galar-yell-hideout": {
+  "id": "galar-yell-hideout",
+  "name": "Yell Hideout",
+  "type": "hideout",
+  "description": "Behind the shutters of Spikemuth, Team Yell keeps a loud, grimy headquarters.",
+  "connections": [
+   "galar-spikemuth"
+  ],
+  "unlock": {
+   "badgesRequired": 4,
+   "requires": [
+    "galar-spikemuth"
+   ]
+  },
+  "unlockOrder": 800010,
+  "position": {
+   "x": 68.5,
+   "y": 54.83
+  },
+  "region": "galar",
+  "biome": "grassland"
  }
 }

@@ -442,6 +442,7 @@ export function biomeForLocation(location) {
  */
 export const AREA_INFO = {
   town: { label: 'Town', icon: '🏠' },
+  hideout: { label: 'Hideout', icon: '🏴' },
   facility: { label: 'Facility', icon: '🏝️' },
   zone: { label: 'Zone', icon: '🗺️' },
   raid: { label: 'Legendary Raid', icon: '⚔️' },

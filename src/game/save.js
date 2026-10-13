@@ -9,6 +9,7 @@ import { elite4Data, encounterData, formDexModel, gymLeaderData, mapData, moveDa
 import { ROUTE_ACTIVITIES } from './minigames/route-activities.js'
 import { BREEDING_GOALS, MAX_BREEDING_PROJECTS } from './breeding-projects.js'
 import { RIVAL_MILESTONES } from './rival.js'
+import { VILLAIN_TOTAL_STAGES } from './villain-teams.js'
 import { PRESTIGE_PERKS } from './prestige.js'
 import { FRONTIER_FACILITIES } from './battle-frontier.js'
 import { isValidHuntTarget } from './hunt.js'
@@ -868,6 +869,22 @@ export function repairSave(saved) {
           Math.min(RIVAL_MILESTONES.length, Math.floor(/** @type {number} */ (stage))),
         ])
     ),
+    // Villain-arc progress per region, clamped to the arc's stage count.
+    villainProgress = Object.fromEntries(
+      Object.entries(
+        saved.villainProgress && typeof saved.villainProgress === 'object'
+          ? saved.villainProgress
+          : {}
+      )
+        .filter(
+          ([regionId, stage]) =>
+            regionIds.has(regionId) && typeof stage === 'number' && stage > 0
+        )
+        .map(([regionId, stage]) => [
+          regionId,
+          Math.min(VILLAIN_TOTAL_STAGES, Math.floor(/** @type {number} */ (stage))),
+        ])
+    ),
     activeEffects = (Array.isArray(saved.activeEffects) ? saved.activeEffects : []).filter(
       /** @param {any} effect */ (effect) => effect && typeof effect === 'object' && effect.type in activeItems
     ),
@@ -1109,6 +1126,7 @@ export function repairSave(saved) {
     defeatedEliteFour,
     defeatedChampions,
     rivals,
+    villainProgress,
     rewardedGenerations,
     rewardedFamilies,
     rewardedRegionalSets,
@@ -1359,6 +1377,7 @@ export const SAVED_STATE_KEYS = [
   'defeatedEliteFour',
   'defeatedChampions',
   'rivals',
+  'villainProgress',
   'rewardedGenerations',
   'rewardedFamilies',
   'rewardedRegionalSets',

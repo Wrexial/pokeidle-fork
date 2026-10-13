@@ -333,7 +333,8 @@
    "unova-route-gate",
    "unova-castelia-sewers",
    "unova-relic-passage",
-   "unova-liberty-garden"
+   "unova-liberty-garden",
+   "unova-plasma-hideout"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2368,5 +2369,27 @@
   },
   "biome": "mountain",
   "background": "/backgrounds/mountain.webp"
+ },
+ "unova-plasma-hideout": {
+  "id": "unova-plasma-hideout",
+  "name": "Plasma Base",
+  "type": "hideout",
+  "description": "Below Castelia's streets, Team Plasma stockpiles the technology a new order will need.",
+  "connections": [
+   "unova-castelia-city"
+  ],
+  "unlock": {
+   "badgesRequired": 3,
+   "requires": [
+    "unova-castelia-city"
+   ]
+  },
+  "unlockOrder": 500004.5001,
+  "position": {
+   "x": 56,
+   "y": 72
+  },
+  "region": "unova",
+  "biome": "grassland"
  }
 }

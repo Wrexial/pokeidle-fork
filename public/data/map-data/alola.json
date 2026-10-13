@@ -161,7 +161,8 @@
   "region": "alola",
   "description": "A town in the Alola region, home to Acerola's Ghost Trial.",
   "connections": [
-   "alola-poni-island"
+   "alola-poni-island",
+   "alola-skull-hideout"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1987,5 +1988,27 @@
   },
   "background": "/backgrounds/cave.webp",
   "biome": "cave"
+ },
+ "alola-skull-hideout": {
+  "id": "alola-skull-hideout",
+  "name": "Team Skull Base",
+  "type": "hideout",
+  "description": "The rainy town of Po Town is walled off and crawling with Team Skull troublemakers.",
+  "connections": [
+   "alola-po-town"
+  ],
+  "unlock": {
+   "badgesRequired": 3,
+   "requires": [
+    "alola-po-town"
+   ]
+  },
+  "unlockOrder": 700003.0002,
+  "position": {
+   "x": 27.5,
+   "y": 78.33
+  },
+  "region": "alola",
+  "biome": "grassland"
  }
 }

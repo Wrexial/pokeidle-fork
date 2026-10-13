@@ -810,7 +810,8 @@
   "connections": [
    "johto-route-42",
    "johto-route-43",
-   "johto-route-44"
+   "johto-route-44",
+   "johto-rocket-hideout"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -1665,5 +1666,27 @@
   "hidden": true,
   "zone": "johto-whirl-islands",
   "biome": "coast"
+ },
+ "johto-rocket-hideout": {
+  "id": "johto-rocket-hideout",
+  "name": "Rocket HQ",
+  "type": "hideout",
+  "description": "A souvenir shop hides the stairwell down to the revived Team Rocket headquarters.",
+  "connections": [
+   "johto-mahogany-town"
+  ],
+  "unlock": {
+   "badgesRequired": 4,
+   "requires": [
+    "johto-mahogany-town"
+   ]
+  },
+  "unlockOrder": 200043,
+  "position": {
+   "x": 69,
+   "y": 25.33
+  },
+  "region": "johto",
+  "biome": "grassland"
  }
 }

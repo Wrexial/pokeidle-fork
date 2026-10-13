@@ -118,6 +118,9 @@ export function completeHealing(state, action) {
         currentTrainerPokemonIndex: 0,
         spriteKey: bossBattle.spriteKey,
         region: bossBattle.region,
+        // Villain-arc bookkeeping (see game/villain-teams.js).
+        villainRegion: bossBattle.villainRegion,
+        villainStage: bossBattle.villainStage,
         // Battle Frontier rule variants (see game/battle-frontier.js).
         rule: bossBattle.rule,
         facilityId: bossBattle.facilityId,

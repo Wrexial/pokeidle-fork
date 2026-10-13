@@ -9,6 +9,8 @@ import { emptyBattleHazards } from '../../hazards.js'
 import { computeUnlockedLocations, prepareNextBattle, syncActivePokemonIntoParty, tickBattleCounters } from '../../progression.js'
 import { frontierTokenReward } from '../../battle-frontier.js'
 import { RIVAL_MILESTONES, rivalDialogue } from '../../rival.js'
+import { VILLAIN_TOTAL_STAGES, villainOrgFor, villainRewardFor } from '../../villain-teams.js'
+import { rewardItemName } from '../../minigames/mining.js'
 import { awardRibbonToParty } from '../../pokemon.js'
 import { settleUnlockTokens, recordSeenPokemon, withNotification } from '../../reducer-helpers.js'
 import { gymTmType, rollUnownedTm } from '../../tms.js'
@@ -29,6 +31,8 @@ export function startBossBattle(state, action) {
       bossQueue,
       spriteKey,
       region,
+      villainRegion,
+      villainStage,
     } = action.payload,
     firstPokemon = trainerTeam[0]
   return recordSeenPokemon(
@@ -67,6 +71,9 @@ export function startBossBattle(state, action) {
         currentTrainerPokemonIndex: 0,
         spriteKey,
         region,
+        // Villain-arc bookkeeping, when the boss belongs to a hideout arc.
+        villainRegion,
+        villainStage,
         // Only the Champion makes mid-battle tactical switches.
         championSwapsRemaining: bossType === 'champion' ? 2 : 0,
       },
@@ -207,6 +214,10 @@ export function bossBattleEnd(state, action) {
     rivalBonus = 0,
     rivals = state.rivals,
     inventory = state.inventory,
+    villainProgress = state.villainProgress,
+    // Set when a villain arc is completed, so the party can be ribboned after
+    // `prepareNextBattle` has synced the active Pokemon into the party.
+    villainRibbon = /** @type {string | null} */ (null),
     championJustDefeated = false
   const notifications = [],
     toastNotifications = []
@@ -265,6 +276,40 @@ export function bossBattleEnd(state, action) {
         dedupeKey: `rival:${rivalRegion}:${stage + 1}`,
       })
     }
+    // A villain-team stage advances the region's arc. Beating the boss pays
+    // the arc's one-off reward: cash, Victory Tokens, a Master Ball bundle and
+    // a region ribbon for the whole party.
+    if (bossType === 'villain') {
+      const villainRegion = state.bossBattle.villainRegion ?? state.bossBattle.region ?? 'kanto',
+        beatenStage = state.bossBattle.villainStage ?? 0,
+        currentProgress = state.villainProgress?.[villainRegion] ?? 0,
+        nextProgress = Math.max(currentProgress, Math.min(VILLAIN_TOTAL_STAGES, beatenStage + 1)),
+        reward = villainRewardFor(villainRegion),
+        completing = currentProgress < VILLAIN_TOTAL_STAGES && nextProgress >= VILLAIN_TOTAL_STAGES
+      if (nextProgress !== currentProgress)
+        villainProgress = { ...(villainProgress ?? {}), [villainRegion]: nextProgress }
+      if (reward && completing) {
+        rivalBonus += reward.money
+        victoryTokens += reward.victoryTokens
+        inventory = { ...inventory }
+        for (const [itemId, quantity] of Object.entries(reward.items ?? {}))
+          inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+        villainRibbon = reward.ribbon
+        const itemSummary = Object.entries(reward.items ?? {})
+            .map(([itemId, quantity]) => `${rewardItemName(itemId)} x${quantity}`)
+            .join(' · '),
+          orgName = villainOrgFor(villainRegion)?.name ?? 'The villain team'
+        notifications.push(`${orgName} has been dismantled!`)
+        toastNotifications.push({
+          message: `${orgName} defeated! +$${reward.money.toLocaleString()}${
+            itemSummary ? ` and ${itemSummary}` : ''
+          }.`,
+          tone: 'shiny',
+          icon: '\u{1f3f4}',
+          dedupeKey: `villain:${villainRegion}`,
+        })
+      }
+    }
     // A first badge comes with a couple of TMs of the gym's theme type, so a
     // gym win is a real way to build up the TM case.
     if (bossType === 'gym' && !state.defeatedGyms.includes(bossId)) {
@@ -302,6 +347,7 @@ export function bossBattleEnd(state, action) {
         ...syncActivePokemonIntoParty(state),
         money: newMoney + rivalBonus,
         rivals,
+        villainProgress,
         inventory,
         trainerBattlesWon,
         battlesWonByLocation,
@@ -358,7 +404,9 @@ export function bossBattleEnd(state, action) {
       unlockedLocations: computeUnlockedLocations(stateWithNextBoss),
     })
     if (championJustDefeated) result = settleUnlockTokens(result)
-    // A win hands the party the boss's ribbon.
+    // A win hands the party the boss's ribbon; a completed villain arc has its
+    // own regional ribbon.
+    if (villainRibbon) result = withPartyRibbon(result, villainRibbon)
     const queueRibbon = won ? ribbonForBossType(state.bossBattle?.bossType, state.bossBattle?.region) : null
     if (queueRibbon) result = withPartyRibbon(result, queueRibbon)
     for (const toastNotification of toastNotifications)
@@ -369,6 +417,7 @@ export function bossBattleEnd(state, action) {
     ...prepareNextBattle(state),
     money: newMoney + rivalBonus,
     rivals,
+    villainProgress,
     inventory,
     trainerBattlesWon,
     battlesWonByLocation,
@@ -393,6 +442,7 @@ export function bossBattleEnd(state, action) {
     unlockedLocations: computeUnlockedLocations(finalState),
   })
   if (championJustDefeated) finalResult = settleUnlockTokens(finalResult)
+  if (villainRibbon) finalResult = withPartyRibbon(finalResult, villainRibbon)
   const bossRibbon = won ? ribbonForBossType(state.bossBattle?.bossType, state.bossBattle?.region) : null
   if (bossRibbon) finalResult = withPartyRibbon(finalResult, bossRibbon)
   // Beating the rival at the last milestone earns the Rival Ribbon.

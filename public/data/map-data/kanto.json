@@ -848,7 +848,8 @@
   "description": "A city of rainbow dreams and a large dept store.",
   "connections": [
    "route7",
-   "route16"
+   "route16",
+   "kanto-rocket-hideout"
   ],
   "unlock": {
    "battlesAtLocation": [
@@ -2104,5 +2105,27 @@
     "name": "Tanoby Ruins"
    }
   ]
+ },
+ "kanto-rocket-hideout": {
+  "id": "kanto-rocket-hideout",
+  "name": "Rocket Hideout",
+  "type": "hideout",
+  "description": "Beneath the Game Corner, Team Rocket runs a smuggling operation out of a hidden basement.",
+  "connections": [
+   "celadonCity"
+  ],
+  "unlock": {
+   "badgesRequired": 4,
+   "requires": [
+    "celadonCity"
+   ]
+  },
+  "unlockOrder": 16.5,
+  "position": {
+   "x": 33.67,
+   "y": 42.5
+  },
+  "region": "kanto",
+  "biome": "grassland"
  }
 }

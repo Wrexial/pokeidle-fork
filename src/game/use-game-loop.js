@@ -276,8 +276,10 @@ export function useGameLoop() {
             return
           }
           // A zone hub is a picker, not a wild route; the player travels to a
-          // sub-area to battle (see `location-panel.js`).
-          if (currentLocationData?.type === 'zone') return
+          // sub-area to battle (see `location-panel.js`). A villain hideout is
+          // the same: it hosts its own trainers, never wild spawns.
+          if (currentLocationData?.type === 'zone' || currentLocationData?.type === 'hideout')
+            return
           const currentEncounterData =
             encounterData[currentGameState.currentRoute]
           if (!currentEncounterData) return

@@ -21,7 +21,7 @@ function MapNode({
 }) {
   const [hovering, setHovering] = React.useState(!1),
     [, tick] = React.useState(0),
-    isTown = location.type === 'town',
+    isTown = location.type === 'town' || location.type === 'hideout',
     isRaid = location.type === 'raid',
     isZone = location.type === 'zone',
     zoneCount = isZone ? (location.subAreas?.length ?? 0) : 0,

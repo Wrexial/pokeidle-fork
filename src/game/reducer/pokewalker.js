@@ -1,8 +1,7 @@
 // Pokewalker reducer handlers: bank steps from elapsed real time and spend
 // them on the walk rewards. The pure math lives in game/pokewalker.js.
 
-import { daycareEggBattles, pokewalkerEggDaycareProgress, pokewalkerEggSteps } from '../../data/config.js'
-import { activeItems } from '../../data/items.js'
+import { daycareEggBattles, pokewalkerEggDaycareProgress, pokewalkerEggSteps, pokewalkerRevealBattles } from '../../data/config.js'
 import { pokemonSpecies } from '../../data/gameData.js'
 import { withNotification } from '../reducer-helpers.js'
 import { POKEWALKER_OPTIONS, accruePokewalker as accrueSteps, pokewalkerItemName, rarestRouteSpecies, rollPokewalkerItem } from '../pokewalker.js'
@@ -104,8 +103,9 @@ function spendOnItem(state, nextPokewalker) {
 }
 
 /**
- * Draw the current route's rarest wild out of hiding with a Honey-style
- * encounter boost (and catch bonus).
+ * Draw the current route's rarest wild out of hiding with the Rare Radar's own
+ * reveal effect: unlike Honey it heavily suppresses every other species on the
+ * route, so the target actually turns up (see resolveActiveModifiers).
  * @param {GameState} state
  * @param {Pokewalker} nextPokewalker
  * @returns {GameState}
@@ -116,7 +116,7 @@ function spendOnReveal(state, nextPokewalker) {
   if (!speciesKey) return state
   const existingIndex = state.activeEffects.findIndex(
       (effect) =>
-        effect.type === 'honey' && effect.routeKey === routeKey && effect.speciesKey === speciesKey
+        effect.type === 'reveal' && effect.routeKey === routeKey && effect.speciesKey === speciesKey
     ),
     name = pokemonSpecies[speciesKey]?.name ?? speciesKey
   let activeEffects
@@ -124,12 +124,12 @@ function spendOnReveal(state, nextPokewalker) {
     activeEffects = [...state.activeEffects]
     activeEffects[existingIndex] = {
       ...activeEffects[existingIndex],
-      battlesRemaining: (activeEffects[existingIndex].battlesRemaining ?? 0) + activeItems.honey.duration,
+      battlesRemaining: (activeEffects[existingIndex].battlesRemaining ?? 0) + pokewalkerRevealBattles,
     }
   } else
     activeEffects = [
       ...state.activeEffects,
-      { type: 'honey', battlesRemaining: activeItems.honey.duration, routeKey, speciesKey },
+      { type: 'reveal', battlesRemaining: pokewalkerRevealBattles, routeKey, speciesKey },
     ]
   return withNotification(
     {

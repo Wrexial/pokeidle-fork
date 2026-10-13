@@ -28,7 +28,7 @@ import { buildHorde, hordeAlive, hordeExpMultiplier, rollHordeSize } from './hor
 import { runDoublesRound } from './minigames/doubles.js'
 import { sosHiddenAbilityChance } from './sos-chain.js'
 import { professorStoryCatchBonus } from './quests.js'
-import { awardExperience, checkShinyOdds, encountersForPhase, isHoneyActive, partyNeedsHealing, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
+import { awardExperience, checkShinyOdds, encountersForPhase, isHoneyActive, isRevealActive, partyNeedsHealing, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
 
 export function useGameLoop() {
   const { state, dispatch: rawDispatch } = useGame(),
@@ -1082,11 +1082,17 @@ export function useGameLoop() {
               prestige.capture *
               (1 + baseBonuses.catch) *
               (1 + professorStoryCatchBonus(currentGameState)),
-            honey: isHoneyActive(
-              currentGameState.activeEffects,
-              currentGameState.currentRoute,
-              enemyPokemon.speciesKey
-            ),
+            honey:
+              isHoneyActive(
+                currentGameState.activeEffects,
+                currentGameState.currentRoute,
+                enemyPokemon.speciesKey
+              ) ||
+              isRevealActive(
+                currentGameState.activeEffects,
+                currentGameState.currentRoute,
+                enemyPokemon.speciesKey
+              ),
           }
           awardExperience(
             dispatch,

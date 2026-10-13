@@ -7204,6 +7204,16 @@ img {
     background: #584828cc
 }
 
+.reveal-indicator {
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+    font-size: 7px;
+    line-height: 1;
+    background: #00000066;
+    border-radius: 2px
+}
+
 .pokedex-grid.selector-mode .pokedex-tile.selector-target {
     cursor: crosshair
 }
@@ -18859,6 +18869,48 @@ img {
 
 .sos-chain-next {
     color: #c08a2a
+}
+
+.reveal-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    margin: 2px 0 6px;
+    padding: 4px 7px;
+    background: #e0703014;
+    border: 1px solid #e07030;
+    border-radius: 3px;
+    color: var(--text-muted);
+    font-size: 8px
+}
+
+.reveal-chip-icon {
+    font-size: 12px;
+    line-height: 1
+}
+
+.reveal-chip-text {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 1px 6px;
+    min-width: 0
+}
+
+.reveal-chip-label {
+    font-weight: 700;
+    color: #e07030
+}
+
+.reveal-chip-species {
+    color: var(--parchment);
+    font-weight: 700
+}
+
+.reveal-chip-remaining {
+    color: var(--text-muted);
+    opacity: .85
 }
 
 .hunt-modal {

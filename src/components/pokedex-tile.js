@@ -74,6 +74,12 @@ export let PokedexTile = React.memo(
                 className: 'pokedex-effect-indicator honey-indicator',
                 children: 'H',
               }),
+            activeEffect?.reveal &&
+              jsx('span', {
+                className: 'pokedex-effect-indicator reveal-indicator',
+                title: 'Drawn out by the Rare Radar',
+                children: '\u{1f4e1}',
+              }),
             jsx('img', {
               className: `pokedex-tile-sprite ${status}`,
               src: getPokemonSpriteUrl(species.id),

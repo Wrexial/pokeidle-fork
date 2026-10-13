@@ -907,7 +907,10 @@ export function repairSave(saved) {
         ])
     ),
     activeEffects = (Array.isArray(saved.activeEffects) ? saved.activeEffects : []).filter(
-      /** @param {any} effect */ (effect) => effect && typeof effect === 'object' && effect.type in activeItems
+      /** @param {any} effect */ (effect) =>
+        effect &&
+        typeof effect === 'object' &&
+        (effect.type in activeItems || effect.type === 'reveal')
     ),
     // Field-move cooldowns: keep known moves with a finite end timestamp only.
     fieldMoveCooldowns = Object.fromEntries(

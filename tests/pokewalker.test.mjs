@@ -6,7 +6,7 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const { encounterData, pokemonSpecies } = await import('../src/data/gameData.js')
-const { pokewalkerDailyCap, pokewalkerEggCost, pokewalkerEggSteps, pokewalkerItemCost, pokewalkerRevealCost, pokewalkerStepsPerHour } = await import('../src/data/config.js')
+const { pokewalkerDailyCap, pokewalkerEggCost, pokewalkerEggSteps, pokewalkerItemCost, pokewalkerRevealBattles, pokewalkerRevealCost, pokewalkerStepsPerHour } = await import('../src/data/config.js')
 const {
   POKEWALKER_OPTIONS,
   accruePokewalker,
@@ -15,6 +15,7 @@ const {
   stepsForElapsed,
 } = await import('../src/game/pokewalker.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
+const { applyEncounterModifiers, isRevealActive, resolveActiveModifiers } = await import('../src/game/progression.js')
 const { createEgg } = await import('../src/game/pokemon.js')
 const { repairSave, serializeSave } = await import('../src/game/save.js')
 
@@ -117,12 +118,45 @@ test('SPEND_POKEWALKER with the Rare Radar draws out the rarest wild', () => {
     ),
     state = { ...started, currentRoute: routeKey, activeEffects: [], pokewalker: walkerAt(1000) },
     next = gameReducer(state, { type: 'SPEND_POKEWALKER', payload: { optionId: 'reveal' } }),
-    effect = next.activeEffects.find((entry) => entry.type === 'honey')
+    effect = next.activeEffects.find((entry) => entry.type === 'reveal')
   assert.equal(next.pokewalker.steps, 1000 - pokewalkerRevealCost)
-  assert.ok(effect, 'a Honey boost is applied')
+  assert.ok(effect, 'a reveal effect is applied')
   assert.equal(effect.routeKey, routeKey)
   assert.equal(effect.speciesKey, rarestRouteSpecies(routeKey))
+  assert.equal(effect.battlesRemaining, pokewalkerRevealBattles)
   assert.ok(encounterData[routeKey].encounters.some((entry) => entry.speciesKey === effect.speciesKey))
+})
+
+test('the Rare Radar reveal makes its target materially more common', () => {
+  // Pick a route whose rarest ordinary wild is genuinely uncommon, so the
+  // reveal's suppression + multiplier has room to show up.
+  const share = (/** @type {string} */ key, /** @type {any[]} */ entries, /** @type {string} */ target) => {
+      const total = entries.reduce((sum, entry) => sum + entry.weight, 0)
+      return entries.find((entry) => entry.speciesKey === target).weight / total
+    },
+    routeKey = Object.keys(encounterData).find((key) => {
+      const entries = encounterData[key]?.encounters
+      if (!entries || entries.length < 5) return false
+      const target = rarestRouteSpecies(key)
+      return target ? share(key, entries, target) < 0.2 : false
+    })
+  assert.ok(routeKey, 'a route with a genuinely rare target exists')
+  const entries = encounterData[routeKey].encounters,
+    target = rarestRouteSpecies(routeKey),
+    state = { ...started, currentRoute: routeKey, activeEffects: [], pokewalker: walkerAt(1000) },
+    next = gameReducer(state, { type: 'SPEND_POKEWALKER', payload: { optionId: 'reveal' } }),
+    baseShare = share(routeKey, entries, target),
+    modified = applyEncounterModifiers(
+      entries,
+      resolveActiveModifiers(next.activeEffects, routeKey, null),
+      null
+    ),
+    modifiedShare = share(routeKey, modified, target)
+  assert.ok(isRevealActive(next.activeEffects, routeKey, target), 'the reveal is active')
+  assert.ok(
+    modifiedShare > 0.5 && modifiedShare > baseShare * 2,
+    `the reveal makes ${target} common (${baseShare.toFixed(3)} -> ${modifiedShare.toFixed(3)})`
+  )
 })
 
 test('spending without enough steps is a no-op', () => {
@@ -145,9 +179,14 @@ test('save repair keeps a sane Pokewalker and clamps a corrupt one', () => {
   const state = {
       ...started,
       pokewalker: { steps: 1234, dailySteps: 50, dailyDate: '2024-01-01', totalSteps: 9999 },
+      activeEffects: [
+        { type: 'reveal', battlesRemaining: 42, routeKey: 'route1', speciesKey: 'pidgey' },
+      ],
     },
     repaired = repairSave(serializeSave(state))
   assert.deepEqual(repaired.pokewalker, state.pokewalker)
+  // The Rare Radar's reveal effect survives a save round-trip.
+  assert.deepEqual(repaired.activeEffects, state.activeEffects)
   const corrupted = repairSave(
     serializeSave({ ...state, pokewalker: { steps: -5, dailySteps: 'x', dailyDate: 7, totalSteps: null } })
   )

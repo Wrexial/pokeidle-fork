@@ -24,6 +24,7 @@ import { BattleTowerPanel } from './battle-tower-panel.js'
 import { BattleFrontierPanel } from './battle-frontier-panel.js'
 import { HuntBar } from './hunt-panel.js'
 import { SosChainChip } from './sos-chain-chip.js'
+import { RevealChip } from './reveal-chip.js'
 import { GymLocationPanel } from './gym-location-panel.js'
 import { SecretBaseCard } from './secret-base-card.js'
 import { RivalPanel } from './rival-panel.js'
@@ -806,6 +807,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
             ],
           }),
         routeEncounters && routeKey && jsx(SosChainChip, { routeKey }),
+        routeKey && jsx(RevealChip, { routeKey }),
         servicePois.length > 0 &&
           jsxs('div', {
             className: 'location-services',

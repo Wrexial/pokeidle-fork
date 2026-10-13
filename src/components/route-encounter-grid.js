@@ -45,15 +45,16 @@ export function RouteEncounterGrid({
     ),
     sortedEncounters = React.useMemo(() => [...displayEncounters].sort((left, right) => right.weight - left.weight), [displayEncounters]),
     activeEffectMap = React.useMemo(() => {
-      const effectMap = /** @type {Record<string, { repel: boolean, honey: boolean }>} */ ({})
+      const effectMap = /** @type {Record<string, { repel: boolean, honey: boolean, reveal: boolean }>} */ ({})
       for (const effect of state.activeEffects)
-        (effect.type === 'repel' || effect.type === 'honey') &&
+        (effect.type === 'repel' || effect.type === 'honey' || effect.type === 'reveal') &&
           effect.routeKey === routeKey &&
           effect.speciesKey &&
           (effectMap[effect.speciesKey] ||
             (effectMap[effect.speciesKey] = {
               repel: !1,
               honey: !1,
+              reveal: !1,
             }),
           (effectMap[effect.speciesKey][effect.type] = !0))
       return effectMap

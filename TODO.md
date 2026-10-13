@@ -67,32 +67,6 @@ Panel-layout and top-bar cleanups: reclaim vertical space, make the sub-tab
 hierarchy read, and fold the daily menus together. All are UI-only unless
 noted.
 
-## Rare Radar reads as broken (bug)
-
-Buying the Pokewalker's Rare Radar sets `revealSpecies` from
-`rarestRouteSpecies(state.currentRoute)` (`src/components/pokewalker-panel.js`)
-and `spendOnReveal` (`src/game/reducer/pokewalker.js`) only adds that species to
-`activeEffects` as a `honey` effect. `resolveActiveModifiers`
-(`src/game/progression/encounters.js`) merely **doubles** its encounter weight,
-so a weight-1 "super rare" in a large table stays effectively invisible, and
-nothing in the UI confirms the buff is up — the steps look wasted. The reducer
-test (`tests/pokewalker.test.mjs`) only asserts the effect object, not that the
-target actually becomes common.
-
-- [ ] Reproduce it: spend steps on a route, then confirm the target's spawn
-      rate barely changes (and the effect is invisible in the location /
-      encounter panel).
-- [ ] Make the reveal actually draw the target out — a much larger multiplier,
-      suppression of the other species, or a guaranteed encounter after N
-      battles — instead of reusing the Honey buff verbatim.
-- [ ] Surface an active-reveal chip in the location panel (target name +
-      battles remaining) so the player can see it working.
-- [ ] Add an idle-loop/encounter test asserting the target is materially more
-      common (or guaranteed) while the reveal is active, not just that the
-      effect object exists.
-
----
-
 ## Useful references when picking these up
 
 - **Data-pipeline template:** `tools/fetch-breeding-data.cjs` — cached PokéAPI

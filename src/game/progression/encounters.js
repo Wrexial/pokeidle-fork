@@ -107,6 +107,13 @@ export const HONEY_CHAIN_THRESHOLD = 4
 /** Weight multiplier Honey applies once a hunt is locked in. */
 const HONEY_LOCK_MULTIPLIER = 25
 
+/**
+ * Weight multiplier the Rare Radar's reveal applies to its target. Paired with
+ * the suppression below, it turns a weight-1 super rare into the route's plain
+ * common for as long as the reveal lasts.
+ */
+export const REVEAL_MULTIPLIER = 50
+
 /** Weight kept for every other species while a chain is protected by Repel. */
 const SUPPRESSED_WEIGHT = 0.02
 
@@ -125,7 +132,7 @@ export function applyEncounterModifiers(encounters, modifiers, shinyChain) {
   const suppressOthers = !!modifiers?.some((modifier) => modifier.suppressOthers),
     protectedSpecies = new Set(
       (modifiers ?? [])
-        .filter((modifier) => modifier.kind === 'honey')
+        .filter((modifier) => modifier.kind === 'honey' || modifier.kind === 'reveal')
         .map((modifier) => modifier.speciesKey)
     )
   if (shinyChain?.speciesKey) protectedSpecies.add(shinyChain.speciesKey)
@@ -142,10 +149,10 @@ export function applyEncounterModifiers(encounters, modifiers, shinyChain) {
  * @param {ActiveEffect[]} activeEffects
  * @param {string} routeKey
  * @param {{ speciesKey: string | null, count: number } | undefined | null} [shinyChain]
- * @returns {{ speciesKey: string, multiplier: number, kind: 'honey' | 'repel', suppressOthers?: boolean }[]}
+ * @returns {{ speciesKey: string, multiplier: number, kind: 'honey' | 'repel' | 'reveal', suppressOthers?: boolean }[]}
  */
 export function resolveActiveModifiers(activeEffects, routeKey, shinyChain) {
-  /** @type {{ speciesKey: string, multiplier: number, kind: 'honey' | 'repel', suppressOthers?: boolean }[]} */
+  /** @type {{ speciesKey: string, multiplier: number, kind: 'honey' | 'repel' | 'reveal', suppressOthers?: boolean }[]} */
   const modifiers = []
   // Once a hunt is locked in (4+ of the same species in a row), Honey and
   // Repel stop being little nudges and actually protect the chain.
@@ -165,6 +172,16 @@ export function resolveActiveModifiers(activeEffects, routeKey, shinyChain) {
           locking && shinyChain?.speciesKey === effect.speciesKey ? HONEY_LOCK_MULTIPLIER : 2,
         kind: 'honey',
       })
+    // The Rare Radar's reveal is its own, far stronger buff: a huge weight
+    // multiplier on the target plus suppression of everything else, so the
+    // rarest wild on the route genuinely shows up.
+    else if (effect.type === 'reveal')
+      modifiers.push({
+        speciesKey: effect.speciesKey,
+        multiplier: REVEAL_MULTIPLIER,
+        kind: 'reveal',
+        suppressOthers: true,
+      })
   }
   return modifiers
 }
@@ -181,6 +198,21 @@ export function isHoneyActive(activeEffects, routeKey, speciesKey) {
   return activeEffects.some(
     (effect) =>
       effect.type === 'honey' && effect.routeKey === routeKey && effect.speciesKey === speciesKey
+  )
+}
+
+/**
+ * Whether the Rare Radar is currently drawing `speciesKey` out on a route.
+ * Reveal also counts as a catch-rate boost (see `attemptCatch`).
+ * @param {ActiveEffect[]} activeEffects
+ * @param {string} routeKey
+ * @param {string} speciesKey
+ * @returns {boolean}
+ */
+export function isRevealActive(activeEffects, routeKey, speciesKey) {
+  return activeEffects.some(
+    (effect) =>
+      effect.type === 'reveal' && effect.routeKey === routeKey && effect.speciesKey === speciesKey
   )
 }
 

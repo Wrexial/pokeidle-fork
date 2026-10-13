@@ -16,6 +16,13 @@ export function PokewalkerPanel() {
     dailyPercent = Math.min(100, Math.round((dailySteps / pokewalkerDailyCap) * 100)),
     revealSpecies = rarestRouteSpecies(state.currentRoute),
     revealName = revealSpecies ? pokemonSpecies[revealSpecies]?.name ?? revealSpecies : null,
+    activeReveal = (state.activeEffects ?? []).find(
+      (effect) => effect.type === 'reveal' && effect.routeKey === state.currentRoute
+    ),
+    activeRevealName =
+      activeReveal?.speciesKey
+        ? pokemonSpecies[activeReveal.speciesKey]?.name ?? activeReveal.speciesKey
+        : null,
     stepRate = Math.round(pokewalkerStepsPerHour / 60)
   return jsxs('div', {
     className: 'pokewalker-panel',
@@ -57,9 +64,11 @@ export function PokewalkerPanel() {
             // The Rare Radar needs a wild route with at least one species to target.
             available = option.id !== 'reveal' || !!revealSpecies,
             detail =
-              option.id === 'reveal' && revealName
-                ? `Current route target: ${revealName}.`
-                : option.description
+              option.id === 'reveal' && activeRevealName && activeReveal
+                ? `${activeRevealName} is out of hiding (${activeReveal.battlesRemaining} battles left). Spending again extends it.`
+                : option.id === 'reveal' && revealName
+                  ? `Current route target: ${revealName}.`
+                  : option.description
           return jsxs(
             'button',
             {

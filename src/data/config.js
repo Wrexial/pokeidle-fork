@@ -86,6 +86,8 @@ export const pokewalkerDailyCap = 9000
 export const pokewalkerEggCost = 400
 export const pokewalkerItemCost = 250
 export const pokewalkerRevealCost = 600
+/** Wild battles a Rare Radar reveal draws its target out for. */
+export const pokewalkerRevealBattles = 100
 /** Egg steps a Pokewalker spend removes from every party egg. */
 export const pokewalkerEggSteps = 512
 /** Day-Care battles a Pokewalker spend adds toward the next egg. */

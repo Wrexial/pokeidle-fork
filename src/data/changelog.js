@@ -129,6 +129,7 @@ export const CHANGELOG = [
       {
         heading: 'Fixes',
         items: [
+          'The Pokewalker’s Rare Radar actually draws out the rarest wild on a route now instead of nudging it with a Honey-style double. The reveal strongly suppresses every other species on the route for its duration, the location panel shows a chip naming the target and its remaining battles, its encounter tile is flagged, and the reveal still carries the easier-catch bonus.',
           'One-off static encounters (Hisui’s nobles and ride Pokemon, the red Gyarados, Snorlax, ...) always get a ball now. They were skipped by the default “new species” auto-catch rule once their species was already registered — which is guaranteed for a Hisui noble or ride Pokemon that also spawns in the wild — so the static could never be claimed.',
           'A held item given to your active Pokemon no longer vanishes. The bag updated the party slot but not the active-Pokemon copy the battle uses, so the next sync wrote the old (empty) copy back over it; both copies are updated now, and putting an item away clears both.',
           'A battle can no longer freeze after an action the reducer ignores: the idle loop’s batched dispatch always produces a fresh state, so a single no-op (a stale turn, an already-ended encounter, ...) cannot leave the loop waiting forever for a commit that never comes.',

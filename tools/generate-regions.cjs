@@ -69,10 +69,14 @@ const GYM_LEVEL_MAX = 64
 const E4_LEVEL_MIN = 68
 const CHAMPION_LEVEL = LEVEL_MAX - 5
 // Post-game rematch rosters, used once the player has every badge in the region
-// (gyms) or has beaten the region's Champion (Elite Four / Champion).
+// (gyms) or has beaten the region's Champion (Elite Four / Champion). The league
+// rematches ramp to an ace over their six-deep roster: Elite Four Lv. 75-85
+// (ace 85) and the Champion Lv. 85-95 (ace 95).
 const GYM_REMATCH_LEVEL = 80
-const E4_REMATCH_LEVEL = 90
-const CHAMPION_REMATCH_LEVEL = 92
+const E4_REMATCH_LEVEL = 75
+const E4_REMATCH_STEP = 2
+const CHAMPION_REMATCH_LEVEL = 85
+const CHAMPION_REMATCH_STEP = 2
 // `unlockOrder` is a stable sort key, not a sequence: it is each location's
 // position in its region's route progression (its `rank`), offset by region so
 // later regions sort later. Deriving it instead of counting means adding a zone
@@ -1759,7 +1763,7 @@ for (const region of REGIONS) {
       region: regionId,
       spriteKey: trainerSpriteKey(memberName),
       team: buildTeam(roster, E4_TYPES[regionId]?.[i], 5, clampLevel(E4_LEVEL_MIN + i), 1, i * 2),
-      rematchTeam: buildTeam(REMATCH_TEAM_POOL, E4_TYPES[regionId]?.[i], 6, E4_REMATCH_LEVEL, 1, i),
+      rematchTeam: buildTeam(REMATCH_TEAM_POOL, E4_TYPES[regionId]?.[i], 6, E4_REMATCH_LEVEL, E4_REMATCH_STEP, i),
     })
   })
   const championPool = CHAMPION_TYPES[regionId]?.length ? REMATCH_TEAM_POOL : roster
@@ -1770,7 +1774,7 @@ for (const region of REGIONS) {
     region: regionId,
     spriteKey: trainerSpriteKey(CHAMPIONS[regionId]),
     team: buildTeam(roster, CHAMPION_TYPES[regionId], 6, clampLevel(CHAMPION_LEVEL), 1, gen),
-    rematchTeam: buildTeam(championPool, CHAMPION_TYPES[regionId], 6, CHAMPION_REMATCH_LEVEL, 1, gen),
+    rematchTeam: buildTeam(championPool, CHAMPION_TYPES[regionId], 6, CHAMPION_REMATCH_LEVEL, CHAMPION_REMATCH_STEP, gen),
   })
 }
 
@@ -2271,11 +2275,11 @@ for (const gym of gymData) {
 for (const member of e4Data) {
   if ((member.region ?? 'kanto') !== 'kanto') continue
   const types = KANTO_E4_TYPES[member.name]
-  if (types) member.rematchTeam = buildTeam(REMATCH_TEAM_POOL, types, 6, E4_REMATCH_LEVEL, 1)
+  if (types) member.rematchTeam = buildTeam(REMATCH_TEAM_POOL, types, 6, E4_REMATCH_LEVEL, E4_REMATCH_STEP)
 }
 for (const champion of champData) {
   if ((champion.region ?? 'kanto') !== 'kanto') continue
-  champion.rematchTeam = buildTeam(teamPoolForGen(1), [], 6, CHAMPION_REMATCH_LEVEL, 1)
+  champion.rematchTeam = buildTeam(teamPoolForGen(1), [], 6, CHAMPION_REMATCH_LEVEL, CHAMPION_REMATCH_STEP)
 }
 
 // --- Alolan forms & missing natives ------------------------------------------

@@ -690,10 +690,12 @@ One-off scripts used to build the data JSON (not run during dev/build):
   `pokemon-species.json` carries a `legendary` flag (set for legendaries,
   mythicals and Ultra Beasts) that keeps them out of every trainer team.
   Every leader also gets a `rematchTeam`: a gym fields six Lv.80 final
-  evolutions once the player has every badge in that region, and the Elite Four
-  / Champion field Lv.90/92 teams once the region's Champion has been beaten.
+  evolutions once the player has every badge in that region, and the league
+  rematches ramp to an ace once the region's Champion has been beaten — Elite
+  Four Lv. 75-85 (ace 85) and the Champion Lv. 85-95 (ace 95).
   Rematches draw from the whole national dex so sparse types still have six
-  members; the gym panel shows a `REMATCH` tag / "Rematch Lv.90" when active.
+  members; the gym panel shows a `REMATCH` tag / its rematch level range when
+  active.
   Badges use their real in-game names (`BADGE_NAMES`) — Alola's trials award
   Z-Crystals and Galar/Paldea use type badges — coloured by the leader's type.
   Alola runs the full 7 island trials + 4 grand trials (11 Z-Crystals) rather

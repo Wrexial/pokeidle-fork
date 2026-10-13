@@ -125,7 +125,7 @@ export function LeagueLocationPanel() {
     children: [
       jsx('div', {
         className: 'location-section-title',
-        children: isLeagueRematch ? 'Pokemon League \u00b7 Rematch Lv.90' : 'Pokemon League',
+        children: isLeagueRematch ? `Pokemon League \u00b7 Rematch ${championLevelRange}` : 'Pokemon League',
       }),
       regionEliteFour.map((member) => {
         const defeated = state.defeatedEliteFour.includes(member.id),

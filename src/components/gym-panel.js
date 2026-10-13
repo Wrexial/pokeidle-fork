@@ -207,7 +207,9 @@ export function GymPanel({ onOpenShop }) {
                 isLeagueRematch
                   ? regionId === 'galar'
                     ? ' · Post-game Tournament'
-                    : ' · Rematch Lv.90'
+                    : championLevelRange
+                      ? ` · Rematch ${championLevelRange}`
+                      : ' · Rematch'
                   : '',
               ],
             }),

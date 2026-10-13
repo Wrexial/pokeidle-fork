@@ -50,6 +50,7 @@ export const CHANGELOG = [
           'Hordes are in: a rare wild encounter can be a pack of 3-5 of one species at once. Your Pokemon faces the whole pack, so spread moves hit every member while a single-target move picks one, and clearing the pack pays bonus EXP (up to 3x) and extra item drops. A horde still counts as a single wild win, so the per-win systems stay idle-friendly. Hordes can be turned off in Settings.',
           'SOS chaining is in: win wild battles in a row on a route (without leaving or blacking out) and its chain climbs, raising the hidden-ability chance of every Pokemon you meet there \u2014 20% at a chain of 10, 100% by 40 \u2014 and its shiny odds, up to 4x at 150. The location panel shows the route\u2019s current and best chain with the odds it has earned, and the first time a route\u2019s chain reaches 10, 25 and 50 it pays a milestone reward.',
           'The auto-battler has a policy now: set it in Settings \u2192 Battles to prefer same-type moves, avoid contact against a Rocky Helmet or Rough Skin, switch out below a chosen HP percentage, and drink a healing item below another. Every rule has a sensible default and can be turned off, so the classic auto-battler is one tap away.',
+          'The post-game league rematches are a gentler climb now: the Elite Four ramp from Lv. 75 to their Lv. 85 ace (was a flat Lv. 90-95) and the Champion from Lv. 85 to its Lv. 95 ace (was Lv. 92-97), so a fully-badged player can re-fight the league without needing to be maxed out first.',
         ],
       },
       {

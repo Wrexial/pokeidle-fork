@@ -30,27 +30,27 @@
   "rematchTeam": [
    {
     "speciesKey": "dewgong",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "cloyster",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "jynx",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "lapras",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "walrein",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "weavile",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -85,27 +85,27 @@
   "rematchTeam": [
    {
     "speciesKey": "poliwrath",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "machamp",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "hitmonlee",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "hitmonchan",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "hitmontop",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "breloom",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -140,27 +140,27 @@
   "rematchTeam": [
    {
     "speciesKey": "drifblim",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "mismagius",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "spiritomb",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "dusknoir",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "cofagrigus",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "jellicent",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -195,27 +195,27 @@
   "rematchTeam": [
    {
     "speciesKey": "kingdra",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "flygon",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "haxorus",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "druddigon",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "hydreigon",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "tyrantrum",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -250,27 +250,27 @@
   "rematchTeam": [
    {
     "speciesKey": "hypno",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "exeggutor",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "mrMime",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "jynx",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "xatu",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "espeon",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -305,27 +305,27 @@
   "rematchTeam": [
    {
     "speciesKey": "nidoqueen",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "nidoking",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "vileplume",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "venomoth",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "tentacruel",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "muk",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -360,27 +360,27 @@
   "rematchTeam": [
    {
     "speciesKey": "hitmonlee",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "hitmonchan",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "hitmontop",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "breloom",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "hariyama",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "toxicroak",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -415,27 +415,27 @@
   "rematchTeam": [
    {
     "speciesKey": "cacturne",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "crawdaunt",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "honchkrow",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "skuntank",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "spiritomb",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "drapion",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -470,27 +470,27 @@
   "rematchTeam": [
    {
     "speciesKey": "umbreon",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "mightyena",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "shiftry",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "cacturne",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "crawdaunt",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "honchkrow",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -525,27 +525,27 @@
   "rematchTeam": [
    {
     "speciesKey": "mismagius",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "spiritomb",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "dusknoir",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "cofagrigus",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "jellicent",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "trevenant",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -580,27 +580,27 @@
   "rematchTeam": [
    {
     "speciesKey": "jynx",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "lapras",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "walrein",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "weavile",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "glaceon",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "mamoswine",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -635,27 +635,27 @@
   "rematchTeam": [
    {
     "speciesKey": "druddigon",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "hydreigon",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "tyrantrum",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "goodra",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "noivern",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "turtonator",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -690,27 +690,27 @@
   "rematchTeam": [
    {
     "speciesKey": "butterfree",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "parasect",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "venomoth",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "ledian",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "ariados",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "forretress",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -745,27 +745,27 @@
   "rematchTeam": [
    {
     "speciesKey": "nidoqueen",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "nidoking",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "dugtrio",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "golem",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "marowak",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "quagsire",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -800,27 +800,27 @@
   "rematchTeam": [
    {
     "speciesKey": "rapidash",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "flareon",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "magcargo",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "torkoal",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "magmortar",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "simisear",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -855,27 +855,27 @@
   "rematchTeam": [
    {
     "speciesKey": "jynx",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "xatu",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "espeon",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "slowking",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "wobbuffet",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "grumpig",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -910,27 +910,27 @@
   "rematchTeam": [
    {
     "speciesKey": "drifblim",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "mismagius",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "spiritomb",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "dusknoir",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "cofagrigus",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "jellicent",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -965,27 +965,27 @@
   "rematchTeam": [
    {
     "speciesKey": "mightyena",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "shiftry",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "cacturne",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "crawdaunt",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "honchkrow",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "skuntank",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1020,27 +1020,27 @@
   "rematchTeam": [
    {
     "speciesKey": "mrMime",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "jynx",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "xatu",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "espeon",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "slowking",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "wobbuffet",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1075,27 +1075,27 @@
   "rematchTeam": [
    {
     "speciesKey": "hitmonchan",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "hitmontop",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "breloom",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "hariyama",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "toxicroak",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "conkeldurr",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1130,27 +1130,27 @@
   "rematchTeam": [
    {
     "speciesKey": "ninetales",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "arcanine",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "rapidash",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "flareon",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "magcargo",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "torkoal",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1185,27 +1185,27 @@
   "rematchTeam": [
    {
     "speciesKey": "poliwrath",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "tentacruel",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "dewgong",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "cloyster",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "kingler",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "seaking",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1240,27 +1240,27 @@
   "rematchTeam": [
    {
     "speciesKey": "bronzong",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "magnezone",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "probopass",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "escavalier",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "ferrothorn",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "klinklang",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1295,27 +1295,27 @@
   "rematchTeam": [
    {
     "speciesKey": "druddigon",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "hydreigon",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "tyrantrum",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "goodra",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "noivern",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "turtonator",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1350,27 +1350,27 @@
   "rematchTeam": [
    {
     "speciesKey": "poliwrath",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "machamp",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "hitmonlee",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "hitmonchan",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "hitmontop",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "breloom",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1405,27 +1405,27 @@
   "rematchTeam": [
    {
     "speciesKey": "omastar",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "kabutops",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "sudowoodo",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "shuckle",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "magcargo",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "corsola",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1460,27 +1460,27 @@
   "rematchTeam": [
    {
     "speciesKey": "bronzong",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "magnezone",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "probopass",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "escavalier",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "ferrothorn",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "klinklang",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1515,27 +1515,27 @@
   "rematchTeam": [
    {
     "speciesKey": "noctowl",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "ledian",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "crobat",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "xatu",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "jumpluff",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "mantine",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1570,27 +1570,27 @@
   "rematchTeam": [
    {
     "speciesKey": "umbreon",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "mightyena",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "shiftry",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "cacturne",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "crawdaunt",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "honchkrow",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1625,27 +1625,27 @@
   "rematchTeam": [
    {
     "speciesKey": "machamp",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "hitmonlee",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "hitmonchan",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "hitmontop",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "breloom",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "hariyama",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1680,27 +1680,27 @@
   "rematchTeam": [
    {
     "speciesKey": "azumarill",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "granbull",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "togekiss",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "whimsicott",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "florges",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "aromatisse",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1735,27 +1735,27 @@
   "rematchTeam": [
    {
     "speciesKey": "druddigon",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "hydreigon",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "tyrantrum",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "goodra",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "noivern",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "turtonator",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1790,27 +1790,27 @@
   "rematchTeam": [
    {
     "speciesKey": "sandslash",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "nidoqueen",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "nidoking",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "dugtrio",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "golem",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "marowak",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1845,27 +1845,27 @@
   "rematchTeam": [
    {
     "speciesKey": "bastiodon",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "bronzong",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "magnezone",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "probopass",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "escavalier",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "ferrothorn",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1900,27 +1900,27 @@
   "rematchTeam": [
    {
     "speciesKey": "dodrio",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "noctowl",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "ledian",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "crobat",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "xatu",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "jumpluff",
-    "level": 95
+    "level": 85
    }
   ]
  },
@@ -1955,27 +1955,27 @@
   "rematchTeam": [
    {
     "speciesKey": "druddigon",
-    "level": 90
+    "level": 75
    },
    {
     "speciesKey": "hydreigon",
-    "level": 91
+    "level": 77
    },
    {
     "speciesKey": "tyrantrum",
-    "level": 92
+    "level": 79
    },
    {
     "speciesKey": "goodra",
-    "level": 93
+    "level": 81
    },
    {
     "speciesKey": "noivern",
-    "level": 94
+    "level": 83
    },
    {
     "speciesKey": "turtonator",
-    "level": 95
+    "level": 85
    }
   ]
  }

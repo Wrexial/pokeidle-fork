@@ -95,6 +95,65 @@ waiting for the calendar.
 - [ ] No save-shape change: the counters already exist, so no `SAVE_VERSION`
       bump or `LEGACY_SAVE_KEYS` entry.
 
+## Trainer tab consolidation (follow-up)
+
+The Backpack's **Trainer** tab (`src/components/trainer-card-panel.js`) is the
+natural home for everything "about the player", but the related views still sit
+in their own tabs. Fold them in so there is one trainer hub:
+
+- [ ] Move **Records** (`RecordsModal`) out of its top-level Backpack tab into
+      the Trainer tab. It already supports `inline` rendering.
+- [ ] Move the **Run Summary** (`RunSummaryModal`, currently opened from the
+      Records tab's button and the battle top-bar's `summary` menu in
+      `src/components/battle-menu-modals.js`) in as a section/button too. It
+      also renders `inline` already.
+- [ ] Consider moving the **League** view (`GymPanel`, the default `league` tab)
+      in as well.
+- [ ] Update `BACKPACK_TABS` / the tab render switch in
+      `src/components/backpack-panel.js` and drop the now-empty top-level tabs.
+
+## Kurt's Apricorn queue (follow-up)
+
+Kurt (`src/game/kurt.js`, `src/components/kurt-panel.js`) queues one Apricorn
+per `CRAFT` click, so batching the same ball means tapping the button once per
+Apricorn. Let the player queue several of the same ball at once — a quantity
+selector or a "craft all owned" action — deducting the matching Apricorns and
+sending one notification. The queue already holds multiple crafts, so this is a
+UI/affordance change, not a state-shape change.
+
+## Professor's Story region gating (follow-up)
+
+The Professor's Story chapters unlock strictly in sequence: in
+`professorStoryStatus` (`src/game/quests.js`) a chapter's `unlocked` is only true
+once the previous chapter is claimed. But regions open in any order now (Unlock
+Tokens), so a player deep into, say, Paldea is still blocked from Kukui's
+chapter until they have chained through every earlier region. Gate each chapter
+on **its own region** being open instead:
+
+- [ ] Base a regional chapter's `unlocked` on the region being available to the
+      player (or just drop the pre-req and let the steps gate it), keeping the
+      `region: null` capstone behind every regional chapter.
+- [ ] Re-check the `chapters` capstone step and the "Locked · <professor>" copy
+      in `src/components/quests-modal.js`, and update
+      `tests/professor-story.test.mjs` (it currently asserts the sequential
+      chain, e.g. that a done-but-unreached Unova chapter stays unclaimable).
+
+## Route activity theme tweaks (follow-up)
+
+Two newer route activities reuse older minigames' mechanics and read as
+duplicates. Keep them, but re-theme so they feel like their own thing:
+
+- [ ] **Dowsing Machine** (`src/game/minigames/dowsing.js`,
+      `src/components/dowsing-scene.js`): the hot/cold probe grid is the Mining
+      grid (`mining.js`) again. Reskin the grid, heat language and reward
+      fiction (lost-and-found, buried treasure, auras) so it is not "another
+      Mining".
+- [ ] **Hide-and-Seek** (`src/game/minigames/hide-and-seek.js`,
+      `src/components/hide-and-seek-scene.js`): the glyph reveal is the Unown
+      Picross nonogram (`unown-picross.js`) again. Re-theme the puzzle
+      presentation (rustling grass, footprint tracking, echolocation) so it is
+      not a second Picross.
+
 ---
 
 ## Useful references when picking these up

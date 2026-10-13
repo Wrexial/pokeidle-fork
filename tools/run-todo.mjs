@@ -67,6 +67,7 @@ const STRUCTURAL_SECTIONS = new Set([
   'Priority order (effort vs. gain)',
   'Feature ideas (0.25.0 brainstorm)',
   'Feature ideas',
+  'UI polish batch',
   'Map cleanup reference maps',
   'Useful references when picking these up',
 ])

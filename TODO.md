@@ -61,6 +61,143 @@ Reference images kept for future checks:
 
 ---
 
+## UI polish batch
+
+Panel-layout and top-bar cleanups: reclaim vertical space, make the sub-tab
+hierarchy read, and fold the daily menus together. All are UI-only unless
+noted.
+
+## Trainer sub-tabs should use the bag tab style (follow-up)
+
+The Backpack's Trainer tab (`src/components/trainer-card-panel.js`) renders its
+four sub-views — Card, League, Records, Summary — with the same `tab-bar` /
+`tab-btn` classes as the top-level Backpack tabs, so the two rows look identical
+and the second level doesn't read as a sub-tab. Reuse the Items tab's pill
+style instead: `src/components/bag-panel.js` renders its categories as
+`bag-tabs` / `bag-tab` buttons, a visibly lighter cluster.
+
+- [ ] Switch the `TRAINER_TABS` rendering in `src/components/trainer-card-panel.js`
+      to the `bag-tabs` / `bag-tab` markup (keep `trainer-tab-bar` as the
+      wrapper class if the layout needs it).
+- [ ] Extend/adjust the `.bag-tab` CSS in `assets/style.css` so it fits four
+      labels at the trainer panel width (it currently targets the wider bag
+      header).
+- [ ] Check the stacked mobile layout (`src/components/mobile-tabs.js`,
+      `src/components/game-layout.js`) still fits.
+
+## Compact the route activity cards (follow-up)
+
+Each route activity renders a full-width `MinigameCard` — a big hint paragraph,
+a full-width "HOW TO PLAY" toggle and a full-width start button
+(`src/components/minigame-card.js`) — plus a `JobControls` block whose
+"ASSIGN A POKEMON" button is another full-width bar
+(`src/components/job-controls.js`). A route with several activities fills the
+panel. Move the secondary controls into the card header: a small help `?`
+toggle and a small assign button, both top-right, and let the hint collapse.
+
+- [ ] In `minigame-card.js`, replace the full-width help toggle with a small
+      icon button inside `location-minigame-head` that toggles the steps (keep
+      the `location-minigame-steps` list and the first-time tutorial).
+- [ ] Surface the field-job assign action in that header too — pass an optional
+      `onAssign` / `assignLabel` / `assignDisabled` prop into `MinigameCard`
+      (or lift the assign button out of `JobControls`) so posting a Pokemon is
+      a small button rather than a full-width bar. It must still dispatch
+      `ASSIGN_JOB` with the default worker.
+- [ ] Trim the hint to one line and adjust the `.location-minigame-*` CSS in
+      `assets/style.css` so the card is noticeably shorter.
+- [ ] Re-check the Dowsing, Hide-and-Seek and fixed-minigame cards, which all
+      share `MinigameCard` (including the zone-hub `fixedMinigameCard`).
+
+## Make the Secret Base card collapsible (follow-up)
+
+`SecretBaseCard` (`src/components/secret-base-card.js`) always shows its
+heading, hint paragraph and start/move button on every route, which is a lot of
+space for a feature most routes don't use. Collapse it behind its section title
+like the other disclosure sections, defaulting to open only when this route *is*
+the player's base.
+
+- [ ] Add a `collapsed` state to `SecretBaseCard` toggled from the
+      `location-section-title`, with a chevron/open indicator.
+- [ ] Keep the hint and the ENTER / MOVE / SET UP button inside the expanded
+      body; show the base's location (or "not set up") in the collapsed title.
+- [ ] Match the existing disclosure styling in `assets/style.css` rather than
+      inventing a new pattern.
+
+## Put Focus Hunt and Field Jobs on one row (follow-up)
+
+The Focus Hunt bar (`HuntBar`, `src/components/hunt-panel.js`) is a full-width
+bar, and the Field Jobs entry (`location-jobs-btn`,
+`src/components/location-panel.js`) only appears under it once a job is already
+running, so there is no single "route utilities" row. Group them: make the
+Focus control read as a compact button (icon + target/short progress) and sit
+the Field Jobs button beside it.
+
+- [ ] Restyle `.hunt-bar` in `assets/style.css` as a compact button so it can
+      share a row instead of stretching full width.
+- [ ] Add a small flex row in `LocationPanel` holding `HuntBar` and the Field
+      Jobs button, and show the jobs button whenever job slots exist rather
+      than only when `jobCount > 0`.
+- [ ] Sanity-check the row on the narrow/mobile location panel.
+
+## Collapse the daily menus into one hub (follow-up)
+
+The battle top bar (`battle-top-buttons` in `src/components/battle-scene.js`)
+has a separate button each for the Daily Event, Mystery Gift, Quests &
+Professor's Story, Pokewalker and Companion. That is five icons competing with
+Info and Settings. Collapse them behind one "Dailies" button that opens a modal
+with a sub-tab per section (reuse the trainer sub-tab styling above) and shows a
+single claimable pulse when any of them has something waiting.
+
+- [ ] Add a `DailyHubModal` that hosts `DailyEventModal`, `MysteryGiftModal`,
+      `QuestsModal`, `PokewalkerPanel` and `CompanionCarePanel` as inline
+      sub-views (they already support inline rendering or can be adapted).
+- [ ] Replace the five top-bar buttons in `battle-scene.js` with one Dailies
+      button, keeping the combined "claimable" state
+      (`claimableMysteryGifts`, `hasClaimableQuests` /
+      `hasClaimableProfessorStory`, `state.dailyEvent`, Pokewalker steps,
+      companion care).
+- [ ] Keep `BattleMenuKey` and the `BattleMenuModals` switch tidy (drop the
+      now-unused keys) and update any test that references them.
+
+## Remove the Run Summary shortcut from the battle screen (follow-up)
+
+The Run Summary now lives in Backpack → Trainer → Summary
+(`src/components/trainer-card-panel.js`), but the battle top bar still has its
+own `run-summary-btn` (`src/components/battle-scene.js`) and the `'summary'`
+branch in `src/components/battle-menu-modals.js`, so the same modal opens from
+two places.
+
+- [ ] Delete the `run-summary-btn` from `battle-scene.js` and the `'summary'`
+      entry from `BattleMenuKey` / `BattleMenuModals`.
+- [ ] Drop the now-unused `RunSummaryModal` import and confirm no test or other
+      caller references the old menu key.
+
+## Rare Radar reads as broken (bug)
+
+Buying the Pokewalker's Rare Radar sets `revealSpecies` from
+`rarestRouteSpecies(state.currentRoute)` (`src/components/pokewalker-panel.js`)
+and `spendOnReveal` (`src/game/reducer/pokewalker.js`) only adds that species to
+`activeEffects` as a `honey` effect. `resolveActiveModifiers`
+(`src/game/progression/encounters.js`) merely **doubles** its encounter weight,
+so a weight-1 "super rare" in a large table stays effectively invisible, and
+nothing in the UI confirms the buff is up — the steps look wasted. The reducer
+test (`tests/pokewalker.test.mjs`) only asserts the effect object, not that the
+target actually becomes common.
+
+- [ ] Reproduce it: spend steps on a route, then confirm the target's spawn
+      rate barely changes (and the effect is invisible in the location /
+      encounter panel).
+- [ ] Make the reveal actually draw the target out — a much larger multiplier,
+      suppression of the other species, or a guaranteed encounter after N
+      battles — instead of reusing the Honey buff verbatim.
+- [ ] Surface an active-reveal chip in the location panel (target name +
+      battles remaining) so the player can see it working.
+- [ ] Add an idle-loop/encounter test asserting the target is materially more
+      common (or guaranteed) while the reveal is active, not just that the
+      effect object exists.
+
+---
+
 ## Useful references when picking these up
 
 - **Data-pipeline template:** `tools/fetch-breeding-data.cjs` — cached PokéAPI

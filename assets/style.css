@@ -19600,18 +19600,25 @@ img {
     overflow-y: auto
 }
 
+/* Children of the scrolling flex column must not shrink: the card sets
+   `overflow: hidden`, so its automatic minimum height collapses it to a
+   sliver otherwise. Let the column scroll instead. */
+.trainer-card-scroll > * {
+    flex: none
+}
+
+/* The Trainer hub's sub-tabs use the Items tab's compact pill cluster rather
+   than the stretched top-level tab style. */
 .trainer-tab-bar {
     flex: none;
     padding: 4px 6px;
-    background: var(--bg-panel-light);
-    border-bottom: 2px solid #483828
+    background: linear-gradient(180deg,#6a4030,#5a3020);
+    border-bottom: 2px solid #3a1e10
 }
 
 .trainer-tab-bar .bag-tab {
-    flex: 1;
-    min-width: 0;
     font-size: 7px;
-    padding: 4px
+    padding: 3px 6px
 }
 
 .trainer-card-panel-head {

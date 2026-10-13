@@ -34,7 +34,7 @@ number and full detail further down. Promote into the tiers above once scoped.
 
 - **Strong candidates:** #78 Seasons · #83 Trainer Card, titles & avatar ·
   #88 Villain-team questlines (each fills a real gap for the effort).
-- **Big but wanted:** #87 Secret Base · #86 Pokemon Bank.
+- **Big but wanted:** #86 Pokemon Bank.
 - **Medium:** #85 Form dex · #89 Mystery Gift ·
   #90 Professor's story · #91 Auto-battle policy · #92 Raid events ·
   #93 Tower ladders · #96 Berry market.
@@ -48,19 +48,6 @@ number and full detail further down. Promote into the tiers above once scoped.
 The numbered entries below are the brainstorm referenced from the priority
 order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
 player-facing value (★ = nice to have, ★★★★★ = core missing feature).
-
-**Meta, collection & customization**
-
-## 87. Secret Base / hideout
-
-Pick a route, decorate a base with furniture/plushies/trophies, earn passive
-bonuses and a daily yield. Reuses the Pelago/Garden patterns.
-
-- [ ] A base owned per save with a decoration inventory and a placement grid.
-- [ ] A shop for furniture and trophies (milestone rewards).
-- [ ] Passive bonuses + a collectable daily yield (idle hook).
-
-Effort: **large**. Gain: ★★★.
 
 **Narrative & quests**
 

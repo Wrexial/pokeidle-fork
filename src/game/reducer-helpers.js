@@ -74,6 +74,7 @@ export function enterMinigame(state, phase, cost = 0, log) {
     state.phase === 'ruinsPuzzle' ||
     state.phase === 'iceSlide' ||
     state.phase === 'pelago' ||
+    state.phase === 'secretBase' ||
     state.phase === 'mantineSurf' ||
     state.phase === 'rotomRally' ||
     state.phase === 'ogreOustin' ||

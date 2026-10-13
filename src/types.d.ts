@@ -221,6 +221,45 @@ type Garden = { plots: GardenPlot[] }
 type PelagoIsland = { assigned: string[]; progress: number; ready: number }
 type Pelago = Record<string, PelagoIsland>
 
+/** One placed decoration on the Secret Base grid. */
+type SecretBasePlacement = { decorationId: string; x: number; y: number }
+
+/** The passive stats a Secret Base decoration can provide. */
+type SecretBaseBonus = { exp?: number; money?: number; catch?: number; shiny?: number }
+
+/** A Secret Base decoration definition. */
+type SecretBaseDecoration = {
+  id: string
+  name: string
+  category: 'furniture' | 'plushie' | 'trophy'
+  icon: string
+  cost: number
+  bonus: SecretBaseBonus
+  milestone?: { type: string; value: number }
+  yield?: { money?: number; items?: Record<string, number> }
+}
+
+/** The player's Secret Base (see game/secret-base.js). */
+type SecretBase = {
+  /** The route the base is established on, or null before setup. */
+  locationId: string | null
+  placements: SecretBasePlacement[]
+  /** Owned-but-unplaced decorations, by decoration id. */
+  inventory: Record<string, number>
+  /** The date key (`YYYY-MM-DD`) the daily yield was last collected. */
+  lastYieldDate: string
+  /** Wild wins banked toward the next daily yield. */
+  yieldProgress: number
+  /** Lifetime money the base has produced, for display. */
+  totalYield: number
+}
+
+/** The base's collected daily yield, shown in a result card until dismissed. */
+type SecretBaseCollect = {
+  money: number
+  items: { itemId: string; quantity: number }[]
+}
+
 /** Field Jobs: a Pokemon auto-running a route activity (see game/jobs.js). */
 type FieldJob = {
   locationId: string
@@ -758,6 +797,10 @@ type GameState = {
   kurtCrafts: { apricornId: string; ballId: string; battlesRemaining: number }[]
   /** Poké Pelago's passive islands (see game/pelago.js). */
   pelago: Pelago
+  /** The Secret Base on a chosen route (see game/secret-base.js). */
+  secretBase: SecretBase
+  /** The last Secret Base yield collection, shown in a card until dismissed. */
+  secretBaseCollect?: SecretBaseCollect | null
   /** Field Jobs: Pokemon auto-running route activities (see game/jobs.js). */
   jobs: FieldJobs
   /** Pokewalker steps banked while away (see game/pokewalker.js). */

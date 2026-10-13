@@ -6,6 +6,7 @@ import { emptyBattleHazards } from './hazards.js'
 import { createCompanionCare } from './companion.js'
 import { createGarden } from './garden.js'
 import { createPelago } from './pelago.js'
+import { createSecretBase } from './secret-base.js'
 import { createJobs } from './jobs.js'
 import { createPokewalker } from './pokewalker.js'
 import { DEFAULT_ROD } from './minigames.js'
@@ -14,6 +15,7 @@ import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimFormDexR
 import { buyCafeItem, buyItem, buyRewardItem, clearHeldItem, collectKurtBalls, craftApricornBall, reviveFossil, sellItem, setAlwaysCatchShinies, setCatchRule, setDefaultCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
 import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } from './reducer/pelago.js'
+import { buyDecoration, collectSecretBaseYield, dismissSecretBaseCollect, endSecretBase, placeDecoration, removeDecoration, setupSecretBase, startSecretBase } from './reducer/secret-base.js'
 import { assignJob, collectJob, takeJobEncounter, unassignJob, accrueJobFinds } from './reducer/jobs.js'
 import { claimGift, startStaticEncounter } from './reducer/gifts.js'
 import { buyResearchItem } from './reducer/research.js'
@@ -106,6 +108,10 @@ export const initialGameState = {
   kurtCrafts: [],
   /** The Poké Pelago passive islands (see game/pelago.js). */
   pelago: createPelago(),
+  /** The Secret Base on a chosen route (see game/secret-base.js). */
+  secretBase: createSecretBase(),
+  /** The last Secret Base yield collection, shown once. */
+  secretBaseCollect: null,
   /** Field Jobs: Pokemon posted to auto-run route activities (see game/jobs.js). */
   jobs: createJobs(),
   /** Pokewalker steps banked while away, spent on walk rewards (see game/pokewalker.js). */
@@ -682,6 +688,22 @@ export function gameReducer(state, action) {
       return collectPelago(state, action)
     case 'DISMISS_PELAGO_COLLECT':
       return dismissPelagoCollect(state, action)
+    case 'START_SECRET_BASE':
+      return startSecretBase(state)
+    case 'END_SECRET_BASE':
+      return endSecretBase(state)
+    case 'SETUP_SECRET_BASE':
+      return setupSecretBase(state, action)
+    case 'BUY_DECORATION':
+      return buyDecoration(state, action)
+    case 'PLACE_DECORATION':
+      return placeDecoration(state, action)
+    case 'REMOVE_DECORATION':
+      return removeDecoration(state, action)
+    case 'COLLECT_SECRET_BASE_YIELD':
+      return collectSecretBaseYield(state)
+    case 'DISMISS_SECRET_BASE_COLLECT':
+      return dismissSecretBaseCollect(state)
     case 'ASSIGN_JOB':
       return assignJob(state, action)
     case 'UNASSIGN_JOB':

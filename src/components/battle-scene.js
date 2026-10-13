@@ -56,6 +56,7 @@ import { PokeballFactoryScene } from './pokeball-factory-scene.js'
 import { RuinsPuzzleScene } from './ruins-puzzle-scene.js'
 import { IceSlideScene } from './ice-slide-scene.js'
 import { PokePelagoScene } from './poke-pelago-scene.js'
+import { SecretBaseScene } from './secret-base-scene.js'
 import { MantineSurfScene } from './mantine-surf-scene.js'
 import { RotomRallyScene } from './rotom-rally-scene.js'
 import { OgreOustinScene } from './ogre-oustin-scene.js'
@@ -150,6 +151,7 @@ export function BattleScene({ onOpenMenu }) {
   if (state.phase === 'ruinsPuzzle') return jsx(RuinsPuzzleScene, {})
   if (state.phase === 'iceSlide') return jsx(IceSlideScene, {})
   if (state.phase === 'pelago') return jsx(PokePelagoScene, {})
+  if (state.phase === 'secretBase') return jsx(SecretBaseScene, {})
   if (state.phase === 'mantineSurf') return jsx(MantineSurfScene, {})
   if (state.phase === 'rotomRally') return jsx(RotomRallyScene, {})
   if (state.phase === 'ogreOustin') return jsx(OgreOustinScene, {})

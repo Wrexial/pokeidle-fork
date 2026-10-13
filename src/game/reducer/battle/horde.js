@@ -11,6 +11,7 @@ import { tickGarden } from '../../garden.js'
 import { hordeAlive, hordeDropRolls } from '../../horde.js'
 import { tickKurtCrafts } from '../../kurt.js'
 import { tickPelago } from '../../pelago.js'
+import { tickSecretBase } from '../../secret-base.js'
 import { gainFriendship, isBattleReady } from '../../pokemon.js'
 import { releaseFaintedParty, syncActivePokemonIntoParty, tickBattleCounters, tickPartyEggs, tickPokerus, rollCandyDrop, rollValuableDrop } from '../../progression.js'
 import { advanceQuests } from '../../quests.js'
@@ -147,6 +148,7 @@ export function endHorde(state, action) {
     eggTick = tickPartyEggs(state.party),
     pelago = tickPelago(state.pelago),
     garden = tickGarden(state.garden),
+    secretBase = tickSecretBase(state.secretBase) ?? state.secretBase,
     kurtCrafts = tickKurtCrafts(state.kurtCrafts),
     companionId = state.companion?.id,
     companion = tickCompanion(
@@ -186,6 +188,7 @@ export function endHorde(state, action) {
       party,
       pelago,
       garden,
+      secretBase,
       kurtCrafts,
       companion,
       daycare,

@@ -4,6 +4,7 @@ import { canBreed } from '../breeding.js'
 import { tickGarden } from '../garden.js'
 import { tickKurtCrafts } from '../kurt.js'
 import { tickPelago } from '../pelago.js'
+import { tickSecretBase } from '../secret-base.js'
 import { daycareEggBattles, offlineBattlesPerHour, offlineCapMs, offlineMinMs, offlineMoneyPerHourPerLevel } from '../../data/config.js'
 
 /**
@@ -81,7 +82,7 @@ export function offlineWildWinEstimate(cappedMs) {
  * there is nothing to advance.
  * @param {GameState} state
  * @param {number} cappedMs
- * @returns {{ pelago: any, garden: any, kurtCrafts: any, daycare: any, battles: number, summary: { id: string, label: string }[] } | null}
+ * @returns {{ pelago: any, garden: any, kurtCrafts: any, daycare: any, secretBase: any, battles: number, summary: { id: string, label: string }[] } | null}
  */
 export function simulateOfflineWildWins(state, cappedMs) {
   const battles = offlineWildWinEstimate(cappedMs)
@@ -90,6 +91,8 @@ export function simulateOfflineWildWins(state, cappedMs) {
     garden = state.garden,
     kurtCrafts = state.kurtCrafts,
     daycare = state.daycare,
+    secretBase = state.secretBase,
+    secretBaseProgressed = false,
     pelagoBanked = 0,
     gardenChanged = false,
     kurtCompleted = 0,
@@ -120,6 +123,11 @@ export function simulateOfflineWildWins(state, cappedMs) {
         next.filter((/** @type {any} */ craft) => craft.battlesRemaining <= 0).length - readyBefore
       kurtCrafts = next
     }
+    if (secretBase) {
+      const next = tickSecretBase(secretBase) ?? secretBase
+      secretBaseProgressed = secretBaseProgressed || next !== secretBase
+      secretBase = next
+    }
     if (
       daycare?.parents?.length === 2 &&
       canBreed(daycare.parents) &&
@@ -142,8 +150,10 @@ export function simulateOfflineWildWins(state, cappedMs) {
       label: `Kurt finished ${kurtCompleted} Apricorn Ball${kurtCompleted === 1 ? '' : 's'}`,
     })
   if (daycareAdvanced) summary.push({ id: 'daycare', label: 'The Day-Care made progress' })
+  if (secretBaseProgressed)
+    summary.push({ id: 'secretBase', label: 'Your Secret Base banked its daily yield' })
   if (summary.length === 0) return null
-  return { pelago, garden, kurtCrafts, daycare, battles, summary }
+  return { pelago, garden, kurtCrafts, daycare, secretBase, battles, summary }
 }
 
 /**

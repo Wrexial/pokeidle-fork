@@ -25,6 +25,7 @@ import { COMPANION_MAX_CARE, createCompanionCare } from './companion.js'
 import { GARDEN_BERRIES, createGarden } from './garden.js'
 import { GAME_CORNER_PRIZE_GOAL } from './minigames/game-corner.js'
 import { PELAGO_MAX_READY, PELAGO_SLOTS, createPelago } from './pelago.js'
+import { SECRET_BASE_GRID, SECRET_BASE_YIELD_WIN_CAP, createSecretBase, decorationById } from './secret-base.js'
 import { RODS, rodsForRegionCount, routeActivityIds } from './minigames.js'
 import { JOB_MAX_READY, accrueJobs, jobCycleMs, jobKey, summarizeJobAccrual } from './jobs.js'
 import { RESEARCH_MAX_POINTS } from './research.js'
@@ -605,6 +606,50 @@ export function repairSave(saved) {
     }
   }
 
+  // The Secret Base: keep the placement grid sane and drop unknown
+  // decorations and out-of-bounds cells.
+  const secretBase = (() => {
+      const base = createSecretBase(),
+        raw = saved.secretBase && typeof saved.secretBase === 'object' ? saved.secretBase : null
+      if (!raw) return base
+      if (typeof raw.locationId === 'string' && mapData[raw.locationId]?.type === 'route')
+        base.locationId = raw.locationId
+      const seen = new Set()
+      const placements = Array.isArray(raw.placements) ? raw.placements : []
+      for (const placement of placements) {
+        if (!placement || !decorationById(placement.decorationId)) continue
+        const x = Math.floor(Number(placement.x)),
+          y = Math.floor(Number(placement.y))
+        if (!Number.isFinite(x) || !Number.isFinite(y)) continue
+        if (x < 0 || y < 0 || x >= SECRET_BASE_GRID.width || y >= SECRET_BASE_GRID.height) continue
+        const key = `${x}:${y}`
+        if (seen.has(key)) continue
+        // A unique (milestone) decoration cannot be duplicated across cells.
+        const decoration = decorationById(placement.decorationId)
+        if (decoration?.milestone && base.placements.some((entry) => entry.decorationId === placement.decorationId))
+          continue
+        seen.add(key)
+        base.placements.push({ decorationId: placement.decorationId, x, y })
+      }
+      const inventory = /** @type {Record<string, number>} */ ({})
+      if (raw.inventory && typeof raw.inventory === 'object')
+        for (const [decorationId, count] of Object.entries(raw.inventory)) {
+          const decoration = decorationById(decorationId)
+          if (!decoration || !Number.isFinite(count) || count <= 0) continue
+          // Milestone trophies are unique; don't let a corrupt count stack them.
+          inventory[decorationId] = decoration.milestone ? 1 : Math.min(99, Math.floor(Number(count)))
+        }
+      base.inventory = inventory
+      base.lastYieldDate = typeof raw.lastYieldDate === 'string' ? raw.lastYieldDate : ''
+      base.yieldProgress = Number.isFinite(raw.yieldProgress)
+        ? Math.max(0, Math.min(SECRET_BASE_YIELD_WIN_CAP, Math.floor(raw.yieldProgress)))
+        : 0
+      base.totalYield = Number.isFinite(raw.totalYield)
+        ? Math.max(0, Math.floor(raw.totalYield))
+        : 0
+      return base
+    })()
+
   // Field Jobs: keep only jobs for a real activity whose worker still exists.
   const jobs = /** @type {Record<string, any>} */ ({}),
     savedJobs = saved.jobs && typeof saved.jobs === 'object' ? saved.jobs : {}
@@ -1045,6 +1090,7 @@ export function repairSave(saved) {
     garden,
     kurtCrafts,
     pelago,
+    secretBase,
     jobs,
     pokewalker,
     researchDefeated,
@@ -1226,6 +1272,7 @@ export function loadSavedState(slot = getActiveSlot() || 1) {
           garden: simulation.garden,
           kurtCrafts: simulation.kurtCrafts,
           daycare: simulation.daycare,
+          secretBase: simulation.secretBase,
         }
       : {}),
     ...(catches
@@ -1294,6 +1341,7 @@ export const SAVED_STATE_KEYS = [
   'garden',
   'kurtCrafts',
   'pelago',
+  'secretBase',
   'jobs',
   'pokewalker',
   'researchDefeated',

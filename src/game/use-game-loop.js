@@ -21,6 +21,7 @@ import { currentSeason } from './seasons.js'
 import { heldMoneyMultiplier } from './held-items.js'
 import { genderForPokemon } from './breeding.js'
 import { prestigeMultipliers } from './prestige.js'
+import { secretBaseBonuses } from './secret-base.js'
 import { buildHorde, hordeAlive, hordeExpMultiplier, rollHordeSize } from './horde.js'
 import { runDoublesRound } from './minigames/doubles.js'
 import { sosHiddenAbilityChance } from './sos-chain.js'
@@ -108,13 +109,19 @@ export function useGameLoop() {
       const completedGenerationSet = completedGenerations(currentGameState.pokedexCaught),
         // Prestige perks: global EXP / money / catch multipliers.
         prestige = prestigeMultipliers(currentGameState),
+        // The Secret Base's placed decorations grant a small passive boost.
+        baseBonuses = secretBaseBonuses(currentGameState.secretBase),
         dailyExpBonus = dailyExpMultiplier(currentGameState.dailyEvent),
         expBonus =
           dailyExpBonus *
           pokerusExpMultiplier(currentGameState.pokerus) *
           companionExpMultiplier(currentGameState.companion) *
-          prestige.experience,
-        dailyPrizeBonus = dailyPrizeMultiplier(currentGameState.dailyEvent) * prestige.fortune,
+          prestige.experience *
+          (1 + baseBonuses.exp),
+        dailyPrizeBonus =
+          dailyPrizeMultiplier(currentGameState.dailyEvent) *
+          prestige.fortune *
+          (1 + baseBonuses.money),
         // Happy Hour doubles the prize money from this battle; an Amulet Coin
         // held by any battler doubles it again.
         happyHourBonus = currentGameState.playerVolatile?.happyHour ? 2 : 1,
@@ -126,7 +133,10 @@ export function useGameLoop() {
           })
         ),
         // The Radiant perk raises wild shiny odds on top of any daily bonus.
-        dailyShinyBonus = dailyShinyMultiplier(currentGameState.dailyEvent) * prestige.shiny
+        dailyShinyBonus =
+          dailyShinyMultiplier(currentGameState.dailyEvent) *
+          prestige.shiny *
+          (1 + baseBonuses.shiny)
       switch (currentGameState.phase) {
         case 'idle': {
           if (!currentGameState.playerPokemon) return
@@ -1028,7 +1038,7 @@ export function useGameLoop() {
             isWater: isWaterLocation(mapData[currentGameState.currentLocation]),
             isCave: isCaveLocation(mapData[currentGameState.currentLocation]),
             isNight: isNightTime(),
-            catchMultiplier: prestige.capture,
+            catchMultiplier: prestige.capture * (1 + baseBonuses.catch),
             honey: isHoneyActive(
               currentGameState.activeEffects,
               currentGameState.currentRoute,
@@ -1245,6 +1255,7 @@ export function useGameLoop() {
       state.phase === 'ruinsPuzzle' ||
       state.phase === 'iceSlide' ||
       state.phase === 'pelago' ||
+      state.phase === 'secretBase' ||
       state.phase === 'mantineSurf' ||
       state.phase === 'rotomRally' ||
       state.phase === 'ogreOustin' ||

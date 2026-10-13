@@ -14,6 +14,7 @@ import { fieldWeatherAt } from '../../weather.js'
 import { tickGarden } from '../../garden.js'
 import { tickKurtCrafts } from '../../kurt.js'
 import { tickPelago } from '../../pelago.js'
+import { tickSecretBase } from '../../secret-base.js'
 import { advanceHuntEncounter } from '../../hunt.js'
 import { applyResearchRibbon, creditResearchDefeat, creditResearchLarge, creditResearchMove, creditResearchSuperEffective, isLargeSpecimen } from '../../research.js'
 import { emptyBattleHazards } from '../../hazards.js'
@@ -244,6 +245,7 @@ export function consumeEvent(state, action) {
     garden = state.garden,
     kurtCrafts = state.kurtCrafts,
     pelago = state.pelago,
+    secretBase = state.secretBase,
     shinyChain = state.shinyChain,
     researchDefeated = state.researchDefeated,
     researchMoves = state.researchMoves,
@@ -391,6 +393,8 @@ export function consumeEvent(state, action) {
     shinyChain = advanceShinyTarget(shinyChain, state.enemyPokemon)
     // Poké Pelago's passive islands tick down their cycles.
     pelago = tickPelago(pelago)
+    // The Secret Base banks a little of its daily yield on every win.
+    secretBase = tickSecretBase(secretBase) ?? secretBase
     // Daily quests track wild wins (and route-specific ones).
     quests = advanceQuests(quests, { kind: 'wild', locationId: state.currentLocation })
     // Daily "Harvest Day" doubles the chance of every wild item drop.
@@ -530,6 +534,7 @@ export function consumeEvent(state, action) {
     garden,
     kurtCrafts,
     pelago,
+    secretBase,
     inventory,
   })
   // A species whose field research just completed earns the Research Ribbon.

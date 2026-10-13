@@ -3,6 +3,7 @@
 
 import React from 'react'
 import { MOBILE_BREAKPOINT, MOBILE_HEIGHT_BREAKPOINT } from './data/ui.js'
+import { HOTKEY_PHASES, actionForKey, hotkeyActions, keyForEvent } from './data/keybindings.js'
 import { mapData } from './data/gameData.js'
 import { useGame } from './game/context.js'
 import { playSfx, startMusic, stopMusic, unlockAudio } from './game/audio.js'
@@ -204,6 +205,44 @@ export function useKonamiCode(onUnlock) {
       () => window.removeEventListener('keydown', handleKeyDown)
     )
   }, [])
+}
+
+/**
+ * Fire the player's rebindable hotkeys while the game is in a main-battle
+ * phase. The Settings panel captures keys in the capture phase and stops the
+ * event, so a rebind never also triggers its old action. Typing in a field and
+ * any key with an unbound modifier combo are ignored.
+ */
+export function useHotkeys() {
+  const { state, dispatch } = useGame(),
+    stateRef = React.useRef(state)
+  React.useEffect(() => {
+    stateRef.current = state
+  })
+  return React.useEffect(() => {
+    const handleKeyDown = /** @param {KeyboardEvent} event */ (event) => {
+      if (event.repeat || event.defaultPrevented) return
+      const current = stateRef.current
+      if (!HOTKEY_PHASES.has(current.phase)) return
+      const target = /** @type {HTMLElement | null} */ (event.target)
+      if (
+        target &&
+        (target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          target.tagName === 'SELECT' ||
+          target.isContentEditable)
+      )
+        return
+      const actionId = actionForKey(current.keybindings, keyForEvent(event))
+      if (!actionId) return
+      event.preventDefault()
+      for (const action of hotkeyActions(actionId, current)) dispatch(action)
+    }
+    return (
+      window.addEventListener('keydown', handleKeyDown),
+      () => window.removeEventListener('keydown', handleKeyDown)
+    )
+  }, [dispatch])
 }
 
 /**

@@ -46,19 +46,6 @@ The numbered entries below are the brainstorm referenced from the priority
 order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
 player-facing value (★ = nice to have, ★★★★★ = core missing feature).
 
-**Interface**
-
-## 98. Rebindable hotkeys
-
-Power users idling for hours would appreciate it.
-
-- [ ] A keybinding settings section and a small resolver.
-- [ ] Cover the common actions (battle speed, manual/auto, catch).
-
-Effort: **S**. Gain: ★★.
-
----
-
 ## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.
 `tools/map-compare/overlay-region-maps.py` draws the game's nodes on top of each

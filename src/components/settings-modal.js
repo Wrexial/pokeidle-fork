@@ -9,6 +9,7 @@ import { unlockAudio } from '../game/audio.js'
 import { useGame } from '../game/context.js'
 import { decodeShareCode, encodeShareCode, repairSave, serializeSave, suspendAutosave, writeImportedSave } from '../game/save.js'
 import { MonotypeSelect } from './monotype-select.js'
+import { KeybindingsPanel } from './keybindings-panel.js'
 import { BankModal } from './bank-modal.js'
 import { NumberControl, SegmentedControl } from './ui-controls.js'
 import { OfflinePanel } from './offline-panel.js'
@@ -555,6 +556,7 @@ export function SettingsModal({ onClose }) {
                       }),
                     ],
                   }),
+                  jsx(KeybindingsPanel, {}),
                   jsxs('div', {
                     className: 'settings-section',
                     children: [

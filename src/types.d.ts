@@ -750,6 +750,8 @@ type GameState = {
   autoBattlePolicy: AutoBattlePolicy
   /** Auto battles run by themselves; manual waits for the player to choose. */
   battleMode: 'auto' | 'manual'
+  /** Player-rebindable global hotkeys, keyed by action id (see data/keybindings.js). */
+  keybindings: Record<string, string>
   autoCatch: boolean
   autoProceed: boolean
   /** Automatically heal the party at the Pokemon Center whenever the map is idle and it is damaged. */

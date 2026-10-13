@@ -6,6 +6,8 @@
 // migration); `mergeStoredSettings` then overlays this store on top, and the
 // provider writes the store back whenever a preference changes.
 
+import { sanitizeKeybindings } from '../data/keybindings.js'
+
 /** Storage key for the shared settings blob. */
 export const SETTINGS_STORAGE_KEY = 'pokemon-idle-settings'
 
@@ -33,6 +35,7 @@ export function setSpriteStyle(style) {
  */
 export const SETTINGS_KEYS = /** @type {const} */ ([
   'speed',
+  'keybindings',
   'battleStyle',
   'autoBattlePolicy',
   'battleMode',
@@ -88,6 +91,9 @@ export function mergeStoredSettings(state) {
   /** @type {Record<string, any>} */
   const merged = { ...state }
   for (const key of SETTINGS_KEYS) if (stored[key] !== void 0) merged[key] = stored[key]
+  // A stored binding map can predate an action or be hand-edited in storage,
+  // so always normalise it back to a full, valid map.
+  merged.keybindings = sanitizeKeybindings(merged.keybindings)
   setSpriteStyle(merged.spriteStyle)
   return /** @type {GameState} */ (merged)
 }

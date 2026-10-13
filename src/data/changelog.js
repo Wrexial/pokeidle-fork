@@ -113,6 +113,7 @@ export const CHANGELOG = [
           'The Backpack gained a Trainer tab for editing the Trainer Card (name, title, outfit, favourite Pokemon and badge case), and the save slots in Settings and the boot picker show each save’s card.',
           'The Pokedex gained a Forms view (the Forms button beside Search): a Living Dex summary of collected form entries, per-family form and gender targets, regional-set and generation progress with a tick for each reward already paid, and a one-tap jump back to a species’ full entry.',
           'A Pokemon Bank panel opens from the Box header and from Settings > Save Slots. It lists what you can deposit on one tab and what is waiting in the bank on the other, with each Pokemon’s sprite, level and source, and it shows how many of the thirty slots are used.',
+          'Hotkeys are rebindable now: a Keybindings section in Settings lets you set a key for pause, battle speed up and down, the manual/auto toggle and auto-catch (click a key, press the new one, Escape cancels). The defaults work out of the box, a shared-key clash is flagged, and one button restores them.',
         ],
       },
       {

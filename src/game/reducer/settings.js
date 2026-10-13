@@ -1,5 +1,6 @@
 // Reducer handlers for settings actions. Split from game/reducer.js.
 
+import { DEFAULT_KEYBINDINGS, sanitizeKeybindings } from '../../data/keybindings.js'
 import { POKEMON_TYPES } from '../../data/moves.js'
 import { DEFAULT_AUTO_BATTLE_POLICY, normalizeAutoBattlePolicy } from '../auto-battle-policy.js'
 import { withNotification } from '../reducer-helpers.js'
@@ -70,6 +71,36 @@ export function setBattleMode(state, action) {
     battleMode: mode,
     // Leaving manual mode drops any half-made choice so the loop resumes clean.
     pendingPlayerMove: mode === 'manual' ? state.pendingPlayerMove : null,
+  }
+}
+
+/**
+ * Handle the `SET_KEYBINDING` action. Binds one action id to a canonical key
+ * string (see `keyForEvent` in src/data/keybindings.js); an unknown action id
+ * is ignored.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function setKeybinding(state, action) {
+  const { actionId, key } = action.payload ?? {}
+  if (typeof actionId !== 'string' || typeof key !== 'string' || !key) return state
+  if (!Object.prototype.hasOwnProperty.call(DEFAULT_KEYBINDINGS, actionId)) return state
+  return {
+    ...state,
+    keybindings: { ...sanitizeKeybindings(state.keybindings), [actionId]: key },
+  }
+}
+
+/**
+ * Handle the `RESET_KEYBINDINGS` action: restore every hotkey to its default.
+ * @param {GameState} state
+ * @returns {GameState}
+ */
+export function resetKeybindings(state) {
+  return {
+    ...state,
+    keybindings: { ...DEFAULT_KEYBINDINGS },
   }
 }
 

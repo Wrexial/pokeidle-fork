@@ -139,8 +139,13 @@ export function todayKey(date = new Date()) {
   return `${year}-${month}-${day}`
 }
 
-/** @param {string} value */
-function hashString(value) {
+/**
+ * Small stable string hash, shared with the market's daily price roll so both
+ * round to the same day in the same way.
+ * @param {string} value
+ * @returns {number}
+ */
+export function hashString(value) {
   let hash = 0
   for (let index = 0; index < value.length; index++)
     hash = (hash * 31 + value.charCodeAt(index)) >>> 0

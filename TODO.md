@@ -35,8 +35,7 @@ number and full detail further down. Promote into the tiers above once scoped.
 - **Strong candidates:** #78 Seasons · #83 Trainer Card, titles & avatar.
 - **Big but wanted:** #86 Pokemon Bank.
 - **Medium:** #85 Form dex · #89 Mystery Gift ·
-  #90 Professor's story · #91 Auto-battle policy · #92 Raid events ·
-  #96 Berry market.
+  #90 Professor's story · #91 Auto-battle policy · #92 Raid events.
 - **Quick wins:** #95 Hide-and-seek · #97 Run summary · #98 Hotkeys.
 
 ---
@@ -46,18 +45,6 @@ number and full detail further down. Promote into the tiers above once scoped.
 The numbered entries below are the brainstorm referenced from the priority
 order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
 player-facing value (★ = nice to have, ★★★★★ = core missing feature).
-
-**Activities & economy**
-
-## 96. Berry / commodity market
-
-Daily price swings; buy low, sell high across days. A gentle idle economy.
-
-- [ ] A price table with daily fluctuation (seeded like `daily-events.js`).
-- [ ] A buy/sell UI (extends `src/game/shop.js`).
-- [ ] Keep it optional so it never blocks normal play.
-
-Effort: **medium**. Gain: ★★★.
 
 **Interface**
 

@@ -4,11 +4,13 @@ import { abilityData, encounterData, moveData, pokemonSpecies } from '../../data
 import { activeItems, consumableItems, fossilItems, heldItems, pokeBalls } from '../../data/items.js'
 import { canGigantamax } from '../../data/mega-evolution.js'
 import { natureName, randomNature } from '../../data/natures.js'
+import { todayKey } from '../../data/daily-events.js'
+import { marketQuoteFor } from '../../data/market.js'
 import { EV_MAX_PER_STAT, EV_MAX_TOTAL, EV_VITAMIN_GAIN } from '../../data/config.js'
 import { isPlantableBerry } from '../garden.js'
 import { hasBattleModifier } from '../ladder-modifiers.js'
 import { MAX_FRIENDSHIP, IV_STAT_ORDER, IV_STAT_LABELS, abilityDisplayName, applyMoveLearning, calculatePokemonStats, calculateRequiredExperience, createEmptyEvs, gainFriendship, getLevelUpResults, totalEvs } from '../pokemon.js'
-import { getItemSellPrice, isActiveEffectItem } from '../progression.js'
+import { getItemInfo, getItemSellPrice, isActiveEffectItem } from '../progression.js'
 import { queueKurtCraft, readyKurtCrafts } from '../kurt.js'
 import { withNotification } from '../reducer-helpers.js'
 import { creditResearchFeed } from '../research.js'
@@ -207,6 +209,63 @@ export function sellItem(state, action) {
     battleLog: [
       ...state.battleLog,
       `Sold ${sold}x ${item.name} for $${earned.toLocaleString()}!`,
+    ].slice(-50),
+  }
+}
+
+/**
+ * Handle the `BUY_MARKET_ITEM` action: buy a Berry/Apricorn commodity at the
+ * market's daily price. The price is recomputed here from the date instead of
+ * trusted from the UI, so a stale board can't buy at yesterday's number.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function buyMarketItem(state, action) {
+  const { itemId, quantity = 1, dateKey } = action.payload ?? {},
+    quote = marketQuoteFor(itemId, dateKey ?? todayKey())
+  if (!quote) return state
+  const count = Math.max(1, Math.floor(Number(quantity) || 0)),
+    cost = quote.buyPrice * count
+  if (state.money < cost) return state
+  return {
+    ...state,
+    money: state.money - cost,
+    inventory: {
+      ...state.inventory,
+      [itemId]: (state.inventory[itemId] ?? 0) + count,
+    },
+    battleLog: [
+      ...state.battleLog,
+      `Bought ${count}x ${getItemInfo(itemId).name} at the market for $${cost.toLocaleString()}.`,
+    ].slice(-50),
+  }
+}
+
+/**
+ * Handle the `SELL_MARKET_ITEM` action: sell a Berry/Apricorn commodity at the
+ * market's daily sell price (a little under the buy price).
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function sellMarketItem(state, action) {
+  const { itemId, quantity = 1, dateKey } = action.payload ?? {},
+    quote = marketQuoteFor(itemId, dateKey ?? todayKey()),
+    owned = state.inventory[itemId] ?? 0
+  if (!quote || owned <= 0) return state
+  const sold = Math.min(Math.max(1, Math.floor(Number(quantity) || 0)), owned),
+    earned = quote.sellPrice * sold
+  return {
+    ...state,
+    money: state.money + earned,
+    inventory: {
+      ...state.inventory,
+      [itemId]: owned - sold,
+    },
+    battleLog: [
+      ...state.battleLog,
+      `Sold ${sold}x ${getItemInfo(itemId).name} at the market for $${earned.toLocaleString()}.`,
     ].slice(-50),
   }
 }

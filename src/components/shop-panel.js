@@ -4,21 +4,29 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { activeItems, consumableItems, coreMartItems, heldItems, pokeBalls } from '../data/items.js'
 import { mapData } from '../data/gameData.js'
+import { todayKey } from '../data/daily-events.js'
 import { useGame } from '../game/context.js'
 import { getItemInfo, getItemSellPrice, isActiveEffectItem } from '../game/progression.js'
-import { regionalStockForMart } from '../game/shop.js'
+import { marketStockFor, regionalStockForMart } from '../game/shop.js'
 import { BallShopRow } from './ball-shop-row.js'
 import { NumberControl, SegmentedControl } from './ui-controls.js'
 import { ItemShopRow } from './item-shop-row.js'
+import { MarketRow } from './market-row.js'
 import { SellShopRow } from './sell-shop-row.js'
 
 /** @param {{ shopDef: { name: string, items: { itemId: string, unlockWildBattlesWon?: number }[] } }} props */
 export function ShopPanel({ shopDef }) {
   const { state, dispatch } = useGame(),
     [qtyMode, setQtyMode] = React.useState(/** @type {number | 'max'} */ (1)),
-    [mode, setMode] = React.useState(/** @type {'buy' | 'sell'} */ ('buy')),
+    [mode, setMode] = React.useState(/** @type {'buy' | 'sell' | 'market'} */ ('buy')),
     open = !state.martCollapsed,
     regionId = mapData[state.currentLocation]?.region ?? 'kanto',
+    // The market rolls with the real calendar day, the same as the daily event.
+    marketDate = todayKey(),
+    marketRows = React.useMemo(
+      () => marketStockFor(state, marketDate),
+      [state.inventory, marketDate]
+    ),
     // Retired: the region's advanced held-item stock now lives in the Grand
     // Auction House, so this is normally empty (kept for future flavour).
     regionalStock = React.useMemo(
@@ -79,11 +87,12 @@ export function ShopPanel({ shopDef }) {
                   options: [
                     { value: 'buy', label: 'BUY' },
                     { value: 'sell', label: 'SELL' },
+                    { value: 'market', label: 'MARKET', title: 'Trace Berries and Apricorns' },
                   ],
                   value: mode,
-                  onChange: /** @param {'buy' | 'sell'} next */ (next) => setMode(next),
+                  onChange: /** @param {'buy' | 'sell' | 'market'} next */ (next) => setMode(next),
                   compact: true,
-                  'aria-label': 'Buy or sell',
+                  'aria-label': 'Buy, sell or trade commodities',
                 }),
                 jsxs('div', {
                   className: 'shop-qty-selector',
@@ -133,7 +142,31 @@ export function ShopPanel({ shopDef }) {
                     className: 'shop-empty',
                     children: 'Nothing to sell.',
                   })
-              : stock.map((shopItem) => {
+              : mode === 'market'
+                ? jsxs('div', {
+                    className: 'market-panel',
+                    children: [
+                      jsx('div', {
+                        className: 'market-hint',
+                        children:
+                          'Berry and Apricorn prices drift every day. Buy low, sell high.',
+                      }),
+                      ...marketRows.map((entry) =>
+                        jsx(
+                          MarketRow,
+                          {
+                            ...entry,
+                            money: state.money,
+                            qtyMode,
+                            dateKey: marketDate,
+                            dispatch,
+                          },
+                          entry.itemId
+                        )
+                      ),
+                    ],
+                  })
+                : stock.map((shopItem) => {
           if (
             shopItem.unlockWildBattlesWon &&
             state.wildBattlesWon < shopItem.unlockWildBattlesWon

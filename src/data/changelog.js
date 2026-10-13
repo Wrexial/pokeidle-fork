@@ -62,6 +62,7 @@ export const CHANGELOG = [
           'Kurt’s Apricorn Balls are in: Apricorns turn up on Johto routes as you win wild battles (and grow in the Berry Garden now), and Kurt’s workshop in Azalea Town carves each one into its ball — Level, Lure, Friend, Heavy, Love, Fast and Moon — with their real situational catch rates. Handing him an Apricorn starts a craft that finishes after ten wild wins, and the panel shows what he is working on and lets you collect the finished balls.',
           'Dismantling a villain organisation pays its one-off arc reward: a Master Ball, Rare Candy, a regional training item, cash and Victory Tokens, plus that organisation\u2019s ribbon for the whole party.',
           'The Professor\u2019s Story pays a themed bundle as each chapter closes \u2014 Pok\u00e9 Balls, Rare Candies, Exp. Candies and similar \u2014 and midway through the chain Professor Juniper\u2019s Catching Charm grants a permanent +15% catch rate. The final chapter hands the party the Professor\u2019s Ribbon, three Master Balls and a large cash and Victory Token payout.',
+          'A Berry and Apricorn market now runs out of every Poke Mart: the MARKET tab lists the day\u2019s buy and sell prices for Oran, Sitrus and Lum Berries and all seven Apricorns, and prices drift once a day \u2014 so a commodity bought cheap one day can be sold high on another. Each row shows the move since yesterday with an up or down arrow.',
         ],
       },
       {

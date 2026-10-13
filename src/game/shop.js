@@ -3,6 +3,9 @@
 
 import { mapData } from '../data/gameData.js'
 import { martShopItems, regionalMartItems } from '../data/items.js'
+import { todayKey } from '../data/daily-events.js'
+import { marketQuotesFor } from '../data/market.js'
+import { getItemInfo } from './progression.js'
 
 /**
  * Every mart location in a region, in progression order. A location counts as a
@@ -42,4 +45,24 @@ export function regionalStockForMart(regionId, locationId) {
   return items.filter(
     (_, index) => (((index - martIndex) % count) + count) % count < windowSize
   )
+}
+
+/**
+ * The Berry / commodity market board: every traded commodity with its daily
+ * buy/sell prices, the player's holdings and the move since yesterday. Prices
+ * are derived from the date, so this is safe to call on every render and never
+ * needs save state — the market is a pure, optional side activity.
+ * @param {GameState} state
+ * @param {string} [dateKey]
+ * @returns {{
+ *   itemId: string, name: string, owned: number, price: number, basePrice: number,
+ *   buyPrice: number, sellPrice: number, previousPrice: number, change: number,
+ * }[]}
+ */
+export function marketStockFor(state, dateKey = todayKey()) {
+  return marketQuotesFor(dateKey).map((quote) => ({
+    ...quote,
+    name: getItemInfo(quote.itemId).name,
+    owned: state.inventory[quote.itemId] ?? 0,
+  }))
 }

@@ -6048,6 +6048,46 @@ img {
     opacity: .7
 }
 
+.market-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 3px
+}
+
+.market-hint {
+    font-size: 7px;
+    color: var(--text-muted);
+    padding: 2px 2px 4px;
+    font-style: italic
+}
+
+.market-item-row {
+    flex-wrap: wrap
+}
+
+.market-item-actions {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+    flex-shrink: 0
+}
+
+.market-trend {
+    font-weight: 700
+}
+
+.market-trend.up {
+    color: #7bd88f
+}
+
+.market-trend.down {
+    color: #e07a7a
+}
+
+.market-trend.flat {
+    color: var(--text-muted)
+}
+
 .trainer-name-display {
     position: absolute;
     top: 44px;

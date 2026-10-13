@@ -8,12 +8,14 @@ import { GymPanel } from './gym-panel.js'
 import { PokedexModal } from './pokedex-modal.js'
 import { RecordsModal } from './records-modal.js'
 import { RewardShopModal } from './reward-shop-modal.js'
+import { TrainerCardPanel } from './trainer-card-panel.js'
 
 const BACKPACK_TABS = [
   { id: 'league', label: 'League' },
   { id: 'dex', label: 'Dex' },
   { id: 'wares', label: 'Kecleon Wares' },
   { id: 'items', label: 'Items' },
+  { id: 'trainer', label: 'Trainer' },
   { id: 'records', label: 'Records' },
 ]
 
@@ -54,6 +56,7 @@ export function BackpackPanel() {
           tab === 'dex' && jsx(PokedexModal, { inline: !0 }),
           tab === 'records' && jsx(RecordsModal, { inline: !0 }),
           tab === 'items' && jsx(BagPanel, {}),
+          tab === 'trainer' && jsx(TrainerCardPanel, { inline: true }),
           tab === 'wares' && jsx(RewardShopModal, { inline: !0 }),
         ],
       }),

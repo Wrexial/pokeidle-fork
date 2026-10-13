@@ -81,6 +81,7 @@ export const CHANGELOG = [
           'The Day-Care tracks breeding: eggs and shinies hatched, eggs since the last shiny, and a project queue (a shiny, all-31 IVs or a specific nature) that completes the moment a matching Egg hatches. The front project also counts the eggs spent on it, and the Masuda method is explicit now: breeding two parents from different regions (a Pokemon from another region’s routes, or a Wonder Trade find) hatches shinies at 1 in 683 instead of 1 in 4096. Each Pokemon shows its origin region on the stats panel.',
           'Prestiging a region now earns Prestige Points for a permanent perk tree that survives every reset: Experience (+8% EXP per rank), Fortune (+10% prize money per rank), Capture (+5% catch rate per rank), Radiant (+10% shiny odds), Scavenger (+10% wild item drops) and Incubation (+12% egg hatching speed), up to rank 5 each. A Reset button refunds every spent point so you can re-spec.',
           'Each region’s Raid Island tracks a Legendary Quest for its box legendary: earn every badge, beat the Champion and recover ten Ancient Relics, then challenge it directly instead of leaving it to the weighted raid roll — the challenge opens with a short boss scene before the raid. Relics are dug up on that region’s wild routes as you battle there, and the region’s own count is shown in the quest panel.',
+          'Every save has a Trainer Card now. Set a trainer name and a title earned from your achievements and ribbon milestones, wear an outfit unlocked by achievements or bought with prize money, pin a favourite Pokemon and choose which badges fill the badge case. The card can be exported as a shareable PNG, and each save slot shows its own card.',
         ],
       },
       {
@@ -92,6 +93,7 @@ export const CHANGELOG = [
           'The Box can bulk-release a search or filter: a “Release Found” button appears while searching and releases everything shown (favourites and shinies are always protected), alongside the existing one-tap Release Dupes.',
           'The Display section gained damage-number and shiny-sparkle toggles, the Box can sort by total IVs, the move buttons show their type effectiveness and flag an estimated KO, and a TEAM button in the Party header saves the party as a preset you can restore in one tap.',
           'Contrast got a pass across the newer panels: the Prestige perks, focus-hunt bar, route-mastery hint, gym/league locks, achievements, Pokedex tiles and encounter detail, save-slot cards, EV/IV chips, gender and nature values, rarity labels, research and Field Jobs cards, the Raid Island quest panel and the “What’s New” heading all use ink that stands out from their background now, instead of dark-on-dark or light-on-parchment. The Legendary Quest’s pre-battle scene — whose light text was sitting on the shared light modal background and was effectively invisible — now uses its own dark backdrop.',
+          'The Backpack gained a Trainer tab for editing the Trainer Card (name, title, outfit, favourite Pokemon and badge case), and the save slots in Settings and the boot picker show each save’s card.',
         ],
       },
       {

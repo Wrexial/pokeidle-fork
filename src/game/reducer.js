@@ -25,6 +25,8 @@ import { claimMinigameReward, collectMining, endBugContest, endMinigame, endRout
 import { applyTeamPreset, boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, deleteTeamPreset, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseFiltered, releaseHatchling, releasePokemon, reorderBox, reorderParty, saveTeamPreset, setBoxSort, setMoves, setNickname, startEvolution, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
 import { addLog, clearLevelUp, dismissNotification, markCatchRoute, markTutorialSeen, pushNotification, setBattleMode, setBattleStyle, setChallengeMonotype, setSpeed, toggleAutoHeal, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleDamageNumbers, toggleHordes, toggleLargeText, toggleMartCollapsed, toggleMoveAnimations, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx, toggleShinySparkles, toggleSpriteStyle } from './reducer/settings.js'
+import { buyOutfit, updateTrainerProfile } from './reducer/profile.js'
+import { createTrainerProfile } from './trainer-profile.js'
 import { buyPrestigePerk, phaseIdle, prestigeRegion, resetEliteFour, resetPrestigePerks, selectStarter, travel, unlockRegion } from './reducer/world.js'
 import { startFrontier } from './reducer/frontier.js'
 import { accruePokewalker, spendPokewalker } from './reducer/pokewalker.js'
@@ -70,6 +72,8 @@ export const initialGameState = {
   boxSort: 'dex_asc',
   /** Saved party presets, most recent last (see game/reducer/pokemon/team-presets.js). */
   teamPresets: [],
+  /** The player's Trainer Card profile (see game/trainer-profile.js). */
+  trainerProfile: createTrainerProfile(),
   /** Newly hatched Pokemon shown in the hatch popup (null when dismissed). */
   hatchResult: null,
   autoCatch: !0,
@@ -522,6 +526,10 @@ export function gameReducer(state, action) {
       return toggleMusic(state, action)
     case 'TOGGLE_SFX':
       return toggleSfx(state, action)
+    case 'UPDATE_TRAINER_PROFILE':
+      return updateTrainerProfile(state, action)
+    case 'BUY_OUTFIT':
+      return buyOutfit(state, action)
     case 'TOGGLE_CHALLENGE_RANDOMIZER':
       return toggleChallengeRandomizer(state, action)
     case 'TOGGLE_CHALLENGE_LEVEL_SCALE':

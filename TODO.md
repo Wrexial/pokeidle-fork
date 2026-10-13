@@ -51,19 +51,6 @@ player-facing value (★ = nice to have, ★★★★★ = core missing feature)
 
 **Meta, collection & customization**
 
-## 83. Trainer Card, titles & avatar
-
-Completely absent today. Titles come from achievements/ribbons, outfits unlock
-at milestones, and the card is exportable and shown on the save slot.
-
-- [ ] A `trainerProfile` save field (name already exists; add title, outfit,
-      badge case, favourite Pokemon).
-- [ ] Title list fed by `src/data/achievements.js` + `src/game/ribbons.js`.
-- [ ] Outfit/avatar unlocks bought or earned, stored per profile.
-- [ ] Render the card on the save slot and add a shareable PNG export.
-
-Effort: **medium**. Gain: ★★★★★.
-
 ## 84. Pokemon marks
 
 Random per-individual marks with titles (Sleepy, Lunchtime, Alpha, Shiny), like

@@ -108,6 +108,48 @@ type Pokemon = BattlePokemon & {
 /** A saved party arrangement (see game/reducer/pokemon/team-presets.js). */
 type TeamPreset = { id: string; name: string; members: string[] }
 
+/**
+ * The player's editable Trainer Card profile (see game/trainer-profile.js).
+ * Titles and earned outfits are derived from the live state; only the chosen
+ * ones, purchases and pinned selections are stored.
+ */
+type TrainerProfile = {
+  /** Display name shown on the card (max 16 characters). */
+  name: string
+  /** Selected title id (an `ach:<achievementId>` or `ribbon:<id>`), or null. */
+  title: string | null
+  /** Selected outfit id (see data/outfits.js). */
+  outfit: string
+  /** Outfit ids bought with money (earned ones are derived, not stored). */
+  ownedOutfits: string[]
+  /** The pinned favourite Pokemon's id, or null for the active Pokemon. */
+  favouritePokemonId: string | null
+  /** Badge ids pinned to the badge case; empty means the current region's. */
+  badgeCase: string[]
+}
+
+/** The card-ready view model shared by the DOM card, the PNG export and the
+ * save-slot summary (see game/trainer-profile.js). */
+type TrainerCardData = {
+  name: string
+  title: string | null
+  outfit: import('../data/outfits.js').Outfit
+  favourite: {
+    speciesKey: string
+    name: string
+    speciesName: string
+    spriteId: number | string | undefined
+    level: number
+    isShiny: boolean
+  } | null
+  regionName: string
+  level: number
+  dex: number
+  badges: { id: string; name: string; color: string }[]
+  totalBadges: number
+  regionId: string
+}
+
 /** One queued breeding goal (see game/breeding-projects.js). */
 type BreedingProject = {
   id: string
@@ -482,6 +524,8 @@ type SaveSlotSummary = {
   savedAt?: number
   /** Active challenge rules, empty for a normal run. */
   challenges?: string[]
+  /** The slot's Trainer Card, when the save has one to show. */
+  card?: TrainerCardData
 }
 
 type ActiveEffect = {
@@ -562,6 +606,8 @@ type GameState = {
   boxSort: string
   /** Saved party presets, most recent last. */
   teamPresets: TeamPreset[]
+  /** The player's Trainer Card profile (name, title, outfit, badge case). */
+  trainerProfile?: TrainerProfile
   /** The most recently hatched egg, shown in the hatch popup until dismissed. */
   hatchResult: Pokemon | null
   battleLog: string[]

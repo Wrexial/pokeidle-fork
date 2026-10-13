@@ -13,6 +13,9 @@ import { PRESTIGE_PERKS } from './prestige.js'
 import { FRONTIER_FACILITIES } from './battle-frontier.js'
 import { isValidHuntTarget } from './hunt.js'
 import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, createEmptyEvs, EV_STAT_ORDER, resolvePokemonMoves, rollAbility, rollSize, RIBBONS } from './pokemon.js'
+import { outfitById } from '../data/outfits.js'
+import { titleById } from './titles.js'
+import { BADGE_CASE_MAX, sanitizeTrainerProfile } from './trainer-profile.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
 import { natureByKey, randomNature } from '../data/natures.js'
 import { isTerminalForm } from '../data/mega-evolution.js'
@@ -910,7 +913,14 @@ export function repairSave(saved) {
     ),
     masteredRoutes = (Array.isArray(saved.masteredRoutes) ? saved.masteredRoutes : []).filter(
       /** @param {string} locationId */ (locationId) => !!mapData[locationId]
-    )
+    ),
+    // Trainer Card profile: sanitise it against the Pokemon that actually exist
+    // and the real gym badges so a stale save can't pin a released Pokemon or a
+    // badge from a removed gym.
+    trainerProfile = sanitizeTrainerProfile(saved.trainerProfile, {
+      pokemonIds: new Set([...party, ...box].map((member) => member.id)),
+      gymIds: new Set(defeatedGyms),
+    })
 
   return {
     ...initialGameState,
@@ -951,6 +961,7 @@ export function repairSave(saved) {
           .filter((/** @type {any} */ memberId) => typeof memberId === 'string')
           .slice(0, 6),
       })),
+    trainerProfile,
     autoCatch: saved.autoCatch ?? true,
     nextPokemonId: nextId,
     currentLocation: safeLocation,
@@ -1208,6 +1219,7 @@ export const SAVED_STATE_KEYS = [
   'box',
   'boxSort',
   'teamPresets',
+  'trainerProfile',
   'nextPokemonId',
   'currentLocation',
   'unlockedLocations',
@@ -1368,6 +1380,65 @@ export function writeImportedSave(save, slot = getActiveSlot() || 1) {
 }
 
 /**
+ * Build the mini Trainer Card a save slot shows, reading only the raw stored
+ * blob (no full repair). Returns null when the save predates the profile.
+ * @param {any} saved
+ * @returns {TrainerCardData | null}
+ */
+function slotTrainerCard(saved) {
+  try {
+    const party = Array.isArray(saved.party) ? saved.party : [],
+      box = Array.isArray(saved.box) ? saved.box : [],
+      pokemonIds = new Set(
+        [...party, ...box].map((/** @type {any} */ member) => member?.id).filter(Boolean)
+      ),
+      gymIds = new Set(gymLeaderData.map((gym) => gym.id)),
+      profile = sanitizeTrainerProfile(saved.trainerProfile, { pokemonIds, gymIds })
+    if (!saved.trainerProfile) return null
+    const favourite = profile.favouritePokemonId
+        ? [...party, ...box].find(
+            (/** @type {any} */ member) => member?.id === profile.favouritePokemonId
+          )
+        : null,
+      species = favourite?.speciesKey ? pokemonSpecies[favourite.speciesKey] : null,
+      regionId = typeof saved.startRegion === 'string' ? saved.startRegion : 'kanto',
+      region = regions.find((entry) => entry.id === regionId),
+      earned = new Set(Array.isArray(saved.defeatedGyms) ? saved.defeatedGyms : []),
+      badgeCase = gymLeaderData
+        .filter((gym) => (gym.region ?? 'kanto') === regionId && earned.has(gym.id))
+        .slice(0, BADGE_CASE_MAX)
+    return {
+      name: profile.name,
+      title: titleById(profile.title)?.name ?? null,
+      outfit: outfitById(profile.outfit),
+      favourite:
+        favourite && species
+          ? {
+              speciesKey: favourite.speciesKey,
+              name: favourite.nickname || species.name || favourite.speciesKey,
+              speciesName: species.name ?? favourite.speciesKey,
+              spriteId: species.id,
+              level: favourite.level ?? 1,
+              isShiny: !!favourite.isShiny,
+            }
+          : null,
+      regionName: region?.name ?? regionId,
+      level: saved.playerPokemon?.level ?? 1,
+      dex: Array.isArray(saved.pokedexCaught) ? saved.pokedexCaught.length : 0,
+      badges: badgeCase.map((gym) => ({
+        id: gym.id,
+        name: gym.badgeName,
+        color: gym.badgeColor,
+      })),
+      totalBadges: earned.size,
+      regionId,
+    }
+  } catch {
+    return null
+  }
+}
+
+/**
  * Summarise one slot for the picker/Settings without repairing it. Reads the
  * raw JSON, so it is cheap and never throws.
  * @param {number} slot
@@ -1397,6 +1468,7 @@ function summarizeSlot(slot) {
       badges: Array.isArray(saved.defeatedGyms) ? saved.defeatedGyms.length : 0,
       savedAt: typeof saved.savedAt === 'number' ? saved.savedAt : 0,
       challenges,
+      card: slotTrainerCard(saved) ?? undefined,
     }
   } catch {
     return { slot, empty: false }

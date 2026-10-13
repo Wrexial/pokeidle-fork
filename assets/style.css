@@ -17771,3 +17771,347 @@ img {
 .kurt-queue-progress {
     opacity: .85
 }
+
+/* Trainer Card */
+.trainer-card {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 420px;
+    padding: 12px;
+    border: 3px solid #00000066;
+    border-radius: 8px;
+    box-shadow: inset 0 0 0 2px #ffffff26;
+    color: #fff;
+    overflow: hidden
+}
+
+.trainer-card.compact {
+    padding: 8px;
+    border-width: 2px;
+    border-radius: 6px
+}
+
+.trainer-card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.trainer-card-avatar {
+    position: relative;
+    flex: none;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 3px #ffffff40
+}
+
+.trainer-card.compact .trainer-card-avatar {
+    width: 38px;
+    height: 38px
+}
+
+.trainer-card-avatar-head {
+    position: absolute;
+    top: 6px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    opacity: .9
+}
+
+.trainer-card.compact .trainer-card-avatar-head {
+    top: 4px;
+    width: 18px;
+    height: 18px
+}
+
+.trainer-card-avatar-emblem {
+    position: relative;
+    z-index: 1;
+    font-size: 22px;
+    line-height: 1
+}
+
+.trainer-card.compact .trainer-card-avatar-emblem {
+    font-size: 16px
+}
+
+.trainer-card-identity {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px
+}
+
+.trainer-card-name {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-shadow: 0 1px 2px #00000080;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.trainer-card.compact .trainer-card-name {
+    font-size: 10px
+}
+
+.trainer-card-title {
+    font-size: 8px;
+    color: #ffe9a8;
+    text-shadow: 0 1px 2px #00000080
+}
+
+.trainer-card-title.empty {
+    opacity: .5
+}
+
+.trainer-card-region {
+    font-size: 8px;
+    opacity: .85
+}
+
+.trainer-card-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px
+}
+
+.trainer-card.compact .trainer-card-body {
+    margin-top: 6px;
+    gap: 6px
+}
+
+.trainer-card-favourite {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0
+}
+
+.trainer-card-favourite-sprite {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 2px 3px #00000080)
+}
+
+.trainer-card.compact .trainer-card-favourite-sprite {
+    width: 40px;
+    height: 40px
+}
+
+.trainer-card-favourite-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0
+}
+
+.trainer-card-favourite-name {
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.trainer-card-favourite-level,
+.trainer-card-favourite-empty {
+    font-size: 8px;
+    opacity: .85
+}
+
+.trainer-card-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    font-size: 8px;
+    text-shadow: 0 1px 2px #00000080;
+    white-space: nowrap
+}
+
+.trainer-card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 10px
+}
+
+.trainer-card.compact .trainer-card-badges {
+    margin-top: 6px;
+    gap: 3px
+}
+
+.trainer-card-badge {
+    width: 16px;
+    height: 16px;
+    clip-path: polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);
+    box-shadow: 0 0 4px #ffffff66
+}
+
+.trainer-card.compact .trainer-card-badge {
+    width: 12px;
+    height: 12px
+}
+
+.trainer-card-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box
+}
+
+.trainer-card-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.trainer-card-panel-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gold)
+}
+
+.trainer-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px
+}
+
+.trainer-card-export-status {
+    font-size: 8px;
+    color: #2e7d32
+}
+
+.trainer-card-section {
+    background: #00000022;
+    border: 1px solid #ffffff22;
+    border-radius: 6px;
+    padding: 10px
+}
+
+.trainer-card-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 9px;
+    margin-bottom: 8px
+}
+
+.trainer-card-input,
+.trainer-card-select {
+    flex: 1;
+    min-width: 0;
+    max-width: 220px;
+    box-sizing: border-box;
+    padding: 5px 6px;
+    font-family: inherit;
+    font-size: 9px;
+    color: #3a2818;
+    background: var(--parchment);
+    border: 2px solid #483828;
+    border-radius: 4px
+}
+
+.trainer-outfit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));
+    gap: 8px;
+    margin-top: 6px
+}
+
+.trainer-outfit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center
+}
+
+.trainer-outfit-swatch {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    border: 3px solid #ffffff33;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer
+}
+
+.trainer-outfit-swatch:disabled {
+    cursor: not-allowed;
+    filter: grayscale(.8);
+    opacity: .6
+}
+
+.trainer-outfit.selected .trainer-outfit-swatch {
+    border-color: #ffe9a8;
+    box-shadow: 0 0 8px #ffe9a880
+}
+
+.trainer-outfit-emblem {
+    font-size: 22px
+}
+
+.trainer-outfit-name {
+    font-size: 7px;
+    color: #e8dcc0
+}
+
+.trainer-outfit-hint,
+.trainer-outfit-buy {
+    font-size: 6px;
+    color: #d8c8a0;
+    opacity: .85
+}
+
+.trainer-outfit-buy {
+    cursor: pointer;
+    padding: 2px 4px;
+    background: #00000033;
+    border: 1px solid #ffffff33;
+    border-radius: 3px;
+    color: #ffe9a8
+}
+
+.trainer-outfit-buy:disabled {
+    cursor: not-allowed;
+    opacity: .5
+}
+
+.trainer-badge-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 6px 0
+}
+
+.trainer-badge-pick {
+    width: 24px;
+    height: 24px;
+    clip-path: polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);
+    opacity: .35;
+    cursor: pointer;
+    transition: opacity .2s
+}
+
+.trainer-badge-pick.active {
+    opacity: 1;
+    box-shadow: 0 0 6px #ffffff80
+}

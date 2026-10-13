@@ -1,7 +1,7 @@
 // Reducer handlers for the one-off NPC gifts and static encounters.
 
 import { createBattlePokemon } from '../combat.js'
-import { entryRequirementStatus, findGift, findStatic, giftRewardLabel, resolveGiftStarter } from '../gifts.js'
+import { entryRequirementStatus, findGift, findMysteryGift, findMysteryGiftByCode, findStatic, giftRewardLabel, mysteryGiftStatus, resolveGiftStarter } from '../gifts.js'
 import { markCaught } from './collection.js'
 import { catchPokemon } from './pokemon/management.js'
 import { startEncounter } from './battle/events.js'
@@ -27,6 +27,37 @@ export function claimGift(state, action) {
   if ((state.claimedGifts ?? []).includes(gift.id)) return state
   if (!entryRequirementStatus(state, gift).met) return state
 
+  const next = applyGiftReward(state, gift),
+    reward = giftRewardLabel(gift)
+  return withNotification(
+    {
+      ...next,
+      claimedGifts: [...(next.claimedGifts ?? []), gift.id],
+      battleLog: [...next.battleLog, `${gift.name} gave you ${reward}!`].slice(-50),
+    },
+    {
+      message: `${gift.name}: ${reward}`,
+      tone: 'success',
+      icon: '\ud83c\udf81',
+      dedupeKey: `gift:${gift.id}`,
+    }
+  )
+}
+
+/**
+ * Hand over a gift's payout (money, items, a Pokemon or an Egg) without the
+ * claim bookkeeping. Shared by location gifts and Mystery Gifts.
+ * @param {GameState} state
+ * @param {{
+ *   pokemon?: { speciesKey: string, level?: number },
+ *   egg?: { speciesKey: string },
+ *   randomStarter?: string,
+ *   money?: number,
+ *   items?: Record<string, number>,
+ * }} gift
+ * @returns {GameState}
+ */
+function applyGiftReward(state, gift) {
   let next = state
   if (gift.money) next = { ...next, money: next.money + gift.money }
   if (gift.items) {
@@ -66,18 +97,38 @@ export function claimGift(state, action) {
             nextPokemonId: next.nextPokemonId + 1,
           }
   }
-  const reward = giftRewardLabel(gift)
+  return next
+}
+
+/**
+ * Handle the `CLAIM_MYSTERY_GIFT` action. Accepts either the id of the featured
+ * rotation gift or an offline redeem code, and pays it out once. A rotation
+ * gift is refused until its distribution has opened.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function claimMysteryGift(state, action) {
+  const payload = action.payload ?? {},
+    gift = payload.giftId
+      ? findMysteryGift(payload.giftId)
+      : findMysteryGiftByCode(payload.code)
+  if (!gift) return state
+  const status = mysteryGiftStatus(state, gift, payload.dateKey)
+  if (!status.unlocked || status.claimed || !status.met) return state
+  const next = applyGiftReward(state, gift),
+    reward = giftRewardLabel(gift)
   return withNotification(
     {
       ...next,
       claimedGifts: [...(next.claimedGifts ?? []), gift.id],
-      battleLog: [...next.battleLog, `${gift.name} gave you ${reward}!`].slice(-50),
+      battleLog: [...next.battleLog, `Mystery Gift: ${gift.name} \u2014 ${reward}!`].slice(-50),
     },
     {
-      message: `${gift.name}: ${reward}`,
+      message: `Mystery Gift: ${gift.name}`,
       tone: 'success',
-      icon: '\ud83c\udf81',
-      dedupeKey: `gift:${gift.id}`,
+      icon: '\ud83c\udf9f\ufe0f',
+      dedupeKey: `mystery:${gift.id}`,
     }
   )
 }

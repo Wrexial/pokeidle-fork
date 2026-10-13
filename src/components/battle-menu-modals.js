@@ -16,11 +16,12 @@ import { shinyOddsForCompletedGenerations } from '../game/progression.js'
 import { CompanionCarePanel } from './companion-panel.js'
 import { PokewalkerPanel } from './pokewalker-panel.js'
 import { DailyEventModal } from './daily-event-modal.js'
+import { MysteryGiftModal } from './mystery-gift-modal.js'
 import { QuestsModal } from './quests-modal.js'
 import { SettingsModal } from './settings-modal.js'
 
 /**
- * @typedef {'info' | 'settings' | 'daily' | 'quests' | 'companion' | 'pokewalker'} BattleMenuKey
+ * @typedef {'info' | 'settings' | 'daily' | 'mystery' | 'quests' | 'companion' | 'pokewalker'} BattleMenuKey
  */
 
 /** @param {{ menu: BattleMenuKey | null, onClose: () => void }} props */
@@ -40,6 +41,7 @@ export function BattleMenuModals({ menu, onClose }) {
     )
   if (menu === 'settings') return createPortal(jsx(SettingsModal, { onClose }), document.body)
   if (menu === 'daily') return createPortal(jsx(DailyEventModal, { onClose }), document.body)
+  if (menu === 'mystery') return createPortal(jsx(MysteryGiftModal, { onClose }), document.body)
   if (menu === 'quests') return createPortal(jsx(QuestsModal, { onClose }), document.body)
   if (menu === 'companion')
     return createPortal(

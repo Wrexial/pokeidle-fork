@@ -8,6 +8,7 @@ import { MoveCategoryIcon } from './move-category-icon.js'
 import { moveTooltip } from '../game/move-info.js'
 import { dailyEventByKey } from '../data/daily-events.js'
 import { hasClaimableQuests } from '../game/quests.js'
+import { claimableMysteryGifts } from '../game/gifts.js'
 import { biomeBackgroundFor, biomeForLocation, BIOME_FILTERS, DAY_NIGHT_FILTERS, locationImages } from '../data/ui.js'
 import { useDayPhase } from '../hooks.js'
 import { getDexStatus, shouldOfferMasterBall } from '../game/catching.js'
@@ -349,6 +350,14 @@ export function BattleScene({ onOpenMenu }) {
             children: state.dailyEvent
               ? dailyEventByKey[state.dailyEvent.kind]?.icon ?? '🎁'
               : '🎁',
+          }),
+          jsx('button', {
+            className: `battle-info-btn mystery-gift-btn${
+              claimableMysteryGifts(state).length > 0 ? ' claimable' : ''
+            }`,
+            onClick: () => onOpenMenu('mystery'),
+            title: 'Mystery Gift',
+            children: '🎟️',
           }),
           jsx('button', {
             className: `battle-info-btn daily-event-btn${

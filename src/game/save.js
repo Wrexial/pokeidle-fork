@@ -30,7 +30,7 @@ import { SECRET_BASE_GRID, SECRET_BASE_YIELD_WIN_CAP, createSecretBase, decorati
 import { RODS, rodsForRegionCount, routeActivityIds } from './minigames.js'
 import { JOB_MAX_READY, accrueJobs, jobCycleMs, jobKey, summarizeJobAccrual } from './jobs.js'
 import { RESEARCH_MAX_POINTS } from './research.js'
-import { GIFTS, STATIC_ENCOUNTERS } from './gifts.js'
+import { GIFTS, MYSTERY_GIFTS, STATIC_ENCOUNTERS } from './gifts.js'
 import { simulateOfflineCatches } from './offline-catch.js'
 import { accruePokewalker, createPokewalker } from './pokewalker.js'
 import { initialGameState } from './reducer.js'
@@ -1135,7 +1135,9 @@ export function repairSave(saved) {
     rewardedAchievements,
     claimedGifts: (Array.isArray(saved.claimedGifts) ? saved.claimedGifts : []).filter(
       (/** @type {string} */ id) =>
-        GIFTS.some((gift) => gift.id === id) || STATIC_ENCOUNTERS.some((entry) => entry.id === id)
+        GIFTS.some((gift) => gift.id === id) ||
+        MYSTERY_GIFTS.some((gift) => gift.id === id) ||
+        STATIC_ENCOUNTERS.some((entry) => entry.id === id)
     ),
     regionPrestige: Object.fromEntries(
       Object.entries(saved.regionPrestige ?? {}).filter(

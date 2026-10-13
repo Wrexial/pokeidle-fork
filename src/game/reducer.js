@@ -17,7 +17,7 @@ import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } f
 import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } from './reducer/pelago.js'
 import { buyDecoration, collectSecretBaseYield, dismissSecretBaseCollect, endSecretBase, placeDecoration, removeDecoration, setupSecretBase, startSecretBase } from './reducer/secret-base.js'
 import { assignJob, collectJob, takeJobEncounter, unassignJob, accrueJobFinds } from './reducer/jobs.js'
-import { claimGift, startStaticEncounter } from './reducer/gifts.js'
+import { claimGift, claimMysteryGift, startStaticEncounter } from './reducer/gifts.js'
 import { buyResearchItem } from './reducer/research.js'
 import { recordRouteMastery } from './reducer/mastery.js'
 import { clearHunt, setHunt } from './reducer/hunt.js'
@@ -670,6 +670,8 @@ export function gameReducer(state, action) {
       return claimMinigameReward(state, action)
     case 'CLAIM_GIFT':
       return claimGift(state, action)
+    case 'CLAIM_MYSTERY_GIFT':
+      return claimMysteryGift(state, action)
     case 'START_STATIC_ENCOUNTER':
       return startStaticEncounter(state, action)
     case 'SET_COMPANION':

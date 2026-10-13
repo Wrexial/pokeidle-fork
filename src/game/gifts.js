@@ -6,6 +6,7 @@
 
 import { gymLeaderData, mapData, pokemonSpecies, regions } from '../data/gameData.js'
 import { regionalStarters } from '../data/config.js'
+import { todayKey } from '../data/daily-events.js'
 import { rewardItemName } from './minigames/mining.js'
 
 /**
@@ -400,7 +401,7 @@ export function locationEntries(state, locationId) {
  * region's starter trio. In the region the player started in, the starter they
  * picked pre-game is left out so the gift is never a duplicate.
  * @param {GameState} state
- * @param {GiftEntry} gift
+ * @param {{ randomStarter?: string }} gift
  * @param {() => number} [rng]
  * @returns {string | null}
  */
@@ -418,7 +419,13 @@ export function resolveGiftStarter(state, gift, rng = Math.random) {
 
 /**
  * A short human label for what a gift hands over.
- * @param {GiftEntry} gift
+ * @param {{
+ *   pokemon?: { speciesKey: string },
+ *   egg?: { speciesKey: string },
+ *   randomStarter?: string,
+ *   money?: number,
+ *   items?: Record<string, number>,
+ * }} gift
  * @returns {string}
  */
 export function giftRewardLabel(gift) {
@@ -436,4 +443,370 @@ export function giftRewardLabel(gift) {
   for (const [itemId, quantity] of Object.entries(gift.items ?? {}))
     parts.push(`${rewardItemName(itemId)} x${quantity}`)
   return parts.join(' + ')
+}
+
+// --- Mystery Gifts (rotating Wonder Card distributions) ---------------------
+//
+// Rotating, date-gated Mythical distributions in the Wonder Card style. Each
+// rotation gift opens on a weekly schedule (MYSTERY_GIFT_PERIOD_DAYS) and stays
+// claimable once its week arrives, so a player who is away never loses a
+// distribution. Offline "codes" are matched against the same table; there is no
+// backend, so a code is just a shared string (a signed variant could be added
+// later without changing the panel).
+
+/**
+ * @typedef {{
+ *   id: string, name: string, distribution: string, description: string,
+ *   ot: string, pokemon?: { speciesKey: string, level: number },
+ *   items?: Record<string, number>, money?: number,
+ *   code?: string, requires?: { caught?: number },
+ * }} MysteryGiftEntry
+ */
+
+/** @type {MysteryGiftEntry[]} */
+export const MYSTERY_GIFTS = [
+  {
+    id: 'mg-mew',
+    name: 'Mew',
+    distribution: 'A Mythical Discovery',
+    description: 'A Mythical Pokemon said to carry the DNA of every Pokemon.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'mew', level: 5 },
+  },
+  {
+    id: 'mg-celebi',
+    name: 'Celebi',
+    distribution: 'Voice of the Forest',
+    description: 'A gentle forest guardian that drifts through time itself.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'celebi', level: 10 },
+  },
+  {
+    id: 'mg-jirachi',
+    name: 'Jirachi',
+    distribution: 'Wish Maker',
+    description: 'It awakens once every thousand years to grant a wish.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'jirachi', level: 10 },
+  },
+  {
+    id: 'mg-deoxys',
+    name: 'Deoxys',
+    distribution: 'Space Virus',
+    description: 'A Pokemon born from a virus that fell to earth on a meteor.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'deoxys', level: 30 },
+  },
+  {
+    id: 'mg-phione',
+    name: 'Phione',
+    distribution: 'Prince of the Sea',
+    description: 'It drifts the warm seas, always chasing its parent Manaphy.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'phione', level: 20 },
+  },
+  {
+    id: 'mg-manaphy',
+    name: 'Manaphy',
+    distribution: 'Prince of the Sea',
+    description: 'It can bond with any Pokemon and guide it home across oceans.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'manaphy', level: 10 },
+  },
+  {
+    id: 'mg-darkrai',
+    name: 'Darkrai',
+    distribution: 'Newmoon Nightmare',
+    description: 'It lulls people and Pokemon into restless sleep to protect itself.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'darkrai', level: 50 },
+  },
+  {
+    id: 'mg-shaymin',
+    name: 'Shaymin',
+    distribution: 'Gratitude Pokemon',
+    description: 'Where it walks, the air clears and flowers bloom in an instant.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'shaymin', level: 30 },
+  },
+  {
+    id: 'mg-arceus',
+    name: 'Arceus',
+    distribution: 'The Mythical Creator',
+    description: 'Said to have shaped the universe from a single egg.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'arceus', level: 60 },
+  },
+  {
+    id: 'mg-victini',
+    name: 'Victini',
+    distribution: 'Victory Star',
+    description: 'It brings victory to whoever it bonds with.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'victini', level: 15 },
+  },
+  {
+    id: 'mg-keldeo',
+    name: 'Keldeo',
+    distribution: 'Colt of Justice',
+    description: 'It crosses the world by running the surface of the sea.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'keldeo', level: 40 },
+  },
+  {
+    id: 'mg-meloetta',
+    name: 'Meloetta',
+    distribution: 'Melody of Mankind',
+    description: 'Its song has the power to command the hearts of all who hear it.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'meloetta', level: 30 },
+  },
+  {
+    id: 'mg-genesect',
+    name: 'Genesect',
+    distribution: 'Paleozoic Pokemon',
+    description: 'An ancient hunter restored and outfitted by Team Plasma.',
+    ot: 'PLASMA',
+    pokemon: { speciesKey: 'genesect', level: 40 },
+  },
+  {
+    id: 'mg-diancie',
+    name: 'Diancie',
+    distribution: 'Jewel Princess',
+    description: 'A sudden transformation of Carbink, its pink crystal is legendary.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'diancie', level: 40 },
+  },
+  {
+    id: 'mg-hoopa',
+    name: 'Hoopa',
+    distribution: 'Mischief Djinn',
+    description: 'It gathers up things into its ring and warps them through space.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'hoopa', level: 40 },
+  },
+  {
+    id: 'mg-volcanion',
+    name: 'Volcanion',
+    distribution: 'Steam Pokemon',
+    description: 'It erupts water from its arms, hot enough to melt anything.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'volcanion', level: 40 },
+  },
+  {
+    id: 'mg-magearna',
+    name: 'Magearna',
+    distribution: 'Artificial Pokemon',
+    description: 'A clockwork marvel built five hundred years ago.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'magearna', level: 40 },
+  },
+  {
+    id: 'mg-marshadow',
+    name: 'Marshadow',
+    distribution: 'Gloomdweller',
+    description: 'It lurks in the shadows and copies the moves of anyone it sees.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'marshadow', level: 40 },
+  },
+  {
+    id: 'mg-zeraora',
+    name: 'Zeraora',
+    distribution: 'Thunderclap Pokemon',
+    description: 'It stores lightning in its fur to move faster than the eye can follow.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'zeraora', level: 40 },
+  },
+  {
+    id: 'mg-meltan',
+    name: 'Meltan',
+    distribution: 'Hex Nut Pokemon',
+    description: 'It feeds on metal and can pull its body apart and back together.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'meltan', level: 15 },
+  },
+  {
+    id: 'mg-melmetal',
+    name: 'Melmetal',
+    distribution: 'Hex Nut Pokemon',
+    description: 'A massive body of hardened steel, forged from many Meltan.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'melmetal', level: 50 },
+  },
+  {
+    id: 'mg-zarude',
+    name: 'Zarude',
+    distribution: 'Rogue Monkey',
+    description: 'It swings through the treetops of dense forests with its vines.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'zarude', level: 40 },
+  },
+  {
+    id: 'mg-pecharunt',
+    name: 'Pecharunt',
+    distribution: 'Subjugation Pokemon',
+    description: 'It controls those who eat the poisoned mochi it makes.',
+    ot: 'MYSTERY',
+    pokemon: { speciesKey: 'pecharunt', level: 45 },
+  },
+  // Offline redeem codes (matched against the table, no backend). These are not
+  // part of the date rotation and only appear once they have been redeemed.
+  {
+    id: 'mg-code-wonder-bundle',
+    name: 'Wonder Card Bundle',
+    distribution: 'Redeem Code',
+    description: 'A thank-you gift from the Pokemon Idle team.',
+    ot: 'MYSTERY',
+    code: 'WONDERCARD',
+    items: { masterball: 1, rareCandy: 5 },
+  },
+  {
+    id: 'mg-code-gold-rush',
+    name: 'Gold Rush Bundle',
+    distribution: 'Redeem Code',
+    description: 'A stash of treasures for a returning trainer.',
+    ot: 'MYSTERY',
+    code: 'GOLDRUSH',
+    items: { bigNugget: 3, goldBottleCap: 1 },
+  },
+]
+
+const MS_PER_DAY = 24 * 60 * 60 * 1000
+
+/** The Monday the distribution schedule opens (rotation index 0). */
+export const MYSTERY_GIFT_EPOCH = '2026-10-05'
+
+/** How long each weekly distribution stays the featured one. */
+export const MYSTERY_GIFT_PERIOD_DAYS = 7
+
+/** The rotation gifts, in schedule order (code gifts are excluded). */
+export const MYSTERY_GIFT_ROTATION = MYSTERY_GIFTS.filter((gift) => !gift.code)
+
+/** @param {string} dateKey @returns {number} */
+function dateKeyToDayNumber(dateKey) {
+  const [year, month, day] = dateKey.split('-').map(Number)
+  return Math.floor(Date.UTC(year, month - 1, day) / MS_PER_DAY)
+}
+
+/** @param {number} dayNumber @returns {string} */
+function dayNumberToDateKey(dayNumber) {
+  const date = new Date(dayNumber * MS_PER_DAY)
+  return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}-${String(
+    date.getUTCDate()
+  ).padStart(2, '0')}`
+}
+
+/**
+ * The rotation index for a date (week 0 is MYSTERY_GIFT_EPOCH).
+ * @param {string} [dateKey]
+ * @returns {number}
+ */
+export function mysteryGiftWeek(dateKey = todayKey()) {
+  return Math.floor(
+    (dateKeyToDayNumber(dateKey) - dateKeyToDayNumber(MYSTERY_GIFT_EPOCH)) /
+      MYSTERY_GIFT_PERIOD_DAYS
+  )
+}
+
+/**
+ * The date a rotation gift opens, or null for a code gift.
+ * @param {MysteryGiftEntry} gift
+ * @returns {string | null}
+ */
+export function mysteryGiftUnlockDate(gift) {
+  const index = MYSTERY_GIFT_ROTATION.indexOf(gift)
+  if (index < 0) return null
+  return dayNumberToDateKey(
+    dateKeyToDayNumber(MYSTERY_GIFT_EPOCH) + index * MYSTERY_GIFT_PERIOD_DAYS
+  )
+}
+
+/**
+ * Whether a gift's distribution has opened. Codes are always open.
+ * @param {MysteryGiftEntry} gift
+ * @param {string} [dateKey]
+ * @returns {boolean}
+ */
+export function mysteryGiftUnlocked(gift, dateKey = todayKey()) {
+  if (gift.code) return true
+  const index = MYSTERY_GIFT_ROTATION.indexOf(gift)
+  return index >= 0 && mysteryGiftWeek(dateKey) >= index
+}
+
+/**
+ * The gift featured this period (the newest to open), or null before launch.
+ * @param {string} [dateKey]
+ * @returns {MysteryGiftEntry | null}
+ */
+export function featuredMysteryGift(dateKey = todayKey()) {
+  const week = mysteryGiftWeek(dateKey)
+  if (week < 0) return null
+  return MYSTERY_GIFT_ROTATION[Math.min(week, MYSTERY_GIFT_ROTATION.length - 1)] ?? null
+}
+
+/**
+ * The next rotation gift that has not opened yet, with its open date.
+ * @param {string} [dateKey]
+ * @returns {{ gift: MysteryGiftEntry, date: string } | null}
+ */
+export function nextMysteryGift(dateKey = todayKey()) {
+  const index = mysteryGiftWeek(dateKey) + 1,
+    gift = MYSTERY_GIFT_ROTATION[index]
+  if (!gift) return null
+  return {
+    gift,
+    date: dayNumberToDateKey(
+      dateKeyToDayNumber(MYSTERY_GIFT_EPOCH) + index * MYSTERY_GIFT_PERIOD_DAYS
+    ),
+  }
+}
+
+/** @param {string} giftId @returns {MysteryGiftEntry | null} */
+export function findMysteryGift(giftId) {
+  return MYSTERY_GIFTS.find((gift) => gift.id === giftId) ?? null
+}
+
+/**
+ * Resolve an offline redeem code (case-insensitive, trimmed).
+ * @param {string} code
+ * @returns {MysteryGiftEntry | null}
+ */
+export function findMysteryGiftByCode(code) {
+  const normalized = String(code ?? '').trim().toUpperCase()
+  if (!normalized) return null
+  return MYSTERY_GIFTS.find((gift) => gift.code === normalized) ?? null
+}
+
+/**
+ * The panel status for one Mystery Gift card.
+ * @param {GameState} state
+ * @param {MysteryGiftEntry} gift
+ * @param {string} [dateKey]
+ */
+export function mysteryGiftStatus(state, gift, dateKey = todayKey()) {
+  const claimed = (state.claimedGifts ?? []).includes(gift.id),
+    unlocked = mysteryGiftUnlocked(gift, dateKey),
+    requirement = entryRequirementStatus(state, { ...gift, location: '' })
+  return {
+    claimed,
+    unlocked,
+    met: requirement.met,
+    requirements: requirement.requirements,
+    claimable: unlocked && !claimed && requirement.met,
+    featured: gift.code ? false : featuredMysteryGift(dateKey)?.id === gift.id,
+    unlockDate: gift.code ? null : mysteryGiftUnlockDate(gift),
+  }
+}
+
+/**
+ * Every rotation gift the player could claim right now. Code gifts are left
+ * out (they only surface once redeemed, so they never light the badge).
+ * @param {GameState} state
+ * @param {string} [dateKey]
+ * @returns {MysteryGiftEntry[]}
+ */
+export function claimableMysteryGifts(state, dateKey = todayKey()) {
+  return MYSTERY_GIFT_ROTATION.filter(
+    (gift) => mysteryGiftStatus(state, gift, dateKey).claimable
+  )
 }

@@ -50,17 +50,6 @@ player-facing value (★ = nice to have, ★★★★★ = core missing feature)
 
 **Narrative & quests**
 
-## 89. Mystery Gift / distributions
-
-Rotating date-gated mythical gifts and redeem codes, Wonder-Card style. No
-backend needed.
-
-- [ ] A date/rotation table for gift species, reusing `src/game/gifts.js`.
-- [ ] A Mystery Gift panel with a claim state and a Wonder Card view.
-- [ ] Optionally accept offline "codes" (a signed string) later.
-
-Effort: **medium**. Gain: ★★★★.
-
 ## 90. Professor's story chain
 
 A multi-region questline beyond the per-species research tasks.

@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, CHAMPION_GAUNTLET_COST, DOUBLES_COST, TRIPLES_COST, ROTATION_COST, FFA_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, MANTINE_SURF_COST, ROTOM_RALLY_COST, OGRE_OUSTIN_COST, TYPE_FUSION_COST, UNOWN_PICROSS_COST, POKESHOT_COST, TERA_RAID_COST, POKEWORD_COST, BERRY_BLENDER_COST, ULTRA_WARP_COST, GAME_CORNER_PRIZE_GOAL, dowsingAvailable, hideAndSeekAvailable, hideAndSeekSpot, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
+import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, CHAMPION_GAUNTLET_COST, DOUBLES_COST, TRIPLES_COST, ROTATION_COST, FFA_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, MANTINE_SURF_COST, ROTOM_RALLY_COST, OGRE_OUSTIN_COST, TYPE_FUSION_COST, UNOWN_PICROSS_COST, POKESHOT_COST, TERA_RAID_COST, POKEWORD_COST, BERRY_BLENDER_COST, ULTRA_WARP_COST, GAME_CORNER_PRIZE_GOAL, dowsingAvailable, hideAndSeekAvailable, hideAndSeekSpot, rollGameCornerPrize, routeActivityIds, minigameIdForPhase, dowsingRouteForRegion, hideAndSeekRouteForRegion } from '../minigames.js'
 import { raidEventByKey, todayKey } from '../../data/daily-events.js'
 import { minigameTmChance } from '../../data/config.js'
 import { mapData, pokemonSpecies } from '../../data/gameData.js'
@@ -94,8 +94,14 @@ export function startAcademyQuiz(state, action) {
  * @returns {GameState}
  */
 export function startDowsing(state, action) {
-  const routeKey = mapData[state.currentLocation]?.routeKey
-  if (!routeKey || !dowsingAvailable(state.dowsingSearches, routeKey)) return state
+  const location = mapData[state.currentLocation],
+    routeKey = location?.routeKey
+  if (
+    !routeKey ||
+    !dowsingAvailable(state.dowsingSearches, routeKey) ||
+    !dowsingRouteForRegion(location?.region ?? 'kanto', routeKey)
+  )
+    return state
   const base = enterMinigame(
     state,
     'dowsing',
@@ -153,11 +159,13 @@ export function endDowsing(state, action) {
  * @returns {GameState}
  */
 export function startHideAndSeek(state, action) {
-  const routeKey = mapData[state.currentLocation]?.routeKey
+  const location = mapData[state.currentLocation],
+    routeKey = location?.routeKey
   if (
     !routeKey ||
     !hideAndSeekAvailable(state.hideAndSeekSearches, routeKey) ||
-    !hideAndSeekSpot(routeKey)
+    !hideAndSeekSpot(routeKey) ||
+    !hideAndSeekRouteForRegion(location?.region ?? 'kanto', routeKey)
   )
     return state
   const base = enterMinigame(

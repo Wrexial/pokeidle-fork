@@ -6,7 +6,7 @@ import { BATTLE_TOWER_LOCATION } from '../data/config.js'
 import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
 import { areaInfoFor } from '../data/ui.js'
-import { DOWSING_PROBES, DOWSING_TUTORIAL, HIDE_AND_SEEK_TUTORIAL, MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_TUTORIALS, ROUTE_ACTIVITIES, ROUTE_ACTIVITY_TUTORIALS, activityConditionLabel, activityConditionMatches, bestRodId, dowsingAvailable, hideAndSeekAvailable, hideAndSeekSpot, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
+import { DOWSING_PROBES, DOWSING_TUTORIAL, HIDE_AND_SEEK_TUTORIAL, MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_TUTORIALS, ROUTE_ACTIVITIES, ROUTE_ACTIVITY_TUTORIALS, activityConditionLabel, activityConditionMatches, bestRodId, dowsingAvailable, dowsingRouteForRegion, hideAndSeekAvailable, hideAndSeekRouteForRegion, hideAndSeekSpot, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { dayPhaseAt } from '../game/day-night.js'
 import { effectiveWeatherAt } from '../game/weather.js'
 import { masteryProgress } from '../game/route-mastery.js'
@@ -281,10 +281,18 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
   const fixedMinigameId = MINIGAME_LOCATIONS[location.id],
     fixedMinigame = fixedMinigameId ? MINIGAME_INFO[fixedMinigameId] : null,
     activityIds = routeActivityIds(location),
-    dowsingRouteKey = location.type === 'route' ? (location.routeKey ?? null) : null,
+    dowsingRouteKey =
+      location.type === 'route' &&
+      location.routeKey &&
+      dowsingRouteForRegion(location.region ?? 'kanto', location.routeKey)
+        ? location.routeKey
+        : null,
     dowsingReady = !!dowsingRouteKey && dowsingAvailable(state.dowsingSearches, dowsingRouteKey),
     hideAndSeekRouteKey =
-      location.type === 'route' && location.routeKey && hideAndSeekSpot(location.routeKey)
+      location.type === 'route' &&
+      location.routeKey &&
+      hideAndSeekSpot(location.routeKey) &&
+      hideAndSeekRouteForRegion(location.region ?? 'kanto', location.routeKey)
         ? location.routeKey
         : null,
     hideAndSeekReady =

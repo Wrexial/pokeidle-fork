@@ -61,25 +61,6 @@ Reference images kept for future checks:
 
 ---
 
-## Route activity frequency (follow-up)
-
-The Dowsing Machine and Hide-and-Seek currently appear on **every** wild route
-(`dowsingRouteKey` / `hideAndSeekRouteKey` in `src/components/location-panel.js`
-fall back to the route's own `routeKey`), so a region can offer a dozen of each.
-Thin them out to **2 Dowsing spots and 2 Hide-and-Seek spots per region** (4
-route activities total per region).
-
-- [ ] Pick the 2 routes per region deterministically (a curated table, or a
-      day-seeded selection) and expose helpers like `dowsingRouteForRegion` /
-      `hideAndSeekRouteForRegion` that the panel consults before showing the
-      cards. Keep the existing per-route daily gating.
-- [ ] Apply the same limit to the `START_DOWSING` / `START_HIDE_AND_SEEK`
-      reducer guards (`src/game/reducer/minigames.js`) so a route that isn't
-      chosen can't start one.
-- [ ] Update `tests/dowsing.test.mjs` and `tests/hide-and-seek.test.mjs`.
-
----
-
 ## Useful references when picking these up
 
 - **Data-pipeline template:** `tools/fetch-breeding-data.cjs` — cached PokéAPI

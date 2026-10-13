@@ -10,15 +10,45 @@ const {
   DOWSING_PROBES,
   DOWSING_TILES,
   DOWSING_TUTORIAL,
+  ROUTE_ACTIVITY_SPOTS,
   dowsingAvailable,
   dowsingDistance,
   dowsingFinds,
   dowsingHeat,
   dowsingReading,
   dowsingRewardName,
+  dowsingRouteForRegion,
+  dowsingRoutesForRegion,
 } = await import('../src/game/minigames.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
+const { mapData } = await import('../src/data/gameData.js')
 const { consumableItems, evolutionItems, heldItems, pokeBalls } = await import('../src/data/items.js')
+
+/** The map location id of a region's route, for standing the player on it.
+ * @param {string} region
+ * @param {string} routeKey
+ * @returns {string | undefined}
+ */
+function locationForRoute(region, routeKey) {
+  return Object.values(mapData).find(
+    (location) => location.routeKey === routeKey && (location.region ?? 'kanto') === region
+  )?.id
+}
+
+/** Every wild route key in a region, in map order.
+ * @param {string} region
+ * @returns {string[]}
+ */
+function regionRouteKeys(region) {
+  return Object.values(mapData)
+    .filter(
+      (location) =>
+        location.type === 'route' &&
+        (location.region ?? 'kanto') === region &&
+        location.routeKey
+    )
+    .map((location) => /** @type {string} */ (location.routeKey))
+}
 
 test('the dowsing grid has a sane shape and a tutorial', () => {
   assert.equal(DOWSING_TILES, 30)
@@ -86,20 +116,46 @@ test('dowsingAvailable ignores routes already swept today', () => {
   assert.equal(dowsingAvailable({ route1: '2024-05-04' }, 'route1', '2024-05-05'), true)
 })
 
+test('a region rotates a couple of dowsing routes a day', () => {
+  for (const region of ['kanto', 'johto', 'hoenn']) {
+    const routes = dowsingRoutesForRegion(region, '2024-05-05')
+    assert.equal(routes.length, ROUTE_ACTIVITY_SPOTS, `${region} thinned to a couple of spots`)
+    assert.equal(new Set(routes).size, routes.length, `${region} spots are distinct routes`)
+    assert.deepEqual(
+      routes,
+      dowsingRoutesForRegion(region, '2024-05-05'),
+      `${region} picks the same routes for the same day`
+    )
+    for (const routeKey of routes)
+      assert.equal(dowsingRouteForRegion(region, routeKey, '2024-05-05'), true)
+  }
+})
+
+test('a route outside the day\u2019s rotation cannot sweep', () => {
+  const chosen = new Set(dowsingRoutesForRegion('kanto', '2024-05-05')),
+    otherRoute = regionRouteKeys('kanto').find((routeKey) => !chosen.has(routeKey))
+  assert.ok(otherRoute, 'a non-chosen route exists')
+  assert.equal(dowsingRouteForRegion('kanto', otherRoute, '2024-05-05'), false)
+})
+
 test('START_DOWSING marks the route and enters the scene once', () => {
+  const routeKey = dowsingRoutesForRegion('kanto')[0],
+    locationId = locationForRoute('kanto', routeKey)
+  assert.ok(locationId, 'the chosen route has a map location')
   const start = gameReducer(
-    { ...initialGameState, currentLocation: 'route1', dowsingSearches: {} },
+    { ...initialGameState, currentLocation: locationId, dowsingSearches: {} },
     { type: 'START_DOWSING' }
   )
   assert.equal(start.phase, 'dowsing')
-  assert.equal(typeof start.dowsingSearches.route1, 'string')
+  assert.equal(typeof start.dowsingSearches[routeKey], 'string')
   const again = gameReducer(start, { type: 'START_DOWSING' })
   assert.equal(again, start, 'a swept route cannot start again the same day')
 })
 
 test('FIND_DOWSING banks the found items and END_DOWSING closes the scene', () => {
+  const locationId = locationForRoute('kanto', dowsingRoutesForRegion('kanto')[0])
   const started = gameReducer(
-    { ...initialGameState, currentLocation: 'route1', inventory: {} },
+    { ...initialGameState, currentLocation: locationId, inventory: {} },
     { type: 'START_DOWSING' }
   )
   const found = gameReducer(started, {
@@ -115,6 +171,18 @@ test('FIND_DOWSING banks the found items and END_DOWSING closes the scene', () =
 test('START_DOWSING refuses a non-route location', () => {
   const skipped = gameReducer(
     { ...initialGameState, currentLocation: 'palletTown', dowsingSearches: {} },
+    { type: 'START_DOWSING' }
+  )
+  assert.equal(skipped.phase, initialGameState.phase)
+  assert.deepEqual(skipped.dowsingSearches, {})
+})
+
+test('START_DOWSING refuses a route the region is not sweeping today', () => {
+  const chosen = new Set(dowsingRoutesForRegion('kanto')),
+    otherRoute = regionRouteKeys('kanto').find((routeKey) => !chosen.has(routeKey)),
+    locationId = locationForRoute('kanto', otherRoute)
+  const skipped = gameReducer(
+    { ...initialGameState, currentLocation: locationId, dowsingSearches: {} },
     { type: 'START_DOWSING' }
   )
   assert.equal(skipped.phase, initialGameState.phase)

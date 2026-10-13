@@ -61,17 +61,6 @@ Reference images kept for future checks:
 
 ---
 
-## Map polish (visual)
-
-The generated maps are readable graphs. The zone marker shows its sub-area
-count, town and area/zone labels stay on screen, and a legend explains the node
-types and services, so what is left here is **art**:
-
-- [ ] Add more battle background art. There are only four base scenes
-      (grassland, beach, mountain, cave) plus the biome colour grades; real
-      forest/desert/swamp/volcano/tundra art would let `routeBackground` stop
-      tinting a handful of images.
-
 ## Wonder Card pacing (follow-up)
 
 The rotating Wonder Cards (Mystery Gifts) are gated on **real-life weeks**: a new

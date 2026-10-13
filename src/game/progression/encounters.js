@@ -2,7 +2,7 @@
 
 import { roamerEncounterChance, shinyCharmMinOddsChance, shinyFullOddsChance, shinyWithCharmChance } from '../../data/config.js'
 import { GENERATION_DEX_RANGES, evolutionData, gymLeaderData, isSpeciesCharmed, pokemonSpecies, regions } from '../../data/gameData.js'
-import { withoutQuestLegendary } from '../../data/legendary-quests.js'
+import { withoutLockedLegendary } from '../../data/legendary-quests.js'
 import { challengeEligibleSpecies, speciesHasType } from '../pokemon.js'
 import { HUNT_ENCOUNTER_MULTIPLIER, huntMatchesSpecies } from '../hunt.js'
 import { sosShinyMultiplier } from '../sos-chain.js'
@@ -353,17 +353,19 @@ export function pickRaidLegendary(pool, pokedexSeen, pokedexCaught, progress = 0
  * @param {number} [shinyBonus] Multiplier on shiny odds from a daily event.
  * @param {string | null} [monotype] Monotype challenge: only this type may appear.
  * @param {number} [progress] Raid progress, for the legendary weighting.
+ * @param {{ villainProgress?: Record<string, number> } | null} [state] Save
+ *   state, so a villain boss's legendary stays withheld until its arc is cleared.
  * @returns {{ species: Species, speciesKey: string, level: number, isShiny: boolean, isRoamer: boolean } | null}
  */
-export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGenerationSet, shinyBonus = 1, monotype = null, progress = 0) {
+export function resolveRoamer(regionId, pokedexSeen, pokedexCaught, completedGenerationSet, shinyBonus = 1, monotype = null, progress = 0, state = null) {
   const region = regions.find((candidate) => candidate.id === regionId),
-    candidates = withoutQuestLegendary(
+    candidates = withoutLockedLegendary(
       regionId,
-      (region?.raidPool ?? []).filter(
-        (entry) =>
-          pokemonSpecies[entry.speciesKey]?.legendary &&
-          !pokedexCaught.includes(entry.speciesKey) &&
-          (!monotype || speciesHasType(entry.speciesKey, monotype))
+      state,
+      (region?.raidPool ?? []).filter((entry) =>
+        pokemonSpecies[entry.speciesKey]?.legendary &&
+        !pokedexCaught.includes(entry.speciesKey) &&
+        (!monotype || speciesHasType(entry.speciesKey, monotype))
       )
     )
   if (candidates.length === 0 || Math.random() >= roamerEncounterChance) return null

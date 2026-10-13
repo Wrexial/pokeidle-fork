@@ -3,7 +3,7 @@
 // pool. Win the boss and you catch it; wipe and you go home empty-handed.
 
 import { pokemonSpecies, regions } from '../../data/gameData.js'
-import { withoutQuestLegendary } from '../../data/legendary-quests.js'
+import { withoutLockedLegendary } from '../../data/legendary-quests.js'
 import { speciesHasType } from '../pokemon.js'
 import { BATTLE_ROYAL_POOL } from './battle-royal.js'
 
@@ -40,12 +40,14 @@ export function dynamaxPaths(stage, baseLevel) {
  * to the full pool when the type has none).
  * @param {string} [regionId]
  * @param {string | null} [monotype]
+ * @param {{ villainProgress?: Record<string, number> } | null} [state]
  * @returns {{ speciesKey: string, level: number, name: string }}
  */
-export function dynamaxBoss(regionId = 'galar', monotype = null) {
+export function dynamaxBoss(regionId = 'galar', monotype = null, state = null) {
   const region = regions.find((candidate) => candidate.id === regionId)
-  let pool = withoutQuestLegendary(
+  let pool = withoutLockedLegendary(
     regionId,
+    state,
     (region?.raidPool ?? []).filter((entry) => pokemonSpecies[entry.speciesKey])
   )
   if (monotype) {
@@ -67,12 +69,14 @@ export function dynamaxBoss(regionId = 'galar', monotype = null) {
  * @param {string} [regionId]
  * @param {string | null} [monotype]
  * @param {number} [count]
+ * @param {{ villainProgress?: Record<string, number> } | null} [state]
  * @returns {{ speciesKey: string, level: number, name: string }[]}
  */
-export function dynamaxBossOptions(regionId = 'galar', monotype = null, count = 3) {
+export function dynamaxBossOptions(regionId = 'galar', monotype = null, count = 3, state = null) {
   const region = regions.find((candidate) => candidate.id === regionId)
-  let pool = withoutQuestLegendary(
+  let pool = withoutLockedLegendary(
     regionId,
+    state,
     (region?.raidPool ?? []).filter((entry) => pokemonSpecies[entry.speciesKey])
   )
   if (monotype) {

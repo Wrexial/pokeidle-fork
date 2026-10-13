@@ -562,7 +562,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
             }),
           jsx(RouteEncounterGrid, {
             routeKey: location.id,
-            encounters: raidPoolFor(location.region ?? 'kanto').map((legendary) => ({
+            encounters: raidPoolFor(location.region ?? 'kanto', state).map((legendary) => ({
               speciesKey: legendary.speciesKey,
               weight: 1,
               minLevel: legendary.level,

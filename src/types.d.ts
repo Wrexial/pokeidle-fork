@@ -1104,7 +1104,6 @@ type VillainOrg = {
   lose: string
   admin: VillainOfficer
   boss: VillainOfficer & { legendary: string }
-  level: number
   types: string[]
   reward: {
     money: number

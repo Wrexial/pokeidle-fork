@@ -43,7 +43,7 @@ export function DynamaxAdventuresScene() {
       dynamaxPaths(0, Math.max(...state.party.map((member) => member.level), 5))
     ),
     [bossOptions, setBossOptions] = React.useState(() =>
-      dynamaxBossOptions('galar', state.challengeMonotype)
+      dynamaxBossOptions('galar', state.challengeMonotype, 3, state)
     ),
     [boss, setBoss] = React.useState(/** @type {any} */ (null)),
     [phase, setPhase] = React.useState(
@@ -69,7 +69,7 @@ export function DynamaxAdventuresScene() {
     bestStages = state.minigameRecords?.dynamaxAdventures?.best ?? 0
 
   function reRoll() {
-    setBossOptions(dynamaxBossOptions('galar', state.challengeMonotype))
+    setBossOptions(dynamaxBossOptions('galar', state.challengeMonotype, 3, state))
     setLog('The Max Lair scouts a fresh set of legends.')
   }
 

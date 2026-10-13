@@ -388,7 +388,7 @@ export function PokedexModal({ onClose, inline = false }) {
                                     setRaidQuest({ regionId: region, quest })
                                     return
                                   }
-                                  const pool = raidPoolFor(region),
+                                  const pool = raidPoolFor(region, state),
                                     target =
                                       pool.find((entry) => entry.speciesKey === activeKey) ??
                                       pickRaidLegendary(

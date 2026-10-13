@@ -16,6 +16,20 @@ import {
 export { VILLAIN_ORGS, VILLAIN_STAGES, VILLAIN_TOTAL_STAGES, villainOrgFor }
 
 /**
+ * The level each arc stage fields, ramping from the first grunt to the boss.
+ * It is flat across regions: a hideout is a late-game challenge wherever it
+ * sits, so the arc tops out at the level cap rather than the region's curve.
+ * @type {Record<string, number>}
+ */
+export const VILLAIN_STAGE_LEVELS = {
+  'grunt-1': 75,
+  'grunt-2': 80,
+  'grunt-3': 85,
+  admin: 90,
+  boss: 100,
+}
+
+/**
  * What kind of trainer a stage is.
  * @param {string} stageId
  * @returns {'grunt' | 'admin' | 'boss'}
@@ -92,7 +106,7 @@ export function buildVillainTeam(stageId, regionId, rng = Math.random) {
   const org = VILLAIN_ORGS[regionId]
   if (!org) return []
   const kind = villainStageKind(stageId),
-    level = org.level + (kind === 'admin' ? 3 : kind === 'boss' ? 7 : 0),
+    level = VILLAIN_STAGE_LEVELS[stageId] ?? 75,
     pool = villainSpeciesPool(regionId, org.types, kind !== 'grunt'),
     used = new Set()
   /** @type {string[]} */

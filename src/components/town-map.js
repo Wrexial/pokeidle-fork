@@ -168,7 +168,7 @@ export function TownMap() {
         return
       }
       const legendary = pickRaidLegendary(
-        raidLegendaryPoolFor(regionId),
+        raidLegendaryPoolFor(regionId, state),
         state.pokedexSeen,
         state.pokedexCaught,
         raidProgressFor(state, regionId)

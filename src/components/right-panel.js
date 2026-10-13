@@ -21,7 +21,7 @@ export function RightPanel() {
     isRaid = location?.type === 'raid',
     routeKey = isRaid ? location?.id : location?.routeKey,
     raidEncounters = isRaid
-      ? raidPoolFor(location?.region ?? 'kanto').map((encounter) => ({
+      ? raidPoolFor(location?.region ?? 'kanto', state).map((encounter) => ({
           speciesKey: encounter.speciesKey,
           weight: 1,
           minLevel: encounter.level,

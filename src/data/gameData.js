@@ -1,7 +1,7 @@
 // Split from the former assets/index.js.
 
 import { applyMoveOverrides } from './move-effects.js'
-import { withoutQuestLegendary } from './legendary-quests.js'
+import { withoutLockedLegendary } from './legendary-quests.js'
 import { buildFormModel } from './pokemon-forms.js'
 import { buildFormDexModel } from './form-dex.js'
 
@@ -166,23 +166,27 @@ export function dlcParentRegion(regionId) {
  * The Raid Island's displayed encounter table: its legendaries. The ordinary
  * finals the island used to carry now live on fitting region routes as wild
  * encounters, so the island stays legendary-only. Empty if the region is
- * unknown.
+ * unknown. Pass `state` to also withhold a villain boss's legendary until its
+ * arc is cleared.
  * @param {string} regionId
+ * @param {GameState} [state]
  * @returns {{ speciesKey: string, level: number }[]}
  */
-export function raidPoolFor(regionId) {
+export function raidPoolFor(regionId, state) {
   const region = regions.find((candidate) => candidate.id === regionId)
-  return region ? withoutQuestLegendary(regionId, [...(region.raidPool ?? [])]) : []
+  return region ? withoutLockedLegendary(regionId, state, [...(region.raidPool ?? [])]) : []
 }
 
 /**
- * The legendaries a region's Raid Island can headline a raid with.
+ * The legendaries a region's Raid Island can headline a raid with. Pass `state`
+ * to also withhold a villain boss's legendary until its arc is cleared.
  * @param {string} regionId
+ * @param {GameState} [state]
  * @returns {{ speciesKey: string, level: number }[]}
  */
-export function raidLegendaryPoolFor(regionId) {
+export function raidLegendaryPoolFor(regionId, state) {
   const region = regions.find((region) => region.id === regionId)
-  return region ? withoutQuestLegendary(regionId, region.raidPool ?? []) : []
+  return region ? withoutLockedLegendary(regionId, state, region.raidPool ?? []) : []
 }
 
 /**

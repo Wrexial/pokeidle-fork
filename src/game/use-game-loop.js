@@ -5,7 +5,7 @@
 import React from 'react'
 import { trainerClassPayouts, hordeEncounterChance, missingnoEncounterChance, mewUnderTruckChance, swarmShinyMultiplier, swarmShinyOddsFloor, manualInputTimeoutMs } from '../data/config.js'
 import { ballOrder } from '../data/items.js'
-import { withoutQuestLegendary } from '../data/legendary-quests.js'
+import { withoutLockedLegendary } from '../data/legendary-quests.js'
 import { completedGenerations, encounterData, formDexModel, mapData, pokemonSpecies, trainerData } from '../data/gameData.js'
 import { newlyCompletedFormDex } from '../data/form-dex.js'
 import { gmaxEvolveReady, megaEvolveReady } from '../data/mega-evolution.js'
@@ -297,11 +297,13 @@ export function useGameLoop() {
           // phase-matching entries, falling back to the full table when a route
           // would otherwise be empty (see encountersForPhase). The region's box
           // legendary is always dropped: it is earned through its Legendary
-          // Quest, never a random raid-island spawn.
+          // Quest, never a random raid-island spawn. A villain boss's legendary
+          // is dropped too until that region's arc is cleared.
           const wildEncounterData = {
             ...currentEncounterData,
-            encounters: withoutQuestLegendary(
+            encounters: withoutLockedLegendary(
               regionId,
+              currentGameState,
               encountersForPhase(currentEncounterData.encounters, isNightTime(), currentSeason())
             ),
           },
@@ -348,7 +350,8 @@ export function useGameLoop() {
               completedGenerationSet,
               dailyShinyBonus,
               currentGameState.challengeMonotype,
-              raidProgressFor(currentGameState, regionId)
+              raidProgressFor(currentGameState, regionId),
+              currentGameState
             ),
             spawningPokemonData =
               roamerData ??

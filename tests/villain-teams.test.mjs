@@ -17,9 +17,11 @@ const {
   villainStageLines,
   villainStageName,
   villainStatus,
+  VILLAIN_STAGE_LEVELS,
 } = await import('../src/game/villain-teams.js')
-const { QUEST_LEGENDARY_BY_REGION } = await import('../src/data/legendary-quests.js')
-const { mapData, pokemonSpecies } = await import('../src/data/gameData.js')
+const { QUEST_LEGENDARY_BY_REGION, isVillainLegendaryLocked, withoutLockedLegendary } =
+  await import('../src/data/legendary-quests.js')
+const { mapData, pokemonSpecies, raidPoolFor } = await import('../src/data/gameData.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 const { repairSave, serializeSave } = await import('../src/game/save.js')
 const { RIBBONS } = await import('../src/game/pokemon.js')
@@ -214,6 +216,52 @@ test('a grunt win advances the arc without paying the reward', () => {
   assert.equal(won.villainProgress.kanto, 1)
   assert.equal(won.inventory.masterball, undefined)
   assert.ok(!won.party[0].ribbons?.includes('villain-kanto'))
+})
+
+test('the arc ramps from a Lv.75 first grunt to a Lv.100 boss', () => {
+  assert.deepEqual(VILLAIN_STAGE_LEVELS, {
+    'grunt-1': 75,
+    'grunt-2': 80,
+    'grunt-3': 85,
+    admin: 90,
+    boss: 100,
+  })
+  for (const regionId of REGIONS) {
+    const boss = buildVillainTeam('boss', regionId, cyclingRng()),
+      first = buildVillainTeam('grunt-1', regionId, cyclingRng())
+    assert.equal(Math.max(...first.map((member) => member.level)), 75, `${regionId} first grunt`)
+    assert.equal(Math.max(...boss.map((member) => member.level)), 100, `${regionId} boss`)
+  }
+})
+
+test('the boss legendary is locked out of the raid pool until the arc is cleared', () => {
+  for (const regionId of REGIONS) {
+    const org = VILLAIN_ORGS[regionId],
+      legendary = org.boss.legendary,
+      fresh = raidPoolFor(regionId, { villainProgress: {} }),
+      cleared = raidPoolFor(regionId, { villainProgress: { [regionId]: VILLAIN_TOTAL_STAGES } })
+    assert.ok(isVillainLegendaryLocked(regionId, { villainProgress: {} }), `${regionId} locked at 0`)
+    assert.ok(
+      !isVillainLegendaryLocked(regionId, {
+        villainProgress: { [regionId]: VILLAIN_TOTAL_STAGES },
+      }),
+      `${regionId} released once cleared`
+    )
+    assert.ok(
+      !fresh.some((entry) => entry.speciesKey === legendary),
+      `${regionId} hides ${legendary} while the arc is open`
+    )
+    assert.ok(
+      cleared.some((entry) => entry.speciesKey === legendary),
+      `${regionId} restores ${legendary} after the arc`
+    )
+    const withheld = withoutLockedLegendary(
+      regionId,
+      { villainProgress: {} },
+      [{ speciesKey: legendary, level: 75 }]
+    )
+    assert.equal(withheld.length, 0, 'the generic helper withholds it too')
+  }
 })
 
 test('repairSave sanitises the villain record', () => {

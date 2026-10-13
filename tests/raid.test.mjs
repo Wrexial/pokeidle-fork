@@ -12,6 +12,7 @@ const { pickRaidLegendary, raidLegendaryWeight, raidProgressFor, resolveRoamer }
   '../src/game/progression.js'
 )
 const { LEGENDARY_QUESTS } = await import('../src/data/legendary-quests.js')
+const { VILLAIN_ORGS } = await import('../src/data/villain-teams.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
 
 /** @param {Record<string, any>} [overrides] */
@@ -44,10 +45,15 @@ test('every region keeps a legendary-only Raid Island', () => {
       )
     const keys = legendary.map((entry) => entry.speciesKey)
     assert.equal(new Set(keys).size, keys.length, `${region.id} lists a species twice`)
-    // The region's box legendary is earned through its Legendary Quest, so the
-    // random pool accessors leave it out (and only it).
+    // The region's box legendary is earned through its Legendary Quest and its
+    // villain boss's legendary is locked until the arc is cleared, so the random
+    // pool accessors leave both out.
     const questLegendary = LEGENDARY_QUESTS[region.id]?.legendary,
-      randomPool = legendary.filter((entry) => entry.speciesKey !== questLegendary)
+      villainLegendary = VILLAIN_ORGS[region.id]?.boss.legendary,
+      randomPool = legendary.filter(
+        (entry) =>
+          entry.speciesKey !== questLegendary && entry.speciesKey !== villainLegendary
+      )
     assert.deepEqual(raidPoolFor(region.id), randomPool)
     assert.deepEqual(raidLegendaryPoolFor(region.id), randomPool)
     if (questLegendary)
@@ -55,6 +61,19 @@ test('every region keeps a legendary-only Raid Island', () => {
         !randomPool.some((entry) => entry.speciesKey === questLegendary),
         `${region.id} keeps ${questLegendary} quest-exclusive`
       )
+    if (villainLegendary)
+      assert.ok(
+        !randomPool.some((entry) => entry.speciesKey === villainLegendary),
+        `${region.id} keeps ${villainLegendary} locked behind its villain arc`
+      )
+    // Clearing the arc unlocks the boss's legendary again.
+    if (villainLegendary) {
+      const unlocked = raidLegendaryPoolFor(region.id, { villainProgress: { [region.id]: 5 } })
+      assert.ok(
+        unlocked.some((entry) => entry.speciesKey === villainLegendary),
+        `${region.id} releases ${villainLegendary} once the arc is cleared`
+      )
+    }
   }
 })
 

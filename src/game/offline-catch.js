@@ -5,6 +5,7 @@
 // off changes nothing — so it can't surprise a player who never set a rule.
 
 import { encounterData, mapData, pokemonSpecies } from '../data/gameData.js'
+import { withoutLockedLegendary } from '../data/legendary-quests.js'
 import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoCatchBall, shouldAutoCatch } from './catching.js'
 import { offlineWildWinEstimate, encountersForPhase } from './progression.js'
 import { currentSeason } from './seasons.js'
@@ -43,11 +44,17 @@ export function simulateOfflineCatches(state, awayMs, random = Math.random) {
   const routeKey = state.currentRoute,
     bucket = encounterData[routeKey]
   if (!bucket?.encounters?.length) return null
-  const encounters = encountersForPhase(bucket.encounters, isNightTime(), currentSeason()),
-    battles = Math.min(MAX_OFFLINE_CATCHES, offlineWildWinEstimate(awayMs))
-  if (battles <= 0) return null
   const location = mapData[state.currentLocation] ?? mapData[routeKey],
-    baseContext = {
+    regionId = location?.region ?? 'kanto',
+    // A quest or villain-locked legendary is never auto-caught offline either.
+    encounters = withoutLockedLegendary(
+      regionId,
+      state,
+      encountersForPhase(bucket.encounters, isNightTime(), currentSeason())
+    ),
+    battles = Math.min(MAX_OFFLINE_CATCHES, offlineWildWinEstimate(awayMs))
+  if (battles <= 0 || encounters.length === 0) return null
+  const baseContext = {
       isWater: isWaterLocation(location),
       isCave: isCaveLocation(location),
       isNight: isNightTime(),

@@ -50,7 +50,6 @@ export const VILLAIN_ORGS = {
       signature: 'persian',
       legendary: 'zapdos',
     },
-    level: 34,
     types: ['Poison', 'Dark'],
     reward: {
       money: 12000,
@@ -94,7 +93,6 @@ export const VILLAIN_ORGS = {
       signature: 'houndoom',
       legendary: 'raikou',
     },
-    level: 36,
     types: ['Dark', 'Poison'],
     reward: {
       money: 13000,
@@ -138,7 +136,6 @@ export const VILLAIN_ORGS = {
       signature: 'wailord',
       legendary: 'latios',
     },
-    level: 38,
     types: ['Water', 'Dark'],
     reward: {
       money: 14000,
@@ -182,7 +179,6 @@ export const VILLAIN_ORGS = {
       signature: 'honchkrow',
       legendary: 'heatran',
     },
-    level: 40,
     types: ['Poison', 'Dark'],
     reward: {
       money: 15000,
@@ -226,7 +222,6 @@ export const VILLAIN_ORGS = {
       signature: 'hydreigon',
       legendary: 'cobalion',
     },
-    level: 42,
     types: ['Electric', 'Dark'],
     reward: {
       money: 16000,
@@ -270,7 +265,6 @@ export const VILLAIN_ORGS = {
       signature: 'pyroar',
       legendary: 'zygarde',
     },
-    level: 44,
     types: ['Fire', 'Dark'],
     reward: {
       money: 17000,
@@ -314,7 +308,6 @@ export const VILLAIN_ORGS = {
       signature: 'golisopod',
       legendary: 'solgaleo',
     },
-    level: 46,
     types: ['Poison', 'Dark'],
     reward: {
       money: 18000,
@@ -358,7 +351,6 @@ export const VILLAIN_ORGS = {
       signature: 'morpeko',
       legendary: 'regieleki',
     },
-    level: 48,
     types: ['Dark', 'Fairy'],
     reward: {
       money: 19000,
@@ -402,7 +394,6 @@ export const VILLAIN_ORGS = {
       signature: 'kingambit',
       legendary: 'chien-pao',
     },
-    level: 50,
     types: ['Dark', 'Fire'],
     reward: {
       money: 20000,

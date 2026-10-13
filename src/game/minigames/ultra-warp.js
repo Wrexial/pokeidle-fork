@@ -5,7 +5,7 @@
 // of leaving the catch to the raid's weighted roll.
 
 import { pokemonSpecies, regions } from '../../data/gameData.js'
-import { withoutQuestLegendary } from '../../data/legendary-quests.js'
+import { withoutLockedLegendary, withoutQuestLegendary } from '../../data/legendary-quests.js'
 
 /** Money spent per ride. */
 export const ULTRA_WARP_COST = 600
@@ -160,10 +160,18 @@ const alolaRaidPool = new Set(
   ).map((entry) => entry.speciesKey)
 )
 
-/** The real, warp-reachable species for a wormhole tier. @param {number} tier */
-export function ultraWarpSpeciesForTier(tier) {
-  const pool = ULTRA_WARP_TIERS[tier]?.species ?? []
-  return pool.filter((speciesKey) => pokemonSpecies[speciesKey] && alolaRaidPool.has(speciesKey))
+/**
+ * The real, warp-reachable species for a wormhole tier. Pass `state` so a
+ * villain boss's legendary stays out of the ride until its arc is cleared.
+ * @param {number} tier
+ * @param {{ villainProgress?: Record<string, number> } | null} [state]
+ */
+export function ultraWarpSpeciesForTier(tier, state = null) {
+  const pool = ULTRA_WARP_TIERS[tier]?.species ?? [],
+    valid = pool.filter(
+      (speciesKey) => pokemonSpecies[speciesKey] && alolaRaidPool.has(speciesKey)
+    )
+  return withoutLockedLegendary('alola', state, valid, (speciesKey) => speciesKey)
 }
 
 /**
@@ -173,10 +181,11 @@ export function ultraWarpSpeciesForTier(tier) {
  * @param {number} tier
  * @param {string[]} caught
  * @param {() => number} [rng]
+ * @param {{ villainProgress?: Record<string, number> } | null} [state]
  * @returns {string | null}
  */
-export function rollWarpSpecies(tier, caught = [], rng = Math.random) {
-  const pool = ultraWarpSpeciesForTier(tier)
+export function rollWarpSpecies(tier, caught = [], rng = Math.random, state = null) {
+  const pool = ultraWarpSpeciesForTier(tier, state)
   if (pool.length === 0) return null
   const caughtSet = new Set(caught),
     uncaught = pool.filter((speciesKey) => !caughtSet.has(speciesKey)),
@@ -187,7 +196,7 @@ export function rollWarpSpecies(tier, caught = [], rng = Math.random) {
 /**
  * The destinations offered after a ride: one wormhole per tier up to the one
  * the run reached, so a better ride offers a rarer choice.
- * @param {{ pokedexCaught?: string[] }} state
+ * @param {{ pokedexCaught?: string[], villainProgress?: Record<string, number> }} state
  * @param {number} reachedTier
  * @param {() => number} [rng]
  */
@@ -197,7 +206,7 @@ export function ultraWarpDestinations(state, reachedTier, rng = Math.random) {
     /** @type {{ speciesKey: string, name: string, tier: number, tierLabel: string, level: number }[]} */
     destinations = []
   for (let tier = 0; tier <= capped; tier++) {
-    const speciesKey = rollWarpSpecies(tier, caught, rng)
+    const speciesKey = rollWarpSpecies(tier, caught, rng, state)
     if (!speciesKey) continue
     destinations.push({
       speciesKey,

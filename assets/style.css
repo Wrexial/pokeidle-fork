@@ -19171,6 +19171,31 @@ img {
     box-sizing: border-box
 }
 
+.trainer-card-panel.inline {
+    flex: 1;
+    min-height: 0
+}
+
+.trainer-card-scroll {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+    padding: 8px;
+    overflow-y: auto
+}
+
+.trainer-tab-bar {
+    padding: 4px 6px 0;
+    background: var(--bg-panel-light)
+}
+
+.trainer-tab-bar .tab-btn {
+    font-size: 7px;
+    padding: 5px 8px
+}
+
 .trainer-card-panel-head {
     display: flex;
     align-items: center;

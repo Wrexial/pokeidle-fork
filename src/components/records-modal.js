@@ -1,8 +1,8 @@
-// Records modal — a read-only summary of the player's journey, opened from the Box.
+// Records modal — a read-only summary of the player's journey, rendered inline
+// as the Trainer hub's Records sub-tab.
 
 import { jsx, jsxs } from 'react/jsx-runtime'
 import React from 'react'
-import { createPortal } from 'react-dom'
 import { ACHIEVEMENTS, RECORDABLE_MINIGAMES } from '../data/achievements.js'
 import { RAID_EVENT_ROTATION } from '../data/daily-events.js'
 import { isTmItem, TM_MOVE_IDS } from '../data/tms.js'
@@ -11,12 +11,10 @@ import { activeLadderRuleSet } from '../game/ladder-modifiers.js'
 import { formatReward } from '../game/progression.js'
 import { completedGenerations, gymLeaderData, isSpeciesRegistered, pokedexIndexes, regions, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
-import { RunSummaryModal } from './run-summary-modal.js'
 
 /** @param {{ onClose?: () => void, inline?: boolean }} props */
 export function RecordsModal({ onClose, inline = false }) {
   const { state } = useGame(),
-    [showSummary, setShowSummary] = React.useState(false),
     rewardedAchievements = new Set(state.rewardedAchievements ?? []),
     achieved = ACHIEVEMENTS.filter((achievement) => achievement.check(state)),
     nationalDex = pokedexIndexes.filter((entry) => entry[1].id > 0 && entry[1].id <= 1025),
@@ -175,11 +173,6 @@ export function RecordsModal({ onClose, inline = false }) {
         jsxs('div', {
           className: 'battle-info-content',
           children: [
-            jsx('button', {
-              className: 'settings-save-btn records-summary-btn',
-              onClick: () => setShowSummary(true),
-              children: '\u{1f4cb} Open Run Summary',
-            }),
             jsxs('div', {
               className: 'records-section',
               children: [
@@ -309,11 +302,6 @@ export function RecordsModal({ onClose, inline = false }) {
             }),
           ],
         }),
-        showSummary &&
-          createPortal(
-            jsx(RunSummaryModal, { onClose: () => setShowSummary(false) }),
-            document.body
-          ),
       ],
     })
   return inline

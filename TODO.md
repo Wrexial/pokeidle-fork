@@ -61,23 +61,6 @@ Reference images kept for future checks:
 
 ---
 
-## Trainer tab consolidation (follow-up)
-
-The Backpack's **Trainer** tab (`src/components/trainer-card-panel.js`) is the
-natural home for everything "about the player", but the related views still sit
-in their own tabs. Fold them in so there is one trainer hub:
-
-- [ ] Move **Records** (`RecordsModal`) out of its top-level Backpack tab into
-      the Trainer tab. It already supports `inline` rendering.
-- [ ] Move the **Run Summary** (`RunSummaryModal`, currently opened from the
-      Records tab's button and the battle top-bar's `summary` menu in
-      `src/components/battle-menu-modals.js`) in as a section/button too. It
-      also renders `inline` already.
-- [ ] Consider moving the **League** view (`GymPanel`, the default `league` tab)
-      in as well.
-- [ ] Update `BACKPACK_TABS` / the tab render switch in
-      `src/components/backpack-panel.js` and drop the now-empty top-level tabs.
-
 ## Kurt's Apricorn queue (follow-up)
 
 Kurt (`src/game/kurt.js`, `src/components/kurt-panel.js`) queues one Apricorn

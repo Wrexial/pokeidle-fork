@@ -1,6 +1,7 @@
-// The Trainer Card panel: edit the player's card (name, title, outfit and
-// favourite Pokemon), pin badges to the case and export the card as a PNG.
-// Rendered inline as a Backpack tab.
+// The Trainer hub: the player's card (name, title, outfit and favourite
+// Pokemon), pinned badges and PNG export, plus the League, Records and Run
+// Summary views as sub-tabs. Rendered inline as a single Backpack tab.
+// The GymPanel sub-view keeps its Kecleon Shop shortcut through `onOpenShop`.
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
@@ -11,13 +12,27 @@ import { pokemonDisplayName } from '../game/pokemon.js'
 import { exportTrainerCardPng } from '../game/trainer-card-export.js'
 import { availableOutfits, buildTrainerCard, createTrainerProfile } from '../game/trainer-profile.js'
 import { availableTitles } from '../game/titles.js'
+import { GymPanel } from './gym-panel.js'
+import { RecordsModal } from './records-modal.js'
+import { RunSummaryModal } from './run-summary-modal.js'
 import { TrainerCard } from './trainer-card.js'
 
+// The Trainer hub's sub-views. The Backpack renders one "Trainer" tab; this
+// panel hosts the card itself plus the League, Records and Run Summary views
+// that used to sit in their own top-level tabs.
+const TRAINER_TABS = [
+  { id: 'card', label: 'Card' },
+  { id: 'league', label: 'League' },
+  { id: 'records', label: 'Records' },
+  { id: 'summary', label: 'Summary' },
+]
+
 /**
- * @param {{ onClose?: () => void, inline?: boolean }} props
+ * @param {{ onClose?: () => void, inline?: boolean, onOpenShop?: () => void }} props
  */
-export function TrainerCardPanel({ onClose, inline = false }) {
+export function TrainerCardPanel({ onClose, inline = false, onOpenShop }) {
   const { state, dispatch } = useGame(),
+    [tab, setTab] = React.useState('card'),
     [exportStatus, setExportStatus] = React.useState(''),
     profile = state.trainerProfile ?? createTrainerProfile(),
     card = buildTrainerCard(state),
@@ -56,8 +71,8 @@ export function TrainerCardPanel({ onClose, inline = false }) {
   const achievementTitles = titles.filter((title) => title.source === 'achievement'),
     ribbonTitles = titles.filter((title) => title.source === 'ribbon')
 
-  return jsxs('div', {
-    className: `trainer-card-panel${inline ? ' inline' : ''}`,
+  const cardContent = jsxs('div', {
+    className: 'trainer-card-scroll',
     children: [
       jsxs('div', {
         className: 'trainer-card-panel-head',
@@ -299,6 +314,34 @@ export function TrainerCardPanel({ onClose, inline = false }) {
             : null,
         ],
       }),
+    ],
+  })
+
+  return jsxs('div', {
+    className: `trainer-card-panel${inline ? ' inline' : ''}`,
+    children: [
+      jsx('div', {
+        className: 'tab-bar trainer-tab-bar',
+        children: TRAINER_TABS.map((tabDef) =>
+          jsx(
+            'button',
+            {
+              className: `tab-btn${tab === tabDef.id ? ' active' : ''}`,
+              onClick: () => setTab(tabDef.id),
+              children: tabDef.label,
+            },
+            tabDef.id
+          )
+        ),
+      }),
+      tab === 'card' && cardContent,
+      tab === 'league' &&
+        jsx('div', {
+          className: 'panel-content',
+          children: jsx(GymPanel, { onOpenShop: onOpenShop ?? (() => {}) }),
+        }),
+      tab === 'records' && jsx(RecordsModal, { inline: true }),
+      tab === 'summary' && jsx(RunSummaryModal, { inline: true }),
     ],
   })
 }

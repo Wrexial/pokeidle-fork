@@ -67,29 +67,6 @@ Panel-layout and top-bar cleanups: reclaim vertical space, make the sub-tab
 hierarchy read, and fold the daily menus together. All are UI-only unless
 noted.
 
-## Compact the route activity cards (follow-up)
-
-Each route activity renders a full-width `MinigameCard` — a big hint paragraph,
-a full-width "HOW TO PLAY" toggle and a full-width start button
-(`src/components/minigame-card.js`) — plus a `JobControls` block whose
-"ASSIGN A POKEMON" button is another full-width bar
-(`src/components/job-controls.js`). A route with several activities fills the
-panel. Move the secondary controls into the card header: a small help `?`
-toggle and a small assign button, both top-right, and let the hint collapse.
-
-- [ ] In `minigame-card.js`, replace the full-width help toggle with a small
-      icon button inside `location-minigame-head` that toggles the steps (keep
-      the `location-minigame-steps` list and the first-time tutorial).
-- [ ] Surface the field-job assign action in that header too — pass an optional
-      `onAssign` / `assignLabel` / `assignDisabled` prop into `MinigameCard`
-      (or lift the assign button out of `JobControls`) so posting a Pokemon is
-      a small button rather than a full-width bar. It must still dispatch
-      `ASSIGN_JOB` with the default worker.
-- [ ] Trim the hint to one line and adjust the `.location-minigame-*` CSS in
-      `assets/style.css` so the card is noticeably shorter.
-- [ ] Re-check the Dowsing, Hide-and-Seek and fixed-minigame cards, which all
-      share `MinigameCard` (including the zone-hub `fixedMinigameCard`).
-
 ## Make the Secret Base card collapsible (follow-up)
 
 `SecretBaseCard` (`src/components/secret-base-card.js`) always shows its

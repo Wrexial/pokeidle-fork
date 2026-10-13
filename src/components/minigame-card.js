@@ -4,9 +4,24 @@ import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 
 /**
- * @param {{ icon?: string, title: string, hint: string, types?: string[], conditionLabel?: string | null, conditionActive?: boolean, steps?: string[], actionLabel: string, disabled?: boolean, onStart: () => void }} props
+ * @param {{ icon?: string, title: string, hint: string, types?: string[], conditionLabel?: string | null, conditionActive?: boolean, steps?: string[], actionLabel: string, disabled?: boolean, onStart: () => void, onAssign?: () => void, assignLabel?: string, assignTitle?: string, assignDisabled?: boolean }} props
  */
-export function MinigameCard({ icon, title, hint, types, conditionLabel, conditionActive, steps, actionLabel, disabled, onStart }) {
+export function MinigameCard({
+  icon,
+  title,
+  hint,
+  types,
+  conditionLabel,
+  conditionActive,
+  steps,
+  actionLabel,
+  disabled,
+  onStart,
+  onAssign,
+  assignLabel,
+  assignTitle,
+  assignDisabled,
+}) {
   const [helpOpen, setHelpOpen] = React.useState(false)
   return jsxs('div', {
     className: 'location-minigame-card',
@@ -16,6 +31,31 @@ export function MinigameCard({ icon, title, hint, types, conditionLabel, conditi
         children: [
           icon ? jsx('span', { className: 'location-minigame-icon', children: icon }) : null,
           jsx('span', { className: 'location-minigame-title', children: title }),
+          jsxs('span', {
+            className: 'location-minigame-head-actions',
+            children: [
+              onAssign
+                ? jsx('button', {
+                    className: 'location-minigame-assign',
+                    type: 'button',
+                    disabled: assignDisabled,
+                    title: assignTitle ?? assignLabel,
+                    onClick: onAssign,
+                    children: assignLabel ?? 'ASSIGN',
+                  })
+                : null,
+              steps?.length
+                ? jsx('button', {
+                    className: `location-minigame-help${helpOpen ? ' active' : ''}`,
+                    type: 'button',
+                    'aria-expanded': helpOpen,
+                    title: helpOpen ? 'Hide how to play' : 'How to play',
+                    onClick: () => setHelpOpen(!helpOpen),
+                    children: '?',
+                  })
+                : null,
+            ],
+          }),
         ],
       }),
       types?.length
@@ -36,14 +76,7 @@ export function MinigameCard({ icon, title, hint, types, conditionLabel, conditi
             children: conditionActive ? `\u2b50 Favoured ${conditionLabel}` : `Best ${conditionLabel}`,
           })
         : null,
-      jsx('p', { className: 'location-minigame-hint', children: hint }),
-      steps?.length
-        ? jsx('button', {
-            className: `location-minigame-help${helpOpen ? ' active' : ''}`,
-            onClick: () => setHelpOpen(!helpOpen),
-            children: helpOpen ? 'HIDE HOW TO PLAY' : 'HOW TO PLAY',
-          })
-        : null,
+      jsx('p', { className: 'location-minigame-hint', title: hint, children: hint }),
       helpOpen && steps?.length
         ? jsx('ol', {
             className: 'location-minigame-steps',

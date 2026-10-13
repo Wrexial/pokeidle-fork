@@ -6,18 +6,19 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { completedGenerations, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { createBattlePokemon } from '../game/combat.js'
-import { JOB_ABILITY_BONUS, JOB_SLOTS, formatJobCycle, jobCycleMs, jobKey, jobReadyCount } from '../game/jobs.js'
+import { JOB_ABILITY_BONUS, formatJobCycle, jobCycleMs, jobKey, jobReadyCount } from '../game/jobs.js'
 import { ROUTE_ACTIVITIES, activityRewardName } from '../game/minigames.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { checkShinyOdds, shinyOddsForSpecies } from '../game/progression.js'
 
 /**
  * The Pokemon that would take a new job: the first party member, else the first
- * boxed one.
+ * boxed one. Shared with the location panel's assign button (see
+ * MinigameCard's `onAssign`).
  * @param {GameState} state
  * @returns {any | null}
  */
-function defaultWorker(state) {
+export function defaultJobWorker(state) {
   return state.party?.[0] ?? state.box?.[0] ?? null
 }
 
@@ -29,8 +30,6 @@ export function JobControls({ locationId, activityId }) {
     key = jobKey(locationId, activityId),
     job = (state.jobs ?? {})[key] ?? null,
     activity = ROUTE_ACTIVITIES[activityId],
-    slotsUsed = Object.keys(state.jobs ?? {}).length,
-    slotsFull = slotsUsed >= JOB_SLOTS,
     worker = job ? [...(state.party ?? []), ...(state.box ?? [])].find((p) => p.id === job.pokemonId) : null,
     ready = job ? jobReadyCount(job) : 0,
     progress = job
@@ -46,15 +45,6 @@ export function JobControls({ locationId, activityId }) {
     hasLoot = (job?.money ?? 0) > 0 || itemEntries.length > 0
 
   if (!activity) return null
-
-  function assign() {
-    const candidate = defaultWorker(state)
-    if (!candidate) return
-    dispatch({
-      type: 'ASSIGN_JOB',
-      payload: { locationId, activityId, pokemonId: candidate.id },
-    })
-  }
 
   function unassign() {
     dispatch({ type: 'UNASSIGN_JOB', payload: { locationId, activityId } })
@@ -80,24 +70,9 @@ export function JobControls({ locationId, activityId }) {
     dispatch({ type: 'START_ENCOUNTER', payload: { enemy } })
   }
 
-  if (!job)
-    return jsxs('div', {
-      className: 'job-controls',
-      children: [
-        jsx('span', {
-          className: 'job-hint',
-          children: slotsFull
-            ? `All ${JOB_SLOTS} field jobs are busy.`
-            : 'Post a Pokemon to keep this running while you are away.',
-        }),
-        jsx('button', {
-          className: 'job-btn assign',
-          disabled: slotsFull || !defaultWorker(state),
-          onClick: assign,
-          children: slotsFull ? 'JOBS FULL' : 'ASSIGN A POKEMON',
-        }),
-      ],
-    })
+  // With no job running the only control is the assign button, which now lives
+  // in the MinigameCard header, so there is nothing to render here.
+  if (!job) return null
 
   const workerName = worker?.name ?? pokemonSpecies[worker?.speciesKey ?? '']?.name ?? 'A Pokemon'
 

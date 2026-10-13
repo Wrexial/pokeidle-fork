@@ -14,8 +14,9 @@ import { useGame } from '../game/context.js'
 import { computeUnlockedLocations, frontierUnlocks, minigameRequirementMet, regionProgressionGoal, unlockBlockers } from '../game/progression.js'
 import { servicePoisFor, cafeFor } from '../game/services.js'
 import { postgameHubFor } from '../data/postgame-hubs.js'
+import { JOB_SLOTS, jobKey } from '../game/jobs.js'
 import { MinigameCard } from './minigame-card.js'
-import { JobControls } from './job-controls.js'
+import { JobControls, defaultJobWorker } from './job-controls.js'
 import { FieldJobsModal } from './field-jobs-modal.js'
 import { GiftPanel } from './gift-panel.js'
 import { FossilPanel } from './fossil-panel.js'
@@ -56,6 +57,8 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
     unlockedNowSet = new Set(unlockedNow),
     location = mapData[state.currentLocation],
     jobCount = Object.keys(state.jobs ?? {}).length,
+    jobsFull = jobCount >= JOB_SLOTS,
+    jobWorker = defaultJobWorker(state),
     // Every locked location on the current region's frontier (adjacent to
     // somewhere already unlocked), soonest first. Several can become available
     // at once — a town with two routes, a badge gate plus its neighbour — so
@@ -896,6 +899,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
               activityIds.map((activityId) => {
                 const activity = ROUTE_ACTIVITIES[activityId]
                 if (!activity) return null
+                const job = (state.jobs ?? {})[jobKey(location.id, activityId)]
                 return jsxs(
                   Fragment,
                   {
@@ -923,6 +927,29 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
                               !state.party.some((member) => member.currentHp > 0)),
                           onStart: () =>
                             dispatch({ type: 'START_ROUTE_ACTIVITY', payload: { activityId } }),
+                          // Posting a worker is a small header button rather than
+                          // a full-width bar; once a job is running the card
+                          // shows JobControls' progress block instead.
+                          onAssign: job
+                            ? undefined
+                            : () => {
+                                if (jobWorker)
+                                  dispatch({
+                                    type: 'ASSIGN_JOB',
+                                    payload: {
+                                      locationId: location.id,
+                                      activityId,
+                                      pokemonId: jobWorker.id,
+                                    },
+                                  })
+                              },
+                          assignLabel: jobsFull ? 'JOBS FULL' : jobWorker ? 'ASSIGN' : 'NO POKEMON',
+                          assignTitle: jobsFull
+                            ? `All ${JOB_SLOTS} field jobs are busy.`
+                            : jobWorker
+                              ? 'Post a Pokemon to keep this running while you are away.'
+                              : 'No Pokemon available to assign.',
+                          assignDisabled: jobsFull || !jobWorker,
                         },
                         activityId
                       ),

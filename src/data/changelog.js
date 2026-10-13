@@ -119,6 +119,7 @@ export const CHANGELOG = [
           'Hotkeys are rebindable now: a Keybindings section in Settings lets you set a key for pause, battle speed up and down, the manual/auto toggle and auto-catch (click a key, press the new one, Escape cancels). The defaults work out of the box, a shared-key clash is flagged, and one button restores them.',
           'The Backpack is one trainer hub now: the League, Records and Run Summary views moved out of their own tabs into sub-tabs of the Trainer tab (Card / League / Records / Summary). The remaining top-level tabs are Trainer, Dex, Kecleon Wares and Items, and the Trainer tab opens on the card.',
           'The Trainer tab’s four sub-views (Card / League / Records / Summary) now use the Items tab’s lighter pill strip instead of the Backpack’s blocky top-level tabs, so the second level reads as a sub-tab.',
+          'Route activity cards are much more compact: the hint is one line, HOW TO PLAY is a small “?” button in the header that folds the steps away, and posting a Pokemon to a Field Job is a small header button instead of a full-width bar. A route with several activities no longer fills the panel.',
         ],
       },
       {

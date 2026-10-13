@@ -10260,6 +10260,58 @@ img {
     border-color: #fff0b0
 }
 
+.dowsing-scene .dowsing-grid {
+    max-width: 460px
+}
+
+.dowsing-tile {
+    font-size: 13px
+}
+
+.dowsing-heat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    line-height: 1
+}
+
+.dowsing-heat-icon {
+    font-size: 15px;
+    line-height: 1
+}
+
+.dowsing-heat-label {
+    font-size: 6px;
+    text-transform: uppercase;
+    letter-spacing: .5px
+}
+
+.mining-tile.dowsing-tile.heat-blazing {
+    background: linear-gradient(#e5484d,#9c1c1c);
+    border-color: #ffb4b0
+}
+
+.mining-tile.dowsing-tile.heat-hot {
+    background: linear-gradient(#e08a3c,#a5521a);
+    border-color: #ffd0a0
+}
+
+.mining-tile.dowsing-tile.heat-warm {
+    background: linear-gradient(#d8b84a,#9c7c1c);
+    border-color: #ffe8a0
+}
+
+.mining-tile.dowsing-tile.heat-cool {
+    background: linear-gradient(#4aa0a0,#1c6c6c);
+    border-color: #a0e8e0
+}
+
+.mining-tile.dowsing-tile.heat-cold {
+    background: linear-gradient(#4a6ab0,#243c74);
+    border-color: #a0c0f0
+}
+
 .mining-found {
     display: flex;
     gap: 6px;

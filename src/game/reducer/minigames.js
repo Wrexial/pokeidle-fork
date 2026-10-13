@@ -1,7 +1,7 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, CHAMPION_GAUNTLET_COST, DOUBLES_COST, TRIPLES_COST, ROTATION_COST, FFA_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, MANTINE_SURF_COST, ROTOM_RALLY_COST, OGRE_OUSTIN_COST, TYPE_FUSION_COST, UNOWN_PICROSS_COST, POKESHOT_COST, TERA_RAID_COST, POKEWORD_COST, BERRY_BLENDER_COST, ULTRA_WARP_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
-import { raidEventByKey } from '../../data/daily-events.js'
+import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, CHAMPION_GAUNTLET_COST, DOUBLES_COST, TRIPLES_COST, ROTATION_COST, FFA_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, MANTINE_SURF_COST, ROTOM_RALLY_COST, OGRE_OUSTIN_COST, TYPE_FUSION_COST, UNOWN_PICROSS_COST, POKESHOT_COST, TERA_RAID_COST, POKEWORD_COST, BERRY_BLENDER_COST, ULTRA_WARP_COST, GAME_CORNER_PRIZE_GOAL, dowsingAvailable, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
+import { raidEventByKey, todayKey } from '../../data/daily-events.js'
 import { minigameTmChance } from '../../data/config.js'
 import { mapData, pokemonSpecies } from '../../data/gameData.js'
 import { getTmInfo, tmItemId } from '../../data/tms.js'
@@ -82,6 +82,65 @@ export function startAcademyQuiz(state, action) {
     QUIZ_COST,
     'You sat down for the Academy Quiz.'
   )
+}
+
+/**
+ * Handle the `START_DOWSING` action. Only enters the sweep when the player is
+ * standing on a wild route whose hidden items have not been taken today; the
+ * route is marked used as soon as the sweep starts, so a reload cannot farm
+ * fresh probes on the same day's set.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startDowsing(state, action) {
+  const routeKey = mapData[state.currentLocation]?.routeKey
+  if (!routeKey || !dowsingAvailable(state.dowsingSearches, routeKey)) return state
+  const base = enterMinigame(
+    state,
+    'dowsing',
+    0,
+    'You swept the route with the Dowsing Machine.'
+  )
+  return base === state
+    ? state
+    : {
+        ...base,
+        dowsingSearches: { ...(state.dowsingSearches ?? {}), [routeKey]: todayKey() },
+      }
+}
+
+/**
+ * Handle the `FIND_DOWSING` action: bank the hidden items uncovered so far.
+ * Rewards are granted the moment they are found, so a reload mid-sweep keeps
+ * them.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function findDowsing(state, action) {
+  if (state.phase !== 'dowsing') return state
+  const rewards = Array.isArray(action.payload?.rewards) ? action.payload.rewards : []
+  if (rewards.length === 0) return state
+  const inventory = { ...state.inventory }
+  for (const reward of rewards)
+    if (reward?.itemId && reward.quantity > 0)
+      inventory[reward.itemId] = (inventory[reward.itemId] ?? 0) + reward.quantity
+  return {
+    ...state,
+    inventory,
+    battleLog: [...state.battleLog, 'The Dowsing Machine found something!'].slice(-50),
+  }
+}
+
+/**
+ * Handle the `END_DOWSING` action, closing the sweep.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function endDowsing(state, action) {
+  return state.phase === 'dowsing' ? { ...state, ...createIdleBattleState() } : state
 }
 
 /**

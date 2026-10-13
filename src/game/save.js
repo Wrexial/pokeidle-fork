@@ -1033,6 +1033,12 @@ export function repairSave(saved) {
           },
         ])
     ),
+    // Dowsing Machine sweeps: keep only real routes and a YYYY-MM-DD date.
+    dowsingSearches = Object.fromEntries(
+      Object.entries(saved.dowsingSearches ?? {}).filter(
+        ([routeKey, date]) => mapData[routeKey] && typeof date === 'string' && date
+      )
+    ),
     // Route activity mastery: keep known locations/activities and ranks 1-3.
     routeMastery = Object.fromEntries(
       Object.entries(saved.routeMastery ?? {})
@@ -1199,6 +1205,7 @@ export function repairSave(saved) {
     frontierRental: null,
     minigameRecords,
     raidEventRecords,
+    dowsingSearches,
     routeMastery,
     masteredRoutes,
     victoryTokens: saved.victoryTokens ?? 0,
@@ -1428,6 +1435,7 @@ export const SAVED_STATE_KEYS = [
   'lingeringWeather',
   'minigameRecords',
   'raidEventRecords',
+  'dowsingSearches',
   'routeMastery',
   'masteredRoutes',
   'towerFloor',

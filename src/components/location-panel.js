@@ -6,7 +6,7 @@ import { BATTLE_TOWER_LOCATION } from '../data/config.js'
 import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
 import { areaInfoFor } from '../data/ui.js'
-import { MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_TUTORIALS, ROUTE_ACTIVITIES, ROUTE_ACTIVITY_TUTORIALS, activityConditionLabel, activityConditionMatches, bestRodId, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
+import { DOWSING_PROBES, DOWSING_TUTORIAL, MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_TUTORIALS, ROUTE_ACTIVITIES, ROUTE_ACTIVITY_TUTORIALS, activityConditionLabel, activityConditionMatches, bestRodId, dowsingAvailable, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { dayPhaseAt } from '../game/day-night.js'
 import { effectiveWeatherAt } from '../game/weather.js'
 import { masteryProgress } from '../game/route-mastery.js'
@@ -281,6 +281,8 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
   const fixedMinigameId = MINIGAME_LOCATIONS[location.id],
     fixedMinigame = fixedMinigameId ? MINIGAME_INFO[fixedMinigameId] : null,
     activityIds = routeActivityIds(location),
+    dowsingRouteKey = location.type === 'route' ? (location.routeKey ?? null) : null,
+    dowsingReady = !!dowsingRouteKey && dowsingAvailable(state.dowsingSearches, dowsingRouteKey),
     mastery = masteryProgress(state, location.id),
     activityConditionContext = {
       time: /** @type {'day' | 'night'} */ (dayPhaseAt().isNight ? 'night' : 'day'),
@@ -294,6 +296,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
       'safari',
       'academyQuiz',
       'mining',
+      'dowsing',
       'gameCorner',
       'routeActivity',
       'wonderTrade',
@@ -834,7 +837,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
             encounters: routeEncounters.encounters,
             onOpenCatchSettings: onOpenCatchSettings ?? (() => {}),
           }),
-        (fixedMinigame || activityIds.length > 0) &&
+        (fixedMinigame || activityIds.length > 0 || dowsingRouteKey) &&
           jsxs('div', {
             className: 'location-minigames',
             children: [
@@ -843,6 +846,18 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
                 children: fixedMinigame ? 'Minigame' : 'Activities',
               }),
               fixedMinigameCard,
+              dowsingRouteKey &&
+                jsx(MinigameCard, {
+                  icon: '\u{1f50d}',
+                  title: 'Dowsing Machine',
+                  hint: dowsingReady
+                    ? `Sweep ${location.name} for hidden items \u2014 probe tiles and follow the hot/cold readings. Each sweep gives ${DOWSING_PROBES} probes and every route refills daily.`
+                    : `You have already swept ${location.name} today \u2014 the hidden items return tomorrow.`,
+                  steps: DOWSING_TUTORIAL,
+                  actionLabel: dowsingReady ? 'START SWEEP' : 'ALREADY SWEPT TODAY',
+                  disabled: minigameBusy || !dowsingReady,
+                  onStart: () => dispatch({ type: 'START_DOWSING' }),
+                }),
               activityIds.length > 0 &&
                 jsx('p', {
                   className: `route-mastery-hint${mastery.mastered ? ' mastered' : ''}`,

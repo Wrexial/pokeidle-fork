@@ -37,8 +37,7 @@ number and full detail further down. Promote into the tiers above once scoped.
 - **Medium:** #85 Form dex · #89 Mystery Gift ·
   #90 Professor's story · #91 Auto-battle policy · #92 Raid events ·
   #96 Berry market.
-- **Quick wins:** #94 Dowsing Machine · #95 Hide-and-seek ·
-  #97 Run summary · #98 Hotkeys.
+- **Quick wins:** #95 Hide-and-seek · #97 Run summary · #98 Hotkeys.
 
 ---
 
@@ -49,15 +48,6 @@ order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
 player-facing value (★ = nice to have, ★★★★★ = core missing feature).
 
 **Activities & economy**
-
-## 94. Dowsing Machine
-
-A grid search for hidden items on a route; reuses the mining/dig grid UI.
-
-- [ ] A per-route hidden-item set, respawning daily.
-- [ ] A hot/cold grid minigame using `src/game/minigames/mining.js` patterns.
-
-Effort: **S**. Gain: ★★.
 
 ## 95. Hide-and-seek spots
 

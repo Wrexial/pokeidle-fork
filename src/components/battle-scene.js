@@ -70,6 +70,7 @@ import { PokewordScene } from './pokeword-scene.js'
 import { BerryBlenderScene } from './berry-blender-scene.js'
 import { UltraWarpScene } from './ultra-warp-scene.js'
 import { MiningScene } from './mining-scene.js'
+import { DowsingScene } from './dowsing-scene.js'
 import { GameCornerScene } from './game-corner-scene.js'
 import { RouteActivityScene } from './route-activity-scene.js'
 import { WonderTradeScene } from './wonder-trade-scene.js'
@@ -165,6 +166,7 @@ export function BattleScene({ onOpenMenu }) {
   if (state.phase === 'berryBlender') return jsx(BerryBlenderScene, {})
   if (state.phase === 'ultraWarp') return jsx(UltraWarpScene, {})
   if (state.phase === 'mining') return jsx(MiningScene, {})
+  if (state.phase === 'dowsing') return jsx(DowsingScene, {})
   if (state.phase === 'gameCorner') return jsx(GameCornerScene, {})
   if (state.phase === 'routeActivity') return jsx(RouteActivityScene, {})
   if (state.phase === 'wonderTrade') return jsx(WonderTradeScene, {})

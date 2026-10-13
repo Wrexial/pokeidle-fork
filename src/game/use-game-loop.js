@@ -1254,6 +1254,8 @@ export function useGameLoop() {
           return
         case 'mining':
           return
+        case 'dowsing':
+          return
         case 'gameCorner':
           return
         case 'wonderTrade':
@@ -1270,6 +1272,7 @@ export function useGameLoop() {
       state.phase === 'safari' ||
       state.phase === 'academyQuiz' ||
       state.phase === 'mining' ||
+      state.phase === 'dowsing' ||
       state.phase === 'gameCorner' ||
       state.phase === 'voltorbFlip' ||
       state.phase === 'auctionHouse' ||

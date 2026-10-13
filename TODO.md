@@ -67,19 +67,6 @@ Panel-layout and top-bar cleanups: reclaim vertical space, make the sub-tab
 hierarchy read, and fold the daily menus together. All are UI-only unless
 noted.
 
-## Remove the Run Summary shortcut from the battle screen (follow-up)
-
-The Run Summary now lives in Backpack → Trainer → Summary
-(`src/components/trainer-card-panel.js`), but the battle top bar still has its
-own `run-summary-btn` (`src/components/battle-scene.js`) and the `'summary'`
-branch in `src/components/battle-menu-modals.js`, so the same modal opens from
-two places.
-
-- [ ] Delete the `run-summary-btn` from `battle-scene.js` and the `'summary'`
-      entry from `BattleMenuKey` / `BattleMenuModals`.
-- [ ] Drop the now-unused `RunSummaryModal` import and confirm no test or other
-      caller references the old menu key.
-
 ## Rare Radar reads as broken (bug)
 
 Buying the Pokewalker's Rare Radar sets `revealSpecies` from

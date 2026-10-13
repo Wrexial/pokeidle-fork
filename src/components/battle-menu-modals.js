@@ -1,4 +1,4 @@
-// The battle top-bar menus: Info, Settings, Run Summary and the Dailies hub.
+// The battle top-bar menus: Info, Settings and the Dailies hub.
 //
 // They are rendered by BattleScreen, outside BattleScene's phase switch. That
 // matters because the phase scenes (healing, evolution, the minigames) replace
@@ -13,11 +13,10 @@ import { completedGenerations, speciesKeysByGeneration } from '../data/gameData.
 import { useGame } from '../game/context.js'
 import { shinyOddsForCompletedGenerations } from '../game/progression.js'
 import { DailyHubModal } from './daily-hub-modal.js'
-import { RunSummaryModal } from './run-summary-modal.js'
 import { SettingsModal } from './settings-modal.js'
 
 /**
- * @typedef {'info' | 'settings' | 'dailies' | 'summary'} BattleMenuKey
+ * @typedef {'info' | 'settings' | 'dailies'} BattleMenuKey
  */
 
 /** @param {{ menu: BattleMenuKey | null, onClose: () => void }} props */
@@ -36,7 +35,6 @@ export function BattleMenuModals({ menu, onClose }) {
       speciesKeysByGeneration.length
     )
   if (menu === 'settings') return createPortal(jsx(SettingsModal, { onClose }), document.body)
-  if (menu === 'summary') return createPortal(jsx(RunSummaryModal, { onClose }), document.body)
   if (menu === 'dailies') return createPortal(jsx(DailyHubModal, { onClose }), document.body)
   if (menu === 'info')
     return createPortal(

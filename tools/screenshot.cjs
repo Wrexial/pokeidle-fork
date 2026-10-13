@@ -1189,8 +1189,11 @@ async function main() {
     await cdp.eval(
       `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
     )
-    await cdp.waitFor(`!!document.querySelector('.run-summary-btn')`, 8000, 'summary button')
-    await cdp.click('.run-summary-btn')
+    await cdp.waitFor(`!!document.querySelector('.trainer-tab-bar')`, 8000, 'trainer tabs')
+    const openedSummary = await cdp.eval(
+      `(() => { const b = [...document.querySelectorAll('.trainer-tab-bar .bag-tab')].find((el) => el.textContent === 'Summary'); if (!b) return false; b.click(); return true })()`
+    )
+    if (!openedSummary) throw new Error('summary sub-tab not found')
     await cdp.waitFor(`!!document.querySelector('.run-summary-modal')`, 5000, 'summary modal')
     await cdp.screenshot(path.join(OUT, '37-run-summary.png'))
     console.log('Run summary modal ok')

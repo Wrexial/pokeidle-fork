@@ -123,6 +123,7 @@ export const CHANGELOG = [
           'The Secret Base card folds away behind its section title, which shows where the base is set up (or that it is not) and only opens by default on the route it sits on. Expand it to read the hint and use ENTER / MOVE / SET UP.',
           'The Focus Hunt control and the Field Jobs entry now share one compact “route utilities” row in the location panel: Focus reads as a button showing its target and a short progress line, and Field Jobs sits beside it, opening the summary as soon as a route has activities instead of only once a job is running.',
           'The battle top bar’s five daily icons (Daily Event, Mystery Gift, Quests & Professor’s Story, Pokewalker and Companion) are now one Dailies button that opens a hub with a sub-tab per section. The button still pulses when anything is waiting, and each sub-tab marks its own claimable reward, so the battle bar has room for Info and Settings.',
+          'The Run Summary no longer has its own battle top-bar shortcut: open it from the Backpack’s Trainer → Summary sub-tab now that it lives beside the Trainer Card, League and Records views.',
         ],
       },
       {

@@ -5,8 +5,8 @@ import { dailyEventByKey } from '../data/daily-events.js'
 import { useGame } from '../game/context.js'
 import { getItemInfo } from '../game/progression.js'
 
-/** @param {{ onClose: () => void }} props */
-export function DailyEventModal({ onClose }) {
+/** @param {{ onClose?: () => void, inline?: boolean }} props */
+export function DailyEventModal({ onClose, inline = false }) {
   const { state, dispatch } = useGame(),
     dailyEvent = state.dailyEvent
   if (!dailyEvent) return null
@@ -17,7 +17,61 @@ export function DailyEventModal({ onClose }) {
       quantity,
       ...getItemInfo(itemId),
     })),
-    claimable = !dailyEvent.claimed
+    claimable = !dailyEvent.claimed,
+    content = jsxs('div', {
+      className: 'battle-info-content daily-event-content',
+      children: [
+        jsx('span', {
+          className: 'daily-event-icon',
+          children: event.icon,
+        }),
+        jsx('span', {
+          className: 'daily-event-name',
+          children: event.name,
+        }),
+        jsx('p', {
+          className: 'daily-event-description',
+          children: event.description,
+        }),
+        jsx('div', {
+          className: 'daily-event-divider',
+        }),
+        jsx('span', {
+          className: 'daily-event-gift-title',
+          children: claimable ? 'Daily gift' : 'Gift already claimed',
+        }),
+        jsxs('div', {
+          className: 'daily-event-gift-list',
+          children: [
+            jsxs('span', {
+              className: 'daily-event-gift-item',
+              children: ['₽', event.gift.money.toLocaleString()],
+            }),
+            ...giftItems.map((giftItem) =>
+              jsxs(
+                'span',
+                {
+                  className: 'daily-event-gift-item',
+                  children: [giftItem.name, ' ×', giftItem.quantity],
+                },
+                giftItem.itemId
+              )
+            ),
+          ],
+        }),
+        claimable
+          ? jsx('button', {
+              className: 'daily-event-claim-btn',
+              onClick: () => dispatch({ type: 'CLAIM_DAILY_GIFT' }),
+              children: 'Claim Daily Gift',
+            })
+          : jsx('p', {
+              className: 'daily-event-claimed',
+              children: 'Come back tomorrow for a new event and gift!',
+            }),
+      ],
+    })
+  if (inline) return content
   return jsx('div', {
     className: 'battle-info-overlay',
     onClick: onClose,
@@ -39,59 +93,7 @@ export function DailyEventModal({ onClose }) {
             }),
           ],
         }),
-        jsxs('div', {
-          className: 'battle-info-content daily-event-content',
-          children: [
-            jsx('span', {
-              className: 'daily-event-icon',
-              children: event.icon,
-            }),
-            jsx('span', {
-              className: 'daily-event-name',
-              children: event.name,
-            }),
-            jsx('p', {
-              className: 'daily-event-description',
-              children: event.description,
-            }),
-            jsx('div', {
-              className: 'daily-event-divider',
-            }),
-            jsx('span', {
-              className: 'daily-event-gift-title',
-              children: claimable ? 'Daily gift' : 'Gift already claimed',
-            }),
-            jsxs('div', {
-              className: 'daily-event-gift-list',
-              children: [
-                jsxs('span', {
-                  className: 'daily-event-gift-item',
-                  children: ['₽', event.gift.money.toLocaleString()],
-                }),
-                ...giftItems.map((giftItem) =>
-                  jsxs(
-                    'span',
-                    {
-                      className: 'daily-event-gift-item',
-                      children: [giftItem.name, ' ×', giftItem.quantity],
-                    },
-                    giftItem.itemId
-                  )
-                ),
-              ],
-            }),
-            claimable
-              ? jsx('button', {
-                  className: 'daily-event-claim-btn',
-                  onClick: () => dispatch({ type: 'CLAIM_DAILY_GIFT' }),
-                  children: 'Claim Daily Gift',
-                })
-              : jsx('p', {
-                  className: 'daily-event-claimed',
-                  children: 'Come back tomorrow for a new event and gift!',
-                }),
-          ],
-        }),
+        content,
       ],
     }),
   })

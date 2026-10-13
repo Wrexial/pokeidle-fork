@@ -6,13 +6,9 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { formatMoveAccuracy } from '../data/moves.js'
 import { MoveCategoryIcon } from './move-category-icon.js'
 import { moveTooltip } from '../game/move-info.js'
-import { dailyEventByKey } from '../data/daily-events.js'
-import { hasClaimableProfessorStory, hasClaimableQuests } from '../game/quests.js'
-import { claimableMysteryGifts } from '../game/gifts.js'
 import { biomeBackgroundFor, biomeForLocation, BIOME_FILTERS, DAY_NIGHT_FILTERS, locationImages } from '../data/ui.js'
 import { useDayPhase } from '../hooks.js'
 import { getDexStatus, shouldOfferMasterBall } from '../game/catching.js'
-import { POKEWALKER_MIN_COST } from '../game/pokewalker.js'
 import { battleSpecies, estimateMoveDamage, getTypeMultiplier } from '../game/combat.js'
 import { BattleWeatherOverlay } from './battle-weather-overlay.js'
 import { isFemalePokemon } from '../game/breeding.js'
@@ -22,6 +18,7 @@ import { mapData, moveData } from '../data/gameData.js'
 import { gmaxEvolveReady, megaEvolveReady } from '../data/mega-evolution.js'
 import { hasBattleModifier } from '../game/ladder-modifiers.js'
 import { useGame } from '../game/context.js'
+import { hasClaimableDailies } from './daily-hub-modal.js'
 import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl, isBattleReady } from '../game/pokemon.js'
 import { EnemyInfoBox } from './enemy-info-box.js'
 import { PlayerInfoBox } from './player-info-box.js'
@@ -351,56 +348,11 @@ export function BattleScene({ onOpenMenu }) {
             children: '▶▶',
           }),
           jsx('button', {
-            className: `battle-info-btn daily-event-btn${
-              state.dailyEvent && !state.dailyEvent.claimed ? ' claimable' : ''
-            }`,
-            onClick: () => onOpenMenu('daily'),
-            title: state.dailyEvent
-              ? dailyEventByKey[state.dailyEvent.kind]?.name ?? 'Daily Event'
-              : 'Daily Event',
-            children: state.dailyEvent
-              ? dailyEventByKey[state.dailyEvent.kind]?.icon ?? '🎁'
-              : '🎁',
+            className: `battle-info-btn dailies-btn${hasClaimableDailies(state) ? ' claimable' : ''}`,
+            onClick: () => onOpenMenu('dailies'),
+            title: 'Dailies',
+            children: '\u{1f4c5}',
           }),
-          jsx('button', {
-            className: `battle-info-btn mystery-gift-btn${
-              claimableMysteryGifts(state).length > 0 ? ' claimable' : ''
-            }`,
-            onClick: () => onOpenMenu('mystery'),
-            title: 'Mystery Gift',
-            children: '🎟️',
-          }),
-          jsx('button', {
-            className: `battle-info-btn daily-event-btn${
-              hasClaimableQuests(state.quests) || hasClaimableProfessorStory(state)
-                ? ' claimable'
-                : ''
-            }`,
-            onClick: () => onOpenMenu('quests'),
-            title: "Quests & Professor's Story",
-            children: '📜',
-          }),
-          // Companion care moves out of Poké Pelago once it is unlocked, so it
-          // sits with the dailies instead of hiding behind the Alola hub.
-          jsx('button', {
-            className: `battle-info-btn pokewalker-btn${
-              (state.pokewalker?.steps ?? 0) >= POKEWALKER_MIN_COST ? ' claimable' : ''
-            }`,
-            onClick: () => onOpenMenu('pokewalker'),
-            title: 'Pokewalker',
-            children: '\u{1f462}',
-          }),
-          state.unlockedLocations?.includes('alola-poke-pelago') &&
-            jsx('button', {
-              className: `battle-info-btn companion-btn${
-                state.companion?.id && state.wildBattlesWon > state.companion.careBattle
-                  ? ' claimable'
-                  : ''
-              }`,
-              onClick: () => onOpenMenu('companion'),
-              title: 'Companion',
-              children: '🐾',
-            }),
           jsx('button', {
             className: 'battle-info-btn',
             onClick: () => onOpenMenu('settings'),

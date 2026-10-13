@@ -1,5 +1,4 @@
-// The battle top-bar menus: Info, Settings, the daily event, quests and
-// Companion care.
+// The battle top-bar menus: Info, Settings, Run Summary and the Dailies hub.
 //
 // They are rendered by BattleScreen, outside BattleScene's phase switch. That
 // matters because the phase scenes (healing, evolution, the minigames) replace
@@ -13,16 +12,12 @@ import { shinyFullOddsChance } from '../data/config.js'
 import { completedGenerations, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { shinyOddsForCompletedGenerations } from '../game/progression.js'
-import { CompanionCarePanel } from './companion-panel.js'
-import { PokewalkerPanel } from './pokewalker-panel.js'
-import { DailyEventModal } from './daily-event-modal.js'
-import { MysteryGiftModal } from './mystery-gift-modal.js'
-import { QuestsModal } from './quests-modal.js'
+import { DailyHubModal } from './daily-hub-modal.js'
 import { RunSummaryModal } from './run-summary-modal.js'
 import { SettingsModal } from './settings-modal.js'
 
 /**
- * @typedef {'info' | 'settings' | 'daily' | 'mystery' | 'quests' | 'companion' | 'pokewalker' | 'summary'} BattleMenuKey
+ * @typedef {'info' | 'settings' | 'dailies' | 'summary'} BattleMenuKey
  */
 
 /** @param {{ menu: BattleMenuKey | null, onClose: () => void }} props */
@@ -41,74 +36,8 @@ export function BattleMenuModals({ menu, onClose }) {
       speciesKeysByGeneration.length
     )
   if (menu === 'settings') return createPortal(jsx(SettingsModal, { onClose }), document.body)
-  if (menu === 'daily') return createPortal(jsx(DailyEventModal, { onClose }), document.body)
-  if (menu === 'mystery') return createPortal(jsx(MysteryGiftModal, { onClose }), document.body)
-  if (menu === 'quests') return createPortal(jsx(QuestsModal, { onClose }), document.body)
   if (menu === 'summary') return createPortal(jsx(RunSummaryModal, { onClose }), document.body)
-  if (menu === 'companion')
-    return createPortal(
-      jsx('div', {
-        className: 'battle-info-overlay',
-        onClick: onClose,
-        children: jsxs('div', {
-          className: 'battle-info-modal companion-modal',
-          onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
-          children: [
-            jsxs('div', {
-              className: 'battle-info-header',
-              children: [
-                jsx('span', {
-                  className: 'battle-info-title',
-                  children: 'Companion',
-                }),
-                jsx('button', {
-                  className: 'battle-info-close',
-                  onClick: onClose,
-                  children: 'X',
-                }),
-              ],
-            }),
-            jsx('div', {
-              className: 'battle-info-content companion-modal-content',
-              children: jsx(CompanionCarePanel, {}),
-            }),
-          ],
-        }),
-      }),
-      document.body
-    )
-  if (menu === 'pokewalker')
-    return createPortal(
-      jsx('div', {
-        className: 'battle-info-overlay',
-        onClick: onClose,
-        children: jsxs('div', {
-          className: 'battle-info-modal pokewalker-modal',
-          onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
-          children: [
-            jsxs('div', {
-              className: 'battle-info-header',
-              children: [
-                jsx('span', {
-                  className: 'battle-info-title',
-                  children: 'Pokewalker',
-                }),
-                jsx('button', {
-                  className: 'battle-info-close',
-                  onClick: onClose,
-                  children: 'X',
-                }),
-              ],
-            }),
-            jsx('div', {
-              className: 'battle-info-content pokewalker-modal-content',
-              children: jsx(PokewalkerPanel, {}),
-            }),
-          ],
-        }),
-      }),
-      document.body
-    )
+  if (menu === 'dailies') return createPortal(jsx(DailyHubModal, { onClose }), document.body)
   if (menu === 'info')
     return createPortal(
       jsx('div', {

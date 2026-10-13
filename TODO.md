@@ -67,26 +67,6 @@ Panel-layout and top-bar cleanups: reclaim vertical space, make the sub-tab
 hierarchy read, and fold the daily menus together. All are UI-only unless
 noted.
 
-## Collapse the daily menus into one hub (follow-up)
-
-The battle top bar (`battle-top-buttons` in `src/components/battle-scene.js`)
-has a separate button each for the Daily Event, Mystery Gift, Quests &
-Professor's Story, Pokewalker and Companion. That is five icons competing with
-Info and Settings. Collapse them behind one "Dailies" button that opens a modal
-with a sub-tab per section (reuse the trainer sub-tab styling above) and shows a
-single claimable pulse when any of them has something waiting.
-
-- [ ] Add a `DailyHubModal` that hosts `DailyEventModal`, `MysteryGiftModal`,
-      `QuestsModal`, `PokewalkerPanel` and `CompanionCarePanel` as inline
-      sub-views (they already support inline rendering or can be adapted).
-- [ ] Replace the five top-bar buttons in `battle-scene.js` with one Dailies
-      button, keeping the combined "claimable" state
-      (`claimableMysteryGifts`, `hasClaimableQuests` /
-      `hasClaimableProfessorStory`, `state.dailyEvent`, Pokewalker steps,
-      companion care).
-- [ ] Keep `BattleMenuKey` and the `BattleMenuModals` switch tidy (drop the
-      now-unused keys) and update any test that references them.
-
 ## Remove the Run Summary shortcut from the battle screen (follow-up)
 
 The Run Summary now lives in Backpack → Trainer → Summary

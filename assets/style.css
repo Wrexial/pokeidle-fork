@@ -7786,15 +7786,50 @@ img {
     top: -2px
 }
 
-.daily-event-btn {
+.daily-event-btn,
+.dailies-btn {
     font-size: 13px
 }
 
 .daily-event-btn.claimable,
 .companion-btn.claimable,
 .pokewalker-btn.claimable,
-.mystery-gift-btn.claimable {
+.mystery-gift-btn.claimable,
+.dailies-btn.claimable {
     animation: dailyPulse 1.6s ease-in-out infinite
+}
+
+.battle-info-modal.daily-hub-modal {
+    width: min(560px, 100%)
+}
+
+.daily-hub-tabs {
+    flex: none;
+    border: 2px solid #483828;
+    background: #00000010
+}
+
+.daily-hub-tabs .bag-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px
+}
+
+.daily-hub-tab-icon {
+    font-size: 9px;
+    line-height: 1
+}
+
+.daily-hub-tab-dot {
+    color: #c8901c;
+    font-size: 7px;
+    line-height: 1
+}
+
+.daily-hub-modal .mystery-gift-content {
+    max-height: none;
+    overflow: visible
 }
 
 .mystery-gift-btn {

@@ -109,8 +109,8 @@ function WonderCard({ gift, status, compact, onClaim }) {
   )
 }
 
-/** @param {{ onClose: () => void }} props */
-export function MysteryGiftModal({ onClose }) {
+/** @param {{ onClose?: () => void, inline?: boolean }} props */
+export function MysteryGiftModal({ onClose, inline = false }) {
   const { state, dispatch } = useGame(),
     [codeInput, setCodeInput] = React.useState(''),
     [message, setMessage] = React.useState(
@@ -140,6 +140,82 @@ export function MysteryGiftModal({ onClose }) {
     setMessage({ tone: 'success', text: `${gift.name} received!` })
     setCodeInput('')
   }
+  const content = jsxs('div', {
+    className: 'battle-info-content mystery-gift-content',
+    children: [
+      headline && headlineStatus
+        ? jsxs('div', {
+            className: 'mystery-gift-featured',
+            children: [
+              jsx('div', {
+                className: 'mystery-gift-section-title',
+                children: headlineStatus.featured
+                  ? 'Latest Wonder Card'
+                  : 'Wonder Card',
+              }),
+              jsx(WonderCard, { gift: headline, status: headlineStatus, onClaim: claim }),
+              claimable.length > 1
+                ? jsx('div', {
+                    className: 'mystery-gift-more',
+                    children: `${claimable.length} distributions waiting to be claimed`,
+                  })
+                : null,
+            ],
+          })
+        : jsx('p', {
+            className: 'mystery-gift-empty',
+            children: upcoming
+              ? `The next card unlocks at ${battleCountLabel(upcoming.battles)} battles.`
+              : 'No Mystery Gift is available right now.',
+          }),
+      jsxs('div', {
+        className: 'mystery-code-row',
+        children: [
+          jsx('input', {
+            className: 'mystery-code-input',
+            type: 'text',
+            value: codeInput,
+            placeholder: 'Enter a code',
+            onChange: /** @param {{ target: HTMLInputElement }} event */ (event) =>
+              setCodeInput(event.target.value),
+            onKeyDown: /** @param {React.KeyboardEvent} event */ (event) => {
+              if (event.key === 'Enter') redeem()
+            },
+          }),
+          jsx('button', {
+            className: 'mystery-code-btn',
+            disabled: !codeInput.trim(),
+            onClick: redeem,
+            children: 'REDEEM',
+          }),
+        ],
+      }),
+      message &&
+        jsx('div', {
+          className: `mystery-code-message ${message.tone}`,
+          children: message.text,
+        }),
+      upcoming &&
+        jsx('div', {
+          className: 'mystery-gift-next',
+          children: `Next card: ${upcoming.gift.name} at ${battleCountLabel(
+            upcoming.battles
+          )} battles`,
+        }),
+      jsx('div', { className: 'mystery-gift-section-title', children: 'Wonder Card Album' }),
+      jsx('div', {
+        className: 'mystery-gift-grid',
+        children: cards.map((gift) =>
+          jsx(
+            WonderCard,
+            { gift, status: mysteryGiftStatus(state, gift), compact: true, onClaim: claim },
+            gift.id
+          )
+        ),
+      }),
+    ],
+  })
+  if (inline) return content
   return jsx('div', {
     className: 'battle-info-overlay',
     onClick: onClose,
@@ -159,81 +235,7 @@ export function MysteryGiftModal({ onClose }) {
             }),
           ],
         }),
-        jsxs('div', {
-          className: 'battle-info-content mystery-gift-content',
-          children: [
-            headline && headlineStatus
-              ? jsxs('div', {
-                  className: 'mystery-gift-featured',
-                  children: [
-                    jsx('div', {
-                      className: 'mystery-gift-section-title',
-                      children: headlineStatus.featured
-                        ? 'Latest Wonder Card'
-                        : 'Wonder Card',
-                    }),
-                    jsx(WonderCard, { gift: headline, status: headlineStatus, onClaim: claim }),
-                    claimable.length > 1
-                      ? jsx('div', {
-                          className: 'mystery-gift-more',
-                          children: `${claimable.length} distributions waiting to be claimed`,
-                        })
-                      : null,
-                  ],
-                })
-              : jsx('p', {
-                  className: 'mystery-gift-empty',
-                  children: upcoming
-                    ? `The next card unlocks at ${battleCountLabel(upcoming.battles)} battles.`
-                    : 'No Mystery Gift is available right now.',
-                }),
-            jsxs('div', {
-              className: 'mystery-code-row',
-              children: [
-                jsx('input', {
-                  className: 'mystery-code-input',
-                  type: 'text',
-                  value: codeInput,
-                  placeholder: 'Enter a code',
-                  onChange: /** @param {{ target: HTMLInputElement }} event */ (event) =>
-                    setCodeInput(event.target.value),
-                  onKeyDown: /** @param {React.KeyboardEvent} event */ (event) => {
-                    if (event.key === 'Enter') redeem()
-                  },
-                }),
-                jsx('button', {
-                  className: 'mystery-code-btn',
-                  disabled: !codeInput.trim(),
-                  onClick: redeem,
-                  children: 'REDEEM',
-                }),
-              ],
-            }),
-            message &&
-              jsx('div', {
-                className: `mystery-code-message ${message.tone}`,
-                children: message.text,
-              }),
-            upcoming &&
-              jsx('div', {
-                className: 'mystery-gift-next',
-                children: `Next card: ${upcoming.gift.name} at ${battleCountLabel(
-                  upcoming.battles
-                )} battles`,
-              }),
-            jsx('div', { className: 'mystery-gift-section-title', children: 'Wonder Card Album' }),
-            jsx('div', {
-              className: 'mystery-gift-grid',
-              children: cards.map((gift) =>
-                jsx(
-                  WonderCard,
-                  { gift, status: mysteryGiftStatus(state, gift), compact: true, onClaim: claim },
-                  gift.id
-                )
-              ),
-            }),
-          ],
-        }),
+        content,
       ],
     }),
   })

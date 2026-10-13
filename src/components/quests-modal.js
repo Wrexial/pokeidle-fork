@@ -17,34 +17,15 @@ function chapterRewardLabel(chapter) {
   return chapter.reward?.charm ? `${parts ? `${parts} \u00b7 ` : ''}${chapter.reward.charm}` : parts
 }
 
-/** @param {{ onClose: () => void }} props */
-export function QuestsModal({ onClose }) {
+/** @param {{ onClose?: () => void, inline?: boolean }} props */
+export function QuestsModal({ onClose, inline = false }) {
   const { state, dispatch } = useGame(),
     quests = state.quests?.list ?? [],
     story = professorStoryStatus(state),
-    [tab, setTab] = React.useState(/** @type {'daily' | 'story'} */ ('daily'))
-  return jsx('div', {
-    className: 'battle-info-overlay',
-    onClick: onClose,
-    children: jsxs('div', {
-      className: 'battle-info-modal quests-modal',
-      onClick: /** @param {React.MouseEvent} mouseEvent */ (mouseEvent) =>
-        mouseEvent.stopPropagation(),
+    [tab, setTab] = React.useState(/** @type {'daily' | 'story'} */ ('daily')),
+    content = jsxs('div', {
+      className: 'daily-hub-quests',
       children: [
-        jsxs('div', {
-          className: 'battle-info-header',
-          children: [
-            jsx('span', {
-              className: 'battle-info-title',
-              children: tab === 'daily' ? 'Daily Quests' : "Professor's Story",
-            }),
-            jsx('button', {
-              className: 'battle-info-close',
-              onClick: onClose,
-              children: 'X',
-            }),
-          ],
-        }),
         jsxs('div', {
           className: 'quests-tabs',
           children: [
@@ -69,6 +50,32 @@ export function QuestsModal({ onClose }) {
           className: 'battle-info-content quests-content',
           children: tab === 'story' ? renderStory(story, dispatch) : renderDaily(quests, dispatch),
         }),
+      ],
+    })
+  if (inline) return content
+  return jsx('div', {
+    className: 'battle-info-overlay',
+    onClick: onClose,
+    children: jsxs('div', {
+      className: 'battle-info-modal quests-modal',
+      onClick: /** @param {React.MouseEvent} mouseEvent */ (mouseEvent) =>
+        mouseEvent.stopPropagation(),
+      children: [
+        jsxs('div', {
+          className: 'battle-info-header',
+          children: [
+            jsx('span', {
+              className: 'battle-info-title',
+              children: tab === 'daily' ? 'Daily Quests' : "Professor's Story",
+            }),
+            jsx('button', {
+              className: 'battle-info-close',
+              onClick: onClose,
+              children: 'X',
+            }),
+          ],
+        }),
+        content,
       ],
     }),
   })

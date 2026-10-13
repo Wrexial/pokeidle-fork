@@ -48,17 +48,6 @@ The numbered entries below are the brainstorm referenced from the priority
 order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
 player-facing value (★ = nice to have, ★★★★★ = core missing feature).
 
-**Narrative & quests**
-
-## 90. Professor's story chain
-
-A multi-region questline beyond the per-species research tasks.
-
-- [ ] Extend `src/game/quests.js` with a chained regional storyline.
-- [ ] Step rewards (items, a charm, a Master Ball) and a final capstone.
-
-Effort: **medium**. Gain: ★★★.
-
 **Battle depth**
 
 ## 91. Configurable auto-battle policy

@@ -11,7 +11,7 @@ import { createJobs } from './jobs.js'
 import { createPokewalker } from './pokewalker.js'
 import { DEFAULT_ROD } from './minigames.js'
 import { applyExp, applySharedExp, attemptActivityCatch, bossBattleEnd, choosePlayerMove, completeMasterBall, consumeEvent, debugMaxLevel, endHorde, executeTurn, fleeBattle, gmaxEvolve, hordeRound, megaEvolve, startBossBattle, startEncounter, startHorde, startRaid, startTower, startTrainerBattle, switchPlayerPokemon, throwMasterBall, trainerBattleEnd, trainerSendNextPokemon, updateVolatile, useEffectItem, usePokeball } from './reducer/battle.js'
-import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimFormDexRewards, claimQuest, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain, advanceSosChain, resetSosChain } from './reducer/collection.js'
+import { claimAchievementRewards, claimDailyGift, claimDexRewards, claimFormDexRewards, claimQuest, claimStoryChapter, clearOfflineReport, completeDexCelebration, markCaught, markSeen, markShinyCaught, markShinySeen, refreshDailyEvent, refreshQuests, startDexCelebration, updateShinyChain, advanceSosChain, resetSosChain } from './reducer/collection.js'
 import { buyCafeItem, buyItem, buyRewardItem, clearHeldItem, collectKurtBalls, craftApricornBall, reviveFossil, sellItem, setAlwaysCatchShinies, setCatchRule, setDefaultCatchRule, toggleAutoCatch, toggleRouteCatchAll, useItemOnPokemon } from './reducer/items.js'
 import { blendBerries, careCompanion, harvestBerry, plantBerry, setCompanion } from './reducer/care.js'
 import { assignPelago, collectPelago, dismissPelagoCollect, unassignPelago } from './reducer/pelago.js'
@@ -158,6 +158,8 @@ export const initialGameState = {
   pokerus: null,
   /** Today's daily quests, or null before they are rolled. */
   quests: null,
+  /** Professor's Story: the chapter ids whose reward has been claimed. */
+  professorStory: { claimed: [] },
   /** A pending region-dex-completion celebration (phase `dexComplete`). */
   dexCelebration: null,
   /** A one-off offline-progress report shown on return (never saved). */
@@ -448,6 +450,8 @@ export function gameReducer(state, action) {
       return refreshQuests(state, action)
     case 'CLAIM_QUEST':
       return claimQuest(state, action)
+    case 'CLAIM_STORY_CHAPTER':
+      return claimStoryChapter(state, action)
     case 'START_DEX_CELEBRATION':
       return startDexCelebration(state, action)
     case 'COMPLETE_DEX_CELEBRATION':

@@ -7,7 +7,7 @@ import { formatMoveAccuracy } from '../data/moves.js'
 import { MoveCategoryIcon } from './move-category-icon.js'
 import { moveTooltip } from '../game/move-info.js'
 import { dailyEventByKey } from '../data/daily-events.js'
-import { hasClaimableQuests } from '../game/quests.js'
+import { hasClaimableProfessorStory, hasClaimableQuests } from '../game/quests.js'
 import { claimableMysteryGifts } from '../game/gifts.js'
 import { biomeBackgroundFor, biomeForLocation, BIOME_FILTERS, DAY_NIGHT_FILTERS, locationImages } from '../data/ui.js'
 import { useDayPhase } from '../hooks.js'
@@ -361,10 +361,12 @@ export function BattleScene({ onOpenMenu }) {
           }),
           jsx('button', {
             className: `battle-info-btn daily-event-btn${
-              hasClaimableQuests(state.quests) ? ' claimable' : ''
+              hasClaimableQuests(state.quests) || hasClaimableProfessorStory(state)
+                ? ' claimable'
+                : ''
             }`,
             onClick: () => onOpenMenu('quests'),
-            title: 'Daily Quests',
+            title: "Quests & Professor's Story",
             children: '📜',
           }),
           // Companion care moves out of Poké Pelago once it is unlocked, so it

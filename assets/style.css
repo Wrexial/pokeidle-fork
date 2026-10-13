@@ -8225,6 +8225,141 @@ img {
     margin: 0
 }
 
+.quests-tabs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px 0
+}
+
+.quests-tab {
+    font-size: 8px;
+    font-weight: 700;
+    padding: 4px 12px;
+    color: #5a4838;
+    background: #00000010;
+    border: 2px solid #a89870;
+    border-bottom: none;
+    cursor: pointer
+}
+
+.quests-tab.active {
+    color: #2a1808;
+    background: var(--gold)
+}
+
+.quests-tab-dot {
+    color: #c8901c;
+    font-size: 10px
+}
+
+.story-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px
+}
+
+.story-progress-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #3a2818
+}
+
+.story-charm {
+    font-size: 8px;
+    font-weight: 700;
+    color: #7a5a10
+}
+
+.story-chapter {
+    background: #00000010;
+    border: 2px solid #a89870;
+    padding: 8px 10px
+}
+
+.story-chapter.done {
+    opacity: .7;
+    border-color: #6a8a4a
+}
+
+.story-chapter.locked {
+    opacity: .5;
+    border-style: dashed
+}
+
+.story-chapter.active {
+    border-color: var(--gold-dark)
+}
+
+.story-chapter.active.complete {
+    border-color: var(--gold)
+}
+
+.story-chapter-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px
+}
+
+.story-chapter-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: #3a2818
+}
+
+.story-chapter-professor {
+    flex: 0 0 auto;
+    font-size: 8px;
+    color: #7a5a10
+}
+
+.story-chapter-check {
+    color: #2e7d32;
+    font-weight: 700
+}
+
+.story-chapter-intro {
+    font-size: 8px;
+    line-height: 1.5;
+    color: #5a4838;
+    margin: 6px 0
+}
+
+.story-chapter-reward {
+    display: block;
+    font-size: 8px;
+    color: #5c3d08
+}
+
+.story-chapter-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px
+}
+
+.story-step {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 8px;
+    color: #5a4838;
+    padding: 2px 0
+}
+
+.story-step.done {
+    color: #2e7d32
+}
+
+.story-step-progress {
+    flex: 0 0 auto;
+    font-weight: 700
+}
+
 .offline-report-content {
     display: flex;
     flex-direction: column;

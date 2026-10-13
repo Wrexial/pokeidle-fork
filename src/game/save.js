@@ -11,6 +11,7 @@ import { BREEDING_GOALS, MAX_BREEDING_PROJECTS } from './breeding-projects.js'
 import { RIVAL_MILESTONES } from './rival.js'
 import { VILLAIN_TOTAL_STAGES } from './villain-teams.js'
 import { PRESTIGE_PERKS } from './prestige.js'
+import { PROFESSOR_CHAPTER_IDS } from '../data/professor-story.js'
 import { FRONTIER_FACILITIES } from './battle-frontier.js'
 import { isValidHuntTarget } from './hunt.js'
 import { BASE_FRIENDSHIP, generateIVs, calculatePokemonStats, createEmptyEvs, EV_STAT_ORDER, resolvePokemonMoves, rollAbility, rollMark, rollSize, RIBBONS } from './pokemon.js'
@@ -743,6 +744,18 @@ export function repairSave(saved) {
     if (regions.some((region) => region.id === regionId) && Number.isFinite(count) && count > 0)
       relics[regionId] = Math.min(1_000_000, Math.floor(/** @type {number} */ (count)))
 
+  // The Professor's Story only stores its claimed chapters; drop any id that no
+  // longer matches a chapter (a renamed or removed chapter).
+  const professorStory = {
+    claimed: (Array.isArray(saved.professorStory?.claimed)
+      ? saved.professorStory.claimed
+      : []
+    ).filter(
+      /** @param {any} chapterId */ (chapterId) =>
+        typeof chapterId === 'string' && PROFESSOR_CHAPTER_IDS.has(chapterId)
+    ),
+  }
+
   // Repair save data that references content which no longer exists (regions,
   // routes and locations have been rebuilt several times), so an old save can't
   // put the game loop into an unknown location and crash.
@@ -1097,6 +1110,7 @@ export function repairSave(saved) {
     swarm,
     pokerus,
     quests,
+    professorStory,
     daycare,
     breeding,
     companion,
@@ -1354,6 +1368,7 @@ export const SAVED_STATE_KEYS = [
   'swarm',
   'pokerus',
   'quests',
+  'professorStory',
   'daycare',
   'breeding',
   'companion',

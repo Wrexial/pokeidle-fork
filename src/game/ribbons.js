@@ -83,6 +83,12 @@ export const RIBBONS = {
     description: 'Completed this species\u2019 field research.',
     icon: '\u{1f52c}',
   },
+  professor: {
+    id: 'professor',
+    name: 'Professor\u2019s Ribbon',
+    description: 'Completed the Professor\u2019s Story chain.',
+    icon: '\u{1f393}',
+  },
 }
 
 // One League Ribbon per region, so beating Kanto's Champion reads differently

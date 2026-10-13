@@ -13,8 +13,9 @@ import { formDexModel, pokemonSpecies } from '../../data/gameData.js'
 import { newlyCompletedFormDex } from '../../data/form-dex.js'
 import { SHINY_CHAIN_FIRST_TARGET, formatReward, prepareNextBattle } from '../progression.js'
 import { recordHuntCatch } from '../hunt.js'
-import { questLabel, rollQuests } from '../quests.js'
+import { questLabel, professorStoryStatus, rollQuests } from '../quests.js'
 import { applyResearchEarnings, applyResearchRibbon } from '../research.js'
+import { awardRibbonToParty } from '../pokemon.js'
 import { withNotification } from '../reducer-helpers.js'
 import { sosRewardsCrossed } from '../sos-chain.js'
 
@@ -348,6 +349,48 @@ export function claimQuest(state, action) {
       tone: 'success',
       icon: '📜',
       dedupeKey: `quest:${questId}`,
+    }
+  )
+}
+
+/**
+ * Handle the `CLAIM_STORY_CHAPTER` action: pay a Professor's Story chapter's
+ * reward once its derived steps are all done. The chapter is re-derived from
+ * the live state, so a stale or forged payload can't mint a reward.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function claimStoryChapter(state, action) {
+  const { chapterId } = action.payload,
+    chapter = professorStoryStatus(state).chapters.find(
+      /** @param {any} candidate */ (candidate) => candidate.id === chapterId
+    )
+  if (!chapter || !chapter.claimable) return state
+  const reward = chapter.reward ?? {},
+    inventory = { ...state.inventory }
+  for (const [itemId, quantity] of Object.entries(reward.items ?? {}))
+    inventory[itemId] = (inventory[itemId] ?? 0) + quantity
+  return withNotification(
+    {
+      ...state,
+      money: state.money + (reward.money ?? 0),
+      victoryTokens: state.victoryTokens + (reward.victoryTokens ?? 0),
+      inventory,
+      party: reward.ribbon ? awardRibbonToParty(state.party, reward.ribbon) : state.party,
+      professorStory: {
+        claimed: [...(state.professorStory?.claimed ?? []), chapterId],
+      },
+      battleLog: [
+        ...state.battleLog,
+        `Professor's story: ${chapter.title} complete!`,
+      ].slice(-50),
+    },
+    {
+      message: `Professor's story complete: ${reward.charm ?? chapter.title} — ${formatReward(reward)}`,
+      tone: 'success',
+      icon: '🎓',
+      dedupeKey: `story:${chapterId}`,
     }
   )
 }

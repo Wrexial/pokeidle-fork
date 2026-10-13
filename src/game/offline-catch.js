@@ -9,6 +9,7 @@ import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoC
 import { offlineWildWinEstimate, encountersForPhase } from './progression.js'
 import { currentSeason } from './seasons.js'
 import { prestigeMultipliers } from './prestige.js'
+import { professorStoryCatchBonus } from './quests.js'
 
 /** Hard cap on catch rolls replayed offline, so a long away window stays cheap. */
 export const MAX_OFFLINE_CATCHES = 500
@@ -52,7 +53,7 @@ export function simulateOfflineCatches(state, awayMs, random = Math.random) {
       isNight: isNightTime(),
       leadLevel: state.playerPokemon?.level ?? 0,
       leadGender: state.playerPokemon?.gender ?? undefined,
-      catchMultiplier: prestigeMultipliers(state).capture,
+      catchMultiplier: prestigeMultipliers(state).capture * (1 + professorStoryCatchBonus(state)),
     }
   let inventory = state.inventory,
     pokedexSeen = [...state.pokedexSeen],

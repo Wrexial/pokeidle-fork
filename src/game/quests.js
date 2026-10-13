@@ -5,7 +5,17 @@
 // Unlike achievements (always-on milestones, recomputed on render), quests are
 // active goals with explicit progress that expire at midnight.
 
-import { encounterData, mapData, pokemonSpecies, regions } from '../data/gameData.js'
+import {
+  encounterData,
+  gymLeaderData,
+  isSpeciesRegistered,
+  mapData,
+  pokemonSpecies,
+  regions,
+  speciesKeysByGeneration,
+} from '../data/gameData.js'
+import { QUEST_LEGENDARY_BY_REGION } from '../data/legendary-quests.js'
+import { PROFESSOR_STORY } from '../data/professor-story.js'
 
 const QUESTS_PER_DAY = 3
 
@@ -203,4 +213,162 @@ export function advanceQuests(quests, event) {
 /** @param {QuestState | null | undefined} quests */
 export function hasClaimableQuests(quests) {
   return !!quests?.list?.some((quest) => !quest.claimed && quest.progress >= quest.goal)
+}
+
+// ---------------------------------------------------------------------------
+// The Professor's Story: a chained regional storyline beyond the daily quests.
+// Each chapter's steps are derived from progress the player already makes, so
+// only the claimed chapters need to live in the save (see data/professor-story).
+// ---------------------------------------------------------------------------
+
+/**
+ * A chapter's regional dex is that region's generation (the region list runs in
+ * generation order), so Kanto maps to Gen 1, Paldea to Gen 9.
+ * @param {string | null | undefined} regionId
+ * @returns {string[]}
+ */
+function regionSpeciesKeys(regionId) {
+  const generationIndex = regions.findIndex((region) => region.id === regionId)
+  return generationIndex >= 0 ? speciesKeysByGeneration[generationIndex] ?? [] : []
+}
+
+/** A region's gyms, in badge order. @param {string | null | undefined} regionId */
+function regionGyms(regionId) {
+  return gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === regionId)
+}
+
+/**
+ * Resolve one chapter step against the live game state.
+ * @param {GameState} state
+ * @param {import('../data/professor-story.js').ProfessorChapter} chapter
+ * @param {import('../data/professor-story.js').ProfessorStep} step
+ * @param {{ registered: Set<string>, chaptersClaimed: number, chapterCount: number, legendariesCaught: number }} context
+ */
+function professorStepStatus(state, chapter, step, context) {
+  const registered = context.registered,
+    regionalSpecies = regionSpeciesKeys(chapter.region)
+  /** @type {number} */
+  let progress = 0,
+    need = step.need
+  switch (step.kind) {
+    case 'dex':
+      progress = regionalSpecies.filter((speciesKey) =>
+        isSpeciesRegistered(registered, speciesKey)
+      ).length
+      break
+    case 'research': {
+      const rewarded = state.researchRewarded ?? {}
+      progress = regionalSpecies.filter((speciesKey) => rewarded[speciesKey]).length
+      break
+    }
+    case 'badges': {
+      const gyms = regionGyms(chapter.region)
+      need = step.need ?? gyms.length
+      progress = gyms.filter((gym) => state.defeatedGyms.includes(gym.id)).length
+      break
+    }
+    case 'champion':
+      progress = chapter.region && state.defeatedChampions.includes(chapter.region) ? 1 : 0
+      break
+    case 'legendary': {
+      const legendary = chapter.region ? QUEST_LEGENDARY_BY_REGION[chapter.region] : null
+      progress = legendary && isSpeciesRegistered(registered, legendary) ? 1 : 0
+      break
+    }
+    case 'relics':
+      progress = (chapter.region && state.relics?.[chapter.region]) || 0
+      break
+    case 'wildBattles':
+      progress = state.wildBattlesWon ?? 0
+      break
+    case 'chapters':
+      need = context.chapterCount
+      progress = context.chaptersClaimed
+      break
+    case 'dexNational':
+      progress = registered.size
+      break
+    case 'totalBadges':
+      need = step.need ?? gymLeaderData.length
+      progress = state.defeatedGyms.length
+      break
+    case 'legendaries':
+      progress = context.legendariesCaught
+      break
+  }
+  return {
+    id: step.id,
+    kind: step.kind,
+    label: step.label,
+    need,
+    progress: Math.min(progress, need),
+    done: progress >= need,
+  }
+}
+
+/**
+ * The Professor's Story chain resolved against the live state: every chapter,
+ * its derived step progress, and which chapter is currently active.
+ * @param {GameState} state
+ */
+export function professorStoryStatus(state) {
+  const claimed = new Set(
+      Array.isArray(state.professorStory?.claimed) ? state.professorStory.claimed : []
+    ),
+    registered = new Set(state.pokedexCaught),
+    chapterCount = PROFESSOR_STORY.filter((chapter) => chapter.region).length,
+    legendariesCaught = Object.values(QUEST_LEGENDARY_BY_REGION).filter((speciesKey) =>
+      isSpeciesRegistered(registered, speciesKey)
+    ).length,
+    chaptersClaimed = PROFESSOR_STORY.filter(
+      (chapter) => chapter.region && claimed.has(chapter.id)
+    ).length,
+    context = { registered, chaptersClaimed, chapterCount, legendariesCaught },
+    chapters = PROFESSOR_STORY.map((chapter, index) => {
+      const previous = index > 0 ? PROFESSOR_STORY[index - 1] : null,
+        unlocked = !previous || claimed.has(previous.id),
+        steps = chapter.steps.map((step) => professorStepStatus(state, chapter, step, context)),
+        done = steps.length > 0 && steps.every((step) => step.done),
+        isClaimed = claimed.has(chapter.id)
+      return {
+        ...chapter,
+        index,
+        unlocked,
+        steps,
+        done,
+        claimed: isClaimed,
+        claimable: unlocked && !isClaimed && done,
+      }
+    })
+  return {
+    chapters,
+    current: chapters.find((chapter) => !chapter.claimed) ?? null,
+    chapterCount: chapters.length,
+    claimedCount: chapters.filter((chapter) => chapter.claimed).length,
+    catchBonus: chapters.reduce(
+      (sum, chapter) => sum + (chapter.claimed ? (chapter.reward.catchBonus ?? 0) : 0),
+      0
+    ),
+  }
+}
+
+/** Whether any chapter's reward is ready to claim. @param {GameState} state */
+export function hasClaimableProfessorStory(state) {
+  return professorStoryStatus(state).chapters.some((chapter) => chapter.claimable)
+}
+
+/**
+ * The passive catch-rate bonus the chain's charm has earned. Cheaper than
+ * `professorStoryStatus`, since the encounter loop calls it every battle.
+ * @param {GameState} state
+ * @returns {number}
+ */
+export function professorStoryCatchBonus(state) {
+  const claimed = new Set(
+    Array.isArray(state.professorStory?.claimed) ? state.professorStory.claimed : []
+  )
+  return PROFESSOR_STORY.reduce(
+    (sum, chapter) => sum + (claimed.has(chapter.id) ? (chapter.reward.catchBonus ?? 0) : 0),
+    0
+  )
 }

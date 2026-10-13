@@ -25,6 +25,7 @@ import { secretBaseBonuses } from './secret-base.js'
 import { buildHorde, hordeAlive, hordeExpMultiplier, rollHordeSize } from './horde.js'
 import { runDoublesRound } from './minigames/doubles.js'
 import { sosHiddenAbilityChance } from './sos-chain.js'
+import { professorStoryCatchBonus } from './quests.js'
 import { awardExperience, checkShinyOdds, encountersForPhase, isHoneyActive, partyNeedsHealing, pokerusExpMultiplier, raidProgressFor, resolveActiveModifiers, resolvePokemonEncounter, resolveRoamer, shinyOddsForSpecies, ENCOUNTER_TYPE_ABILITY } from './progression.js'
 
 export function useGameLoop() {
@@ -1040,7 +1041,10 @@ export function useGameLoop() {
             isWater: isWaterLocation(mapData[currentGameState.currentLocation]),
             isCave: isCaveLocation(mapData[currentGameState.currentLocation]),
             isNight: isNightTime(),
-            catchMultiplier: prestige.capture * (1 + baseBonuses.catch),
+            catchMultiplier:
+              prestige.capture *
+              (1 + baseBonuses.catch) *
+              (1 + professorStoryCatchBonus(currentGameState)),
             honey: isHoneyActive(
               currentGameState.activeEffects,
               currentGameState.currentRoute,

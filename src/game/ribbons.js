@@ -89,6 +89,12 @@ export const RIBBONS = {
     description: 'Completed the Professor\u2019s Story chain.',
     icon: '\u{1f393}',
   },
+  gmax: {
+    id: 'gmax',
+    name: 'Gigantamax Ribbon',
+    description: 'Helped fell a rotating Gigantamax raid boss.',
+    icon: '\u{1f48e}',
+  },
 }
 
 // One League Ribbon per region, so beating Kanto's Champion reads differently

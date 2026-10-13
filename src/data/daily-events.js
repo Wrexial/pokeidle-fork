@@ -47,6 +47,87 @@ export const DAILY_EVENTS = [
 export const dailyEventByKey = Object.fromEntries(DAILY_EVENTS.map((event) => [event.key, event]))
 
 /**
+ * The rotating Gigantamax raid events. One entry is featured per week (the week
+ * number picks a slot, so the whole world sees the same boss), while the
+ * crystal's Tera type rotates daily. `boss` is a base species that has a
+ * Gigantamax form (`gx-...`), resolved when the raid scene builds the boss;
+ * `ally` is the simulated partner that joins the raid for free; `drops` are the
+ * event-only rewards on top of the guaranteed Gigantamax Factor Pokemon.
+ * @type {{ key: string, name: string, boss: string, ally: string, teraTypes: string[], drops: { itemId: string, quantity: number }[] }[]}
+ */
+export const RAID_EVENT_ROTATION = [
+  {
+    key: 'charizard',
+    name: 'Charizard the Unrivaled',
+    boss: 'charizard',
+    ally: 'pikachu',
+    teraTypes: ['Fire', 'Flying', 'Dragon'],
+    drops: [{ itemId: 'cometShard', quantity: 1 }],
+  },
+  {
+    key: 'gengar',
+    name: 'Gengar the Unrivaled',
+    boss: 'gengar',
+    ally: 'alakazam',
+    teraTypes: ['Ghost', 'Poison'],
+    drops: [{ itemId: 'starPiece', quantity: 2 }],
+  },
+  {
+    key: 'snorlax',
+    name: 'Snorlax the Unrivaled',
+    boss: 'snorlax',
+    ally: 'machamp',
+    teraTypes: ['Normal'],
+    drops: [{ itemId: 'bigNugget', quantity: 1 }],
+  },
+  {
+    key: 'lapras',
+    name: 'Lapras the Unrivaled',
+    boss: 'lapras',
+    ally: 'kingler',
+    teraTypes: ['Water', 'Ice'],
+    drops: [{ itemId: 'bigPearl', quantity: 1 }],
+  },
+  {
+    key: 'copperajah',
+    name: 'Copperajah the Unrivaled',
+    boss: 'copperajah',
+    ally: 'duraludon',
+    teraTypes: ['Steel'],
+    drops: [{ itemId: 'nugget', quantity: 3 }],
+  },
+  {
+    key: 'grimmsnarl',
+    name: 'Grimmsnarl the Unrivaled',
+    boss: 'grimmsnarl',
+    ally: 'hatterene',
+    teraTypes: ['Dark', 'Fairy'],
+    drops: [{ itemId: 'bigNugget', quantity: 1 }],
+  },
+  {
+    key: 'corviknight',
+    name: 'Corviknight the Unrivaled',
+    boss: 'corviknight',
+    ally: 'drednaw',
+    teraTypes: ['Flying', 'Steel'],
+    drops: [{ itemId: 'starPiece', quantity: 2 }],
+  },
+  {
+    key: 'toxtricity',
+    name: 'Toxtricity the Unrivaled',
+    boss: 'toxtricity',
+    ally: 'centiskorch',
+    teraTypes: ['Electric', 'Poison'],
+    drops: [{ itemId: 'cometShard', quantity: 1 }],
+  },
+]
+
+/** @type {Record<string, typeof RAID_EVENT_ROTATION[number]>} */
+export const raidEventByKey = Object.fromEntries(
+  RAID_EVENT_ROTATION.map((event) => [event.key, event])
+)
+
+/**
  * Local calendar date as `YYYY-MM-DD` (the day rolls over at local midnight).
  * @param {Date} [date]
  * @returns {string}
@@ -64,6 +145,17 @@ function hashString(value) {
   for (let index = 0; index < value.length; index++)
     hash = (hash * 31 + value.charCodeAt(index)) >>> 0
   return hash
+}
+
+/**
+ * Whole days since the Unix epoch at local midnight for a `YYYY-MM-DD` key.
+ * @param {string} dateKey
+ * @returns {number}
+ */
+function dayNumberForDateKey(dateKey) {
+  const [year, month, day] = dateKey.split('-').map(Number),
+    date = new Date(year, month - 1, day)
+  return Math.floor((date.getTime() - date.getTimezoneOffset() * 60000) / 86400000)
 }
 
 /**
@@ -95,4 +187,34 @@ export function dailyDropMultiplier(dailyEvent) {
 /** @param {{ kind?: string } | null | undefined} dailyEvent */
 export function dailyShinyMultiplier(dailyEvent) {
   return dailyEvent?.kind === 'lucky' ? 2 : 1
+}
+
+/**
+ * The Gigantamax raid event featured for a date. The boss rotates weekly (a new
+ * slot every seven days) and the crystal's Tera type rotates daily, so a reload
+ * during the same day keeps the same event. Deterministic, like the daily one.
+ * @param {string} [dateKey]
+ * @returns {{ date: string, key: string, teraType: string }}
+ */
+export function rollRaidEvent(dateKey = todayKey()) {
+  const dayNumber = dayNumberForDateKey(dateKey),
+    weekNumber = Math.floor(dayNumber / 7),
+    event = RAID_EVENT_ROTATION[
+      ((weekNumber % RAID_EVENT_ROTATION.length) + RAID_EVENT_ROTATION.length) %
+        RAID_EVENT_ROTATION.length
+    ],
+    teraIndex =
+      ((dayNumber % event.teraTypes.length) + event.teraTypes.length) % event.teraTypes.length
+  return { date: dateKey, key: event.key, teraType: event.teraTypes[teraIndex] }
+}
+
+/**
+ * The featured raid event plus its rotation data, ready for the raid scene.
+ * @param {string} [dateKey]
+ * @returns {{ date: string, key: string, teraType: string, event: typeof RAID_EVENT_ROTATION[number] }}
+ */
+export function activeRaidEvent(dateKey = todayKey()) {
+  const rotation = rollRaidEvent(dateKey),
+    event = raidEventByKey[rotation.key] ?? RAID_EVENT_ROTATION[0]
+  return { ...rotation, event }
 }

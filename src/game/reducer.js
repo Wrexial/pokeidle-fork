@@ -208,6 +208,8 @@ export const initialGameState = {
   prestigePerks: {},
   /** Best result per minigame, used by `unlock.minigame` route gates. */
   minigameRecords: {},
+  /** Cleared rotating Gigantamax raid events, keyed by event id. */
+  raidEventRecords: {},
   /** Best activity hit quality per route, for route mastery (see game/route-mastery.js). */
   routeMastery: {},
   /** Route ids whose activity mastery bonus has been paid. */

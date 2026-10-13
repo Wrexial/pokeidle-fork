@@ -385,7 +385,7 @@ export const MINIGAME_INFO = {
     title: 'Tera Raid',
     cost: TERA_RAID_COST,
     action: 'BREAK THE CRYSTAL',
-    hint: `A crystal boss with a Tera type and inflated HP. Your healthy party fights it in turn, each member until it faints; shatter the crystal and you catch the boss. Higher stars pay far more. Entry is $${TERA_RAID_COST.toLocaleString()}.`,
+    hint: `A crystal boss with a Tera type and inflated HP. Your healthy party fights it in turn, each member until it faints; shatter the crystal and you catch the boss. Higher stars pay far more. A rotating Gigantamax event also runs here, with a Gmax boss, a simulated ally and event-only rewards. Entry is $${TERA_RAID_COST.toLocaleString()}.`,
   },
   pokeword: {
     title: 'Trainer School',
@@ -578,6 +578,8 @@ export const MINIGAME_TUTORIALS = {
     'A crystal boss has a Tera type and inflated HP.',
     'Your healthy party fights it in turn, each member until it faints.',
     'Shatter the crystal and you catch the boss; higher stars pay far more.',
+    'A rotating Gigantamax event runs here too: a Gmax boss with a simulated ally and event-only rewards.',
+    'Switch between the event and a normal Tera raid before your first attack.',
   ],
   pokeword: [
     'A silhouette appears with its name\u2019s letters jumbled.',

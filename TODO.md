@@ -50,17 +50,6 @@ player-facing value (★ = nice to have, ★★★★★ = core missing feature)
 
 **Battle depth**
 
-## 92. Rotating raid events
-
-Tera raids exist; add Gmax raid bosses on a daily/weekly rotation with a
-simulated ally.
-
-- [ ] A rotation table picked by `daily-events.js` / date.
-- [ ] A boss modifier on the existing Tera Raid scene.
-- [ ] Event-only rewards and a completion record.
-
-Effort: **medium**. Gain: ★★★.
-
 ## 93. Battle Tower ladder modifiers
 
 Weekly rotating rule sets on top of the existing Tower/Frontier (inverse, no

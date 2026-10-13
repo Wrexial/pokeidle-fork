@@ -298,6 +298,7 @@ export function catchPokemon(state, action) {
       ivs,
       heldItem,
       ability,
+      gmax,
     } = action.payload,
     catchLevel = state.inRaid ? 60 : level,
     // Keep the wild Pokemon's IVs when the caller passes them, so a caught
@@ -313,6 +314,8 @@ export function catchPokemon(state, action) {
   let newPokemon = gender ? { ...rolledPokemon, gender } : rolledPokemon
   if (heldItem) newPokemon = { ...newPokemon, heldItem }
   if (ability) newPokemon = { ...newPokemon, ability }
+  // A Gigantamax raid reward arrives carrying the Gigantamax Factor.
+  if (gmax) newPokemon = { ...newPokemon, gmax: true }
   // Record where it came from (drives the Masuda method when breeding).
   newPokemon = {
     ...newPokemon,

@@ -2,6 +2,7 @@
 
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { ACHIEVEMENTS, RECORDABLE_MINIGAMES } from '../data/achievements.js'
+import { RAID_EVENT_ROTATION } from '../data/daily-events.js'
 import { isTmItem, TM_MOVE_IDS } from '../data/tms.js'
 import { MINIGAME_INFO } from '../game/minigames.js'
 import { formatReward } from '../game/progression.js'
@@ -28,6 +29,9 @@ export function RecordsModal({ onClose, inline = false }) {
       (itemId) => isTmItem(itemId) && (state.inventory[itemId] ?? 0) > 0
     ).length,
     minigameRecords = state.minigameRecords ?? {},
+    raidEventRecords = state.raidEventRecords ?? {},
+    clearedRaidEvents = RAID_EVENT_ROTATION.filter((event) => raidEventRecords[event.key]?.cleared)
+      .length,
     clearedMinigames = RECORDABLE_MINIGAMES.filter((id) => minigameRecords[id]?.completed).length,
     playedMinigames = RECORDABLE_MINIGAMES.map((id) => ({
       id,
@@ -75,6 +79,22 @@ export function RecordsModal({ onClose, inline = false }) {
               `${entry.completed ? '\u2605 Cleared' : 'Played'}${
                 entry.best > 0 ? ` \u00b7 Best ${entry.best.toLocaleString()}` : ''
               }`,
+            ]
+          }),
+        ],
+      },
+      {
+        title: 'Raid Events',
+        rows: [
+          [
+            'Gigantamax raids cleared',
+            `${clearedRaidEvents} / ${RAID_EVENT_ROTATION.length}`,
+          ],
+          ...RAID_EVENT_ROTATION.map((event) => {
+            const record = raidEventRecords[event.key]
+            return [
+              event.name,
+              record?.cleared ? `\u2605 Cleared \u00b7 ${record.clears}` : 'Not yet cleared',
             ]
           }),
         ],

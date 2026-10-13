@@ -15882,6 +15882,66 @@ img {
     font-size: 12px
 }
 
+.gmax-raid-scene {
+    background-image: url(/backgrounds/volcano.webp)
+}
+
+.raid-event-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px
+}
+
+.raid-event-name {
+    color: #ffe066;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px
+}
+
+.raid-event-sub {
+    color: #dbeaff;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px
+}
+
+.raid-mode-toggle {
+    display: flex;
+    gap: 6px
+}
+
+.raid-mode-btn {
+    padding: 2px 10px;
+    border: 1px solid #55617e;
+    border-radius: 8px;
+    background: #2b3350;
+    color: #dbeaff;
+    cursor: pointer;
+    font-size: 10px;
+    letter-spacing: 1px
+}
+
+.raid-mode-btn.active {
+    border-color: #ffe066;
+    background: #7038f8;
+    color: #fff
+}
+
+.raid-ally-chip {
+    padding: 1px 6px;
+    background: #2f9e44;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 10px;
+    text-transform: uppercase
+}
+
+.royal-fighter.raid-ally .royal-sprite {
+    filter: drop-shadow(0 0 6px #2f9e44)
+}
+
 /* --- Trainer School / Pokeword (Unova) ---------------------------------- */
 .pokeword-scene {
     background-image: url(/backgrounds/town.webp)

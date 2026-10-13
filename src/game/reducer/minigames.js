@@ -1,6 +1,7 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
 import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, CHAMPION_GAUNTLET_COST, DOUBLES_COST, TRIPLES_COST, ROTATION_COST, FFA_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, MANTINE_SURF_COST, ROTOM_RALLY_COST, OGRE_OUSTIN_COST, TYPE_FUSION_COST, UNOWN_PICROSS_COST, POKESHOT_COST, TERA_RAID_COST, POKEWORD_COST, BERRY_BLENDER_COST, ULTRA_WARP_COST, GAME_CORNER_PRIZE_GOAL, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
+import { raidEventByKey } from '../../data/daily-events.js'
 import { minigameTmChance } from '../../data/config.js'
 import { mapData, pokemonSpecies } from '../../data/gameData.js'
 import { getTmInfo, tmItemId } from '../../data/tms.js'
@@ -554,7 +555,7 @@ export function startUltraWarp(state, action) {
  * a clear (the route `unlock.minigame` gates depend on that).
  * @param {GameState} state
  * @param {GameAction} action
- * @returns {{ minigame?: string, score?: number, completed?: boolean } | null | undefined}
+ * @returns {{ minigame?: string, score?: number, completed?: boolean, raidEvent?: string | null } | null | undefined}
  */
 function minigameResult(state, action) {
   const minigame = action.payload?.minigame ?? minigameIdForPhase(state.phase)
@@ -564,7 +565,7 @@ function minigameResult(state, action) {
 /**
  * Merge a minigame result into `state.minigameRecords`, keeping the best score.
  * @param {GameState} state
- * @param {{ minigame?: string, score?: number, completed?: boolean } | null | undefined} [result]
+ * @param {{ minigame?: string, score?: number, completed?: boolean, raidEvent?: string | null } | null | undefined} [result]
  * @returns {GameState}
  */
 function recordMinigame(state, result) {
@@ -579,6 +580,19 @@ function recordMinigame(state, result) {
       [result.minigame]: { best, completed },
     },
   }
+}
+
+/**
+ * Merge a cleared Gigantamax raid event into `state.raidEventRecords`, counting
+ * the clears so the Records panel can show the full rotation progress.
+ * @param {Record<string, { cleared: boolean, clears: number }> | undefined} records
+ * @param {string} eventKey
+ * @returns {Record<string, { cleared: boolean, clears: number }>}
+ */
+function recordRaidEventClear(records, eventKey) {
+  const previous = records?.[eventKey],
+    clears = (previous?.clears ?? 0) + 1
+  return { ...(records ?? {}), [eventKey]: { cleared: true, clears } }
 }
 
 /**
@@ -607,6 +621,19 @@ export function endMinigame(state, action) {
         : null
   if (achievementRibbon) {
     const party = awardRibbonToParty(next.party, achievementRibbon)
+    if (party !== next.party) next = { ...next, party }
+  }
+  // A cleared rotating Gigantamax raid records the event and ribbons the party.
+  const raidEvent =
+    result?.completed &&
+    result.minigame === 'teraRaid' &&
+    typeof result.raidEvent === 'string' &&
+    raidEventByKey[result.raidEvent]
+      ? result.raidEvent
+      : null
+  if (raidEvent) {
+    next = { ...next, raidEventRecords: recordRaidEventClear(next.raidEventRecords, raidEvent) }
+    const party = awardRibbonToParty(next.party, 'gmax')
     if (party !== next.party) next = { ...next, party }
   }
   return next
@@ -706,7 +733,7 @@ export function claimMinigameReward(state, action) {
     const speciesKey = pokemon.speciesKey
     next = catchPokemon(next, {
       type: 'CATCH_POKEMON',
-      payload: { speciesKey, level: pokemon.level ?? 5 },
+      payload: { speciesKey, level: pokemon.level ?? 5, gmax: !!pokemon.gmax },
     })
     next = markCaught(next, { type: 'MARK_CAUGHT', payload: { speciesKey } })
   }

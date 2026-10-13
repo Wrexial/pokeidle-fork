@@ -3,7 +3,7 @@
 // repair logic stays testable on its own.
 
 import { BATTLE_TOWER_REGION, EV_MAX_PER_STAT, EV_MAX_TOTAL, LEGACY_SAVE_KEYS, MAX_TEAM_PRESETS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, getActiveSlot, regionalStarters, saveSlotKey, setActiveSlot } from '../data/config.js'
-import { dailyEventByKey, todayKey } from '../data/daily-events.js'
+import { dailyEventByKey, raidEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, autoCatchBallOrder, consumableItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, formDexModel, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
 import { ROUTE_ACTIVITIES } from './minigames/route-activities.js'
@@ -1017,6 +1017,22 @@ export function repairSave(saved) {
           },
         ])
     ),
+    // Cleared rotating Gigantamax raid events; keep only known events and a
+    // sane clear count so a stale save can't invent progress.
+    raidEventRecords = Object.fromEntries(
+      Object.entries(saved.raidEventRecords ?? {})
+        .filter(([id, record]) => raidEventByKey[id] && record && typeof record === 'object')
+        .map(([id, record]) => [
+          id,
+          {
+            cleared: !!record.cleared,
+            clears:
+              typeof record.clears === 'number' && record.clears > 0
+                ? Math.floor(record.clears)
+                : 0,
+          },
+        ])
+    ),
     // Route activity mastery: keep known locations/activities and ranks 1-3.
     routeMastery = Object.fromEntries(
       Object.entries(saved.routeMastery ?? {})
@@ -1182,6 +1198,7 @@ export function repairSave(saved) {
     frontierBest: repairedFrontierBest,
     frontierRental: null,
     minigameRecords,
+    raidEventRecords,
     routeMastery,
     masteredRoutes,
     victoryTokens: saved.victoryTokens ?? 0,
@@ -1410,6 +1427,7 @@ export const SAVED_STATE_KEYS = [
   'hunt',
   'lingeringWeather',
   'minigameRecords',
+  'raidEventRecords',
   'routeMastery',
   'masteredRoutes',
   'towerFloor',

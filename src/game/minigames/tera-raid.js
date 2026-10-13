@@ -3,6 +3,8 @@
 // fighting until it faints. Break the crystal and you catch the boss.
 
 import { pokemonSpecies } from '../../data/gameData.js'
+import { RAID_EVENT_ROTATION, raidEventByKey } from '../../data/daily-events.js'
+import { gmaxFormFor } from '../../data/mega-evolution.js'
 import { createOpponent, simulateBattle } from './gauntlet.js'
 
 /** Money spent to enter a raid. */
@@ -10,6 +12,9 @@ export const TERA_RAID_COST = 600
 
 /** Hard cap on the whole raid so a stall war can never hang the scene. */
 export const TERA_RAID_MAX_TURNS = 160
+
+/** Extra HP a Gigantamax event boss carries over a normal Tera boss. */
+export const GMAX_RAID_HP_MULTIPLIER = 1.25
 
 /**
  * The species a Tera Raid can hide. Any base-species Pokemon in the national dex
@@ -195,5 +200,83 @@ export function teraRaidPrize(stars, won, speciesKey = '', level = 60) {
     items: [{ itemId: 'expCandyM', quantity: 1 }],
     label: 'Crystal shattered!',
     pokemon: { speciesKey, level },
+  }
+}
+
+/**
+ * The Gigantamax boss for a rotation entry: the boss's `gx-` form, a fixed
+ * Tera type from the day's rotation and a level above the party. Event bosses
+ * are five-star and always drop the Gigantamax Factor.
+ * @param {{ key: string, teraType: string }} rotation
+ * @param {number} baseLevel The party's best level.
+ * @returns {{ eventKey: string, eventName: string, speciesKey: string, baseSpeciesKey: string, name: string, level: number, stars: number, teraType: string, gmax: boolean }}
+ */
+export function gmaxRaidBoss(rotation, baseLevel) {
+  const event = raidEventByKey[rotation?.key] ?? RAID_EVENT_ROTATION[0],
+    speciesKey = gmaxFormFor(event.boss) ?? event.boss,
+    species = pokemonSpecies[speciesKey]
+  return {
+    eventKey: event.key,
+    eventName: event.name,
+    speciesKey,
+    baseSpeciesKey: event.boss,
+    name: species?.name ?? speciesKey,
+    level: Math.max(5, Math.min(100, Math.round(baseLevel + 8))),
+    stars: 5,
+    teraType: rotation?.teraType ?? event.teraTypes[0],
+    gmax: true,
+  }
+}
+
+/**
+ * The simulated ally that joins a Gigantamax raid: one of the event's partners,
+ * levelled just above the party so it can hold its own.
+ * @param {{ ally: string }} event
+ * @param {number} baseLevel
+ * @returns {any}
+ */
+export function gmaxRaidAlly(event, baseLevel) {
+  const level = Math.max(5, Math.min(100, Math.round((baseLevel ?? 5) + 3))),
+    ally = createOpponent(event.ally, level)
+  return { ...ally, isPlayer: true, isAlly: true }
+}
+
+/**
+ * Build the Gigantamax event boss with its extra shield of HP.
+ * @param {{ speciesKey: string, level: number, stars: number }} info
+ * @returns {any}
+ */
+export function createGmaxRaidBoss(info) {
+  const boss = createTeraRaidBoss(info),
+    maxHp = Math.max(1, Math.round(boss.maxHp * GMAX_RAID_HP_MULTIPLIER))
+  return { ...boss, maxHp, currentHp: maxHp }
+}
+
+/**
+ * Prize for a Gigantamax raid event. A win hands over the base species carrying
+ * the Gigantamax Factor (so it can Gigantamax) plus the event's exclusive drop
+ * and a guaranteed Max Mushroom.
+ * @param {{ boss: string, name: string, drops?: { itemId: string, quantity: number }[] }} event
+ * @param {boolean} won
+ * @param {number} level
+ * @returns {{ money: number, items: { itemId: string, quantity: number }[], label: string, pokemon?: { speciesKey: string, level: number, gmax: boolean } | null }}
+ */
+export function gmaxRaidPrize(event, won, level = 60) {
+  if (!won)
+    return {
+      money: 1500,
+      items: [{ itemId: 'expCandyL', quantity: 1 }],
+      label: `${event.name} repelled the raid`,
+      pokemon: null,
+    }
+  return {
+    money: 15000,
+    items: [
+      { itemId: 'maxMushroom', quantity: 1 },
+      { itemId: 'expCandyXL', quantity: 1 },
+      ...(event.drops ?? []),
+    ],
+    label: `${event.name} subdued!`,
+    pokemon: { speciesKey: event.boss, level, gmax: true },
   }
 }

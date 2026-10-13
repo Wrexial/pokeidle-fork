@@ -1,23 +1,30 @@
 #!/usr/bin/env node
 // tools/run-todo.mjs
 //
-// Drive TODO.md to completion: hand each numbered item (`## 78. Seasons`, ...)
-// to its own `pi` run, one at a time, until every item is gone from the file.
-// Nothing here touches game code directly — it just launches the agent, so the
-// usual AGENTS.md conventions (typecheck, tests, changelog, commit) apply to
-// each run.
+// Drive TODO.md to completion: hand each work section to its own `pi` run, one
+// at a time, until every item is gone from the file. Nothing here touches game
+// code directly — it just launches the agent, so the usual AGENTS.md conventions
+// (typecheck, tests, changelog, commit) apply to each run.
 //
-// Completion contract: an item is done when its `## N.` section is no longer in
+// Two kinds of section are queued:
+//   * numbered items, e.g. `## 78. Seasons` (id `78`, session `todo-78`)
+//   * named follow-ups, e.g. `## Kurt's Apricorn queue (follow-up)` (id is the
+//     slugified title, session `todo-kurts-apricorn-queue`)
+// A small list of structural/reference headings (the priority table, the useful
+// references footer, ...) is skipped — see STRUCTURAL_SECTIONS.
+//
+// Completion contract: an item is done when its `## ...` section is no longer in
 // TODO.md. Per AGENTS.md, finished work moves to the changelog and leaves
 // TODO.md, so the final step of each run is removing the section. Retries
-// continue the same per-item session (`--session-id todo-<n>`), so a large item
-// can be finished across several runs.
+// continue the same per-item session (`todo-<id>`), so a large item can be
+// finished across several runs.
 //
 // Usage:
 //   node tools/run-todo.mjs --dry                 # list the queue, run nothing
-//   node tools/run-todo.mjs                       # work every numbered item
-//   node tools/run-todo.mjs --only=78,83,88
-//   node tools/run-todo.mjs --from=85 --to=90
+//   node tools/run-todo.mjs                       # work every queued section
+//   node tools/run-todo.mjs --only=78,98          # numbered ids
+//   node tools/run-todo.mjs --only=sos-chain-should-break-on-a-new-species
+//   node tools/run-todo.mjs --from=85 --to=90     # numbered ids only
 //   node tools/run-todo.mjs --attempts=3 --max=30
 //   node tools/run-todo.mjs --model=sonnet:high --thinking=high
 //   node tools/run-todo.mjs --fresh               # a new session per attempt
@@ -25,8 +32,8 @@
 //
 // Flags:
 //   --dry            print the parsed queue and exit
-//   --only=78,83     only these item numbers
-//   --from=N/--to=N  clamp the number range
+//   --only=...       only these ids (numbers or slugs), comma-separated
+//   --from=N/--to=N  clamp the numbered id range (named sections are skipped)
 //   --attempts=N     per-item attempt cap before moving on (default 5)
 //   --max=N          total `pi` runs cap (default unlimited)
 //   --model=...      passed through to `pi --model`
@@ -39,7 +46,7 @@
 //   --help           this text
 //
 // Logs: every run's stdout/stderr is echoed live and appended to
-// tools/todo-logs/<number>-<timestamp>.log (gitignored).
+// tools/todo-logs/<id>-<timestamp>.log (gitignored).
 
 import { spawn, execFileSync } from 'node:child_process'
 import { createWriteStream, existsSync, mkdirSync, readFileSync } from 'node:fs'
@@ -50,10 +57,21 @@ const here = dirname(fileURLToPath(import.meta.url))
 const repoRoot = resolve(here, '..')
 const todoPath = join(repoRoot, 'TODO.md')
 const logDir = join(here, 'todo-logs')
-const ITEM_RE = /^##\s+(\d+)\.\s+(.+?)\s*$/
-const SENTINEL_RE = /TODO_ITEM_COMPLETE\s+#(\d+)/
+const NUMBERED_RE = /^##\s+(\d+)\.\s+(.+?)\s*$/
+const NAMED_RE = /^##\s+(.+?)\s*$/
+const SENTINEL_RE = /TODO_ITEM_COMPLETE\s+#?([A-Za-z0-9-]+)/
 
-/** @param {string[]} argv */
+// H2 headings that are scaffolding rather than work items. Add to this list (or
+// drop a heading below) when TODO.md grows a new meta section.
+const STRUCTURAL_SECTIONS = new Set([
+  'Priority order (effort vs. gain)',
+  'Feature ideas (0.25.0 brainstorm)',
+  'Feature ideas',
+  'Map cleanup reference maps',
+  'Useful references when picking these up',
+])
+
+/** @param {string} argv */
 function parseArgs(argv) {
   /** @type {Record<string, any>} */
   const opts = {
@@ -89,8 +107,8 @@ function parseArgs(argv) {
       case 'only':
         opts.only = String(value || '')
           .split(',')
-          .map((part) => Number(part.trim()))
-          .filter((number) => Number.isFinite(number))
+          .map((part) => part.trim())
+          .filter(Boolean)
         break
       case 'from':
         opts.from = Number(value)
@@ -132,28 +150,49 @@ function parseArgs(argv) {
   return opts
 }
 
-/** @param {string} text */
+/** @param {string} title */
+function slugify(title) {
+  return title
+    .replace(/['\u2019]/g, '')
+    .replace(/\([^)]*\)/g, ' ')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+/**
+ * @param {string} text
+ * @returns {{ id: string, number: number | null, slug: string | null, title: string, body: string }[]}
+ */
 function parseItems(text) {
   const lines = text.split(/\r?\n/)
-  /** @type {{ number: number, title: string, body: string }[]} */
-  const items = []
+  /** @type {{ number: number | null, title: string, bodyLines: string[] }[]} */
+  const raw = []
   let current = null
   for (const line of lines) {
-    const match = line.match(ITEM_RE)
-    if (match) {
-      if (current) items.push(finishItem(current))
-      current = { number: Number(match[1]), title: match[2], bodyLines: [] }
+    const numbered = line.match(NUMBERED_RE)
+    const named = numbered ? null : line.match(NAMED_RE)
+    if (numbered || named) {
+      if (current) raw.push(current)
+      current = numbered
+        ? { number: Number(numbered[1]), title: numbered[2].trim(), bodyLines: [] }
+        : { number: null, title: named[1].trim(), bodyLines: [] }
     } else if (current) {
       current.bodyLines.push(line)
     }
   }
-  if (current) items.push(finishItem(current))
-  return items
-}
+  if (current) raw.push(current)
 
-/** @param {{ number: number, title: string, bodyLines: string[] }} item */
-function finishItem(item) {
-  return { number: item.number, title: item.title, body: item.bodyLines.join('\n').trim() }
+  return raw
+    .filter((item) => item.number != null || !STRUCTURAL_SECTIONS.has(item.title))
+    .map((item) => {
+      const body = item.bodyLines.join('\n').trim()
+      if (item.number != null) {
+        return { id: String(item.number), number: item.number, slug: null, title: item.title, body }
+      }
+      const slug = slugify(item.title)
+      return { id: slug, number: null, slug, title: item.title, body }
+    })
 }
 
 /** @param {string} body */
@@ -167,12 +206,21 @@ function readTodo() {
   return readFileSync(todoPath, 'utf8')
 }
 
+/** @param {{ id: string, number: number | null, slug: string | null, title: string }} item */
+function itemTag(item) {
+  return `#${item.number != null ? item.number : item.slug}`
+}
+
 /** @param {Record<string, any>} opts */
 function queueFilter(opts) {
-  return (/** @type {{ number: number }} */ item) => {
-    if (opts.only && !opts.only.includes(item.number)) return false
-    if (opts.from != null && Number.isFinite(opts.from) && item.number < opts.from) return false
-    if (opts.to != null && Number.isFinite(opts.to) && item.number > opts.to) return false
+  return (/** @type {{ id: string, number: number | null }} */ item) => {
+    if (opts.only && !opts.only.includes(item.id)) return false
+    if (opts.from != null && Number.isFinite(opts.from)) {
+      if (item.number == null || item.number < opts.from) return false
+    }
+    if (opts.to != null && Number.isFinite(opts.to)) {
+      if (item.number == null || item.number > opts.to) return false
+    }
     return true
   }
 }
@@ -192,14 +240,14 @@ function sleep(ms) {
 /**
  * @param {string} prompt
  * @param {Record<string, any>} opts
- * @param {number} number
+ * @param {string} sessionId
  * @param {string} logPath
  */
-function runPi(prompt, opts, number, logPath) {
+function runPi(prompt, opts, sessionId, logPath) {
   const args = ['--print']
   if (opts.approve) args.push('--approve')
   if (opts.fresh) args.push('--no-session')
-  else args.push('--session-id', `todo-${number}`)
+  else args.push('--session-id', `todo-${sessionId}`)
   if (opts.model) args.push('--model', opts.model)
   if (opts.thinking) args.push('--thinking', opts.thinking)
 
@@ -240,7 +288,7 @@ function runPi(prompt, opts, number, logPath) {
 }
 
 /**
- * @param {{ number: number, title: string, body: string }} item
+ * @param {{ id: string, number: number | null, slug: string | null, title: string, body: string }} item
  * @param {number} attempt
  * @param {number} maxAttempts
  */
@@ -249,31 +297,46 @@ function buildPrompt(item, attempt, maxAttempts) {
     attempt > 1
       ? `\nThis is attempt ${attempt} of ${maxAttempts} for this item. The section is still in TODO.md, so the previous run either made partial progress or did not finish. Continue the work; do not start over. Check \`git log\` and the working tree for what was already done.\n`
       : ''
+  const label =
+    item.number != null ? `#${item.number} (${item.title})` : `"${item.title}"`
+  const deleteHeading =
+    item.number != null ? `## ${item.number}. ${item.title}` : `## ${item.title}`
+  const sentinel = item.number != null ? `#${item.number}` : item.slug
   return `You are implementing exactly one item from TODO.md in the PokemonIdle repository. Work autonomously; do not ask the user questions.${retry}
-TODO item #${item.number}: ${item.title}
+TODO item ${label}
 
 --- BEGIN TODO ITEM ---
 ${item.body}
 --- END TODO ITEM ---
 
 Repository rules (from AGENTS.md):
-- Match the existing style: no semicolons, single quotes, 2-space indent, ES5 trailing commas, React 19 \`jsx()\` calls (no JSX syntax). Keep the diff scoped to this item.
+- Match the existing style: no semicolons, single quotes, 2-space indent, ES5 trailing commas, React 19 \`jsx()\` calls (no JSX syntax). Keep the diff scoped to this item; do not touch unrelated TODO sections.
 - Keep \`npm run typecheck\` and \`npm test\` clean. Run \`npm run validate\` after any data change and \`node tools/quickplay.mjs\` after progression/gate changes.
 - Record user-facing changes by adding items under the correct canonical heading in the TOP entry of \`src/data/changelog.js\`. Do NOT bump \`GAME_VERSION\` and do NOT add a new version entry.
-- When the item is fully implemented, verified, and committed, DELETE its \`## ${item.number}.\` section from TODO.md. That removal is the completion signal the runner watches for.
+- When the item is fully implemented, verified, and committed, DELETE its \`${deleteHeading}\` section from TODO.md. That removal is the completion signal the runner watches for.
 - Commit each logical change with an imperative subject line and a body; NEVER \`git push\`.
 
 If the item is too large to finish in one run, make solid, committed progress and leave the TODO section in place so a later run can continue.
 
 When the item is completely done, end your final message with a line exactly like:
-TODO_ITEM_COMPLETE #${item.number}
+TODO_ITEM_COMPLETE ${sentinel}
 `
+}
+
+function helpText() {
+  const lines = readFileSync(join(here, 'run-todo.mjs'), 'utf8').split('\n')
+  const out = []
+  for (let index = 1; index < lines.length; index++) {
+    if (lines[index].startsWith('//')) out.push(lines[index].replace(/^\/\/ ?/, ''))
+    else if (out.length) break
+  }
+  return out.join('\n')
 }
 
 async function main() {
   const opts = parseArgs(process.argv.slice(2))
   if (opts.help) {
-    console.log(readFileSync(join(here, 'run-todo.mjs'), 'utf8').split('\n').slice(1, 48).join('\n'))
+    console.log(helpText())
     return
   }
   if (!existsSync(todoPath)) throw new Error(`No TODO.md at ${todoPath}`)
@@ -285,7 +348,8 @@ async function main() {
     console.log(`${queue.length} item(s) in the queue:`)
     for (const item of queue) {
       const { open, done } = progressOf(item.body)
-      console.log(`  #${item.number}  ${item.title}  [${done}/${done + open} steps checked]`)
+      const steps = done + open ? `  [${done}/${done + open} steps checked]` : ''
+      console.log(`  ${itemTag(item)}  ${item.title}${steps}`)
     }
     return
   }
@@ -300,14 +364,14 @@ async function main() {
 
   mkdirSync(logDir, { recursive: true })
   const completed = []
-  /** @type {Set<number>} */
+  /** @type {Set<string>} */
   const failed = new Set()
   let runs = 0
 
   while (true) {
     const remaining = parseItems(readTodo())
       .filter(filter)
-      .filter((item) => !failed.has(item.number))
+      .filter((item) => !failed.has(item.id))
     if (!remaining.length) break
     if (runs >= opts.max) {
       console.log(`[run-todo] hit the --max cap of ${opts.max} runs; stopping.`)
@@ -316,49 +380,48 @@ async function main() {
 
     const item = remaining[0]
     const { open, done } = progressOf(item.body)
-    console.log(
-      `\n[run-todo] === #${item.number} ${item.title} (${done}/${done + open} steps checked) ===`
-    )
+    const steps = done + open ? ` (${done}/${done + open} steps checked)` : ''
+    console.log(`\n[run-todo] === ${itemTag(item)} ${item.title}${steps} ===`)
 
     let complete = false
     for (let attempt = 1; attempt <= opts.attempts && runs < opts.max; attempt++) {
       runs++
       const stamp = new Date().toISOString().replace(/[:.]/g, '-')
-      const logPath = join(logDir, `${item.number}-${stamp}.log`)
-      console.log(`[run-todo] run ${runs}: #${item.number}, attempt ${attempt}/${opts.attempts} -> ${logPath}`)
-      const result = await runPi(buildPrompt(item, attempt, opts.attempts), opts, item.number, logPath)
+      const logPath = join(logDir, `${item.id}-${stamp}.log`)
+      console.log(`[run-todo] run ${runs}: ${itemTag(item)}, attempt ${attempt}/${opts.attempts} -> ${logPath}`)
+      const result = await runPi(buildPrompt(item, attempt, opts.attempts), opts, item.id, logPath)
 
-      const present = parseItems(readTodo()).some((entry) => entry.number === item.number)
+      const present = parseItems(readTodo()).some((entry) => entry.id === item.id)
       const sentinel = result.out.match(SENTINEL_RE)
       if (!present) {
         complete = true
-        console.log(`[run-todo] #${item.number} is done (section removed).`)
+        console.log(`[run-todo] ${itemTag(item)} is done (section removed).`)
         break
       }
-      if (sentinel && Number(sentinel[1]) === item.number) {
-        console.log(`[run-todo] #${item.number} reported complete but the TODO section is still present; retrying.`)
+      if (sentinel && sentinel[1] === item.id) {
+        console.log(`[run-todo] ${itemTag(item)} reported complete but the TODO section is still present; retrying.`)
       } else if (result.code !== 0) {
-        console.log(`[run-todo] #${item.number} run exited with code ${result.code}.`)
+        console.log(`[run-todo] ${itemTag(item)} run exited with code ${result.code}.`)
       } else {
-        console.log(`[run-todo] #${item.number} made progress but is not finished yet.`)
+        console.log(`[run-todo] ${itemTag(item)} made progress but is not finished yet.`)
       }
       if (opts.sleep > 0 && attempt < opts.attempts) await sleep(opts.sleep)
     }
 
     if (complete) {
-      completed.push(item.number)
+      completed.push(item.id)
     } else {
-      failed.add(item.number)
-      console.log(`[run-todo] #${item.number} exhausted its attempts; moving on.`)
+      failed.add(item.id)
+      console.log(`[run-todo] ${itemTag(item)} exhausted its attempts; moving on.`)
       if (opts.failFast) break
     }
   }
 
   const stillOpen = parseItems(readTodo()).filter(filter)
   console.log('\n[run-todo] summary')
-  console.log(`  completed: ${completed.length ? completed.map((n) => `#${n}`).join(', ') : '(none)'}`)
-  console.log(`  failed:    ${failed.size ? [...failed].map((n) => `#${n}`).join(', ') : '(none)'}`)
-  console.log(`  remaining: ${stillOpen.length ? stillOpen.map((i) => `#${i.number}`).join(', ') : '(none)'}`)
+  console.log(`  completed: ${completed.length ? completed.join(', ') : '(none)'}`)
+  console.log(`  failed:    ${failed.size ? [...failed].join(', ') : '(none)'}`)
+  console.log(`  remaining: ${stillOpen.length ? stillOpen.map((i) => itemTag(i)).join(', ') : '(none)'}`)
   console.log(`  runs:      ${runs}`)
   if (failed.size) process.exitCode = 1
 }

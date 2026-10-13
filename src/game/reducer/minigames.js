@@ -1,6 +1,6 @@
 // Reducer handlers for minigames actions. Split from game/reducer.js.
 
-import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, CHAMPION_GAUNTLET_COST, DOUBLES_COST, TRIPLES_COST, ROTATION_COST, FFA_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, MANTINE_SURF_COST, ROTOM_RALLY_COST, OGRE_OUSTIN_COST, TYPE_FUSION_COST, UNOWN_PICROSS_COST, POKESHOT_COST, TERA_RAID_COST, POKEWORD_COST, BERRY_BLENDER_COST, ULTRA_WARP_COST, GAME_CORNER_PRIZE_GOAL, dowsingAvailable, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
+import { MATCH3_COST, MEMORY_COST, MUSICAL_COST, PICNIC_COST, POKEBALL_FACTORY_COST, WHACK_COST, BATTLE_ROYAL_COST, CHAMPION_GAUNTLET_COST, DOUBLES_COST, TRIPLES_COST, ROTATION_COST, FFA_COST, BUG_CONTEST_COST, CONTEST_COST, CURRY_COST, DYNAMAX_ADVENTURES_COST, LIGHTS_OUT_COST, MINING_COST, POKEATHLON_COST, POKE_RADAR_COST, POKESTAR_COST, QUIZ_COST, ROUTE_ACTIVITIES, SAFARI_COST, SLIDING_COST, ICE_SLIDE_COST, VOLTORB_FLIP_COST, MANTINE_SURF_COST, ROTOM_RALLY_COST, OGRE_OUSTIN_COST, TYPE_FUSION_COST, UNOWN_PICROSS_COST, POKESHOT_COST, TERA_RAID_COST, POKEWORD_COST, BERRY_BLENDER_COST, ULTRA_WARP_COST, GAME_CORNER_PRIZE_GOAL, dowsingAvailable, hideAndSeekAvailable, hideAndSeekSpot, rollGameCornerPrize, routeActivityIds, minigameIdForPhase } from '../minigames.js'
 import { raidEventByKey, todayKey } from '../../data/daily-events.js'
 import { minigameTmChance } from '../../data/config.js'
 import { mapData, pokemonSpecies } from '../../data/gameData.js'
@@ -141,6 +141,47 @@ export function findDowsing(state, action) {
  */
 export function endDowsing(state, action) {
   return state.phase === 'dowsing' ? { ...state, ...createIdleBattleState() } : state
+}
+
+/**
+ * Handle the `START_HIDE_AND_SEEK` action. Only enters the reveal when the
+ * player is standing on a wild route that still hides a spot today; the route
+ * is marked searched as soon as the scene opens, so a reload cannot reroll the
+ * same day's find.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function startHideAndSeek(state, action) {
+  const routeKey = mapData[state.currentLocation]?.routeKey
+  if (
+    !routeKey ||
+    !hideAndSeekAvailable(state.hideAndSeekSearches, routeKey) ||
+    !hideAndSeekSpot(routeKey)
+  )
+    return state
+  const base = enterMinigame(
+    state,
+    'hideAndSeek',
+    0,
+    'You looked for a Pokemon hiding on the route.'
+  )
+  return base === state
+    ? state
+    : {
+        ...base,
+        hideAndSeekSearches: { ...(state.hideAndSeekSearches ?? {}), [routeKey]: todayKey() },
+      }
+}
+
+/**
+ * Handle the `END_HIDE_AND_SEEK` action, closing the spot.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function endHideAndSeek(state, action) {
+  return state.phase === 'hideAndSeek' ? { ...state, ...createIdleBattleState() } : state
 }
 
 /**

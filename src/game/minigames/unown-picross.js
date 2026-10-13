@@ -77,11 +77,14 @@ export function picrossClues(line) {
 }
 
 /**
- * Pick a random glyph and derive its row and column clues.
+ * Pick a glyph (optionally from a seeded RNG) and derive its row and column
+ * clues. The Unown Picross scene uses the default randomness; the hide-and-seek
+ * spots pass a seeded RNG so a route + day always shows the same glyph.
+ * @param {() => number} [rng]
  * @returns {{ solution: number[][], rowClues: number[][], colClues: number[][] }}
  */
-export function createPicrossPuzzle() {
-  const solution = UNOWN_PICROSS_PUZZLES[Math.floor(Math.random() * UNOWN_PICROSS_PUZZLES.length)],
+export function createPicrossPuzzle(rng = Math.random) {
+  const solution = UNOWN_PICROSS_PUZZLES[Math.floor(rng() * UNOWN_PICROSS_PUZZLES.length)],
     size = solution.length,
     rowClues = solution.map((row) => picrossClues(row)),
     colClues = Array.from({ length: size }, (_, column) =>

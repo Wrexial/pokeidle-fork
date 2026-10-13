@@ -1039,6 +1039,12 @@ export function repairSave(saved) {
         ([routeKey, date]) => mapData[routeKey] && typeof date === 'string' && date
       )
     ),
+    // Hide-and-seek spots: keep only real routes and a YYYY-MM-DD date.
+    hideAndSeekSearches = Object.fromEntries(
+      Object.entries(saved.hideAndSeekSearches ?? {}).filter(
+        ([routeKey, date]) => mapData[routeKey] && typeof date === 'string' && date
+      )
+    ),
     // Route activity mastery: keep known locations/activities and ranks 1-3.
     routeMastery = Object.fromEntries(
       Object.entries(saved.routeMastery ?? {})
@@ -1206,6 +1212,7 @@ export function repairSave(saved) {
     minigameRecords,
     raidEventRecords,
     dowsingSearches,
+    hideAndSeekSearches,
     routeMastery,
     masteredRoutes,
     victoryTokens: saved.victoryTokens ?? 0,
@@ -1436,6 +1443,7 @@ export const SAVED_STATE_KEYS = [
   'minigameRecords',
   'raidEventRecords',
   'dowsingSearches',
+  'hideAndSeekSearches',
   'routeMastery',
   'masteredRoutes',
   'towerFloor',

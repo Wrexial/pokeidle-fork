@@ -49,16 +49,6 @@ player-facing value (★ = nice to have, ★★★★★ = core missing feature)
 
 **Activities & economy**
 
-## 95. Hide-and-seek spots
-
-Hidden Pokemon spots that reveal rare spawns, using the Picross / Ruins reveal
-pattern.
-
-- [ ] Spots on a route that reveal a bonus encounter when found.
-- [ ] Reuse the `unown-picross` / `ruins-puzzle` reveal UI.
-
-Effort: **S**. Gain: ★★.
-
 ## 96. Berry / commodity market
 
 Daily price swings; buy low, sell high across days. A gentle idle economy.

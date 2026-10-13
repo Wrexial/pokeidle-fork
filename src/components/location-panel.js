@@ -6,7 +6,7 @@ import { BATTLE_TOWER_LOCATION } from '../data/config.js'
 import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
 import { areaInfoFor } from '../data/ui.js'
-import { DOWSING_PROBES, DOWSING_TUTORIAL, MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_TUTORIALS, ROUTE_ACTIVITIES, ROUTE_ACTIVITY_TUTORIALS, activityConditionLabel, activityConditionMatches, bestRodId, dowsingAvailable, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
+import { DOWSING_PROBES, DOWSING_TUTORIAL, HIDE_AND_SEEK_TUTORIAL, MINIGAME_AREAS, MINIGAME_INFO, MINIGAME_LOCATIONS, MINIGAME_START_ACTION, MINIGAME_TUTORIALS, ROUTE_ACTIVITIES, ROUTE_ACTIVITY_TUTORIALS, activityConditionLabel, activityConditionMatches, bestRodId, dowsingAvailable, hideAndSeekAvailable, hideAndSeekSpot, nextRod, rodForId, routeActivityIds } from '../game/minigames.js'
 import { dayPhaseAt } from '../game/day-night.js'
 import { effectiveWeatherAt } from '../game/weather.js'
 import { masteryProgress } from '../game/route-mastery.js'
@@ -283,6 +283,13 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
     activityIds = routeActivityIds(location),
     dowsingRouteKey = location.type === 'route' ? (location.routeKey ?? null) : null,
     dowsingReady = !!dowsingRouteKey && dowsingAvailable(state.dowsingSearches, dowsingRouteKey),
+    hideAndSeekRouteKey =
+      location.type === 'route' && location.routeKey && hideAndSeekSpot(location.routeKey)
+        ? location.routeKey
+        : null,
+    hideAndSeekReady =
+      !!hideAndSeekRouteKey &&
+      hideAndSeekAvailable(state.hideAndSeekSearches, hideAndSeekRouteKey),
     mastery = masteryProgress(state, location.id),
     activityConditionContext = {
       time: /** @type {'day' | 'night'} */ (dayPhaseAt().isNight ? 'night' : 'day'),
@@ -297,6 +304,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
       'academyQuiz',
       'mining',
       'dowsing',
+      'hideAndSeek',
       'gameCorner',
       'routeActivity',
       'wonderTrade',
@@ -837,7 +845,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
             encounters: routeEncounters.encounters,
             onOpenCatchSettings: onOpenCatchSettings ?? (() => {}),
           }),
-        (fixedMinigame || activityIds.length > 0 || dowsingRouteKey) &&
+        (fixedMinigame || activityIds.length > 0 || dowsingRouteKey || hideAndSeekRouteKey) &&
           jsxs('div', {
             className: 'location-minigames',
             children: [
@@ -857,6 +865,18 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
                   actionLabel: dowsingReady ? 'START SWEEP' : 'ALREADY SWEPT TODAY',
                   disabled: minigameBusy || !dowsingReady,
                   onStart: () => dispatch({ type: 'START_DOWSING' }),
+                }),
+              hideAndSeekRouteKey &&
+                jsx(MinigameCard, {
+                  icon: '\u{1f648}',
+                  title: 'Hide-and-Seek',
+                  hint: hideAndSeekReady
+                    ? `A rare Pokemon is hiding in ${location.name} \u2014 solve the glyph to flush it out, then battle it. Each route hides one spot a day.`
+                    : `You already found ${location.name}\u2019s hidden spot today \u2014 another turns up tomorrow.`,
+                  steps: HIDE_AND_SEEK_TUTORIAL,
+                  actionLabel: hideAndSeekReady ? 'SEARCH THE SPOT' : 'ALREADY FOUND TODAY',
+                  disabled: minigameBusy || !hideAndSeekReady,
+                  onStart: () => dispatch({ type: 'START_HIDE_AND_SEEK' }),
                 }),
               activityIds.length > 0 &&
                 jsx('p', {

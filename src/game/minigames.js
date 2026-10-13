@@ -4,6 +4,7 @@
 
 export { MINING_COST, MINING_TILES, MINING_REWARD_TILES, MINING_DIGS, rollMiningReward, rewardItemName } from './minigames/mining.js'
 export { DOWSING_COLS, DOWSING_ROWS, DOWSING_TILES, DOWSING_ITEMS, DOWSING_PROBES, DOWSING_TUTORIAL, dowsingFinds, dowsingDistance, dowsingHeat, dowsingReading, dowsingAvailable, dowsingRewardName } from './minigames/dowsing.js'
+export { HIDE_AND_SEEK_SHINY_MULTIPLIER, HIDE_AND_SEEK_TUTORIAL, hideAndSeekPool, hideAndSeekSpot, hideAndSeekPuzzle, hideAndSeekAvailable } from './minigames/hide-and-seek.js'
 export { BUG_CONTEST_COST, BUG_CONTEST_BUSHES, BUG_CONTEST_RUSTLES, BUG_CONTEST_BALL, BUG_CONTEST_POOL, contestScore, bugFleeChance, rollContestBug, rollContestBugs, bugCatchChance, throwNetBall, bugStays, buildContestResults, contestPlayerRank, bugContestPrize } from './minigames/bug-contest.js'
 export { SAFARI_COST, SAFARI_BALLS, SAFARI_BALL, SAFARI_ROUTE_KEY, SAFARI_EFFECT_TURNS, SAFARI_SHINY_MULTIPLIER, SAFARI_AREAS, safariAreaById, rollSafariPokemon, safariCatchChance, safariFleeChance, applySafariAction, tickSafariEffects, safariThrowsBall, safariFlees } from './minigames/safari.js'
 export { QUIZ_COST, QUIZ_QUESTIONS, QUIZ_SECONDS, QUIZ_LIVES, QUIZ_OPTIONS, generateQuizQuestion, quizPrize } from './minigames/academy-quiz.js'

@@ -903,6 +903,8 @@ type GameState = {
   minigameRecords: Record<string, { best: number; completed: boolean }>
   /** Route key -> the date (YYYY-MM-DD) its Dowsing Machine was last swept. */
   dowsingSearches: Record<string, string>
+  /** Route key -> the date (YYYY-MM-DD) its hide-and-seek spot was last found. */
+  hideAndSeekSearches: Record<string, string>
   /** Cleared rotating Gigantamax raid events, keyed by event id (see raid-events). */
   raidEventRecords: Record<string, { cleared: boolean; clears: number }>
   /** Best activity hit quality per route, for route mastery (see game/route-mastery.js). */

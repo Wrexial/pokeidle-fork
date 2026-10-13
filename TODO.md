@@ -72,6 +72,31 @@ types and services, so what is left here is **art**:
       forest/desert/swamp/volcano/tundra art would let `routeBackground` stop
       tinting a handful of images.
 
+## Wonder Card pacing (follow-up)
+
+The rotating Wonder Cards (Mystery Gifts) are gated on **real-life weeks**: a new
+distribution opens every `MYSTERY_GIFT_PERIOD_DAYS` (7) from `MYSTERY_GIFT_EPOCH`,
+so the schedule advances whether or not you play. Base the rotation on **total
+battles won** instead, which the save already tracks (`state.wildBattlesWon +
+state.trainerBattlesWon`; see `totalBattles` in `src/data/achievements.js` and the
+Records panel). Then an idle player unlocks the next card by playing, not by
+waiting for the calendar.
+
+- [ ] Give each rotation gift a battle threshold (e.g. every 250 total battles
+      opens the next card) and replace `mysteryGiftWeek` / `MYSTERY_GIFT_EPOCH` /
+      `MYSTERY_GIFT_PERIOD_DAYS` in `src/game/gifts.js` with a battle-progress
+      check driven by `GameState`. `mysteryGiftUnlocked`, `featuredMysteryGift`,
+      `nextMysteryGift` and `mysteryGiftStatus` all currently take a `dateKey`.
+- [ ] Update `src/components/mystery-gift-modal.js`: the `Opens <date>` copy and
+      "This Week's Wonder Card" / "Next distribution: … on <date>" labels become
+      a battle count ("Next card at 1,250 battles").
+- [ ] Keep the offline redeem-code gifts unchanged (they are not part of the
+      rotation), and update `tests/mystery-gift.test.mjs`.
+- [ ] No save-shape change: the counters already exist, so no `SAVE_VERSION`
+      bump or `LEGACY_SAVE_KEYS` entry.
+
+---
+
 ## Useful references when picking these up
 
 - **Data-pipeline template:** `tools/fetch-breeding-data.cjs` — cached PokéAPI

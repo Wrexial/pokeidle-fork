@@ -9,9 +9,8 @@ const { getBallModifier } = await import('../src/game/catching.js')
 const { APRICORN_IDS, autoCatchBallOrder, ballOrder, consumableItems, pokeBalls } =
   await import('../src/data/items.js')
 const { gameReducer, initialGameState } = await import('../src/game/reducer.js')
-const { KURT_CRAFT_BATTLES, queueKurtCraft, readyKurtCrafts, tickKurtCrafts } = await import(
-  '../src/game/kurt.js'
-)
+const { KURT_CRAFT_BATTLES, queueKurtCraft, queueKurtCrafts, readyKurtCrafts, tickKurtCrafts } =
+  await import('../src/game/kurt.js')
 const { GARDEN_BERRIES, isPlantableBerry } = await import('../src/game/garden.js')
 const { repairSave, serializeSave } = await import('../src/game/save.js')
 
@@ -94,6 +93,48 @@ test('Kurt queues an Apricorn, carves it over a few wins, then hands it over', (
       ballId = /** @type {string} */ (consumableItems[apricornId].kurtBall)
     assert.equal(one.kurtCrafts[0].ballId, ballId, `${apricornId} -> ${ballId}`)
   }
+})
+
+test('Kurt can take a whole batch of the same Apricorn at once', () => {
+  const base = { ...initialGameState, inventory: { apricornRed: 3 } },
+    batched = gameReducer(base, {
+      type: 'CRAFT_APRICORN_BALL',
+      payload: { apricornId: 'apricornRed', quantity: 3 },
+    })
+  assert.equal(batched.inventory.apricornRed, 0, 'all three Apricorns are consumed')
+  assert.equal(batched.kurtCrafts.length, 3, 'three crafts are queued')
+  assert.ok(batched.kurtCrafts.every((craft) => craft.ballId === 'levelball'))
+  assert.equal(batched.notifications.length, 1, 'one notification covers the batch')
+
+  // The batch is clamped to what the player owns.
+  const clamped = gameReducer(
+    { ...initialGameState, inventory: { apricornRed: 2 } },
+    { type: 'CRAFT_APRICORN_BALL', payload: { apricornId: 'apricornRed', quantity: 5 } }
+  )
+  assert.equal(clamped.inventory.apricornRed, 0)
+  assert.equal(clamped.kurtCrafts.length, 2)
+
+  // A batch of zero is a no-op; a missing quantity defaults to one.
+  assert.equal(
+    gameReducer(base, {
+      type: 'CRAFT_APRICORN_BALL',
+      payload: { apricornId: 'apricornRed', quantity: 0 },
+    }),
+    base
+  )
+  const single = gameReducer(
+    { ...initialGameState, inventory: { apricornBlue: 1 } },
+    { type: 'CRAFT_APRICORN_BALL', payload: { apricornId: 'apricornBlue' } }
+  )
+  assert.equal(single.kurtCrafts.length, 1)
+
+  // The helper builds the whole stack and rejects non-Apricorns.
+  assert.equal(queueKurtCrafts(undefined, 'nope', 4).length, 0)
+  assert.equal(
+    queueKurtCrafts(undefined, 'apricornRed', 4).length,
+    4,
+    'four matching crafts are queued'
+  )
 })
 
 test('the kurt craft queue helpers tick and report readiness', () => {

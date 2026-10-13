@@ -13,19 +13,36 @@ export const KURT_CRAFT_BATTLES = 10
  */
 
 /**
- * Add an Apricorn to Kurt's queue. Returns the same array when the item isn't
- * an Apricorn, so a caller can cheaply skip a state update.
+ * Add a stack of the same Apricorn to Kurt's queue. Each Apricorn becomes its
+ * own craft, all started at the same time. Clamps the count to a whole number
+ * and returns the same array when there is nothing to queue, so a caller can
+ * cheaply skip a state update.
+ * @param {KurtCraft[] | undefined} crafts
+ * @param {string} apricornId
+ * @param {number} [quantity]
+ * @returns {KurtCraft[]}
+ */
+export function queueKurtCrafts(crafts, apricornId, quantity = 1) {
+  const apricorn = consumableItems[apricornId],
+    count = Math.max(0, Math.floor(quantity))
+  if (!apricorn?.kurtBall || count <= 0) return crafts ?? []
+  const queued = Array.from({ length: count }, () => ({
+    apricornId,
+    ballId: /** @type {string} */ (apricorn.kurtBall),
+    battlesRemaining: KURT_CRAFT_BATTLES,
+  }))
+  return [...(crafts ?? []), ...queued]
+}
+
+/**
+ * Add a single Apricorn to Kurt's queue. Returns the same array when the item
+ * isn't an Apricorn, so a caller can cheaply skip a state update.
  * @param {KurtCraft[] | undefined} crafts
  * @param {string} apricornId
  * @returns {KurtCraft[]}
  */
 export function queueKurtCraft(crafts, apricornId) {
-  const apricorn = consumableItems[apricornId]
-  if (!apricorn?.kurtBall) return crafts ?? []
-  return [
-    ...(crafts ?? []),
-    { apricornId, ballId: apricorn.kurtBall, battlesRemaining: KURT_CRAFT_BATTLES },
-  ]
+  return queueKurtCrafts(crafts, apricornId, 1)
 }
 
 /**

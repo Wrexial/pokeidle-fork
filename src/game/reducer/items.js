@@ -11,7 +11,7 @@ import { isPlantableBerry } from '../garden.js'
 import { hasBattleModifier } from '../ladder-modifiers.js'
 import { MAX_FRIENDSHIP, IV_STAT_ORDER, IV_STAT_LABELS, abilityDisplayName, applyMoveLearning, calculatePokemonStats, calculateRequiredExperience, createEmptyEvs, gainFriendship, getLevelUpResults, totalEvs } from '../pokemon.js'
 import { getItemInfo, getItemSellPrice, isActiveEffectItem } from '../progression.js'
-import { queueKurtCraft, readyKurtCrafts } from '../kurt.js'
+import { queueKurtCrafts, readyKurtCrafts } from '../kurt.js'
 import { withNotification } from '../reducer-helpers.js'
 import { creditResearchFeed } from '../research.js'
 import { markCaught } from './collection.js'
@@ -731,8 +731,10 @@ export function setAlwaysCatchShinies(state, action) {
 }
 
 /**
- * Handle the `CRAFT_APRICORN_BALL` action: hand Kurt (Azalea Town) an Apricorn,
- * which he carves over a few wild wins (see `collectKurtBalls`).
+ * Handle the `CRAFT_APRICORN_BALL` action: hand Kurt (Azalea Town) up to
+ * `payload.quantity` matching Apricorns, which he carves over a few wild wins
+ * each (see `collectKurtBalls`). The batch is clamped to what the player owns
+ * and produces a single notification.
  * @param {GameState} state
  * @param {GameAction} action
  * @returns {GameState}
@@ -741,23 +743,29 @@ export function craftApricornBall(state, action) {
   const apricornId = action.payload?.apricornId,
     apricorn = consumableItems[apricornId],
     ballId = apricorn?.kurtBall,
-    owned = state.inventory[apricornId] ?? 0
-  if (!ballId || !pokeBalls[ballId] || owned <= 0) return state
+    owned = state.inventory[apricornId] ?? 0,
+    requested = Math.max(0, Math.floor(action.payload?.quantity ?? 1)),
+    quantity = Math.min(requested, owned)
+  if (!ballId || !pokeBalls[ballId] || quantity <= 0) return state
+  const ballName = pokeBalls[ballId].name,
+    label = quantity > 1 ? `${quantity} ${ballName}s` : `your ${ballName}`
   return withNotification(
     {
       ...state,
       inventory: {
         ...state.inventory,
-        [apricornId]: owned - 1,
+        [apricornId]: owned - quantity,
       },
-      kurtCrafts: queueKurtCraft(state.kurtCrafts, apricornId),
+      kurtCrafts: queueKurtCrafts(state.kurtCrafts, apricornId, quantity),
       battleLog: [
         ...state.battleLog,
-        `Kurt took the ${apricorn.name} \u2014 come back after a few battles.`,
+        `Kurt took ${quantity > 1 ? `${quantity} ` : 'the '}${apricorn.name}${
+          quantity > 1 ? 's' : ''
+        } \u2014 come back after a few battles.`,
       ].slice(-50),
     },
     {
-      message: `Kurt started on your ${pokeBalls[ballId].name}.`,
+      message: `Kurt started on ${label}.`,
       tone: 'info',
       icon: '\u{1f528}',
       dedupeKey: `kurtcraft:${apricornId}:${Date.now()}`,

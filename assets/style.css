@@ -17967,6 +17967,39 @@ img {
 }
 
 /* Kurt's Apricorn Ball workshop (Azalea Town). */
+.kurt-qty {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 4px 0
+}
+
+.kurt-qty-label {
+    font-size: 8px;
+    color: #3a2818
+}
+
+.kurt-qty-btn {
+    padding: 2px 7px;
+    font-size: 8px;
+    font-family: inherit;
+    background: #d8c49c;
+    color: #3a2818;
+    border: 1px solid #8a7040;
+    border-radius: 2px;
+    cursor: pointer
+}
+
+.kurt-qty-btn:hover {
+    background: #e2d0ac
+}
+
+.kurt-qty-btn.active {
+    background: #8a7040;
+    color: #f4e8cc;
+    font-weight: 700
+}
+
 .kurt-list {
     display: flex;
     flex-direction: column;

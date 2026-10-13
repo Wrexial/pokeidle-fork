@@ -61,15 +61,6 @@ Reference images kept for future checks:
 
 ---
 
-## Kurt's Apricorn queue (follow-up)
-
-Kurt (`src/game/kurt.js`, `src/components/kurt-panel.js`) queues one Apricorn
-per `CRAFT` click, so batching the same ball means tapping the button once per
-Apricorn. Let the player queue several of the same ball at once — a quantity
-selector or a "craft all owned" action — deducting the matching Apricorns and
-sending one notification. The queue already holds multiple crafts, so this is a
-UI/affordance change, not a state-shape change.
-
 ## Professor's Story region gating (follow-up)
 
 The Professor's Story chapters unlock strictly in sequence: in

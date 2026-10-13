@@ -1,6 +1,7 @@
 // Kurt's Apricorn Ball workshop, hosted in Azalea Town. Hand him an Apricorn
 // and he carves it into the matching ball. Apricorns turn up on Johto routes.
 
+import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { APRICORN_IDS, consumableItems, pokeBalls } from '../data/items.js'
 import { useGame } from '../game/context.js'
@@ -12,7 +13,8 @@ import { ItemIcon } from './item-icon.js'
 export const KURT_LOCATION = 'johto-azalea-town'
 
 export function KurtPanel() {
-  const { state, dispatch } = useGame()
+  const { state, dispatch } = useGame(),
+    [craftQty, setCraftQty] = React.useState(/** @type {number | 'all'} */ (1))
   if (state.currentLocation !== KURT_LOCATION) return null
   const crafts = state.kurtCrafts ?? [],
     ready = readyKurtCrafts(crafts)
@@ -72,12 +74,33 @@ export function KurtPanel() {
           ],
         }),
       jsx('div', {
+        className: 'kurt-qty',
+        children: [
+          jsx('span', {
+            className: 'kurt-qty-label',
+            children: 'Batch:',
+          }),
+          /** @type {(number | 'all')[]} */ ([1, 5, 'all']).map((option) =>
+            jsx(
+              'button',
+              {
+                className: `kurt-qty-btn${craftQty === option ? ' active' : ''}`,
+                onClick: () => setCraftQty(option),
+                children: option === 'all' ? 'All' : option,
+              },
+              String(option)
+            )
+          ),
+        ],
+      }),
+      jsx('div', {
         className: 'kurt-list',
         children: APRICORN_IDS.map((apricornId) => {
           const apricorn = consumableItems[apricornId],
             ballId = /** @type {string} */ (apricorn.kurtBall),
             ball = pokeBalls[ballId],
-            owned = state.inventory[apricornId] ?? 0
+            owned = state.inventory[apricornId] ?? 0,
+            quantity = craftQty === 'all' ? owned : Math.min(craftQty, owned)
           return jsxs(
             'div',
             {
@@ -99,9 +122,14 @@ export function KurtPanel() {
                   onClick: () =>
                     dispatch({
                       type: 'CRAFT_APRICORN_BALL',
-                      payload: { apricornId },
+                      payload: { apricornId, quantity },
                     }),
-                  children: 'CRAFT',
+                  children:
+                    craftQty === 'all' && owned > 0
+                      ? `CRAFT ALL (${owned})`
+                      : quantity > 1
+                        ? `CRAFT \u00d7${quantity}`
+                        : 'CRAFT',
                 }),
               ],
             },

@@ -32,8 +32,7 @@ _(empty — every shipped system's follow-ups are done.)_
 A backlog of candidate features gathered from a brainstorm. Each has a stable
 number and full detail further down. Promote into the tiers above once scoped.
 
-- **Strong candidates:** #78 Seasons · #83 Trainer Card, titles & avatar ·
-  #88 Villain-team questlines (each fills a real gap for the effort).
+- **Strong candidates:** #78 Seasons · #83 Trainer Card, titles & avatar.
 - **Big but wanted:** #86 Pokemon Bank.
 - **Medium:** #85 Form dex · #89 Mystery Gift ·
   #90 Professor's story · #91 Auto-battle policy · #92 Raid events ·
@@ -50,18 +49,6 @@ order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
 player-facing value (★ = nice to have, ★★★★★ = core missing feature).
 
 **Narrative & quests**
-
-## 88. Villain-team questlines
-
-The rival exists but no antagonist organisation does. Grunt hideouts gated
-behind badges, an admin, a boss with a legendary. The biggest content gap.
-
-- [ ] One org per region (Rocket / Aqua / Magma / Galactic / Plasma / Flare /
-      Skull / Yell / Star) with a hideout location and a short arc.
-- [ ] Reuse the trainer/gym/raid plumbing for grunts, admins and the boss.
-- [ ] A post-arc reward (a legendary quest, a Master Ball, a key item).
-
-Effort: **large**. Gain: ★★★★★.
 
 ## 89. Mystery Gift / distributions
 

@@ -859,8 +859,8 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
                   icon: '\u{1f50d}',
                   title: 'Dowsing Machine',
                   hint: dowsingReady
-                    ? `Sweep ${location.name} for hidden items \u2014 probe tiles and follow the hot/cold readings. Each sweep gives ${DOWSING_PROBES} probes and every route refills daily.`
-                    : `You have already swept ${location.name} today \u2014 the hidden items return tomorrow.`,
+                    ? `Sweep ${location.name} for lost things \u2014 probe tiles and follow the aura readings to the nearest one. Each sweep gives ${DOWSING_PROBES} probes and every route scatters new finds daily.`
+                    : `You have already swept ${location.name} today \u2014 the auras settle and reform tomorrow.`,
                   steps: DOWSING_TUTORIAL,
                   actionLabel: dowsingReady ? 'START SWEEP' : 'ALREADY SWEPT TODAY',
                   disabled: minigameBusy || !dowsingReady,
@@ -871,8 +871,8 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
                   icon: '\u{1f648}',
                   title: 'Hide-and-Seek',
                   hint: hideAndSeekReady
-                    ? `A rare Pokemon is hiding in ${location.name} \u2014 solve the glyph to flush it out, then battle it. Each route hides one spot a day.`
-                    : `You already found ${location.name}\u2019s hidden spot today \u2014 another turns up tomorrow.`,
+                    ? `A rare Pokemon is hiding in ${location.name} \u2014 follow the footprint trail through the grass to flush it out, then battle it. Each route hides one spot a day.`
+                    : `You already found ${location.name}\u2019s hidden spot today \u2014 fresh tracks appear tomorrow.`,
                   steps: HIDE_AND_SEEK_TUTORIAL,
                   actionLabel: hideAndSeekReady ? 'SEARCH THE SPOT' : 'ALREADY FOUND TODAY',
                   disabled: minigameBusy || !hideAndSeekReady,

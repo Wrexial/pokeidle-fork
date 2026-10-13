@@ -1,20 +1,75 @@
 // Hide-and-seek spots. Unlike the fixed POIs in registry.js, any wild route can
-// hide a skittish rare Pokemon behind a glyph: solve the picross reveal to
-// flush it out, then battle it. The spot is seeded per route + calendar day
-// (like the Dowsing Machine) and each route can only be searched once a day.
+// hide a skittish rare Pokemon behind a trail of rustled grass: follow the
+// footprint counts to flush it out, then battle it. The spot is seeded per
+// route + calendar day (like the Dowsing Machine) and each route can only be
+// searched once a day. The tracking grid is its own thing, not a Unown glyph.
 
 import { encounterData, pokemonSpecies } from '../../data/gameData.js'
 import { todayKey } from '../../data/daily-events.js'
 import { hashString, mulberry32 } from '../rng.js'
-import { createPicrossPuzzle } from './unown-picross.js'
+import { picrossClues } from './unown-picross.js'
 
 /** Shiny-odds multiplier for the Pokemon a spot flushes out. */
 export const HIDE_AND_SEEK_SHINY_MULTIPLIER = 2
 
+/** The tracking grid is size x size. */
+export const HIDE_AND_SEEK_SIZE = 5
+
+/**
+ * The 5x5 trail patterns a spot can leave: 1 marks a patch of rustled grass.
+ * These are footprint trails and paw tracks rather than Unown glyphs, so the
+ * reveal reads as tracking a Pokemon and not as a second Picross.
+ * @type {number[][][]}
+ */
+export const HIDE_AND_SEEK_TRACKS = [
+  [
+    [1, 0, 1, 0, 1],
+    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
+    [0, 1, 1, 1, 0],
+    [0, 0, 1, 0, 0],
+  ],
+  [
+    [1, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0],
+    [0, 1, 1, 1, 0],
+    [0, 0, 0, 1, 0],
+    [0, 0, 0, 1, 1],
+  ],
+  [
+    [1, 0, 0, 0, 1],
+    [0, 1, 0, 1, 0],
+    [0, 0, 1, 0, 0],
+    [0, 1, 0, 1, 0],
+    [1, 0, 0, 0, 1],
+  ],
+  [
+    [1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1],
+    [0, 0, 1, 0, 0],
+    [1, 1, 0, 1, 1],
+    [1, 1, 0, 1, 1],
+  ],
+  [
+    [1, 1, 1, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 1, 1, 1],
+    [0, 0, 0, 1, 0],
+    [1, 1, 1, 1, 0],
+  ],
+  [
+    [1, 1, 0, 0, 1],
+    [1, 0, 0, 1, 0],
+    [0, 0, 1, 0, 0],
+    [0, 1, 0, 0, 0],
+    [1, 0, 0, 1, 1],
+  ],
+]
+
 /** Short "how to play" steps, shown on the launch card. */
 export const HIDE_AND_SEEK_TUTORIAL = [
-  'Read the row and column clues and fill the cells that match the hidden glyph, then check your work.',
-  'Solving the glyph flushes out a rare Pokemon hiding on the route.',
+  'Read the trail counts along each row and column and mark every patch of rustled grass, then follow the trail.',
+  'Completing the trail flushes out a rare Pokemon hiding on the route.',
   'Each route hides one spot a day \u2014 battle the Pokemon or let it go.',
 ]
 
@@ -66,14 +121,22 @@ export function hideAndSeekSpot(routeKey, dateKey = todayKey()) {
 }
 
 /**
- * The reveal puzzle for a route + day, seeded so a reload shows the same glyph.
- * Reuses the Unown Picross nonogram generator.
+ * The trail puzzle for a route + day, seeded so a reload shows the same
+ * tracks. Uses the same run-length clue maths as the Unown nonogram, but on
+ * the hide-and-seek trail patterns.
  * @param {string} routeKey
  * @param {string} [dateKey]
- * @returns {ReturnType<typeof createPicrossPuzzle>}
+ * @returns {{ solution: number[][], rowClues: number[][], colClues: number[][] }}
  */
 export function hideAndSeekPuzzle(routeKey, dateKey = todayKey()) {
-  return createPicrossPuzzle(mulberry32(hashString(`spot@${routeKey}@${dateKey}`)))
+  const random = mulberry32(hashString(`trail@${routeKey}@${dateKey}`)),
+    solution = HIDE_AND_SEEK_TRACKS[Math.floor(random() * HIDE_AND_SEEK_TRACKS.length)],
+    size = solution.length,
+    rowClues = solution.map((row) => picrossClues(row)),
+    colClues = Array.from({ length: size }, (_, column) =>
+      picrossClues(solution.map((row) => row[column]))
+    )
+  return { solution: solution.map((row) => [...row]), rowClues, colClues }
 }
 
 /**

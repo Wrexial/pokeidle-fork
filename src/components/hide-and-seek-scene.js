@@ -1,9 +1,9 @@
-// Hide-and-seek spots: any wild route can hide a rare Pokemon behind a glyph.
-// Played as a full-stage scene while the reducer is in the `hideAndSeek` phase,
-// reusing the Unown Picross nonogram for the reveal, then offering the flushed
-// out Pokemon as a manual encounter (like the Picnic). The spot is day-seeded
-// (see game/minigames/hide-and-seek.js) and the route is marked searched when
-// the scene opens, so a reload can't reroll the find.
+// Hide-and-seek spots: any wild route can hide a rare Pokemon behind a trail
+// of rustled grass. Played as a full-stage scene while the reducer is in the
+// `hideAndSeek` phase, following the footprint trail to flush it out, then
+// offering the Pokemon as a manual encounter (like the Picnic). The spot is
+// day-seeded (see game/minigames/hide-and-seek.js) and the route is marked
+// searched when the scene opens, so a reload cannot reroll the find.
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
@@ -13,7 +13,7 @@ import { playSfx } from '../game/audio.js'
 import { createBattlePokemon } from '../game/combat.js'
 import {
   HIDE_AND_SEEK_SHINY_MULTIPLIER,
-  UNOWN_PICROSS_SIZE,
+  HIDE_AND_SEEK_SIZE,
   hideAndSeekPuzzle,
   hideAndSeekSpot,
   picrossMatches,
@@ -28,7 +28,7 @@ export function HideAndSeekScene() {
     [spot] = React.useState(() => hideAndSeekSpot(routeKey)),
     [puzzle] = React.useState(() => hideAndSeekPuzzle(routeKey)),
     [cells, setCells] = React.useState(() =>
-      Array.from({ length: UNOWN_PICROSS_SIZE }, () => Array(UNOWN_PICROSS_SIZE).fill(0))
+      Array.from({ length: HIDE_AND_SEEK_SIZE }, () => Array(HIDE_AND_SEEK_SIZE).fill(0))
     ),
     [wrongFills, setWrongFills] = React.useState(0),
     [pending, setPending] = React.useState(
@@ -100,7 +100,7 @@ export function HideAndSeekScene() {
     spawnSpecies = pending ? pokemonSpecies[pending.speciesKey] : null
 
   return jsxs('div', {
-    className: 'minigame-scene unown-picross-scene hide-and-seek-scene',
+    className: 'minigame-scene hide-and-seek-scene',
     children: [
       jsx('div', { className: 'minigame-scene-bg' }),
       jsxs('div', {
@@ -111,7 +111,7 @@ export function HideAndSeekScene() {
             className: 'minigame-scene-tally',
             children: pending
               ? `${routeName} \u00b7 spot found`
-              : `${routeName}${wrongFills > 0 ? ` \u00b7 ${wrongFills} wrong` : ''}`,
+              : `${routeName}${wrongFills > 0 ? ` \u00b7 ${wrongFills} off-trail` : ''}`,
           }),
         ],
       }),
@@ -160,36 +160,36 @@ export function HideAndSeekScene() {
                     children: [
                       `Shiny odds \u00d7${HIDE_AND_SEEK_SHINY_MULTIPLIER}`,
                       ' \u00b7 ',
-                      'cornered!',
+                      'tracked down!',
                     ],
                   }),
                 ],
               })
             : jsxs('div', {
-                className: 'picross-play',
+                className: 'track-play',
                 children: [
                   jsxs('div', {
-                    className: 'picross-grid',
+                    className: 'track-grid',
                     children: [
-                      jsx('div', { className: 'picross-corner' }),
+                      jsx('div', { className: 'track-corner', children: '\u{1f43e}' }),
                       ...puzzle.colClues.map((clue, column) =>
                         jsx(
                           'div',
-                          { className: 'picross-clue col', children: clue.join(' ') },
+                          { className: 'track-clue col', children: clue.join(' ') },
                           `col-${column}`
                         )
                       ),
                       ...puzzle.rowClues.flatMap((clue, row) => [
                         jsx(
                           'div',
-                          { className: 'picross-clue row', children: clue.join(' ') },
+                          { className: 'track-clue row', children: clue.join(' ') },
                           `row-${row}`
                         ),
-                        ...Array.from({ length: UNOWN_PICROSS_SIZE }, (_, column) =>
+                        ...Array.from({ length: HIDE_AND_SEEK_SIZE }, (_, column) =>
                           jsx(
                             'button',
                             {
-                              className: `picross-cell${cells[row][column] ? ' on' : ''}`,
+                              className: `track-cell${cells[row][column] ? ' on' : ''}`,
                               onClick: () => toggle(row, column),
                               'aria-label': `Row ${row + 1} column ${column + 1}`,
                             },
@@ -200,13 +200,13 @@ export function HideAndSeekScene() {
                     ],
                   }),
                   jsx('button', {
-                    className: 'move-panel-btn confirm picross-check-btn',
+                    className: 'move-panel-btn confirm track-follow-btn',
                     onClick: check,
-                    children: 'CHECK',
+                    children: 'FOLLOW TRAIL',
                   }),
                   jsx('div', {
-                    className: 'picross-hint',
-                    children: 'Numbers give the runs of filled cells in each row and column.',
+                    className: 'track-hint',
+                    children: 'Each number counts a run of rustled grass along its row or column.',
                   }),
                 ],
               }),

@@ -1,17 +1,17 @@
 // Dowsing Machine. Split from the other minigames because, unlike the fixed
 // POIs in registry.js, it works on any wild route: every route hides a small,
-// day-seeded set of items that a hot/cold grid probe can uncover. The grid and
-// reward plumbing mirror game/minigames/mining.js, but the set is deterministic
+// day-seeded set of lost things, and a probe grid reads the aura they give off
+// (a lost-and-found sweep, not an Underground dig). The set is deterministic
 // for a route + calendar day and each route can only be swept once a day.
 
 import { todayKey } from '../../data/daily-events.js'
 import { hashString, mulberry32 } from '../rng.js'
 import { rewardItemName } from './mining.js'
 
-/** Columns in the dowsing grid (the mining grid is 6 wide too). */
+/** Columns in the dowsing scanner grid. */
 export const DOWSING_COLS = 6
 
-/** Rows in the dowsing grid. */
+/** Rows in the dowsing scanner grid. */
 export const DOWSING_ROWS = 5
 
 /** Tiles in the dowsing grid. */
@@ -25,15 +25,16 @@ export const DOWSING_PROBES = 10
 
 /** Short "how to play" steps, shown on the launch card. */
 export const DOWSING_TUTORIAL = [
-  `Probe a tile to read how close the nearest hidden item is \u2014 Blazing is right next door, Cold is far away.`,
-  `Every route hides ${DOWSING_ITEMS} items a day and each sweep gives ${DOWSING_PROBES} probes.`,
-  'Found items are banked straight away, and the route refills tomorrow.',
+  `Probe a tile to read the aura of the nearest lost thing \u2014 Surging when it is right next door, Still when nothing is close.`,
+  `Every route hides ${DOWSING_ITEMS} lost things a day and each sweep gives ${DOWSING_PROBES} probes.`,
+  'Whatever you recover is banked on the spot, and the route scatters new finds tomorrow.',
 ]
 
 /**
- * Weighted reward table for the hidden items. Modest on purpose: the Dowsing
- * Machine is a free daily route activity, so it leans on sellables, supplies
- * and berries with only a rare evolution stone or candy.
+ * Weighted reward table for the lost things a sweep turns up. Modest on
+ * purpose: the Dowsing Machine is a free daily route activity, so it leans on
+ * the kind of things a trainer drops on the road (sellables, supplies and
+ * berries) with only a rare evolution stone or candy.
  * @type {{ itemId: string, weight: number, min: number, max: number }[]}
  */
 const DOWSING_REWARD_TABLE = [
@@ -64,9 +65,10 @@ const DOWSING_REWARD_TABLE = [
 const TOTAL_WEIGHT = DOWSING_REWARD_TABLE.reduce((sum, entry) => sum + entry.weight, 0)
 
 /**
- * The seeded hidden-item set for a route on a date. The tile positions are a
- * shuffled slice of the grid and the rewards are rolled from the table with the
- * same PRNG, so the whole sweep is reproducible. Cached per route + day.
+ * The seeded lost-and-found set for a route on a date. The tile positions are
+ * a shuffled slice of the scanner grid and the rewards are rolled from the
+ * table with the same PRNG, so the whole sweep is reproducible. Cached per
+ * route + day.
  * @type {Map<string, { index: number, itemId: string, quantity: number }[]>}
  */
 const gridCache = new Map()
@@ -119,22 +121,23 @@ export function dowsingDistance(from, to) {
 }
 
 /**
- * The heat reading a probe gets on an empty tile: how close the nearest hidden
- * item is. Distance 0 is the item itself (handled before this is called).
+ * The aura reading a probe gets on an empty tile: how strongly the nearest
+ * lost thing resonates. Distance 0 is the find itself (handled before this is
+ * called).
  * @param {number} distance
  * @returns {{ key: string, label: string, icon: string }}
  */
 export function dowsingHeat(distance) {
-  if (distance <= 1) return { key: 'blazing', label: 'Blazing', icon: '\u{1f525}' }
-  if (distance === 2) return { key: 'hot', label: 'Hot', icon: '\u2668\ufe0f' }
-  if (distance === 3) return { key: 'warm', label: 'Warm', icon: '\u2600\ufe0f' }
-  if (distance === 4) return { key: 'cool', label: 'Cool', icon: '\u{1f343}' }
-  return { key: 'cold', label: 'Cold', icon: '\u2744\ufe0f' }
+  if (distance <= 1) return { key: 'surging', label: 'Surging', icon: '\u{1f31f}' }
+  if (distance === 2) return { key: 'radiating', label: 'Radiating', icon: '\u2728' }
+  if (distance === 3) return { key: 'humming', label: 'Humming', icon: '\u{1f4a0}' }
+  if (distance === 4) return { key: 'faint', label: 'Faint', icon: '\u{1f4ab}' }
+  return { key: 'still', label: 'Still', icon: '\u{1f4a4}' }
 }
 
 /**
- * The heat reading for a probed tile: the nearest hidden item in the route's
- * day set, or `null` when the tile itself holds one.
+ * The aura reading for a probed tile: the nearest find in the route's day set,
+ * or `null` when the tile itself holds one.
  * @param {{ index: number }[]} finds
  * @param {number} tileIndex
  * @returns {{ key: string, label: string, icon: string } | null}

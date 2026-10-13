@@ -56,20 +56,20 @@ test('different days and routes can roll different sets', () => {
   assert.notEqual(dayOne, otherRoute)
 })
 
-test('distance and heat read as hot and cold', () => {
+test('distance and aura readings run from surging to still', () => {
   assert.equal(dowsingDistance(0, 0), 0)
   assert.equal(dowsingDistance(0, 1), 1)
   // Same column, one row down on a 6-wide grid.
   assert.equal(dowsingDistance(0, 6), 1)
-  assert.equal(dowsingHeat(0).key, 'blazing')
-  assert.equal(dowsingHeat(1).key, 'blazing')
-  assert.equal(dowsingHeat(2).key, 'hot')
-  assert.equal(dowsingHeat(3).key, 'warm')
-  assert.equal(dowsingHeat(4).key, 'cool')
-  assert.equal(dowsingHeat(9).key, 'cold')
+  assert.equal(dowsingHeat(0).key, 'surging')
+  assert.equal(dowsingHeat(1).key, 'surging')
+  assert.equal(dowsingHeat(2).key, 'radiating')
+  assert.equal(dowsingHeat(3).key, 'humming')
+  assert.equal(dowsingHeat(4).key, 'faint')
+  assert.equal(dowsingHeat(9).key, 'still')
 })
 
-test('a probe on an item reads null, an empty tile reads heat', () => {
+test('a probe on a find reads null, an empty tile reads aura', () => {
   const finds = dowsingFinds('route1', '2024-06-01'),
     itemTile = finds[0].index
   assert.equal(dowsingReading(finds, itemTile), null)

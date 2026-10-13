@@ -1,8 +1,9 @@
-// Dowsing Machine: a hot/cold grid sweep for a route's daily hidden items,
-// played as a full-stage scene while the reducer is in the `dowsing` phase.
-// The hidden set is day-seeded (see game/minigames/dowsing.js) and the route is
-// marked swept when the scene opens, so the found rewards are banked the moment
-// they are uncovered. Reuses the Underground mining grid styling.
+// Dowsing Machine: a lost-and-found aura sweep for a route's daily hidden
+// items, played as a full-stage scene while the reducer is in the `dowsing`
+// phase. The hidden set is day-seeded (see game/minigames/dowsing.js) and the
+// route is marked swept when the scene opens, so recovered rewards are banked
+// the moment their aura is pinned down. The scanner grid is dowsing's own, not
+// the Underground's dig grid.
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { mapData } from '../data/gameData.js'
@@ -60,7 +61,7 @@ export function DowsingScene() {
   const routeName = mapData[state.currentLocation]?.name ?? 'the route'
 
   return jsxs('div', {
-    className: 'minigame-scene mining-scene dowsing-scene',
+    className: 'minigame-scene dowsing-scene',
     children: [
       jsx('div', { className: 'minigame-scene-bg' }),
       jsxs('div', {
@@ -82,13 +83,13 @@ export function DowsingScene() {
         className: 'minigame-scene-body',
         children: showReward
           ? [jsx(MinigameRewardScreen, {
-              prize: { items: found, label: `${routeName} hidden items` },
+              prize: { items: found, label: `${routeName} lost-and-found` },
               onCollect: () => endSweep({ type: 'END_DOWSING' }),
               buttonLabel: 'FINISH',
             })]
           : [
           jsx('div', {
-            className: 'mining-grid dowsing-grid',
+            className: 'dowsing-grid',
             children: [...Array(DOWSING_TILES).keys()].map((index) => {
               const cell = probed[index],
                 isFound = !!cell?.found,
@@ -96,22 +97,22 @@ export function DowsingScene() {
               return jsxs(
                 'button',
                 {
-                  className: `mining-tile dowsing-tile${cell ? ' dug' : ''}${isFound ? ' reward' : ''}${heat ? ` heat-${heat.key}` : ''}`,
+                  className: `dowsing-tile${cell ? ' swept' : ''}${isFound ? ' find' : ''}${heat ? ` aura-${heat.key}` : ''}`,
                   onClick: () => probe(index),
                   disabled: !!cell || finished,
                   title: cell
                     ? isFound
-                      ? 'Item found!'
+                      ? 'Lost item recovered!'
                       : heat?.label
                     : 'Probe this tile',
                   children: isFound
                     ? '\u2728'
                     : heat
                       ? jsxs('span', {
-                          className: 'dowsing-heat',
+                          className: 'dowsing-aura',
                           children: [
-                            jsx('span', { className: 'dowsing-heat-icon', children: heat.icon }),
-                            jsx('span', { className: 'dowsing-heat-label', children: heat.label }),
+                            jsx('span', { className: 'dowsing-aura-icon', children: heat.icon }),
+                            jsx('span', { className: 'dowsing-aura-label', children: heat.label }),
                           ],
                         })
                       : '?',
@@ -121,20 +122,20 @@ export function DowsingScene() {
             }),
           }),
           jsxs('div', {
-            className: 'mining-found',
+            className: 'dowsing-found',
             children: [
               jsx('span', {
-                className: 'mining-found-title',
-                children: 'Found',
+                className: 'dowsing-found-title',
+                children: 'Recovered',
               }),
               jsx('span', {
-                className: 'mining-found-list',
+                className: 'dowsing-found-list',
                 children:
                   found.length > 0
                     ? found
                         .map((entry) => `${dowsingRewardName(entry.itemId)} x${entry.quantity}`)
                         .join('  \u00b7  ')
-                    : 'Nothing yet \u2014 sweep warmer tiles.',
+                    : 'Nothing yet \u2014 follow a stronger aura.',
               }),
             ],
           }),

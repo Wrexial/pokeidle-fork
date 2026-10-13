@@ -100,7 +100,7 @@ export function startDowsing(state, action) {
     state,
     'dowsing',
     0,
-    'You swept the route with the Dowsing Machine.'
+    'You switched on the Dowsing Machine and followed the auras.'
   )
   return base === state
     ? state
@@ -129,7 +129,7 @@ export function findDowsing(state, action) {
   return {
     ...state,
     inventory,
-    battleLog: [...state.battleLog, 'The Dowsing Machine found something!'].slice(-50),
+    battleLog: [...state.battleLog, 'The Dowsing Machine recovered a lost thing!'].slice(-50),
   }
 }
 
@@ -164,7 +164,7 @@ export function startHideAndSeek(state, action) {
     state,
     'hideAndSeek',
     0,
-    'You looked for a Pokemon hiding on the route.'
+    'You read the fresh tracks on the route.'
   )
   return base === state
     ? state

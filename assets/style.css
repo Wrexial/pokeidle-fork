@@ -10535,15 +10535,63 @@ img {
     border-color: #fff0b0
 }
 
+/* --- Dowsing Machine (route lost-and-found) ----------------------------- */
+.dowsing-scene {
+    background-image: url(/backgrounds/grassland.webp)
+}
+
 .dowsing-scene .dowsing-grid {
-    max-width: 460px
+    width: 100%;
+    max-width: 460px;
+    margin: 0;
+    padding: 8px;
+    background: radial-gradient(circle at 50% 40%,rgba(40,90,96,.55),rgba(10,24,30,.72) 70%);
+    border: 2px solid #3f8a86;
+    border-radius: 10px;
+    box-shadow: inset 0 0 22px rgba(120,240,230,.18)
+}
+
+.dowsing-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+    margin-bottom: 8px
 }
 
 .dowsing-tile {
-    font-size: 13px
+    aspect-ratio: 1;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #cdeeea;
+    background: linear-gradient(#17323a,#0c1f26);
+    border: 1px solid #2f6b6b;
+    border-radius: 4px;
+    padding: 1px;
+    cursor: pointer;
+    overflow: hidden
 }
 
-.dowsing-heat {
+.dowsing-tile:hover:not(:disabled) {
+    border-color: #7ff0e0;
+    box-shadow: 0 0 8px rgba(120,240,220,.55)
+}
+
+.dowsing-tile.swept {
+    color: #5d8a8a;
+    background: #0a181d;
+    border-color: #1d3d40;
+    cursor: default
+}
+
+.dowsing-tile.find {
+    color: #12240a;
+    background: linear-gradient(#c8ff9a,#6fce4a);
+    border-color: #eaffd0;
+    box-shadow: 0 0 10px rgba(150,255,120,.6)
+}
+
+.dowsing-aura {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10551,40 +10599,66 @@ img {
     line-height: 1
 }
 
-.dowsing-heat-icon {
+.dowsing-aura-icon {
     font-size: 15px;
     line-height: 1
 }
 
-.dowsing-heat-label {
+.dowsing-aura-label {
     font-size: 6px;
     text-transform: uppercase;
     letter-spacing: .5px
 }
 
-.mining-tile.dowsing-tile.heat-blazing {
-    background: linear-gradient(#e5484d,#9c1c1c);
-    border-color: #ffb4b0
+.dowsing-tile.aura-surging {
+    background: radial-gradient(circle,#fff6a0,#c98a10 70%);
+    border-color: #fff2a0;
+    color: #2a1c00
 }
 
-.mining-tile.dowsing-tile.heat-hot {
-    background: linear-gradient(#e08a3c,#a5521a);
-    border-color: #ffd0a0
+.dowsing-tile.aura-radiating {
+    background: radial-gradient(circle,#ffe084,#b06a10 75%);
+    border-color: #ffd98a;
+    color: #2a1a00
 }
 
-.mining-tile.dowsing-tile.heat-warm {
-    background: linear-gradient(#d8b84a,#9c7c1c);
-    border-color: #ffe8a0
+.dowsing-tile.aura-humming {
+    background: radial-gradient(circle,#a8f0d0,#1f7a68 75%);
+    border-color: #b8ffe8;
+    color: #062620
 }
 
-.mining-tile.dowsing-tile.heat-cool {
-    background: linear-gradient(#4aa0a0,#1c6c6c);
-    border-color: #a0e8e0
+.dowsing-tile.aura-faint {
+    background: radial-gradient(circle,#8fb6e8,#26456f 78%);
+    border-color: #c4dcff;
+    color: #061426
 }
 
-.mining-tile.dowsing-tile.heat-cold {
-    background: linear-gradient(#4a6ab0,#243c74);
-    border-color: #a0c0f0
+.dowsing-tile.aura-still {
+    background: radial-gradient(circle,#5a6f7a,#1a2630 80%);
+    border-color: #7f96a0;
+    color: #c6d6dc
+}
+
+.dowsing-found {
+    display: flex;
+    gap: 6px;
+    font-size: 8px;
+    color: var(--parchment);
+    margin-bottom: 8px
+}
+
+.dowsing-found-title {
+    font-weight: 700;
+    color: #8ff0d8
+}
+
+.dowsing-scene .dowsing-found {
+    width: 100%;
+    max-width: 460px;
+    min-height: 22px;
+    margin: 0;
+    justify-content: center
 }
 
 .mining-found {
@@ -16186,6 +16260,94 @@ img {
 
 .picross-hint,
 .picross-score-line {
+    color: #dbeaff;
+    font-size: 12px;
+    text-align: center
+}
+
+/* --- Hide-and-Seek (route footprint tracking) --------------------------- */
+.hide-and-seek-scene {
+    background-image: url(/backgrounds/forest.webp)
+}
+
+.track-play {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px
+}
+
+.track-grid {
+    display: grid;
+    grid-template-columns: 38px repeat(5, 40px);
+    gap: 4px;
+    padding: 10px;
+    background: rgba(20,40,18,.72);
+    border: 2px solid #5a8a3c;
+    border-radius: 8px;
+    box-shadow: inset 0 0 18px rgba(120,200,80,.18)
+}
+
+.track-corner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #cfe8a8
+}
+
+.track-clue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d8f0b0;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: pre
+}
+
+.track-clue.col {
+    align-items: flex-end;
+    padding-bottom: 2px
+}
+
+.track-clue.row {
+    justify-content: flex-end;
+    padding-right: 4px
+}
+
+.track-cell {
+    width: 40px;
+    height: 40px;
+    background: #2e4a24;
+    border: 2px solid #4d7038;
+    border-radius: 6px;
+    cursor: pointer
+}
+
+.track-cell:hover {
+    filter: brightness(1.18)
+}
+
+.track-cell.on {
+    background: linear-gradient(#8fe06a,#4f9e34);
+    border-color: #d8ffb0;
+    box-shadow: inset 0 -3px 0 #2f6a1c88
+}
+
+.track-cell.on::after {
+    content: '\1F43E';
+    display: block;
+    line-height: 34px;
+    text-align: center;
+    font-size: 18px
+}
+
+.track-follow-btn {
+    min-width: 180px
+}
+
+.track-hint {
     color: #dbeaff;
     font-size: 12px;
     text-align: center

@@ -6,6 +6,8 @@ import { installGameData } from './helpers/game-data.mjs'
 installGameData()
 
 const {
+  HIDE_AND_SEEK_SIZE,
+  HIDE_AND_SEEK_TRACKS,
   HIDE_AND_SEEK_TUTORIAL,
   hideAndSeekAvailable,
   hideAndSeekPool,
@@ -53,13 +55,20 @@ test('different days can roll a different spot', () => {
   assert.ok(spots.size > 1, 'the spot changes over days')
 })
 
-test('the reveal puzzle is a deterministic solvable nonogram', () => {
+test('the trail puzzle is a deterministic solvable tracking grid', () => {
   const puzzle = hideAndSeekPuzzle('route1', '2024-05-05'),
     again = hideAndSeekPuzzle('route1', '2024-05-05')
   assert.deepEqual(puzzle, again)
   assert.equal(picrossMatches(puzzle.solution, puzzle.solution), true)
   assert.equal(puzzle.rowClues.length, puzzle.solution.length)
   assert.equal(puzzle.colClues.length, puzzle.solution.length)
+  assert.equal(puzzle.solution.length, HIDE_AND_SEEK_SIZE)
+  assert.ok(
+    HIDE_AND_SEEK_TRACKS.some(
+      (track) => JSON.stringify(track) === JSON.stringify(puzzle.solution)
+    ),
+    'the solution is one of the hide-and-seek trail patterns, not a Unown glyph'
+  )
 })
 
 test('hideAndSeekAvailable ignores routes searched today', () => {

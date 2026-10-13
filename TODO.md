@@ -61,22 +61,6 @@ Reference images kept for future checks:
 
 ---
 
-## Route activity theme tweaks (follow-up)
-
-Two newer route activities reuse older minigames' mechanics and read as
-duplicates. Keep them, but re-theme so they feel like their own thing:
-
-- [ ] **Dowsing Machine** (`src/game/minigames/dowsing.js`,
-      `src/components/dowsing-scene.js`): the hot/cold probe grid is the Mining
-      grid (`mining.js`) again. Reskin the grid, heat language and reward
-      fiction (lost-and-found, buried treasure, auras) so it is not "another
-      Mining".
-- [ ] **Hide-and-Seek** (`src/game/minigames/hide-and-seek.js`,
-      `src/components/hide-and-seek-scene.js`): the glyph reveal is the Unown
-      Picross nonogram (`unown-picross.js`) again. Re-theme the puzzle
-      presentation (rustling grass, footprint tracking, echolocation) so it is
-      not a second Picross.
-
 ## SOS chain should break on a new species (bug)
 
 The SOS chain keys only on the **route** (`sosChain: { routeKey, count }`; see

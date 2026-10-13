@@ -588,9 +588,11 @@ function applyTrapAbility(source, target) {
  *   so only the player acts.
  * @param {boolean} [skipEndOfTurn] Don't run the end-of-turn residual pass.
  *   A doubles round resolves several single actions and runs it once itself.
+ * @param {{ preferStab?: boolean, avoidContact?: boolean } | null} [autoBattlePolicy]
+ *   The player's auto-battle move policy, if any.
  * @returns {any[]}
  */
-export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1, playerMoveChoice = null, enemySkipMove = !1, skipEndOfTurn = !1, inverseTypeChart = !1) {
+export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn = !1, weather = null, hazards = null, deterministic = !1, terrain = null, enemySkill = null, playerSkill = null, playerSkipMove = !1, playerMoveChoice = null, enemySkipMove = !1, skipEndOfTurn = !1, inverseTypeChart = !1, autoBattlePolicy = null) {
   const events = /** @type {any[]} */ ([])
   // Switch requests are queued and appended after the end-of-turn residual, so
   // the residuals still apply to the outgoing Pokemon.
@@ -724,7 +726,7 @@ export function resolveBattleTurn(player, enemy, isTrainerBattle = !1, firstTurn
     const lockedMove = applyMoveLock(player, respectChoice(player, playerMoveChoice))
     ;((playerMoveId = resolveCalledMove(lockedMove, player, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))
   } else {
-    const bestMove = chooseMoveForBattle(player, enemy, activeHazards, playerAiSkill, inverseTypeChart),
+    const bestMove = chooseMoveForBattle(player, enemy, activeHazards, playerAiSkill, inverseTypeChart, autoBattlePolicy),
       lockedMove = applyMoveLock(player, respectChoice(player, bestMove.moveId))
     ;((playerMoveId = resolveCalledMove(lockedMove, player, enemy, activeTerrain)), (playerMove = moveData[playerMoveId]))
   }

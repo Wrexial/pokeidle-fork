@@ -34,6 +34,15 @@ export function SettingsModal({ onClose }) {
   const [shareInput, setShareInput] = React.useState('')
   const [shareStatus, setShareStatus] = React.useState('')
   const [showBank, setShowBank] = React.useState(!1)
+  const autoBattlePolicy = state.autoBattlePolicy ?? {
+    preferStab: false,
+    avoidContact: false,
+    switchBelow: 0,
+    itemBelow: 0,
+  }
+  /** @param {Partial<AutoBattlePolicy>} patch */
+  const setAutoBattlePolicy = (patch) =>
+    dispatch({ type: 'SET_AUTO_BATTLE_POLICY', payload: { policy: patch } })
   /** @type {React.RefObject<HTMLInputElement>} */
   const fileInputRef = React.useRef(/** @type {any} */ (null))
   function resetSave() {
@@ -432,6 +441,71 @@ export function SettingsModal({ onClose }) {
                         className: 'settings-hint',
                         children:
                           'Manual mode lets you pick each move and switch Pokemon yourself (use the AUTO/MANUAL button on the battle screen to swap at any time). A battle left alone falls back to auto after a minute.',
+                      }),
+                      jsx('div', {
+                        className: 'settings-section-title',
+                        children: 'Auto-Battle Policy',
+                      }),
+                      jsx('p', {
+                        className: 'settings-hint',
+                        children:
+                          'Rules your auto-battler follows. Prefer STAB gives a same-type move a small edge; Avoid Contact favours a non-contact move when the foe holds a Rocky Helmet or has Rough Skin / Iron Barbs. The two thresholds are off at 0% and only apply while Auto battle mode is on (switching also needs the Switch style).',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${autoBattlePolicy.preferStab ? ' active' : ''}`,
+                        onClick: () =>
+                          setAutoBattlePolicy({ preferStab: !autoBattlePolicy.preferStab }),
+                        children: autoBattlePolicy.preferStab
+                          ? 'Prefer STAB Moves: ON'
+                          : 'Prefer STAB Moves: OFF',
+                      }),
+                      jsx('button', {
+                        className: `settings-toggle-btn${autoBattlePolicy.avoidContact ? ' active' : ''}`,
+                        onClick: () =>
+                          setAutoBattlePolicy({ avoidContact: !autoBattlePolicy.avoidContact }),
+                        children: autoBattlePolicy.avoidContact
+                          ? 'Avoid Contact vs Rocky Helmet: ON'
+                          : 'Avoid Contact vs Rocky Helmet: OFF',
+                      }),
+                      jsxs('div', {
+                        className: 'settings-speed',
+                        children: [
+                          jsx('span', {
+                            className: 'settings-speed-label',
+                            children: 'Switch below',
+                          }),
+                          jsx(NumberControl, {
+                            value: Math.round(autoBattlePolicy.switchBelow * 100),
+                            min: 0,
+                            max: 100,
+                            step: 5,
+                            onChange: /** @param {number} value */ (value) =>
+                              setAutoBattlePolicy({ switchBelow: value / 100 }),
+                            format: /** @param {number} value */ (value) =>
+                              value === 0 ? 'Off' : `${value}%`,
+                            'aria-label': 'Switch below HP percentage',
+                          }),
+                        ],
+                      }),
+                      jsxs('div', {
+                        className: 'settings-speed',
+                        children: [
+                          jsx('span', {
+                            className: 'settings-speed-label',
+                            children: 'Use item below',
+                          }),
+                          jsx(NumberControl, {
+                            value: Math.round(autoBattlePolicy.itemBelow * 100),
+                            min: 0,
+                            max: 100,
+                            step: 5,
+                            onChange: /** @param {number} value */ (value) =>
+                              setAutoBattlePolicy({ itemBelow: value / 100 }),
+                            format: /** @param {number} value */ (value) =>
+                              value === 0 ? 'Off' : `${value}%`,
+                            'aria-label': 'Use item below HP percentage',
+                          }),
+                        ],
                       }),
                     ],
                   }),

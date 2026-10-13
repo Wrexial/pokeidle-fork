@@ -35,6 +35,7 @@ import { GIFTS, MYSTERY_GIFTS, STATIC_ENCOUNTERS } from './gifts.js'
 import { simulateOfflineCatches } from './offline-catch.js'
 import { accruePokewalker, createPokewalker } from './pokewalker.js'
 import { initialGameState } from './reducer.js'
+import { normalizeAutoBattlePolicy } from './auto-battle-policy.js'
 import { SHINY_CHAIN_FIRST_TARGET, computeOfflineReward, entryRoutePath, simulateOfflineWildWins } from './progression.js'
 
 const FALLBACK_CATCH_RULE = {
@@ -1196,6 +1197,7 @@ export function repairSave(saved) {
       saved.battleStyle === 'set' || saved.battleStyle === 'training'
         ? saved.battleStyle
         : 'switch',
+    autoBattlePolicy: normalizeAutoBattlePolicy(saved.autoBattlePolicy),
     battleMode: saved.battleMode === 'manual' ? 'manual' : 'auto',
     browserNotifications: !!saved.browserNotifications,
     notifyShiny: saved.notifyShiny !== !1,

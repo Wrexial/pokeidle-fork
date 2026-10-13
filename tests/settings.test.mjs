@@ -45,6 +45,35 @@ test('audio defaults: music off, sound effects on', () => {
   assert.equal(initialGameState.sfxEnabled, true)
 })
 
+test('the auto-battle policy defaults sensibly and merges partial updates', () => {
+  assert.deepEqual(initialGameState.autoBattlePolicy, {
+    preferStab: true,
+    avoidContact: true,
+    switchBelow: 0.25,
+    itemBelow: 0,
+  })
+  const updated = gameReducer(initialGameState, {
+    type: 'SET_AUTO_BATTLE_POLICY',
+    payload: { policy: { preferStab: false, switchBelow: 0.4 } },
+  })
+  assert.equal(updated.autoBattlePolicy.preferStab, false)
+  assert.equal(updated.autoBattlePolicy.switchBelow, 0.4)
+  assert.equal(updated.autoBattlePolicy.avoidContact, true, 'untouched fields stay put')
+  // A bad threshold falls back to the default rather than trusting it, and a
+  // non-object payload is a no-op.
+  assert.equal(
+    gameReducer(initialGameState, {
+      type: 'SET_AUTO_BATTLE_POLICY',
+      payload: { policy: { itemBelow: 'soon' } },
+    }).autoBattlePolicy.itemBelow,
+    0
+  )
+  assert.equal(
+    gameReducer(initialGameState, { type: 'SET_AUTO_BATTLE_POLICY', payload: {} }),
+    initialGameState
+  )
+})
+
 test('battle style defaults to Switch and can be set to Set or Training', () => {
   assert.equal(initialGameState.battleStyle, 'switch')
   const setStyle = gameReducer(initialGameState, {
@@ -113,6 +142,18 @@ test('repairSave defaults the accessibility settings off and keeps them on', () 
   assert.equal(repairSave(save({ battleStyle: 'set' })).battleStyle, 'set')
   assert.equal(repairSave(save({ battleStyle: 'training' })).battleStyle, 'training')
   assert.equal(repairSave(save({ battleStyle: 'garbage' })).battleStyle, 'switch')
+  // The auto-battle policy repairs to its defaults and keeps a valid one.
+  assert.deepEqual(defaults.autoBattlePolicy, {
+    preferStab: true,
+    avoidContact: true,
+    switchBelow: 0.25,
+    itemBelow: 0,
+  })
+  const repairedPolicy = repairSave(
+    save({ autoBattlePolicy: { preferStab: false, itemBelow: 0.5 } })
+  ).autoBattlePolicy
+  assert.equal(repairedPolicy.preferStab, false)
+  assert.equal(repairedPolicy.itemBelow, 0.5)
   // The notification category toggles default on and keep an explicit off.
   assert.equal(defaults.notifyShiny, true)
   assert.equal(defaults.notifyRare, true)

@@ -16,6 +16,7 @@ import { attemptCatch, isCaveLocation, isNightTime, isWaterLocation, selectAutoC
 import { abilityOf } from './abilities.js'
 import { companionCritBonus, companionDodgeChance, companionExpMultiplier, companionStatusCureChance, companionToughOutChance, friendshipToughOutChance } from './companion.js'
 import { applyBattleForm, createBattlePokemon, createVolatileState, resolveBattleTurn, volatileStateFromBattle, AI_SKILL, chooseBestSwitch, chooseTrainingSwitch } from './combat.js'
+import { chooseAutoHealItem } from './auto-battle-policy.js'
 import { isBattleReady } from './pokemon.js'
 import { currentSeason } from './seasons.js'
 import { heldMoneyMultiplier } from './held-items.js'
@@ -711,7 +712,8 @@ export function useGameLoop() {
                       currentGameState.party,
                       enemyBattlePokemon,
                       currentGameState.activePlayerPokemonIndex,
-                      inverseBattle
+                      inverseBattle,
+                      currentGameState.autoBattlePolicy
                     )
           if (playerSwitch >= 0) {
             dispatch({
@@ -719,6 +721,31 @@ export function useGameLoop() {
               payload: { newPokemonIndex: playerSwitch, costsTurn: !0 },
             })
             return
+          }
+          // The policy's item rule: once HP drops below its threshold, drink
+          // the best healing item in the bag. Like a switch, it costs the
+          // player's turn, so only the foe attacks. Skipped in the rule-variant
+          // facilities, whose deterministic floors and no-item palace forbid it.
+          const autoItemThreshold = currentGameState.autoBattlePolicy?.itemBelow ?? 0
+          if (
+            autoItemThreshold > 0 &&
+            !isTowerBattle &&
+            currentGameState.bossBattle?.rule !== 'noItems' &&
+            !currentGameState.playerTurnSpent &&
+            currentGameState.battleMode !== 'manual'
+          ) {
+            const healItemId = chooseAutoHealItem(
+              currentGameState.inventory,
+              playerBattlePokemon,
+              autoItemThreshold
+            )
+            if (healItemId) {
+              dispatch({
+                type: 'USE_ITEM_ON_POKEMON',
+                payload: { itemId: healItemId, pokemonId: currentGameState.playerPokemon.id },
+              })
+              return
+            }
           }
           if (
             bossType === 'champion' &&
@@ -789,7 +816,8 @@ export function useGameLoop() {
               currentGameState.pendingPlayerMove ?? null,
               !!currentGameState.enemyTurnSpent,
               !1,
-              inverseBattle
+              inverseBattle,
+              currentGameState.autoBattlePolicy
             )
           } catch (error) {
             // A throwing turn used to freeze the loop silently (the dispatch

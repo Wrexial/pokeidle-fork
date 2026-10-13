@@ -1,6 +1,7 @@
 // Reducer handlers for settings actions. Split from game/reducer.js.
 
 import { POKEMON_TYPES } from '../../data/moves.js'
+import { DEFAULT_AUTO_BATTLE_POLICY, normalizeAutoBattlePolicy } from '../auto-battle-policy.js'
 import { withNotification } from '../reducer-helpers.js'
 
 /**
@@ -31,6 +32,27 @@ export function setBattleStyle(state, action) {
   return {
     ...state,
     battleStyle: style,
+  }
+}
+
+/**
+ * Handle the `SET_AUTO_BATTLE_POLICY` action. The payload's `policy` is a
+ * partial policy; any field it doesn't name keeps its current value, and the
+ * result is normalised so a bad value can't leak into the auto-battler.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function setAutoBattlePolicy(state, action) {
+  const patch = action.payload?.policy
+  if (!patch || typeof patch !== 'object') return state
+  return {
+    ...state,
+    autoBattlePolicy: normalizeAutoBattlePolicy({
+      ...DEFAULT_AUTO_BATTLE_POLICY,
+      ...(state.autoBattlePolicy ?? {}),
+      ...patch,
+    }),
   }
 }
 

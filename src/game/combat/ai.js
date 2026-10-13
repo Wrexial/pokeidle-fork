@@ -1,8 +1,35 @@
 // Move-choice AI: pick the best damaging/setup/status move. Split from game/combat.js.
 
 import { moveData } from '../../data/gameData.js'
+import { moveMakesContact } from '../../data/move-effects.js'
 import { estimateMoveDamage, getTypeMultiplier, normalizeStatKey } from './damage.js'
 import { STATUS_IMMUNE_TYPES } from './status.js'
+
+/**
+ * Extra weight the auto-battler gives a same-type attack when its policy's
+ * `preferStab` is on. STAB is already in {@link estimateMoveDamage}; this only
+ * breaks near-ties toward the move that matches the attacker.
+ */
+const STAB_POLICY_BONUS = 1.12
+
+/**
+ * Damage multiplier the auto-battler applies to a contact move when its policy
+ * says to avoid a foe holding a Rocky Helmet (or with Rough Skin / Iron Barbs).
+ */
+const CONTACT_POLICY_PENALTY = 0.5
+
+/**
+ * Whether a foe punishes contact moves: a Rocky Helmet holder, or Rough Skin /
+ * Iron Barbs. The policy only avoids these once the player has asked it to.
+ * @param {BattlePokemon} defender
+ * @returns {boolean}
+ */
+function punishesContact(defender) {
+  return (
+    defender?.heldItem === 'rockyHelmet' ||
+    ['roughSkin', 'ironBarbs'].includes(defender?.ability ?? '')
+  )
+}
 
 /**
  * Moves this battler has already seen fail against the current foe's ability
@@ -29,9 +56,11 @@ function observedNullifiedMoves(attacker, defender) {
  * @param {Record<string, number>} [attackerStages]
  * @param {Record<string, number>} [defenderStages]
  * @param {boolean} [inverse] Inverse-battle type chart (the Battle Arena).
+ * @param {{ preferStab?: boolean, avoidContact?: boolean } | null} [policy] The player's auto-battle move policy.
+ * @param {boolean} [contactPunished] The defender punishes contact moves.
  * @returns {{ moveId: string, move: Move }}
  */
-export function chooseBestMove(moves, attackerLevel, attack, spAttack, attackerTypes, defenderTypes, defenderDefense, defenderSpDefense, attackerStages, defenderStages, inverse = !1) {
+export function chooseBestMove(moves, attackerLevel, attack, spAttack, attackerTypes, defenderTypes, defenderDefense, defenderSpDefense, attackerStages, defenderStages, inverse = !1, policy = null, contactPunished = !1) {
   let bestMoveId = moves[0],
     bestDamage = -1
   for (const moveId of moves) {
@@ -44,6 +73,9 @@ export function chooseBestMove(moves, attackerLevel, attack, spAttack, attackerT
       attackStage = attackerStages?.[attackStatKey] ?? 0,
       defenseStage = defenderStages?.[defenseStatKey] ?? 0
     let damage = estimateMoveDamage(attackerLevel, effectiveAttack, effectiveDefense, moveDef, attackerTypes, defenderTypes, attackStage, defenseStage, inverse)
+    if (policy?.preferStab && attackerTypes?.includes(moveDef.type)) damage *= STAB_POLICY_BONUS
+    if (policy?.avoidContact && contactPunished && moveMakesContact(moveDef))
+      damage *= CONTACT_POLICY_PENALTY
     if (moveDef.effect)
       switch (moveDef.effect.type) {
         case 'recoil':
@@ -90,9 +122,10 @@ export const AI_SKILL = { dumb: 'dumb', smart: 'smart', smartest: 'smartest' }
  * @param {{ player: any, enemy: any } | null} [hazards]
  * @param {string} [skill] One of {@link AI_SKILL}.
  * @param {boolean} [inverse] Inverse-battle type chart (the Battle Arena).
+ * @param {{ preferStab?: boolean, avoidContact?: boolean } | null} [policy] The player's auto-battle move policy.
  * @returns {{ moveId: string, move: Move }}
  */
-export function chooseMoveForBattle(attacker, defender, hazards, skill = AI_SKILL.smart, inverse = !1) {
+export function chooseMoveForBattle(attacker, defender, hazards, skill = AI_SKILL.smart, inverse = !1, policy = null) {
   if (skill === AI_SKILL.dumb) return chooseRandomMove(attacker.moves)
   const deterministic = skill === AI_SKILL.smartest,
     usableMoves = attacker.moves.filter((moveId) => moveData[moveId]),
@@ -163,7 +196,9 @@ export function chooseMoveForBattle(attacker, defender, hazards, skill = AI_SKIL
     defender.spDefense,
     attacker.statStages,
     defender.statStages,
-    inverse
+    inverse,
+    policy,
+    policy?.avoidContact ? punishesContact(defender) : !1
   )
 }
 
@@ -215,10 +250,29 @@ export function matchupScore(pokemon, foe, inverse = !1) {
  * @param {BattlePokemon} foe
  * @param {number} activeIndex
  * @param {boolean} [inverse] Inverse-battle type chart (the Battle Arena).
+ * @param {{ switchBelow?: number } | null} [policy] The player's auto-switch policy.
  * @returns {number}
  */
-export function chooseBestSwitch(active, party, foe, activeIndex, inverse = !1) {
-  const activeScore = matchupScore(active, foe, inverse)
+export function chooseBestSwitch(active, party, foe, activeIndex, inverse = !1, policy = null) {
+  const activeScore = matchupScore(active, foe, inverse),
+    activeHp = active.maxHp > 0 ? active.currentHp / active.maxHp : 1,
+    switchBelow = policy?.switchBelow ?? 0
+  // The policy's low-HP pivot: hand the field to a healthier teammate even when
+  // the active one still wins the type matchup. It only ever picks someone in
+  // better shape, so it can't ping-pong between two hurt Pokemon.
+  if (switchBelow > 0 && activeHp < switchBelow) {
+    let healthyIndex = -1,
+      healthyHp = activeHp
+    ;(party ?? []).forEach((member, index) => {
+      if (index === activeIndex || !member || member.currentHp <= 0) return
+      const hp = member.maxHp > 0 ? member.currentHp / member.maxHp : 0
+      if (hp > healthyHp) {
+        healthyHp = hp
+        healthyIndex = index
+      }
+    })
+    if (healthyIndex >= 0) return healthyIndex
+  }
   if (activeScore >= 0) return -1
   let bestIndex = -1,
     bestScore = activeScore + SWITCH_MARGIN

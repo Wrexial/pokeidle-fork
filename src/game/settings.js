@@ -34,6 +34,7 @@ export function setSpriteStyle(style) {
 export const SETTINGS_KEYS = /** @type {const} */ ([
   'speed',
   'battleStyle',
+  'autoBattlePolicy',
   'battleMode',
   'autoCatch',
   'alwaysCatchShinies',

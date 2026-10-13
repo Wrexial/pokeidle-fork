@@ -648,6 +648,18 @@ type WonderTradeState = {
   returnPhase: string
 }
 
+/** The auto-battler's move / switch / item rules. */
+type AutoBattlePolicy = {
+  /** Give a same-type attack a small edge over a slightly stronger off-type one. */
+  preferStab: boolean
+  /** Favour a non-contact move against a Rocky Helmet / Rough Skin / Iron Barbs foe. */
+  avoidContact: boolean
+  /** Switch to a healthier teammate below this HP fraction (0 = only on a losing matchup). */
+  switchBelow: number
+  /** Use a healing item below this HP fraction (0 = never). */
+  itemBelow: number
+}
+
 type GameState = {
   phase: string
   startRegion: string
@@ -689,6 +701,8 @@ type GameState = {
   paused: boolean
   /** Set never auto-switches; Switch picks a better matchup; Training protects a low-HP lead and shares a maxed one's EXP. */
   battleStyle: 'set' | 'switch' | 'training'
+  /** The auto-battler's move / switch / item rules (see game/auto-battle-policy.js). */
+  autoBattlePolicy: AutoBattlePolicy
   /** Auto battles run by themselves; manual waits for the player to choose. */
   battleMode: 'auto' | 'manual'
   autoCatch: boolean

@@ -50,17 +50,6 @@ player-facing value (★ = nice to have, ★★★★★ = core missing feature)
 
 **Battle depth**
 
-## 91. Configurable auto-battle policy
-
-AUTO currently chooses moves for the player. Let players set rules instead: prefer
-STAB, avoid contact vs Rocky Helmet, switch below X%, item at Y%.
-
-- [ ] A settings shape for move/switching/item policy.
-- [ ] Feed it into `src/game/combat/ai.js` (used for the player's auto turns).
-- [ ] A compact editor in Settings with sensible defaults.
-
-Effort: **S–M**. Gain: ★★★★.
-
 ## 92. Rotating raid events
 
 Tera raids exist; add Gmax raid bosses on a daily/weekly rotation with a

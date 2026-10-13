@@ -154,6 +154,54 @@ duplicates. Keep them, but re-theme so they feel like their own thing:
       presentation (rustling grass, footprint tracking, echolocation) so it is
       not a second Picross.
 
+## SOS chain should break on a new species (bug)
+
+The SOS chain keys only on the **route** (`sosChain: { routeKey, count }`; see
+`advanceSosChain` in `src/game/reducer/collection.js`), so KOing a *different*
+species on the same route keeps the streak — and its hidden-ability/shiny odds
+and milestone rewards — climbing. It should be a same-species chain: meeting a
+new species breaks it.
+
+- [ ] Store the species on the chain and reset `count` to 1 when the enemy's
+      species differs. The wild-win event already has
+      `state.enemyPokemon?.speciesKey` (`src/game/reducer/battle/events.js`).
+- [ ] Decide whether `sosBestChains` and the milestone rewards stay per route or
+      become per species, and adjust the location-panel SOS copy.
+- [ ] Cover it in `tests/sos-chain.test.mjs`.
+
+## Sweet Scent as field Honey (follow-up)
+
+Honey (`src/data/items.js`, the `USE_EFFECT_ITEM` reducer) is an out-of-combat,
+per-route, per-species lure: it doubles that species' encounter weight and gives
+a 1.5x catch bonus for 500 battles (`applyEncounterModifiers` / `isHoneyActive`
+in `src/game/progression/encounters.js`, offered from
+`src/components/encounter-detail-panel.js`). Sweet Scent is currently only a
+battle move, so let a party Pokemon that knows it grant the same out-of-combat
+utility instead of spending Honey.
+
+- [ ] Apply the existing `{ type: 'honey', routeKey, speciesKey,
+      battlesRemaining }` effect from a field-move button on the encounter/route
+      panel, with a cooldown (or small cost) so it doesn't fully replace the
+      item. Only the entry point is new; the effect plumbing is already there.
+- [ ] Cover the field-move path and its cooldown in the tests.
+
+## Route activity frequency (follow-up)
+
+The Dowsing Machine and Hide-and-Seek currently appear on **every** wild route
+(`dowsingRouteKey` / `hideAndSeekRouteKey` in `src/components/location-panel.js`
+fall back to the route's own `routeKey`), so a region can offer a dozen of each.
+Thin them out to **2 Dowsing spots and 2 Hide-and-Seek spots per region** (4
+route activities total per region).
+
+- [ ] Pick the 2 routes per region deterministically (a curated table, or a
+      day-seeded selection) and expose helpers like `dowsingRouteForRegion` /
+      `hideAndSeekRouteForRegion` that the panel consults before showing the
+      cards. Keep the existing per-route daily gating.
+- [ ] Apply the same limit to the `START_DOWSING` / `START_HIDE_AND_SEEK`
+      reducer guards (`src/game/reducer/minigames.js`) so a route that isn't
+      chosen can't start one.
+- [ ] Update `tests/dowsing.test.mjs` and `tests/hide-and-seek.test.mjs`.
+
 ---
 
 ## Useful references when picking these up

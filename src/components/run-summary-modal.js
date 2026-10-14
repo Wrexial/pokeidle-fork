@@ -84,21 +84,21 @@ export function RunSummaryModal({ onClose, inline = false }) {
   }
 
   const content = jsxs('div', {
-    className: inline ? 'records-inline run-summary-inline' : 'battle-info-modal run-summary-modal',
+    className: inline ? 'records-inline run-summary-inline' : 'modal run-summary-modal',
     ...(inline
       ? {}
       : { onClick: /** @param {React.MouseEvent} event */ event => event.stopPropagation() }),
     children: [
       jsxs('div', {
-        className: 'battle-info-header',
+        className: 'modal-header',
         children: [
-          jsx('span', { className: 'battle-info-title', children: 'Run Summary' }),
+          jsx('span', { className: 'modal-title', children: 'Run Summary' }),
           onClose &&
-            jsx('button', { className: 'battle-info-close', onClick: onClose, children: 'X' }),
+            jsx('button', { className: 'modal-close', onClick: onClose, children: 'X' }),
         ],
       }),
       jsxs('div', {
-        className: 'battle-info-content run-summary-content',
+        className: 'modal-content run-summary-content',
         children: [
           jsxs('div', {
             className: 'run-summary-identity',
@@ -214,7 +214,7 @@ export function RunSummaryModal({ onClose, inline = false }) {
   if (inline) return content
   return createPortal(
     jsx('div', {
-      className: 'battle-info-overlay',
+      className: 'modal-overlay',
       onClick: onClose,
       children: content,
     }),

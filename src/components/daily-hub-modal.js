@@ -97,22 +97,22 @@ export function DailyHubModal({ onClose }) {
       tabs[0].id
   return createPortal(
     jsx('div', {
-      className: 'battle-info-overlay',
+      className: 'modal-overlay',
       onClick: onClose,
       children: jsxs('div', {
-        className: 'battle-info-modal daily-hub-modal',
+        className: 'modal daily-hub-modal',
         onClick: /** @param {React.MouseEvent} mouseEvent */ (mouseEvent) =>
           mouseEvent.stopPropagation(),
         children: [
           jsxs('div', {
-            className: 'battle-info-header',
+            className: 'modal-header',
             children: [
               jsx('span', {
-                className: 'battle-info-title',
+                className: 'modal-title',
                 children: 'Dailies',
               }),
               jsx('button', {
-                className: 'battle-info-close',
+                className: 'modal-close',
                 onClick: onClose,
                 children: 'X',
               }),
@@ -144,12 +144,12 @@ export function DailyHubModal({ onClose }) {
           activeTab === 'quests' && jsx(QuestsModal, { inline: true }),
           activeTab === 'pokewalker' &&
             jsx('div', {
-              className: 'battle-info-content pokewalker-modal-content',
+              className: 'modal-content pokewalker-modal-content',
               children: jsx(PokewalkerPanel, {}),
             }),
           activeTab === 'companion' &&
             jsx('div', {
-              className: 'battle-info-content companion-modal-content',
+              className: 'modal-content companion-modal-content',
               children: jsx(CompanionCarePanel, {}),
             }),
         ],

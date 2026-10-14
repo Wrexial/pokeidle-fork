@@ -150,28 +150,28 @@ export function RecordsModal({ onClose, inline = false }) {
       },
     ]
   const panel = jsxs('div', {
-    className: inline ? 'records-inline' : 'battle-info-modal',
+    className: inline ? 'records-inline' : 'modal',
     ...(inline
       ? {}
       : { onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation() }),
     children: [
         jsxs('div', {
-          className: 'battle-info-header',
+          className: 'modal-header',
           children: [
             jsx('span', {
-              className: 'battle-info-title',
+              className: 'modal-title',
               children: 'Records',
             }),
             onClose &&
               jsx('button', {
-                className: 'battle-info-close',
+                className: 'modal-close',
                 onClick: onClose,
                 children: 'X',
               }),
           ],
         }),
         jsxs('div', {
-          className: 'battle-info-content',
+          className: 'modal-content',
           children: [
             jsxs('div', {
               className: 'section records-section',
@@ -307,7 +307,7 @@ export function RecordsModal({ onClose, inline = false }) {
   return inline
     ? panel
     : jsx('div', {
-        className: 'battle-info-overlay',
+        className: 'modal-overlay',
         onClick: onClose,
         children: panel,
       })

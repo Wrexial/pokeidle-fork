@@ -746,25 +746,25 @@ export function BattleScene({ onOpenMenu }) {
       switchPickerOpen &&
         createPortal(
           jsx('div', {
-            className: 'battle-info-overlay',
+            className: 'modal-overlay',
             onClick: () => {
               if (!faintReplacement) setShowSwitch(!1)
             },
             children: jsxs('div', {
-              className: 'battle-info-modal switch-modal',
+              className: 'modal switch-modal',
               onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
               children: [
                 jsxs('div', {
-                  className: 'battle-info-header',
+                  className: 'modal-header',
                   children: [
                     jsx('span', {
-                      className: 'battle-info-title',
+                      className: 'modal-title',
                       children: faintReplacement ? 'Choose Your Next Pokemon' : 'Switch Pokemon',
                     }),
                     faintReplacement
                       ? null
                       : jsx('button', {
-                          className: 'battle-info-close',
+                          className: 'modal-close',
                           onClick: () => setShowSwitch(!1),
                           children: 'X',
                         }),

@@ -117,7 +117,7 @@ export function SecretBaseScene() {
             children: `\u{1F3D5}\uFE0F Secret Base${location ? ` \u2014 ${location.name}` : ''}`,
           }),
           jsx('button', {
-            className: 'battle-info-close',
+            className: 'modal-close',
             onClick: () => dispatch({ type: 'END_SECRET_BASE' }),
             children: 'X',
           }),

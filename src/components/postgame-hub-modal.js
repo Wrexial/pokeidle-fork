@@ -26,10 +26,10 @@ export function PostgameHubModal({ locationId, onClose }) {
       onClose()
     }
   return jsx('div', {
-    className: 'battle-info-overlay postgame-hub-overlay',
+    className: 'modal-overlay postgame-hub-overlay',
     onClick: onClose,
     children: jsxs('div', {
-      className: 'battle-info-modal postgame-hub-modal',
+      className: 'modal postgame-hub-modal',
       style: { backgroundImage: `linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.75)), url(${hub.background})` },
       onClick: /** @param {React.MouseEvent} mouseEvent */ (mouseEvent) =>
         mouseEvent.stopPropagation(),
@@ -45,7 +45,7 @@ export function PostgameHubModal({ locationId, onClose }) {
                 jsx('span', { className: 'postgame-hub-subtitle', children: hub.subtitle }),
               ],
             }),
-            jsx('button', { className: 'battle-info-close', onClick: onClose, children: 'X' }),
+            jsx('button', { className: 'modal-close', onClick: onClose, children: 'X' }),
           ],
         }),
         jsx('p', { className: 'postgame-hub-greeting', children: hub.greeting }),

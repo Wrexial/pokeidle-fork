@@ -69,24 +69,24 @@ export function FieldJobsModal({ onClose }) {
   const anyLoot = entries.some(([, job]) => job.money > 0 || Object.keys(job.items ?? {}).length > 0)
 
   return jsx('div', {
-    className: 'field-jobs-overlay',
+    className: 'modal-overlay field-jobs-overlay',
     onClick: (/** @type {React.MouseEvent<HTMLDivElement>} */ event) => {
       if (event.target === event.currentTarget) onClose()
     },
     children: jsxs('div', {
-      className: 'field-jobs-modal',
+      className: 'modal dark field-jobs-modal',
       role: 'dialog',
       'aria-modal': 'true',
       'aria-label': 'Field Jobs',
       children: [
         jsxs('div', {
-          className: 'field-jobs-head',
+          className: 'modal-header',
           children: [
-            jsx('span', { className: 'field-jobs-title', children: '\u2699\ufe0f Field Jobs' }),
+            jsx('span', { className: 'modal-title', children: '\u2699\ufe0f Field Jobs' }),
             jsx('button', {
-              className: 'job-btn',
+              className: 'modal-close',
               onClick: onClose,
-              children: 'CLOSE',
+              children: 'X',
             }),
           ],
         }),

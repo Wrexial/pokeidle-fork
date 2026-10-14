@@ -19,10 +19,10 @@ export function LegendaryIntroModal({ regionId, quest, onClose }) {
     species = pokemonSpecies[quest.legendary],
     lines = legendaryDialogue(regionId)
   return jsx('div', {
-    className: 'battle-info-overlay',
+    className: 'modal-overlay',
     onClick: onClose,
     children: jsxs('div', {
-      className: 'battle-info-modal legendary-intro-modal',
+      className: 'modal legendary-intro-modal',
       onClick: /** @param {React.MouseEvent} mouseEvent */ (mouseEvent) =>
         mouseEvent.stopPropagation(),
       children: [
@@ -64,7 +64,7 @@ export function LegendaryIntroModal({ regionId, quest, onClose }) {
           className: 'legendary-intro-actions',
           children: [
             jsx('button', {
-              className: 'battle-info-close',
+              className: 'modal-close',
               onClick: onClose,
               children: 'BACK',
             }),

@@ -91,17 +91,17 @@ export function BankModal({ onClose }) {
   }
 
   return jsx('div', {
-    className: 'catch-modal-overlay',
+    className: 'modal-overlay catch-modal-overlay',
     onClick: onClose,
     children: jsxs('div', {
-      className: 'catch-modal bank-modal',
+      className: 'modal catch-modal bank-modal',
       onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
       children: [
         jsxs('div', {
-          className: 'catch-modal-header',
+          className: 'modal-header',
           children: [
-            jsx('span', { className: 'catch-modal-title', children: 'Pokemon Bank' }),
-            jsx('button', { className: 'catch-modal-close', onClick: onClose, children: 'X' }),
+            jsx('span', { className: 'modal-title', children: 'Pokemon Bank' }),
+            jsx('button', { className: 'modal-close', onClick: onClose, children: 'X' }),
           ],
         }),
         jsx('p', {

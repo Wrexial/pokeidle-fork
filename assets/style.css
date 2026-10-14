@@ -24,7 +24,8 @@
     --exp-blue: #8ab8e8;
     --scroll-thumb: #685040;
     --scroll-thumb-hover: #8a6a50;
-    --scroll-track: #00000026
+    --scroll-track: #00000026;
+    --modal-backdrop: #00000080
 }
 
 html,body,#root {
@@ -1477,17 +1478,6 @@ img {
     --type-ink: var(--text-on-type)
 }
 
-.move-panel-overlay {
-    position: fixed;
-    inset: 0;
-    background: #0009;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px
-}
-
 .move-panel {
     background: url(/ui/parchment.png) repeat;
     background-size: 64px 64px;
@@ -1866,13 +1856,7 @@ img {
     }
 }
 
-.hatch-popup-overlay {
-    position: fixed;
-    inset: 0;
-    background: #000000a6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.modal-overlay.hatch-popup-overlay {
     z-index: 210
 }
 
@@ -4416,17 +4400,11 @@ img {
     filter: brightness(1.15)
 }
 
-.field-jobs-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 60;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,.7)
+.modal-overlay.field-jobs-overlay {
+    z-index: 60
 }
 
-.field-jobs-modal {
+.modal.field-jobs-modal {
     box-sizing: border-box;
     width: 520px;
     max-width: 92vw;
@@ -4435,22 +4413,7 @@ img {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 14px 16px;
-    color: var(--parchment);
-    background: linear-gradient(180deg,#2a241c,#1a160f);
-    border: 2px solid #8a7040;
-    border-radius: 8px
-}
-
-.field-jobs-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between
-}
-
-.field-jobs-title {
-    font-size: 12px;
-    color: var(--gold)
+    padding: 14px 16px
 }
 
 .field-jobs-empty {
@@ -6489,56 +6452,20 @@ img {
     white-space: nowrap
 }
 
-.catch-modal-overlay {
+.modal-overlay.catch-modal-overlay {
     position: absolute;
     inset: 0;
-    background: #00000080;
-    z-index: 100;
+    align-items: flex-start;
+    justify-content: center;
     overflow-y: auto;
     padding: 40px 4px 4px
 }
 
-.catch-modal {
-    background: linear-gradient(180deg,#e8dcc0,#d8c8a0);
-    border: 2px solid #483828;
-    padding: 8px;
+.modal.catch-modal {
     width: 200px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
     transform: scale(1.5);
-    transform-origin: top center;
-    gap: 6px
-}
-
-.catch-modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between
-}
-
-.catch-modal-title {
-    font-size: 9px;
-    font-weight: 700;
-    color: #2a1808
-}
-
-.catch-modal-close {
-    flex: 0 0 auto;
-    font-family: var(--font-pixel);
-    font-size: 8px;
-    padding: 1px 6px;
-    background: #685040;
-    color: var(--parchment);
-    border: 2px solid #483828;
-    border-radius: 0;
-    cursor: pointer;
-    font-weight: 700;
-    box-shadow: 1px 1px #0000004d
-}
-
-.catch-modal-close:hover {
-    background: #786050
+    transform-origin: top center
 }
 
 .catch-modal-route-settings {
@@ -6672,7 +6599,7 @@ img {
    `.bag-tabs` / `.bag-tab` pill strip — on a `.sub-tab-bar` strip when it needs
    its own header row — with `.bag-tab.parchment` on light surfaces. Keep new
    sub-tab strips on these classes instead of adding another `-tab` family. All
-   close buttons use `.battle-info-close`. ---------------------------------- */
+   close buttons use `.modal-close`. ---------------------------------------- */
 .bag-tabs {
     display: flex;
     flex-wrap: wrap;
@@ -6771,6 +6698,94 @@ img {
     gap: 10px;
     font-size: 9px;
     margin-bottom: 8px
+}
+
+/* --- Modal / popup system --------------------------------------------------
+   Every popup uses `.modal-overlay` for the backdrop and `.modal` for the
+   panel (`.modal.dark` on the dark panels). Header rows use `.modal-header`,
+   the heading `.modal-title`, the button `.modal-close` and the body
+   `.modal-content`. A specific modal keeps its own class for size/layout. -- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background: var(--modal-backdrop)
+}
+
+.modal {
+    background: linear-gradient(180deg,#e8dcc0,#d8c8a0);
+    border: 2px solid #483828;
+    border-radius: 6px;
+    padding: 8px;
+    width: min(480px,100%);
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #3a2818
+}
+
+.modal.dark {
+    background: linear-gradient(180deg,#2a241c,#1a160f);
+    border-color: #8a7040;
+    color: var(--parchment)
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex: none
+}
+
+.modal-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: #3a2818;
+    min-width: 0
+}
+
+.modal.dark .modal-title {
+    color: var(--gold)
+}
+
+.modal-close {
+    flex: none;
+    margin-left: 8px;
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    padding: 1px 6px;
+    background: #685040;
+    color: var(--parchment);
+    border: 2px solid #483828;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 1px 1px #0000004d
+}
+
+.modal-close:hover {
+    background: #786050
+}
+
+.modal-content {
+    font-size: 10.5px;
+    color: #3a2818;
+    line-height: 1.4
+}
+
+.modal.dark .modal-content {
+    color: var(--parchment)
+}
+
+.pokedex-detail-header .modal-close {
+    margin-left: auto
 }
 
 .bag-header-money {
@@ -7309,27 +7324,18 @@ img {
     }
 }
 
-.pokedex-modal-overlay {
+.modal-overlay.pokedex-modal-overlay {
     position: absolute;
     inset: 0;
-    background: #00000080;
-    z-index: 100;
-    display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: center;
     padding: 40px 4px 4px
 }
 
 .pokedex-modal {
-    background: linear-gradient(180deg,#e8dcc0,#d8c8a0);
-    border: 2px solid #483828;
-    padding: 8px;
     width: 280px;
-    display: flex;
-    flex-direction: column;
     transform: scale(1.5);
     transform-origin: top center;
-    gap: 6px;
     max-height: 60%
 }
 
@@ -7337,18 +7343,6 @@ img {
     flex: 1;
     min-height: 0;
     overflow-y: auto
-}
-
-.pokedex-modal-header {
-    display: flex;
-    align-items: center;
-    gap: 6px
-}
-
-.pokedex-modal-title {
-    font-size: 9px;
-    font-weight: 700;
-    color: #3a2818
 }
 
 .pokedex-modal-counts {
@@ -7395,25 +7389,6 @@ img {
     padding: 6px
 }
 
-.pokedex-modal-close {
-    flex: 0 0 auto;
-    margin-left: 8px;
-    font-family: var(--font-pixel);
-    font-size: 8px;
-    padding: 1px 6px;
-    background: #685040;
-    color: var(--parchment);
-    border: 2px solid #483828;
-    border-radius: 0;
-    cursor: pointer;
-    font-weight: 700;
-    box-shadow: 1px 1px #0000004d
-}
-
-.pokedex-modal-close:hover {
-    background: #786050
-}
-
 .pokedex-modal .pokedex-grid {
     gap: 2px
 }
@@ -7454,25 +7429,6 @@ img {
 .pokedex-detail-header .pokedex-form-tabs {
     flex: 1;
     min-width: 0
-}
-
-.pokedex-detail-close {
-    margin-left: auto;
-    flex: 0 0 auto;
-    font-family: var(--font-pixel);
-    font-size: 8px;
-    padding: 1px 6px;
-    background: #685040;
-    color: var(--parchment);
-    border: 2px solid #483828;
-    border-radius: 0;
-    cursor: pointer;
-    font-weight: 700;
-    box-shadow: 1px 1px #0000004d
-}
-
-.pokedex-detail-close:hover {
-    background: #786050
 }
 
 .pokedex-modal-detail .stats-panel-identity {
@@ -7771,7 +7727,7 @@ img {
     animation: dailyPulse 1.6s ease-in-out infinite
 }
 
-.battle-info-modal.daily-hub-modal {
+.modal.daily-hub-modal {
     width: min(560px, 100%)
 }
 
@@ -8486,66 +8442,6 @@ img {
     background: var(--gold-bright)
 }
 
-.battle-info-overlay {
-    position: fixed;
-    inset: 0;
-    background: #00000080;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px
-}
-
-.battle-info-modal {
-    background: linear-gradient(180deg,#e8dcc0,#d8c8a0);
-    border: 2px solid #483828;
-    padding: 8px;
-    width: min(480px,100%);
-    max-height: 80vh;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 6px
-}
-
-.battle-info-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between
-}
-
-.battle-info-title {
-    font-size: 9px;
-    font-weight: 700;
-    color: #3a2818;
-    min-width: 0
-}
-
-.battle-info-close {
-    flex: 0 0 auto;
-    margin-left: 8px;
-    font-size: 8px;
-    padding: 1px 6px;
-    background: #685040;
-    color: var(--parchment);
-    border: 2px solid #483828;
-    border-radius: 0;
-    cursor: pointer;
-    font-weight: 700;
-    box-shadow: 1px 1px #0000004d
-}
-
-.battle-info-close:hover {
-    background: #786050
-}
-
-.battle-info-content {
-    font-size: 10.5px;
-    color: #3a2818;
-    line-height: 1.4
-}
-
 .records-section {
     margin-bottom: 10px
 }
@@ -8961,26 +8857,26 @@ img {
     color: var(--text-muted)
 }
 
-.battle-info-content p {
+.modal-content p {
     margin: 0 0 8px
 }
 
-.battle-info-content p:last-child {
+.modal-content p:last-child {
     margin-bottom: 0
 }
 
-.battle-info-content a {
+.modal-content a {
     color: #2a4a80;
     text-decoration: underline
 }
 
-.battle-info-content a:hover {
+.modal-content a:hover {
     color: #1a3a6a
 }
 
 /* The guide/primary action buttons are links, so re-assert their ink over the
    generic content-link colour. */
-.battle-info-content a.settings-guide-btn {
+.modal-content a.settings-guide-btn {
     color: var(--parchment)
 }
 
@@ -11298,7 +11194,7 @@ img {
 
 /* This dark modal reuses the light battle-info header, so its title needs a
    light ink instead of the default dark one. */
-.patch-notes-modal .battle-info-title {
+.patch-notes-modal .modal-title {
     color: var(--gold)
 }
 
@@ -18421,7 +18317,7 @@ img {
 .legendary-intro-modal {
     max-width: 320px;
     text-align: center;
-    /* This boss scene is dark, but it reuses the light `.battle-info-modal`
+    /* This boss scene is dark, but it reuses the light `.modal`
        shell; without its own background the light intro text is invisible. */
     background: linear-gradient(180deg,#2a1e14,#1a1208);
     border-color: var(--gold);

@@ -37,7 +37,7 @@ export function HatchPopup() {
       speed: hatch.speed,
     }
   return jsx('div', {
-    className: 'hatch-popup-overlay',
+    className: 'modal-overlay hatch-popup-overlay',
     children: jsxs('div', {
       className: `hatch-popup${hatch.isShiny ? ' shiny' : ''}`,
       children: [

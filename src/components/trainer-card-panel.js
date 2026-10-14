@@ -80,7 +80,7 @@ export function TrainerCardPanel({ onClose, inline = false, onOpenShop }) {
           jsx('span', { className: 'trainer-card-panel-title', children: 'Trainer Card' }),
           onClose
             ? jsx('button', {
-                className: 'battle-info-close',
+                className: 'modal-close',
                 onClick: onClose,
                 children: 'X',
               })

@@ -47,29 +47,29 @@ export function QuestsModal({ onClose, inline = false }) {
           ],
         }),
         jsx('div', {
-          className: 'battle-info-content quests-content',
+          className: 'modal-content quests-content',
           children: tab === 'story' ? renderStory(story, dispatch) : renderDaily(quests, dispatch),
         }),
       ],
     })
   if (inline) return content
   return jsx('div', {
-    className: 'battle-info-overlay',
+    className: 'modal-overlay',
     onClick: onClose,
     children: jsxs('div', {
-      className: 'battle-info-modal quests-modal',
+      className: 'modal quests-modal',
       onClick: /** @param {React.MouseEvent} mouseEvent */ (mouseEvent) =>
         mouseEvent.stopPropagation(),
       children: [
         jsxs('div', {
-          className: 'battle-info-header',
+          className: 'modal-header',
           children: [
             jsx('span', {
-              className: 'battle-info-title',
+              className: 'modal-title',
               children: tab === 'daily' ? 'Daily Quests' : "Professor's Story",
             }),
             jsx('button', {
-              className: 'battle-info-close',
+              className: 'modal-close',
               onClick: onClose,
               children: 'X',
             }),

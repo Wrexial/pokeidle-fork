@@ -133,16 +133,16 @@ export function PokedexModal({ onClose, inline = false }) {
   }, [selected])
 
   const panel = jsxs('div', {
-    className: inline ? 'pokedex-inline' : 'pokedex-modal',
+    className: inline ? 'pokedex-inline' : 'modal pokedex-modal',
     ...(inline
       ? {}
       : { onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation() }),
     children: [
         jsxs('div', {
-          className: 'pokedex-modal-header',
+          className: 'modal-header',
           children: [
             jsx('span', {
-              className: 'pokedex-modal-title',
+              className: 'modal-title',
               children: 'Pokedex',
             }),
             jsxs('span', {
@@ -151,7 +151,7 @@ export function PokedexModal({ onClose, inline = false }) {
             }),
             onClose &&
               jsx('button', {
-                className: 'pokedex-modal-close',
+                className: 'modal-close',
                 onClick: onClose,
                 children: 'X',
               }),
@@ -285,7 +285,7 @@ export function PokedexModal({ onClose, inline = false }) {
                       })
                     : null,
                   jsx('button', {
-                    className: 'pokedex-detail-close',
+                    className: 'modal-close',
                     onClick: () => setSelected(null),
                     title: 'Close',
                     'aria-label': 'Close Pokemon details',
@@ -481,7 +481,7 @@ export function PokedexModal({ onClose, inline = false }) {
   return inline
     ? panel
     : jsx('div', {
-        className: 'pokedex-modal-overlay',
+        className: 'modal-overlay pokedex-modal-overlay',
         onClick: onClose,
         children: panel,
       })

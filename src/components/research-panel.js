@@ -26,24 +26,24 @@ function ResearchShopModal({ onClose }) {
   const { state, dispatch } = useGame(),
     points = state.researchPoints ?? 0
   return jsx('div', {
-    className: 'field-jobs-overlay',
+    className: 'modal-overlay field-jobs-overlay',
     onClick: (/** @type {React.MouseEvent<HTMLDivElement>} */ event) => {
       if (event.target === event.currentTarget) onClose()
     },
     children: jsxs('div', {
-      className: 'field-jobs-modal research-shop-modal',
+      className: 'modal dark field-jobs-modal research-shop-modal',
       role: 'dialog',
       'aria-modal': 'true',
       'aria-label': 'Research Shop',
       children: [
         jsxs('div', {
-          className: 'field-jobs-head',
+          className: 'modal-header',
           children: [
             jsxs('span', {
-              className: 'field-jobs-title',
+              className: 'modal-title',
               children: [`\u{1f52c} Research Shop \u00b7 `, `${points} RP`],
             }),
-            jsx('button', { className: 'job-btn', onClick: onClose, children: 'CLOSE' }),
+            jsx('button', { className: 'modal-close', onClick: onClose, children: 'X' }),
           ],
         }),
         jsxs('div', {

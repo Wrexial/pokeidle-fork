@@ -115,21 +115,21 @@ export const CatchSettingsModal = React.memo(
         })
       }, [routeKey, dispatch])
     return jsx('div', {
-      className: 'catch-modal-overlay',
+      className: 'modal-overlay catch-modal-overlay',
       onClick: onClose,
       children: jsxs('div', {
-        className: 'catch-modal',
+        className: 'modal catch-modal',
         onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
         children: [
           jsxs('div', {
-            className: 'catch-modal-header',
+            className: 'modal-header',
             children: [
               jsx('span', {
-                className: 'catch-modal-title',
+                className: 'modal-title',
                 children: 'Catch Settings',
               }),
               jsx('button', {
-                className: 'catch-modal-close',
+                className: 'modal-close',
                 onClick: onClose,
                 children: 'X',
               }),

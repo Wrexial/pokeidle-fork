@@ -16,29 +16,29 @@ export function OfflineProgressModal() {
   const dismiss = () => dispatch({ type: 'CLEAR_OFFLINE_REPORT' }),
     steps = report.steps ?? 0
   return jsx('div', {
-    className: 'battle-info-overlay',
+    className: 'modal-overlay',
     onClick: dismiss,
     children: jsxs('div', {
-      className: 'battle-info-modal offline-report-modal',
+      className: 'modal offline-report-modal',
       onClick: /** @param {React.MouseEvent} mouseEvent */ (mouseEvent) =>
         mouseEvent.stopPropagation(),
       children: [
         jsxs('div', {
-          className: 'battle-info-header',
+          className: 'modal-header',
           children: [
             jsx('span', {
-              className: 'battle-info-title',
+              className: 'modal-title',
               children: 'While You Were Away',
             }),
             jsx('button', {
-              className: 'battle-info-close',
+              className: 'modal-close',
               onClick: dismiss,
               children: 'X',
             }),
           ],
         }),
         jsxs('div', {
-          className: 'battle-info-content offline-report-content',
+          className: 'modal-content offline-report-content',
           children: [
             jsx('span', {
               className: 'offline-report-time',

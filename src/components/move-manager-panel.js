@@ -63,7 +63,7 @@ export function MoveManagerPanel({ pokemon, onClose }) {
       onClose())
   }
   return jsx('div', {
-    className: 'move-panel-overlay',
+    className: 'modal-overlay move-panel-overlay',
     onClick: onClose,
     children: jsxs('div', {
       className: 'move-panel',

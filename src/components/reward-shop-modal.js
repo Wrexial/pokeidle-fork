@@ -24,16 +24,16 @@ export function RewardShopModal({ onClose, inline = false }) {
         })
       : tokenShopItems
   const panel = jsxs('div', {
-    className: inline ? 'reward-shop-inline' : 'battle-info-modal',
+    className: inline ? 'reward-shop-inline' : 'modal',
     ...(inline
       ? {}
       : { onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation() }),
     children: [
         jsxs('div', {
-          className: 'battle-info-header',
+          className: 'modal-header',
           children: [
             jsx('span', {
-              className: 'battle-info-title',
+              className: 'modal-title',
               children: 'Kecleon Shop',
             }),
             jsxs('div', {
@@ -50,7 +50,7 @@ export function RewardShopModal({ onClose, inline = false }) {
                 }),
                 onClose &&
                   jsx('button', {
-                    className: 'battle-info-close',
+                    className: 'modal-close',
                     onClick: onClose,
                     children: 'X',
                   }),
@@ -80,7 +80,7 @@ export function RewardShopModal({ onClose, inline = false }) {
             ],
           }),
         jsxs('div', {
-          className: 'battle-info-content',
+          className: 'modal-content',
           children: [
             jsxs('div', {
               className: 'reward-shop-token-display',
@@ -177,7 +177,7 @@ export function RewardShopModal({ onClose, inline = false }) {
   return inline
     ? panel
     : jsx('div', {
-        className: 'battle-info-overlay',
+        className: 'modal-overlay',
         onClick: onClose,
         children: panel,
       })

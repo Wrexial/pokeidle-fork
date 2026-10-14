@@ -39,28 +39,28 @@ export function BattleMenuModals({ menu, onClose }) {
   if (menu === 'info')
     return createPortal(
       jsx('div', {
-        className: 'battle-info-overlay',
+        className: 'modal-overlay',
         onClick: onClose,
         children: jsxs('div', {
-          className: 'battle-info-modal',
+          className: 'modal',
           onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
           children: [
             jsxs('div', {
-              className: 'battle-info-header',
+              className: 'modal-header',
               children: [
                 jsx('span', {
-                  className: 'battle-info-title',
+                  className: 'modal-title',
                   children: 'Info',
                 }),
                 jsx('button', {
-                  className: 'battle-info-close',
+                  className: 'modal-close',
                   onClick: onClose,
                   children: 'X',
                 }),
               ],
             }),
             jsxs('div', {
-              className: 'battle-info-content',
+              className: 'modal-content',
               children: [
                 jsxs('p', {
                   children: [

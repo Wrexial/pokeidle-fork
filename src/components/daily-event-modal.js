@@ -19,7 +19,7 @@ export function DailyEventModal({ onClose, inline = false }) {
     })),
     claimable = !dailyEvent.claimed,
     content = jsxs('div', {
-      className: 'battle-info-content daily-event-content',
+      className: 'modal-content daily-event-content',
       children: [
         jsx('span', {
           className: 'daily-event-icon',
@@ -73,21 +73,21 @@ export function DailyEventModal({ onClose, inline = false }) {
     })
   if (inline) return content
   return jsx('div', {
-    className: 'battle-info-overlay',
+    className: 'modal-overlay',
     onClick: onClose,
     children: jsxs('div', {
-      className: 'battle-info-modal daily-event-modal',
+      className: 'modal daily-event-modal',
       onClick: /** @param {React.MouseEvent} mouseEvent */ (mouseEvent) => mouseEvent.stopPropagation(),
       children: [
         jsxs('div', {
-          className: 'battle-info-header',
+          className: 'modal-header',
           children: [
             jsx('span', {
-              className: 'battle-info-title',
+              className: 'modal-title',
               children: 'Daily Event',
             }),
             jsx('button', {
-              className: 'battle-info-close',
+              className: 'modal-close',
               onClick: onClose,
               children: 'X',
             }),

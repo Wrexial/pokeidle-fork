@@ -15,21 +15,21 @@ export function PatchNotesModal() {
   if (!show) return null
   const latest = CHANGELOG[0]
   return jsx('div', {
-    className: 'battle-info-overlay',
+    className: 'modal-overlay',
     onClick: dismiss,
     children: jsxs('div', {
       className: 'patch-notes-modal',
       onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
       children: [
         jsxs('div', {
-          className: 'battle-info-header',
+          className: 'modal-header',
           children: [
             jsxs('span', {
-              className: 'battle-info-title',
+              className: 'modal-title',
               children: ["What's New — v", latest.version],
             }),
             jsx('button', {
-              className: 'battle-info-close',
+              className: 'modal-close',
               onClick: dismiss,
               children: 'X',
             }),

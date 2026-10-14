@@ -47,7 +47,7 @@ export function PokePelagoScene() {
             children: '\u{1f3dd}\ufe0f Pok\u00e9 Pelago',
           }),
           jsx('button', {
-            className: 'battle-info-close',
+            className: 'modal-close',
             onClick: leave,
             children: 'X',
           }),

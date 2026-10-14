@@ -92,17 +92,17 @@ export function HuntModal({ onClose }) {
     routes = React.useMemo(() => routesForHunt(hunt), [hunt])
 
   return jsx('div', {
-    className: 'catch-modal-overlay',
+    className: 'modal-overlay catch-modal-overlay',
     onClick: onClose,
     children: jsxs('div', {
-      className: 'catch-modal hunt-modal',
+      className: 'modal catch-modal hunt-modal',
       onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
       children: [
         jsxs('div', {
-          className: 'catch-modal-header',
+          className: 'modal-header',
           children: [
-            jsx('span', { className: 'catch-modal-title', children: 'Focus Hunt' }),
-            jsx('button', { className: 'catch-modal-close', onClick: onClose, children: 'X' }),
+            jsx('span', { className: 'modal-title', children: 'Focus Hunt' }),
+            jsx('button', { className: 'modal-close', onClick: onClose, children: 'X' }),
           ],
         }),
         hunt

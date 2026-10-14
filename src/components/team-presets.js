@@ -25,21 +25,21 @@ export function TeamPresets() {
       open &&
         createPortal(
           jsx('div', {
-            className: 'battle-info-overlay',
+            className: 'modal-overlay',
             onClick: () => setOpen(!1),
             children: jsxs('div', {
-              className: 'battle-info-modal team-presets-modal',
+              className: 'modal team-presets-modal',
               onClick: /** @param {React.MouseEvent} event */ (event) => event.stopPropagation(),
               children: [
                 jsxs('div', {
-                  className: 'battle-info-header',
+                  className: 'modal-header',
                   children: [
                     jsx('span', {
-                      className: 'battle-info-title',
+                      className: 'modal-title',
                       children: 'Team Presets',
                     }),
                     jsx('button', {
-                      className: 'battle-info-close',
+                      className: 'modal-close',
                       onClick: () => setOpen(!1),
                       children: 'X',
                     }),

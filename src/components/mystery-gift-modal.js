@@ -141,7 +141,7 @@ export function MysteryGiftModal({ onClose, inline = false }) {
     setCodeInput('')
   }
   const content = jsxs('div', {
-    className: 'battle-info-content mystery-gift-content',
+    className: 'modal-content mystery-gift-content',
     children: [
       headline && headlineStatus
         ? jsxs('div', {
@@ -217,19 +217,19 @@ export function MysteryGiftModal({ onClose, inline = false }) {
   })
   if (inline) return content
   return jsx('div', {
-    className: 'battle-info-overlay',
+    className: 'modal-overlay',
     onClick: onClose,
     children: jsxs('div', {
-      className: 'battle-info-modal mystery-gift-modal',
+      className: 'modal mystery-gift-modal',
       onClick: /** @param {React.MouseEvent} mouseEvent */ (mouseEvent) =>
         mouseEvent.stopPropagation(),
       children: [
         jsxs('div', {
-          className: 'battle-info-header',
+          className: 'modal-header',
           children: [
-            jsx('span', { className: 'battle-info-title', children: 'Mystery Gift' }),
+            jsx('span', { className: 'modal-title', children: 'Mystery Gift' }),
             jsx('button', {
-              className: 'battle-info-close',
+              className: 'modal-close',
               onClick: onClose,
               children: 'X',
             }),

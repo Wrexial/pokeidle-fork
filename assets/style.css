@@ -21,7 +21,10 @@
     --gold: #c8a848;
     --gold-bright: #f0d060;
     --gold-dark: #74500c;
-    --exp-blue: #8ab8e8
+    --exp-blue: #8ab8e8;
+    --scroll-thumb: #685040;
+    --scroll-thumb-hover: #8a6a50;
+    --scroll-track: #00000026
 }
 
 html,body,#root {
@@ -50,6 +53,37 @@ button {
 
 img {
     image-rendering: pixelated
+}
+
+/* One thin scrollbar for the whole game: a brown thumb on a translucent track
+   so it reads on both the dark panels and the parchment modals. `scrollbar-color`
+   inherits but `scrollbar-width` does not, so set both on every element; the
+   map's horizontal region strip is the one place that hides it. */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scroll-thumb) var(--scroll-track)
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scroll-track)
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scroll-thumb);
+    border-radius: 3px
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scroll-thumb-hover)
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent
 }
 
 .game-window {
@@ -1548,19 +1582,6 @@ img {
     max-height: 160px
 }
 
-.move-panel-list::-webkit-scrollbar {
-    width: 6px
-}
-
-.move-panel-list::-webkit-scrollbar-track {
-    background: #d8c8a0
-}
-
-.move-panel-list::-webkit-scrollbar-thumb {
-    background: #685040;
-    border-radius: 0
-}
-
 .move-panel-item {
     display: flex;
     align-items: center;
@@ -1735,19 +1756,6 @@ img {
     font-size: 7px;
     color: #b8a878;
     padding: 1px 0
-}
-
-.log-entries::-webkit-scrollbar {
-    width: 4px
-}
-
-.log-entries::-webkit-scrollbar-track {
-    background: #1a1208
-}
-
-.log-entries::-webkit-scrollbar-thumb {
-    background: #685040;
-    border-radius: 0
 }
 
 .level-up-notification {
@@ -2055,22 +2063,7 @@ img {
     position: relative;
     overflow-y: auto;
     overflow-x: hidden;
-    z-index: 1;
-    scrollbar-width: thin;
-    scrollbar-color: #685040 #1a1208
-}
-
-.panel-content::-webkit-scrollbar {
-    width: 6px
-}
-
-.panel-content::-webkit-scrollbar-track {
-    background: #1a1208
-}
-
-.panel-content::-webkit-scrollbar-thumb {
-    background: #685040;
-    border-radius: 3px
+    z-index: 1
 }
 
 .tab-bar {
@@ -2119,9 +2112,7 @@ img {
     gap: 6px;
     min-height: 0;
     overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: thin;
-    scrollbar-color: #685040 #1a1208
+    overflow-x: hidden
 }
 
 .party-list {
@@ -2446,8 +2437,6 @@ img {
     gap: 5px;
     min-height: 0;
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #685040 #e8dcc0;
     box-shadow: inset 2px 2px #ffdca04d,inset -2px -2px #00000026,0 0 0 2px #3a2810
 }
 
@@ -6599,21 +6588,7 @@ img {
     flex-direction: column;
     gap: 2px;
     max-height: 312px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #8a7a60 transparent
-}
-
-.catch-modal-species-list::-webkit-scrollbar {
-    width: 2px
-}
-
-.catch-modal-species-list::-webkit-scrollbar-track {
-    background: transparent
-}
-
-.catch-modal-species-list::-webkit-scrollbar-thumb {
-    background: #8a7a60
+    overflow-y: auto
 }
 
 .catch-modal-species-row {
@@ -7333,18 +7308,6 @@ img {
     flex: 1;
     min-height: 0;
     overflow-y: auto
-}
-
-.pokedex-modal-grid-scroll::-webkit-scrollbar {
-    width: 2px
-}
-
-.pokedex-modal-grid-scroll::-webkit-scrollbar-track {
-    background: transparent
-}
-
-.pokedex-modal-grid-scroll::-webkit-scrollbar-thumb {
-    background: #8a7a60
 }
 
 .pokedex-modal-header {
@@ -11342,27 +11305,7 @@ img {
     color: var(--text-color);
     overflow-y: auto;
     max-height: 75vh;
-    line-height: 1.5;
-    scrollbar-width: thin;
-    scrollbar-color: var(--gold-dark) #1a1208
-}
-
-.patch-notes-content::-webkit-scrollbar {
-    width: 8px
-}
-
-.patch-notes-content::-webkit-scrollbar-track {
-    background: #1a1208;
-    border-radius: 4px
-}
-
-.patch-notes-content::-webkit-scrollbar-thumb {
-    background: var(--gold-dark);
-    border-radius: 4px
-}
-
-.patch-notes-content::-webkit-scrollbar-thumb:hover {
-    background: var(--gold)
+    line-height: 1.5
 }
 
 .patch-notes-title {
@@ -11651,22 +11594,7 @@ img {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     min-height: 0;
-    background: var(--bg-panel);
-    scrollbar-width: thin;
-    scrollbar-color: #685040 #1a1208
-}
-
-.mobile-tab-content::-webkit-scrollbar {
-    width: 6px
-}
-
-.mobile-tab-content::-webkit-scrollbar-track {
-    background: #1a1208
-}
-
-.mobile-tab-content::-webkit-scrollbar-thumb {
-    background: #685040;
-    border-radius: 3px
+    background: var(--bg-panel)
 }
 
 .mobile-tabs .tab-btn {
@@ -19818,14 +19746,6 @@ img {
     flex-direction: column;
     gap: 3px;
     padding-right: 2px
-}
-
-.form-dex-families::-webkit-scrollbar {
-    width: 2px
-}
-
-.form-dex-families::-webkit-scrollbar-thumb {
-    background: #8a7a60
 }
 
 .form-dex-family {

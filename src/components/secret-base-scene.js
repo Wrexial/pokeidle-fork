@@ -312,7 +312,7 @@ export function SecretBaseScene() {
                             className: 'secret-base-shop-group',
                             children: [
                               jsx('div', {
-                                className: 'location-section-title',
+                                className: 'section-title inverse',
                                 children: label,
                               }),
                               ...SECRET_BASE_DECORATIONS.filter(

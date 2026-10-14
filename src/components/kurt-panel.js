@@ -22,7 +22,7 @@ export function KurtPanel() {
     className: 'location-tower kurt-panel',
     children: [
       jsx('div', {
-        className: 'location-section-title',
+        className: 'section-title inverse',
         children: 'Kurt\u2019s Apricorn Balls',
       }),
       jsx('p', {

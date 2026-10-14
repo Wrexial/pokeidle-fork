@@ -63,9 +63,9 @@ export function PostgameHubModal({ locationId, onClose }) {
           ],
         }),
         jsxs('div', {
-          className: 'postgame-hub-section',
+          className: 'section dark postgame-hub-section',
           children: [
-            jsx('div', { className: 'postgame-hub-section-title', children: 'Set out' }),
+            jsx('div', { className: 'section-title inverse', children: 'Set out' }),
             jsx('div', {
               className: 'zone-area-list',
               children: subAreas.map((subArea) => {
@@ -91,7 +91,7 @@ export function PostgameHubModal({ locationId, onClose }) {
         jsxs('div', {
           className: 'postgame-hub-shop',
           children: [
-            jsx('div', { className: 'postgame-hub-section-title', children: 'Shop' }),
+            jsx('div', { className: 'section-title inverse', children: 'Shop' }),
             jsx(ShopPanel, { shopDef: hub.shop }),
           ],
         }),

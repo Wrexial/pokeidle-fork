@@ -52,7 +52,7 @@ export function GiftPanel({ locationId }) {
   return jsxs('div', {
     className: 'location-gifts',
     children: [
-      jsx('div', { className: 'location-section-title', children: 'People & Places' }),
+      jsx('div', { className: 'section-title inverse', children: 'People & Places' }),
       gifts.map((gift) => {
         const reward = giftRewardLabel(gift),
           giftSpecies = gift.pokemon ?? gift.egg

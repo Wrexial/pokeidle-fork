@@ -91,7 +91,7 @@ export function GymLocationPanel() {
     className: 'location-tower',
     children: [
       jsx('div', {
-        className: 'location-section-title',
+        className: 'section-title inverse',
         children: anyRematch ? 'Gym Leader \u00b7 Rematch' : 'Gym Leader',
       }),
       ...locationGyms.map(({ gym: leader, leaderIndex }) => {

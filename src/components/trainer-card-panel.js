@@ -102,11 +102,11 @@ export function TrainerCardPanel({ onClose, inline = false, onOpenShop }) {
         ],
       }),
       jsxs('div', {
-        className: 'settings-section trainer-card-section',
+        className: 'section dark',
         children: [
-          jsx('div', { className: 'settings-section-title', children: 'Identity' }),
+          jsx('div', { className: 'section-title', children: 'Identity' }),
           jsxs('label', {
-            className: 'trainer-card-field',
+            className: 'section-field',
             children: [
               jsx('span', { children: 'Name' }),
               jsx('input', {
@@ -120,7 +120,7 @@ export function TrainerCardPanel({ onClose, inline = false, onOpenShop }) {
             ],
           }),
           jsxs('label', {
-            className: 'trainer-card-field',
+            className: 'section-field',
             children: [
               jsx('span', { children: 'Title' }),
               jsxs('select', {
@@ -164,9 +164,9 @@ export function TrainerCardPanel({ onClose, inline = false, onOpenShop }) {
         ],
       }),
       jsxs('div', {
-        className: 'settings-section trainer-card-section',
+        className: 'section dark',
         children: [
-          jsx('div', { className: 'settings-section-title', children: 'Outfit' }),
+          jsx('div', { className: 'section-title', children: 'Outfit' }),
           jsx('p', {
             className: 'settings-hint',
             children:
@@ -231,9 +231,9 @@ export function TrainerCardPanel({ onClose, inline = false, onOpenShop }) {
         ],
       }),
       jsxs('div', {
-        className: 'settings-section trainer-card-section',
+        className: 'section dark',
         children: [
-          jsx('div', { className: 'settings-section-title', children: 'Favourite Pokemon' }),
+          jsx('div', { className: 'section-title', children: 'Favourite Pokemon' }),
           jsx('p', {
             className: 'settings-hint',
             children: 'The partner shown on the card. Defaults to your active Pokemon.',
@@ -273,9 +273,9 @@ export function TrainerCardPanel({ onClose, inline = false, onOpenShop }) {
         ],
       }),
       jsxs('div', {
-        className: 'settings-section trainer-card-section',
+        className: 'section dark',
         children: [
-          jsx('div', { className: 'settings-section-title', children: 'Badge Case' }),
+          jsx('div', { className: 'section-title', children: 'Badge Case' }),
           jsx('p', {
             className: 'settings-hint',
             children: autoBadgeCase

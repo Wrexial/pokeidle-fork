@@ -16,7 +16,7 @@ export const CafePanel = React.memo(
       className: 'cafe-panel',
       children: [
         jsx('div', {
-          className: 'location-section-title',
+          className: 'section-title inverse',
           children: cafe.name,
         }),
         ...cafe.items.map((entry) => {

@@ -148,7 +148,7 @@ export function MysteryGiftModal({ onClose, inline = false }) {
             className: 'mystery-gift-featured',
             children: [
               jsx('div', {
-                className: 'mystery-gift-section-title',
+                className: 'section-title',
                 children: headlineStatus.featured
                   ? 'Latest Wonder Card'
                   : 'Wonder Card',
@@ -202,7 +202,7 @@ export function MysteryGiftModal({ onClose, inline = false }) {
             upcoming.battles
           )} battles`,
         }),
-      jsx('div', { className: 'mystery-gift-section-title', children: 'Wonder Card Album' }),
+      jsx('div', { className: 'section-title', children: 'Wonder Card Album' }),
       jsx('div', {
         className: 'mystery-gift-grid',
         children: cards.map((gift) =>

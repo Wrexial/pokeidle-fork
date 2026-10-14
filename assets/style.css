@@ -4169,14 +4169,6 @@ img {
     font-style: italic
 }
 
-.location-section-title {
-    font-size: 7px;
-    color: var(--gold);
-    text-transform: uppercase;
-    letter-spacing: .5px;
-    margin-bottom: 4px
-}
-
 .location-minigames {
     display: flex;
     flex-direction: column;
@@ -4477,11 +4469,7 @@ img {
 .field-job {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding: 8px;
-    background: rgba(255,255,255,.04);
-    border: 1px solid #4a4034;
-    border-radius: 6px
+    gap: 4px
 }
 
 .field-job-head {
@@ -6559,14 +6547,6 @@ img {
     gap: 2px
 }
 
-.catch-modal-section-title {
-    font-size: 7px;
-    font-weight: 700;
-    color: #5a4838;
-    text-transform: uppercase;
-    letter-spacing: .3px
-}
-
 .catch-modal-divider {
     height: 1px;
     background: #8a7a60
@@ -6742,6 +6722,55 @@ img {
     background: #6a4e30;
     color: #f0e0b0;
     border-color: #8a6820
+}
+
+/* --- Section system --------------------------------------------------------
+   A section is a tinted card with a `.section-title` heading. Use the default
+   (light) surface in the parchment modals and `.section.dark` on the dark
+   panels. Label/value rows use `.section-row`, label/control rows
+   `.section-field`. --------------------------------------------------------- */
+.section {
+    background: #00000010;
+    border: 1px solid #00000026;
+    border-radius: 6px;
+    padding: 10px
+}
+
+.section.dark {
+    background: #00000022;
+    border-color: #ffffff22
+}
+
+.section-title {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: #3a2818;
+    margin: 0 0 4px
+}
+
+.section.dark .section-title,
+.section-title.inverse {
+    color: var(--gold)
+}
+
+.section-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 9px;
+    padding: 2px 0
+}
+
+.section-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 9px;
+    margin-bottom: 8px
 }
 
 .bag-header-money {
@@ -8036,14 +8065,6 @@ img {
     overflow-y: auto
 }
 
-.mystery-gift-section-title {
-    font-size: 9px;
-    font-weight: 700;
-    color: #3a2818;
-    text-transform: uppercase;
-    letter-spacing: .5px
-}
-
 .mystery-gift-featured {
     display: flex;
     flex-direction: column;
@@ -8220,12 +8241,6 @@ img {
     display: flex;
     flex-direction: column;
     gap: 10px
-}
-
-.quest {
-    background: #00000010;
-    border: 2px solid #a89870;
-    padding: 8px 10px
 }
 
 .quest.complete {
@@ -8702,24 +8717,6 @@ img {
     margin: 8px 0 0
 }
 
-.records-section-title {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--gold-dark);
-    letter-spacing: .5px;
-    border-bottom: 1px solid #0000001a;
-    padding-bottom: 3px;
-    margin-bottom: 3px
-}
-
-.records-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    font-size: 9.5px;
-    padding: 2px 0
-}
-
 .records-label {
     color: #5a4838
 }
@@ -9062,16 +9059,7 @@ img {
 }
 
 .settings-section {
-    border-top: 1px solid #00000022;
-    padding-top: 10px;
     margin-bottom: 14px
-}
-
-.settings-section-title {
-    font-size: 10px;
-    font-weight: 700;
-    color: #3a2818;
-    margin-bottom: 6px
 }
 
 .settings-save-row {
@@ -9686,14 +9674,6 @@ img {
     display: flex;
     flex-direction: column;
     gap: 3px
-}
-
-.gym-section-title {
-    font-size: 7px;
-    color: var(--gold);
-    text-transform: uppercase;
-    letter-spacing: .5px;
-    margin-bottom: 2px
 }
 
 .gym-row {
@@ -18560,15 +18540,6 @@ img {
     margin-bottom: 10px
 }
 
-.postgame-hub-section-title {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: .5px;
-    text-transform: uppercase;
-    color: #b8860b;
-    margin-bottom: 4px
-}
-
 .postgame-hub-shop {
     margin: 10px 0;
     padding: 8px;
@@ -19485,22 +19456,6 @@ img {
     color: #2e7d32
 }
 
-.trainer-card-section {
-    background: #00000022;
-    border: 1px solid #ffffff22;
-    border-radius: 6px;
-    padding: 10px
-}
-
-.trainer-card-field {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    font-size: 9px;
-    margin-bottom: 8px
-}
-
 .trainer-card-input,
 .trainer-card-select {
     flex: 1;
@@ -19662,14 +19617,6 @@ img {
 .form-dex-section-grow {
     flex: 1;
     min-height: 0
-}
-
-.form-dex-section-title {
-    font-size: 7px;
-    font-weight: 700;
-    color: #3a2818;
-    text-transform: uppercase;
-    letter-spacing: .04em
 }
 
 .form-dex-sets {

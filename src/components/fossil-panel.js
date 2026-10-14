@@ -27,7 +27,7 @@ export function FossilPanel() {
   return jsxs('div', {
     className: 'location-gifts',
     children: [
-      jsx('div', { className: 'location-section-title', children: 'Cinnabar Lab' }),
+      jsx('div', { className: 'section-title inverse', children: 'Cinnabar Lab' }),
       jsx('p', {
         className: 'fossil-lab-hint',
         children:

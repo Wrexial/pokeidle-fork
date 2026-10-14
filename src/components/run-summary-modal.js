@@ -175,7 +175,7 @@ export function RunSummaryModal({ onClose, inline = false }) {
             className: 'run-summary-timeline-head',
             children: [
               jsx('span', {
-                className: 'records-section-title',
+                className: 'section-title',
                 children: `Milestones \u00b7 ${summary.milestones.length}`,
               }),
               jsx('div', {

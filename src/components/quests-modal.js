@@ -97,7 +97,7 @@ function renderDaily(quests, dispatch) {
     return jsxs(
       'div',
       {
-        className: `quest${complete ? ' complete' : ''}${quest.claimed ? ' claimed' : ''}`,
+        className: `section quest${complete ? ' complete' : ''}${quest.claimed ? ' claimed' : ''}`,
         children: [
           jsxs('div', {
             className: 'quest-head',

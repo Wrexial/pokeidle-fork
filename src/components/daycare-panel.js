@@ -108,7 +108,7 @@ export function DaycarePanel() {
     className: 'location-tower daycare-panel',
     children: [
       jsx('div', {
-        className: 'location-section-title',
+        className: 'section-title inverse',
         children: 'Daycare',
       }),
       jsxs('div', {
@@ -286,7 +286,7 @@ export function DaycarePanel() {
           className: 'daycare-deposit',
           children: [
             jsx('div', {
-              className: 'location-section-title',
+              className: 'section-title inverse',
               children: 'Deposit from the Box',
             }),
             state.box.length === 0

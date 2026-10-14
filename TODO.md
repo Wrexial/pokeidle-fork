@@ -67,24 +67,6 @@ Panel-layout and top-bar cleanups: reclaim vertical space, make the sub-tab
 hierarchy read, and fold the daily menus together. All are UI-only unless
 noted.
 
-## Standardise the section headings and fields (follow-up)
-
-The tab strips and close buttons are consistent now, but the in-panel and modal
-section headings are not: `location-section-title` (24 uses),
-`settings-section-title` (18), `gym-section-title` (7), `records-section-title`
-(4), `form-dex-section-title`, `catch-modal-section-title`,
-`mystery-gift-section-title` and `postgame-hub-section-title` each roll their own
-font size, colour, casing and margin, so panels read as different products.
-
-- [ ] Add a canonical `.section-title` (and a small `.section-row` /
-      `.section-field` for label/value rows like `trainer-card-field`) styled
-      from the current `settings-section-title` / `location-section-title`, then
-      migrate the bespoke `*-section-title` classes to it.
-- [ ] Keep only genuine context modifiers (e.g. the light vs dark panel tint)
-      and delete the rest.
-- [ ] Spot-check the Trainer, Settings, location, gym/league, Records and
-      post-game hub panels at both panel widths.
-
 ## Useful references when picking these up
 
 - **Data-pipeline template:** `tools/fetch-breeding-data.cjs` — cached PokéAPI

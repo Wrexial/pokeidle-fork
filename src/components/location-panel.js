@@ -98,7 +98,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
           className: 'location-next-unlock location-region-goal',
           children: [
             jsx('div', {
-              className: 'location-section-title',
+              className: 'section-title inverse',
               children: 'Next Goal',
             }),
             jsxs('div', {
@@ -147,7 +147,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
             children: [
               actionableGates.length > 0 &&
                 jsx('div', {
-                  className: 'location-section-title',
+                  className: 'section-title inverse',
                   children: actionableGates.length > 1 ? 'Next Unlocks' : 'Next Unlock',
                 }),
               actionableGates.map(({ nextLocation: nextLockedLocation }) => {
@@ -655,7 +655,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
               ],
             }),
           jsx('div', {
-            className: 'location-section-title',
+            className: 'section-title inverse',
             children: 'Areas',
           }),
           jsx('p', {
@@ -736,7 +736,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
               className: 'location-minigames',
               children: [
                 jsx('div', {
-                  className: 'location-section-title',
+                  className: 'section-title inverse',
                   children: 'Minigame',
                 }),
                 fixedMinigameCard,
@@ -872,7 +872,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
             className: 'location-minigames',
             children: [
               jsx('div', {
-                className: 'location-section-title',
+                className: 'section-title inverse',
                 children: fixedMinigame ? 'Minigame' : 'Activities',
               }),
               fixedMinigameCard,

@@ -63,9 +63,9 @@ export function FormDexPanel({ onSelectSpecies }) {
         ],
       }),
       jsxs('div', {
-        className: 'form-dex-section',
+        className: 'section form-dex-section',
         children: [
-          jsx('span', { className: 'form-dex-section-title', children: 'Regional sets' }),
+          jsx('span', { className: 'section-title', children: 'Regional sets' }),
           jsx('div', {
             className: 'form-dex-sets',
             children: formDexModel.regionalSets.map((set) => {
@@ -105,9 +105,9 @@ export function FormDexPanel({ onSelectSpecies }) {
         ],
       }),
       jsxs('div', {
-        className: 'form-dex-section',
+        className: 'section form-dex-section',
         children: [
-          jsx('span', { className: 'form-dex-section-title', children: 'Generations' }),
+          jsx('span', { className: 'section-title', children: 'Generations' }),
           jsx('div', {
             className: 'form-dex-generations',
             children: formDexModel.generationTargets.map((targets, index) => {
@@ -136,7 +136,7 @@ export function FormDexPanel({ onSelectSpecies }) {
         ],
       }),
       jsxs('div', {
-        className: 'form-dex-section form-dex-section-grow',
+        className: 'section form-dex-section form-dex-section-grow',
         children: [
           jsx('div', {
             className: 'bag-tabs form-dex-filters',

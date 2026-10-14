@@ -229,10 +229,10 @@ export function SettingsModal({ onClose }) {
                     children: 'Battle Reference',
                   }),
                   jsxs('div', {
-                    className: 'settings-section',
+                    className: 'section settings-section',
                     children: [
                       jsx('div', {
-                        className: 'settings-section-title',
+                        className: 'section-title',
                         children: 'Gameplay',
                       }),
                       jsx('p', {
@@ -406,10 +406,10 @@ export function SettingsModal({ onClose }) {
                     ],
                   }),
                   jsxs('div', {
-                    className: 'settings-section',
+                    className: 'section settings-section',
                     children: [
                       jsx('div', {
-                        className: 'settings-section-title',
+                        className: 'section-title',
                         children: 'Battles',
                       }),
                       jsx('p', {
@@ -444,7 +444,7 @@ export function SettingsModal({ onClose }) {
                           'Manual mode lets you pick each move and switch Pokemon yourself (use the AUTO/MANUAL button on the battle screen to swap at any time). A battle left alone falls back to auto after a minute.',
                       }),
                       jsx('div', {
-                        className: 'settings-section-title',
+                        className: 'section-title',
                         children: 'Auto-Battle Policy',
                       }),
                       jsx('p', {
@@ -511,10 +511,10 @@ export function SettingsModal({ onClose }) {
                     ],
                   }),
                   jsxs('div', {
-                    className: 'settings-section',
+                    className: 'section settings-section',
                     children: [
                       jsx('div', {
-                        className: 'settings-section-title',
+                        className: 'section-title',
                         children: 'Display',
                       }),
                       jsx('p', {
@@ -558,10 +558,10 @@ export function SettingsModal({ onClose }) {
                   }),
                   jsx(KeybindingsPanel, {}),
                   jsxs('div', {
-                    className: 'settings-section',
+                    className: 'section settings-section',
                     children: [
                       jsx('div', {
-                        className: 'settings-section-title',
+                        className: 'section-title',
                         children: 'Notifications',
                       }),
                       jsx('p', {
@@ -607,10 +607,10 @@ export function SettingsModal({ onClose }) {
                     ],
                   }),
                   jsxs('div', {
-                    className: 'settings-section',
+                    className: 'section settings-section',
                     children: [
                       jsx('div', {
-                        className: 'settings-section-title',
+                        className: 'section-title',
                         children: 'Accessibility',
                       }),
                       jsx('button', {
@@ -635,10 +635,10 @@ export function SettingsModal({ onClose }) {
                     ],
                   }),
                   jsxs('div', {
-                    className: 'settings-section',
+                    className: 'section settings-section',
                     children: [
                       jsx('div', {
-                        className: 'settings-section-title',
+                        className: 'section-title',
                         children: 'Challenge Modes',
                       }),
                       jsx('p', {
@@ -683,10 +683,10 @@ export function SettingsModal({ onClose }) {
                     ],
                   }),
                   jsxs('div', {
-                    className: 'settings-section',
+                    className: 'section settings-section',
                     children: [
                       jsx('div', {
-                        className: 'settings-section-title',
+                        className: 'section-title',
                         children: 'Audio',
                       }),
                       jsx('p', {
@@ -713,10 +713,10 @@ export function SettingsModal({ onClose }) {
                     ],
                   }),
                   jsxs('div', {
-                    className: 'settings-section',
+                    className: 'section settings-section',
                     children: [
                       jsx('div', {
-                        className: 'settings-section-title',
+                        className: 'section-title',
                         children: 'Save Data',
                       }),
                       jsx('p', {
@@ -801,10 +801,10 @@ export function SettingsModal({ onClose }) {
                   }),
                   jsx(OfflinePanel, {}),
                   jsxs('div', {
-                    className: 'settings-section',
+                    className: 'section settings-section',
                     children: [
                       jsx('div', {
-                        className: 'settings-section-title',
+                        className: 'section-title',
                         children: 'Save Slots',
                       }),
                       jsx('p', {

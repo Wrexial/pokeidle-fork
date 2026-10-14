@@ -40,10 +40,10 @@ export function KeybindingsPanel() {
   }
   const hasConflict = [...keyCounts.values()].some((count) => count > 1)
   return jsxs('div', {
-    className: 'settings-section',
+    className: 'section settings-section',
     children: [
       jsx('div', {
-        className: 'settings-section-title',
+        className: 'section-title',
         children: 'Keybindings',
       }),
       jsx('p', {

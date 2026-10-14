@@ -120,7 +120,7 @@ export function VillainPanel() {
             className: 'villain-head-text',
             children: [
               jsx('div', {
-                className: 'location-section-title',
+                className: 'section-title inverse',
                 children: org.name,
               }),
               jsx('div', {

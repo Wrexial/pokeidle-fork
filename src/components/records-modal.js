@@ -174,10 +174,10 @@ export function RecordsModal({ onClose, inline = false }) {
           className: 'battle-info-content',
           children: [
             jsxs('div', {
-              className: 'records-section',
+              className: 'section records-section',
               children: [
                 jsxs('div', {
-                  className: 'records-section-title',
+                  className: 'section-title',
                   children: ['Achievements', ` · ${achieved.length}/${ACHIEVEMENTS.length}`],
                 }),
                 jsx('div', {
@@ -225,17 +225,17 @@ export function RecordsModal({ onClose, inline = false }) {
               jsxs(
                 'div',
                 {
-                  className: 'records-section',
+                  className: 'section records-section',
                   children: [
                     jsx('div', {
-                      className: 'records-section-title',
+                      className: 'section-title',
                       children: section.title,
                     }),
                     section.rows.map(([label, value]) =>
                       jsxs(
                         'div',
                         {
-                          className: 'records-row',
+                          className: 'section-row',
                           children: [
                             jsx('span', {
                               className: 'records-label',
@@ -256,10 +256,10 @@ export function RecordsModal({ onClose, inline = false }) {
               )
             ),
             jsxs('div', {
-              className: 'records-section',
+              className: 'section records-section',
               children: [
                 jsx('div', {
-                  className: 'records-section-title',
+                  className: 'section-title',
                   children: 'Regions',
                 }),
                 regions
@@ -279,7 +279,7 @@ export function RecordsModal({ onClose, inline = false }) {
                     return jsxs(
                       'div',
                       {
-                        className: 'records-row',
+                        className: 'section-row',
                         children: [
                           jsx('span', {
                             className: 'records-label',

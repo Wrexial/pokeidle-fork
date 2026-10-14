@@ -150,7 +150,7 @@ export const CatchSettingsModal = React.memo(
             className: 'catch-modal-route-settings',
             children: [
               jsx('div', {
-                className: 'catch-modal-section-title',
+                className: 'section-title',
                 children: 'Catch Mode',
               }),
               CATCH_MODE_OPTIONS.map(({ value: encounter, label: species, hint }) =>
@@ -226,7 +226,7 @@ export const CatchSettingsModal = React.memo(
             className: 'catch-modal-species-header',
             children: [
               jsx('span', {
-                className: 'catch-modal-section-title',
+                className: 'section-title',
                 children: 'Pokemon',
               }),
               jsxs('div', {

@@ -102,7 +102,7 @@ export function RouteEncounterGrid({
         className: 'pokedex-grid-header',
         children: [
           jsx('div', {
-            className: 'location-section-title',
+            className: 'section-title inverse',
             children: 'Wild Pokemon',
           }),
           exclusiveSpecies?.size

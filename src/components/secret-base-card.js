@@ -26,7 +26,7 @@ export function SecretBaseCard({ locationId }) {
     className: 'location-minigames secret-base-card',
     children: [
       jsxs('button', {
-        className: `location-section-title secret-base-toggle${collapsed ? '' : ' open'}`,
+        className: `section-title inverse secret-base-toggle${collapsed ? '' : ' open'}`,
         type: 'button',
         'aria-expanded': !collapsed,
         title: collapsed ? 'Show Secret Base' : 'Hide Secret Base',

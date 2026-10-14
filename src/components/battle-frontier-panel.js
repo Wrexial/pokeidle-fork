@@ -73,7 +73,7 @@ export function BattleFrontierPanel() {
     className: 'location-frontier',
     children: [
       jsxs('div', {
-        className: 'location-section-title',
+        className: 'section-title inverse',
         children: ['Battle Frontier'],
       }),
       jsx('div', {

@@ -115,9 +115,9 @@ export function OfflinePanel() {
 
   if (!supported) {
     return jsxs('div', {
-      className: 'settings-section',
+      className: 'section settings-section',
       children: [
-        jsx('div', { className: 'settings-section-title', children: 'Offline Play' }),
+        jsx('div', { className: 'section-title', children: 'Offline Play' }),
         jsx('p', {
           className: 'settings-hint',
           children: 'This browser cannot store the game files for offline play.',
@@ -128,9 +128,9 @@ export function OfflinePanel() {
 
   if (!available) {
     return jsxs('div', {
-      className: 'settings-section',
+      className: 'section settings-section',
       children: [
-        jsx('div', { className: 'settings-section-title', children: 'Offline Play' }),
+        jsx('div', { className: 'section-title', children: 'Offline Play' }),
         jsx('p', {
           className: 'settings-hint',
           children:
@@ -147,9 +147,9 @@ export function OfflinePanel() {
   const downloadedAll = plannedFiles > 0 && summary.count >= plannedFiles
 
   return jsxs('div', {
-    className: 'settings-section',
+    className: 'section settings-section',
     children: [
-      jsx('div', { className: 'settings-section-title', children: 'Offline Play' }),
+      jsx('div', { className: 'section-title', children: 'Offline Play' }),
       jsx('p', {
         className: 'settings-hint',
         children: `Download the static sprite for every Pokemon, plus every battle backdrop, item icon and data file (about ${formatBytes(

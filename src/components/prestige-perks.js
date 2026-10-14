@@ -16,7 +16,7 @@ export function PrestigePerks() {
         className: 'prestige-header',
         children: [
           jsxs('div', {
-            className: 'gym-section-title',
+            className: 'section-title inverse',
             children: ['Prestige Perks', ` \u00b7 ${points} PP`],
           }),
           invested > 0 &&

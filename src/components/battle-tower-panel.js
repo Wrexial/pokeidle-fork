@@ -68,7 +68,7 @@ export function BattleTowerPanel() {
     className: 'location-tower',
     children: [
       jsxs('div', {
-        className: 'location-section-title',
+        className: 'section-title inverse',
         children: ['Battle Tower', towerBest > 0 ? ` \u00b7 Best Floor ${towerBest}` : ''],
       }),
       jsx('div', {
@@ -126,7 +126,7 @@ export function BattleTowerPanel() {
             : 'ENTER THE BATTLE TOWER',
       }),
       jsxs('div', {
-        className: 'location-section-title',
+        className: 'section-title inverse',
         style: { marginTop: '10px' },
         children: 'Doubles Court',
       }),
@@ -151,7 +151,7 @@ export function BattleTowerPanel() {
         children: 'ENTER THE DOUBLES COURT',
       }),
       jsxs('div', {
-        className: 'location-section-title',
+        className: 'section-title inverse',
         style: { marginTop: '10px' },
         children: 'Triples Court',
       }),
@@ -176,7 +176,7 @@ export function BattleTowerPanel() {
         children: 'ENTER THE TRIPLES COURT',
       }),
       jsxs('div', {
-        className: 'location-section-title',
+        className: 'section-title inverse',
         style: { marginTop: '10px' },
         children: 'Rotation Court',
       }),
@@ -201,7 +201,7 @@ export function BattleTowerPanel() {
         children: 'ENTER THE ROTATION COURT',
       }),
       jsxs('div', {
-        className: 'location-section-title',
+        className: 'section-title inverse',
         style: { marginTop: '10px' },
         children: 'Free-for-All',
       }),

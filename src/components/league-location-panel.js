@@ -108,7 +108,7 @@ export function LeagueLocationPanel() {
       className: 'location-tower',
       children: [
         jsx('div', {
-          className: 'location-section-title',
+          className: 'section-title inverse',
           children: 'Pokemon League',
         }),
         jsx('div', {
@@ -124,7 +124,7 @@ export function LeagueLocationPanel() {
     className: 'location-tower',
     children: [
       jsx('div', {
-        className: 'location-section-title',
+        className: 'section-title inverse',
         children: isLeagueRematch ? `Pokemon League \u00b7 Rematch ${championLevelRange}` : 'Pokemon League',
       }),
       regionEliteFour.map((member) => {

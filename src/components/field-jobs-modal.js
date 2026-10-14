@@ -110,7 +110,7 @@ export function FieldJobsModal({ onClose }) {
                 return jsxs(
                   'div',
                   {
-                    className: 'field-job',
+                    className: 'section dark field-job',
                     children: [
                       jsxs('div', {
                         className: 'field-job-head',

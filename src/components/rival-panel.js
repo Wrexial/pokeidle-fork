@@ -68,7 +68,7 @@ export function RivalPanel() {
     className: 'location-tower rival-panel',
     children: [
       jsx('div', {
-        className: 'location-section-title',
+        className: 'section-title inverse',
         children: 'Rival',
       }),
       jsxs('div', {

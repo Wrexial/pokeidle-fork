@@ -80,7 +80,7 @@ export function GymPanel({ onOpenShop }) {
     className: 'gym-panel',
     children: [
       jsx('div', {
-        className: 'gym-section-title',
+        className: 'section-title inverse',
         style: { marginBottom: '4px' },
         children: `${region?.name ?? 'Kanto'} League`,
       }),
@@ -107,10 +107,10 @@ export function GymPanel({ onOpenShop }) {
         }),
       }),
       jsxs('div', {
-        className: 'gym-section',
+        className: 'section dark gym-section',
         children: [
           jsx('div', {
-            className: 'gym-section-title',
+            className: 'section-title inverse',
             children: badgeTrackLabel,
           }),
           regionGyms.map((leader, leaderIndex) => {
@@ -198,10 +198,10 @@ export function GymPanel({ onOpenShop }) {
       allBadgesEarned &&
         regionChampion &&
         jsxs('div', {
-          className: 'gym-section',
+          className: 'section dark gym-section',
           children: [
             jsxs('div', {
-              className: 'gym-section-title',
+              className: 'section-title inverse',
               children: [
                 eliteTrackLabel,
                 isLeagueRematch
@@ -315,10 +315,10 @@ export function GymPanel({ onOpenShop }) {
         state.unlockedLocations.includes(BATTLE_TOWER_LOCATION) &&
         state.currentLocation !== BATTLE_TOWER_LOCATION &&
         jsxs('div', {
-          className: 'gym-section',
+          className: 'section dark gym-section',
           children: [
             jsx('div', {
-              className: 'gym-section-title',
+              className: 'section-title inverse',
               children: 'Battle Tower',
             }),
             jsx('div', {
@@ -329,10 +329,10 @@ export function GymPanel({ onOpenShop }) {
         }),
       state.defeatedGyms.length > 0 &&
         jsxs('div', {
-          className: 'gym-section',
+          className: 'section dark gym-section',
           children: [
             jsx('div', {
-              className: 'gym-section-title',
+              className: 'section-title inverse',
               children: 'Victory Tokens',
             }),
             jsxs('div', {
@@ -353,10 +353,10 @@ export function GymPanel({ onOpenShop }) {
         }),
       isLeagueRematch &&
         jsxs('div', {
-          className: 'gym-section prestige-section',
+          className: 'section dark gym-section prestige-section',
           children: [
             jsxs('div', {
-              className: 'gym-section-title',
+              className: 'section-title inverse',
               children: ['Prestige', prestigeLevel > 0 ? ` · Level ${prestigeLevel}` : ''],
             }),
             jsx('div', {

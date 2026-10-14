@@ -1,7 +1,7 @@
-// The Dailies hub: one battle-bar button for the daily event, Mystery Gift,
-// quests & the Professor's story, the Pokewalker and Companion care. Each is an
-// inline sub-view behind a sub-tab (the Trainer hub's bag-tab styling), with a
-// claimable dot on any section that has something waiting.
+// The Dailies hub: one battle-bar button for the daily event, quests, the
+// Professor's story, Companion care, Mystery Gift and the Pokewalker. Each is
+// an inline sub-view behind a sub-tab (the Trainer hub's bag-tab styling), with
+// a claimable dot on any section that has something waiting.
 //
 // The top-bar button pulses off `hasClaimableDailies`, so a single icon in the
 // battle bar stands in for the five it replaced.
@@ -19,7 +19,7 @@ import { MysteryGiftModal } from './mystery-gift-modal.js'
 import { PokewalkerPanel } from './pokewalker-panel.js'
 import { QuestsModal } from './quests-modal.js'
 
-/** @typedef {'event' | 'mystery' | 'quests' | 'pokewalker' | 'companion'} DailyHubTab */
+/** @typedef {'event' | 'quests' | 'story' | 'companion' | 'mystery' | 'pokewalker'} DailyHubTab */
 
 /**
  * @typedef {{
@@ -46,22 +46,16 @@ export function dailyHubTabs(state) {
       claimable: !!state.dailyEvent && !state.dailyEvent.claimed,
     },
     {
-      id: 'mystery',
-      label: 'Gifts',
-      icon: '\u{1f39f}\ufe0f',
-      claimable: claimableMysteryGifts(state).length > 0,
-    },
-    {
       id: 'quests',
       label: 'Quests',
       icon: '\u{1f4dc}',
-      claimable: hasClaimableQuests(state.quests) || hasClaimableProfessorStory(state),
+      claimable: hasClaimableQuests(state.quests),
     },
     {
-      id: 'pokewalker',
-      label: 'Walker',
-      icon: '\u{1f45f}',
-      claimable: (state.pokewalker?.steps ?? 0) >= POKEWALKER_MIN_COST,
+      id: 'story',
+      label: 'Story',
+      icon: '\u{1f4d6}',
+      claimable: hasClaimableProfessorStory(state),
     },
     ...(state.unlockedLocations?.includes('alola-poke-pelago')
       ? [
@@ -73,6 +67,18 @@ export function dailyHubTabs(state) {
           },
         ]
       : []),
+    {
+      id: 'mystery',
+      label: 'Gifts',
+      icon: '\u{1f39f}\ufe0f',
+      claimable: claimableMysteryGifts(state).length > 0,
+    },
+    {
+      id: 'pokewalker',
+      label: 'Walker',
+      icon: '\u{1f45f}',
+      claimable: (state.pokewalker?.steps ?? 0) >= POKEWALKER_MIN_COST,
+    },
   ]
 }
 
@@ -140,17 +146,18 @@ export function DailyHubModal({ onClose }) {
             ),
           }),
           activeTab === 'event' && jsx(DailyEventModal, { inline: true }),
-          activeTab === 'mystery' && jsx(MysteryGiftModal, { inline: true }),
-          activeTab === 'quests' && jsx(QuestsModal, { inline: true }),
-          activeTab === 'pokewalker' &&
-            jsx('div', {
-              className: 'modal-content pokewalker-modal-content',
-              children: jsx(PokewalkerPanel, {}),
-            }),
+          activeTab === 'quests' && jsx(QuestsModal, { view: 'daily' }),
+          activeTab === 'story' && jsx(QuestsModal, { view: 'story' }),
           activeTab === 'companion' &&
             jsx('div', {
               className: 'modal-content companion-modal-content',
               children: jsx(CompanionCarePanel, {}),
+            }),
+          activeTab === 'mystery' && jsx(MysteryGiftModal, { inline: true }),
+          activeTab === 'pokewalker' &&
+            jsx('div', {
+              className: 'modal-content pokewalker-modal-content',
+              children: jsx(PokewalkerPanel, {}),
             }),
         ],
       }),

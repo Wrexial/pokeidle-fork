@@ -1,6 +1,6 @@
-// Split from a grouped component file.
+// The Dailies hub's Quests and Story sub-views: the daily quest list and the
+// chained regional Professor's story, rendered inline by `daily-hub-modal.js`.
 
-import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
 import { regions } from '../data/gameData.js'
@@ -17,67 +17,18 @@ function chapterRewardLabel(chapter) {
   return chapter.reward?.charm ? `${parts ? `${parts} \u00b7 ` : ''}${chapter.reward.charm}` : parts
 }
 
-/** @param {{ onClose?: () => void, inline?: boolean }} props */
-export function QuestsModal({ onClose, inline = false }) {
+/**
+ * The daily quest list (`view: 'daily'`) or the Professor's story
+ * (`view: 'story'`). Rendered inline as the Dailies hub's two sub-views.
+ * @param {{ view?: 'daily' | 'story' }} props
+ */
+export function QuestsModal({ view = 'daily' }) {
   const { state, dispatch } = useGame(),
     quests = state.quests?.list ?? [],
-    story = professorStoryStatus(state),
-    [tab, setTab] = React.useState(/** @type {'daily' | 'story'} */ ('daily')),
-    content = jsxs('div', {
-      className: 'daily-hub-quests',
-      children: [
-        jsxs('div', {
-          className: 'bag-tabs quests-tabs',
-          children: [
-            jsx('button', {
-              className: `bag-tab parchment${tab === 'daily' ? ' active' : ''}`,
-              onClick: () => setTab('daily'),
-              children: 'Daily',
-            }),
-            jsx('button', {
-              className: `bag-tab parchment${tab === 'story' ? ' active' : ''}`,
-              onClick: () => setTab('story'),
-              children: 'Story',
-            }),
-            story.chapters.some(
-              /** @param {any} chapter */ (chapter) => chapter.claimable
-            )
-              ? jsx('span', { className: 'quests-tab-dot', title: 'Claimable reward', children: '\u25cf' })
-              : null,
-          ],
-        }),
-        jsx('div', {
-          className: 'modal-content quests-content',
-          children: tab === 'story' ? renderStory(story, dispatch) : renderDaily(quests, dispatch),
-        }),
-      ],
-    })
-  if (inline) return content
+    story = professorStoryStatus(state)
   return jsx('div', {
-    className: 'modal-overlay',
-    onClick: onClose,
-    children: jsxs('div', {
-      className: 'modal quests-modal',
-      onClick: /** @param {React.MouseEvent} mouseEvent */ (mouseEvent) =>
-        mouseEvent.stopPropagation(),
-      children: [
-        jsxs('div', {
-          className: 'modal-header',
-          children: [
-            jsx('span', {
-              className: 'modal-title',
-              children: tab === 'daily' ? 'Daily Quests' : "Professor's Story",
-            }),
-            jsx('button', {
-              className: 'modal-close',
-              onClick: onClose,
-              children: 'X',
-            }),
-          ],
-        }),
-        content,
-      ],
-    }),
+    className: 'modal-content quests-content',
+    children: view === 'story' ? renderStory(story, dispatch) : renderDaily(quests, dispatch),
   })
 }
 

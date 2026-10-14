@@ -8279,17 +8279,6 @@ img {
     margin: 0
 }
 
-.quests-tabs {
-    flex: none;
-    align-items: center;
-    padding: 6px 12px 0
-}
-
-.quests-tab-dot {
-    color: #c8901c;
-    font-size: 10px
-}
-
 .story-progress {
     display: flex;
     justify-content: space-between;

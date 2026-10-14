@@ -13,8 +13,8 @@ import { TrainerCardPanel } from './trainer-card-panel.js'
 const BACKPACK_TABS = [
   { id: 'trainer', label: 'Trainer' },
   { id: 'dex', label: 'Dex' },
-  { id: 'wares', label: 'Kecleon Wares' },
   { id: 'items', label: 'Items' },
+  { id: 'wares', label: 'Kecleon Wares' },
 ]
 
 export function BackpackPanel() {

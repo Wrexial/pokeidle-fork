@@ -21,8 +21,8 @@ import { TrainerCard } from './trainer-card.js'
 // panel hosts the card itself plus the League, Records and Run Summary views
 // that used to sit in their own top-level tabs.
 const TRAINER_TABS = [
-  { id: 'card', label: 'Card' },
   { id: 'league', label: 'League' },
+  { id: 'card', label: 'Card' },
   { id: 'records', label: 'Records' },
   { id: 'summary', label: 'Summary' },
 ]

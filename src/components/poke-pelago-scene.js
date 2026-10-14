@@ -57,7 +57,7 @@ export function PokePelagoScene() {
         className: 'minigame-scene-body pelago-scene-body',
         children: [
           jsx('div', {
-            className: 'pelago-tabs',
+            className: 'bag-tabs pelago-tabs',
             children: PELAGO_TABS.map((entry) => {
               const alert =
                 (entry.id === 'companion' && canCare) ||
@@ -66,7 +66,7 @@ export function PokePelagoScene() {
               return jsxs(
                 'button',
                 {
-                  className: `pelago-tab${tab === entry.id ? ' active' : ''}`,
+                  className: `bag-tab parchment${tab === entry.id ? ' active' : ''}`,
                   onClick: () => setTab(entry.id),
                   children: [
                     `${entry.icon} ${entry.label}`,

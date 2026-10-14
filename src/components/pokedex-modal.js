@@ -158,7 +158,7 @@ export function PokedexModal({ onClose, inline = false }) {
           ],
         }),
         jsx('div', {
-          className: 'pokedex-gen-tabs',
+          className: 'bag-tabs pokedex-gen-tabs',
           children: [
             ...[{ id: 0, label: 'All' }]
               .concat(Array.from({ length: 9 }, (_, i) => ({ id: i + 1, label: String(i + 1) })))
@@ -166,7 +166,7 @@ export function PokedexModal({ onClose, inline = false }) {
                 jsx(
                   'button',
                   {
-                    className: `pokedex-gen-tab${gen === option.id ? ' active' : ''}`,
+                    className: `bag-tab parchment${gen === option.id ? ' active' : ''}`,
                     onClick: () => setGen(option.id),
                     children: option.label,
                   },
@@ -176,7 +176,7 @@ export function PokedexModal({ onClose, inline = false }) {
             jsx(
               'button',
               {
-                className: `pokedex-search-toggle${view === 'forms' ? ' active' : ''}`,
+                className: `bag-tab parchment pokedex-search-toggle${view === 'forms' ? ' active' : ''}`,
                 onClick: () => setView(view === 'forms' ? 'grid' : 'forms'),
                 title: 'Living Dex form completion',
                 'aria-label': 'Living Dex form completion',
@@ -187,7 +187,7 @@ export function PokedexModal({ onClose, inline = false }) {
             jsx(
               'button',
               {
-                className: `pokedex-search-toggle${searchOpen ? ' active' : ''}`,
+                className: `bag-tab parchment pokedex-search-toggle${searchOpen ? ' active' : ''}`,
                 onClick: () => {
                   // Collapsing clears the query so the grid isn't left filtered
                   // with the control hidden.
@@ -262,10 +262,10 @@ export function PokedexModal({ onClose, inline = false }) {
                 children: [
                   slotForms.length > 0
                     ? jsx('div', {
-                        className: 'pokedex-form-tabs',
+                        className: 'bag-tabs pokedex-form-tabs',
                         children: [
                           jsx('button', {
-                            className: `pokedex-form-tab${activeKey === selected ? ' active' : ''}`,
+                            className: `bag-tab parchment${activeKey === selected ? ' active' : ''}`,
                             onClick: () => setFormKey(null),
                             children: formLabelFor(selected) ?? 'Base',
                           }),
@@ -273,7 +273,7 @@ export function PokedexModal({ onClose, inline = false }) {
                             jsx(
                               'button',
                               {
-                                className: `pokedex-form-tab${activeKey === formKey ? ' active' : ''}`,
+                                className: `bag-tab parchment${activeKey === formKey ? ' active' : ''}`,
                                 onClick: () => setFormKey(formKey),
                                 title: pokemonSpecies[formKey].name,
                                 children: formLabelFor(formKey) ?? pokemonSpecies[formKey].name,

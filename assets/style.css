@@ -6547,18 +6547,21 @@ img {
 }
 
 .catch-modal-close {
-    background: none;
-    border: 1px solid #483828;
-    color: #483828;
-    font-size: 7px;
+    flex: 0 0 auto;
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    padding: 1px 6px;
+    background: #685040;
+    color: var(--parchment);
+    border: 2px solid #483828;
+    border-radius: 0;
     cursor: pointer;
-    padding: 0 3px;
-    line-height: 1.4
+    font-weight: 700;
+    box-shadow: 1px 1px #0000004d
 }
 
 .catch-modal-close:hover {
-    background: #483828;
-    color: var(--parchment)
+    background: #786050
 }
 
 .catch-modal-route-settings {
@@ -6708,6 +6711,13 @@ img {
     border-bottom: 2px solid #3a1e10
 }
 
+/* --- Tab system -----------------------------------------------------------
+   Top-level navigation uses `.tab-bar` / `.tab-btn`; every secondary view (a
+   panel or modal's sub-views, category and generation filters) uses the
+   `.bag-tabs` / `.bag-tab` pill strip — on a `.sub-tab-bar` strip when it needs
+   its own header row — with `.bag-tab.parchment` on light surfaces. Keep new
+   sub-tab strips on these classes instead of adding another `-tab` family. All
+   close buttons use `.battle-info-close`. ---------------------------------- */
 .bag-tabs {
     display: flex;
     flex-wrap: wrap;
@@ -6717,6 +6727,8 @@ img {
 }
 
 .bag-tab {
+    position: relative;
+    font-family: inherit;
     font-size: 7px;
     padding: 2px 5px;
     background: #4a3426;
@@ -6737,6 +6749,24 @@ img {
     background: var(--gold);
     border-color: var(--gold-dark);
     color: #1a1008
+}
+
+.bag-tab.parchment {
+    background: #e8dcc0;
+    color: #5a4838;
+    border-color: #b8a878
+}
+
+.bag-tab.parchment:hover {
+    background: #f0e6cc;
+    color: #3a2818;
+    border-color: #8a6820
+}
+
+.bag-tab.parchment.active {
+    background: #6a4e30;
+    color: #f0e0b0;
+    border-color: #8a6820
 }
 
 .bag-header-money {
@@ -7337,32 +7367,8 @@ img {
 }
 
 .pokedex-gen-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3px;
+    flex: none;
     margin: 6px 0
-}
-
-.pokedex-gen-tab {
-    flex: 1 0 auto;
-    font-family: var(--font-pixel);
-    font-size: 7px;
-    padding: 3px 6px;
-    color: #5a4838;
-    background: #e8dcc0;
-    border: 2px solid #b8a878;
-    cursor: pointer;
-    transition: .1s
-}
-
-.pokedex-gen-tab:hover {
-    border-color: #8a6820
-}
-
-.pokedex-gen-tab.active {
-    color: #f0e0b0;
-    background: #6a4e30;
-    border-color: #8a6820
 }
 
 .pokedex-search {
@@ -7387,25 +7393,7 @@ img {
 
 .pokedex-search-toggle {
     flex: 0 0 auto;
-    margin-left: auto;
-    font-family: var(--font-pixel);
-    font-size: 7px;
-    padding: 3px 6px;
-    color: #5a4838;
-    background: #e8dcc0;
-    border: 2px solid #b8a878;
-    cursor: pointer;
-    transition: .1s
-}
-
-.pokedex-search-toggle:hover {
-    border-color: #8a6820
-}
-
-.pokedex-search-toggle.active {
-    color: #f0e0b0;
-    background: #6a4e30;
-    border-color: #8a6820
+    margin-left: auto
 }
 
 .pokedex-grid-empty {
@@ -7416,18 +7404,22 @@ img {
 }
 
 .pokedex-modal-close {
-    background: none;
-    border: 1px solid #483828;
-    color: #3a2818;
-    font-size: 7px;
+    flex: 0 0 auto;
+    margin-left: 8px;
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    padding: 1px 6px;
+    background: #685040;
+    color: var(--parchment);
+    border: 2px solid #483828;
+    border-radius: 0;
     cursor: pointer;
-    padding: 1px 4px;
-    line-height: 1
+    font-weight: 700;
+    box-shadow: 1px 1px #0000004d
 }
 
 .pokedex-modal-close:hover {
-    background: #483828;
-    color: var(--parchment)
+    background: #786050
 }
 
 .pokedex-modal .pokedex-grid {
@@ -7458,30 +7450,7 @@ img {
 }
 
 .pokedex-form-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3px
-}
-
-.pokedex-form-tab {
-    font-family: var(--font-pixel);
-    font-size: 7px;
-    padding: 2px 6px;
-    color: #5a4838;
-    background: #e8dcc0;
-    border: 1px solid #b8a878;
-    cursor: pointer;
-    transition: .1s
-}
-
-.pokedex-form-tab:hover {
-    border-color: #8a6820
-}
-
-.pokedex-form-tab.active {
-    color: #f0e0b0;
-    background: #6a4e30;
-    border-color: #8a6820
+    flex: none
 }
 
 .pokedex-detail-header {
@@ -7499,18 +7468,19 @@ img {
     margin-left: auto;
     flex: 0 0 auto;
     font-family: var(--font-pixel);
-    font-size: 7px;
-    line-height: 1;
-    padding: 1px 4px;
-    color: #3a2818;
-    background: none;
-    border: 1px solid #483828;
-    cursor: pointer
+    font-size: 8px;
+    padding: 1px 6px;
+    background: #685040;
+    color: var(--parchment);
+    border: 2px solid #483828;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 1px 1px #0000004d
 }
 
 .pokedex-detail-close:hover {
-    background: #483828;
-    color: var(--parchment)
+    background: #786050
 }
 
 .pokedex-modal-detail .stats-panel-identity {
@@ -8376,26 +8346,9 @@ img {
 }
 
 .quests-tabs {
-    display: flex;
+    flex: none;
     align-items: center;
-    gap: 6px;
     padding: 6px 12px 0
-}
-
-.quests-tab {
-    font-size: 8px;
-    font-weight: 700;
-    padding: 4px 12px;
-    color: #5a4838;
-    background: #00000010;
-    border: 2px solid #a89870;
-    border-bottom: none;
-    cursor: pointer
-}
-
-.quests-tab.active {
-    color: #2a1808;
-    background: var(--gold)
 }
 
 .quests-tab-dot {
@@ -9578,22 +9531,7 @@ img {
 }
 
 .bank-tabs {
-    display: flex;
-    gap: 4px
-}
-
-.bank-tab {
-    background: none;
-    border: 1px solid #483828;
-    color: #483828;
-    font-size: 7px;
-    padding: 3px 5px;
-    cursor: pointer
-}
-
-.bank-tab.active {
-    background: #483828;
-    color: var(--parchment)
+    flex: none
 }
 
 .bank-message {
@@ -13570,32 +13508,8 @@ img {
 }
 
 .pelago-tabs {
-    display: flex;
-    gap: 6px;
+    flex: none;
     margin-bottom: 2px
-}
-
-.pelago-tab {
-    position: relative;
-    flex: 1;
-    padding: 7px 8px;
-    font: inherit;
-    font-size: 9px;
-    font-weight: 700;
-    color: #3a2818;
-    background: #00000012;
-    border: 2px solid #483828;
-    cursor: pointer
-}
-
-.pelago-tab:hover {
-    background: #00000022
-}
-
-.pelago-tab.active {
-    background: var(--gold);
-    border-color: var(--gold-dark);
-    color: #1a1008
 }
 
 .pelago-tab-dot {
@@ -19607,16 +19521,15 @@ img {
     flex: none
 }
 
-/* The Trainer hub's sub-tabs use the Items tab's compact pill cluster rather
-   than the stretched top-level tab style. */
-.trainer-tab-bar {
+/* The dark strip a sub-tab row sits on (Trainer hub, Dailies). */
+.sub-tab-bar {
     flex: none;
     padding: 4px 6px;
     background: linear-gradient(180deg,#6a4030,#5a3020);
     border-bottom: 2px solid #3a1e10
 }
 
-.trainer-tab-bar .bag-tab {
+.sub-tab-bar .bag-tab {
     font-size: 7px;
     padding: 3px 6px
 }
@@ -19894,30 +19807,7 @@ img {
 }
 
 .form-dex-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 3px
-}
-
-.form-dex-filter-tab {
-    font-family: var(--font-pixel);
-    font-size: 7px;
-    padding: 2px 5px;
-    color: #5a4838;
-    background: #e8dcc0;
-    border: 1px solid #b8a878;
-    cursor: pointer;
-    transition: .1s
-}
-
-.form-dex-filter-tab:hover {
-    border-color: #8a6820
-}
-
-.form-dex-filter-tab.active {
-    color: #f0e0b0;
-    background: #6a4e30;
-    border-color: #8a6820
+    flex: none
 }
 
 .form-dex-families {

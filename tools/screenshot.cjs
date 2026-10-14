@@ -445,7 +445,7 @@ async function main() {
     await cdp.dismissTutorial()
     await cdp.screenshot(path.join(OUT, '02-pelago-companion.png'))
     await cdp.eval(
-      `(() => { const t = [...document.querySelectorAll('.pelago-tab')].find((el) => /Islands/.test(el.textContent)); t && t.click(); return !!t })()`
+      `(() => { const t = [...document.querySelectorAll('.pelago-tabs .bag-tab')].find((el) => /Islands/.test(el.textContent)); t && t.click(); return !!t })()`
     )
     await sleep(300)
     await cdp.screenshot(path.join(OUT, '03-pelago-islands.png'))
@@ -459,7 +459,7 @@ async function main() {
     )
     await sleep(200)
     await cdp.eval(
-      `(() => { const t = [...document.querySelectorAll('.pelago-tab')].find((el) => /Berry/.test(el.textContent)); t && t.click(); return !!t })()`
+      `(() => { const t = [...document.querySelectorAll('.pelago-tabs .bag-tab')].find((el) => /Berry/.test(el.textContent)); t && t.click(); return !!t })()`
     )
     await sleep(300)
     await cdp.screenshot(path.join(OUT, '04-pelago-garden.png'))
@@ -1189,9 +1189,9 @@ async function main() {
     await cdp.eval(
       `(() => { const b = document.querySelector('.patch-notes-dismiss-btn'); if (b) b.click(); return true })()`
     )
-    await cdp.waitFor(`!!document.querySelector('.trainer-tab-bar')`, 8000, 'trainer tabs')
+    await cdp.waitFor(`!!document.querySelector('.trainer-card-panel .sub-tab-bar')`, 8000, 'trainer tabs')
     const openedSummary = await cdp.eval(
-      `(() => { const b = [...document.querySelectorAll('.trainer-tab-bar .bag-tab')].find((el) => el.textContent === 'Summary'); if (!b) return false; b.click(); return true })()`
+      `(() => { const b = [...document.querySelectorAll('.trainer-card-panel .sub-tab-bar .bag-tab')].find((el) => el.textContent === 'Summary'); if (!b) return false; b.click(); return true })()`
     )
     if (!openedSummary) throw new Error('summary sub-tab not found')
     await cdp.waitFor(`!!document.querySelector('.run-summary-modal')`, 5000, 'summary modal')

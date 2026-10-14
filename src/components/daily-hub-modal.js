@@ -119,7 +119,7 @@ export function DailyHubModal({ onClose }) {
             ],
           }),
           jsx('div', {
-            className: 'bag-tabs trainer-tab-bar daily-hub-tabs',
+            className: 'bag-tabs sub-tab-bar daily-hub-tabs',
             children: tabs.map((tabDef) =>
               jsxs(
                 'button',

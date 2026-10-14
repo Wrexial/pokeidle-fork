@@ -117,17 +117,17 @@ export function BankModal({ onClose }) {
               children: `Stored: ${bank.entries.length} / ${BANK_CAPACITY}`,
             }),
             jsxs('div', {
-              className: 'bank-tabs',
+              className: 'bag-tabs bank-tabs',
               children: [
                 jsx('button', {
-                  className: `bank-tab${mode === 'deposit' ? ' active' : ''}`,
+                  className: `bag-tab parchment${mode === 'deposit' ? ' active' : ''}`,
                   onClick: () => {
                     ;(setMode('deposit'), setError(''), setNotice(''))
                   },
                   children: `Deposit (${depositable.length})`,
                 }),
                 jsx('button', {
-                  className: `bank-tab${mode === 'withdraw' ? ' active' : ''}`,
+                  className: `bag-tab parchment${mode === 'withdraw' ? ' active' : ''}`,
                   onClick: () => {
                     ;(setMode('withdraw'), setError(''), setNotice(''))
                   },

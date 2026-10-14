@@ -321,7 +321,7 @@ export function TrainerCardPanel({ onClose, inline = false, onOpenShop }) {
     className: `trainer-card-panel${inline ? ' inline' : ''}`,
     children: [
       jsx('div', {
-        className: 'bag-tabs trainer-tab-bar',
+        className: 'bag-tabs sub-tab-bar',
         children: TRAINER_TABS.map((tabDef) =>
           jsx(
             'button',

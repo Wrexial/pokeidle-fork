@@ -139,7 +139,7 @@ export function FormDexPanel({ onSelectSpecies }) {
         className: 'form-dex-section form-dex-section-grow',
         children: [
           jsx('div', {
-            className: 'form-dex-filters',
+            className: 'bag-tabs form-dex-filters',
             children: [
               ...[{ id: 0, label: 'All' }]
                 .concat(Array.from({ length: 9 }, (_, index) => ({ id: index + 1, label: String(index + 1) })))
@@ -147,7 +147,7 @@ export function FormDexPanel({ onSelectSpecies }) {
                   jsx(
                     'button',
                     {
-                      className: `form-dex-filter-tab${generation === option.id ? ' active' : ''}`,
+                      className: `bag-tab parchment${generation === option.id ? ' active' : ''}`,
                       onClick: () => setGeneration(option.id),
                       children: option.label,
                     },
@@ -155,7 +155,7 @@ export function FormDexPanel({ onSelectSpecies }) {
                   )
                 ),
               jsx('button', {
-                className: `form-dex-filter-tab${showBaseOnly ? ' active' : ''}`,
+                className: `bag-tab parchment${showBaseOnly ? ' active' : ''}`,
                 onClick: () => setShowBaseOnly(!showBaseOnly),
                 title: 'Also list families with no alternate forms',
                 children: showBaseOnly ? 'All families' : 'Forms only',

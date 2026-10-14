@@ -127,7 +127,7 @@ export function SecretBaseScene() {
         className: 'minigame-scene-body secret-base-body',
         children: [
           jsx('div', {
-            className: 'pelago-tabs',
+            className: 'bag-tabs pelago-tabs',
             children: [
               { id: 'base', label: 'Base', icon: '\u{1F6CB}\uFE0F' },
               { id: 'shop', label: 'Shop', icon: '\u{1F6D2}' },
@@ -135,7 +135,7 @@ export function SecretBaseScene() {
               jsxs(
                 'button',
                 {
-                  className: `pelago-tab${tab === entry.id ? ' active' : ''}`,
+                  className: `bag-tab parchment${tab === entry.id ? ' active' : ''}`,
                   onClick: () => setTab(/** @type {any} */ (entry.id)),
                   children: [entry.icon, ' ', entry.label],
                 },

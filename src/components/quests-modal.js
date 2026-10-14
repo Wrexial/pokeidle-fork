@@ -27,15 +27,15 @@ export function QuestsModal({ onClose, inline = false }) {
       className: 'daily-hub-quests',
       children: [
         jsxs('div', {
-          className: 'quests-tabs',
+          className: 'bag-tabs quests-tabs',
           children: [
             jsx('button', {
-              className: `quests-tab${tab === 'daily' ? ' active' : ''}`,
+              className: `bag-tab parchment${tab === 'daily' ? ' active' : ''}`,
               onClick: () => setTab('daily'),
               children: 'Daily',
             }),
             jsx('button', {
-              className: `quests-tab${tab === 'story' ? ' active' : ''}`,
+              className: `bag-tab parchment${tab === 'story' ? ' active' : ''}`,
               onClick: () => setTab('story'),
               children: 'Story',
             }),

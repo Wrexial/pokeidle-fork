@@ -17,36 +17,22 @@ renumbered, so the gaps below are items that shipped or were dropped.
 
 ### Tier 1 — Worth the effort
 
-_(empty — the last Tier 1 item, #77, shipped.)_
+_(empty)_
 
 ### Tier 2 — Big, defer
 
-_(empty — the game stays client-only, so the online-sync idea was dropped.)_
+_(empty)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-_(empty — every shipped system's follow-ups are done.)_
-
-### Feature ideas (0.25.0 brainstorm)
-
-A backlog of candidate features gathered from a brainstorm. Each has a stable
-number and full detail further down. Promote into the tiers above once scoped.
-
-- **Strong candidates:** #78 Seasons · #83 Trainer Card, titles & avatar.
-- **Big but wanted:** #86 Pokemon Bank.
-- **Medium:** #85 Form dex · #89 Mystery Gift ·
-  #90 Professor's story · #91 Auto-battle policy · #92 Raid events.
-- **Quick wins:** #95 Hide-and-seek · #98 Hotkeys.
+_(empty)_
 
 ---
 
-## Feature ideas
+## Reference notes
 
-The numbered entries below are the brainstorm referenced from the priority
-order above. Effort uses the same scale (S < S–M < M < M–L < L); gain is
-player-facing value (★ = nice to have, ★★★★★ = core missing feature).
+### Map cleanup reference maps
 
-## Map cleanup reference maps
 All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.
 `tools/map-compare/overlay-region-maps.py` draws the game's nodes on top of each
 reference image (`tools/map-compare/refs/`, fetched by `fetch-refs.cjs`) to
@@ -59,15 +45,7 @@ Reference images kept for future checks:
 - **Kalos** — https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Fm77o7e9nfw371.jpg
 - **Unova** — https://upload.wikimedia.org/wikipedia/commons/2/2b/Unova_Map.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail_unscaled&_=20231229170134
 
----
-
-## UI polish batch
-
-Panel-layout and top-bar cleanups: reclaim vertical space, make the sub-tab
-hierarchy read, and fold the daily menus together. All are UI-only unless
-noted.
-
-## Useful references when picking these up
+### Useful references when picking these up
 
 - **Data-pipeline template:** `tools/fetch-breeding-data.cjs` — cached PokéAPI
   fetch, form ids resolved to base species, writes a `public/data/*.json`, then

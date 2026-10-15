@@ -224,7 +224,7 @@
   "unlockOrder": 800004.5,
   "position": {
    "x": 38.5,
-   "y": 58
+   "y": 59
   },
   "mart": {
    "name": "Galar Mart",
@@ -373,7 +373,7 @@
   },
   "unlockOrder": 800006.5001,
   "position": {
-   "x": 48.5,
+   "x": 50.5,
    "y": 49
   },
   "mart": {
@@ -1434,7 +1434,7 @@
   "unlockOrder": 800006.0001,
   "position": {
    "x": 62.24,
-   "y": 48.32
+   "y": 48.2
   },
   "biome": "grassland"
  },
@@ -1460,7 +1460,7 @@
   "unlockOrder": 800006.001,
   "position": {
    "x": 70.92,
-   "y": 50.85
+   "y": 50.73
   },
   "biome": "swamp"
  },
@@ -1486,7 +1486,7 @@
   "unlockOrder": 800006.002,
   "position": {
    "x": 75.53,
-   "y": 57.25
+   "y": 57.12
   },
   "biome": "cave"
  },
@@ -1553,8 +1553,8 @@
   },
   "unlockOrder": 800005.9,
   "position": {
-   "x": 62.23866952184723,
-   "y": 59.12197207444398
+   "x": 62.24,
+   "y": 59
   },
   "biome": "grassland"
  },
@@ -1579,7 +1579,7 @@
   "unlockOrder": 800006.003,
   "position": {
    "x": 73.93,
-   "y": 64.52
+   "y": 64.4
   },
   "biome": "forest",
   "background": "/backgrounds/grassland.webp"
@@ -1605,7 +1605,7 @@
   "unlockOrder": 800006.004,
   "position": {
    "x": 66.86,
-   "y": 69.27
+   "y": 69.15
   },
   "biome": "coast",
   "background": "/backgrounds/beach.webp"
@@ -1631,7 +1631,7 @@
   "unlockOrder": 800006.005,
   "position": {
    "x": 57.62,
-   "y": 69.27
+   "y": 69.15
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.webp"
@@ -1657,7 +1657,7 @@
   "unlockOrder": 800006.006,
   "position": {
    "x": 50.55,
-   "y": 64.52
+   "y": 64.4
   },
   "biome": "desert",
   "background": "/backgrounds/grassland.webp"
@@ -1682,8 +1682,8 @@
   },
   "unlockOrder": 800006.007,
   "position": {
-   "x": 48.94,
-   "y": 57.25
+   "x": 48.95,
+   "y": 57.12
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.webp"
@@ -1709,7 +1709,7 @@
   "unlockOrder": 800006.008,
   "position": {
    "x": 53.56,
-   "y": 50.85
+   "y": 50.73
   },
   "biome": "coast",
   "background": "/backgrounds/beach.webp"

@@ -14,8 +14,8 @@
   },
   "unlockOrder": 899999,
   "position": {
-   "x": 49.54075628588747,
-   "y": 83.64000708033167
+   "x": 48.9,
+   "y": 83.64
   },
   "mart": {
    "name": "Paldea Mart",
@@ -357,8 +357,8 @@
   },
   "unlockOrder": 910009,
   "position": {
-   "x": 76.7859065640899,
-   "y": 67.64342764350816
+   "x": 76.25,
+   "y": 67.64
   },
   "mart": {
    "name": "Paldea Mart",
@@ -858,7 +858,7 @@
   "unlockOrder": 910014,
   "position": {
    "x": 11.99,
-   "y": 41.935
+   "y": 41.19
   },
   "mart": {
    "name": "Paldea Mart",

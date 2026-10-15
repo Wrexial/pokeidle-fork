@@ -390,7 +390,7 @@
   "unlockOrder": 600007.5,
   "position": {
    "x": 17,
-   "y": 54
+   "y": 53
   },
   "mart": {
    "name": "Kalos Mart",
@@ -528,7 +528,7 @@
   "unlockOrder": 600010,
   "position": {
    "x": 11,
-   "y": 51.5
+   "y": 53
   },
   "biome": "grassland"
  },

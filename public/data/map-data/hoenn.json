@@ -1673,7 +1673,7 @@
   "unlockOrder": 300135,
   "position": {
    "x": 78.5,
-   "y": 54.5
+   "y": 55.5
   },
   "biome": "coast"
  },
@@ -2078,7 +2078,7 @@
   "unlockOrder": 300140,
   "position": {
    "x": 37,
-   "y": 31
+   "y": 30
   },
   "background": "/backgrounds/mountain.webp",
   "biome": "mountain"

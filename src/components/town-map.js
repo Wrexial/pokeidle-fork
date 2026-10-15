@@ -413,7 +413,9 @@ export function TownMap() {
           cx = (Math.min(...xs) + Math.max(...xs)) / 2,
           cy = (Math.min(...ys) + Math.max(...ys)) / 2,
           span = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys), 1),
-          boxPx = Math.max((span / 100) * WORLD_SIZE, 1),
+          // Pad the box so the labels sitting below the outermost nodes aren't
+          // clipped by the canvas edge.
+          boxPx = Math.max(((span + 6) / 100) * WORLD_SIZE, 1),
           // Fit the area's bounding box into ~85% of the smaller canvas side.
           scale = Math.min(
             MAX_SCALE,
@@ -636,6 +638,76 @@ export function TownMap() {
   // node and hovered nodes still label themselves, and the focused area view
   // forces every label).
   const labelsVisible = view.scale >= 0.8
+
+  // Keep labels from colliding when a few towns sit close: measure the rendered
+  // labels and flip a node's label above its dot when the below position would
+  // overlap one already placed. Overlap is zoom-invariant, so this only needs to
+  // recompute when the visible node set or the region/area changes.
+  const [labelAbove, setLabelAbove] = React.useState(() => /** @type {Set<string>} */ (new Set()))
+  const activeKey = activeLocationIds.join('|')
+  React.useLayoutEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas || !labelsVisible) {
+      setLabelAbove((previous) => (previous.size ? new Set() : previous))
+      return
+    }
+    /** @type {{ id: string, cx: number, cy: number, halfHeight: number, width: number, height: number }[]} */
+    const items = []
+    for (const element of canvas.querySelectorAll('.map-node')) {
+      const label = element.querySelector('.map-node-label'),
+        id = element.getAttribute('data-location-id')
+      if (!label || !id) continue
+      const nodeRect = element.getBoundingClientRect(),
+        labelRect = label.getBoundingClientRect()
+      if (labelRect.width === 0) continue
+      items.push({
+        id,
+        cx: nodeRect.left + nodeRect.width / 2,
+        cy: nodeRect.top + nodeRect.height / 2,
+        halfHeight: nodeRect.height / 2,
+        width: labelRect.width,
+        height: labelRect.height,
+      })
+    }
+    items.sort((left, right) => left.cy - right.cy || left.cx - right.cx)
+    /** @type {{ left: number, right: number, top: number, bottom: number }[]} */
+    const placed = []
+    const above = /** @type {Set<string>} */ (new Set())
+    const overlap = /** @param {{ left: number, right: number, top: number, bottom: number }} rect */ (rect) =>
+      placed.some(
+        (other) =>
+          rect.left < other.right &&
+          rect.right > other.left &&
+          rect.top < other.bottom &&
+          rect.bottom > other.top
+      )
+    for (const item of items) {
+      const left = item.cx - item.width / 2,
+        right = item.cx + item.width / 2,
+        below = {
+          left,
+          right,
+          top: item.cy + item.halfHeight + 2,
+          bottom: item.cy + item.halfHeight + 2 + item.height,
+        },
+        over = {
+          left,
+          right,
+          top: item.cy - item.halfHeight - 2 - item.height,
+          bottom: item.cy - item.halfHeight - 2,
+        }
+      let chosen = below
+      if (overlap(below) && !overlap(over)) {
+        chosen = over
+        above.add(item.id)
+      }
+      placed.push(chosen)
+    }
+    setLabelAbove((previous) =>
+      previous.size === above.size && [...above].every((id) => previous.has(id)) ? previous : above
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [labelsVisible, activeKey, activeRegion, focusZone])
 
   return jsxs('div', {
     className: 'town-map',
@@ -946,9 +1018,30 @@ export function TownMap() {
                 viewBox: '0 0 100 100',
                 preserveAspectRatio: 'none',
                 children: [
-                  roadPaths.map(({ from: fromId, to: toId, key, d }) => {
-                    const roadClass = `map-road-border${unlockedLocations.includes(fromId) && unlockedLocations.includes(toId) ? ' unlocked' : ' locked'}`
-                    return jsx('path', { d, className: roadClass }, `border-${key}`)
+                  jsx('defs', {
+                    children: jsx('filter', {
+                      id: 'town-road-shadow',
+                      x: '-10%',
+                      y: '-10%',
+                      width: '120%',
+                      height: '120%',
+                      children: jsx('feDropShadow', {
+                        dx: 0.12,
+                        dy: 0.16,
+                        stdDeviation: 0.1,
+                        floodColor: '#241608',
+                        floodOpacity: 0.35,
+                      }),
+                    }),
+                  }),
+                  // The dark casing casts the shadow, then the lighter fill is
+                  // drawn on top, so every road reads as a raised path.
+                  jsx('g', {
+                    filter: 'url(#town-road-shadow)',
+                    children: roadPaths.map(({ from: fromId, to: toId, key, d }) => {
+                      const roadClass = `map-road-border${unlockedLocations.includes(fromId) && unlockedLocations.includes(toId) ? ' unlocked' : ' locked'}`
+                      return jsx('path', { d, className: roadClass }, `border-${key}`)
+                    }),
                   }),
                   roadPaths.map(({ from: fromId, to: toId, key, d }) => {
                     const roadClass = `map-road-fill${unlockedLocations.includes(fromId) && unlockedLocations.includes(toId) ? ' unlocked' : ' locked'}`
@@ -989,6 +1082,7 @@ export function TownMap() {
                     allCaught: completedRoutes.has(locationId),
                     forceLabel: Boolean(focusZone),
                     labelsVisible,
+                    labelAbove: labelAbove.has(locationId),
                     // Deliberately omits the species: the Town Map should only
                     // say a swarm is active here, not spoil which Pokemon.
                     swarmLabel:

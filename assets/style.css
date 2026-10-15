@@ -3714,8 +3714,8 @@ img {
 }
 
 .map-road-border.unlocked {
-    stroke: #7a5a30;
-    stroke-width: .833;
+    stroke: #5a3d1e;
+    stroke-width: .9;
     stroke-linecap: round;
     fill: none
 }
@@ -3729,8 +3729,8 @@ img {
 }
 
 .map-road-fill.unlocked {
-    stroke: #a08040;
-    stroke-width: .417;
+    stroke: #d3af6c;
+    stroke-width: .42;
     stroke-linecap: round;
     fill: none
 }
@@ -3937,6 +3937,13 @@ img {
     padding: 1px 3px;
     border-radius: 2px;
     z-index: 10
+}
+
+.map-node.label-above .map-node-label {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: 2px
 }
 
 .map-node.zone .map-node-label {

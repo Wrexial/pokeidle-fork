@@ -6,7 +6,7 @@ import { formatCooldown } from '../game/progression.js'
 import { POI_LOCATIONS, minigameNameForLocation } from '../game/minigames.js'
 import { servicePoisFor } from '../game/services.js'
 
-/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, allCaught?: boolean, swarmLabel?: string | null, forceLabel?: boolean, labelsVisible?: boolean }} props */
+/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, allCaught?: boolean, swarmLabel?: string | null, forceLabel?: boolean, labelsVisible?: boolean, labelAbove?: boolean }} props */
 export
 function MapNode({
   location,
@@ -19,6 +19,7 @@ function MapNode({
   swarmLabel,
   forceLabel,
   labelsVisible = true,
+  labelAbove = false,
 }) {
   const [hovering, setHovering] = React.useState(!1),
     [, tick] = React.useState(0),
@@ -50,6 +51,7 @@ function MapNode({
     raidOnCooldown && (className += ' cooldown'),
     isUnlocked && allCaught && (className += ' complete'),
     swarmLabel && (className += ' swarm'),
+    labelAbove && (className += ' label-above'),
     isCurrent
       ? (className += ' current')
       : isClickable
@@ -57,6 +59,7 @@ function MapNode({
         : isUnlocked || (className += ' locked'),
     jsxs('div', {
       className,
+      'data-location-id': location.id,
       style: {
         left: `${location.position.x}%`,
         top: `${location.position.y}%`,

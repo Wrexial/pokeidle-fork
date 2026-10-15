@@ -3650,6 +3650,24 @@ img {
     opacity: 1
 }
 
+.map-compass {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 34px;
+    height: 34px;
+    z-index: 5;
+    pointer-events: none;
+    opacity: .85;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,.45))
+}
+
+.map-compass-n {
+    font-family: var(--font-pixel);
+    font-size: 7px;
+    fill: #5a3e20
+}
+
 .map-zoom-controls {
     position: absolute;
     right: 6px;

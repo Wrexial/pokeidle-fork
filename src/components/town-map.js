@@ -102,6 +102,44 @@ function terrainFor(location, bucket) {
   }
 }
 
+/**
+ * A small parchment compass rose pinned to the map canvas. Decorative; the
+ * canvas clips it and it never captures pointer events.
+ */
+function MapCompass() {
+  return jsxs('svg', {
+    className: 'map-compass',
+    viewBox: '0 0 40 40',
+    'aria-hidden': true,
+    children: [
+      jsx('circle', {
+        cx: 20,
+        cy: 20,
+        r: 16,
+        fill: '#efe4c8',
+        stroke: '#6a4a26',
+        strokeWidth: 1.4,
+      }),
+      jsx('polygon', {
+        points: '20,4.5 23.2,16.8 35.5,20 23.2,23.2 20,35.5 16.8,23.2 4.5,20 16.8,16.8',
+        fill: '#e8d8b0',
+        stroke: '#7a5a30',
+        strokeWidth: 1,
+        strokeLinejoin: 'round',
+      }),
+      jsx('polygon', { points: '20,4.5 23.2,16.8 20,20 16.8,16.8', fill: '#b6382c' }),
+      jsx('circle', { cx: 20, cy: 20, r: 2.6, fill: '#f4e6b0', stroke: '#5a3e20', strokeWidth: 1 }),
+      jsx('text', {
+        x: 20,
+        y: 12.4,
+        textAnchor: 'middle',
+        className: 'map-compass-n',
+        children: 'N',
+      }),
+    ],
+  })
+}
+
 /** @typedef {{ x: number, y: number, scale: number }} MapView */
 
 export function TownMap() {
@@ -818,8 +856,13 @@ export function TownMap() {
             children: [
               jsxs('svg', {
                 className: 'town-map-terrain',
-                viewBox: '0 0 100 100',
+                // Extends 40 world units past every edge so the terrain fills the
+                // whole canvas (no parchment bars or hard world edge) and the
+                // ocean can run off the panel; still 12px per unit, so the
+                // blobs stay aligned with the nodes.
+                viewBox: '-40 -40 180 180',
                 preserveAspectRatio: 'none',
+                style: { inset: '-40%', width: '180%', height: '180%' },
                 children: [
                   jsxs('defs', {
                     children: [
@@ -861,10 +904,10 @@ export function TownMap() {
                     ],
                   }),
                   jsx('rect', {
-                    x: 0,
-                    y: 0,
-                    width: 100,
-                    height: 100,
+                    x: -40,
+                    y: -40,
+                    width: 180,
+                    height: 180,
                     fill: 'url(#town-water-gradient)',
                   }),
                   // Deep water first, then a blurred sand rim underneath the
@@ -958,6 +1001,7 @@ export function TownMap() {
               }),
             ],
           }),
+          jsx(MapCompass, {}),
           jsxs('div', {
             className: 'map-zoom-controls',
             onPointerDown: stopDrag,

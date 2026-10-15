@@ -276,18 +276,28 @@ export function TownMap() {
     [activeLocationIds.join('|')]
   )
 
-  // Centre of the active region (used when the player isn't in it).
-  const regionCentre = React.useMemo(() => {
-    if (activeLocationIds.length === 0) return { x: WORLD_SIZE / 2, y: WORLD_SIZE / 2 }
-    let x = 0,
-      y = 0
-    for (const id of activeLocationIds) {
-      x += mapData[id].position.x
-      y += mapData[id].position.y
+  // Bounding box of the active region's nodes, so “Fit whole region” frames
+  // the content instead of the whole 100x100 world (which left the region
+  // small with parchment margins on a wide panel).
+  const regionBounds = React.useMemo(() => {
+    const ids = activeLocationIds.filter((id) => mapData[id])
+    if (ids.length === 0) return null
+    let minX = Infinity,
+      maxX = -Infinity,
+      minY = Infinity,
+      maxY = -Infinity
+    for (const id of ids) {
+      const { x, y } = mapData[id].position
+      if (x < minX) minX = x
+      if (x > maxX) maxX = x
+      if (y < minY) minY = y
+      if (y > maxY) maxY = y
     }
     return {
-      x: (x / activeLocationIds.length / 100) * WORLD_SIZE,
-      y: (y / activeLocationIds.length / 100) * WORLD_SIZE,
+      cx: (minX + maxX) / 2,
+      cy: (minY + maxY) / 2,
+      spanX: maxX - minX,
+      spanY: maxY - minY,
     }
   }, [activeLocationIds])
 
@@ -307,12 +317,40 @@ export function TownMap() {
     [canvasRect]
   )
 
+  /**
+   * The camera that fits the active region's content into `rect`, padding it a
+   * little so nodes aren't flush against the canvas edge. World coordinates.
+   */
+  const fitRegion = React.useCallback(
+    /** @param {DOMRect} rect */
+    (rect) => {
+      if (!regionBounds) {
+        const scale = Math.min(rect.width, rect.height) / WORLD_SIZE
+        return { worldX: WORLD_SIZE / 2, worldY: WORLD_SIZE / 2, scale }
+      }
+      // Padding in world units, kept small so the content still fills the panel.
+      const pad = 5,
+        spanX = Math.max(regionBounds.spanX + pad * 2, 1),
+        spanY = Math.max(regionBounds.spanY + pad * 2, 1),
+        scale = Math.min(
+          rect.width / ((spanX / 100) * WORLD_SIZE),
+          rect.height / ((spanY / 100) * WORLD_SIZE)
+        )
+      return {
+        worldX: (regionBounds.cx / 100) * WORLD_SIZE,
+        worldY: (regionBounds.cy / 100) * WORLD_SIZE,
+        scale: Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale)),
+      }
+    },
+    [regionBounds]
+  )
+
   const fitView = React.useCallback(() => {
     const rect = canvasRect()
     if (!rect) return
-    const fitScale = Math.min(rect.width, rect.height) / WORLD_SIZE
-    centreOn(regionCentre.x, regionCentre.y, Math.min(MAX_SCALE, Math.max(MIN_SCALE, fitScale)))
-  }, [canvasRect, centreOn, regionCentre])
+    const { worldX, worldY, scale } = fitRegion(rect)
+    centreOn(worldX, worldY, scale)
+  }, [canvasRect, centreOn, fitRegion])
 
   const centreOnCurrent = React.useCallback(() => {
     const target = mapData[currentLocation]?.position
@@ -327,7 +365,7 @@ export function TownMap() {
   React.useEffect(() => {
     const rect = canvasRect()
     if (!rect) return
-    const fitScale = Math.min(rect.width, rect.height) / WORLD_SIZE
+    const fit = fitRegion(rect)
     // Focused area view: fit the hub and all its sub-areas (hidden included).
     if (focusZone) {
       const ids = activeLocationIds.filter((id) => mapData[id])
@@ -364,11 +402,11 @@ export function TownMap() {
       // Zoomed in on a real node, but fit the whole region when there is nothing
       // to focus (an empty map, or a sub-area whose hub isn't visible).
       scale = focusId
-        ? Math.min(MAX_SCALE, Math.max(MIN_SCALE, Math.max(1, fitScale)))
-        : Math.min(MAX_SCALE, Math.max(MIN_SCALE, fitScale)),
+        ? Math.min(MAX_SCALE, Math.max(MIN_SCALE, Math.max(1, fit.scale)))
+        : fit.scale,
       focus = focusId
         ? mapData[focusId].position
-        : { x: (regionCentre.x / WORLD_SIZE) * 100, y: (regionCentre.y / WORLD_SIZE) * 100 }
+        : { x: (fit.worldX / WORLD_SIZE) * 100, y: (fit.worldY / WORLD_SIZE) * 100 }
     centreOn((focus.x / 100) * WORLD_SIZE, (focus.y / 100) * WORLD_SIZE, scale)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeRegion, focusNonce, focusZone])
@@ -554,6 +592,12 @@ export function TownMap() {
       .sort((left, right) => mapData[left].name.localeCompare(mapData[right].name))
       .slice(0, 8)
   }, [searchQuery, unlockedLocations])
+
+  // Below this zoom the always-on town/zone labels are too small to read and
+  // only add noise, so they're hidden until the map is zoomed in (the current
+  // node and hovered nodes still label themselves, and the focused area view
+  // forces every label).
+  const labelsVisible = view.scale >= 0.8
 
   return jsxs('div', {
     className: 'town-map',
@@ -803,9 +847,26 @@ export function TownMap() {
                         height: '150%',
                         children: jsx('feGaussianBlur', { stdDeviation: 3 }),
                       }),
+                      jsxs('radialGradient', {
+                        id: 'town-water-gradient',
+                        cx: '50%',
+                        cy: '45%',
+                        r: '75%',
+                        children: [
+                          jsx('stop', { offset: '0%', stopColor: '#3f86c6' }),
+                          jsx('stop', { offset: '55%', stopColor: TERRAIN_COLORS.water }),
+                          jsx('stop', { offset: '100%', stopColor: '#235a91' }),
+                        ],
+                      }),
                     ],
                   }),
-                  jsx('rect', { x: 0, y: 0, width: 100, height: 100, fill: TERRAIN_COLORS.water }),
+                  jsx('rect', {
+                    x: 0,
+                    y: 0,
+                    width: 100,
+                    height: 100,
+                    fill: 'url(#town-water-gradient)',
+                  }),
                   // Deep water first, then a blurred sand rim underneath the
                   // land so every landmass gets a beach before its biome fill.
                   jsx('g', {
@@ -884,6 +945,7 @@ export function TownMap() {
                     cooldownEnd: location.type === 'raid' ? state.raidCooldownEnd : void 0,
                     allCaught: completedRoutes.has(locationId),
                     forceLabel: Boolean(focusZone),
+                    labelsVisible,
                     // Deliberately omits the species: the Town Map should only
                     // say a swarm is active here, not spoil which Pokemon.
                     swarmLabel:

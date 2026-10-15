@@ -6,7 +6,7 @@ import { formatCooldown } from '../game/progression.js'
 import { POI_LOCATIONS, minigameNameForLocation } from '../game/minigames.js'
 import { servicePoisFor } from '../game/services.js'
 
-/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, allCaught?: boolean, swarmLabel?: string | null, forceLabel?: boolean }} props */
+/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, allCaught?: boolean, swarmLabel?: string | null, forceLabel?: boolean, labelsVisible?: boolean }} props */
 export
 function MapNode({
   location,
@@ -18,6 +18,7 @@ function MapNode({
   allCaught,
   swarmLabel,
   forceLabel,
+  labelsVisible = true,
 }) {
   const [hovering, setHovering] = React.useState(!1),
     [, tick] = React.useState(0),
@@ -36,7 +37,13 @@ function MapNode({
     const intervalId = setInterval(() => tick((tickCount) => tickCount + 1), 1e3)
     return () => clearInterval(intervalId)
   }, [raidOnCooldown])
-  const showLabel = isCurrent || hovering || forceLabel || (isUnlocked && (isTown || isZone))
+  // Labels scale with the zoomed world, so below a readable size they're only
+  // noise; show them when zoomed in (or on hover, one at a time, or in the
+  // focused area view).
+  const showLabel =
+    forceLabel ||
+    hovering ||
+    (labelsVisible && (isCurrent || (isUnlocked && (isTown || isZone))))
   let className = 'map-node'
   return (
     isRaid ? (className += ' raid') : isTown ? (className += ' town') : isZone ? (className += ' zone') : (className += ' route'),

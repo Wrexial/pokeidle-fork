@@ -912,6 +912,14 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Regions with hidden zone sub-areas are skipped (moving a hub would decouple it
   from the ring its sub-areas sit in, and they barely gain) unless
   `--include-zones` is passed. Idempotent.
+- `align-map-roads.cjs` — data-only pass that fixes the shallow little steps in
+  the elbow roads: leaving the hand-measured anchors (towns, zones, the league,
+  raids) fixed, it searches each `route` node's x/y (within 2 units, Pareto-safe
+  against creating overlaps or sitting on an unrelated road) for the spot that
+  lines up the most of its edges, then pushes overlapping nodes apart. Reads the
+  committed data, writes `map-layout-overrides.json`; then run
+  `apply-map-layout.cjs`. `--regions=unova,sinnoh` limits it, `--dry` previews;
+  defaults to every region. Idempotent.
 - `lib/straighten.cjs` — the 1D coordinate clustering behind the straighten
   pass (also mirrored in map-editor.html's Straighten button); values within
   `TOLERANCE` merge onto their rounded mean, kept below the 0.5 grid step so the

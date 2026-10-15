@@ -46,8 +46,8 @@
   },
   "unlockOrder": 600001,
   "position": {
-   "x": 66.5,
-   "y": 65.5
+   "x": 68.5,
+   "y": 64.5
   },
   "biome": "forest"
  },
@@ -108,8 +108,8 @@
   },
   "unlockOrder": 600002,
   "position": {
-   "x": 64,
-   "y": 59
+   "x": 65.5,
+   "y": 57.5
   },
   "biome": "grassland"
  },
@@ -364,7 +364,7 @@
   "unlockOrder": 600007,
   "position": {
    "x": 29,
-   "y": 54
+   "y": 53
   },
   "biome": "grassland"
  },
@@ -497,7 +497,7 @@
   },
   "unlockOrder": 600009,
   "position": {
-   "x": 19.5,
+   "x": 21,
    "y": 69
   },
   "biome": "mountain"
@@ -667,7 +667,7 @@
   "unlockOrder": 600012,
   "position": {
    "x": 25.5,
-   "y": 37
+   "y": 39
   },
   "biome": "coast"
  },
@@ -849,7 +849,7 @@
   },
   "unlockOrder": 600015,
   "position": {
-   "x": 60,
+   "x": 58,
    "y": 30
   },
   "biome": "coast"
@@ -951,7 +951,7 @@
   "unlockOrder": 600017,
   "position": {
    "x": 79,
-   "y": 38.5
+   "y": 40.5
   },
   "weather": "snow",
   "biome": "mountain"
@@ -1184,7 +1184,7 @@
   },
   "unlockOrder": 600020.0002,
   "position": {
-   "x": 79.5,
+   "x": 79,
    "y": 56
   },
   "biome": "forest"
@@ -1263,8 +1263,8 @@
   },
   "unlockOrder": 600021,
   "position": {
-   "x": 86,
-   "y": 57.5
+   "x": 84,
+   "y": 56
   },
   "biome": "coast"
  },
@@ -1299,7 +1299,7 @@
   "unlockOrder": 600022,
   "position": {
    "x": 71,
-   "y": 54
+   "y": 56
   },
   "biome": "coast"
  },
@@ -1465,7 +1465,7 @@
   },
   "unlockOrder": 600010.25,
   "position": {
-   "x": 5.5,
+   "x": 4.5,
    "y": 56
   },
   "biome": "cave",
@@ -1491,7 +1491,7 @@
   },
   "unlockOrder": 600017.75,
   "position": {
-   "x": 83.5,
+   "x": 85.5,
    "y": 34
   },
   "biome": "cave",
@@ -1518,8 +1518,8 @@
   },
   "unlockOrder": 600015.75,
   "position": {
-   "x": 74,
-   "y": 42.5
+   "x": 73.5,
+   "y": 40.5
   },
   "biome": "tundra",
   "background": "/backgrounds/grassland.webp"
@@ -1571,7 +1571,7 @@
   },
   "unlockOrder": 600020.2501,
   "position": {
-   "x": 96,
+   "x": 94.5,
    "y": 56
   },
   "biome": "coast",
@@ -1625,7 +1625,7 @@
   },
   "unlockOrder": 600008.75,
   "position": {
-   "x": 23,
+   "x": 21,
    "y": 49.5
   },
   "biome": "coast",

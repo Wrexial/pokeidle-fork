@@ -109,6 +109,7 @@ export const CHANGELOG = [
         heading: 'Interface',
         items: [
           'A season chip sits beside the day/night and weather chips on the Town Map, and the terrain colours are retinted to match the season.',
+          'The Town Map layouts got a node-placement cleanup: route nodes (whose positions are interpolated, unlike the hand-measured towns) were nudged so their elbow roads line up on a shared axis instead of drawing a shallow step, and nodes sitting on top of each other or on an unrelated road were moved clear. Every region reads a little straighter.',
           'The small input controls are consistent now: one shared segmented button (battle speed, shop Buy/Sell, Box filters) and one shared number control — a track-and-handle slider with −/+ steppers and arrow-key support — for the catch level threshold and the shop quantity (with its MAX shortcut). Active states use the same gold treatment across segments, toggles, sliders and the radio lists.',
           'Settings gained Auto-Heal (top the party up at the Pokemon Center whenever the map is idle and someone is hurt) and a Default Catch Rule (mode, level threshold and enabled balls) for routes you have not customised.',
           'The Box can bulk-release a search or filter: a “Release Found” button appears while searching and releases everything shown (favourites and shinies are always protected), alongside the existing one-tap Release Dupes.',

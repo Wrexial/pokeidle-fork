@@ -169,7 +169,7 @@
   },
   "unlockOrder": 300103,
   "position": {
-   "x": 22,
+   "x": 21.5,
    "y": 53
   },
   "biome": "coast"
@@ -290,7 +290,7 @@
   },
   "unlockOrder": 300106,
   "position": {
-   "x": 5.5,
+   "x": 7,
    "y": 81
   },
   "biome": "coast"
@@ -387,7 +387,7 @@
   "unlockOrder": 300108,
   "position": {
    "x": 30.5,
-   "y": 82.5
+   "y": 82
   },
   "biome": "coast"
  },
@@ -1240,7 +1240,7 @@
   },
   "unlockOrder": 300125,
   "position": {
-   "x": 86,
+   "x": 86.5,
    "y": 27.5
   },
   "biome": "coast"
@@ -1864,7 +1864,7 @@
   "unlockOrder": 300110.25,
   "position": {
    "x": 37.5,
-   "y": 51
+   "y": 53
   },
   "biome": "grassland",
   "background": "/backgrounds/grassland.webp"

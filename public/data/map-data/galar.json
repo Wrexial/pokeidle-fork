@@ -47,7 +47,7 @@
   },
   "unlockOrder": 800001,
   "position": {
-   "x": 53.5,
+   "x": 52.5,
    "y": 92.5
   },
   "biome": "grassland"
@@ -267,7 +267,7 @@
   "unlockOrder": 800005,
   "position": {
    "x": 48.5,
-   "y": 58.5
+   "y": 59
   },
   "biome": "grassland"
  },
@@ -344,7 +344,7 @@
   "unlockOrder": 800006.0002,
   "position": {
    "x": 44,
-   "y": 53.5
+   "y": 53
   },
   "biome": "grassland"
  },
@@ -687,7 +687,7 @@
   "unlockOrder": 800010,
   "position": {
    "x": 50.5,
-   "y": 32.5
+   "y": 33
   },
   "weather": "snow",
   "biome": "tundra"

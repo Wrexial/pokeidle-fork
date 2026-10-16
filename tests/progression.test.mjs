@@ -473,3 +473,22 @@ test('completedGenerations is memoised per pokedexCaught array and recomputed fo
   assert.ok(completed.has(0), 'the completed generation is reported')
   assert.equal(completed.has(1), false)
 })
+
+test('Town Map roads round their elbow corners', async () => {
+  const { createRoadPaths } = await import('../src/game/progression.js')
+  // route2 and diglettsCave meet on a bent elbow: the path must round the
+  // corner with a quadratic curve rather than a hard right angle.
+  const bent = createRoadPaths(['route2', 'diglettsCave'])
+  assert.equal(bent.length, 1, 'one road between the two')
+  assert.match(bent[0].d, /^M 22 30 L /, 'starts at route2')
+  assert.match(bent[0].d, / Q /, 'rounds the corner')
+  assert.match(bent[0].d, / L 44 46$/, 'ends at diglettsCave')
+  // An aligned pair has no corner to round and stays a straight line.
+  const straight = createRoadPaths(['palletTown', 'route1'])
+  assert.equal(straight.length, 1)
+  assert.doesNotMatch(straight[0].d, / Q /, 'a straight road has no curve')
+  // The same edge is only emitted once, whichever end is listed first.
+  const reversed = createRoadPaths(['diglettsCave', 'route2'])
+  assert.equal(reversed.length, 1)
+  assert.equal(reversed[0].key, bent[0].key)
+})

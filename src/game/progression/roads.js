@@ -13,6 +13,44 @@ export function formatCooldown(ms) {
   return `${minutes}:${String(seconds).padStart(2, '0')}`
 }
 
+// The largest corner radius a road may round with, in world units (the map is
+// a 100x100 viewBox). Kept small so a short elbow still reads as a corner and
+// the right-angle grid the layout is built on is preserved.
+const ROAD_CORNER_RADIUS = 2.4
+
+/**
+ * Clip a rounded corner radius to the shorter leg of the elbow, so the curve
+ * never overshoots past either endpoint.
+ * @param {number} ax @param {number} ay @param {number} cx @param {number} cy @param {number} bx @param {number} by
+ * @returns {number}
+ */
+function cornerRadius(ax, ay, cx, cy, bx, by) {
+  const leg1 = Math.hypot(cx - ax, cy - ay),
+    leg2 = Math.hypot(bx - cx, by - cy)
+  return Math.max(0, Math.min(ROAD_CORNER_RADIUS, leg1 / 2, leg2 / 2))
+}
+
+/**
+ * An SVG path along the three elbow points with the corner rounded by a
+ * quadratic curve. A degenerate (straight) elbow stays a straight line.
+ * @param {{ x: number, y: number }[]} points
+ * @returns {string}
+ */
+function roundedElbowPath(points) {
+  const [a, corner, b] = points,
+    radius = cornerRadius(a.x, a.y, corner.x, corner.y, b.x, b.y)
+  if (radius < 0.05)
+    return `M ${a.x} ${a.y} L ${corner.x} ${corner.y} L ${b.x} ${b.y}`
+  // Unit vectors along each leg, then step `radius` back from the corner.
+  const leg1 = Math.hypot(corner.x - a.x, corner.y - a.y) || 1,
+    leg2 = Math.hypot(b.x - corner.x, b.y - corner.y) || 1,
+    entryX = corner.x - ((corner.x - a.x) / leg1) * radius,
+    entryY = corner.y - ((corner.y - a.y) / leg1) * radius,
+    exitX = corner.x + ((b.x - corner.x) / leg2) * radius,
+    exitY = corner.y + ((b.y - corner.y) / leg2) * radius
+  return `M ${a.x} ${a.y} L ${entryX} ${entryY} Q ${corner.x} ${corner.y} ${exitX} ${exitY} L ${b.x} ${b.y}`
+}
+
 /**
  * The two right-angled candidate paths between two points: one turning at
  * `(x2, y1)`, the other at `(x1, y2)`.
@@ -69,7 +107,7 @@ export function createRoadPaths(locationIds) {
       from,
       to,
       key,
-      d: `M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y} L ${points[2].x} ${points[2].y}`,
+      d: roundedElbowPath(points),
     }
   })
 }

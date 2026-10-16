@@ -2,7 +2,8 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { baseRegions, encounterData, raidLegendaryPoolFor, mapAreas, mapData, pokemonSpecies, regions } from '../data/gameData.js'
+import { baseRegions, encounterData, gymLeaderData, raidLegendaryPoolFor, mapAreas, mapData, pokemonSpecies, regions } from '../data/gameData.js'
+import { mapThemeFor } from '../data/map-theme.js'
 import { biomeForLocation } from '../data/ui.js'
 import { useGame } from '../game/context.js'
 import { useSeason } from '../hooks.js'
@@ -36,16 +37,21 @@ function displayRegionFor(regionId) {
   return region?.isDlc && region.parentRegion ? region.parentRegion : regionId
 }
 
+// Locations that end a region's badge track. The league node is a normal town
+// whose id does not always end in `-league` (Kanto's Indigo Plateau), so the
+// region metadata is the source of truth.
+const LEAGUE_LOCATIONS = new Set(
+  regions.map((region) => region.leagueLocationKey).filter(Boolean)
+)
+
 /**
  * Colours for the generated terrain layer: oceans, a sandy shore and one shade
  * per land biome. Deliberately saturated so land and water read apart even when
- * the map is zoomed out.
+ * the map is zoomed out. Water and the shore are overridden per region by the
+ * `MAP_THEMES` palette; the biome shades below are the regional constants.
  * @type {Record<string, string>}
  */
 const TERRAIN_COLORS = {
-  water: '#2f6fae',
-  waterDeep: '#1b4a80',
-  shore: '#ecd9a2',
   grassland: '#6cb04e',
   forest: '#3f8a3a',
   autumn: '#b9772f',
@@ -66,6 +72,10 @@ const TERRAIN_COLORS = {
   league: '#d8d3c2',
 }
 
+// Biomes that sit on a raised plateau, so the map layers a lighter highland
+// blob on top of the land patch to hint at relief.
+const HIGHLAND_BIOMES = new Set(['mountain', 'volcanic', 'tundra', 'ruins'])
+
 // Aquatic names that should read as water even when the wild table isn't
 // Water-majority (a lake full of Magikarp and Psyduck is still a lake).
 const WATER_NAME_PATTERN =
@@ -75,12 +85,14 @@ const WATER_NAME_PATTERN =
  * The terrain for a location: water routes (or routes whose wild table is
  * mostly Water-types) are blue, everything else takes its biome shade. The
  * `water` flag lets the renderer draw water and land as separate layers with a
- * defined coastline between them.
+ * defined coastline between them; `tall` marks a raised plateau for the
+ * highland highlight.
  * @param {MapLocation} location
  * @param {any} bucket
- * @returns {{ color: string, water: boolean }}
+ * @param {import('../data/map-theme.js').MapTheme} theme
+ * @returns {{ color: string, water: boolean, tall: boolean }}
  */
-function terrainFor(location, bucket) {
+function terrainFor(location, bucket, theme) {
   if (location.type !== 'zone') {
     const encounters = bucket?.encounters
     if (encounters?.length) {
@@ -90,15 +102,19 @@ function terrainFor(location, bucket) {
             sum + (pokemonSpecies[entry.speciesKey]?.types?.includes('Water') ? entry.weight : 0),
           0
         )
-      if (total > 0 && water / total >= 0.5) return { color: TERRAIN_COLORS.waterDeep, water: true }
+      if (total > 0 && water / total >= 0.5)
+        return { color: theme.oceanDeep, water: true, tall: false }
     }
     if (WATER_NAME_PATTERN.test(location.name ?? ''))
-      return { color: TERRAIN_COLORS.waterDeep, water: true }
+      return { color: theme.oceanDeep, water: true, tall: false }
   }
-  if (location.id.endsWith('-league')) return { color: TERRAIN_COLORS.league, water: false }
+  if (LEAGUE_LOCATIONS.has(location.id) || location.id.endsWith('-league'))
+    return { color: TERRAIN_COLORS.league, water: false, tall: true }
+  const biome = biomeForLocation(location)
   return {
-    color: TERRAIN_COLORS[biomeForLocation(location)] ?? TERRAIN_COLORS.grassland,
+    color: TERRAIN_COLORS[biome] ?? TERRAIN_COLORS.grassland,
     water: false,
+    tall: HIGHLAND_BIOMES.has(biome),
   }
 }
 
@@ -247,6 +263,17 @@ export function TownMap() {
       }
       return map
     }, []),
+    // Gym leaders keyed by the town they stand in, so a gym town can fly its
+    // badge colour on the map.
+    gymByLocation = React.useMemo(() => {
+      /** @type {Record<string, any>} */
+      const map = {}
+      for (const gym of gymLeaderData) if (gym.locationKey) map[gym.locationKey] = gym
+      return map
+    }, []),
+    // The active region's palette (TODO #99), used by the terrain layer, the
+    // canvas frame and the region watermark.
+    theme = mapThemeFor(activeRegion),
     focusedHub = focusZone ? mapData[focusZone] : null,
     activeLocationIds = /** @type {string[]} */ (
       focusedHub
@@ -272,18 +299,20 @@ export function TownMap() {
     }, [activeLocationIds, state.pokedexCaught])
 
   // Terrain blobs, one per visible location, split into water and land so the
-  // renderer can lay down oceans, a coastline and land as separate blurred
-  // passes. Water is the base, so only deeper water and land show as blobs.
+  // renderer can lay down the sea, a coastline, the landmass wash and the land
+  // patches as separate passes. Water is the base, so only deeper water and land
+  // show as blobs; `tall` marks a raised plateau for the relief highlight.
   const terrain = React.useMemo(() => {
-    /** @type {{ id: string, x: number, y: number, radius: number, color: string }[]} */
+    /** @type {{ id: string, x: number, y: number, radius: number, color: string, tall: boolean }[]} */
     const waterBlobs = [],
-      /** @type {{ id: string, x: number, y: number, radius: number, color: string }[]} */
+      /** @type {{ id: string, x: number, y: number, radius: number, color: string, tall: boolean }[]} */
       landBlobs = []
     for (const locationId of activeLocationIds) {
       const location = mapData[locationId],
-        { color, water } = terrainFor(
+        { color, water, tall } = terrainFor(
           location,
-          location.routeKey ? encounterData[location.routeKey] : null
+          location.routeKey ? encounterData[location.routeKey] : null,
+          theme
         ),
         blob = {
           id: locationId,
@@ -294,17 +323,18 @@ export function TownMap() {
           radius:
             location.type === 'zone'
               ? 14
-              : locationId.endsWith('-league')
+              : LEAGUE_LOCATIONS.has(locationId) || locationId.endsWith('-league')
                 ? 7
                 : location.type === 'town'
                   ? 9
                   : 7,
           color,
+          tall,
         }
       ;(water ? waterBlobs : landBlobs).push(blob)
     }
     return { waterBlobs, landBlobs }
-  }, [activeLocationIds])
+  }, [activeLocationIds, theme])
 
   // Roads are laid out with the least-overlapping elbow per edge, in a stable
   // order so the map draws the same way every tick.
@@ -914,6 +944,20 @@ export function TownMap() {
       jsxs('div', {
         className: 'town-map-canvas',
         ref: canvasRef,
+        'data-region': activeRegion,
+        // The region palette (TODO #99) drives the frame, watermark and any
+        // accent tinting the CSS does outside the SVG terrain layer.
+        style: {
+          '--map-ocean': theme.ocean,
+          '--map-ocean-deep': theme.oceanDeep,
+          '--map-ocean-shallow': theme.oceanShallow,
+          '--map-shore': theme.shore,
+          '--map-land': theme.land,
+          '--map-accent': theme.accent,
+          '--map-accent-bright': theme.accentBright,
+          '--map-ink': theme.ink,
+          '--map-haze': theme.haze,
+        },
         onPointerDown: handlePointerDown,
         onClickCapture: handleClickCapture,
         onClick: handleCanvasClick,
@@ -938,39 +982,86 @@ export function TownMap() {
                 children: [
                   jsxs('defs', {
                     children: [
-                      jsx('filter', {
-                        id: 'town-terrain-water',
-                        x: '-25%',
-                        y: '-25%',
-                        width: '150%',
-                        height: '150%',
-                        children: jsx('feGaussianBlur', { stdDeviation: 7 }),
-                      }),
-                      jsx('filter', {
-                        id: 'town-terrain-shore',
-                        x: '-25%',
-                        y: '-25%',
-                        width: '150%',
-                        height: '150%',
-                        children: jsx('feGaussianBlur', { stdDeviation: 4 }),
-                      }),
-                      jsx('filter', {
-                        id: 'town-terrain-land',
-                        x: '-25%',
-                        y: '-25%',
-                        width: '150%',
-                        height: '150%',
-                        children: jsx('feGaussianBlur', { stdDeviation: 3 }),
-                      }),
                       jsxs('radialGradient', {
                         id: 'town-water-gradient',
                         cx: '50%',
-                        cy: '45%',
-                        r: '75%',
+                        cy: '42%',
+                        r: '78%',
                         children: [
-                          jsx('stop', { offset: '0%', stopColor: '#3f86c6' }),
-                          jsx('stop', { offset: '55%', stopColor: TERRAIN_COLORS.water }),
-                          jsx('stop', { offset: '100%', stopColor: '#235a91' }),
+                          jsx('stop', { offset: '0%', stopColor: theme.oceanShallow }),
+                          jsx('stop', { offset: '35%', stopColor: theme.ocean }),
+                          jsx('stop', { offset: '100%', stopColor: theme.oceanDeep }),
+                        ],
+                      }),
+                      // A wide, soft wash that ties a region's separate patches
+                      // into one readable landmass before the sharper water and
+                      // land layers carve the detail back in.
+                      jsx('filter', {
+                        id: 'town-terrain-wash',
+                        x: '-30%',
+                        y: '-30%',
+                        width: '160%',
+                        height: '160%',
+                        children: jsx('feGaussianBlur', { stdDeviation: 8 }),
+                      }),
+                      jsx('filter', {
+                        id: 'town-terrain-water',
+                        x: '-30%',
+                        y: '-30%',
+                        width: '160%',
+                        height: '160%',
+                        children: jsx('feGaussianBlur', { stdDeviation: 4 }),
+                      }),
+                      jsx('filter', {
+                        id: 'town-terrain-shore',
+                        x: '-30%',
+                        y: '-30%',
+                        width: '160%',
+                        height: '160%',
+                        children: jsx('feGaussianBlur', { stdDeviation: 2.5 }),
+                      }),
+                      jsx('filter', {
+                        id: 'town-terrain-land',
+                        x: '-30%',
+                        y: '-30%',
+                        width: '160%',
+                        height: '160%',
+                        children: jsx('feGaussianBlur', { stdDeviation: 1.8 }),
+                      }),
+                      // A fine monochrome grain over the whole map, so the
+                      // painted terrain reads as a hand-drawn chart rather than
+                      // flat vector fills.
+                      jsxs('filter', {
+                        id: 'town-terrain-grain',
+                        x: '-10%',
+                        y: '-10%',
+                        width: '120%',
+                        height: '120%',
+                        children: [
+                          jsx('feTurbulence', {
+                            type: 'fractalNoise',
+                            baseFrequency: 0.75,
+                            numOctaves: 3,
+                            stitchTiles: 'stitch',
+                            result: 'noise',
+                          }),
+                          jsx('feColorMatrix', {
+                            in: 'noise',
+                            type: 'matrix',
+                            values: '0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0',
+                          }),
+                        ],
+                      }),
+                      // A soft haze at the map edge so the eye stays on the
+                      // centre of the region.
+                      jsxs('radialGradient', {
+                        id: 'town-terrain-vignette',
+                        cx: '50%',
+                        cy: '50%',
+                        r: '72%',
+                        children: [
+                          jsx('stop', { offset: '55%', stopColor: theme.ink, stopOpacity: 0 }),
+                          jsx('stop', { offset: '100%', stopColor: theme.ink, stopOpacity: 0.42 }),
                         ],
                       }),
                     ],
@@ -982,14 +1073,46 @@ export function TownMap() {
                     height: 180,
                     fill: 'url(#town-water-gradient)',
                   }),
-                  // Deep water first, then a blurred sand rim underneath the
-                  // land so every landmass gets a beach before its biome fill.
+                  // The landmass wash, then the deep-water patches, then the
+                  // land: each layer is a blurred blob pass with a shore rim
+                  // underneath, which turns the scattered nodes into coastlines.
+                  jsx('g', {
+                    filter: 'url(#town-terrain-wash)',
+                    opacity: 0.5,
+                    children: terrain.landBlobs.map((blob) =>
+                      jsx(
+                        'circle',
+                        { cx: blob.x, cy: blob.y, r: blob.radius + 2.5, fill: theme.land },
+                        `wash-${blob.id}`
+                      )
+                    ),
+                  }),
+                  // A shallow reef shelf under every water patch, so lakes and
+                  // sea routes read as water even where the ocean base is dark.
+                  jsx('g', {
+                    filter: 'url(#town-terrain-shore)',
+                    children: terrain.waterBlobs.map((blob) =>
+                      jsx(
+                        'circle',
+                        {
+                          cx: blob.x,
+                          cy: blob.y,
+                          r: blob.radius + 3,
+                          fill: theme.oceanShallow,
+                          opacity: 0.85,
+                        },
+                        `reef-${blob.id}`
+                      )
+                    ),
+                  }),
                   jsx('g', {
                     filter: 'url(#town-terrain-water)',
                     children: terrain.waterBlobs.map((blob) =>
                       jsx('circle', { cx: blob.x, cy: blob.y, r: blob.radius, fill: blob.color }, blob.id)
                     ),
                   }),
+                  // A blurred sand rim underneath the land, so every landmass
+                  // gets a beach before its biome fill.
                   jsx('g', {
                     filter: 'url(#town-terrain-shore)',
                     children: terrain.landBlobs.map((blob) =>
@@ -999,7 +1122,7 @@ export function TownMap() {
                           cx: blob.x,
                           cy: blob.y,
                           r: blob.radius + 2.4,
-                          fill: TERRAIN_COLORS.shore,
+                          fill: theme.shore,
                         },
                         blob.id
                       )
@@ -1010,6 +1133,40 @@ export function TownMap() {
                     children: terrain.landBlobs.map((blob) =>
                       jsx('circle', { cx: blob.x, cy: blob.y, r: blob.radius, fill: blob.color }, blob.id)
                     ),
+                  }),
+                  // A pale highlight hints at the raised plateaus (mountains,
+                  // volcanoes, tundra, ruins) without drawing real relief.
+                  jsx('g', {
+                    filter: 'url(#town-terrain-land)',
+                    opacity: 0.4,
+                    children: terrain.landBlobs
+                      .filter((blob) => blob.tall)
+                      .map((blob) =>
+                        jsx(
+                          'circle',
+                          {
+                            cx: blob.x - 0.6,
+                            cy: blob.y - 0.8,
+                            r: blob.radius * 0.45,
+                            fill: '#ffffff',
+                          },
+                          `high-${blob.id}`
+                        )
+                      ),
+                  }),
+                  jsx('rect', {
+                    x: -40,
+                    y: -40,
+                    width: 180,
+                    height: 180,
+                    filter: 'url(#town-terrain-grain)',
+                  }),
+                  jsx('rect', {
+                    x: -40,
+                    y: -40,
+                    width: 180,
+                    height: 180,
+                    fill: 'url(#town-terrain-vignette)',
                   }),
                 ],
               }),
@@ -1066,6 +1223,9 @@ export function TownMap() {
                   MapNode,
                   {
                     location,
+                    isLeague:
+                      LEAGUE_LOCATIONS.has(locationId) || locationId.endsWith('-league'),
+                    gym: gymByLocation[locationId] ?? null,
                     isCurrent,
                     isUnlocked,
                     isClickable,
@@ -1096,6 +1256,11 @@ export function TownMap() {
             ],
           }),
           jsx(MapCompass, {}),
+          jsx('div', {
+            className: 'map-region-watermark',
+            'aria-hidden': true,
+            children: theme.name,
+          }),
           jsxs('div', {
             className: 'map-zoom-controls',
             onPointerDown: stopDrag,
@@ -1149,10 +1314,14 @@ export function TownMap() {
                   className: 'map-legend-items',
                   children: [
                     ['legend-town', 'Town'],
+                    ['legend-gym', 'Gym town'],
                     ['legend-route', 'Route'],
                     ['legend-complete', 'All Pokemon caught'],
                     ['legend-zone', 'Area / zone hub'],
+                    ['legend-league', 'Pokemon League'],
                     ['legend-raid', 'Raid Island'],
+                    ['legend-hideout', 'Villain hideout'],
+                    ['legend-facility', 'Facility'],
                     ['legend-current', 'You are here'],
                     ['legend-poi', 'Minigame / service'],
                   ].map(([swatch, label]) =>

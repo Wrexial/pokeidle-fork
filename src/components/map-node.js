@@ -6,7 +6,7 @@ import { formatCooldown } from '../game/progression.js'
 import { POI_LOCATIONS, minigameNameForLocation } from '../game/minigames.js'
 import { servicePoisFor } from '../game/services.js'
 
-/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, allCaught?: boolean, swarmLabel?: string | null, forceLabel?: boolean, labelsVisible?: boolean, labelAbove?: boolean }} props */
+/** @param {{ location: MapLocation, isCurrent: boolean, isUnlocked: boolean, isClickable: boolean, onClick: () => void, cooldownEnd?: number, allCaught?: boolean, swarmLabel?: string | null, forceLabel?: boolean, labelsVisible?: boolean, labelAbove?: boolean, isLeague?: boolean, gym?: { badgeColor?: string, badgeName?: string } | null }} props */
 export
 function MapNode({
   location,
@@ -20,12 +20,16 @@ function MapNode({
   forceLabel,
   labelsVisible = true,
   labelAbove = false,
+  isLeague = false,
+  gym = null,
 }) {
   const [hovering, setHovering] = React.useState(!1),
     [, tick] = React.useState(0),
-    isTown = location.type === 'town' || location.type === 'hideout',
+    isTown = location.type === 'town',
     isRaid = location.type === 'raid',
     isZone = location.type === 'zone',
+    isHideout = location.type === 'hideout',
+    isFacility = location.type === 'facility',
     zoneCount = isZone ? (location.subAreas?.length ?? 0) : 0,
     isPoi = isUnlocked && POI_LOCATIONS.has(location.id),
     minigameName = isUnlocked ? minigameNameForLocation(location.id) : null,
@@ -44,10 +48,21 @@ function MapNode({
   const showLabel =
     forceLabel ||
     hovering ||
-    (labelsVisible && (isCurrent || (isUnlocked && (isTown || isZone))))
+    (labelsVisible &&
+      (isCurrent || (isUnlocked && (isTown || isZone || isHideout || isFacility))))
   let className = 'map-node'
+  isRaid
+    ? (className += ' raid')
+    : isHideout
+      ? (className += ' hideout')
+      : isZone
+        ? (className += ' zone')
+        : isFacility
+          ? (className += ' facility')
+          : (className += isTown ? ' town' : ' route')
   return (
-    isRaid ? (className += ' raid') : isTown ? (className += ' town') : isZone ? (className += ' zone') : (className += ' route'),
+    isLeague && (className += ' league'),
+    gym && isUnlocked && (className += ' gym'),
     raidOnCooldown && (className += ' cooldown'),
     isUnlocked && allCaught && (className += ' complete'),
     swarmLabel && (className += ' swarm'),
@@ -100,6 +115,15 @@ function MapNode({
             className: 'map-node-zone-count',
             title: `${zoneCount} areas`,
             children: zoneCount,
+          }),
+        // A town that holds a gym flies its badge colour as a small gem, so a
+        // glance tells you where the next badge is.
+        gym &&
+          isUnlocked &&
+          jsx('span', {
+            className: 'map-node-gym',
+            title: gym.badgeName ?? 'Gym',
+            style: gym.badgeColor ? { '--badge-color': gym.badgeColor } : void 0,
           }),
         isPoi || servicePois.length > 0
           ? jsxs('div', {

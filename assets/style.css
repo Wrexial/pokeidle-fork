@@ -4065,6 +4065,291 @@ img {
     z-index: 10
 }
 
+/* ── Town Map redesign (TODO #99) ─────────────────────────────────────────
+   A region palette (src/data/map-theme.js) tints the sea base, the region
+   watermark and the canvas frame, while the terrain layer paints the land.
+   Every marker below gets its own silhouette so the map reads at a glance. */
+
+.town-map-canvas {
+    background: radial-gradient(ellipse 125% 95% at 50% 38%, var(--map-ocean, #2f6fae) 0%, var(--map-ocean-deep, #1b4a80) 74%, #0e2f52 100%)
+}
+
+.map-region-watermark {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    z-index: 4;
+    font-family: var(--font-pixel);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--map-accent-bright, #f5c542);
+    padding: 2px 6px 3px;
+    border-bottom: 2px solid var(--map-accent, #d8453a);
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    pointer-events: none;
+    opacity: .72
+}
+
+.map-node-dot {
+    position: relative;
+    pointer-events: auto;
+    transition: box-shadow .14s ease, border-color .14s ease, filter .14s ease
+}
+
+/* Town: a little house with a tiled roof and a door. */
+.map-node.town .map-node-dot {
+    width: 18px;
+    height: 15px;
+    margin-top: 7px;
+    border-radius: 2px 2px 3px 3px;
+    background: linear-gradient(180deg, #f3dcaa, #cf9f56 68%, #a8763c);
+    border: 2px solid #6a4522;
+    box-shadow: 0 1px 0 1px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.55)
+}
+
+.map-node.town .map-node-dot::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    margin-bottom: -1px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 9px solid #b63024;
+    filter: drop-shadow(0 -1px 0 #6a1810)
+}
+
+.map-node.town .map-node-dot::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 1px;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 6px;
+    background: #5a3a1a;
+    border-radius: 1px 1px 0 0
+}
+
+/* Route: a small grassy pin with a highlight. */
+.map-node.route .map-node-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 32%, #9be88f, #46a04a 62%, #2c7a34);
+    border: 2px solid #e9f2d2;
+    box-shadow: 0 0 0 1px #1c4a1e, 1px 1px 0 1px rgba(0,0,0,.35)
+}
+
+.map-node.route .map-node-dot::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.34)
+}
+
+.map-node.route.complete .map-node-dot {
+    background: radial-gradient(circle at 38% 32%, #b8fbef, #26b6a4 62%, #138070);
+    border-color: #e6fffb;
+    box-shadow: 0 0 0 1px #0a4a40, 0 0 7px 2px rgba(74,224,204,.55)
+}
+
+/* Zone hub: a diamond with a gold core. */
+.map-node.zone .map-node-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    transform: rotate(45deg);
+    background: linear-gradient(135deg, #a8ddff, #3f86d0 60%, #2a5a9a);
+    border: 2.5px solid var(--map-accent-bright, #f0d870);
+    box-shadow: 0 0 0 1px #1c3a66, 0 0 9px 2px rgba(90,150,230,.6)
+}
+
+.map-node.zone .map-node-dot::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border-radius: 2px;
+    background: var(--map-accent-bright, #f0d870);
+    box-shadow: 0 0 4px 1px rgba(240,216,112,.7)
+}
+
+/* Pokemon League: a gold shield with a crown. */
+.map-node.league .map-node-dot {
+    width: 24px;
+    height: 24px;
+    margin-top: 0;
+    border-radius: 50% 50% 7px 7px / 46% 46% 16px 16px;
+    background: linear-gradient(180deg, #fff4c8, #e6b84a 58%, #a8791e);
+    border: 2.5px solid #6a4a12;
+    box-shadow: 0 0 0 1px #4a3208, 0 0 10px 3px rgba(240,200,80,.62), inset 0 1px 0 rgba(255,255,255,.75)
+}
+
+.map-node.league .map-node-dot::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    top: 4px;
+    bottom: 4px;
+    border: none;
+    background: #7a5a10;
+    clip-path: polygon(0 100%, 0 32%, 26% 58%, 50% 0, 74% 58%, 100% 32%, 100% 100%);
+    filter: none
+}
+
+.map-node.league .map-node-dot::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 4px;
+    background: #f8e090;
+    border-radius: 1px
+}
+
+/* Villain hideout: a dark hexagon with a red slit. */
+.map-node.hideout .map-node-dot {
+    width: 22px;
+    height: 22px;
+    border: none;
+    border-radius: 0;
+    background: linear-gradient(180deg, #5a1616, #2a0808 70%, #180404);
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    filter: drop-shadow(0 0 4px rgba(220,50,40,.75));
+    box-shadow: none
+}
+
+.map-node.hideout .map-node-dot::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 9px;
+    height: 2px;
+    border-radius: 1px;
+    background: #ff4d3a;
+    box-shadow: 0 0 4px 1px rgba(255,80,60,.9)
+}
+
+/* Facility: a steel tile with a ring. */
+.map-node.facility .map-node-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, #d6ecf8, #6fa0c0 68%, #3d6a8a);
+    border: 2px solid #2c4a66;
+    box-shadow: 0 1px 0 1px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.6)
+}
+
+.map-node.facility .map-node-dot::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    border: 2px solid #2c4a66
+}
+
+/* Raid Island: a purple orb with a gold star. */
+.map-node.raid .map-node-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 30%, #7a4fb0, #3d1f66 68%, #241040);
+    border: 2.5px solid var(--map-accent-bright, #f0d870);
+    box-shadow: 0 0 0 1px #2a1248, 0 0 13px 4px rgba(180,110,230,.7);
+    animation: raidPulse 2s ease-in-out infinite
+}
+
+.map-node.raid .map-node-dot::after {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    background: linear-gradient(180deg, #ffe680, #f0b020);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    filter: drop-shadow(0 0 3px rgba(255,220,120,.9))
+}
+
+/* A gym town flies its badge colour. */
+.map-node-gym {
+    position: absolute;
+    top: -9px;
+    right: -10px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--badge-color, #f0c850);
+    border: 1.5px solid #4a3008;
+    box-shadow: 0 0 4px 1px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.6);
+    z-index: 6;
+    pointer-events: none
+}
+
+/* Current location: a pulsing gold glow around whatever silhouette it is. */
+.map-node.current .map-node-dot {
+    border-color: #f8e060;
+    filter: drop-shadow(0 0 5px rgba(248,224,96,.95))
+}
+
+.map-node.current.town .map-node-dot {
+    background: linear-gradient(180deg, #ffe9bc, #e0aa5a 70%, #b4803f)
+}
+
+.map-node.current.route .map-node-dot {
+    background: radial-gradient(circle at 38% 32%, #b6ffa8, #52b855 62%, #378a3e)
+}
+
+.map-node.current.league .map-node-dot,
+.map-node.current.raid .map-node-dot,
+.map-node.current.zone .map-node-dot,
+.map-node.current.facility .map-node-dot,
+.map-node.current.hideout .map-node-dot {
+    filter: drop-shadow(0 0 6px rgba(248,224,96,.95))
+}
+
+.map-node-blink {
+    clip-path: inherit
+}
+
+.map-node.raid.cooldown .map-node-dot {
+    filter: none
+}
+
+/* Locked nodes stay legible in every silhouette. */
+.map-node.locked .map-node-dot {
+    filter: grayscale(.75) opacity(.55)
+}
+
+/* Legend swatches for the new node types. */
+.map-legend-swatch.legend-gym {
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 38%, #ffe0a0, #d09030, #8a5a10);
+    border: 1px solid #4a3008
+}
+
+.map-legend-swatch.legend-league {
+    border-radius: 50% 50% 30% 30%;
+    background: radial-gradient(circle at 40% 34%, #fff4c8, #e6b84a, #a8791e)
+}
+
+.map-legend-swatch.legend-hideout {
+    background: linear-gradient(180deg, #5a1616, #2a0808);
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)
+}
+
+.map-legend-swatch.legend-facility {
+    border-radius: 2px;
+    background: radial-gradient(circle at 40% 34%, #d6ecf8, #6fa0c0, #3d6a8a)
+}
+
 .raid-location-panel {
     text-align: center
 }

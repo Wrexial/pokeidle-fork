@@ -61,15 +61,15 @@ const NUMBERED_RE = /^##\s+(\d+)\.\s+(.+?)\s*$/
 const NAMED_RE = /^##\s+(.+?)\s*$/
 const SENTINEL_RE = /TODO_ITEM_COMPLETE\s+#?([A-Za-z0-9-]+)/
 
-// H2 headings that are scaffolding rather than work items. Add to this list (or
-// drop a heading below) when TODO.md grows a new meta section.
+// Top-level (`##`) headings that are scaffolding rather than work items. Add to
+// this list (or drop a heading below) when TODO.md grows a new meta section.
+// Only exact H2 titles belong here — `###` subsections are never parsed.
 const STRUCTURAL_SECTIONS = new Set([
   'Priority order (effort vs. gain)',
-  'Feature ideas (0.25.0 brainstorm)',
   'Feature ideas',
+  'Feature ideas (0.25.0 brainstorm)',
   'UI polish batch',
-  'Map cleanup reference maps',
-  'Useful references when picking these up',
+  'Reference notes',
 ])
 
 /** @param {string} argv */

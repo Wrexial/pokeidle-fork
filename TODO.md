@@ -21,11 +21,94 @@ _(empty)_
 
 ### Tier 2 — Big, defer
 
-_(empty)_
+- **#99 Redesign the region maps** (L, ★★★★) — give every region a proper,
+  redrawn Town Map (layout, terrain art and node styling) instead of the
+  current scraped + hand-nudged approximation. See the full entry below.
+- **#100 Redesign the site theme** (L, ★★★★) — a full visual refresh of the
+  game's look and feel (palette, panels, typography, icons/illustrations), not
+  just a tweak of the current dark-brown/parchment skin. See the full entry
+  below.
 
 ### Tier 3 — Small follow-ups on shipped systems
 
 _(empty)_
+
+---
+
+## Feature ideas
+
+The numbered entries below are open work items. Effort uses the same scale
+(S < S–M < M < M–L < L); gain is player-facing value (★ = nice to have,
+★★★★★ = core missing feature).
+
+## 99. Redesign the region maps
+
+**Effort:** L  **Gain:** ★★★★
+
+Every region's Town Map is currently a scraped force-directed layout that was
+hand-measured onto a reference image and then nudged with the automatic passes
+(`straighten-map.cjs`, `align-map-roads.cjs`, `apply-map-layout.cjs`). It is
+*readable* but it is not *designed*: roads are orthogonal elbows, nodes are
+generic dots/pins, and the terrain is coarse biome shading. This item is to
+redesign and redraw the maps of each region properly.
+
+Scope (pick a subset to start):
+
+- **Layout:** rework each region's `REGION_MAP_LAYOUTS` (in
+  `generate-regions.cjs`) so the shape reads like the real region — correct
+  relative geography, sane spacing, no overlapping roads. Work region by region
+  with `tools/map-editor.html` and `tools/map-compare/` (overlay the game's
+  nodes on the Bulbapedia reference via `overlay-region-maps.py`).
+- **Visuals:** redesign the map canvas itself — a real terrain backdrop per
+  region, distinct node icons for towns / routes / gyms / league / raid /
+  hideouts / zone hubs, better roads (bezier vs. elbows) and zone focus view.
+  Theme lives in `:root` in `assets/style.css`; the map renders in
+  `src/components/town-map.js` and `src/game/progression/roads.js` builds the
+  road paths.
+- **Consistency:** apply the same visual language to all regions (Kanto is
+  hand-curated and currently the odd one out), and keep the focused zone view
+  (`focusZone`) working.
+
+Keep the data passes idempotent (`apply-map-layout.cjs` last) and re-run
+`generate-encounter-index.cjs` / `generate-reference.cjs` afterwards. Verify
+with `npm test`, `node tools/quickplay.mjs`, `npm run build` and
+`tools/screenshot.cjs` (Town Map + focused area view).
+
+## 100. Redesign the site theme
+
+**Effort:** L  **Gain:** ★★★★
+
+The whole game wears the same skin it was decompiled with: a dark-brown pixel
+palette with gold accents, parchment modals and a wood-button texture, all
+driven by the `:root` custom properties at the top of `assets/style.css`. It is
+functional and consistent, but it is a single flat theme rather than a designed
+visual identity. This item is to redesign the game's look and feel end to end.
+
+Scope (pick a subset to start):
+
+- **Palette & design tokens:** rework the `:root` variables (`--bg-dark`,
+  `--bg-panel`, `--accent`, `--gold`, `--parchment`, `--ink`, type colours, …)
+  into a cohesive palette, and audit every hard-coded colour scattered through
+  the component styles so nothing is left on the old theme. Consider light/dark
+  or a few selectable themes via the existing Settings panel.
+- **Typography:** revisit `assets/fonts.css` (currently the single "Press Start
+  2P" pixel face) — e.g. a more readable body face alongside a pixel display
+  face, with a type scale.
+- **Panels, cards & controls:** redesign the shared chrome — panels, modals
+  (`error-boundary.js`, `slot-select.js`, …), buttons, tabs/sub-tabs, pills and
+  form controls — so components stop repeating one-off styles. The `ui/`
+  textures (parchment, wood button) and the CSS variables are the shared
+  surface.
+- **Icons & illustration:** a consistent icon set (type badges, item icons,
+  map pins, nav) and refreshed backdrops under `public/backgrounds/`.
+- **Motion & feedback:** a shared transition/easing vocabulary (respecting
+  `prefers-reduced-motion`, which the weather overlay already honours).
+
+Aim for one coherent design language applied across every screen (Town Map,
+Pokédex, battle scene, Bag, Settings, minigames). Verify visually with
+`npm run dev` and `tools/screenshot.cjs` (it captures the Town Map, Pelago and
+Settings), keep `npm run typecheck` clean, and fold the result into the top
+`CHANGELOG` entry under **Interface**.
 
 ---
 

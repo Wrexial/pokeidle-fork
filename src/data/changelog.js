@@ -139,6 +139,7 @@ export const CHANGELOG = [
           'The battle top bar’s daily icons are one Dailies button that opens a hub with a sub-tab per section: Event, Quests, Story, Companion, Gifts and Walker. The Professor’s Story is its own tab now rather than a sub-tab of Quests, and the button still pulses when anything is waiting while each sub-tab marks its own claimable reward, so the battle bar has room for Info and Settings.',
           'The tabs have been reordered: the Backpack runs Trainer / Dex / Items / Kecleon Wares, the Trainer sub-tabs run League / Card / Records / Summary, and the Dailies hub runs Event / Quests / Story / Companion / Gifts / Walker.',
           'The Run Summary no longer has its own battle top-bar shortcut: open it from the Backpack’s Trainer → Summary sub-tab now that it lives beside the Trainer Card, League and Records views.',
+          'Legibility got a pass across every theme: the smallest labels, chips and hints stepped up a font size, and the muted, dim and soft text shades were lightened so secondary text no longer blends into the panels behind it (the classic theme\u2019s dim gold and the grey-on-grey used on raised cards were the worst offenders).',
         ],
       },
       {

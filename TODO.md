@@ -29,8 +29,10 @@ _(empty)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-- **#109 Refresh the icon set and backdrops for the new theme** (M, ★★) — the
-  theme redesign skipped its illustration scope; see the entry below.
+- **#109–#111 Finish the theme's illustration scope** (S–M each, ★★) — the
+  theme redesign skipped its icons/backdrops bullet; split into the glyph set,
+  the item-icon/type-badge audit and the backdrop theming. See the entries
+  below.
 
 ---
 
@@ -141,18 +143,55 @@ sub-area rings intact. Nudge the committed nodes with `tools/map-editor.html`,
 check them with `tools/map-compare/overlay-region-maps.py`, then run
 `tools/apply-map-layout.cjs` last and remove this section.
 
-## 109. Refresh the icon set and backdrops for the new theme
+## 109. Replace the scattered UI glyphs with one themed icon set
 
 **Effort:** M  **Gain:** ★★
 
-The site-theme redesign (palette, typography, shared chrome and the four
-selectable themes) shipped, but its "icons & illustration" scope is still open.
-Audit the icons the UI draws — type badges (`src/data/moves.js`), item icons
-(`src/components/item-icon.js` + `public/sprites/items/`), Town Map pins, the
-nav/tab glyphs and the battle HUD — and give them one consistent set that reads
-on every theme, including Classic. Then refresh the scene art under
-`public/backgrounds/` (and any `BIOME_SCENE_IMAGES` entries in `src/data/ui.js`)
-so the battlegrounds match the new palette.
+The site-theme redesign gave every surface shared colour tokens, but the small
+glyphs the UI draws are still raw unicode characters sprinkled through the
+components — check marks and crosses (`✓`, `×`), arrows (`← → ▲ ▼`, `▶`),
+stars (`★`), the battle sword (`⚔`) and the Pokédex spark (`✦`) — so they
+inherit the text colour by luck and render differently per platform. Introduce
+one `Icon` component (`src/components/icon.js`) backed by a small inline-SVG
+set that draws with `currentColor` (so it re-tints per theme), and swap the
+call sites over. Cover the nav/tab glyphs, list/row action glyphs, the battle
+prompt arrow, the toast/status marks and the map's back button.
+
+Search `src/components/` for the characters above to find every site. Keep the
+existing accessible labels (`alt`/`aria-hidden`) intact, size the icons off the
+`--text-*` scale, honour Reduced Motion, and verify on all four themes with
+`tools/screenshot.cjs` plus `npm run typecheck` / `npm test`. Fold the result
+into the top `CHANGELOG` entry under **Interface**.
+
+## 110. Audit item icons and type badges against the four themes
+
+**Effort:** S–M  **Gain:** ★★
+
+`ItemIcon` (`src/components/item-icon.js`) already falls back from the
+downloaded sprites to the Pokeball/TM glyphs, and type badges are styled by the
+`type-<type>` classes, but neither was revisited for the new palettes. Check
+that every item in the live tables (mart / Reward Shop / Auction / drops) has an
+entry in `public/data/item-icons.json` or a sensible fallback (re-run
+`tools/download-item-sprites.cjs` for any gaps), that the TM and Pokeball
+fallbacks size up alongside the sprites, and that every `type-badge` keeps its
+contrast on the Pokédex, Verdant, Noir and Classic palettes (the `--text-on-type`
+token and type fills live in `assets/style.css`).
+
+Verify visually on all four themes, keep `npm run typecheck` clean, and add an
+**Interface** line to the top `CHANGELOG` entry.
+
+## 111. Make the battle backdrops match the selectable themes
+
+**Effort:** M  **Gain:** ★★
+
+The painted scenes under `public/backgrounds/` predate the theme redesign, and
+`BIOME_FILTERS` / `BIOME_SCENE_IMAGES` (`src/data/ui.js`) grade them
+independently of the active theme. Make the wild-battle backdrop sit in whatever
+palette is selected: retune the biome grades and add a theme-scoped tint /
+vignette (keyed off `[data-theme]` in `assets/style.css`, layered by
+`battle-scene.js`) so the same art reads warm under Classic and cool under
+Pokédex / Noir / Verdant. New painted art can come later; this item only needs
+the existing images to stop clashing.
 
 Verify on all four themes with `tools/screenshot.cjs`, keep `npm run typecheck`
 clean, and fold the result into the top `CHANGELOG` entry under **Interface**.

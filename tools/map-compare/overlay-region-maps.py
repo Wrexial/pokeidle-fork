@@ -23,7 +23,13 @@ REF_DIR = os.path.join(HERE, "refs")
 OUT_DIR = os.path.join(HERE, "out")
 GENERATOR = os.path.join(ROOT, "tools", "generate-regions.cjs")
 
-REGIONS = ["sinnoh", "unova", "kalos", "galar"]
+# Regions with a REGION_MAP_LAYOUTS frame measured against a matching reference
+# image. Alola is deliberately absent: its layout is hand-laid as four islands
+# in a square 100x100 world (not a projection of the real map), so an overlay
+# would be meaningless. Paldea is absent for now: its frame is portrait
+# (1300x1368) but Bulbapedia only has landscape Paldea artwork (1280x905), so a
+# stretch would distort it.
+REGIONS = ["johto", "hoenn", "sinnoh", "unova", "kalos", "galar"]
 OUTPUT_HEIGHT = 1200
 
 

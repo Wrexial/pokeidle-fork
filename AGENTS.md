@@ -817,7 +817,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Safari starters + Seafoam Jynx, route variety), rebuilds the gym / Elite Four
   / Champion initial teams with `lib/team-builder.cjs` (keeping canonical
   levels), and swaps the leader gen3 sprites for current-gen art (Lorelei and
-  Agatha keep gen3, the only art available). Idempotent (`--dry`).
+  Agatha keep gen3, the only art available). The Sevii Islands sub-areas
+  (`sevii-islands-*` routeKeys) are exempt: their hand-authored encounter
+  tables are snapshotted and restored so the rebuild can't overwrite them,
+  while their keys still count toward the level curve / variety pool so
+  base-Kanto output is unchanged. Idempotent (`--dry`).
 - `apply-paldea-progression.cjs` — data-only pass that turns open-world Paldea
   into one linear Victory Road route: it re-orders every Paldea location by the
   canonical gym order, gates the province hubs / gym towns / landmarks behind

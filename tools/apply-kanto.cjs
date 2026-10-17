@@ -15,6 +15,11 @@
  *   3. swaps the leader gen3 sprites for current-gen art (Lorelei / Agatha keep
  *      their gen3 art, the only art Showdown has for them).
  *
+ * The Sevii Islands (folded into Kanto post-game) keep their hand-authored
+ * encounter tables: their buckets are snapshotted and restored, so nothing here
+ * rewrites them. Their keys still count toward the level curve and the variety
+ * pool, so base-Kanto results don't shift.
+ *
  * Idempotent. Usage: node tools/apply-kanto.cjs [--dry]
  */
 const fs = require('fs')
@@ -114,6 +119,12 @@ const champions = read('champion-data.json')
 
 const dry = process.argv.includes('--dry')
 
+// Sevii Islands buckets (post-game Kanto) are left exactly as authored; see the
+// module header. Detected by routeKey so both the zone hub and its sub-areas
+// are covered.
+const SEVII_PREFIX = 'sevii-islands'
+const isSevii = (location) => (location.routeKey ?? '').startsWith(SEVII_PREFIX)
+
 // ---------------------------------------------------------------------------
 // 1. encounters
 // ---------------------------------------------------------------------------
@@ -148,6 +159,9 @@ function plausibleEncounters(entries) {
 for (const location of Object.values(map)) {
   if ((location.region ?? 'kanto') !== 'kanto' || !location.routeKey || location.type === 'raid')
     continue
+  // Leave the Sevii tables alone, both so the rebuilt buckets keep their
+  // hand-authored species and so the variety pool below still sees them.
+  if (isSevii(location)) continue
   const real = realEncounters[location.routeKey]
   if (real?.length && encounters[location.routeKey])
     encounters[location.routeKey] = {
@@ -155,6 +169,11 @@ for (const location of Object.values(map)) {
       encounters: real.map((entry) => ({ ...entry })),
     }
 }
+// Snapshot the Sevii buckets before the shared passes below mutate entries
+// (they re-level and re-add `variety` species); restore them before writing.
+const seviiBuckets = Object.entries(encounters)
+  .filter(([key]) => key.startsWith(SEVII_PREFIX))
+  .map(([key, bucket]) => [key, JSON.stringify(bucket)])
 const orderedKeys = Object.values(map)
   .filter(
     (location) =>
@@ -209,6 +228,8 @@ for (const [key, bucket] of Object.entries(regionBuckets)) {
   const result = enrichEncounters(bucket.encounters, wildPool, species, evolutionLevels)
   if (result.added.length) bucket.encounters = result.encounters
 }
+// Restore the untouched Sevii tables (see the snapshot above).
+for (const [key, json] of seviiBuckets) encounters[key] = JSON.parse(json)
 
 // ---------------------------------------------------------------------------
 // 2. gym / Elite Four / Champion initial teams

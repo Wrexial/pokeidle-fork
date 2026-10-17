@@ -10,6 +10,7 @@
  */
 const fs = require('fs')
 const path = require('path')
+const { browserJson, closeBrowserFetcher } = require('../lib/browser-fetch.cjs')
 
 const OUT = path.join(__dirname, 'refs')
 const UA = 'PokemonIdle-map-research/1.0'
@@ -17,9 +18,9 @@ const API = 'https://bulbapedia.bulbagarden.net/w/api.php'
 
 // Preferred in-game town map first, then a fallback from the region article.
 const CANDIDATES = {
-  kanto: ['File:Kanto Town Map RGBY.png', 'File:PE Kanto Map.png', 'File:KantoTownMap.png'],
-  johto: ['File:Johto Town Map GSC.png', 'File:JohtoMap.png'],
-  hoenn: ['File:Hoenn RSE Map.png', 'File:Hoenn ORAS Map.png'],
+  kanto: ['File:PE Kanto Map.png', 'File:Kanto Town Map RGBY.png', 'File:KantoTownMap.png'],
+  johto: ['File:JohtoMap.png', 'File:Johto Town Map GSC.png'],
+  hoenn: ['File:Hoenn ORAS Map.png', 'File:Hoenn RSE Map.png'],
   sinnoh: ['File:Sinnoh Town Map DPPt.png', 'File:Sinnoh BDSP artwork.png'],
   unova: ['File:Unova Town Map BW.png', 'File:Unova Map.png', 'File:Unova B2W2 alt.png'],
   kalos: ['File:Kalos Town Map.png', 'File:Kalos alt.png'],
@@ -32,8 +33,7 @@ async function imageUrls(titles) {
   const url =
     `${API}?action=query&titles=${encodeURIComponent(titles.join('|'))}` +
     '&prop=imageinfo&iiprop=url&format=json'
-  const response = await fetch(url, { headers: { 'User-Agent': UA } })
-  const json = await response.json()
+  const json = await browserJson(url)
   const out = {}
   for (const page of Object.values(json.query.pages)) {
     const url = page.imageinfo?.[0]?.url
@@ -51,13 +51,17 @@ async function imageUrls(titles) {
       console.warn(`${region}: no reference found`)
       continue
     }
+    // The image host (archives.bulbagarden.net) is not Cloudflare-challenged,
+    // so the bytes come from a plain request; only the wiki API needs Chrome.
     const response = await fetch(urls[title], { headers: { 'User-Agent': UA } })
     const buffer = Buffer.from(await response.arrayBuffer())
     const dest = path.join(OUT, `${region}.png`)
     fs.writeFileSync(dest, buffer)
     console.log(`${region.padEnd(7)} ${title} (${(buffer.length / 1024).toFixed(0)} KB)`)
   }
-})().catch((error) => {
+  await closeBrowserFetcher()
+})().catch(async (error) => {
   console.error('ERR', error.stack || error.message)
+  await closeBrowserFetcher()
   process.exit(1)
 })

@@ -572,7 +572,9 @@ One-off scripts used to build the data JSON (not run during dev/build):
   PokéAPI and route/town compass connections (`north/south/east/west`) from
   Bulbapedia's raw infoboxes, then computes a directional layout. Caches HTTP
   responses under `tools/cache/` (gitignored) and writes
-  `tools/region-maps.json` (committed). Note Paldea is PokéAPI region **10**
+  `tools/region-maps.json` (committed). PokéAPI is fetched normally, but
+  Bulbapedia rejects Node's `fetch`, so its pages go through
+  `lib/browser-fetch.cjs` (a real Chrome). Note Paldea is PokéAPI region **10**
   (region 9 is Hisui) and has no routes — its areas are the
   "<Dir> Province (Area N)" locations.
 
@@ -603,7 +605,8 @@ One-off scripts used to build the data JSON (not run during dev/build):
   is why Kanto Victory Road no longer carries Gold/SoulSilver species). Maps
   species to the game's keys, and also refreshes Kanto from its own map-data.
   **Paldea isn't in PokéAPI's encounter data**, so its province areas are parsed
-  from Bulbapedia's `{{Catch/entry9}}` tables instead. Writes
+  from Bulbapedia's `{{Catch/entry9}}` tables instead (read via
+  `lib/browser-fetch.cjs`, since Cloudflare blocks Node's `fetch`). Writes
   `tools/route-encounters.json` (committed).
 - `generate-regions.cjs` — turns `tools/region-maps.json` + `route-encounters.json` into game content
   (locations, encounters, trainers, marts, Raid Islands, and gym/Elite
@@ -992,12 +995,26 @@ One-off scripts used to build the data JSON (not run during dev/build):
   Idempotent (`--dry`).
 - `kill-vite.cjs` — kills orphaned Vite dev servers on the port range (Windows
   `taskkill`, else `kill`). Run `npm run kill-vite`, or `--dry` to preview.
+- `lib/browser-fetch.cjs` — a tiny DevTools-Protocol driver (no npm deps, like
+  `screenshot.cjs`) that launches a **visible** Chrome, waits out Bulbapedia's
+  Cloudflare "Just a moment" challenge, then proxies same-origin requests
+  through the page's own `fetch()` (the clearance cookie rides along and CORS
+  is a non-issue). Cloudflare fingerprints Node's HTTP stack, so a plain
+  `fetch` to `bulbapedia.bulbagarden.net` returns the challenge whatever the
+  User-Agent; headless Chrome is also detected, so the window is not optional
+  (`PI_BROWSER_HEADLESS=1` is for experimentation only; `CHROME_PATH` overrides
+  the binary). The profile lives in `tools/cache/browser-profile` (gitignored),
+  so the clearance cookie is reused and only the first run in a while solves
+  the challenge. Exports `browserText` / `browserJson` / `closeBrowserFetcher`;
+  callers must `closeBrowserFetcher()` when done.
 - `lib/region-data.cjs` — `readRegionDir`/`writeRegionDir` for the split
   `map-data/` and `encounter-data/` directories (used by `generate-regions.cjs`
   and `scrape-route-encounters.cjs`).
 - `map-compare/` — visual sanity-check of the generated region layouts against
-  real region maps. `fetch-refs.cjs` downloads Bulbapedia references (gitignored
-  `refs/`); `render-region-maps.py` (uses Pillow from `.venv`) draws each
+  real region maps. `fetch-refs.cjs` downloads Bulbapedia references (the wiki
+  API via `lib/browser-fetch.cjs`, the `archives.bulbagarden.net` images with a
+  plain request; gitignored `refs/`); `render-region-maps.py` (uses Pillow from
+  `.venv`) draws each
   region's locations/roads from `public/data/map-data/` and writes side-by-side
   composites to gitignored `out/`; `overlay-region-maps.py` draws the game's
   nodes on top of the reference so the hand-measured `REGION_MAP_LAYOUTS`
@@ -1022,7 +1039,11 @@ One-off scripts used to build the data JSON (not run during dev/build):
 
 These scripts hit external sites (PokeAPI, Serebii's itemdex, Bulbapedia) and
 may write large files — only run them when the task is explicitly about
-re-scraping or regenerating data.
+re-scraping or regenerating data. Bulbapedia additionally sits behind a
+Cloudflare managed challenge that rejects Node's `fetch` (it fingerprints the
+HTTP stack, so no User-Agent gets around it) as well as headless Chrome;
+`lib/browser-fetch.cjs` launches a real Chrome for those reads. PokeAPI,
+Serebii and Pokémon Showdown accept plain requests.
 
 ## Conventions
 

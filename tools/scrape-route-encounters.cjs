@@ -19,6 +19,7 @@ const OUT = path.join(__dirname, 'route-encounters.json')
 const MAPS = path.join(__dirname, 'region-maps.json')
 const DATA = path.join(__dirname, '../public/data')
 const { readRegionDir } = require('./lib/region-data.cjs')
+const { browserText, closeBrowserFetcher } = require('./lib/browser-fetch.cjs')
 const UA = 'PokemonIdle-encounter-research/1.0'
 const onlyArg = process.argv.find((a) => a.startsWith('--region='))
 const ONLY = onlyArg ? onlyArg.split('=')[1] : null
@@ -57,6 +58,7 @@ const VERSION_GENERATION = {
 
 fs.mkdirSync(CACHE, { recursive: true })
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+// PokéAPI accepts plain requests; only Bulbapedia (fetchBulbaRaw) needs Chrome.
 async function cacheGet(url, file) {
   const p = path.join(CACHE, file)
   if (fs.existsSync(p)) return JSON.parse(fs.readFileSync(p, 'utf8'))
@@ -90,11 +92,9 @@ async function fetchBulbaRaw(title) {
   const file = 'bp-' + title.replace(/[^A-Za-z0-9]+/g, '_') + '.txt'
   const p = path.join(CACHE, file)
   if (fs.existsSync(p)) return fs.readFileSync(p, 'utf8')
-  const res = await fetch(
-    `https://bulbapedia.bulbagarden.net/w/index.php?title=${encodeURIComponent(title)}&action=raw`,
-    { headers: { 'User-Agent': UA } }
+  const text = await browserText(
+    `https://bulbapedia.bulbagarden.net/w/index.php?title=${encodeURIComponent(title)}&action=raw`
   )
-  const text = await res.text()
   fs.writeFileSync(p, text)
   await sleep(300)
   return text
@@ -305,7 +305,9 @@ async function routeEncounters(regionId, routeSlug) {
 
   fs.writeFileSync(OUT, JSON.stringify(out, null, 1))
   console.log('wrote', path.relative(path.join(__dirname, '..'), OUT))
-})().catch((e) => {
+  await closeBrowserFetcher()
+})().catch(async (e) => {
   console.error('ERR', e.stack || e.message)
+  await closeBrowserFetcher()
   process.exit(1)
 })

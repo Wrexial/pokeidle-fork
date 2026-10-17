@@ -11,6 +11,7 @@
  */
 const fs = require('fs')
 const path = require('path')
+const { browserText, closeBrowserFetcher } = require('./lib/browser-fetch.cjs')
 
 const CACHE = path.join(__dirname, 'cache')
 const OUT = path.join(__dirname, 'region-maps.json')
@@ -26,11 +27,24 @@ const ONLY = onlyArg ? onlyArg.split('=')[1] : null
 fs.mkdirSync(CACHE, { recursive: true })
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+// PokéAPI is not Cloudflare-challenged, so it uses a plain request. Bulbapedia
+// (see cachedBulbaText) goes through the browser instead.
 const cachedFetch = async (url, file) => {
   const p = path.join(CACHE, file)
   if (fs.existsSync(p)) return fs.readFileSync(p, 'utf8')
   const res = await fetch(url, { headers: { 'User-Agent': UA } })
   const text = await res.text()
+  fs.writeFileSync(p, text)
+  await sleep(350)
+  return text
+}
+
+// Bulbapedia rejects Node's fetch (Cloudflare fingerprints the HTTP stack), so
+// its pages are read through a real Chrome carrying a solved clearance cookie.
+const cachedBulbaText = async (url, file) => {
+  const p = path.join(CACHE, file)
+  if (fs.existsSync(p)) return fs.readFileSync(p, 'utf8')
+  const text = await browserText(url)
   fs.writeFileSync(p, text)
   await sleep(350)
   return text
@@ -99,7 +113,7 @@ function pageTitle(regionName, slug) {
 
 async function fetchRaw(title) {
   const file = 'bp-' + title.replace(/[^A-Za-z0-9]+/g, '_') + '.txt'
-  let text = await cachedFetch(
+  let text = await cachedBulbaText(
     `https://bulbapedia.bulbagarden.net/w/index.php?title=${encodeURIComponent(title)}&action=raw`,
     file
   )
@@ -417,10 +431,13 @@ async function main() {
 }
 
 if (require.main === module) {
-  main().catch((e) => {
-    console.error('ERR', e.stack || e.message)
-    process.exit(1)
-  })
+  main()
+    .then(() => closeBrowserFetcher())
+    .catch(async (e) => {
+      console.error('ERR', e.stack || e.message)
+      await closeBrowserFetcher()
+      process.exit(1)
+    })
 }
 
 module.exports = { regionGraph, layout, addConnectorHubs, contractHubs }

@@ -66,6 +66,10 @@
     --scroll-track: #00000026;
     --modal-backdrop: #05070b99;
 
+    /* Tint layered over the painted battle backdrop so the same art sits in the
+       active theme's palette (see .battle-scene-tint). */
+    --battle-tint: linear-gradient(180deg, #1b2a4638, #0e11171f);
+
     /* --- Motion & elevation --------------------------------------------- */
     --ease-out: cubic-bezier(.22,.61,.36,1);
     --ease-in-out: cubic-bezier(.45,.05,.55,.95);
@@ -113,6 +117,8 @@
     --scroll-thumb: #685040;
     --scroll-thumb-hover: #8a6a50;
     --modal-backdrop: #00000080
+
+    --battle-tint: linear-gradient(180deg, #c8a8482e, #6a4a1024)
 }
 
 /* Noir — an OLED-black skin with a cool teal highlight. */
@@ -153,6 +159,8 @@
     --scroll-thumb: #2a2d34;
     --scroll-thumb-hover: #454a55;
     --modal-backdrop: #000000cc
+
+    --battle-tint: linear-gradient(180deg, #04141c66, #0000004d)
 }
 
 /* Verdant — a deep forest skin with a leaf-green highlight. */
@@ -192,6 +200,8 @@
     --wood-dark: #14261f;
     --scroll-thumb: #2b463a;
     --scroll-thumb-hover: #406052
+
+    --battle-tint: linear-gradient(180deg, #12302059, #07100c2e)
 }
 
 html,body,#root {
@@ -648,6 +658,17 @@ img {
     background-size: cover;
     background-position: center bottom;
     pointer-events: none
+}
+
+/* A palette tint over the painted backdrop, driven by the active theme's
+   --battle-tint, so the same scene reads warm on Classic and cool on the
+   modern themes. It sits above the backdrop but below the combatants and the
+   weather overlay (which follow it in the DOM). */
+.battle-scene-tint {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: var(--battle-tint, none)
 }
 
 .info-box {

@@ -21,7 +21,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const { pathToFileURL } = require('url')
+const { collectItemIds } = require('./lib/item-ids.cjs')
 
 const ROOT = path.join(__dirname, '..')
 const SPRITE_DIR = path.join(ROOT, 'public', 'sprites', 'items')
@@ -62,35 +62,6 @@ const SEREBII_NAMES = {
   apricornBlack: 'blackapricorn',
   // The Ancient Relic quest item borrows the Relic Crown art.
   ancientRelic: 'reliccrown',
-}
-
-/** Every item id that can appear in the bag, a shop or an auction lot. */
-function collectItemIds() {
-  const ids = new Set(),
-    addTable = (/** @type {Record<string, any>} */ table) => {
-      for (const item of Object.values(table)) if (item?.id) ids.add(item.id)
-    },
-    addEntries = (/** @type {{ itemId: string }[]} */ entries) => {
-      for (const entry of entries) if (entry?.itemId) ids.add(entry.itemId)
-    }
-  return Promise.all([
-    import(pathToFileURL(path.join(ROOT, 'src', 'data', 'items.js')).href),
-    import(pathToFileURL(path.join(ROOT, 'src', 'game', 'minigames', 'auction-house.js')).href),
-  ]).then(([items, auction]) => {
-    addTable(items.activeItems)
-    addTable(items.consumableItems)
-    addTable(items.heldItems)
-    addTable(items.evolutionItems)
-    addTable(items.fossilItems)
-    addEntries(items.valuableDropTable)
-    addEntries(items.coreMartItems)
-    for (const stock of Object.values(items.regionalMartItems)) addEntries(stock)
-    addEntries(items.tokenShopItems)
-    for (const lot of auction.AUCTION_LOTS) addEntries(lot.items)
-    // Balls already render the shared PokeballIcon, so they don't need art.
-    for (const ballId of Object.keys(items.pokeBalls)) ids.delete(ballId)
-    return [...ids].sort()
-  })
 }
 
 /** Streams `url` to `filepath`; resolves true on 200, false on 404. */

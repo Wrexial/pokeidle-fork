@@ -29,10 +29,7 @@ _(empty)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-- **#110–#111 Finish the theme's illustration scope** (S–M each, ★★) — the
-  theme redesign skipped its icons/backdrops bullet; the shared glyph set
-  (#109) shipped, leaving the item-icon/type-badge audit and the backdrop
-  theming. See the entries below.
+_(empty)_
 
 ---
 
@@ -142,39 +139,6 @@ order that `tools/apply-paldea-progression.cjs` writes, and keep the zone hub
 sub-area rings intact. Nudge the committed nodes with `tools/map-editor.html`,
 check them with `tools/map-compare/overlay-region-maps.py`, then run
 `tools/apply-map-layout.cjs` last and remove this section.
-
-## 110. Audit item icons and type badges against the four themes
-
-**Effort:** S–M  **Gain:** ★★
-
-`ItemIcon` (`src/components/item-icon.js`) already falls back from the
-downloaded sprites to the Pokeball/TM glyphs, and type badges are styled by the
-`type-<type>` classes, but neither was revisited for the new palettes. Check
-that every item in the live tables (mart / Reward Shop / Auction / drops) has an
-entry in `public/data/item-icons.json` or a sensible fallback (re-run
-`tools/download-item-sprites.cjs` for any gaps), that the TM and Pokeball
-fallbacks size up alongside the sprites, and that every `type-badge` keeps its
-contrast on the Pokédex, Verdant, Noir and Classic palettes (the `--text-on-type`
-token and type fills live in `assets/style.css`).
-
-Verify visually on all four themes, keep `npm run typecheck` clean, and add an
-**Interface** line to the top `CHANGELOG` entry.
-
-## 111. Make the battle backdrops match the selectable themes
-
-**Effort:** M  **Gain:** ★★
-
-The painted scenes under `public/backgrounds/` predate the theme redesign, and
-`BIOME_FILTERS` / `BIOME_SCENE_IMAGES` (`src/data/ui.js`) grade them
-independently of the active theme. Make the wild-battle backdrop sit in whatever
-palette is selected: retune the biome grades and add a theme-scoped tint /
-vignette (keyed off `[data-theme]` in `assets/style.css`, layered by
-`battle-scene.js`) so the same art reads warm under Classic and cool under
-Pokédex / Noir / Verdant. New painted art can come later; this item only needs
-the existing images to stop clashing.
-
-Verify on all four themes with `tools/screenshot.cjs`, keep `npm run typecheck`
-clean, and fold the result into the top `CHANGELOG` entry under **Interface**.
 
 ## Reference notes
 

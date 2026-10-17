@@ -17,6 +17,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { readRegionDir } from './lib/region-data.cjs'
 import { buildEvolutionLevels } from './lib/evolution-levels.cjs'
+import { collectItemIds } from './lib/item-ids.cjs'
 import { installGameData } from './lib/game-data.mjs'
 
 const DATA = path.join(import.meta.dirname, '../public/data')
@@ -230,12 +231,17 @@ for (const [category, dir] of Object.entries(femaleSpriteDirs)) {
 }
 
 // The shop / auction item sprite manifest must match the files on disk, or a
-// row would request an icon that does not exist.
+// row would request an icon that does not exist — and every item the live
+// tables can show must be in the manifest, or a newly-added item would render
+// blank until download-item-sprites.cjs is re-run.
 const itemIcons = read('item-icons.json')
 const ITEM_SPRITE_ROOT = path.join(import.meta.dirname, '../public/sprites/items')
 for (const [itemId, file] of Object.entries(itemIcons))
   if (!fs.existsSync(path.join(ITEM_SPRITE_ROOT, file)))
     fail(`item sprite manifest lists ${itemId} but ${file} is missing`)
+for (const itemId of await collectItemIds())
+  if (!itemIcons[itemId])
+    fail(`item ${itemId} has no sprite in item-icons.json (re-run tools/download-item-sprites.cjs)`)
 
 for (const [locationId, location] of Object.entries(mapData)) {
   if (location.background && !fs.existsSync(path.join(import.meta.dirname, '../public', location.background)))

@@ -296,6 +296,7 @@ export function BattleScene({ onOpenMenu }) {
               .join(' ') || 'none',
         },
       }),
+      jsx('div', { className: 'battle-scene-tint' }),
       jsx(BattleWeatherOverlay, {
         weather: state.weather?.type,
       }),

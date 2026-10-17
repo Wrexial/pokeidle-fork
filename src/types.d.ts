@@ -768,6 +768,8 @@ type GameState = {
   colourblindTypes: boolean
   /** Uniformly scale the UI up for readability. */
   largeText: boolean
+  /** Selectable site theme (see data/themes.js); applied as `data-theme` on <html>. */
+  theme: string
   /** Sprite style: animated gifs or static pngs. */
   spriteStyle: 'animated' | 'static'
   /** Float the damage dealt over the sprite in battle. */

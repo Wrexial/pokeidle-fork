@@ -7,6 +7,7 @@
 // provider writes the store back whenever a preference changes.
 
 import { sanitizeKeybindings } from '../data/keybindings.js'
+import { sanitizeTheme } from '../data/themes.js'
 
 /** Storage key for the shared settings blob. */
 export const SETTINGS_STORAGE_KEY = 'pokemon-idle-settings'
@@ -52,6 +53,7 @@ export const SETTINGS_KEYS = /** @type {const} */ ([
   'reducedMotion',
   'colourblindTypes',
   'largeText',
+  'theme',
   'spriteStyle',
   'showDamageNumbers',
   'showMoveAnimations',
@@ -94,6 +96,7 @@ export function mergeStoredSettings(state) {
   // A stored binding map can predate an action or be hand-edited in storage,
   // so always normalise it back to a full, valid map.
   merged.keybindings = sanitizeKeybindings(merged.keybindings)
+  merged.theme = sanitizeTheme(merged.theme)
   setSpriteStyle(merged.spriteStyle)
   return /** @type {GameState} */ (merged)
 }

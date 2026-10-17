@@ -3,6 +3,7 @@
 
 import { defaultCatchSettings } from '../data/config.js'
 import { DEFAULT_KEYBINDINGS } from '../data/keybindings.js'
+import { DEFAULT_THEME } from '../data/themes.js'
 import { DEFAULT_AUTO_BATTLE_POLICY } from './auto-battle-policy.js'
 import { emptyBattleHazards } from './hazards.js'
 import { createCompanionCare } from './companion.js'
@@ -28,7 +29,7 @@ import { createBreedingTracker } from './breeding-projects.js'
 import { claimMinigameReward, collectMining, endBugContest, endDowsing, endHideAndSeek, endMinigame, endRouteActivity, endSafari, findDowsing, payMinigameFee, recordGameCornerWin, startDowsing, startHideAndSeek, startAcademyQuiz, startAuctionHouse, startBattleRoyal, startChampionGauntlet, startBugContest, startContest, startCurry, startDoubles, startDynamaxAdventures, startGameCorner, startIceSlide, startLightsOut, startMemory, startMining, startMusical, startPelago, startPicnic, startPokeathlon, startPokeRadar, startPokeballFactory, startPokestar, startPuzzleLeague, startRouteActivity, startRuinsPuzzle, startSafari, startVoltorbFlip, startWhack, startMantineSurf, startRotomRally, startOgreOustin, startTypeFusion, startUnownPicross, startPokeshot, startTeraRaid, startPokeword, startBerryBlender, startUltraWarp, startTriples, startRotation, startFreeForAll } from './reducer/minigames.js'
 import { applyTeamPreset, bankDeposit, bankWithdraw, boxToParty, catchPokemon, clearHatchResult, completeEvolution, completeWonderTrade, deleteTeamPreset, depositDaycare, evolutionStep, hatchDaycareEgg, partyToBox, releaseDuplicates, releaseFainted, releaseFiltered, releaseHatchling, releasePokemon, reorderBox, reorderParty, saveTeamPreset, setBoxSort, setMoves, setNickname, startEvolution, swapPartyBox, toggleFavourite, withdrawDaycare, wonderTrade } from './reducer/pokemon.js'
 import { completeHealing, healingStep, nuzlockeGameOver, startHealing } from './reducer/recovery.js'
-import { addLog, clearLevelUp, dismissNotification, markCatchRoute, markTutorialSeen, pushNotification, resetKeybindings, setAutoBattlePolicy, setBattleMode, setBattleStyle, setChallengeMonotype, setKeybinding, setSpeed, toggleAutoHeal, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleDamageNumbers, toggleHordes, toggleLargeText, toggleMartCollapsed, toggleMoveAnimations, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx, toggleShinySparkles, toggleSpriteStyle } from './reducer/settings.js'
+import { addLog, clearLevelUp, dismissNotification, markCatchRoute, markTutorialSeen, pushNotification, resetKeybindings, setAutoBattlePolicy, setBattleMode, setBattleStyle, setChallengeMonotype, setKeybinding, setSpeed, setTheme, toggleAutoHeal, toggleAutoProceed, toggleBrowserNotifications, toggleChallengeLevelScale, toggleChallengeNuzlocke, toggleChallengeRandomizer, toggleChallengeRestrictCatches, toggleColourblindTypes, toggleDamageNumbers, toggleHordes, toggleLargeText, toggleMartCollapsed, toggleMoveAnimations, toggleMusic, toggleNotifyEgg, toggleNotifyRare, toggleNotifyShiny, togglePause, toggleReducedMotion, toggleSfx, toggleShinySparkles, toggleSpriteStyle } from './reducer/settings.js'
 import { buyOutfit, updateTrainerProfile } from './reducer/profile.js'
 import { createTrainerProfile } from './trainer-profile.js'
 import { buyPrestigePerk, phaseIdle, prestigeRegion, resetEliteFour, resetPrestigePerks, selectStarter, travel, unlockRegion } from './reducer/world.js'
@@ -248,6 +249,8 @@ export const initialGameState = {
   colourblindTypes: !1,
   /** Uniformly scale the UI up for readability. */
   largeText: !1,
+  /** Selectable site theme (see data/themes.js); applied as data-theme on <html>. */
+  theme: DEFAULT_THEME,
   /** Sprite style: 'animated' gifs (default) or 'static' pngs. */
   spriteStyle: 'animated',
   /** Float the damage dealt over the sprite during battle. */
@@ -575,6 +578,8 @@ function applyAction(state, action) {
       return toggleColourblindTypes(state, action)
     case 'TOGGLE_LARGE_TEXT':
       return toggleLargeText(state, action)
+    case 'SET_THEME':
+      return setTheme(state, action)
     case 'TOGGLE_SPRITE_STYLE':
       return toggleSpriteStyle(state, action)
     case 'TOGGLE_DAMAGE_NUMBERS':

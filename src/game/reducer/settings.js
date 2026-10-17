@@ -1,6 +1,7 @@
 // Reducer handlers for settings actions. Split from game/reducer.js.
 
 import { DEFAULT_KEYBINDINGS, sanitizeKeybindings } from '../../data/keybindings.js'
+import { sanitizeTheme } from '../../data/themes.js'
 import { POKEMON_TYPES } from '../../data/moves.js'
 import { DEFAULT_AUTO_BATTLE_POLICY, normalizeAutoBattlePolicy } from '../auto-battle-policy.js'
 import { withNotification } from '../reducer-helpers.js'
@@ -323,6 +324,21 @@ export function toggleLargeText(state, action) {
   return {
     ...state,
     largeText: !state.largeText,
+  }
+}
+
+/**
+ * Handle the `SET_THEME` action: switch the site theme (see `data/themes.js`).
+ * An unknown value falls back to the default theme rather than applying an
+ * undefined `data-theme`.
+ * @param {GameState} state
+ * @param {GameAction} action
+ * @returns {GameState}
+ */
+export function setTheme(state, action) {
+  return {
+    ...state,
+    theme: sanitizeTheme(action.payload?.theme),
   }
 }
 

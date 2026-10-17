@@ -74,44 +74,6 @@ Keep the data passes idempotent (`apply-map-layout.cjs` last) and re-run
 with `npm test`, `node tools/quickplay.mjs`, `npm run build` and
 `tools/screenshot.cjs` (Town Map + focused area view).
 
-## 100. Redesign the site theme
-
-**Effort:** L  **Gain:** ★★★★
-
-The whole game wears the same skin it was decompiled with: a dark-brown pixel
-palette with gold accents, parchment modals and a wood-button texture, all
-driven by the `:root` custom properties at the top of `assets/style.css`. It is
-functional and consistent, but it is a single flat theme rather than a designed
-visual identity. This item is to redesign the game's look and feel end to end.
-
-Scope (pick a subset to start):
-
-- **Palette & design tokens:** rework the `:root` variables (`--bg-dark`,
-  `--bg-panel`, `--accent`, `--gold`, `--parchment`, `--ink`, type colours, …)
-  into a cohesive palette, and audit every hard-coded colour scattered through
-  the component styles so nothing is left on the old theme. Consider light/dark
-  or a few selectable themes via the existing Settings panel.
-- **Typography:** revisit `assets/fonts.css` (currently the single "Press Start
-  2P" pixel face) — e.g. a more readable body face alongside a pixel display
-  face, with a type scale.
-- **Panels, cards & controls:** redesign the shared chrome — panels, modals
-  (`error-boundary.js`, `slot-select.js`, …), buttons, tabs/sub-tabs, pills and
-  form controls — so components stop repeating one-off styles. The `ui/`
-  textures (parchment, wood button) and the CSS variables are the shared
-  surface.
-- **Icons & illustration:** a consistent icon set (type badges, item icons,
-  map pins, nav) and refreshed backdrops under `public/backgrounds/`.
-- **Motion & feedback:** a shared transition/easing vocabulary (respecting
-  `prefers-reduced-motion`, which the weather overlay already honours).
-
-Aim for one coherent design language applied across every screen (Town Map,
-Pokédex, battle scene, Bag, Settings, minigames). Verify visually with
-`npm run dev` and `tools/screenshot.cjs` (it captures the Town Map, Pelago and
-Settings), keep `npm run typecheck` clean, and fold the result into the top
-`CHANGELOG` entry under **Interface**.
-
----
-
 ## Reference notes
 
 ### Map cleanup reference maps

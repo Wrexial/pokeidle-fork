@@ -5,6 +5,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { clearSave } from '../data/config.js'
 import { autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { CATCH_MODE_OPTIONS, SPEED_OPTIONS } from '../data/ui.js'
+import { THEMES } from '../data/themes.js'
 import { unlockAudio } from '../game/audio.js'
 import { useGame } from '../game/context.js'
 import { decodeShareCode, encodeShareCode, repairSave, serializeSave, suspendAutosave, writeImportedSave } from '../game/save.js'
@@ -516,6 +517,45 @@ export function SettingsModal({ onClose }) {
                       jsx('div', {
                         className: 'section-title',
                         children: 'Display',
+                      }),
+                      jsxs('div', {
+                        className: 'settings-theme',
+                        children: [
+                          jsx('span', {
+                            className: 'settings-speed-label',
+                            children: 'Theme',
+                          }),
+                          jsx('p', {
+                            className: 'settings-hint',
+                            children:
+                              'Recolours the whole interface and battle scene. Classic restores the original brown-and-gold pixel skin.',
+                          }),
+                          jsx('div', {
+                            className: 'settings-theme-options',
+                            children: THEMES.map(({ value, label, hint }) =>
+                              jsxs(
+                                'button',
+                                {
+                                  className: `settings-theme-btn${(state.theme ?? 'poke') === value ? ' active' : ''}`,
+                                  onClick: () =>
+                                    dispatch({ type: 'SET_THEME', payload: { theme: value } }),
+                                  title: hint,
+                                  children: [
+                                    jsx('span', {
+                                      className: 'settings-theme-name',
+                                      children: label,
+                                    }),
+                                    jsx('span', {
+                                      className: 'settings-theme-hint',
+                                      children: hint,
+                                    }),
+                                  ],
+                                },
+                                value
+                              )
+                            ),
+                          }),
+                        ],
                       }),
                       jsx('p', {
                         className: 'settings-hint',

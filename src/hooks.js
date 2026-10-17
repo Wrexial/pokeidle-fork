@@ -3,6 +3,7 @@
 
 import React from 'react'
 import { MOBILE_BREAKPOINT, MOBILE_HEIGHT_BREAKPOINT } from './data/ui.js'
+import { sanitizeTheme } from './data/themes.js'
 import { HOTKEY_PHASES, actionForKey, hotkeyActions, keyForEvent } from './data/keybindings.js'
 import { mapData } from './data/gameData.js'
 import { useGame } from './game/context.js'
@@ -357,7 +358,8 @@ export function useAccessibilitySettings() {
     root.dataset.reducedMotion = state.reducedMotion ? 'true' : 'false'
     root.dataset.colourblindTypes = state.colourblindTypes ? 'true' : 'false'
     root.dataset.largeText = state.largeText ? 'true' : 'false'
-  }, [state.reducedMotion, state.colourblindTypes, state.largeText])
+    root.dataset.theme = sanitizeTheme(state.theme)
+  }, [state.reducedMotion, state.colourblindTypes, state.largeText, state.theme])
 }
 
 /**

@@ -21,13 +21,11 @@ _(empty)_
 
 ### Tier 2 — Big, defer
 
-- **#99 Redesign the region maps** (L, ★★★★) — give every region a proper,
-  redrawn Town Map (layout, terrain art and node styling) instead of the
-  current scraped + hand-nudged approximation. See the full entry below.
-- **#100 Redesign the site theme** (L, ★★★★) — a full visual refresh of the
-  game's look and feel (palette, panels, typography, icons/illustrations), not
-  just a tweak of the current dark-brown/parchment skin. See the full entry
-  below.
+- **#101–#108 Redraw each region's map layout** (M each, ★★★) — the #99 map
+  canvas, per-region palettes, node silhouettes and curved roads shipped; what
+  is left is re-measuring each region's `REGION_MAP_LAYOUTS` so its shape
+  matches the reference map. Split one item per region so each gets a focused
+  run instead of one oversized job. See the entries below.
 
 ### Tier 3 — Small follow-ups on shipped systems
 
@@ -41,38 +39,106 @@ The numbered entries below are open work items. Effort uses the same scale
 (S < S–M < M < M–L < L); gain is player-facing value (★ = nice to have,
 ★★★★★ = core missing feature).
 
-## 99. Redesign the region maps
+The #99 map redesign (canvas, per-region palettes, node silhouettes, curved
+roads) shipped in `b5acb6f4`. The remaining work is the region-by-region layout
+rework, split by region below: the old combined item's `todo-99` session grew
+large enough that the runner's requests kept hitting the API's worker resource
+limit (`503`), so each region now gets a fresh, short session. The shared method
+is in **Map cleanup reference maps** under Reference notes.
 
-**Effort:** L  **Gain:** ★★★★
+## 101. Redraw the Johto map layout
 
-Every region's Town Map is currently a scraped force-directed layout that was
-hand-measured onto a reference image and then nudged with the automatic passes
-(`straighten-map.cjs`, `align-map-roads.cjs`, `apply-map-layout.cjs`). It is
-*readable* but it is not *designed*: roads are orthogonal elbows, nodes are
-generic dots/pins, and the terrain is coarse biome shading. This item is to
-redesign and redraw the maps of each region properly.
+**Effort:** M  **Gain:** ★★★
 
-Scope (pick a subset to start):
+Re-measure Johto's `REGION_MAP_LAYOUTS.johto` in `tools/generate-regions.cjs`
+against its reference map so the shape reads like the real region: correct
+relative geography, sane spacing and no overlapping roads. Johto is anchored by
+Mt. Silver on the right with the league hanging off it, so keep that ending
+orientation. Nudge the committed nodes with `tools/map-editor.html`, check them
+with `tools/map-compare/overlay-region-maps.py`, then run
+`tools/apply-map-layout.cjs` last and remove this section.
 
-- **Layout:** rework each region's `REGION_MAP_LAYOUTS` (in
-  `generate-regions.cjs`) so the shape reads like the real region — correct
-  relative geography, sane spacing, no overlapping roads. Work region by region
-  with `tools/map-editor.html` and `tools/map-compare/` (overlay the game's
-  nodes on the Bulbapedia reference via `overlay-region-maps.py`).
-- **Visuals:** redesign the map canvas itself — a real terrain backdrop per
-  region, distinct node icons for towns / routes / gyms / league / raid /
-  hideouts / zone hubs, better roads (bezier vs. elbows) and zone focus view.
-  Theme lives in `:root` in `assets/style.css`; the map renders in
-  `src/components/town-map.js` and `src/game/progression/roads.js` builds the
-  road paths.
-- **Consistency:** apply the same visual language to all regions (Kanto is
-  hand-curated and currently the odd one out), and keep the focused zone view
-  (`focusZone`) working.
+## 102. Redraw the Hoenn map layout
 
-Keep the data passes idempotent (`apply-map-layout.cjs` last) and re-run
-`generate-encounter-index.cjs` / `generate-reference.cjs` afterwards. Verify
-with `npm test`, `node tools/quickplay.mjs`, `npm run build` and
-`tools/screenshot.cjs` (Town Map + focused area view).
+**Effort:** M  **Gain:** ★★★
+
+Re-measure Hoenn's `REGION_MAP_LAYOUTS.hoenn` in `tools/generate-regions.cjs`
+against its ORAS reference map so the shape reads like the real region: correct
+relative geography, sane spacing and no overlapping roads. The sea routes and
+the Ever Grande league (anchored on Route 128) are the tricky parts. Nudge the
+committed nodes with `tools/map-editor.html`, check them with
+`tools/map-compare/overlay-region-maps.py`, then run
+`tools/apply-map-layout.cjs` last and remove this section.
+
+## 103. Redraw the Sinnoh map layout
+
+**Effort:** M  **Gain:** ★★★
+
+Re-measure Sinnoh's `REGION_MAP_LAYOUTS.sinnoh` in `tools/generate-regions.cjs`
+against its reference map so the shape reads like the real region: correct
+relative geography, sane spacing and no overlapping roads. A reference image is
+kept in Reference notes. Nudge the committed nodes with `tools/map-editor.html`,
+check them with `tools/map-compare/overlay-region-maps.py`, then run
+`tools/apply-map-layout.cjs` last and remove this section.
+
+## 104. Redraw the Unova map layout
+
+**Effort:** M  **Gain:** ★★★
+
+Re-measure Unova's `REGION_MAP_LAYOUTS.unova` in `tools/generate-regions.cjs`
+against its reference map so the shape reads like the real region: correct
+relative geography, sane spacing and no overlapping roads. A reference image is
+kept in Reference notes. Nudge the committed nodes with `tools/map-editor.html`,
+check them with `tools/map-compare/overlay-region-maps.py`, then run
+`tools/apply-map-layout.cjs` last and remove this section.
+
+## 105. Redraw the Kalos map layout
+
+**Effort:** M  **Gain:** ★★★
+
+Re-measure Kalos's `REGION_MAP_LAYOUTS.kalos` in `tools/generate-regions.cjs`
+against its reference map so the shape reads like the real region: correct
+relative geography, sane spacing and no overlapping roads. A reference image is
+kept in Reference notes. Nudge the committed nodes with `tools/map-editor.html`,
+check them with `tools/map-compare/overlay-region-maps.py`, then run
+`tools/apply-map-layout.cjs` last and remove this section.
+
+## 106. Redraw the Alola map layout
+
+**Effort:** M  **Gain:** ★★★
+
+Re-measure Alola's `REGION_MAP_LAYOUTS.alola` in `tools/generate-regions.cjs`
+against its reference map so the four islands read as separate landmasses in the
+right relative positions (Melemele / Akala / Ula'ula / Poni), with sane spacing
+and no overlapping roads. Nudge the committed nodes with
+`tools/map-editor.html`, check them with
+`tools/map-compare/overlay-region-maps.py`, then run
+`tools/apply-map-layout.cjs` last and remove this section.
+
+## 107. Redraw the Galar map layout
+
+**Effort:** M  **Gain:** ★★★
+
+Re-measure Galar's `REGION_MAP_LAYOUTS.galar` in `tools/generate-regions.cjs`
+against its reference map so the shape reads like the real region: correct
+relative geography, sane spacing and no overlapping roads. The Wild Area/DLC
+zone hubs sit inside the region, so keep their sub-area rings intact when a hub
+moves. A reference image is kept in Reference notes. Nudge the committed nodes
+with `tools/map-editor.html`, check them with
+`tools/map-compare/overlay-region-maps.py`, then run
+`tools/apply-map-layout.cjs` last and remove this section.
+
+## 108. Redraw the Paldea map layout
+
+**Effort:** M  **Gain:** ★★★
+
+Re-measure Paldea's `REGION_MAP_LAYOUTS.paldea` in `tools/generate-regions.cjs`
+against its reference map so the shape reads like the real region (the province
+areas and landmarks rather than numbered routes). Keep the linear Victory Road
+order that `tools/apply-paldea-progression.cjs` writes, and keep the zone hub
+sub-area rings intact. Nudge the committed nodes with `tools/map-editor.html`,
+check them with `tools/map-compare/overlay-region-maps.py`, then run
+`tools/apply-map-layout.cjs` last and remove this section.
 
 ## Reference notes
 
@@ -82,6 +148,24 @@ All eight non-Kanto regions have hand-measured `REGION_MAP_LAYOUTS` overrides.
 `tools/map-compare/overlay-region-maps.py` draws the game's nodes on top of each
 reference image (`tools/map-compare/refs/`, fetched by `fetch-refs.cjs`) to
 check them. Re-run the overlay after moving or adding nodes.
+
+Common method for the per-region layout items (#101–#108):
+
+1. Overlay the region (`overlay-region-maps.py`) and compare it to the
+   reference to find which nodes are off and by how much.
+2. Nudge the committed positions with `tools/map-editor.html` (drag nodes, or
+   run the Straighten button), which writes `tools/map-layout-overrides.json`.
+   Copy the positions back into `REGION_MAP_LAYOUTS.<region>` in
+   `tools/generate-regions.cjs` too, so a regeneration keeps them.
+3. Run the data passes in order with `apply-map-layout.cjs` **last**, keeping
+   every pass idempotent: `node tools/straighten-map.cjs --regions=<region>`,
+   `node tools/align-map-roads.cjs --regions=<region>`,
+   `node tools/apply-map-layout.cjs` (each takes `--dry` to preview; only the
+   first two take `--regions`).
+4. Verify with `npm test`, `node tools/quickplay.mjs`, `npm run build` and
+   `tools/screenshot.cjs` (Town Map + focused area view), and re-run
+   `tools/generate-encounter-index.cjs` / `tools/generate-reference.cjs` if any
+   visible data changed.
 
 Reference images kept for future checks:
 

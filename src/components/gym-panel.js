@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { championData, elite4Data, gymLeaderData, mapData, regions } from '../data/gameData.js'
 import { BATTLE_TOWER_LOCATION, BATTLE_TOWER_REGION } from '../data/config.js'
 import { useGame } from '../game/context.js'
@@ -165,10 +166,7 @@ export function GymPanel({ onOpenShop }) {
                     className: 'gym-row-status',
                     children: [
                       defeated &&
-                        jsx('span', {
-                          className: 'gym-defeated-mark',
-                          children: '✓',
-                        }),
+                        jsx(Icon, { name: 'check', className: 'gym-defeated-mark' }),
                       canStart
                         ? jsx('span', {
                             className: 'gym-locked-label travel',
@@ -265,10 +263,7 @@ export function GymPanel({ onOpenShop }) {
                       className: 'gym-row-status',
                       children:
                         defeated &&
-                        jsx('span', {
-                          className: 'gym-defeated-mark',
-                          children: '✓',
-                        }),
+                        jsx(Icon, { name: 'check', className: 'gym-defeated-mark' }),
                     }),
                   ],
                 },
@@ -302,10 +297,7 @@ export function GymPanel({ onOpenShop }) {
                   className: 'gym-row-status',
                   children:
                     state.defeatedChampions.includes(regionId) &&
-                    jsx('span', {
-                      className: 'gym-defeated-mark',
-                      children: '✓',
-                    }),
+                    jsx(Icon, { name: 'check', className: 'gym-defeated-mark' }),
                 }),
               ],
             }),

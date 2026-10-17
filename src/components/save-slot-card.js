@@ -1,6 +1,7 @@
 // A single save slot, shared by the boot slot picker and the Settings panel.
 
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { TrainerCard } from './trainer-card.js'
 
 /**
@@ -81,21 +82,23 @@ export function SaveSlotCard({ entry, active, onPlay, onNew, onDelete }) {
             ? jsx('button', {
                 className: 'settings-save-btn',
                 onClick: onPlay,
-                children: '▶ Play',
+                children: [jsx(Icon, { name: 'play' }), ' Play'],
               })
             : null,
           onNew
             ? jsx('button', {
                 className: 'settings-save-btn',
                 onClick: onNew,
-                children: entry.empty ? '＋ New Game' : '↺ New Game',
+                children: entry.empty
+                  ? [jsx(Icon, { name: 'plus' }), ' New Game']
+                  : [jsx(Icon, { name: 'undo' }), ' New Game'],
               })
             : null,
           onDelete && !entry.empty
             ? jsx('button', {
                 className: 'settings-save-btn danger',
                 onClick: onDelete,
-                children: '🗑 Delete',
+                children: [jsx(Icon, { name: 'trash' }), ' Delete'],
               })
             : null,
         ],

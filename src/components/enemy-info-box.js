@@ -1,6 +1,7 @@
 // Split from a grouped component file.
 
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { statusLabel } from '../data/ui.js'
 import { DexBallBadge } from './dex-ball-badge.js'
 import { HpBar } from './hp-bar.js'
@@ -13,11 +14,7 @@ export function EnemyInfoBox({ pokemon, dexStatus }) {
       jsxs('div', {
         className: 'info-name-row',
         children: [
-          pokemon.isShiny &&
-            jsx('span', {
-              className: 'shiny-star',
-              children: '★',
-            }),
+          pokemon.isShiny && jsx(Icon, { name: 'star', className: 'shiny-star' }),
           jsx('span', {
             className: 'info-pokemon-name',
             children: pokemon.name.toUpperCase(),

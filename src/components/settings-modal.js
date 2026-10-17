@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { clearSave } from '../data/config.js'
 import { autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { CATCH_MODE_OPTIONS, SPEED_OPTIONS } from '../data/ui.js'
@@ -771,12 +772,12 @@ export function SettingsModal({ onClose }) {
                             className: 'settings-save-btn',
                             onClick: exportSave,
                             disabled: !state.playerPokemon,
-                            children: '⬇ Export Save',
+                            children: [jsx(Icon, { name: 'download' }), ' Export Save'],
                           }),
                           jsx('button', {
                             className: 'settings-save-btn',
                             onClick: () => fileInputRef.current?.click(),
-                            children: '⬆ Import Save',
+                            children: [jsx(Icon, { name: 'upload' }), ' Import Save'],
                           }),
                           jsx('input', {
                             ref: fileInputRef,
@@ -825,7 +826,7 @@ export function SettingsModal({ onClose }) {
                             className: 'settings-save-btn',
                             onClick: importShareCode,
                             disabled: !shareInput.trim(),
-                            children: '⬆ Load Share Code',
+                            children: [jsx(Icon, { name: 'upload' }), ' Load Share Code'],
                           }),
                           shareStatus
                             ? jsx('p', { className: 'settings-share-status', children: shareStatus })

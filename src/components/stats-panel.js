@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { formatMoveAccuracy } from '../data/moves.js'
 import { heldItems } from '../data/items.js'
 import { statBarColors } from '../data/ui.js'
@@ -282,10 +283,7 @@ export function StatsPanel({
                     className: 'stats-panel-name',
                     children: [
                       pokemon.isShiny &&
-                        jsx('span', {
-                          className: 'shiny-star',
-                          children: '★',
-                        }),
+                        jsx(Icon, { name: 'star', className: 'shiny-star' }),
                       editingName
                         ? jsx('input', {
                             className: 'stats-panel-name-input',

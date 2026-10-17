@@ -5,6 +5,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { OUTFITS } from '../data/outfits.js'
 import { gymLeaderData, mapData, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
@@ -94,7 +95,7 @@ export function TrainerCardPanel({ onClose, inline = false, onOpenShop }) {
           jsx('button', {
             className: 'settings-save-btn',
             onClick: exportCard,
-            children: '⬇ Export Card (PNG)',
+            children: [jsx(Icon, { name: 'download' }), ' Export Card (PNG)'],
           }),
           exportStatus
             ? jsx('span', { className: 'trainer-card-export-status', children: exportStatus })
@@ -309,7 +310,7 @@ export function TrainerCardPanel({ onClose, inline = false, onOpenShop }) {
                 className: 'settings-save-btn',
                 onClick: () =>
                   dispatch({ type: 'UPDATE_TRAINER_PROFILE', payload: { badgeCase: [] } }),
-                children: '↺ Show all earned badges',
+                children: [jsx(Icon, { name: 'undo' }), ' Show all earned badges'],
               })
             : null,
         ],

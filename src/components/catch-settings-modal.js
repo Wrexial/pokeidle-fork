@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { CATCH_MODE_OPTIONS } from '../data/ui.js'
 import { pokemonSpecies } from '../data/gameData.js'
@@ -144,7 +145,7 @@ export const CatchSettingsModal = React.memo(
                   value: !state.alwaysCatchShinies,
                 },
               }),
-            children: '★ Always catch shinies',
+            children: [jsx(Icon, { name: 'star' }), ' Always catch shinies'],
           }),
           jsxs('div', {
             className: 'catch-modal-route-settings',

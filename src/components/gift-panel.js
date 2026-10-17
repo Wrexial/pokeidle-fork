@@ -2,6 +2,7 @@
 // static overworld encounters at the current location.
 
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { regionalStarters } from '../data/config.js'
 import { useGame } from '../game/context.js'
@@ -31,7 +32,7 @@ function RequirementList({ requirements }) {
         {
           className: `location-gift-requirement${requirement.met ? ' met' : ''}`,
           children: [
-            requirement.met ? '✓ ' : '○ ',
+            requirement.met ? jsx(Icon, { name: 'check' }) : jsx(Icon, { name: 'circle' }),
             requirement.required > 1
               ? `${requirement.current}/${requirement.required} ${requirement.label.toLowerCase()}`
               : requirement.label,

@@ -3,6 +3,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import {
   DAYCARE_LOCATIONS,
   breedShinyOdds,
@@ -56,7 +57,7 @@ function ParentSlot({ pokemon }) {
       jsxs('span', {
         className: 'daycare-slot-name',
         children: [
-          pokemon.isShiny && jsx('span', { className: 'shiny-star', children: '★' }),
+          pokemon.isShiny && jsx(Icon, { name: 'star', className: 'shiny-star' }),
           pokemonDisplayName(pokemon),
           jsx('span', {
             className: `pokemon-gender ${genderClass(gender)}`,
@@ -349,7 +350,7 @@ export function DaycarePanel() {
                                       className: 'daycare-deposit-name',
                                       children: [
                                         member.isShiny &&
-                                          jsx('span', { className: 'shiny-star', children: '★' }),
+                                          jsx(Icon, { name: 'star', className: 'shiny-star' }),
                                         pokemonDisplayName(member),
                                         jsx('span', {
                                           className: `pokemon-gender ${genderClass(gender)}`,

@@ -4,6 +4,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import {
   clearOfflineAssets,
   collectOfflineAssets,
@@ -191,10 +192,13 @@ export function OfflinePanel() {
                 className: 'settings-save-btn',
                 onClick: startDownload,
                 children: downloadedAll
-                  ? '↻ Re-check / Update Files'
-                  : `⬇ Download ${plannedFiles.toLocaleString()} Files (≈${formatBytes(
-                      plannedBytes
-                    )})`,
+                  ? [jsx(Icon, { name: 'refresh' }), ' Re-check / Update Files']
+                  : [
+                      jsx(Icon, { name: 'download' }),
+                      ` Download ${plannedFiles.toLocaleString()} Files (≈${formatBytes(
+                        plannedBytes
+                      )})`,
+                    ],
               }),
               summary.count > 0
                 ? jsx('button', {

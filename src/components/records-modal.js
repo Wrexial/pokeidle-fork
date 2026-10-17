@@ -2,6 +2,7 @@
 // as the Trainer hub's Records sub-tab.
 
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import React from 'react'
 import { ACHIEVEMENTS, RECORDABLE_MINIGAMES } from '../data/achievements.js'
 import { RAID_EVENT_ROTATION } from '../data/daily-events.js'
@@ -69,7 +70,7 @@ export function RecordsModal({ onClose, inline = false }) {
           ...speciesKeysByGeneration.map((speciesKeys, generationIndex) => [
             `Gen ${generationIndex + 1}`,
             completedGenerationSet.has(generationIndex)
-              ? '★ Complete'
+              ? [jsx(Icon, { name: 'star' }), ' Complete']
               : `${speciesKeys.filter((speciesKey) => isSpeciesRegistered(caughtSet, speciesKey)).length} / ${speciesKeys.length}`,
           ]),
         ],
@@ -287,11 +288,13 @@ export function RecordsModal({ onClose, inline = false }) {
                           }),
                           jsx('span', {
                             className: 'records-value',
-                            children: `${badges}/${badgeTotal} ${badgeNoun.toLowerCase()}s${
-                              beaten ? ' · Champion ★' : ''
-                            }${prestige ? ` · Prestige ${prestige}` : ''}${
-                              towerBest ? ` · Tower ${towerBest}` : ''
-                            }`,
+                            children: [
+                              `${badges}/${badgeTotal} ${badgeNoun.toLowerCase()}s`,
+                              beaten ? ' · Champion ' : '',
+                              beaten ? jsx(Icon, { name: 'star' }) : null,
+                              prestige ? ` · Prestige ${prestige}` : '',
+                              towerBest ? ` · Tower ${towerBest}` : '',
+                            ],
                           }),
                         ],
                       },

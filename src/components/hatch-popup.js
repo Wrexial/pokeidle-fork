@@ -3,6 +3,7 @@
 // numbers that decide whether to keep or release it — plus Keep / release.
 
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { natureByKey, natureName } from '../data/natures.js'
 import { useGame } from '../game/context.js'
@@ -60,11 +61,7 @@ export function HatchPopup() {
         jsxs('div', {
           className: 'hatch-popup-name',
           children: [
-            hatch.isShiny &&
-              jsx('span', {
-                className: 'shiny-star',
-                children: '★',
-              }),
+            hatch.isShiny && jsx(Icon, { name: 'star', className: 'shiny-star' }),
             pokemonDisplayName(hatch),
             jsx('span', {
               className: `pokemon-gender ${genderClass}`,
@@ -90,11 +87,11 @@ export function HatchPopup() {
                     children: [
                       jsxs('span', {
                         className: 'nature-stat nature-up',
-                        children: ['▲', IV_STAT_LABELS[nature.increased] ?? nature.increased],
+                        children: [jsx(Icon, { name: 'chevron-up' }), IV_STAT_LABELS[nature.increased] ?? nature.increased],
                       }),
                       jsxs('span', {
                         className: 'nature-stat nature-down',
-                        children: ['▼', IV_STAT_LABELS[nature.decreased] ?? nature.decreased],
+                        children: [jsx(Icon, { name: 'chevron-down' }), IV_STAT_LABELS[nature.decreased] ?? nature.decreased],
                       }),
                     ],
                   })

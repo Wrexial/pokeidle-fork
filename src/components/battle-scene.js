@@ -3,6 +3,7 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { formatMoveAccuracy } from '../data/moves.js'
 import { MoveCategoryIcon } from './move-category-icon.js'
 import { moveTooltip } from '../game/move-info.js'
@@ -339,7 +340,7 @@ export function BattleScene({ onOpenMenu }) {
                 type: 'TOGGLE_AUTO_PROCEED',
               }),
             title: state.autoProceed ? 'Auto-proceed: ON' : 'Auto-proceed: OFF',
-            children: '▶▶',
+            children: [jsx(Icon, { name: 'play' }), jsx(Icon, { name: 'play' })],
           }),
           jsx('button', {
             className: `battle-info-btn dailies-btn${hasClaimableDailies(state) ? ' claimable' : ''}`,
@@ -352,7 +353,7 @@ export function BattleScene({ onOpenMenu }) {
             onClick: () => onOpenMenu('settings'),
             children: jsx('span', {
               className: 'settings-icon',
-              children: '⚙',
+              children: jsx(Icon, { name: 'gear' }),
             }),
           }),
         ],

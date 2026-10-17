@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { mapData, pokemonSpecies } from '../data/gameData.js'
 import { biomeForLocation } from '../data/ui.js'
 import { effectiveWeatherAt } from '../game/weather.js'
@@ -284,10 +285,7 @@ export function PartyPanel({
                                     jsxs('span', {
                                       children: [
                                         member.isShiny &&
-                                          jsx('span', {
-                                            className: 'shiny-star',
-                                            children: '★',
-                                          }),
+                                          jsx(Icon, { name: 'star', className: 'shiny-star' }),
                                         pokemonDisplayName(member),
                                         member.favourite &&
                                           jsx('span', {

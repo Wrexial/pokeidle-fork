@@ -1,6 +1,7 @@
 // Split from a grouped component file.
 
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { useTypewriter } from '../hooks.js'
 
 /** @param {{ event: any, speed: number, isAtTown: boolean }} props */
@@ -18,7 +19,7 @@ export function BattleTextBox({ event, speed, isAtTown }) {
           displayed,
           jsx('span', {
             className: 'text-cursor',
-            children: '▼',
+            children: jsx(Icon, { name: 'chevron-down' }),
           }),
         ],
       }),

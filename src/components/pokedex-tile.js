@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { pokemonSpecies } from '../data/gameData.js'
 import { getPokemonSpriteFallbackUrl, getPokemonSpriteUrl } from '../game/pokemon.js'
 import { DexBallBadge } from './dex-ball-badge.js'
@@ -62,7 +63,7 @@ export let PokedexTile = React.memo(
               jsx('span', {
                 className: 'shiny-chain-badge',
                 title: `${chainCount} in a row — better shiny odds`,
-                children: `✦${chainCount}`,
+                children: [jsx(Icon, { name: 'sparkle' }), chainCount],
               }),
             activeEffect?.repel &&
               jsx('span', {

@@ -222,6 +222,17 @@ img {
     image-rendering: pixelated
 }
 
+/* Shared inline-SVG icon set (src/components/icon.js). Icons inherit the
+   surrounding text colour, so they follow the active theme automatically. */
+.ui-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -.125em;
+    flex: none;
+    fill: currentColor
+}
+
 /* One thin scrollbar for the whole game: a brown thumb on a translucent track
    so it reads on both the dark panels and the parchment modals. `scrollbar-color`
    inherits but `scrollbar-width` does not, so set both on every element; the

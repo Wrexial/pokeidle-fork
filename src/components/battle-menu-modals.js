@@ -8,6 +8,7 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { shinyFullOddsChance } from '../data/config.js'
 import { completedGenerations, speciesKeysByGeneration } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
@@ -105,7 +106,10 @@ export function BattleMenuModals({ menu, onClose }) {
                             className: `info-shiny-gen${isComplete ? ' complete' : ''}`,
                             children: [
                               `Gen ${generationIndex + 1} `,
-                              isComplete ? '✓ Shiny Charm' : `${caughtCount}/${requiredSpecies.length}`,
+                              isComplete
+                                ? jsx(Icon, { name: 'check' })
+                                : `${caughtCount}/${requiredSpecies.length}`,
+                              isComplete ? ' Shiny Charm' : '',
                             ],
                           },
                           generationIndex

@@ -1,6 +1,7 @@
 // Split from a grouped component file.
 
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { dailyEventByKey } from '../data/daily-events.js'
 import { useGame } from '../game/context.js'
 import { getItemInfo } from '../game/progression.js'
@@ -52,7 +53,7 @@ export function DailyEventModal({ onClose, inline = false }) {
                 'span',
                 {
                   className: 'daily-event-gift-item',
-                  children: [giftItem.name, ' ×', giftItem.quantity],
+                  children: [giftItem.name, ' ', jsx(Icon, { name: 'times' }), giftItem.quantity],
                 },
                 giftItem.itemId
               )

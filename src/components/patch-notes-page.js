@@ -1,6 +1,7 @@
 // Split from a grouped component file.
 
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { CHANGELOG } from '../data/changelog.js'
 
 export function PatchNotesPage() {
@@ -13,7 +14,7 @@ export function PatchNotesPage() {
           jsx('a', {
             href: '#',
             className: 'patch-notes-back-btn',
-            children: '← Back to Game',
+            children: [jsx(Icon, { name: 'arrow-left' }), ' Back to Game'],
           }),
           jsx('h1', {
             className: 'patch-notes-page-title',

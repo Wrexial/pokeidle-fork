@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { BATTLE_TOWER_LOCATION } from '../data/config.js'
 import { martShopItems } from '../data/items.js'
 import { encounterData, gymLeaderData, mapData, pokemonSpecies, regions, raidPoolFor } from '../data/gameData.js'
@@ -195,7 +196,11 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
                                   children: [
                                     jsx('span', {
                                       className: 'location-unlock-check-icon',
-                                      children: requirement.met ? '✓' : targetLocationId ? '→' : '○',
+                                      children: requirement.met
+                                        ? jsx(Icon, { name: 'check' })
+                                        : targetLocationId
+                                          ? jsx(Icon, { name: 'arrow-right' })
+                                          : jsx(Icon, { name: 'circle' }),
                                     }),
                                     jsx('span', {
                                       className: 'location-unlock-check-label',
@@ -834,7 +839,10 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
           jsx('button', {
             className: 'zone-back-btn',
             onClick: () => travelToTarget(location.zone),
-            children: `← ${mapData[location.zone]?.name ?? 'Zone'}`,
+            children: [
+              jsx(Icon, { name: 'arrow-left' }),
+              ` ${mapData[location.zone]?.name ?? 'Zone'}`,
+            ],
           }),
         location.type === 'town' &&
           jsxs(Fragment, {

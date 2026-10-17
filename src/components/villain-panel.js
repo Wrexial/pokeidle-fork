@@ -5,6 +5,7 @@
 
 import React from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
+import { Icon } from './icon.js'
 import { mapData, pokemonSpecies } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam } from '../game/progression.js'
@@ -176,10 +177,7 @@ export function VillainPanel() {
                   className: 'gym-row-status',
                   children: [
                     stage.done &&
-                      jsx('span', {
-                        className: 'gym-defeated-mark',
-                        children: '✓',
-                      }),
+                      jsx(Icon, { name: 'check', className: 'gym-defeated-mark' }),
                     stage.current && !complete
                       ? jsx('button', {
                           className: 'gym-fight-btn',

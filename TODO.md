@@ -29,10 +29,10 @@ _(empty)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-- **#109–#111 Finish the theme's illustration scope** (S–M each, ★★) — the
-  theme redesign skipped its icons/backdrops bullet; split into the glyph set,
-  the item-icon/type-badge audit and the backdrop theming. See the entries
-  below.
+- **#110–#111 Finish the theme's illustration scope** (S–M each, ★★) — the
+  theme redesign skipped its icons/backdrops bullet; the shared glyph set
+  (#109) shipped, leaving the item-icon/type-badge audit and the backdrop
+  theming. See the entries below.
 
 ---
 
@@ -142,26 +142,6 @@ order that `tools/apply-paldea-progression.cjs` writes, and keep the zone hub
 sub-area rings intact. Nudge the committed nodes with `tools/map-editor.html`,
 check them with `tools/map-compare/overlay-region-maps.py`, then run
 `tools/apply-map-layout.cjs` last and remove this section.
-
-## 109. Replace the scattered UI glyphs with one themed icon set
-
-**Effort:** M  **Gain:** ★★
-
-The site-theme redesign gave every surface shared colour tokens, but the small
-glyphs the UI draws are still raw unicode characters sprinkled through the
-components — check marks and crosses (`✓`, `×`), arrows (`← → ▲ ▼`, `▶`),
-stars (`★`), the battle sword (`⚔`) and the Pokédex spark (`✦`) — so they
-inherit the text colour by luck and render differently per platform. Introduce
-one `Icon` component (`src/components/icon.js`) backed by a small inline-SVG
-set that draws with `currentColor` (so it re-tints per theme), and swap the
-call sites over. Cover the nav/tab glyphs, list/row action glyphs, the battle
-prompt arrow, the toast/status marks and the map's back button.
-
-Search `src/components/` for the characters above to find every site. Keep the
-existing accessible labels (`alt`/`aria-hidden`) intact, size the icons off the
-`--text-*` scale, honour Reduced Motion, and verify on all four themes with
-`tools/screenshot.cjs` plus `npm run typecheck` / `npm test`. Fold the result
-into the top `CHANGELOG` entry under **Interface**.
 
 ## 110. Audit item icons and type badges against the four themes
 

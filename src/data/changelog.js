@@ -152,6 +152,7 @@ export const CHANGELOG = [
           'A finished Legendary Quest no longer drops you straight into the raid from the Town Map or the Pokedex: clicking the Raid Island now opens the challenge scene first, so you can read it and confirm the battle (the quest panel’s own CHALLENGE button already worked this way).',
           'The Champions’ Gauntlet and the Battle Maison now close when you collect their prizes — their end action was being ignored, which left the reward screen (and the game) stuck after a run.',
           'SOS chaining is same-species now: the chain only grows while the same Pokemon keeps appearing, so defeating a different species on the route starts a new chain instead of letting the streak, its hidden-ability and shiny odds and its milestone rewards keep climbing off the back of another Pokemon. The route\u2019s best chain and its one-off milestone rewards are unchanged.',
+          'The Town Map can no longer be dragged off into empty parchment: panning and zooming are clamped to the region\u2019s own content, so the map always stays in view however far you drag.',
         ],
       },
     ],

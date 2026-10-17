@@ -371,18 +371,54 @@ export function TownMap() {
 
   const canvasRect = React.useCallback(() => canvasRef.current?.getBoundingClientRect(), [])
 
+  // Keep the camera on the map: clamp the pan so the region's content (plus a
+  // little padding, matching `fitRegion`) can't be dragged off into the empty
+  // parchment beyond it. When the content is smaller than the viewport on an
+  // axis it is centred instead, so a fitted map can't be nudged at all.
+  const clampView = React.useCallback(
+    /** @param {MapView} next @returns {MapView} */
+    (next) => {
+      const rect = canvasRect()
+      if (!rect) return next
+      const pad = 5,
+        bounds = regionBounds ?? { cx: 50, cy: 50, spanX: 100, spanY: 100 },
+        minX = ((bounds.cx - bounds.spanX / 2 - pad) / 100) * WORLD_SIZE,
+        maxX = ((bounds.cx + bounds.spanX / 2 + pad) / 100) * WORLD_SIZE,
+        minY = ((bounds.cy - bounds.spanY / 2 - pad) / 100) * WORLD_SIZE,
+        maxY = ((bounds.cy + bounds.spanY / 2 + pad) / 100) * WORLD_SIZE
+      /**
+       * Clamp one axis: centre the content when it fits, otherwise stop at the
+       * point where its far edge reaches the matching viewport edge.
+       * @param {number} offset @param {number} viewport @param {number} min @param {number} max
+       */
+      const clampAxis = (offset, viewport, min, max) => {
+        if ((max - min) * next.scale <= viewport)
+          return viewport / 2 - ((min + max) / 2) * next.scale
+        return Math.min(-min * next.scale, Math.max(viewport - max * next.scale, offset))
+      }
+      return {
+        scale: next.scale,
+        x: clampAxis(next.x, rect.width, minX, maxX),
+        y: clampAxis(next.y, rect.height, minY, maxY),
+      }
+    },
+    [canvasRect, regionBounds]
+  )
+
   const centreOn = React.useCallback(
     /** @param {number} worldX @param {number} worldY @param {number} scale */
     (worldX, worldY, scale) => {
       const rect = canvasRect()
       if (!rect) return
-      setView({
-        scale,
-        x: rect.width / 2 - worldX * scale,
-        y: rect.height / 2 - worldY * scale,
-      })
+      setView(
+        clampView({
+          scale,
+          x: rect.width / 2 - worldX * scale,
+          y: rect.height / 2 - worldY * scale,
+        })
+      )
     },
-    [canvasRect]
+    [canvasRect, clampView]
   )
 
   /**
@@ -491,14 +527,14 @@ export function TownMap() {
       setView((previous) => {
         const scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, previous.scale * factor))
         const ratio = scale / previous.scale
-        return {
+        return clampView({
           scale,
           x: px - (px - previous.x) * ratio,
           y: py - (py - previous.y) * ratio,
-        }
+        })
       })
     },
-    [canvasRect]
+    [canvasRect, clampView]
   )
 
   // Wheel must be a non-passive native listener so we can preventDefault.
@@ -540,7 +576,9 @@ export function TownMap() {
     const dx = event.clientX - drag.startX,
       dy = event.clientY - drag.startY
     if (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD) drag.moved = true
-    setView((previous) => ({ ...previous, x: drag.originX + dx, y: drag.originY + dy }))
+    setView((previous) =>
+      clampView({ ...previous, x: drag.originX + dx, y: drag.originY + dy })
+    )
   }
 
   /** @param {PointerEvent} event */

@@ -29,7 +29,8 @@ _(empty)_
 
 ### Tier 3 — Small follow-ups on shipped systems
 
-_(empty)_
+- **#109 Refresh the icon set and backdrops for the new theme** (M, ★★) — the
+  theme redesign skipped its illustration scope; see the entry below.
 
 ---
 
@@ -139,6 +140,22 @@ order that `tools/apply-paldea-progression.cjs` writes, and keep the zone hub
 sub-area rings intact. Nudge the committed nodes with `tools/map-editor.html`,
 check them with `tools/map-compare/overlay-region-maps.py`, then run
 `tools/apply-map-layout.cjs` last and remove this section.
+
+## 109. Refresh the icon set and backdrops for the new theme
+
+**Effort:** M  **Gain:** ★★
+
+The site-theme redesign (palette, typography, shared chrome and the four
+selectable themes) shipped, but its "icons & illustration" scope is still open.
+Audit the icons the UI draws — type badges (`src/data/moves.js`), item icons
+(`src/components/item-icon.js` + `public/sprites/items/`), Town Map pins, the
+nav/tab glyphs and the battle HUD — and give them one consistent set that reads
+on every theme, including Classic. Then refresh the scene art under
+`public/backgrounds/` (and any `BIOME_SCENE_IMAGES` entries in `src/data/ui.js`)
+so the battlegrounds match the new palette.
+
+Verify on all four themes with `tools/screenshot.cjs`, keep `npm run typecheck`
+clean, and fold the result into the top `CHANGELOG` entry under **Interface**.
 
 ## Reference notes
 

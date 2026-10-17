@@ -80,6 +80,7 @@ export const CHANGELOG = [
           'The Dowsing Machine is in: carry it onto any wild route from the location panel and sweep the scanner grid for that route\u2019s lost-and-found. Every route hides a small set of lost things, different each day, and each probe reads the aura they give off \u2014 Surging when one is right next door, Still when nothing is close. A sweep gives 10 probes and banks each item the moment you recover it; routes refill the next day.',
           'Hide-and-seek spots are in: any wild route can hide a rare Pokemon behind a trail of rustled grass. Open the spot from the location panel and follow the footprint trail \u2014 read the run counts along each row and column \u2014 to flush it out, then battle it for a chance to catch it (with doubled shiny odds). Each route hides one spot a day.',
           'The Dowsing Machine and Hide-and-Seek no longer turn up on every wild route: each region keeps just two spots of each, rotating onto fresh routes on a day-seeded schedule, so the daily sweep and trail are a find rather than a routine that greets you on any route.',
+          'Voltorb Flip is winnable now: every board the table deals is regenerated until it can be cleared by deduction alone, so a run no longer stalls on a board that forces a coin-flip guess (only a few percent of random boards were solvable). The level climb and the Coin Rush achievement are reachable by good play.',
         ],
       },
       {

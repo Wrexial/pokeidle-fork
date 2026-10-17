@@ -50,11 +50,18 @@ function rollTileKind(level) {
 }
 
 /**
- * Build a fresh board for a level.
+ * How many candidate boards a level tries before accepting a solvable one. A
+ * solvable board is uncommon at deep levels (only a few percent), so this
+ * matters, but exhausting it is astronomically unlikely.
+ */
+const VOLTORB_GENERATE_ATTEMPTS = 2000
+
+/**
+ * Build a fresh random board for a level.
  * @param {number} level
  * @returns {VoltorbBoard}
  */
-export function createVoltorbBoard(level) {
+function buildVoltorbBoard(level) {
   const voltorbs = voltorbCountForLevel(level),
     voltorbCells = new Set()
   while (voltorbCells.size < voltorbs)
@@ -83,6 +90,22 @@ export function createVoltorbBoard(level) {
 }
 
 /**
+ * A fresh board for a level, guaranteed to be clearable by deduction alone (no
+ * guess), so a run is always winnable by good play. The level's advertised
+ * Voltorb count is fixed; only the tile layout is regenerated until the solver
+ * below can reach every 2 and 3.
+ * @param {number} level
+ * @returns {VoltorbBoard}
+ */
+export function createVoltorbBoard(level) {
+  for (let attempt = 0; attempt < VOLTORB_GENERATE_ATTEMPTS; attempt++) {
+    const board = buildVoltorbBoard(level)
+    if (voltorbBoardSolvable(board)) return board
+  }
+  return buildVoltorbBoard(level)
+}
+
+/**
  * The Voltorbs / point total advertised for each row and column.
  * @param {VoltorbBoard} board
  * @returns {{ rows: VoltorbHint[], cols: VoltorbHint[] }}
@@ -102,6 +125,122 @@ export function boardHints(board) {
     }
   })
   return { rows, cols }
+}
+
+/** Tile values the solver reasons about; 0 is a Voltorb. */
+const SOLVER_VALUES = [0, 1, 2, 3]
+
+/**
+ * The value each still-hidden tile in one line could hold, given the line's
+ * advertised Voltorbs / point total and the values already known. The sets are
+ * a sound over-approximation: a value that never appears cannot be the tile's.
+ * @param {VoltorbHint} hint
+ * @param {number[]} indexes
+ * @param {(number | null)[]} known
+ * @returns {Map<number, Set<number>>}
+ */
+function lineValueDomains(hint, indexes, known) {
+  /** @type {Map<number, Set<number>>} */
+  const domains = new Map()
+  /** @type {number[]} */
+  const unknown = []
+  let fixedZeros = 0,
+    fixedSum = 0
+  for (const index of indexes) {
+    const value = known[index]
+    if (value === null) unknown.push(index)
+    else if (value === 0) fixedZeros++
+    else fixedSum += value
+  }
+  for (const index of unknown) domains.set(index, new Set())
+  const remaining = unknown.length,
+    zerosNeeded = hint.voltorbs - fixedZeros,
+    sumNeeded = hint.sum - fixedSum
+  if (
+    zerosNeeded < 0 ||
+    zerosNeeded > remaining ||
+    sumNeeded < 0 ||
+    sumNeeded > remaining * 3
+  )
+    return domains
+  const assignment = new Array(remaining).fill(1)
+  /**
+   * Enumerate every assignment of the hidden tiles that satisfies the line.
+   * @param {number} position @param {number} zeros @param {number} sum
+   */
+  const search = (position, zeros, sum) => {
+    if (zeros > zerosNeeded || sum > sumNeeded) return
+    const left = remaining - position
+    if (zerosNeeded - zeros > left || sumNeeded - sum > left * 3) return
+    if (position === remaining) {
+      if (zeros === zerosNeeded && sum === sumNeeded)
+        for (let i = 0; i < remaining; i++) {
+          const domain = domains.get(unknown[i])
+          if (domain) domain.add(assignment[i])
+        }
+      return
+    }
+    for (const value of SOLVER_VALUES) {
+      assignment[position] = value
+      search(position + 1, zeros + (value === 0 ? 1 : 0), sum + value)
+    }
+  }
+  search(0, 0, 0)
+  return domains
+}
+
+/**
+ * Can this board be cleared by deduction alone, without guessing? Solves the
+ * row/column hints with arc consistency: a tile that both its row and its
+ * column agree cannot be a Voltorb is safe to flip, so its value is revealed
+ * and the board is re-solved. Returns true once every 2 and 3 has been reached
+ * that way. Sound (never accepts an unsolvable board), if not complete.
+ * @param {VoltorbBoard} board
+ * @returns {boolean}
+ */
+export function voltorbBoardSolvable(board) {
+  const values = board.cells.map((cell) => CELL_POINTS[cell.kind]),
+    /** @type {(number | null)[]} */
+    known = new Array(board.cells.length).fill(null),
+    rows = Array.from({ length: VOLTORB_SIZE }, (_, row) =>
+      Array.from({ length: VOLTORB_SIZE }, (_, col) => row * VOLTORB_SIZE + col)
+    ),
+    cols = Array.from({ length: VOLTORB_SIZE }, (_, col) =>
+      Array.from({ length: VOLTORB_SIZE }, (_, row) => row * VOLTORB_SIZE + col)
+    ),
+    { rows: rowHints, cols: colHints } = boardHints(board)
+  // Each pass can only fix a cell, so a board's cell count of passes is enough.
+  for (let pass = 0; pass < board.cells.length; pass++) {
+    let changed = false
+    const rowDomains = rowHints.map((hint, row) => lineValueDomains(hint, rows[row], known)),
+      colDomains = colHints.map((hint, col) => lineValueDomains(hint, cols[col], known))
+    for (let index = 0; index < board.cells.length; index++) {
+      const row = Math.floor(index / VOLTORB_SIZE),
+        col = index % VOLTORB_SIZE,
+        fromRow = rowDomains[row].get(index),
+        fromCol = colDomains[col].get(index)
+      if (!fromRow || !fromCol) continue
+      const possible = [...fromRow].filter((value) => fromCol.has(value))
+      if (possible.length === 0) return false
+      if (possible.includes(0)) {
+        if (possible.length === 1 && known[index] !== 0) {
+          known[index] = 0
+          changed = true
+        }
+        continue
+      }
+      // Provably not a Voltorb: flip it to reveal the real value.
+      if (known[index] !== values[index]) {
+        known[index] = values[index]
+        changed = true
+      }
+    }
+    if (!changed) break
+  }
+  return board.cells.every(
+    (cell, index) =>
+      (cell.kind !== 'two' && cell.kind !== 'three') || known[index] === CELL_POINTS[cell.kind]
+  )
 }
 
 /** True once every 2 and 3 tile is face up (1s may stay hidden).

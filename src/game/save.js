@@ -1717,18 +1717,16 @@ export function listSaveSlots() {
  */
 export function isChallengeModeAvailable() {
   if (isChallengeModeUnlocked()) return true
-  const earned = Array.from({ length: SAVE_SLOT_COUNT }, (_, index) => index + 1).some(
-    (slot) => {
-      const raw = readRawSave(slot)
-      if (!raw) return false
-      try {
-        const saved = JSON.parse(raw.json)
-        return Array.isArray(saved?.defeatedChampions) && saved.defeatedChampions.length > 0
-      } catch {
-        return false
-      }
+  const earned = Array.from({ length: SAVE_SLOT_COUNT }, (_, index) => index + 1).some((slot) => {
+    const raw = readRawSave(slot)
+    if (!raw) return false
+    try {
+      const saved = JSON.parse(raw.json)
+      return Array.isArray(saved?.defeatedChampions) && saved.defeatedChampions.length > 0
+    } catch {
+      return false
     }
-  )
+  })
   if (earned) unlockChallengeMode()
   return earned
 }

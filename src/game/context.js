@@ -58,7 +58,7 @@ export function GameProvider({ children }) {
         dedupeKey: 'challenge-mode-unlocked',
       },
     })
-  }, [state.defeatedChampions])
+  }, [state.defeatedChampions, dispatch])
   // Clear a pending trailing save if the provider ever unmounts.
   React.useEffect(
     () => () => {

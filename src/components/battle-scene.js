@@ -19,7 +19,7 @@ import { mapData, moveData } from '../data/gameData.js'
 import { gmaxEvolveReady, megaEvolveReady } from '../data/mega-evolution.js'
 import { hasBattleModifier } from '../game/ladder-modifiers.js'
 import { useGame } from '../game/context.js'
-import { hasClaimableDailies } from './daily-hub-modal.js'
+import { dailyHubStatus } from './daily-hub-modal.js'
 import { getBossTrainerSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getTrainerSpriteUrl, isBattleReady } from '../game/pokemon.js'
 import { EnemyInfoBox } from './enemy-info-box.js'
 import { PlayerInfoBox } from './player-info-box.js'
@@ -173,7 +173,8 @@ export function BattleScene({ onOpenMenu }) {
   if (state.phase === 'dexComplete') return jsx(DexCompleteScene, {})
   if (state.phase === 'gameOver') return jsx(GameOverScene, {})
   if (!playerPokemon) return null
-  const currentEvent = battleEvents.length > 0 ? battleEvents[battleEvents.length - 1] : null,
+  const dailyStatus = dailyHubStatus(state),
+    currentEvent = battleEvents.length > 0 ? battleEvents[battleEvents.length - 1] : null,
     playerSpecies = battleSpecies(state.playerVolatile?.formKey ?? playerPokemon.speciesKey),
     activeTrainerBattle = state.bossBattle ?? state.trainerBattle,
     lastDamageEvent = battleEvents
@@ -343,12 +344,13 @@ export function BattleScene({ onOpenMenu }) {
             title: state.autoProceed ? 'Auto-proceed: ON' : 'Auto-proceed: OFF',
             children: [jsx(Icon, { name: 'play' }), jsx(Icon, { name: 'play' })],
           }),
-          jsx('button', {
-            className: `battle-info-btn dailies-btn${hasClaimableDailies(state) ? ' claimable' : ''}`,
-            onClick: () => onOpenMenu('dailies'),
-            title: 'Dailies',
-            children: '\u{1f4c5}',
-          }),
+          dailyStatus.available &&
+            jsx('button', {
+              className: `battle-info-btn dailies-btn${dailyStatus.claimable ? ' claimable' : ''}`,
+              onClick: () => onOpenMenu('dailies'),
+              title: 'Dailies',
+              children: '\u{1f4c5}',
+            }),
           jsx('button', {
             className: 'battle-info-btn',
             onClick: () => onOpenMenu('settings'),

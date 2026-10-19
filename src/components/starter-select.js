@@ -6,9 +6,38 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { regionalStarters } from '../data/config.js'
 import { pokemonSpecies, regions } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
+import { isChallengeModeAvailable } from '../game/save.js'
 import { calculatePokemonStats, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, getThreeStageBaseSpecies, monotypeSpeciesPool } from '../game/pokemon.js'
 import { checkShinyOdds } from '../game/progression.js'
+import { Icon } from './icon.js'
 import { MonotypeSelect } from './monotype-select.js'
+
+/**
+ * The four selling points on the first-run welcome screen. Kept short: they
+ * have to explain the game to someone who has never seen it at a glance.
+ */
+const WELCOME_FEATURES = [
+  {
+    icon: '\u{1f30d}',
+    title: 'Nine regions',
+    text: 'Kanto to Paldea \u2014 real routes, Gym leaders, Elite Four and a Champion for every one.',
+  },
+  {
+    icon: '\u{26a1}',
+    title: 'Idle or hands-on',
+    text: 'Battles run themselves while you watch, and you can take over for moves, catches and big fights.',
+  },
+  {
+    icon: '\u{2728}',
+    title: 'Everything to collect',
+    text: 'Shinies, legendaries, regional forms, ribbons, field research and a living Pok\u00e9dex.',
+  },
+  {
+    icon: '\u{1f319}',
+    title: 'Never stops',
+    text: 'Catching, Field Jobs and the Pok\u00e9walker keep working while the game is closed.',
+  },
+]
 
 export function StarterSelect() {
   const { state, dispatch } = useGame()
@@ -21,6 +50,10 @@ export function StarterSelect() {
       []
     ),
     region = regions.find((candidate) => candidate.id === regionId),
+    // Challenge Mode is earned: it stays locked until this browser has beaten
+    // any region's Champion (in any save slot), so a first run can't wander
+    // into Nuzlocke by accident.
+    challengeUnlocked = React.useMemo(() => isChallengeModeAvailable(), []),
     starters = regionalStarters[regionId] ?? regionalStarters.kanto,
     startLevel = region?.startLevel ?? 5,
     // A Monotype run doesn't let the player pick: it hands out a random base of
@@ -54,42 +87,89 @@ export function StarterSelect() {
 
   if (step === 'mode')
     return jsxs('div', {
-      className: 'starter-select mode-select',
+      className: 'starter-select mode-select welcome-select',
       children: [
-        jsx('h2', { className: 'starter-title', children: 'How will you play?' }),
-        jsx('p', {
-          className: 'starter-subtitle',
-          children:
-            'Normal Mode is the standard journey. Challenge Mode adds hard-mode rules \u2014 you pick them next, before choosing a starter, and can change them later in Settings.',
+        jsxs('div', {
+          className: 'welcome-hero',
+          children: [
+            jsx('h2', { className: 'starter-title welcome-title', children: 'Pok\u00e9mon Idle' }),
+            jsx('p', {
+              className: 'welcome-tagline',
+              children:
+                'A Pok\u00e9mon adventure that keeps playing while you do something else. Catch them, raise them and take on every region \u2014 one badge at a time.',
+            }),
+          ],
+        }),
+        jsx('div', {
+          className: 'welcome-features',
+          children: WELCOME_FEATURES.map((entry) =>
+            jsxs(
+              'div',
+              {
+                className: 'welcome-feature',
+                children: [
+                  jsx('span', { className: 'welcome-feature-icon', children: entry.icon }),
+                  jsxs('span', {
+                    className: 'welcome-feature-body',
+                    children: [
+                      jsx('span', { className: 'welcome-feature-title', children: entry.title }),
+                      jsx('span', { className: 'welcome-feature-text', children: entry.text }),
+                    ],
+                  }),
+                ],
+              },
+              entry.title
+            )
+          ),
         }),
         jsxs('div', {
-          className: 'mode-choice',
+          className: 'welcome-actions',
           children: [
-            jsx('button', {
-              className: 'mode-btn',
+            jsxs('button', {
+              className: 'welcome-start',
               onClick: () => {
                 clearChallenges()
                 setStep('starter')
               },
               children: [
-                jsx('span', { className: 'mode-btn-title', children: 'Normal Mode' }),
+                jsxs('span', {
+                  className: 'welcome-start-title',
+                  children: ['Start Your Journey', jsx(Icon, { name: 'arrow-right' })],
+                }),
                 jsx('span', {
-                  className: 'mode-btn-hint',
-                  children: 'The standard adventure, with no extra rules.',
+                  className: 'welcome-start-hint',
+                  children:
+                    'Normal Mode \u2014 the full adventure at its own pace. You pick a region and a starter next.',
                 }),
               ],
             }),
-            jsx('button', {
-              className: 'mode-btn challenge',
-              onClick: () => setStep('challenge'),
-              children: [
-                jsx('span', { className: 'mode-btn-title', children: 'Challenge Mode' }),
-                jsx('span', {
-                  className: 'mode-btn-hint',
-                  children: 'Randomizer, Level Scaling, Nuzlocke and Monotype \u2014 pick any.',
+            challengeUnlocked
+              ? jsxs('button', {
+                  className: 'welcome-secondary',
+                  onClick: () => setStep('challenge'),
+                  children: [
+                    jsx('span', { className: 'welcome-secondary-title', children: 'Challenge Mode' }),
+                    jsx('span', {
+                      className: 'welcome-secondary-hint',
+                      children:
+                        'Randomizer, Level Scaling, Nuzlocke, one-catch-per-route or Monotype \u2014 pick any hard-mode rules.',
+                    }),
+                  ],
+                })
+              : jsxs('div', {
+                  className: 'welcome-secondary locked',
+                  children: [
+                    jsxs('span', {
+                      className: 'welcome-secondary-title',
+                      children: [jsx(Icon, { name: 'lock' }), 'Challenge Mode'],
+                    }),
+                    jsx('span', {
+                      className: 'welcome-secondary-hint',
+                      children:
+                        'Earned, not offered: beat any region Champion and the hard-mode rules open for every journey after it.',
+                    }),
+                  ],
                 }),
-              ],
-            }),
           ],
         }),
       ],

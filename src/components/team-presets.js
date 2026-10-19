@@ -4,6 +4,7 @@ import React from 'react'
 import { createPortal } from 'react-dom'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { useGame } from '../game/context.js'
+import { isFeatureUnlocked } from '../game/feature-unlocks.js'
 
 /** The phases a preset can be applied in (only the map, never mid-battle). */
 const APPLYABLE_PHASES = new Set(['idle'])
@@ -16,12 +17,13 @@ export function TeamPresets() {
     canSave = state.party.length > 0
   return jsxs(React.Fragment, {
     children: [
-      jsx('button', {
-        className: 'team-presets-btn',
-        onClick: () => setOpen(!0),
-        title: 'Saved team presets',
-        children: '\u2699 TEAM',
-      }),
+      isFeatureUnlocked(state, 'teamPresets') &&
+        jsx('button', {
+          className: 'team-presets-btn',
+          onClick: () => setOpen(!0),
+          title: 'Saved team presets',
+          children: '\u2699 TEAM',
+        }),
       open &&
         createPortal(
           jsx('div', {

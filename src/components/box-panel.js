@@ -10,6 +10,7 @@ import { getEggSpriteUrl, getPokemonSpriteFallbackUrl, getPokemonSpriteUrl, isAl
 import { isFemalePokemon } from '../game/breeding.js'
 import { fuzzyNameMatch, normalizeSearchName, speciesMatchingSearch } from '../game/species-search.js'
 import { itemTooltip } from '../game/progression.js'
+import { isFeatureUnlocked } from '../game/feature-unlocks.js'
 import { ItemIcon } from './item-icon.js'
 import { BankModal } from './bank-modal.js'
 import { SegmentedControl } from './ui-controls.js'
@@ -40,6 +41,7 @@ export function BoxPanel({
     [confirmFiltered, setConfirmFiltered] = React.useState(!1),
     [showBank, setShowBank] = React.useState(!1),
     [searchOpen, setSearchOpen] = React.useState(!1),
+    bankUnlocked = isFeatureUnlocked(state, 'bank'),
     dexSeenSet = React.useMemo(
       () => new Set([...state.pokedexSeen, ...state.pokedexCaught]),
       [state.pokedexSeen, state.pokedexCaught]
@@ -147,11 +149,12 @@ export function BoxPanel({
                     },
                     children: 'Search',
                   }),
-                  jsx('button', {
-                    className: 'box-pokedex-btn',
-                    onClick: () => setShowBank(!0),
-                    children: 'Bank',
-                  }),
+                  bankUnlocked &&
+                    jsx('button', {
+                      className: 'box-pokedex-btn',
+                      onClick: () => setShowBank(!0),
+                      children: 'Bank',
+                    }),
                 ],
               }),
               jsxs('div', {
@@ -418,7 +421,7 @@ export function BoxPanel({
           }),
         ],
       }),
-      showBank && jsx(BankModal, { onClose: () => setShowBank(!1) }),
+      showBank && bankUnlocked && jsx(BankModal, { onClose: () => setShowBank(!1) }),
     ],
   })
 }

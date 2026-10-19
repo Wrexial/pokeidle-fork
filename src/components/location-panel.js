@@ -14,6 +14,7 @@ import { masteryProgress } from '../game/route-mastery.js'
 import { useGame } from '../game/context.js'
 import { computeUnlockedLocations, frontierUnlocks, minigameRequirementMet, regionProgressionGoal, unlockBlockers } from '../game/progression.js'
 import { servicePoisFor, cafeFor } from '../game/services.js'
+import { isFeatureUnlocked } from '../game/feature-unlocks.js'
 import { postgameHubFor } from '../data/postgame-hubs.js'
 import { JOB_SLOTS, jobKey } from '../game/jobs.js'
 import { MinigameCard } from './minigame-card.js'
@@ -61,6 +62,14 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
     jobCount = Object.keys(state.jobs ?? {}).length,
     jobsFull = jobCount >= JOB_SLOTS,
     jobWorker = defaultJobWorker(state),
+    // Late-run systems: keep them out of a fresh save's first route panel.
+    // Fallbacks (an active hunt, a posted job, a set-up base) keep existing
+    // saves reachable, so these flags mirror `isFeatureUnlocked` exactly.
+    huntUnlocked = isFeatureUnlocked(state, 'focusHunt'),
+    sosUnlocked = isFeatureUnlocked(state, 'sosChain'),
+    secretBaseUnlocked = isFeatureUnlocked(state, 'secretBase'),
+    fieldJobsUnlocked = isFeatureUnlocked(state, 'fieldJobs'),
+    jobsVisible = fieldJobsUnlocked || jobCount > 0,
     // Every locked location on the current region's frontier (adjacent to
     // somewhere already unlocked), soonest first. Several can become available
     // at once — a town with two routes, a badge gate plus its neighbour — so
@@ -795,12 +804,13 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
           className: 'location-description',
           children: location.description,
         }),
-        (onOpenHunt || activityIds.length > 0 || jobCount > 0) &&
+        ((onOpenHunt && huntUnlocked) || (jobsVisible && (activityIds.length > 0 || jobCount > 0))) &&
           jsxs('div', {
             className: 'location-utility-row',
             children: [
-              onOpenHunt && jsx(HuntBar, { onOpen: onOpenHunt }),
-              (activityIds.length > 0 || jobCount > 0) &&
+              onOpenHunt && huntUnlocked && jsx(HuntBar, { onOpen: onOpenHunt }),
+              jobsVisible &&
+                (activityIds.length > 0 || jobCount > 0) &&
                 jsx('button', {
                   className: 'location-jobs-btn',
                   onClick: () => setShowJobs(true),
@@ -811,7 +821,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
                 }),
             ],
           }),
-        routeEncounters && routeKey && jsx(SosChainChip, { routeKey }),
+        sosUnlocked && routeEncounters && routeKey && jsx(SosChainChip, { routeKey }),
         routeKey && jsx(RevealChip, { routeKey }),
         servicePois.length > 0 &&
           jsxs('div', {
@@ -861,7 +871,9 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
             ],
           }),
         jsx(GymLocationPanel, {}),
-        location.type === 'route' && jsx(SecretBaseCard, { locationId: location.id }),
+        location.type === 'route' &&
+          (secretBaseUnlocked || state.secretBase?.locationId) &&
+          jsx(SecretBaseCard, { locationId: location.id }),
         jsx(RivalPanel, {}),
         jsx(VillainPanel, {}),
         jsx(LeagueLocationPanel, {}),
@@ -948,20 +960,23 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
                             dispatch({ type: 'START_ROUTE_ACTIVITY', payload: { activityId } }),
                           // Posting a worker is a small header button rather than
                           // a full-width bar; once a job is running the card
-                          // shows JobControls' progress block instead.
-                          onAssign: job
-                            ? undefined
-                            : () => {
-                                if (jobWorker)
-                                  dispatch({
-                                    type: 'ASSIGN_JOB',
-                                    payload: {
-                                      locationId: location.id,
-                                      activityId,
-                                      pokemonId: jobWorker.id,
-                                    },
-                                  })
-                              },
+                          // shows JobControls' progress block instead. The
+                          // automation unlocks after a region Champion, so
+                          // early routes only offer the manual activity.
+                          onAssign:
+                            job || !fieldJobsUnlocked
+                              ? undefined
+                              : () => {
+                                  if (jobWorker)
+                                    dispatch({
+                                      type: 'ASSIGN_JOB',
+                                      payload: {
+                                        locationId: location.id,
+                                        activityId,
+                                        pokemonId: jobWorker.id,
+                                      },
+                                    })
+                                },
                           assignLabel: jobsFull ? 'JOBS FULL' : jobWorker ? 'ASSIGN' : 'NO POKEMON',
                           assignTitle: jobsFull
                             ? `All ${JOB_SLOTS} field jobs are busy.`
@@ -985,7 +1000,7 @@ export function LocationPanel({ onOpenCatchSettings, onOpenHunt }) {
         location.id === 'cinnabarIsland' && jsx(FossilPanel, {}),
         jsx(GiftPanel, { locationId: location.id }),
         nextUnlocksSection,
-        showJobs && jsx(FieldJobsModal, { onClose: () => setShowJobs(false) }),
+        showJobs && jobsVisible && jsx(FieldJobsModal, { onClose: () => setShowJobs(false) }),
       ],
     }),
   })

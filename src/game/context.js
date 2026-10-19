@@ -5,6 +5,7 @@ import { jsx } from 'react/jsx-runtime'
 import { gameReducer, initialGameState } from './reducer.js'
 import { SAVED_STATE_KEYS, autosaveSave, loadSavedState, resolveBootSlot } from './save.js'
 import { SETTINGS_KEYS, mergeStoredSettings, setSpriteStyle, storeSettings } from './settings.js'
+import { isChallengeModeUnlocked, unlockChallengeMode } from '../data/config.js'
 
 /** @type {React.Context<{ state: GameState, dispatch: (action: GameAction) => void } | null>} */
 const GameContext = React.createContext(
@@ -41,6 +42,23 @@ export function GameProvider({ children }) {
   })
   const lastAutosaveRef = React.useRef(0),
     autosaveTimerRef = React.useRef(/** @type {ReturnType<typeof setTimeout> | null} */ (null))
+  // Beating a region's Champion earns Challenge Mode for every later run, in
+  // any slot, so the marker lives outside the save blobs (see
+  // `isChallengeModeUnlocked`) and is written as soon as one falls.
+  React.useEffect(() => {
+    if ((state.defeatedChampions ?? []).length === 0 || isChallengeModeUnlocked()) return
+    unlockChallengeMode()
+    dispatch({
+      type: 'PUSH_NOTIFICATION',
+      payload: {
+        message:
+          'Challenge Mode unlocked \u2014 hard-mode rules open on your next new journey.',
+        tone: 'success',
+        icon: '\u{1f513}',
+        dedupeKey: 'challenge-mode-unlocked',
+      },
+    })
+  }, [state.defeatedChampions])
   // Clear a pending trailing save if the provider ever unmounts.
   React.useEffect(
     () => () => {

@@ -10,6 +10,7 @@ import { PartyBoxPanel } from './party-box-panel.js'
 import { MobileTabs } from './mobile-tabs.js'
 import { RightPanel } from './right-panel.js'
 import { HatchPopup } from './hatch-popup.js'
+import { FeatureUnlockModal } from './feature-unlock-modal.js'
 import { OfflineProgressModal } from './offline-progress-modal.js'
 import { NotificationStack } from './notification-stack.js'
 import { GlobalTooltip } from './global-tooltip.js'
@@ -45,6 +46,7 @@ export function GameLayout() {
             jsx(BattleScreen, {}),
             jsx(MobileTabs, {}),
             jsx(HatchPopup, {}),
+            jsx(FeatureUnlockModal, {}),
             jsx(OfflineProgressModal, {}),
             jsx(NotificationStack, {}),
             jsx(GlobalTooltip, {}),
@@ -61,6 +63,7 @@ export function GameLayout() {
             }),
             jsx(RightPanel, {}),
             jsx(HatchPopup, {}),
+            jsx(FeatureUnlockModal, {}),
             jsx(OfflineProgressModal, {}),
             jsx(NotificationStack, {}),
             jsx(GlobalTooltip, {}),

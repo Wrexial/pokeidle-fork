@@ -81,6 +81,15 @@ helper `pokemonIdleResetSave()` also exists. Bump `SAVE_VERSION` and add the old
 key to `LEGACY_SAVE_KEYS` when the save shape changes incompatibly; `clearSave()`
 removes the active slot's key (the quarantine backup is kept).
 
+**Cross-save progress** that must outlive a reset lives in its own key, not a
+save blob: `CHALLENGE_UNLOCK_KEY` (`pokemon-idle-challenge-unlocked`, see
+`config.js`) is set the moment any slot beats a region Champion, so Challenge
+Mode stays earned for later runs (a fresh save would otherwise start with an
+empty `defeatedChampions` and re-lock it). `isChallengeModeAvailable()`
+(`save.js`) reads the flag and scans the slots once for a save made before it
+existed; the welcome screen (`starter-select.js`) and Settings both hide the
+hard-mode rules behind it.
+
 Formatting: `.prettierrc.json` is the intended style (`semi: false`,
 `singleQuote: true`, `trailingComma: "es5"`), but Prettier is **not** installed
 as a dependency and there is no format script. Match the surrounding code
@@ -150,6 +159,7 @@ in `GameLayout`) dispatches `DEBUG_MAX_LEVEL` when the Konami code
 | `src/game/save.js` | `repairSave`, `loadSavedState`, `serializeSave`, `persistSave` and `SAVED_STATE_KEYS` — the versioned localStorage save. |
 | `src/game/offline-catch.js` | `simulateOfflineCatches` — replays the away window's wild encounters on the current route through the live auto-catch rules (reusing `catching.js`), applied by `loadSavedState` and named in `offlineReport.caught`. Lives outside `progression/` so it can import `catching.js` without an import cycle. |
 | `src/hooks.js` | Cross-cutting UI hooks: `useTypewriter`, `useIsMobile`, `useKonamiCode`, `useDayPhase`, daily/notification/audio/quest hooks. |
+| `src/game/feature-unlocks.js` | Progressive feature gates (`FEATURE_UNLOCKS`): the Dailies sections, Secret Base, Focus Hunt, SOS chains, Mystery Gifts, Pokewalker, Pokemon Bank, team presets and Field Jobs open on early milestones instead of at save start. Components read `isFeatureUnlocked(state, id)` / `featureUnlockHint(id)`, and `FeatureUnlockModal` (`feature-unlock-modal.js`, rendered by `GameLayout`) queues a congratulations popup plus a toast for each newly opened system. Gates are computed from run progress (badges, Champions, lifetime battles) so no save field is needed; `fallback` keeps a feature reachable when a legacy save already uses it. |
 | `src/game/use-game-loop.js` | `useGameLoop` — the idle tick state machine. |
 | `src/game/minigames.js` | Barrel re-exporting `src/game/minigames/`: `mining`, `bug-contest`, `safari` (Kanto Safari Zone), `academy-quiz` (Paldea type quiz), `game-corner`, `doubles` (2v2 plus the shared N-vs-N round engine), `rotation` (3v3 with one active fighter), `free-for-all` (4-way last-one-standing), `gauntlet` (headless battle helper), `registry` (fixed `MINIGAME_LOCATIONS` POIs), `rods` (fishing tiers), `fishing` (curated `FISHING_LOCATIONS` + route-exclusive catches) and `route-activities` (terrain-driven Rock Smash / Headbutt / Diving / foraging). Minigames launch from the location panel, and Town Map nodes are badged via `POI_LOCATIONS` / `FISHING_LOCATIONS`. |
 | `src/game/pelago.js` | Poké Pelago's passive islands (Bean Farm / Training Isle / Isle Caves) that bank rewards per wild win. Companion care (`companion.js`) and the Berry Garden (`garden.js`) are hosted by the Pelago hub scene (`poke-pelago-scene.js`), opened from the Alola Pelago location. |

@@ -30,6 +30,7 @@ const ICON_PATHS = {
   upload: 'M12 3.62l4.92 4.92-1.42 1.41-3.5-3.5V21h-2V6.45l-3.5 3.5-1.42-1.41zM5 3h14v2H5z',
   trash: 'M9 3h6l1 2h4v2H4V5h4l1-2zM6 8h12l-1 13H7L6 8z',
   plus: 'M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z',
+  lock: 'M12 2a5 5 0 0 0-5 5v3H4v12h16V10h-3V7a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V7a3 3 0 0 1 3-3zm0 9a2 2 0 0 1 1 3.73V19h-2v-2.27A2 2 0 0 1 12 13z',
 }
 
 /**

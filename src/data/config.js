@@ -158,6 +158,32 @@ export const LEGACY_SAVE_KEYS = ['pokemon-idle-save']
 /** Where a save that fails to load is parked (never retried, never auto-deleted). */
 export const SAVE_BACKUP_KEY = 'pi-save-backup'
 
+/**
+ * Cross-save progress marker: Challenge Mode opens once any region's Champion
+ * has been beaten in this browser, in any slot. It lives in its own key (not a
+ * save blob) because a brand new run starts with an empty `defeatedChampions`
+ * and would otherwise re-lock the rules it has already earned.
+ */
+export const CHALLENGE_UNLOCK_KEY = 'pokemon-idle-challenge-unlocked'
+
+/** Whether Challenge Mode has been earned in this browser. @returns {boolean} */
+export function isChallengeModeUnlocked() {
+  try {
+    return localStorage.getItem(CHALLENGE_UNLOCK_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
+/** Remember that Challenge Mode is earned (called when a Champion falls). */
+export function unlockChallengeMode() {
+  try {
+    localStorage.setItem(CHALLENGE_UNLOCK_KEY, '1')
+  } catch {
+    /* storage may be unavailable */
+  }
+}
+
 /** How many independent save slots the game offers. */
 export const SAVE_SLOT_COUNT = 3
 /** Storage key holding the slot the game is currently playing (1-based). */

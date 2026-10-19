@@ -3,12 +3,13 @@
 import React from 'react'
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
 import { Icon } from './icon.js'
-import { clearSave } from '../data/config.js'
+import { clearSave, isChallengeModeUnlocked } from '../data/config.js'
 import { autoCatchBallOrder, pokeBalls } from '../data/items.js'
 import { CATCH_MODE_OPTIONS, SPEED_OPTIONS } from '../data/ui.js'
 import { THEMES } from '../data/themes.js'
 import { unlockAudio } from '../game/audio.js'
 import { useGame } from '../game/context.js'
+import { featureUnlockHint, isFeatureUnlocked } from '../game/feature-unlocks.js'
 import { decodeShareCode, encodeShareCode, repairSave, serializeSave, suspendAutosave, writeImportedSave } from '../game/save.js'
 import { MonotypeSelect } from './monotype-select.js'
 import { KeybindingsPanel } from './keybindings-panel.js'
@@ -37,6 +38,17 @@ export function SettingsModal({ onClose }) {
   const [shareInput, setShareInput] = React.useState('')
   const [shareStatus, setShareStatus] = React.useState('')
   const [showBank, setShowBank] = React.useState(!1)
+  const bankUnlocked = isFeatureUnlocked(state, 'bank')
+  // Challenge rules are earned with a region Champion (see the starter screen);
+  // a save that already has rules on can still turn them off.
+  const challengeUnlocked =
+    isChallengeModeUnlocked() ||
+    (state.defeatedChampions ?? []).length > 0 ||
+    !!(state.challengeRandomizer ||
+      state.challengeLevelScale ||
+      state.challengeNuzlocke ||
+      state.challengeRestrictCatches ||
+      state.challengeMonotype)
   const autoBattlePolicy = state.autoBattlePolicy ?? {
     preferStab: false,
     avoidContact: false,
@@ -682,45 +694,61 @@ export function SettingsModal({ onClose }) {
                         className: 'section-title',
                         children: 'Challenge Modes',
                       }),
-                      jsx('p', {
-                        className: 'settings-hint',
-                        children:
-                          'Optional hard-mode rules. Randomizer rolls a random species on every wild encounter; Level Scaling makes wild Pokemon match your active Pokemon\u2019s level; Nuzlocke releases a Pokemon the moment it faints (your last one is spared); One Catch per Route lets you catch only the first wild Pokemon on each route; Monotype limits wild encounters to a single type.',
-                      }),
-                      jsx('button', {
-                        className: `settings-toggle-btn${state.challengeRandomizer ? ' active' : ''}`,
-                        onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_RANDOMIZER' }),
-                        children: state.challengeRandomizer
-                          ? 'Randomizer: ON'
-                          : 'Randomizer: OFF',
-                      }),
-                      jsx('button', {
-                        className: `settings-toggle-btn${state.challengeLevelScale ? ' active' : ''}`,
-                        onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_LEVEL_SCALE' }),
-                        children: state.challengeLevelScale
-                          ? 'Level Scaling: ON'
-                          : 'Level Scaling: OFF',
-                      }),
-                      jsx('button', {
-                        className: `settings-toggle-btn${state.challengeNuzlocke ? ' active' : ''}`,
-                        onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_NUZLOCKE' }),
-                        children: state.challengeNuzlocke ? 'Nuzlocke: ON' : 'Nuzlocke: OFF',
-                      }),
-                      jsx('button', {
-                        className: `settings-toggle-btn${state.challengeRestrictCatches ? ' active' : ''}`,
-                        onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_RESTRICT_CATCHES' }),
-                        children: state.challengeRestrictCatches
-                          ? 'One Catch per Route: ON'
-                          : 'One Catch per Route: OFF',
-                      }),
-                      jsx(MonotypeSelect, {
-                        value: state.challengeMonotype,
-                        onChange: /** @param {string | null} monotype */ (monotype) =>
-                          dispatch({
-                            type: 'SET_CHALLENGE_MONOTYPE',
-                            payload: { monotype },
+                      challengeUnlocked
+                        ? jsx('p', {
+                            className: 'settings-hint',
+                            children:
+                              'Optional hard-mode rules. Randomizer rolls a random species on every wild encounter; Level Scaling makes wild Pokemon match your active Pokemon\u2019s level; Nuzlocke releases a Pokemon the moment it faints (your last one is spared); One Catch per Route lets you catch only the first wild Pokemon on each route; Monotype limits wild encounters to a single type.',
+                          })
+                        : jsx('p', {
+                            className: 'settings-hint settings-hint-locked',
+                            children:
+                              'Hard-mode rules are earned: beat any region Champion to unlock Randomizer, Level Scaling, Nuzlocke, one-catch-per-route and Monotype for this and every later run.',
                           }),
-                      }),
+                      challengeUnlocked
+                        ? jsx('button', {
+                            className: `settings-toggle-btn${state.challengeRandomizer ? ' active' : ''}`,
+                            onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_RANDOMIZER' }),
+                            children: state.challengeRandomizer
+                              ? 'Randomizer: ON'
+                              : 'Randomizer: OFF',
+                          })
+                        : null,
+                      challengeUnlocked
+                        ? jsx('button', {
+                            className: `settings-toggle-btn${state.challengeLevelScale ? ' active' : ''}`,
+                            onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_LEVEL_SCALE' }),
+                            children: state.challengeLevelScale
+                              ? 'Level Scaling: ON'
+                              : 'Level Scaling: OFF',
+                          })
+                        : null,
+                      challengeUnlocked
+                        ? jsx('button', {
+                            className: `settings-toggle-btn${state.challengeNuzlocke ? ' active' : ''}`,
+                            onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_NUZLOCKE' }),
+                            children: state.challengeNuzlocke ? 'Nuzlocke: ON' : 'Nuzlocke: OFF',
+                          })
+                        : null,
+                      challengeUnlocked
+                        ? jsx('button', {
+                            className: `settings-toggle-btn${state.challengeRestrictCatches ? ' active' : ''}`,
+                            onClick: () => dispatch({ type: 'TOGGLE_CHALLENGE_RESTRICT_CATCHES' }),
+                            children: state.challengeRestrictCatches
+                              ? 'One Catch per Route: ON'
+                              : 'One Catch per Route: OFF',
+                          })
+                        : null,
+                      challengeUnlocked
+                        ? jsx(MonotypeSelect, {
+                            value: state.challengeMonotype,
+                            onChange: /** @param {string | null} monotype */ (monotype) =>
+                              dispatch({
+                                type: 'SET_CHALLENGE_MONOTYPE',
+                                payload: { monotype },
+                              }),
+                          })
+                        : null,
                     ],
                   }),
                   jsxs('div', {
@@ -854,19 +882,25 @@ export function SettingsModal({ onClose }) {
                           'The game keeps up to three independent saves. Play a different one, or start a new game in any slot.',
                       }),
                       jsx(SaveSlotsPanel, {}),
-                      jsx('button', {
-                        className: 'settings-save-btn',
-                        onClick: () => setShowBank(!0),
-                        children: '\u{1f4e6} Pokemon Bank',
-                      }),
+                      bankUnlocked
+                        ? jsx('button', {
+                            className: 'settings-save-btn',
+                            onClick: () => setShowBank(!0),
+                            children: '\u{1f4e6} Pokemon Bank',
+                          })
+                        : jsx('p', {
+                            className: 'settings-hint',
+                            children: `Pok\u00e9mon Bank is locked \u2014 ${featureUnlockHint('bank').toLowerCase()}.`,
+                          }),
                       jsx('p', {
                         className: 'settings-hint',
-                        children:
-                          'Move individual Pokemon between slots: deposit them here, switch save, then withdraw them into the new save.',
+                        children: bankUnlocked
+                          ? 'Move individual Pokemon between slots: deposit them here, switch save, then withdraw them into the new save.'
+                          : 'A slot-independent stash for moving Pokemon between saves, once you are a Champion.',
                       }),
                     ],
                   }),
-                  showBank && jsx(BankModal, { onClose: () => setShowBank(!1) }),
+                  showBank && bankUnlocked && jsx(BankModal, { onClose: () => setShowBank(!1) }),
                 ],
               }),
         }),

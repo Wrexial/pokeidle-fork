@@ -2,7 +2,7 @@
 // save. Split out of context.js so the provider is just React wiring and this
 // repair logic stays testable on its own.
 
-import { BATTLE_TOWER_REGION, EV_MAX_PER_STAT, EV_MAX_TOTAL, LEGACY_SAVE_KEYS, MAX_TEAM_PRESETS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, fieldMoves, getActiveSlot, regionalStarters, saveSlotKey, setActiveSlot } from '../data/config.js'
+import { BATTLE_TOWER_REGION, EV_MAX_PER_STAT, EV_MAX_TOTAL, LEGACY_SAVE_KEYS, MAX_TEAM_PRESETS, SAVE_BACKUP_KEY, SAVE_SLOT_COUNT, SAVE_VERSION, fieldMoves, getActiveSlot, isChallengeModeUnlocked, regionalStarters, saveSlotKey, setActiveSlot, unlockChallengeMode } from '../data/config.js'
 import { dailyEventByKey, raidEventByKey, todayKey } from '../data/daily-events.js'
 import { activeItems, autoCatchBallOrder, consumableItems, pokeBalls } from '../data/items.js'
 import { elite4Data, encounterData, formDexModel, gymLeaderData, mapData, moveData, pokemonSpecies, preEvolutionMap, regions, speciesKeysByGeneration } from '../data/gameData.js'
@@ -1706,6 +1706,31 @@ function summarizeSlot(slot) {
  */
 export function listSaveSlots() {
   return Array.from({ length: SAVE_SLOT_COUNT }, (_, index) => summarizeSlot(index + 1))
+}
+
+/**
+ * Whether Challenge Mode is open: it is earned by beating any region Champion
+ * in this browser, in any slot. The flag is written when a Champion falls
+ * (`GameProvider`), so this only has to scan the slots once for a save made
+ * before the flag existed.
+ * @returns {boolean}
+ */
+export function isChallengeModeAvailable() {
+  if (isChallengeModeUnlocked()) return true
+  const earned = Array.from({ length: SAVE_SLOT_COUNT }, (_, index) => index + 1).some(
+    (slot) => {
+      const raw = readRawSave(slot)
+      if (!raw) return false
+      try {
+        const saved = JSON.parse(raw.json)
+        return Array.isArray(saved?.defeatedChampions) && saved.defeatedChampions.length > 0
+      } catch {
+        return false
+      }
+    }
+  )
+  if (earned) unlockChallengeMode()
+  return earned
 }
 
 /**

@@ -2429,6 +2429,28 @@ img {
     box-shadow: 0 1px 0 var(--gold-dark)
 }
 
+.feature-unlock-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px
+}
+
+.feature-unlock-actions .feature-unlock-btn {
+    margin-top: 0
+}
+
+.feature-unlock-btn.secondary {
+    color: var(--text-soft);
+    background: linear-gradient(180deg,#3a3327,#2b261d);
+    border-color: var(--line);
+    box-shadow: 0 3px 0 #00000060
+}
+
+.feature-unlock-btn.secondary:active {
+    box-shadow: 0 1px 0 #00000060
+}
+
 @media (prefers-reduced-motion: reduce) {
     .feature-unlock {
         animation: none

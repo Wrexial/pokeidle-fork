@@ -5,7 +5,7 @@ import { installGameData } from './helpers/game-data.mjs'
 
 installGameData()
 
-const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, regionProgressionGoal, checkShinyOdds, shinyChainMultiplier, shinyOddsForCompletedGenerations, shinyOddsForSpecies, entryRoutePath, minigameRequirementMet, partyNeedsHealing } =
+const { awardExperience, computeUnlockedLocations, getRegionUnlockTokens, regionTokenStatus, regionProgressionGoal, checkShinyOdds, shinyChainMultiplier, shinyOddsForCompletedGenerations, shinyOddsForSpecies, entryRoutePath, minigameRequirementMet, partyNeedsHealing } =
   await import('../src/game/progression.js')
 const { initialGameState, gameReducer } = await import('../src/game/reducer.js')
 const { encounterData, gymLeaderData, mapData, pokemonSpecies, regions } = await import('../src/data/gameData.js')
@@ -75,6 +75,34 @@ test('getRegionUnlockTokens counts Champions minus opened regions', () => {
     2
   )
   assert.equal(getRegionUnlockTokens(baseState({ defeatedChampions: [], unlockedRegions: [] })), 0)
+})
+
+test('regionTokenStatus describes the token the unlock popup announces', () => {
+  // A fresh save has nothing to announce.
+  assert.deepEqual(regionTokenStatus(baseState()), { tokens: 0, regionId: null })
+  // A Champion win with no region opened yet leaves a token to spend.
+  assert.deepEqual(
+    regionTokenStatus(baseState({ defeatedChampions: ['kanto'], unlockedRegions: ['kanto'] })),
+    { tokens: 1, regionId: 'kanto' }
+  )
+  // Spending it on another region leaves nothing to announce.
+  assert.deepEqual(
+    regionTokenStatus(
+      baseState({ defeatedChampions: ['kanto'], unlockedRegions: ['kanto', 'johto'] })
+    ),
+    { tokens: 0, regionId: 'kanto' }
+  )
+  // With every region open, leftovers are converted to Victory Tokens and the
+  // popup must not promise a region to open.
+  assert.deepEqual(
+    regionTokenStatus(
+      baseState({
+        defeatedChampions: ['kanto', 'johto'],
+        unlockedRegions: regions.map((region) => region.id),
+      })
+    ),
+    { tokens: 0, regionId: 'johto' }
+  )
 })
 
 test('minigame gates unlock a route once the record is met', () => {

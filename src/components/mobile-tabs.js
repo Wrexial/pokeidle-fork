@@ -6,6 +6,7 @@ import { MOBILE_TABS, biomeForLocation } from '../data/ui.js'
 import { encounterData, raidPoolFor, mapData } from '../data/gameData.js'
 import { effectiveWeatherAt } from '../game/weather.js'
 import { useGame } from '../game/context.js'
+import { useUi } from '../game/ui-context.js'
 import { getEvolutionOptions } from '../game/breeding.js'
 import { LocationPanel } from './location-panel.js'
 import { TownMap } from './town-map.js'
@@ -19,6 +20,7 @@ import { BattleLog } from './battle-log.js'
 
 export function MobileTabs() {
   const { state, dispatch } = useGame(),
+    { mapRequest } = useUi(),
     [tab, setTab] = React.useState('party'),
     [inspected, setInspected] = React.useState(/** @type {{ source: string, id: string } | null} */ (null)),
     [releaseConfirm, setReleaseConfirm] = React.useState(/** @type {string | null} */ (null)),
@@ -124,6 +126,11 @@ export function MobileTabs() {
         setBoxReleaseConfirm(null))
     }, [boxReleaseConfirm, dispatch]),
     releaseTarget = boxReleaseConfirm ? (state.box.find((locationId) => locationId.id === boxReleaseConfirm) ?? null) : null
+  // The unlock popup raises a map request when a Champion win pays out an
+  // Unlock Token; on phones the map is a tab, so swap to it.
+  React.useEffect(() => {
+    if (mapRequest > 0) setTab('map')
+  }, [mapRequest])
   return jsxs('div', {
     className: 'mobile-tabs',
     children: [

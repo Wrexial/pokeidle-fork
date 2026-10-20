@@ -1,5 +1,7 @@
 // Lightweight UI state shared by panels that don't live in the same subtree:
-// the Pokédex selection (so it survives tab swaps and the Box can filter to it).
+// the Pokédex selection (so it survives tab swaps and the Box can filter to it)
+// and a "show the Town Map" request the unlock popup can raise after a Champion
+// win (on phones the map is a tab, so only MobileTabs can act on it).
 
 import React from 'react'
 import { jsx } from 'react/jsx-runtime'
@@ -10,6 +12,8 @@ import { jsx } from 'react/jsx-runtime'
  *   setPokedexSelected: (value: string | null) => void,
  *   pokedexGen: number,
  *   setPokedexGen: (value: number) => void,
+ *   mapRequest: number,
+ *   requestMap: () => void,
  * }} UiState
  */
 
@@ -22,14 +26,20 @@ export function UiProvider({ children }) {
       /** @type {string | null} */ (null)
     ),
     [pokedexGen, setPokedexGen] = React.useState(0),
+    // A counter rather than a boolean so every request is a fresh signal; the
+    // mobile tab swaps to the map each time it changes.
+    [mapRequest, setMapRequest] = React.useState(0),
+    requestMap = React.useCallback(() => setMapRequest((pending) => pending + 1), []),
     value = React.useMemo(
       () => ({
         pokedexSelected,
         setPokedexSelected,
         pokedexGen,
         setPokedexGen,
+        mapRequest,
+        requestMap,
       }),
-      [pokedexSelected, pokedexGen]
+      [pokedexSelected, pokedexGen, mapRequest, requestMap]
     )
   return jsx(UiContext.Provider, {
     value,

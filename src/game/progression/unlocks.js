@@ -118,6 +118,24 @@ export function getRegionUnlockTokens(state) {
 }
 
 /**
+ * The Region Unlock Token a Champion win pays out, shaped for the
+ * congratulations popup: how many are ready to spend (zero once every region
+ * is open, since leftover tokens are converted to Victory Tokens) and the
+ * Champion that earned the latest one.
+ * @param {GameState} state
+ * @returns {{ tokens: number, regionId: string | null }}
+ */
+export function regionTokenStatus(state) {
+  const opened = (state.unlockedRegions ?? []).length,
+    everyRegionOpen = baseRegions.length > 0 && opened >= baseRegions.length,
+    champions = state.defeatedChampions ?? []
+  return {
+    tokens: everyRegionOpen ? 0 : getRegionUnlockTokens(state),
+    regionId: champions[champions.length - 1] ?? null,
+  }
+}
+
+/**
  * The goal to show when a region has no locations left to unlock (so there is
  * no next route to point at): beat its Champion for the Unlock Token, spend a
  * token that is already banked, or, with nothing left, a completion message.

@@ -671,8 +671,12 @@ export const MYSTERY_GIFTS = [
   },
 ]
 
-/** How many total battles open each successive Wonder Card. */
-export const MYSTERY_GIFT_BATTLE_STEP = 250
+/**
+ * How many total battles open each successive Wonder Card. Deliberately more
+ * than the Mystery Gifts feature's own gate so the first card never arrives
+ * with several others already open on the same battle.
+ */
+export const MYSTERY_GIFT_BATTLE_STEP = 500
 
 /** The rotation gifts, in schedule order (code gifts are excluded). */
 export const MYSTERY_GIFT_ROTATION = MYSTERY_GIFTS.filter((gift) => !gift.code)

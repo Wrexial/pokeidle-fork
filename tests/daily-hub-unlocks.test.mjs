@@ -43,20 +43,28 @@ test('a fresh save hides the Dailies button and locks every section', () => {
     tabs = dailyHubTabs(state)
   assert.deepEqual(dailyHubStatus(state), { available: false, claimable: false })
   for (const tabDef of tabs) assert.equal(tabDef.locked, true, tabDef.id)
-  assert.equal(tab(tabs, 'quests').hint, 'Unlocks after your first Gym badge')
+  assert.equal(tab(tabs, 'quests').hint, 'Unlocks after 2 Gym badges')
 })
 
-test('the first badge opens the first sections and shows the hub', () => {
+test('the first badge opens the Daily Event and the hub, then the others follow', () => {
   const state = makeState({ defeatedGyms: ['kanto-pewter'] }),
     tabs = dailyHubTabs(state)
   assert.equal(dailyHubStatus(state).available, true)
-  for (const id of ['event', 'quests', 'pokewalker']) assert.equal(tab(tabs, id).locked, false, id)
-  for (const id of ['story', 'mystery']) assert.equal(tab(tabs, id).locked, true, id)
-  assert.equal(tab(tabs, 'story').hint, 'Unlocks after 2 Gym badges')
+  assert.equal(tab(tabs, 'event').locked, false)
+  assert.equal(tab(tabs, 'quests').locked, true, 'quests wait for badge 2')
+  assert.equal(tab(tabs, 'pokewalker').locked, true, 'the walker waits for badge 3')
+  assert.equal(tab(tabs, 'story').locked, true)
+  assert.equal(tab(tabs, 'story').hint, 'Unlocks after 4 Gym badges')
+
+  const twoBadges = makeState({
+    defeatedGyms: ['kanto-pewter', 'kanto-cerulean'],
+  })
+  assert.equal(tab(dailyHubTabs(twoBadges), 'quests').locked, false)
+  assert.equal(tab(dailyHubTabs(twoBadges), 'pokewalker').locked, true)
 })
 
 test('a locked section never lights the claim dot', () => {
-  // A big Pokewalker balance still can't pulse before the first badge.
+  // A big Pokewalker balance still can't pulse before its badge gate.
   const state = makeState({
     pokewalker: { steps: 9999, totalSteps: 0 },
   })

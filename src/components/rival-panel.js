@@ -6,7 +6,14 @@ import { jsx, jsxs } from 'react/jsx-runtime'
 import { gymLeaderData, mapData } from '../data/gameData.js'
 import { useGame } from '../game/context.js'
 import { buildTrainerTeam } from '../game/progression.js'
-import { buildRivalTeam, rivalChallenge, rivalDialogue, rivalName, rivalSpriteKey } from '../game/rival.js'
+import {
+  buildRivalTeam,
+  rivalBenchmarkLevel,
+  rivalChallenge,
+  rivalDialogue,
+  rivalName,
+  rivalSpriteKey,
+} from '../game/rival.js'
 
 export function RivalPanel() {
   const { state, dispatch } = useGame(),
@@ -15,7 +22,7 @@ export function RivalPanel() {
     regionGyms = gymLeaderData.filter((gym) => (gym.region ?? 'kanto') === regionId),
     badgeCount = regionGyms.filter((gym) => state.defeatedGyms.includes(gym.id)).length,
     { ready, stage, requiredBadges } = rivalChallenge(state, regionId, badgeCount),
-    playerLevel = Math.max(5, ...state.party.map((member) => member.level)),
+    playerLevel = rivalBenchmarkLevel(state.party),
     // Build one team for the panel so the level range shown is the team fought.
     team = React.useMemo(
       () => (ready ? buildRivalTeam(regionId, stage, playerLevel) : []),
@@ -85,7 +92,7 @@ export function RivalPanel() {
               levelRange
                 ? jsx('span', {
                     className: 'gym-level-range',
-                    title: 'The rival\u2019s team scales with your party',
+                    title: 'The rival\u2019s team scales with your party\u2019s average level',
                     children: levelRange,
                   })
                 : null,

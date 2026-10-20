@@ -171,12 +171,27 @@ function rivalSpeciesPool(regionId) {
 }
 
 /**
+ * The level a rival's team is built from: the average level of the player's
+ * party, so one over-levelled ace doesn't drag the whole fight up with it.
+ * @param {{ level?: number }[] | null | undefined} party
+ * @returns {number}
+ */
+export function rivalBenchmarkLevel(party) {
+  const levels = (party ?? [])
+    .map((member) => Number(member?.level))
+    .filter((level) => Number.isFinite(level) && level > 0)
+  if (levels.length === 0) return 5
+  const average = levels.reduce((sum, level) => sum + level, 0) / levels.length
+  return Math.max(5, Math.round(average))
+}
+
+/**
  * Build a rival's team: `2 + stage` distinct species from the region's
- * generation, all at a level a little above the player's lead so the fight
- * scales with them.
+ * generation, all at a level a little above the player's party average so the
+ * fight scales with them.
  * @param {string} regionId
  * @param {number} stage
- * @param {number} playerLevel
+ * @param {number} playerLevel The player's party average (see `rivalBenchmarkLevel`).
  * @param {() => number} [rng]
  * @returns {{ speciesKey: string, level: number }[]}
  */

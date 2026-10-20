@@ -37,6 +37,7 @@ export const CHANGELOG = [
         heading: 'Trainers',
         items: [
           'A recurring rival challenges you in each region: Blue, Silver, Wally, Barry, Hugh, Calem, Hau, Hop and Nemona turn up in town once you have earned 2, 4, 6 and 8 badges, each with a team that scales to your party. Each rival has their own sprite and speaks before the battle and again after a win or loss, and beating one pays a rising cash bonus and a Rare Candy. Win at all four milestones and the party earns the Rival Ribbon.',
+          'Rival teams scale to the average level of your party rather than its strongest member, so one over-levelled Pokemon no longer turns the fight into a slog for the rest of the team.',
           'A villain organisation now menaces every region \u2014 Team Rocket in Kanto and Johto, Team Aqua in Hoenn, Team Galactic in Sinnoh, Team Plasma in Unova, Team Flare in Kalos, Team Skull in Alola, Team Yell in Galar and Team Star in Paldea. Each keeps a hideout on the Town Map that opens once you have earned enough badges in that region. Clear its three grunts and an admin to reach the boss, whose team carries a legendary; every fight reuses the gym and raid plumbing. The arc is a flat late-game challenge \u2014 the first grunt fields Lv.75 Pokemon and the boss Lv.100 \u2014 and the boss\u2019s legendary can\u2019t be caught elsewhere until the organisation is dismantled: it stays out of that region\u2019s Raid Island pool (and its roamer, Ultra Warp and Dynamax rolls) until the arc is cleared.',
         ],
       },

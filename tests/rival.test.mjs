@@ -9,6 +9,7 @@ const {
   RIVAL_DIALOGUE,
   RIVAL_MILESTONES,
   buildRivalTeam,
+  rivalBenchmarkLevel,
   rivalChallenge,
   rivalDialogue,
   rivalName,
@@ -82,6 +83,24 @@ test('buildRivalTeam scales and stays in the region generation', () => {
   const big = buildRivalTeam('kanto', 3, 98, cyclingRng())
   assert.equal(big.length, 5)
   assert.ok(big.every((member) => member.level <= 100))
+})
+
+test('the rival scales to the party average, not its strongest member', () => {
+  // A lone Lv.80 ace alongside low-level companions averages well below 80.
+  const party = [
+    { level: 80 },
+    { level: 20 },
+    { level: 20 },
+    { level: 20 },
+  ]
+  assert.equal(rivalBenchmarkLevel(party), 35)
+  // An empty (or invalid) party falls back to the minimum level.
+  assert.equal(rivalBenchmarkLevel([]), 5)
+  assert.equal(rivalBenchmarkLevel(null), 5)
+  assert.equal(rivalBenchmarkLevel([{ level: 0 }, {}]), 5)
+  // The team's ace then sits one stage above that average.
+  const team = buildRivalTeam('kanto', 1, rivalBenchmarkLevel(party), cyclingRng())
+  assert.equal(Math.max(...team.map((member) => member.level)), 36)
 })
 
 test('beating the rival advances the stage and pays the bonus', () => {
